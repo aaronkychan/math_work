@@ -210,15 +210,15 @@ Pala Lundi, Fiji}\par\nopagebreak
 \comm{TODO: rewrite}
 The modern notion of $p$-complexes first appear in the works of Mayer \cite{Mayer1, Mayer2} back in the 40s.
 A $p$-complex is a sequence of groups $(C_k)_{k\in \Z}$ along with maps (called \emph{$p$-differentials}) $(\partial_k:C_k\to C_{k-1})_{k\in \Z}$ such that any composition of $p$ consecutive such maps is zero.
-A simple example is to take $C_k=\mathbb{Z}$ for all $0\leq k< p$, $\partial_k=\mathrm{id}$ for all $0<k< p$, and $C_k=0=\partial_k$ for all other $k$'s.
+A simple example is to take $C_k=\mathbb{Z}$ for all $0\leq k\leq p$, $\partial_k=\mathrm{id}$ for all $0<k\leq p$, and $C_k=0=\partial_k$ for all other $k$'s.
 
 In \cite{Mayer1}, Mayer defined a homology theory on a $p$-complex $C_\bullet=(C_k, \partial_k)_k$ given by the groups ${}^aH_k:=\Ker(\partial^a)/\Image(\partial^{p-a})$, with $a\in\{1,2,\ldots, p-1\}$.
-Moreover, the $p$-differential $\partial_k$ naturally induces a map  ${}^aH_k \to {}^{a+1}H_{k-1}$ for all $a$, which gives the total homology $\bigoplus_{k,a}{}^aH_k$ a structure of a $p$-complex.
-
-It turns out that Mayer's homology theory is not quite optimal, especially when one wants some form derived category for $p$-complexes.   For example, over any prime $p>2$, the $p$-complex $C_\bullet:=(\F\xrightarrow{\mathrm{id}}\F)$ concentrate in degrees $1,0$ has Mayer homology $\bigoplus_{k,a} {}^aH_k(C_\bullet) = (C_\bullet)^{\oplus p-2}$.
+Moreover, the $p$-differential $\partial_k$ naturally induces a map  ${}^aH_k \to {}^{a+1}H_{k-1}$ for all $a$, which gives the total homology $\bigoplus_{k,a}{}^aH_k$ a structure of a $(p-1)$-complex.
+However, a result of Spanier states that these homology groups can be determined by the classical simplicial homology groups, and so $p$-complexes never catch much attention to topologists.
 
 Recently, the Khovanov school advocates that $p$-complexes should provide a foundational tool for categorifying quantum groups at primitive $p$-th root of unity.
-As a part of this programme, in \cite{KhQi}, Khovanov and Qi gave a more detailed account of two alternative homology theories for $p$-complexes (which are dual to each other).  These homology theories are called \emph{slash} and \emph{backslash homology}, and are `homologically optimal'.  At each degree $k$, there are $p-1$ \emph{slash} and \emph{backslash homology groups}, given by
+As a part of this programme, in \cite{KhQi}, Khovanov and Qi gave a more detailed account of two alternative homology theories for $p$-complexes (which are dual to each other).  These homology theories are called \emph{slash} and \emph{backslash homology}, and have better compatibility with the technology of differential graded categories than Mayer's version.
+At each degree $k$, there are $p-1$ \emph{slash} and \emph{backslash homology groups}, given by
 \begin{align*}
 H_k^{/a} := \Ker(\partial^{a+1})/(\Image(\partial^{p-a-1})+\Ker(\partial^a))
 \;\; \text{and}\;\; H_k^{\backslash a}:= (\Image(\partial^a_{k+a})\cap \Ker(\partial^{p-1-a}_k))/\Image(\partial^{a+1}_{k+a+1})
@@ -234,7 +234,7 @@ Let $\varphi_k:\F\Omega_k\to \F\Omega_{k-1}$ be the $\F$-linear map that sends a
 \[
 \varphi_k:\omega \mapsto \sum_{\substack{\omega' \subset \omega \\ |\omega'|=k-1}} \omega'.
 \]
-It is an easy exercise to check that $\varphi_k\varphi_{k-1}\cdots \varphi_{k-(p-1)}=0$ for any $k$ (or simply $\varphi^p=0$ by omitting subscripts).
+It is an easy exercise to check that $\varphi_k\varphi_{k-1}\cdots \varphi_{k-p}=0$ for any $k$ (or simply $\varphi^p=0$ by omitting subscripts).
 Hence, we have a $p$-complex of the form
 \[
 \F\Omega_\bullet:= ( 0\to \F\Omega_n \xrightarrow{\varphi_n} \F\Omega_{n-1} \xrightarrow{\varphi_{n-1}} \cdots \xrightarrow{\varphi_2}\F\Omega_1 \xrightarrow{\varphi_1}\F\Omega_0 \to 0).
@@ -244,22 +244,26 @@ It should not be difficult to see that in the case of $p=2$, $\F\Omega_\bullet$ 
 In fact, $\F\Omega_\bullet$ is not just a $p$-complex of $\F$-vector spaces, it is also a $p$-complex of $\mathfrak{S}_n$ representations, where $\mathfrak{S}_n$ is the symmetric group of rank $n$.
 Indeed, $\F\Omega_k$ is isomorphic to the module induced from the trivial $\F(\mathfrak{S}_{n-k}\times \mathfrak{S}_k)$-module, i.e. the permutation module $M^{(n-k,k)}$ of the two-part composition $(n-k,k)$ of $n$, and $\varphi_k$'s are also $\F\mathfrak{S}_n$-linear.
 
-Our first main result is the complete description of the slash homology of $\F\Omega_\bullet$.  
-\begin{theorem*}{\rm (Theorem \ref{thm:newfinal})}
-For any prime $p$ and any positive integer $n$, the slash homology $p$-complex $H_k^/$ (resp. $H_{n-k}^{\backslash}$) is non-vanishing if, and only if, $p\neq 2$ and $n-2k\in\interval{0, p-2}$.  In such a case, we have
+Our first main result is the complete description of the (total) slash homology of $\F\Omega_\bullet$.  
+\begin{theorem*}{\rm (Theorem \ref{thm:final})}
+For any prime $p$ and any positive integer $n$, the slash homology $(p-1)$-complexes $H_k^{/}$ at degree $k\in\{0,1, \ldots, n\}$ of $\F\Omega_\bullet$ is non-vanishing if, and only if, $p\neq 2$ and $n-2k\in\interval{0,p-2}$.
+Moreover, in the case when $H_k^{/}$ is non-vanishing, it takes the form
 \begin{align*}
-H_k^{/} &\cong  \big( H_{n-k}^{/n-2k} \xrightarrow{\sim} H_{n-k-1}^{/n-2k-1} \xrightarrow{\sim} \cdots \xrightarrow{\sim} H_{k+1}^{/1} \xrightarrow{\sim} H_k^{/0} \big) \\
-&\cong \big( D^{(n-k,k)} \xrightarrow{\sim} D^{(n-k,k)} \xrightarrow{\sim} \cdots \xrightarrow{\sim} D^{(n-k,k)}\xrightarrow{\sim} D^{(n-k,k)}\big) \\
-& \cong  \big( H_{n-k}^{\backslash 0} \xrightarrow{\sim} H_{n-k-1}^{\backslash 1} \xrightarrow{\sim} \cdots \xrightarrow{\sim} H_{k+1}^{\backslash n-2k-1} \xrightarrow{\sim} H_k^{\backslash n-2k} \big) \;\cong\; H_{n-k}^{\backslash}.
+H_k^{/} &\cong  \big( 0 \to H_{n-k}^{/n-2k} \xrightarrow{\sim} H_{n-k-1}^{/n-2k-1} \xrightarrow{\sim} \cdots \xrightarrow{\sim} H_{k+1}^{/1} \xrightarrow{\sim} H_k^{/0} \to 0 \big) \\
+&\cong \big( 0 \to D^{(n-k,k)} \xrightarrow{\sim} D^{(n-k,k)} \xrightarrow{\sim} \cdots \xrightarrow{\sim} D^{(n-k,k)}\xrightarrow{\sim} D^{(n-k,k)}\to 0),
 \end{align*}
-In particular, $H_k^{/a}$ (resp. $H_{n-k}^{\backslash a}$) is non-vanishing if, and only if, $p\neq2$ and  $n-2(k-a)\in\interval{a,p-2}$; in such a case, $H_k^{\slash a}\cong D^{(n-(k-a), k-a)}$.
+where $D^{(n-k,k)}$ is the simple $\F\mathfrak{S}_n$-module corresponding to the partition $(n-k,k)$.
 \end{theorem*}
-Note that the case of $p=2$ is just the classical result which says that the chain complex of an $(n-1)$-simplex has zero homology, as every student taking a first course in algebraic topology would know.
+We remark that knowing the slash homology is enough to determine the backslash homology and Mayer's version of homology of $\F\Omega_\bullet$ as well; see subsection \ref{subsec:pcpx} and subsection \ref{subsec:duality}.
+Note also that our condition means that $H_k^{/}$ vanishes when $2k\leq n-(p-1)$.
+In particular, all slash homology groups vanish when $p=2$.  This is just the classical result which says that the chain complex of an $(n-1)$-simplex has zero homology, as every student taking a first course in algebraic topology would know.
+
+Let us give some remark on the technique we use to achieve our goal.
+Inspire by the ``$\alpha$-sequence" combinatorics used by James in studying the permutation modules \cite{James2}, we consider a new statistic, called \emph{density}, on two-row tableaux (which are equivalent to subsets) of $n$.  In fact, if $2k\leq n$ (meaning that $(n-k,k)$ is a two-row partition), then density records when a column in the row-standard tableau is standard. Then we define threshold to allow us carving an induction machine to show that ``most" elements in $\Ker(\varphi)$ lies in $\Image(\varphi^{p-1})$.
 
 \smallskip 
 
-\comm{TODO: write something}
-\new{To further the understanding of the homologies, we study them as a quotient of $M^{(n-k,k)}$. As the above theorem states, $D^{(n-k,k)}$ is simple as a $\mathfrak{S}_n$-module. That is, $D^{(n-k,k)}$ is generated by any $(n-k,k)$-tableau as a $\mathfrak{S}_n$-module. In this paper, we further sought for a $\F$-basis of $D^{(n-k,k)}$. This constitutes our second main result.} 
+One particular step in proving the above theorem is to show that $H_k^{/0}$ is a quotient of the Specht module $S^{(n-k,k)}$ when it is non-zero.  Recall that every Specht module $S^\lambda$ admits a basis given by the polytabloids $\bfe_\tbx$ associated to standard tableaux $\tbx$ of shape $\lambda$.  It turns out the projecting this basis onto $H_k^{/0}$ results in a basis that is indexed by what Kleshchev calls \emph{$p$-standard tablueax} in \cite{Kl} (see Definition \ref{def:pathread}, its following remark, and Lemma \ref{lem:badpaths}).
 
 \begin{theorem*}{\rm (Theorem \ref{thm:basis})}
 The simple $\F\mathfrak{S}_n$-module $D^{(n-k,k)}$, where $k$ satisfies $n-(p-1)<2k\leq n$ admits a basis
@@ -271,15 +275,15 @@ We remark that it is shown in \cite{Kl} that $\dim_{\F} D^{(n-k,k)}$ is the same
 
 \subsection*{Literature}
 \comm{TODO: rewrite}
-\old{After we have finished writing up this script, we discovered that the $p$-homology groups of $\F\Omega_\bullet$ is completely determined in \cite{BJS}.
-As we have mentioned, the $p$-homology groups contain an equivalent amount of information as the back/slash homology groups via the exact sequences \eqref{eq:4termseq}.  Nevertheless, the combinatorics we employ to determine the slash homology groups are different and rooted from those that are used by James in \cite{James2, James3}.}
-\new{The content of this script is, at first, done via the combinatorics rooted from those that are used by James in \cite{James2, James3}. After we have finished writing up the script, we discovered that the $p$-homology groups of $\F\Omega_\bullet$ is completely determined in \cite{BJS}. As we have mentioned, the $p$-homology groups contain an equivalent amount of information as the back/slash homology groups via the exact sequences \eqref{eq:4termseq}. To give proper recognition to \cite{BJS} we have rewritten our result (mainly in Section \ref{sec:newmain}) using their approach. 
+After we have finished writing up this script, we discovered that the $p$-homology groups of $\F\Omega_\bullet$ is completely determined in \cite{BJS}.
+As we have mentioned, the $p$-homology groups contain an equivalent amount of information as the back/slash homology groups via the exact sequences \eqref{eq:4termseq}.  Nevertheless, the combinatorics we employ to determine the slash homology groups are different and rooted from those that are used by James in \cite{James2, James3}.
+
 
 \subsection*{Structure}
 \comm{TODO: rewrite}
 The preliminary Section \ref{sec: prelim} presents the necessary material for our investigation - primarily elementary facts about $\F\Omega_k$'s and $p$-complexes.
-\old{Section \ref{sec:partn} is devoted to establish the notion of density and threshold, as well as the tools and techniques that come with them.
-In Section \ref{sec:main}, we calculate the dimension of all slash homology groups and proves the first main theorem.}\new{Section \ref{sec:newmain} is a short section to derive the slash homology using the results of \cite{BJS}. Then in Section \ref{sec:tab} we introduce tableaux and some observations related to $k$-subsets used in $\F\Omega_k$ and two-row tableaux.}
+Section \ref{sec:partn} is devoted to establish the notion of density and threshold, as well as the tools and techniques that come with them.
+In Section \ref{sec:main}, we calculate the dimension of all slash homology groups and proves the first main theorem.
 The final Section \ref{sec:basis} is devoted to proving Theorem \ref{thm:basis}.
 
 
@@ -289,6 +293,9 @@ We will mostly follow notations in \cite{Wil}.
 In particular, by module we mean a finitely generated right module.
 Maps (homomorphisms) are also applied to the right of a module.
 
+\comm{may not need?}
+\old{Unless otherwise stated, we fix a positive integer $n$ throughout the article, and define $m:=\lfloor n/2 \rfloor+1$.}
+
 An interval of integers will be denoted by $\interval{a,b}:=\{a,a+1,\ldots,b\}$ for $a<b\in\Z$; we also use $\interval{a}:=\interval{1,a}$ for convenience.
 For a set $\mathcal{S}$, we denote by $|\mathcal{S}|$ its cardinality.
 We use $\mathcal{S}\setminus \mathcal{T}$ to denote the complement of the subset $\mathcal{T}$ of $\mathcal{S}$.	
@@ -297,7 +304,7 @@ For a finite set $\Psi$, we denote by $\F\Psi$ the $\F$-vector space with basis 
 If $\Psi$ is a finite subset of a module over some algebra, then we denote by $\Fspan\Psi$ the set of elements spanned by elements of $\Psi$ over $\F$ - we do not assume $\Psi$ is a basis of $\Fspan\Psi$ in this case, unless otherwise stated.
 
 Denote by $\Omega_k$ the set of all $k$-subsets of $\interval{n}$.
-For $\omega\in\Omega_k$, we denote by $\omega^c$ the complement $\interval{n}\setminus \omega$ of $\omega$ in $\interval{n}$.  The symmetric group $\mathfrak{S}_n$ acts naturally on $\Omega_k$ by permuting elements of $\omega\in \Omega_k$; hence $\F\Omega_k$ is a $\F\mathfrak{S}_n$-module.
+For $\omega\in\Omega_k$, we denote by $\omega^c$ the complement $\interval{n}\setminus \omega$ of $\omega$ in $\interval{n}$.  The symmetric group $\mathfrak{S}_n$ acts naturally on $\Omega_k$ by permuting elements of $\omega\in \Omega_k$; hence $\F\Omega_k$ is a $\F\mathfrak{S}_n$-module.  In the language of symmetric group representations, this module is the same as the permutation module $M^{(n-k,k)}$ associated to the composition $(n-k,k)$ of $n$, i.e. the induced representation of the trivial representation of the Young subgroup $\mathfrak{S}_{n-k}\times\mathfrak{S}_k$.  Moreover, $\Omega_k$ can be identified with the basis of $M^{(n-k,k)}$ consisting of $\mathfrak{S}_{n-k}\times\mathfrak{S}_k$-cosets, c.f.  Section \ref{sec:basis}.
 
 \section*{Acknowledgement}
 Both authors were supported by JSPS International Research Fellowship.  AC is also supported by JSPS Grant-in-Aid for Research Activity Start-up program 19K23401.
@@ -342,11 +349,10 @@ H_k^{/a}(C_\bullet) &:= \Ker(\partial^{a+1}_k)/(\Image(\partial^{p-a-1}_{k+p-a-1
 respectively.
 \end{definition}
 
-It is clear that $H_k^{/0}(C_\bullet)={}^1H_k(C_\bullet)$ and $H_k^{\backslash 0}(C_\bullet)={}^{p-1}H_k(C_\bullet)$ for any $p$-complex $C_\bullet$.  In fact, as remarked in \cite{KhQi}, the natural inclusion $\iota_{k}^{(r-1)}:\Ker(\partial_k^{r-1})\to \Ker(\partial_k^r)$ for any $k\in\Z$ and $r\in \interval{p-1}$ induces an exact sequence
+It is clear that $H_k^{/0}(C_\bullet)={}^1H_k(C_\bullet)$ and $H_k^{\backslash 0}(C_\bullet)={}^{p-1}H_k(C_\bullet)$ for any $p$-complex $C_\bullet$.  In fact, as remarked in \cite{KhQi}, the natural inclusion $\iota_{k}^{(r-1)}:\Ker(\partial_k^{r-1})\to \Ker(\partial_k^r)$ for any $k\in\Z$ and $r\in \interval{2,p-1}$ \comm{WW: I suggest allow $r=1$ so the next equation can include all necessary slash homology. (In the same vine you might allow $r=p$ too, but not absolutely necessary.) Then we need some trivial conventions.} induces an exact sequence
 \begin{equation}\label{eq:4termseq}
 0 \to H_k^{\backslash p-r}(C_\bullet) \to {}^{r-1}H_k(C_\bullet) \xrightarrow{\overline{\iota}_{k}^{(r-1)}} {}^rH_k(C_\bullet) \to H_k^{/r-1}(C_\bullet) \to 0,
 \end{equation}
-where ${}^\ell H_k(C_\bullet)$ is treated as for $\ell\in\{0,p\}$.
 
 Consider the restriction of the $p$-differential $\partial_k:\Ker(\partial_k^{r})\to \Ker(\partial_{k-1}^{r-1})$ induces $\overline{\partial}_{k+r}: {}^rH_k(C_\bullet)\to {}^{r-1}H_{k-1}(C_\bullet)$.
 Then it is clear from the definition that the $\overline{\partial}$'s maps commute with the $\overline{\iota}$'s, and give rise to the following commutative diagram 
@@ -386,7 +392,7 @@ Note that $(\overline{\partial}^{\slash})^{p-1}=0=(\overline{\partial}^{\backsla
 
 If we view the category of $p$-complexes of vectors spaces as the category of graded modules over $\F[\partial]/(\partial^p)$, then the $a$-th slash homology group $H_k^{/a}(C_\bullet)$ picks up (``slashes through"\footnote{This is not true reason why they are called slash, but we find this mnemonic useful.}) the $a$-th radical layer of any indecomposable non-projective direct summand of $C_\bullet$ occurring at degree $k$, whereas the $a$-th backslash homology group picks up the $a$-th socle layer. 
 In particular, the total slash homology of a complex corresponds to removing the maximal projective direct summand.
-In contrast, $\bigoplus_{a,k} {}^aH_k(C_\bullet)$ is almost always much larger than the total slash homology.
+In contrast, $\bigoplus_{a,k} {}^aH_k(C_\bullet)$ is almost always much larger than the total slash homology.  For example, for $p>2$, $H^{/}(C_\bullet)$ of $C_\bullet:=(\F\xrightarrow{\mathrm{id}}\F)$ concentrate in degrees $1,0$ is just $C_\bullet$ itself, whereas $\bigoplus_{k,a} {}^aH_k(C_\bullet) = (C_\bullet)^{\oplus p-2}$.
 
 
 \subsection{Duality}\label{subsec:duality}
@@ -422,7 +428,6 @@ Moreover, there is a canonical isomorphism $\F\Omega_k^*\cong \F\Omega_{n-k}$ wh
 \F\Omega_{n-k+a} \ar[r]^{\varphi_{n-k+a}^{(a)}} & \F\Omega_{n-k},
 }
 \end{equation}
-\comm{havn't defined $\varphi_k^{(a)}$ yet}
 where the vertical isomorphisms are the canonical ones.
 In particular, we have an isomorphism $\F\Omega_\bullet \cong \F\Omega_\bullet^*$ of $p$-complexes, where $\F\Omega_\bullet^*$ is the $p$-complex whose degree $k$ term is given by $\F\Omega_{n-k}^*$ and $p$-differentials given by $\varphi_k^*$.
 
@@ -446,7 +451,7 @@ Note that this duality between slash homology and backslash homology holds as lo
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
 % % % % % % % % % % % %  Proof  % % % % % % % % % % % % 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
-\section{Proof of first main theorem}\label{sec:newmain}
+\section{Proof of first main theorem}
 
 \comm{TODO: Brief intro}
 
@@ -535,13 +540,12 @@ where the rows and columns are all exact.  The claim now follows.
 
 
 \begin{theorem}\label{thm:newfinal}
-For any prime $p$ and any positive integer $n$, the slash homology $p$-complex $H_k^/$ (resp. $H_{n-k}^{\backslash}$) is non-vanishing if, and only if, $p\neq 2$ and $n-2k\in\interval{0, p-2}$.  In such a case, we have
+For any prime $p$ and any positive integer $n$, the slash homology $p$-complex $H_k^/$ is non-vanishing if, and only if, $p\neq 2$ and $n-2k\in\interval{0, p-2}$.  In such a case, we have
 \begin{align*}
 H_k^{/} &\cong  \big( H_{n-k}^{/n-2k} \xrightarrow{\sim} H_{n-k-1}^{/n-2k-1} \xrightarrow{\sim} \cdots \xrightarrow{\sim} H_{k+1}^{/1} \xrightarrow{\sim} H_k^{/0} \big) \\
-&\cong \big( D^{(n-k,k)} \xrightarrow{\sim} D^{(n-k,k)} \xrightarrow{\sim} \cdots \xrightarrow{\sim} D^{(n-k,k)}\xrightarrow{\sim} D^{(n-k,k)}\big) \\
-& \cong  \big( H_{n-k}^{\backslash 0} \xrightarrow{\sim} H_{n-k-1}^{\backslash 1} \xrightarrow{\sim} \cdots \xrightarrow{\sim} H_{k+1}^{\backslash n-2k-1} \xrightarrow{\sim} H_k^{\backslash n-2k} \big) \;\cong\; H_{n-k}^{\backslash}.
+&\cong \big( D^{(n-k,k)} \xrightarrow{\sim} D^{(n-k,k)} \xrightarrow{\sim} \cdots \xrightarrow{\sim} D^{(n-k,k)}\xrightarrow{\sim} D^{(n-k,k)}\big).
 \end{align*}
-In particular, $H_k^{/a}$ (resp. $H_{n-k}^{\backslash a}$) is non-vanishing if, and only if, $p\neq2$ and  $n-2(k-a)\in\interval{a,p-2}$; in such a case, $H_k^{\slash a}\cong D^{(n-(k-a), k-a)}$.
+In particular, $H_k^{/a}$ is non-vanishing if, and only if, $p\neq2$ and  $n-2(k-a)\in\interval{a,p-2}$; in such a case, $H_k^{\slash a}\cong D^{(n-(k-a), k-a)}$.
 \end{theorem}
 \begin{proof}
 For $p=2$, we know already that $\F\Omega_\bullet$ is exact and so all (slash) homology (groups) vanish (c.f. Introduction); this is the reason why $p\neq 2$ appears as a condition.
@@ -559,9 +563,7 @@ By repeatedly applying Lemma \ref{lem:del-on-slash}, we then obtain a sequence o
 \[
 H_{k}^{\slash 2k-n} \xrightarrow{\;\,\overline{\varphi}^{\slash}\;}  H_{k-1}^{\slash 2k-n-1} \xrightarrow{\;\,\overline{\varphi}^{\slash}\;} \;\; \cdots \;\;\xrightarrow{\;\,\overline{\varphi}^{\slash}\;}   H_{n-k+1}^{\slash 1} \xrightarrow{\;\,\overline{\varphi}^{\slash}\;} H_{n-k}^{\slash 0}.
 \]
-Now the claim for the slash homology follows by reordering the indices (that is, mapping $k$ in the above sequence to $n-k$ everywhere).
-
-The claim for the backslash homology follows immediately from the form of the slash homology.
+Now the claim follows by reordering the indices (that is, mapping $k$ in the above sequence to $n-k$ everywhere).
 \end{proof}
 The groups ${}^rH_k$ when $h(k,r)\geq r$ can be obtained by inductively  direct summing ${}^{r-1}H_k$ with ${}^{r+1}H_{k+1}$ and then remove the common direct summand ${}^{r}H_{k+1}$.  For $1\leq h(k,r)<r$, one use Lemma \ref{lem:BJS-iota} (2) to `flip' the groups from the other half.
 Let us demonstrate this in the following example.
@@ -641,11 +643,15 @@ As we have mentioned above, the $p$-homology groups at these points can be obtai
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
 % % % % % % % % % % % % Tableux % % % % % % % % % % % % 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
-\section{Review on tablueax combinatorics for permutation modules}\label{sec:tab}
+\section{Review on tablueax combinatorics for permutation modules}\label{subsec:James}
 
 For a finite set $X$, denote by $\mathfrak{S}_{X}$ the group of symmetries on $X$.  Clearly, $\mathfrak{S}_{X}$ is isomorphic to the symmetric group $\mathfrak{S}_{r}$ of rank $r:=|X|$.  For a subgroup $G\leq \mathfrak{S}_X$, and a subset $Y\subset X$, the stabiliser (subgroup) of $Y$ is given by the set of $g\in G$ such that $(Y)g=Y$ (instead of $(y)=y$ for all $y\in Y$); we also call this the $Y$-stabiliser if the context is clear.
 
 For convenience, given a $\F$-basis $\mathcal{B}$ of a module $M$, we say that $b\in\mathcal{B}$ is in the \emph{support of $v\in M$} if the coefficient of $b$ in $v$ is non-zero.
+
+\comm{TODO: rewrite this para} In \cite{James2} (see also \cite[Chapter 17]{James3}), James shows that a permutation module $M^\mu$ corresponding to a composition $\mu$ admits a filtration $\{S^{\mu^\#,\mu}\}_{\mu^\#}$ over a certain series of partitions $\mu^\#$.
+In this subsection, we will review his construction and some related results in the special case of $\mu = (n-k,k)$ with $k\in\interval{0,n}$.
+%We advise readers who are not familiar with tableau combinatorics to skip this part until Section \ref{sec:basis}, since we will use only a very small portion of the material in this subsection for showing the first main theorem (Theorem \ref{thm:ind}).
 
 \medskip
 
@@ -656,9 +662,7 @@ From now on, we will only work with tableaux that have at most two rows.
 For a $(n-k,k)$-tableau $\tbx$ is \emph{row-standard} (resp. \emph{column-standard}) if the entries in each row (resp. column) are arranged in increasing order.
 We denote by $\ST_n(k)$ the set of standard Young tableaux of shape $(n-k,k)$.
 
-For an $(n-k,k)$-tableau $\tbx$, denote by $C_{\tbx}\leq \mathfrak{S}_n$ the column stabiliser of $\tbx$, i.e. the direct product 
-\[
-\prod_{i=1}^k \langle (\tbx_{1,j}, \tbx_{2,j}) \rangle.\]
+For an $(n-k,k)$-tableau $\tbx$, denote by $C_{\tbx}\leq \mathfrak{S}_n$ the column stabiliser of $\tbx$, i.e. the direct product of order 2 subgroups $\langle (\tbx_{1,j}, \tbx_{2,j}) \rangle$ over all $j\in\interval{k}$.
 \end{definition}
 
 Recall the following relation between row-equivalent classes (a.k.a. \emph{tabloid}) of $(n-k,k)$-tableaux and $k$-subsets:
@@ -674,23 +678,19 @@ Take $n=8$, $k=3$, and $\omega=\{2,3,7\}$, then the (row-standard) tableau $\tbx
 \end{tikzpicture}.\end{center}
 \end{example}
 
-As we have mentioned in the introduction, $\F\Omega_k$ is the same as the permutation module associated to the Young subgroup $\mathfrak{S}_{n-k}\times \mathfrak{S})_k$.  Indeed, the row-equivalence class of a $(n-k,k)$-tableau, which correspond to a $k$-subset as we have just explained, is simply a shorthand of writing a coset of $\mathfrak{S}_{n-k}\times \mathfrak{S})_k$ in $\mathfrak{S}_n$.
-
-Let us now look at an important submodule of $\F\Omega_k$.
-
 \begin{definition}\label{def:poly}
-For an $(n-k,k)$-tableau, the \emph{polytabloid associated to $\tbx$} is the element 
-\[
-\bfe_{\tbx} := \{\tbx\}\sum_{ \sigma\in C_{\tbx}} \mathrm{sgn}(\sigma)\sigma \quad \in \F\Omega_k,\]
-where $\mathrm{sgn}(\sigma)$ denotes the sign of the permutation $\sigma\in C_\tbx\leq \mathfrak{S}_n$.  We say that $\bfe_{\tbx}$ is \emph{standard} if so is $\tbx$.
+For a subgroup $G\leq \mathfrak{S}_n$, the \emph{signed sum of $G$} is an element in the group algebra given by the sum of $\sgn(\sigma)\sigma$ over all $\sigma\in G$.  
+
+For an $(n-k,k)$-tableau, the \emph{polytabloid associated to $\tbx$} is the element $\{\tbx\}\kappa_{\tbx,\ell}\in \F\Omega_k$, where $\kappa_{\tbx}$ is the signed sum of $C_{\tbx}$.  We say that $\bfe_{\tbx}$ is \emph{standard} if so is $\tbx$.
 \end{definition}
 
 Note that a polytabloid is dependent on the defining tableau, i.e. row-equivalent but distinct tableaux can define distinct polytabloids.
+For convenience, we will denote by $\bfe_{\omega}$ the polytbaloid $\bfe_{\tbx^{\omega}}$.
 
 \begin{example}
 For $n=8$, the polytabloid associated to $\tbx:= \tbx^{\interval{3}}$ is
 \[
-\bfe_{\tbx} = \{1,2,3\} - \{4,2,3\} - \{1,5,3\} +\{4,5,3\}.
+\bfe_{\interval{3}} = \{1,2,3\} - \{4,2,3\} - \{1,5,3\} +\{4,5,3\}.
 \]
 \end{example}
 
@@ -706,7 +706,7 @@ For $n=8$, the polytabloid associated to $\tbx:= \tbx^{\interval{3}}$ is
 \begin{definition}
 For an integer $k$ with $n-2k\geq 0$, the \emph{Specht module} $S^{(n-k,k)}$ associated to a partition $(n-k,k)$ of $n$ is the $\F\mathfrak{S}_n$-submodule of $\F\Omega_k$ spanned by all polytabloids, i.e.
 \[
-S^{(n-k,k)} := \F\text{-span}\{ \bfe_{\tbx} \mid \tbx\text{ is a $(n-k,k)$-tableau}\}.
+S^{(n-k,k)} := \F\text{-span}\{ \bfe_{\tbx} \mid \tbx\text{ a $(n-k,k)$-tableau}\}.
 \]
 \end{definition}
 
@@ -718,7 +718,7 @@ From the viewpoint of representation theory over $\mathfrak{S}_n$, the map $\var
 \begin{theorem}\label{thm:James}
 Let $k$ be an integer with $2k\in\interval{0,n}$.  Then the following hold.
 \begin{enumerate}
-\item {\rm\cite{James1}} If $p\neq 2$, then $S^{(n-k,k)}$ has an irreducible top $D^{(n-k,k)}:=S^{(n-k,k)}/\mathrm{rad}S^{(n-k,k)}$ such that $D^{(n-k,k)}\ncong D^{(n-r,r)}$ for any $r\neq k$.
+\item {\rm\cite{James1}} If $p\neq 2$, then $S^{(n-k,k)}$ has an irreducible top $D^{(n-k,k)}:=S^{(n-k,k)}/\mathrm{rad}S^{(n-k,k)}$.
 
 \item {\rm\cite[Theorem 9.1]{James2}} $S^{(n-k,k)}\subset \Ker(\varphi_k)$.
 
@@ -732,7 +732,7 @@ In \cite{Pe}, Peel considered a total order on the set of tabloids ($k$-subsets 
 Denote by $\omega\ulhd_r\omega'$ if $|\omega\cap \interval{i}| \leq |\omega'\cap \interval{i}|$ for all $i\in\interval{k}$; this defines a partial order on $\Omega_k$ called the the \emph{row-dominance order}.
 \end{definition}
 \begin{remark}\label{rmk:orders}
-The definition in \cite{James2} is stated differently. They use the backward-reading lexicographical order on $k$-subsets, i.e. $\omega <_{lex} \omega' \in \Omega_k$ if there is some $j\in \interval{k}$ so that $|\omega\cap\interval{j}|<|\omega'\cap\interval{j}|$ and $|\omega\cap\interval{i}|=|\omega'\cap \interval{i}|$ for all $i\in\interval{j+1,k}$.
+The definition in \cite{James2} is stated differently. They use the backward-reading lexicographical order on $k$-subsets, i.e. $\omega <_{lex} \omega' \in \Omega_k$ if there is some $j\in \interval{k}$ so that $|\omega\cap\interval{j}|<|\omega'\cap\interval{j}|$ and $|\omega\cap\interval{i}|=|\omega'\cap \interval{i}$ for all $i\in\interval{j+1,k}$.
 Our formulation is the opposite of the partial order used in \cite{Sag}, which is coarser than the one used in \cite{James2}.
 With respect to the next result, it does not matter which order one prefer to use.
 \end{remark}
@@ -753,11 +753,16 @@ The following hold for any integer $k$ with $2k\in\interval{0,n}$.
 
 \section{Basis of the slash homology groups}\label{sec:basis}
 
-Our next aim is to explain a nice combinatorial description for the basis of $H_k^{/0}$ when it is non-vanishing.  For this purpose, it makes sense to impose throughout this section the following
+From now on, we impose the following
 \[
 \text{\bf Assumption}: \qquad n-2k \in \interval{0,p-2},
 \]
 unless otherwise stated.
+
+\comm{TODO: rewrite this para}
+Recall from Theorem \ref{thm:Spechtbasis} that the set $\ST_n(k)$ of standard Young $(n-k,k)$-tableaux is an indexing set of a basis (given by standard polytabloid) of $S^{k,k}$, and from Lemma \ref{lem:main-lo} that $H_k^{/0}$ is a quotient of $S^{k,k}$.
+Moreover, there is also a well-known bijection between $\mathcal{L}_{n-k,k}^{1,\infty}$ with $\ST_n(k)$, so given that $\dim H_k^{/0}$ coincide with $|\mathcal{L}_{n-k,k}^{1,p-1}|$ as shown in the previous section, it is natural to expect the bijection induces a basis for $H_k^{/0}$.
+The aim of this subsection is to show that this is indeed the case.
 
 \begin{definition}\label{def:p-std}
 We call a $(n-k,k)$-tableau $\tbx$ \emph{$p$-standard} if $n-2k\in\interval{0,p-2}$, $\tbx$ is standard and satisfies $\tbx_{2,j}<\tbx_{1,j+p-2}$ for all $j\in\{1, 2, \ldots, k\}$.  Denote by $\ST_n^p(k)$ the set of $p$-standard $(n-k,k)$-tableaux.
@@ -775,17 +780,14 @@ Then a basis of the slash homology group $H_k^{/0}$ is given by \[
 \]
 where $[v]$ denotes $v+\Image(\varphi_{k-p+1}^{p-1}) \in H_k^{/0}$ for $v\in \Ker(\varphi_k)$.
 \end{theorem}
-\begin{remark}
-Note that this description works even for the case when $p=2$, as $H_k^{/0}=0$ and there does not exist any $p$-standard tableau.
-\end{remark}
 
 \begin{corollary}
-Suppose $p\neq 2$.  For an integer $k$ satisfying $n-2k\in\interval{0,p-2}$, the simple top $D^{(n-k,k)}$ of $S^{(n-k,k)}$ admits a basis $\{[\bfe_\tbx] \mid \tbx \in \ST_n^p(k) \}$, where $[v]$ represents $v+\mathrm{rad} S^{(n-k,k)}$.
+For an integer $k$ satisfying $n-2k\in\interval{0,p-2}$, the simple top $D^{(n-k,k)}$ of $S^{(n-k,k)}$ admits a basis $\{[\bfe_\tbx] \mid \tbx \in \ST_n^p(k) \}$, where $[v]$ represents $v+\mathrm{rad} S^{(n-k,k)}$.
 In particular, we have
 \[
 \dim_{\F} D^{(n-k,k)} = \sum_{j\in \Z} \binom{n}{pj+k} - \binom{n}{pj+k-1},
 \]
-where the binomial coefficient $\binom{a}{b}$ with $b>a$ or $b$ negative is considered zero.
+where the binomial coefficient $\binom{a}{b}$ with $a$ or $b$ negative is considered zero.
 \end{corollary}
 \begin{remark}
 The dimension formula is also obtained in \cite{Erd} (precisely, \cite[Example 5.3]{Erd} by taking $(m, s, t, d, \delta)$ therein as $(k, n-2k, 0, n-2k+1, p-(n-2k+1))$), which is proved by looking at tensor product of tilting modules over $GL_2(\F)$ and utilising Schur-Weyl duality.
@@ -796,16 +798,21 @@ Also, recall from Theorem \ref{thm:James} (3) that the appearance of $D^{(n-k,k)
 
 For the dimension formula, we use the bijection between standard $(n-k,k)$-tableau and Dyck paths.  Recall that a Dyck path is a lattice path in $\Z^2$ starting at $(0,0)$ ending at $(n,n)$ that is (non-strictly) bounded by the $x$-axis and the diagonal $y=x$, and that each step of the path is either $(0,1)$ or $(1,0)$.  This bijection sends a standard tableau $\tbx$ to the path so that the $i$-th step is $(1,0)$ if $i$ is in the first row of $\tbx$; $(0,1)$ otherwise. c.f. \cite[p.4-5]{Moh}.
 
-Under this bijection, the $p$-standard tableaux correspond to the Dyck paths that are bounded by the region $0 \leq y-x < p$. Hence the dimension of $D^{(n-k,k)}$ for $n-2k\in\interval{0,p-2}$ is the same as the number of such Dyck paths.  The claim then follows by using existing formula for lattice path enumeration - for example, taking $(s,t)=(1,p-1)$ in \cite[Theorem 2]{Moh}.
+Under this bijection, the $p$-standard tableaux correspond to the Dyck paths that are (non-strictly )bounded in the region $0 \leq y-x < p$. Hence the dimension of $D^{(n-k,k)}$ for $n-2k\in\interval{0,p-2}$ is the same as the number of such Dyck paths.  The claim then follows by using existing formula for lattice path enumeration - for example, taking $(s,t)=(1,p-1)$ in \cite[Theorem 2]{Moh}.
 \end{proof}
 
 
 We will prove Theorem \ref{thm:basis} in what follows.
 The strategy is to modify the \emph{straightening rule} - the induction process that is used to show that a Specht module admits a basis given by standard polytabloids in \cite{Pe}.  The modification are designed so that we can keep track of how ``far" away the tableaux appearing in a Garnir relation is from being a $p$-standard tableau.
 
-\subsection{Almost standard tableaux}\label{subsec:basisprelim}
+\subsection{Preliminaries}\label{subsec:basisprelim}
 In this subsection, we present the definition of the partially ordered set that allows us to prove Theorem \ref{thm:basis} by induction, and also a few techniques that we will use frequently.
 
+For convenience, denote by
+\[
+\pbad_n(k) := \ST_n(k)\setminus \ST_n^p(k),
+\]
+and call its elements \emph{$p$-bad} standard tableaux.
 
 \begin{definition}\label{def:aST}
 Let $\tbx$ be a $(n-k,k)$-tableau.
@@ -870,7 +877,7 @@ Note that only the largest tableau $\tbx^{\{2,4\}}$ is good when $p=3$; for any 
 \end{example} 
 
 
-Recall the following Garnir relation that is used to `straighten' a $(n-k,k)$-tableaux (with non-standard first row); c.f. \cite[Section 7, 8]{James3}.
+Recall the following Garnir relation that is used to straighten a $(n-k,k)$-tableaux (with non-standard first row); c.f. \cite[Section 7, 8]{James3}.
 \begin{lemma}\label{lem:Garnir}
 Let $\tbx$ be a $(n-k,k)$-tableau.
 %\begin{enumerate}[(1)]
@@ -900,7 +907,7 @@ Both of them follow immediately from the definition of polytabloid.
 
 \begin{lemma}\label{lem:bad-swap}
 Consider almost standard tableaux $\tbx,\tbx'\in \aST$.
-If $\{\tbx\}$ and $\{\tbx'\}$ differ only by one element, say, $\{\tbx\}=S\sqcup\{a\}$ and $\{\tbx'\}=S\sqcup \{b\}$ with $a>b$, then $\tbx\prec \tbx'$.
+If $\{\tbx\}$ and $\{\tbx'\}$ differ only by one element, say $\{\tbx\}=S\sqcup\{a\}$ and $\{\tbx'\}=S\sqcup \{b\}$, and $a>b$, then $\tbx\prec \tbx'$.
 \end{lemma}
 \begin{proof}
 Condition (ii) in Definition \ref{def:aST} holds by assumption.
@@ -968,34 +975,10 @@ Therefore, combining with $\bfe_{\tbs}=\bfe_{\mathtt{u}}-\bfe_{\mathtt{w}}$, the
 \end{proof}
 
 
-\subsection{Straightening a $p$-bad tableaux}\label{subsec:badtab}
-The aim of this subsection is to show a similar statement as Lemma \ref{lem:nonstd} but with $\tbx$ being a standard tableau that is not $p$-standard.
+\subsection{The case of bad tableaux}\label{subsec:badtab}
+The aim of this subsection is to show a similar statement as Lemma \ref{lem:nonstd} but with $\tbx$ being a bad standard tableau and with the polytabloids replaced by their cosets in $H_k^{/0}$.
 
-For convenience, denote by
-\[
-\pbad_n(k) := \ST_n(k)\setminus \ST_n^p(k),
-\]
-and call its elements \emph{$p$-bad} standard tableaux.
-
-We will apply a simple combinatorial lemma from \cite{Wil}.  First note that there is a bilinear operation on $\bigoplus_{k=0}^n\F\Omega_k$ given by bilinearly extending 
-\[
-	\nu\cdot \omega := \begin{cases} \nu\cup \omega, &\text{if } \nu\cap \omega=\emptyset; \\
-	0, &\text{otherwise}
-\end{cases}
-\]
-for $\nu\in\Omega_k$ and $\omega \in\Omega_\ell$.  
-
-Another notion we need is the \emph{$a$-step boundary map} $\varphi_k^{(a)}:\F\Omega_k\to \F\Omega_{k-a}$ with $a\in\Z$ and $k\in\{0,1,\ldots,n\}$.
-For $a\notin \interval{0,k}$, $\varphi_k^{(a)}$ is defined to be the zero map; otherwise, it sends $\omega\in \Omega_k$ to the $\sum_{\nu} \nu$ with $\nu$ varying over all $(k-a)$-subsets contained in $\omega$.  It is easy to see that $a!\varphi^{(a)}=\varphi^a$ for any $a\in \interval{p-1}$ as $a$ (hence $a!$) is invertible in $\F$.  We are now ready to introduce the following Leibniz-like rule for the $a$-step boundary map.
-
-\begin{lemma}[Splitting rule]{\rm \cite[Lemma 3.5]{Wil}}\label{lem:splitting}
-For $v\in \F\Omega_k$ and $w\in \F\Omega_\ell$ such that $\nu\cap\omega=\emptyset$ for all $\nu$ in the support of $v$ and $\omega$ in the support of $w$, we have
-\[
-(v\cdot w)\varphi_{k+\ell}^{(t)} = \sum_{i=0}^t((v)\varphi_k^{(i)})\cdot((w)\varphi_\ell^{(t-i)}).
-\]
-\end{lemma}
-
-The following key lemma which provides a relation between certain polytabloids and the map $\varphi$.
+We start with the following key lemma which provides a relation between certain polytabloids in $H_k^{/0}$.
 \begin{lemma}\label{lem:tbx-reln}
 For a $(n-k,k)$-tableau $\tbx$ and an integer $i\in \interval{k-(p-2)}$, consider the $(p-1)$-subset $B:=\{\tbx_{1,i}, \tbx_{1,i+1}, \ldots, \tbx_{1,i+p-2}\}$, the following equation holds.
 \[
@@ -1039,7 +1022,7 @@ We take $L$ to be the set of entries in the first row that are not in $B$.  See 
 \caption{Notations used in Lemma \ref{lem:tbx-reln}.}\label{fig:tbx}
 \end{figure}
 
-We will prove the lemma by showing the following two equations:
+We will prove the lemma by showing the following two equalities:
 \begin{enumerate}[(i)]
 \item $\bfe_\tbx \sum_{\tau\in \mathfrak{S}_B} \tau = -\bfe_{\tbx'}\cdot(K)\varphi^{(p-1)}$.
 \item $-\bfe_{\tbx'}\cdot(K)\varphi^{(p-1)} = (\bfe_{\tbx'}\cdot K)\varphi^{p-1}$.
@@ -1077,7 +1060,7 @@ that $-\sgn(\sigma')=(-1)^{r'+1} = \lambda_\mu$.
 This finishes the proof of (i).
 
 \underline{Proof of (ii)}:
-It is clear from the construction that every $k$-subset in the support of $\bfe_{\tbx'}$ is disjoint from $K$, so it follows from Lemma \ref{lem:splitting} that 
+It is clear from the construction that every $k$-subset in the support of $\bfe_{\tbx'}$ is disjoint from $K$, so it follows from the splitting rule (Lemma \ref{lem:splitting}) that 
 \[
 (\bfe_{\tbx'}\cdot K)\varphi^{(p-1)} = \sum_{i=0}^{p-1} (\bfe_{\tbx'})\varphi^{(i)}\cdot (K)\varphi^{(p-1-i)}.
 \]
@@ -1086,31 +1069,25 @@ It then follows from Theorem \ref{thm:James} that $\bfe_{\tbx'}\in S^{k-\ell,k-\
 The required equality now follows from the observation that $\varphi^{(p-1)}=(p-1)!\varphi^{p-1}=-\varphi^{p-1}$, where the last equality follows from Wilson's theorem.
 \end{proof}
 
-Before proceeding to the next step, we need an elementary observation on the elements in $\{\tbx\}$ for $p$-bad standard tableaux $\tbx$.
-
+Before proceeding to the next step, we need an elementary observation on the elements in $\{\tbx^P\}$ that correspond to a $(0,1)$-step intersecting or lying below the line $y=x-(p-1)$.
 \begin{lemma}\label{lem:badpaths}
-For a standard tableau $\tbx\in\ST_n(k)$, the following are equivalent
-\begin{enumerate}[(1)]
-\item $\tbx$ is $p$-bad.
-\item There is a strictly descending chain $\tbx_{2,i} > \tbx_{1,i+p-2} > \tbx_{1,i+p-3} > \cdots > \tbx_{1,i}$ for some $i\in\interval{k}$.
-\item $\tbx_{2,i}\geq p+2(i-1)$ for some $i\in \interval{k}$.
-\end{enumerate}
-In such a case, we also have $i+p-2\leq n-k$.
+Let $\tbx:=\tbx^P$ be a standard tableau associated to a path $P$, and $(x,y)$ be the starting point of the $i$-th (0,1)-step of $P$.
+Then $(x,y)$ satisfies $y\leq x-(p-1)$ if, and only if, we have a strictly descending chain
+\[\tbx_{2,i} > \tbx_{1,i+p-2} > \tbx_{1,i+p-3} > \cdots > \tbx_{1,i}.\]
+In particular, $P$ is bad if, and only if, there is some $i\in \interval{k}$ such that $\tbx_{2,i}\geq 2i-1+p-1$; in which case, we also have $i+p-2\leq n-k$.
 \end{lemma}
 \begin{proof}
-\underline{(1) $\Leftrightarrow$ (2)}:  By definition.
+The if statement follows from $\tbx$ being standard and the correspondence between standard $(n-k,k)$-tableau and $\mathcal{L}_{n-k,k}^{1,\infty}$. 
 
-\underline{(2) $\Rightarrow$ (3)}:  Since $\tbx$ is standard, the smallest possibly entry for $\tbx_{1,i+p-2}$ is $i+p-2$.  On the other hand, $\tbx_{2,i}$ must be larger than $\tbx_{2,j}$ for all $j<i$.  Hence $\tbx_{2,i} > (i+p-2)+(i-1) = 2(i-1)+p-1$.
+For the only if part, by definition we have $y=i-1$, and so we have $x\geq i+p-2$.
+Since $x$ counts the number of entries in the first row of $\tbx$ that are less than $\tbx_{2,i}$, so $x\geq i+p-2$ implies that $\tbx_{2,i}>\tbx_{1,i+p-2}$; the rest of the chain follows from the row-standardness of $\tbx$.
 
-\underline{(3) $\Rightarrow$ (1)}:  By standardness of $\tbx$, $\tbx_{2,i}\geq 2i$, and so one needs to at least fill up $(2i-1)+(p-1)-2i-1 = p-2$ more boxes after the $i$-th box in the first row before filling $i$-th box in the second row by $\tbx_{2,i}$.  Hence, we have $\tbx_{2,i}>\tbx_{1,i+p-2}$ as required.
-
-The final statement follow from (2), as the number of entries in the first row is $n-k$.
+For the final statement, observe from the condition on the chain that the smallest possible value $\tbx_{2,i}$ can take is $(i+p-2)+(i-1)+1 = 2i-1+p-1$, where $i+p-2$ is the number of terms in the chain above that appear after $\tbx_{2,i}$ (hence the inequality $i+p-2\leq n-k$), and $(i-1)$ is the number of $\tbx_{2,j}$ satisfying $\tbx_{2,j}<\tbx_{2,i}$.
 \end{proof}
 
 Lemma \ref{lem:badpaths} allows us to introduce the following terminology.
 \begin{definition}\label{def:Bi}
-Let $\tbx\in\pbad_n(k)$ be a $p$-bad standard $(n-k,k)$-tableau.
-We say that $\tbx_{2,i}$ is a \emph{bad entry} if $\tbx_{2,i}\geq p+2(i-1)$.
+For a bad standard tableau $\tbx$, we say that $\tbx_{2,i}$ is a \emph{bad entry} if $\tbx_{2,i}\geq 2i-1+p-1$.
 Since such an entry always exists by Lemma \ref{lem:badpaths}, we can  define the following $(p-1)$-subset of $\interval{n}$:
 \[
 B_i:=\{\tbx_{1,i+1} < \tbx_{1,i+2} < \cdots < \tbx_{1,i+p-1} < \tbx_{2,i}\}.
@@ -1118,8 +1095,8 @@ B_i:=\{\tbx_{1,i+1} < \tbx_{1,i+2} < \cdots < \tbx_{1,i+p-1} < \tbx_{2,i}\}.
 \end{definition}
 
 \begin{lemma}\label{lem:tbx-out}
-Let $\tbx\in \pbad_n(k)$ be a $p$-bad standard tableau with a bad entry $\tbx_{2,i}$.
-Then the element $\sum_{\tau\in \mathfrak{S}_{B_i}} \bfe_{\tbx}\tau \in S^{(n-k,k)}\subset \F\Omega_k$ belongs to the submodule $\Image(\varphi_{k+p-1}^{p-1})$.
+Let $\tbx$ be a bad standard tableau with a bad entry $\tbx_{2,i}$.
+Then the element $\sum_{\tau\in \mathfrak{S}_{B_i}} \bfe_{\tbx}\tau \in S^{k,k}$ belongs to the submodule $\Image(\varphi_{k+p-1}^{p-1})$.
 \end{lemma}
 \begin{proof}
 Take $B:=B_i(\tbx_{1,i},\tbx_{2,i})$, then we have $(\tbx_{1,i},\tbx_{2,i})\mathfrak{S}_{B_i}(\tbx_{1,i},\tbx_{2,i}) = \mathfrak{S}_B$.
@@ -1134,7 +1111,7 @@ Hence, the element on the right-hand side is also in $\Image(\varphi^{p-1})$, an
 
 
 \begin{lemma}\label{lem:badpaths2}
-Let $\tbx\in \pbad_n(k)$ be a $p$-bad standard tableau with a bad entry $\tbx_{2,i}$.
+Let $\tbx$ be a bad standard tableau with a bad entry $\tbx_{2,i}$.
 Then $\tbx\sigma$ is column-standard for any $\sigma\in B_i$.
 In particular, $\tbx\sigma$ is almost standard if $(\tbx_{2,i})\sigma=\tbx_{2,i}$.
 \end{lemma}
@@ -1147,10 +1124,10 @@ The last statement follows from the fact that $\tbx$ is standard and $\sigma$ fi
 
 Before proceeding, recall our notation 
 \[\ [v]:=v+\Image(\varphi^{p-1}) \in H_k^{/0}\]
-denotes the coset containing $v\in \F\Omega_k$ in the quotient $H_k^{/0}$.
+for the coset containing $v\in \F\Omega_k$ in the quotient $H_k^{/0}$.
 
 \begin{lemma}\label{lem:badstd}
-$[\bfe_{\tbx}] \in \Fspan\{[\bfe_{\tbx'}]\mid \tbx'\succ\tbx\}\subset H_k^{/0}$ for any $p$-bad standard tableau $\tbx\in \pbad_n(k)$.
+Suppose $\tbx$ is a bad standard tableau, then we have $[\bfe_{\tbx}] \in \Fspan\{[\bfe_{\tbx'}]\mid \tbx'\succ\tbx\}\subset H_k^{/0}$.
 \end{lemma}
 \begin{proof}
 By Lemma \ref{lem:tbx-out}, if $\tbx_{2,i}$ is a bad entry (which always exists by Lemma \ref{lem:badpaths}), we have 
@@ -1189,19 +1166,20 @@ Thus, the summation $\sum_{\sigma\in T}[\bfe_\tbx\sigma]$ is in $\Fspan\{\tbx'\m
 All the required ingredients for proving Theorem \ref{thm:basis} are now ready.
 
 \subsection{Proof of Theorem \ref{thm:basis}}\label{subsec:basisproof}
+We can assume $\mathcal{L}_{n-k,k}^{1,p-1}$ is non-empty (in particular, $p\neq 2$); otherwise, there is nothing to show as $H_k^{/0}=0$.
 
-Recall from Theorem \ref{thm:newfinal} that $H_k^{\slash 0}\cong D^{(n-k,k)}$, which is a unique composition factor of $\F\Omega_k$ appearing as the top of the submodule $S^{(n-k,k)}$ by Theorem \ref{thm:James}.  Hence, we only needs to show that the coset $[\bfe_\tbx]:=\bfe_{\tbx}+\Image(\varphi^{p-1})$ associated to any standard polytabloid $\bfe_{\tbx}$ of $\tbx\in \ST_n(k)$ is in the $\F$-span of the cosets associated to $p$-standard polytabloid.  Since any standard tableau is almost standard, it is enough to show the following.
+By Lemma \ref{lem:main-lo}, $H_k^{/0}$ is a quotient of the Specht module $S^{k,k} = \Fspan\{\bfe_\tbx\mid \tbx:$ any tableau$\}$, which has a basis given by standard polytabloid.  So we can prove the theorem by showing the following result.
 
 \begin{lemma}
-For all almost standard tableau $\tbx\in \aST_n(k)$, we have
+For all $\tbx\in \aST$, we have
 \[
-\ [\bfe_{\tbx}]:=\bfe_{\tbx}+\Image(\varphi^{p-1}) \;\;\in \;\; \Fspan\{[\bfe_{\tbx'}]\mid \tbx' \text{ is $p$-standard }\}.
+\ [\bfe_{\tbx}] \in  \Fspan\{[\bfe_{\tbx'}]\mid \tbx'\text{ good and standard }\}.
 \]
 \end{lemma}
 \begin{proof}
 We will show this by induction on $(\aST,\preceq)$.
-Note that the maximal (in fact, maximum) element of this poset is the standard tableau $\tbx^\omega$ associated to $\omega=\{2, 4, \ldots,2k\}$. \old{, which corresponds to the lattice path that changes direction at every step.
-This path is in $\mathcal{L}_{n-k,k}^{1,p-1}$ so long as the set is non-empty.} \new{For $p \neq 2$ this standard tableau is always $p$-good.}
+Note that the maximal (in fact, maximum) element of this poset is the standard tableau $\tbx^\omega$ associated to $\omega=\{2, 4, \ldots,2k\}$, which corresponds to the lattice path that changes direction at every step.
+This path is in $\mathcal{L}_{n-k,k}^{1,p-1}$ so long as the set is non-empty.
 Hence, there is nothing to show in the case $\tbx=\tbx^\omega$.
 
 Consider now $\tbx\prec\tbx^\omega$.
