@@ -1,0 +1,185 @@
+\documentclass[12pt]{article}
+
+
+\usepackage[margin=2cm]{geometry}
+\usepackage[shortlabels]{enumitem}
+\usepackage{amsmath,amsxtra,amsthm,amssymb,mathrsfs}
+\usepackage[all]{xy}
+
+\usepackage{exsheets}
+\SetupExSheets{headings=runin}
+\SetupExSheets{question/type=exercise}
+\SetupExSheets{question/name=Ex }
+
+\newcommand{\Hom}{\operatorname{Hom}\nolimits}
+\newcommand{\End}{\operatorname{End}\nolimits}
+
+\DeclareMathOperator{\Char}{char}
+\newcommand{\triv}{\operatorname{triv}\nolimits}
+\newcommand{\sgn}{\operatorname{sgn}\nolimits}
+\newcommand{\Mat}{\operatorname{Mat}\nolimits}
+\newcommand{\GL}{\operatorname{GL}\nolimits}
+\DeclareMathOperator{\Sn}{\mathfrak{S}}
+
+\begin{document}
+
+{\scshape Autumn 2025} \hfill {\scshape \large Topics in Math. Sci. VIII} \hfill {\scshape Homework Assignment 1}
+\smallskip
+
+\hrule
+
+\bigskip
+
+\begin{question}
+Let $A=A_1\times A_2$ be a direct product of two $\Bbbk$-algebras $A_1, A_2$.
+Note that there are algebra homomorphisms $\pi_i : A\to A_i$.
+Consider the idempotents $e_1:=(1_{A_1},0), e_2:=(0,1_{A_2})$ of $A$.
+\begin{enumerate}
+\item For $M\in \mod A$, show that $M=M_1\oplus M_2$ with $M_i=Me_i$ for both $i\in\{1,2\}$, i.e. $M=Me_1+Me_2$ with $Me_1\cap Me_2=0$.
+
+\item Show that $\pi_i$ induces a simple $A$-module structure on the simple $A_i$-modules for both $i\in\{1,2\}$.
+
+\item Show that there exists a natural $A_i$-action on the direct summand $M_i$ of $M$ (in the notation of (1)).  In particular, classify the simple $A$-modules.
+\end{enumerate}
+\end{question}
+
+%\begin{question}
+%Consider the formal power series ring $\Bbbk[[x]]:=\{\sum_{i=0}^\infty \lambda_i x^i\mid \lambda_i\in \Bbbk\}$ with 
+%\begin{itemize}
+%\item addtition $(\sum_i \lambda_i x^i)+(\sum_i \mu_i x^i) = \sum_i (\lambda_i+\mu_i)x^i$,
+%\item scalar multiplication $\lambda(\sum_i\lambda_ix^i)=\sum_i (\lambda \lambda_i)x^i$,
+%\item multiplication $(\sum_i \lambda_i x^i)(\sum_j\mu_j x^j ) = \sum_k( \sum_{i+j=k} \lambda_i\mu_j) x^k$.
+%\end{itemize}
+%\begin{enumerate}
+%\item Show that $\Bbbk[[x]]$ is a commutative $\Bbbk$-algebra.
+%
+%\item Determine the invertible elements in $\Bbbk[[x]]$.
+%
+%\item Show that $\Bbbk[[x]]$ is a local algebra, i.e. there exists a unique maximal left (equivalently, right) ideal.
+%
+%\item Classify the simple modules of $\Bbbk[[x]]$.
+%
+%\item Classify the simple modules of $\Bbbk[x]$.  \emph{Hint}: (a) Maximal two-sided ideals of a ring are determined by the irreducible elements. (b) $\Bbbk[x]$ is commutative.
+%\end{enumerate}
+%\end{question}
+%
+%\begin{question}
+%Consider the group algebra $A=R[G]$ of the finite group $G=C_2=\{1,\sigma\}$.
+%\begin{enumerate}
+%\item For $R=\mathbb{C}$, show that there are two non-isomorphic simple $A$-modules $S_1,S_2$ so that $A\cong S_1\oplus S_2$.  Hint: Find an a non-zero non-identity idempotent of $A$.
+%
+%\item For $R=\mathbb{F}_2$ the finite field with two elements, show that $A$ is a local algebra by, for example, showing that $A\cong R[x]/(x^2)$ as $R$-algebra.
+%\end{enumerate}
+%\end{question}
+
+\begin{question}
+Let $A$ be the ring
+\[
+\begin{pmatrix}
+\mathbb{R} & \mathbb{C} \\ 0 & \mathbb{C}
+\end{pmatrix} = \left\{ \begin{pmatrix} a&b\\0&c \end{pmatrix} : a\in \mathbb{R}, b,c\in \mathbb{C} \right\}.
+\]
+\begin{enumerate}
+\item Show that $A$ is an $\mathbb{R}$-algebra and find the dimension of $A$ over $\mathbb{R}$.
+
+\item There are two simple $A$-modules.  Describe them.
+
+\item Write down a composition series (i.e. filtration whose subquotients are simples) of the free $A$-module $A_A$.
+\end{enumerate}
+\end{question}
+
+
+\begin{question}
+Let $A$ be the following $\Bbbk$-algebra:
+\[
+\left\{
+\begin{pmatrix}
+a & b & c \\ 0& x & y \\ 0 & 0& a
+\end{pmatrix} \mid a,b,c,x,y\in \Bbbk
+\right\}
+\]
+Note that for every matrix in $A$, the (1,1)-entry and the (3,3)-entry must be the same.
+Let $e_1$ be the idempotent of $A$ given by the matrix with 1 in the (1,1)- and (3,3)-entry and 0 everywhere else; and $e_2=1_B-e_1$.
+
+\begin{enumerate}
+\item Show that both $e_1A$ and $e_2A$ have a unique simple submodules and they are isomorphic.
+
+\item Let $S_1$ be the simple module in (1).  Show that $S_2:=e_2A/S_1 \ncong S_1$.
+
+\item Find the composition series of $e_1A$ and of $e_2A$.
+\end{enumerate}
+\end{question}
+
+
+\begin{question}
+\begin{enumerate}
+\item Consider the linearly oriented $\vec{\mathbb{A}}_5$-quiver:
+\[
+\xymatrix{ 1 \ar[r]^{\alpha_1} & 2 \ar[r]^{\alpha_2} & 3 \ar[r]^{\alpha_3} & 4 \ar[r]^{\alpha_4} & 5}
+\]
+and the following representation $M$ of $\vec{\mathbb{A}}_5$:
+\[
+\Bbbk \xrightarrow{1} \Bbbk \xrightarrow{\left(\begin{smallmatrix}1\\0\end{smallmatrix}\right)} \Bbbk^2 \xrightarrow{\left(\begin{smallmatrix}a&b\\c&d\end{smallmatrix}\right)} \Bbbk^2 \xrightarrow{(1,1)} \Bbbk 
+\]
+Find the indecomposable decompositions of $M$ in the cases when the matrix $\left(\begin{smallmatrix}a&b\\c&d\end{smallmatrix}\right)$ is of rank 1 and of rank 2.
+Explain in details your reasoning.
+
+You may use the fact that there are indecomposable modules of the form $U_{i,j}$ for $1\leq i\leq j\leq 5$ such that
+\[
+U_{i,j}e_x = \begin{cases}
+\Bbbk & \text{if  $i\leq x\leq j$;}\\
+0 & \text{otherwise,}
+\end{cases} \text{ and } U_{i,j}\alpha_k = \begin{cases}
+\mathrm{id} & \text{if $i\leq k<j$;}\\
+0 & \text{otherwise.}
+\end{cases}
+\]
+
+\item Consider $A=\Bbbk Q/I$ given by
+\[
+Q: \xymatrix@1{1 \ar[r]^{\alpha}\ar@/_1pc/[rr]_{\delta}& 2 \ar[r]^{\beta}& 3 \ar[r]^{\gamma}& 4}, \quad I=\langle \alpha\beta\gamma-\delta\gamma\rangle 
+\]
+
+\begin{enumerate}
+\item Find a basis for the socle (i.e. maximal semisimple submodule) of the indecomposable projective $P_1$.\\
+\emph{Hint}: The socle is 2-dimensional.
+
+\item Show that the radical $\mathrm{rad}P_1:=\mathrm{Ker}(P_1\twoheadrightarrow S_1)$ of $P_1$ is not indecomposable.  Details your reason.
+\end{enumerate}
+
+%\item Consider the following quiver 
+%\[
+%Q:\quad  \xymatrix{ 1 \ar@(dl,ul)^{\alpha} \ar@/^/[r]^{\beta}& 2 \ar@/^/[l]^{\gamma}}
+%\]
+%Let $I_1:=\langle \alpha^2-\beta\gamma, \gamma\beta-\gamma\alpha\beta,\alpha^4\rangle$ and $I_2:=\langle \alpha^2-\beta\gamma,\gamma\beta,\alpha^4\rangle$.
+%Show that $\Bbbk Q/I_1 \cong \Bbbk Q/I_2$ as $\Bbbk$-algebra when the characteristic of $\Bbbk$ is not 2.
+\end{enumerate}
+\end{question}
+
+
+
+%\begin{question}
+%Let $A$ be the algebra of upper triangular $n\times n$-matrices:
+%\[
+%A := \begin{pmatrix}
+%K & K & \cdots & K \\
+%0 & K & \cdots & K \\
+%0 & 0 & \ddots & \vdots \\
+%0 & 0 & 0 & K
+%\end{pmatrix} = { \left\{(a_{i,j})_{1\leq i,j\leq n}\middle| \begin{array}{l}a_{i,j}\in K\;\forall i,j\\
+%a_{i,j}=0\;\forall i>j \end{array}\right\} }
+%\]
+%For $1\leq i \leq j \leq n$, let $M_{i,j} \subset K^{\oplus n}$ be the vector space given by column vectors $v=(v_k)_{1\leq k\leq n}$ where $v_k=0$ for $k\notin \{i,i+1,\ldots, j\}$.
+%\begin{enumerate}[\rm(i)]
+%\item Determine which $M_{i,j}$'s are simple.
+%\item Describe the composition series of $M_{i,j}$.
+%\end{enumerate}  
+%\end{question}
+
+\vfill
+\hfill Deadline: 24th October, 2025
+
+\hfill Submission: E-mail to (replace at by @) aaron.chan at math.nagoya-u.ac.jp
+
+
+\end{document}

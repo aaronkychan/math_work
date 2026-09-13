@@ -1,0 +1,146 @@
+\documentclass[a4,11pt]{article}
+\usepackage{etex}
+\usepackage[top=25mm, bottom=25mm, left=25mm, right=25mm]{geometry}
+
+%\textheight 220mm
+%\textwidth 160mm
+%%\textheight 230mm
+%%\textwidth 150mm
+%\hoffset -16mm
+%%\voffset -16mm
+
+\usepackage{amssymb}
+\usepackage{amstext}
+\usepackage{amsmath}
+\usepackage{amscd}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{comment}
+%\usepackage{ifsym}
+%\usepackage{stmaryrd}
+\usepackage[shortlabels]{enumitem}
+%\usepackage{booktabs}
+%\usepackage{graphicx}
+\usepackage{latexsym}
+\usepackage[all]{xy}
+%\usepackage{alltt}
+%\usepackage[usenames]{color}
+%\usepackage{bbm}
+%\usepackage{verbatim}
+%\usepackage{makeidx}
+%\usepackage{tikz}
+%\usetikzlibrary{shapes,arrows}
+%\usetikzlibrary{patterns}
+%\usetikzlibrary{decorations.pathreplacing}
+%\usepackage{showkeys}
+%\usepackage[pdftex]{hyperref}
+%\hypersetup{
+%  bookmarksnumbered = true,
+%  bookmarksopen = false,
+%  bookmarksopenlevel = 2,
+%  colorlinks = false,
+  %hyperindex=true,
+%  pageanchor=true,
+%  pdfcreator={Takahide Adachi, Takuma Aihara, Aaron Chan},
+%  pdfstartview = FitH
+%}
+%\usepackage{fixltx2e}  %to fix error from using overhead arrow in caption
+%\MakeRobust{\overrightarrow}
+%\MakeRobust{\overleftarrow}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{12pt}
+
+%\usepackage{pstricks}
+%\usepackage{comment}
+%\newcommand{\comment}[1]{{\color[rgb]{0.1,0.9,0.1}#1}}
+%\newcommand{\old}[1]{{\color{red}#1}}
+%\newcommand{\new}[1]{{\color{blue}#1}}
+
+%\newtheorem{convention}[theorem]{Convention}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\mod}{\operatorname{mod}}
+\newcommand{\proj}{\operatorname{proj}}
+\newcommand{\smod}{\operatorname{\underline{mod}}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\add}{\operatorname{\mathsf{add}}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\sHom}{\operatorname{\underline{Hom}}}
+\newcommand{\soc}{\operatorname{\mathsf{soc}}}
+\newcommand{\tp}{\operatorname{\mathsf{top}}}
+\newcommand{\NN}{\mathbb{N}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%\title{Comments on ``A characterization of IE-closed subcategories via $\tau$-tilting theory"}
+%\date{\vspace{-10ex}}
+
+%\maketitle
+
+\begin{center}
+	{\LARGE 
+Comments on\\
+``A characterization of IE-closed subcategories via $\tau$-tilting theory"
+}
+\end{center}
+
+{\bf General comments}
+
+The paper look at the problem of classifying the so called IE-subcategories (subcategories closed under images and extensions) using finite-dimensional modules.  
+Such an attempt was previously experimented by Enomoto and Sakai, where they achieved the case for hereditary algebras.
+This paper propose two classes of (pairs of) modules that extends Enomoto-Sakai success to arbitrary finite-dimensional algebras over algebraically closed fields.
+
+The first class (canonical twin support $\tau$-tilting modules) is, in my opinion, not a new discovery but just restating and putting together known correspondence between certian subcategories and their characterising modules..  The key is that IE-closed subcategories are intersection of torsion class and torsion-free class, and the pair the author used here is nothing but requiring one of the modules in the pair generates the intersection, and the other cogenerates it.  Although not stated explicitly in Enomoto-Sakai's paper, it is very natural to expect that this type of characterising conditions are exactly what they were trying to avoid.  A useful characterising pair should not invovle checking what subcategories the modules (co)generate, but to only use the intrinsic module-theoretic properties of the pairs.
+In contrast, the second class (canonical Ext-pairs) provides the characterising conditions that are completely module theorectic -- they are the modules Enomoto-Sakai used to characterise IE-closed subcateogires, and this echos my last sentence of why the first class is not being reviewed by Enomoto-Sakai.
+There are also some imprecise and unclear statements which leave some doubts to the rigour of the proof, although I believe it is correct.
+
+The first class of modules are practically useless since determining them is no difference than determining the torsion and torsion-free classes that give rise to the corresponding IE subcategories.  Only in very small examples, like the one that the authors gave, can really be calculated by hand or computer.  Because the example is so small, it is also not clear how useful (efficient in calculation/classifcation) they are in practice.  
+
+{\bf Verdict}
+
+There are some potential for the pairs studied in this paper to be interesting to a wide range of audience.  In this sense, I think one point that could make it up to JPAA standard.   If there are some interesting example (representation-infinite algebras) where their notions can actually produce interesting IE-subcategories or even full classifications, then I am more confident in recommending this paper.  However, at the moment, what the authors show have not fully convinced me that this is the case yet.  Although I lean on leaving a more proper judgement after a revision of the paper, perhaps it is difficult to expect if any new results or significant examples  that would improvement my recommendation can be completed  in the near future.
+
+
+{\bf Specific comments}
+
+\begin{enumerate}[(1)] 
+
+\item p.3 line $-2$: $\mathcal{F}$ is $\mathcal{T}$?
+
+\item p.5 line $-5$:  Why $M$ is not bracketed but $N$ is ?
+
+\item p.6, equation 3.1, 3.2:  In my opinion, these are very bad notations.  It suggests the $U,P$ modules are dependent only on $M$ but they are also dependent on $N$.  I have no idea why the role of $M$ should be emphasied yet the role of $N$ can be ignored here.  The authors have used the torsion radical notation $t_{\mathcal{T}}$ and this should be used here to emphasise the role of $M$ and $N$.
+
+\item Proof of Theorem 3.7, last paragraph:  Bad grammar (what even is canonicail support $\tau$-tilting module?).  `Finally, by definition, the   
+pair $(M,N)$ of basic support $\tau$-tiling module is canonical if and only if .....'
+
+\item p.7, line 5: use \texttt{\\emph } or bold to mark definiton of Ext-progenertoa
+
+\item p.7, line 7, line 9: the unique, the direct sum, the unique
+
+\item p.7, para 2, line 6: The quoted lemma does not say anything like that.  Is the number misquoted?
+
+\item p.7, para 2, line 6,7:  claim that $\mathsf{add} W= \mathsf{add} P_M$, which then implies that ... an Ext-progenerator.
+
+\item p.7, para 2, line 7:  calrify if every Ext-projective must be a direct sum of Ext-progenerator  (this is used when you say `only need to show')
+
+\item p.8, sentence before the first displayed short exact sequence:  this sentence is not finish.  You are claiming the ses exists?
+
+\item Def 3.9: some clarifications are needed -- how $(P,I)$ is dependent on $(M,N)$, and whether there can be two pairs of $(M,N)$ satisfying the required condition.  Also, why the notations $P_M$ and $I^N$ are dropped (this affect when you apply Theorem 3.7 in the proof of Theorem 3.10)?
+
+\item after proof of Theorem 3.10:  `$P$ and $I$ is always rigid' (why the present perfect tense?)  why is this true?
+
+\item line 2 after proof of Theorem 3.10:  it is absurd that this paper claim to generalize Enomoto-Sakai's twin rigid module and yet there is no recall what a twin rigid module is.
+
+\item Before table 1:  the quotation mark before the direct sum is reversed (should be ``, not ")
+\end{enumerate}
+
+\end{document}
