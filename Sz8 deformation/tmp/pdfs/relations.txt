@@ -1,0 +1,882 @@
+
+===== PAGE 1 =====
+Journal of Symbolic Computation 42 (2007) 429–442
+www.elsevier.com/locate/jsc
+An example of relations on the Ext-quiver for the
+Suzuki group Sz(8) in characteristic 2
+∗
+Hitoshi Koshita
+1-10-12 Shinoda, Aomori-shi 038-0011, Japan
+Received 11 December 2004; accepted 28 December 2006
+Available online 7 January 2007
+Abstract
+Let G be the smallest Suzuki group Sz(8) and let F be an algebraically closed field of characteristic
+2. The basic algebra of the group algebra of G over F is described by its Ext-quiver and a certain set of
+relations.
+(cid:13)c 2007 Elsevier Ltd. All rights reserved.
+Keywords: Sz(8); Ext-quiver
+0. Introduction
+For a finite-dimensional algebra over a field there is a basic algebra which is Morita equivalent
+to it (Benson, 1991, Section 2.2). A finite-dimensional basic algebra over an algebraically closed
+field is described by its Ext-quiver with relations (Benson, 1991, Definitions 4.1.6 and 4.1.8).
+There is a surjective map of algebras from the path algebra such that the kernel is contained in
+the ideal of paths of length at least two (Benson, 1991, Proposition 4.1.7). Note that our Ext-
+quiver has been determined by the simple modules and their extensions.
+This paper consists of Introduction, Sections 1–8 and References. Section 1 contains the main
+theorem and the comments. Section 2 mainly describes the already known valuable results from
+Schneider (1993) and Sin (1992). Section 3 defines the projective indecomposable modules of
+larger dimensions and the homomorphisms between the projective indecomposable modules.
+Section 4 begins by setting an orthogonal primitive idempotent decomposition, defines the
+homomorphism from the path algebra to the basic algebra which maps the arrows in the quiver
+∗ Tel.: +81 017 766 6532.
+E-mail address: HZI04441@nifty.com.
+0747-7171/$ - see front matter (cid:13)c 2007 Elsevier Ltd. All rights reserved.
+doi:10.1016/j.jsc.2006.12.003
+
+===== PAGE 2 =====
+430 H. Koshita / Journal of Symbolic Computation 42 (2007) 429–442
+e˙
+5
+·
+(cid:10)
+(cid:10)(cid:10)(cid:30)
+L˙ (cid:10)
+(cid:10)
+(cid:10) (cid:10) I˙
+e˙ (cid:10)(cid:29)(cid:10) (cid:10)
+4
+·
+(cid:10)
+(cid:10)(cid:10)(cid:30)
+G˙ (cid:10)
+(cid:10)
+(cid:10) (cid:10) C˙
+e˙
+6 (cid:27)
+J˙ e˙
+2 (cid:27)
+A˙ e˙
+1
+(cid:10)(cid:29)(cid:10)
+(cid:10)
+· - · - ·
+M˙ D˙ J J]J
+JJ F˙
+B˙ JJ
+JJ^ J e˙
+· 3
+J
+J]J
+JJ K˙
+H˙ JJ
+JJ^ J e˙
+· 7
+Fig. 1. The quiver Q.
+to the elements corresponding to the homomorphisms between the principal indecomposable
+modules, and also describes the remark and the lemma used in the succeeding section. Section 5
+shows that the previously defined algebra homomorphism is surjective and its kernel is generated
+by the relations described in the main theorem. Sections 6–8 are for the listings of the GAP
+programs and the Opal script.
+1. Main result
+Let G be the Suzuki Group Sz(8), let F be an algebraically closed field of characteristic 2, and
+let F G be the group algebra of G over F. The group algebra F G has two blocks. Let B be the
+0
+principal block and B be the other. Then B is a semi-simple algebra containing the Steinberg
+1 1
+module.
+Theorem 1. Let Q be the quiver as shown in Fig. 1 and let F Q be its path algebra over F. Let
+α = D˙A˙, α = F˙B˙, α = G˙C˙, α = K˙H˙, α = L˙I˙, α = M˙J˙,
+1 2 3 4 5 6
+α = D˙B˙H˙, α = F˙C˙I˙, α = G˙A˙J˙, α = K˙F˙A˙, α = L˙G˙B˙, α = M˙D˙C˙,
+7 8 9 10 11 12
+α = K˙F˙C˙G˙B˙H˙, α = L˙G˙A˙D˙C˙I˙, α = M˙D˙B˙F˙A˙J˙, α = D˙C˙G˙A˙ + D˙B˙F˙A˙J˙M˙ + J˙M˙D˙B˙F˙A˙,
+13 14 15 16
+α = F˙A˙D˙B˙ + F˙C˙G˙B˙H˙K˙ + H˙K˙F˙C˙G˙B˙, α = G˙B˙F˙C˙ + G˙A˙D˙C˙I˙L˙ + I˙L˙G˙A˙D˙C˙,
+17 18
+α = D˙B˙F˙C˙G˙A˙ + D˙C˙G˙B˙F˙A˙ + D˙B˙F˙A˙D˙B˙F˙C˙G˙A˙ + D˙B˙F˙A˙D˙C˙I˙L˙G˙A˙ + D˙B˙F˙C˙G˙A˙D˙B˙F˙A˙
+19
++ D˙C˙G˙A˙D˙B˙F˙C˙G˙A˙ + D˙C˙G˙B˙H˙K˙F˙C˙G˙A˙ + D˙C˙I˙L˙G˙A˙D˙B˙F˙A˙ + D˙B˙F˙A˙D˙C˙G˙B˙F˙C˙G˙A˙,
+α = F˙C˙G˙A˙D˙B˙ + F˙A˙D˙C˙G˙B˙ + F˙C˙G˙B˙F˙C˙G˙A˙D˙B˙ + F˙C˙G˙B˙F˙A˙J˙M˙D˙B˙ + F˙C˙G˙A˙D˙B˙F˙C˙G˙B˙
+20
++ F˙A˙D˙B˙F˙C˙G˙A˙D˙B˙ + F˙A˙D˙C˙I˙L˙G˙A˙D˙B˙ + F˙A˙J˙M˙D˙B˙F˙C˙G˙B˙ + F˙C˙G˙B˙F˙A˙D˙C˙G˙A˙D˙B˙,
+α = G˙A˙D˙B˙F˙C˙ + G˙B˙F˙A˙D˙C˙ + G˙A˙D˙C˙G˙A˙D˙B˙F˙C˙ + G˙A˙D˙C˙G˙B˙H˙K˙F˙C˙ + G˙A˙D˙B˙F˙C˙G˙A˙D˙C˙
+21
++ G˙B˙F˙C˙G˙A˙D˙B˙F˙C˙ + G˙B˙F˙A˙J˙M˙D˙B˙F˙C˙ + G˙B˙H˙K˙F˙C˙G˙A˙D˙C˙ + G˙A˙D˙C˙G˙B˙F˙A˙D˙B˙F˙C˙,
+β = A˙D˙B˙F˙C˙G˙ + C˙G˙B˙F˙A˙D˙ + A˙D˙C˙G˙B˙H˙K˙F˙C˙G˙ + B˙H˙K˙F˙C˙G˙A˙D˙C˙G˙ + C˙G˙A˙D˙C˙G˙B˙H˙K˙F˙
+1
++ C˙G˙B˙H˙K˙F˙C˙G˙A˙D˙ + A˙J˙M˙D˙B˙F˙A˙D˙B˙F˙C˙G˙ + C˙G˙B˙F˙A˙D˙B˙F˙A˙J˙M˙D˙ + A˙D˙B˙F˙A˙D˙C˙G˙A˙D˙C˙I˙L˙G˙
++ C˙G˙A˙D˙C˙I˙L˙G˙A˙D˙B˙F˙A˙D˙ + C˙G˙A˙D˙C˙I˙L˙G˙A˙D˙B˙F˙C˙G˙A˙D˙,
+
+===== PAGE 3 =====
+H. Koshita / Journal of Symbolic Computation 42 (2007) 429–442 431
+β = B˙F˙C˙G˙A˙D˙ + A˙D˙C˙G˙B˙F˙ + B˙F˙A˙D˙C˙I˙L˙G˙A˙D˙ + C˙I˙L˙G˙A˙D˙B˙F˙A˙D˙ + A˙D˙B˙F˙A˙D˙C˙I˙L˙G˙
+2
++ A˙D˙C˙I˙L˙G˙A˙D˙B˙F˙ + B˙H˙K˙F˙C˙G˙B˙F˙C˙G˙A˙D˙ + A˙D˙C˙G˙B˙F˙C˙G˙B˙H˙K˙F˙ + B˙F˙C˙G˙B˙F˙A˙D˙B˙F˙A˙J˙M˙D˙
++ A˙D˙B˙F˙A˙J˙M˙D˙B˙F˙C˙G˙B˙F˙ + A˙D˙B˙F˙A˙J˙M˙D˙B˙F˙C˙G˙A˙D˙B˙F˙,
+β = C˙G˙A˙D˙B˙F˙ + B˙F˙A˙D˙C˙G˙ + C˙G˙B˙F˙A˙J˙M˙D˙B˙F˙ + A˙J˙M˙D˙B˙F˙C˙G˙B˙F˙ + B˙F˙C˙G˙B˙F˙A˙J˙M˙D˙
+3
++ B˙F˙A˙J˙M˙D˙B˙F˙C˙G˙ + C˙I˙L˙G˙A˙D˙C˙G˙A˙D˙B˙F˙ + B˙F˙A˙D˙C˙G˙A˙D˙C˙I˙L˙G˙ + C˙G˙A˙D˙C˙G˙B˙F˙C˙G˙B˙H˙K˙F˙
++ B˙F˙C˙G˙B˙H˙K˙F˙C˙G˙A˙D˙C˙G˙ + B˙F˙C˙G˙B˙H˙K˙F˙C˙G˙A˙D˙B˙F˙C˙G˙,
+α = β + β and α = β + β . Let X be the two-sided ideal of F Q generated by
+22 1 2 23 2 3
+α , α , . . . , α . Then the quotient algebra F Q/ X is isomorphic to the basic algebra of B .
+1 2 23 0
+Our main goal in this paper is to prove Theorem 1. The computer algebra system GAP (GAP,
+2004) and the Gro¨bner basis system Opal (Keller, 1999) are used. The program p1.g in Section 6
+needs the subprogram p2.g in Section 7. They are for GAP. The script p3.opal in Section 8 is for
+Opal. The matrices e0, e1, e2, e3, e4, A, B, C, D, F, G, H, I, J, K, L, M and the row vectors t1,
+t2, t3, t4, t5, t6, t7 are given by p2.g. After GAP reads and evaluates p1.g,1 the variable ans
+is bound to a dense list of length 92 in which every element is the Boolean value true. We will
+remember this. The script p3.opal outputs True and a set of 1192 paths. Those paths which the
+function Nontips returns give an F-basis of the algebra F Q/ X .
+2. Preliminaries
+We refer to the start of p1.g. By (1), the variable g1 is bound to the Suzuki group Sz(8). The
+elements are 4×4 matrices over the finite field with 8 elements. This can be regarded as a subfield
+of F. We will identify g1 with G. By (4) and (5), the group G is generated by two elements r0
+and s0. They are described in (6)–(13) explicitly. There is a group automorphism τ of G (see Sin
+(1992)) such that τ 2 is the mapping which squares matrix entries and τ 3 is the identity mapping
+on G.
+Definition 2. Let i 1 , i 2 , . . . , i n be integers in {0, 1, 2}. Denote by τ (i1 ,i2 ,...,in ) the group
+homomorphism from G to the group of nonsingular 4n × 4n matrices over F such that
+τ
+(i1 ,i2 ,...,in )
+(g) = τ i1(g) ⊗ τ i2(g) ⊗ · · · ⊗ τ in (g)
+where the symbol ⊗ means the Kronecker product of matrices. Note that τ 0 is the identity
+mapping on G. Let V(i1 ,i2 ,...,in ) be a 4n-dimensional row vector space over F. The action of g ∈ G
+on V(i1 ,i2 ,...,in ) is taken to be the standard product of a row vector with the matrix τ (i1 ,i2 ,...,in ) (g).
+Then V(i1 ,i2 ,...,in ) and V(i1 ) ⊗ V(i2 ) ⊗ · · · ⊗ V(in ) are isomorphic F G-modules. Let V ∅ be the trivial
+module F.
+The eight modules V ∅ , V(0) , V(1) , V(2) , V(0,1) , V(0,2) , V(1,2) and V(0,1,2) form a complete set of
+nonisomorphic simple F G-modules. The module V(0,1,2) is the Steinberg module which is
+simple and projective. The other seven modules belong to the principal block. (See Schneider
+(1993) and Sin (1992).)
+Definition 3. Let P
+1
+, P
+2
+, P
+3
+, P
+4
+, P
+5
+, P
+6
+and P
+7
+be the projective covers of V ∅, V(0), V(1), V(2),
+V(1,2), V(0,2) and V(0,1), respectively.
+Then we have the next proposition. This is described in Schneider (1993, Proposition 6).
+1 Change the directory in (2) if necessary. The evaluation took about an hour and a half when the author tried.
+
+===== PAGE 4 =====
+432 H. Koshita / Journal of Symbolic Computation 42 (2007) 429–442
+∼ ∼ ∼
+Proposition 4. V(0,0,1,2) = P
+5
+, V(0,1,1,2) = P
+6
+, V(0,1,2,2) = P
+7
+,
+V(0,1,1,2,2) ∼ = P
+2
+⊕ 2 · V(0,1,2), V(0,0,1,2,2) ∼ = P
+3
+⊕ 2 · V(0,1,2),
+V(0,0,1,1,2) ∼ = P
+4
+⊕ 2 · V(0,1,2), V(0,0,1,1,2,2) ∼ = P
+1
+⊕ 2 · P
+5
+⊕ 2 · P
+6
+⊕ 2 · P
+7
+⊕ 9 · V(0,1,2).
+Corollary 5. dim P = dim P = dim P = 256,
+F 5 F 6 F 7
+dim P = dim P = dim P = 896, dim P = 1984.
+F 2 F 3 F 4 F 1
+3. Row vector spaces
+We are going to use p1.g. Note that r1 = τ (r0) by (14) and r2 = τ 2(r0) by (15), while
+τ (s0) = s0 by (10)–(13). For example, (16) computes r0 ⊗ r0 ⊗ r1 ⊗ r2 = τ (0,0,1,2) (r0) and
+binds it to r3.
+Definition 6. For a matrix M over F, let V (M) be a row vector space over F spanned by the
+whole rows of M. Note that an element of V (M) is a standard product of a row vector with M.
+The matrix e0 commutes with both τ (0,0,1,1,2,2) (r0) and τ (0,0,1,1,2,2) (s0) by (24), (25) and
+(29). The group G is generated by {r0, s0}. Hence e0 commutes with τ (0,0,1,1,2,2) (g) for all
+g ∈ G. Thus V (e0) is an F G-submodule of V(0,0,1,1,2,2). Similarly, by (20)–(25) and (30)–(33),
+V (e1), V (e2), V (e3) and V (e4) are F G-submodules of V(0,0,1,1,2,2) , V(0,1,1,2,2) , V(0,0,1,2,2) and
+V(0,0,1,1,2), respectively.
+Lemma 7. V (e1) ∼ = P , V (e2) ∼ = P , V (e3) ∼ = P , V (e4) ∼ = P .
+1 2 3 4
+Proof. Since (e0)2 = e0 by (34), the module V (e0) is a direct summand of V(0,0,1,1,2,2).
+Similarly, by (35)–(38), the modules V (e1), V (e2), V (e3) and V (e4) are direct summands of
+V(0,0,1,1,2,2) , V(0,1,1,2,2) , V(0,0,1,2,2) and V(0,0,1,1,2), respectively. By (41)–(43), dim
+F
+V (e2) =
+dim V (e3) = dim V (e4) = 896. Thus Proposition 4 and the Krull–Schmidt theorem yield
+F F
+V (e2) ∼ = P , V (e3) ∼ = P and V (e4) ∼ = P . Since both e0 · e1 and e1 · e0 are zero matrices by
+2 3 4
+(44), V (e0) ⊕ V (e1) is a direct summand of V(0,0,1,1,2,2). We have
+dim V (e0) = 576 < dim P ,
+F F 1
+dim V (e1) = 1984 = dim P ,
+F F 1
+dim
+F
+V(0,0,1,1,2,2) − dim
+F
+(V (e0) ⊕ V (e1)) = 4096 − (576 + 1984) < dim
+F
+P
+1
+by (39), (40) and Corollary 5. Thus V (e1) ∼ = P by Proposition 4 and the Krull–Schmidt
+1
+theorem. (cid:3)
+Since A · e1 = A by (45), the standard product x · A of a row vector x ∈ V (e2) with the matrix A
+belongs to V (e1). By (20), (23)–(25) and (54), the equation τ (0,1,1,2,2) (g) · A = A · τ (0,0,1,1,2,2) (g)
+holds for g = r0, s0. The group G is generated by {r0, s0}. Hence the same equation holds for
+all g ∈ G. Thus the homomorphism which maps x ∈ V (e2) to x · A ∈ V (e1) is an F G-
+homomorphism. We use (16)–(25) and (45)–(65) in this manner.
+Definition 8. F G-homomorphisms
+a : V (e2) → V (e1), b : V (e3) → V (e1), c : V (e4) → V (e1),
+d : V (e1) → V (e2), f : V (e1) → V (e3), g : V (e1) → V (e4),
+h : V(0,1,2,2) → V (e3), i : V(0,0,1,2) → V (e4), j : V(0,1,1,2) → V (e2),
+k : V (e3) → V(0,1,2,2) , l : V (e4) → V(0,0,1,2) , m : V (e2) → V(0,1,1,2)
+
+===== PAGE 5 =====
+H. Koshita / Journal of Symbolic Computation 42 (2007) 429–442 433
+can be defined by
+a(x) = x · A, b(x) = x · B, c(x) = x · C,
+d(x) = x · D, f (x) = x · F, g(x) = x · G,
+h(x) = x · H, i(x) = x · I, j(x) = x · J,
+k(x) = x · K, l(x) = x · L, m(x) = x · M,
+where the right hand sides are standard products of a row vector with a matrix.
+4. Idempotent decomposition
+Definition 9. Let A = F G and let 1 = ε + ε where ε and ε are central idempotents such
+A 0 1 0 1
+that B = ε A and B = ε A. Let
+0 0 1 1
+4 4 4 16 16 16
+ε 0 = e 1 + P e 2,a + P e 3,a + P e 4,a + P e 5,a + P e 6,a + P e 7,a
+a=1 a=1 a=1 a=1 a=1 a=1
+be an orthogonal primitive idempotent decomposition of ε 0 such that e 1 A ∼ = P 1 and e 2,a A ∼ = P 2 ,
+e 3,a A ∼ = P 3 , e 4,a A ∼ = P 4 (for a = 1, 2, 3, 4) and e 5,a A ∼ = P 5 , e 6,a A ∼ = P 6 , e 7,a A ∼ = P 7 (for
+a = 1, . . . , 16). Let e i = e i,1 for i = 2, . . . , 7.
+Definition 10. We fix the following A-isomorphisms. (Proposition 4 gives the latter three.
+Lemma 7 gives the others.)
+η : V (e1) → e A, η : V (e2) → e A, η : V (e3) → e A,
+1 1 2 2 3 3
+η
+4
+: V (e4) → e
+4
+A, η
+5
+: V(0,0,1,2) → e
+5
+A, η
+6
+: V(0,1,1,2) → e
+6
+A,
+η
+7
+: V(0,1,2,2) → e
+7
+A.
+Definition 11. We define the following A-homomorphisms.
+a˜ = η ◦ a ◦ (η )−1 : e A → e A, b ˜ = η ◦ b ◦ (η )−1 : e A → e A,
+1 2 2 1 1 3 3 1
+c˜ = η ◦ c ◦ (η )−1 : e A → e A, d ˜ = η ◦ d ◦ (η )−1 : e A → e A,
+1 4 4 1 2 1 1 2
+f ˜ = η ◦ f ◦ (η )−1 : e A → e A, g˜ = η ◦ g ◦ (η )−1 : e A → e A,
+3 1 1 3 4 1 1 4
+h ˜ = η ◦ h ◦ (η )−1 : e A → e A, i ˜ = η ◦ i ◦ (η )−1 : e A → e A,
+3 7 7 3 4 5 5 4
+j ˜ = η ◦ j ◦ (η )−1 : e A → e A, k ˜ = η ◦ k ◦ (η )−1 : e A → e A,
+2 6 6 2 7 3 3 7
+l ˜ = η ◦ l ◦ (η )−1 : e A → e A, m˜ = η ◦ m ◦ (η )−1 : e A → e A.
+5 4 4 5 6 2 2 6
+Let e = e + e + · · · + e and let Λ = e Ae (= eB e). Then Λ is a basic algebra of B . Let J (A)
+1 2 7 0 0
+be the Jacobson radical of A and let J = e J (A)e. Then J is the Jacobson radical of Λ (Feit,
+1982, Lemma I.8.4). Note that J ⊂ J (A). We have e Λe = e Ae , e J e = e J (A)e and
+i j i j i j i j
+(cid:26) F if i = j
+e Ae /e J (A)e ∼ = Hom (e A, e A/e J (A)) ∼ =
+i j i j A j i i
+0 if i 6= j
+for all i, j = 1, . . . , 7 (Benson, 1991, Lemmas 1.3.3(i) and 1.7.5).
+
+===== PAGE 6 =====
+434 H. Koshita / Journal of Symbolic Computation 42 (2007) 429–442
+Definition 12. We define the following elements of Λ.
+a = a˜(e ) ∈ e J e , b = b ˜(e ) ∈ e J e , c = c˜(e ) ∈ e J e ,
+2 1 2 3 1 3 4 1 4
+d = d ˜(e ) ∈ e J e , f = f ˜(e ) ∈ e J e , g = g˜(e ) ∈ e J e ,
+1 2 1 1 3 1 1 4 1
+h = h ˜(e ) ∈ e J e , i = i ˜(e ) ∈ e J e , j = j ˜(e ) ∈ e J e ,
+7 3 7 5 4 5 6 2 6
+k = k ˜(e ) ∈ e J e , l = l ˜(e ) ∈ e J e , m = m˜ (e ) ∈ e J e .
+3 7 3 4 5 4 2 6 2
+Definition 13. Let φ be the F-algebra homomorphism from F Q to Λ such that
+φ(e˙ ) = e , φ(e˙ ) = e , φ(e˙ ) = e , φ(e˙ ) = e , φ(e˙ ) = e ,
+1 1 2 2 3 3 4 4 5 5
+φ(e˙ ) = e , φ(e˙ ) = e , φ(A˙) = a, φ(B˙) = b, φ(C˙) = c,
+6 6 7 7
+φ(D˙) = d, φ(F˙) = f , φ(G˙) = g, φ(H˙) = h, φ(I˙) = i,
+φ(J˙) = j, φ(K˙) = k, φ(L˙) = l, φ(M˙) = m.
+Calculations such as a η (x ) = a˜(e ) η (x ) = a˜(e η (x )) = a˜(η (x )) = η (a(x )) =
+2 2 2 2 2 2 2 2 2 2 1 2
+η (x · A) (∀x ∈ V (e2)) yield the next remark.
+1 2 2
+Remark 14. For any x
+1
+∈ V (e1), x
+2
+∈ V (e2), x
+3
+∈ V (e3), x
+4
+∈ V (e4), x
+5
+∈ V(0,0,1,2),
+x
+6
+∈ V(0,1,1,2) and x
+7
+∈ V(0,1,2,2), the following equations hold.
+a η (x ) = η (x · A), b η (x ) = η (x · B), c η (x ) = η (x · C),
+2 2 1 2 3 3 1 3 4 4 1 4
+d η (x ) = η (x · D), f η (x ) = η (x · F), g η (x ) = η (x · G),
+1 1 2 1 1 1 3 1 1 1 4 1
+h η (x ) = η (x · H), i η (x ) = η (x · I), j η (x ) = η (x · J),
+7 7 3 7 5 5 4 5 6 6 2 6
+k η (x ) = η (x · K), l η (x ) = η (x · L), m η (x ) = η (x · M).
+3 3 7 3 4 4 5 4 2 2 6 2
+Lemma 15. Let t1, . . . , t7 be the elements defined in p2.g.
+(i) V (e1) = t1· A, V (e2) = t2· A, V (e3) = t3· A, V (e4) = t4· A, V(0,0,1,2) = t5· A,
+V(0,1,1,2) = t6 · A, V(0,1,2,2) = t7 · A.
+(ii) a, b, c, d, f , g, h, i, j, k, l, m ∈/ J 2.
+Proof. First note that t1 ∈ V (e1) by (66). By (70) and (71),
+t1·F·B·D·M·J·A·F·B·D·A·G·L·I·C·D·A·F·B·D·A·G·L·I·C·D·A 6= 0.
+Thus
+a d c i l g a d b f a d c i l g a d b f a j m d b f η (t1)
+1
+= η (t1·F·B·D·M·J·A·F·B·D·A·G·L·I·C·D·A·F·B·D·A·G·L·I·C·D·A) 6= 0
+1
+by using Remark 14 repeatedly. By Schneider (1993, Table 4), e A has socle length 27. This is
+1
+equal to the radical length (Benson, 1991, Definition 1.2.1). Hence e J (A)27 = 0. Thus
+1
+a d c i l g a d b f a d c i l g a d b f a j m d b f η (t1) ∈/ J (A)27.
+1
+Hence a, b, c, d, f , g, i, j, l, m ∈/ J (A)2 and η (t1) ∈/ e J (A) because a, b, c, d, f , g, i,
+1 1
+j, l, m ∈ J (A). Then η (t1) generates e A as A-module because e J (A) is a unique maximal
+1 1 1
+A-submodule of e A. Therefore t1 generates V (e1) as A-module. The rest is obtained from
+1
+Schneider (1993, Tables 2 and 3), (67)–(69) and (72)–(83) in a similar way. (cid:3)
+
+===== PAGE 7 =====
+H. Koshita / Journal of Symbolic Computation 42 (2007) 429–442 435
+5. Algebra homomorphism
+The proof of Theorem 1 is completed in this section. The basic algebra Λ and the
+homomorphism φ were defined in the previous section. It will turn out that φ is surjective and its
+kernel is X defined in Theorem 1.
+Lemma 16. X ⊂ Ker φ.
+Proof. It suffices to show that α ∈ Ker φ for all i = 1, . . . , 23. This is achieved by using (84)–
+i
+(168). We are going to show only α = D˙C˙G˙A˙ + D˙B˙F˙A˙J˙M˙ + J˙M˙D˙B˙F˙A˙ ∈ Ker φ. Let y be a row
+16
+vector in V (e2) such that η (y) = e . By Lemma 15(i), some z in A satisfies y = t2 · z. Then
+2 2
+d c g a = d c g a η (t2) z = η (t2·A·G·C·D) z,
+2 2
+d b f a j m = d b f a j m η (t2) z = η (t2·M·J·A·F·B·D) z,
+2 2
+j m d b f a = j m d b f a η (t2) z = η (t2·A·F·B·D·M·J) z
+2 2
+by Remark 14. We have t2·A·G·C·D + t2·M·J·A·F·B·D + t2·A·F·B·D·M·J = 0 by (99)–(101). Thus
+φ(D˙C˙G˙A˙ + D˙B˙F˙A˙J˙M˙ + J˙M˙D˙B˙F˙A˙)
+= d c g a + d b f a j m + j m d b f a
+= η (t2·A·G·C·D + t2·M·J·A·F·B·D + t2·A·F·B·D·M·J) z
+2
+= 0. (cid:3)
+Definition 17. There is a unique F-algebra homomorphism ψ from F Q/ X to Λ such that
+φ = ψ ◦ π where π is a canonical surjection from F Q to F Q/ X .
+Proposition 18. φ is surjective.
+Proof. Note that dim (e Λe /e J e ) = 1 and e ∈ e Λe but e ∈/ e J e for all i = 1, . . . , 7,
+F i i i i i i i i i i
+while e Λe = e J e for all i, j = 1, . . . , 7 such that i 6= j. Thus φ is surjective modulo J .
+i j i j
+Let i, j = 1, . . . , 7. If e J e 6= e J 2e then dim (e J e /e J 2e ) = 1 and e J e contains some
+i j i j F i j i j i j
+element among a, b, c, d, f , g, h, i, j, k, l, m by Benson (1991, Proposition 2.4.3) and Sin (1992,
+Theorem), but it does not belong to e J 2e by Lemma 15(ii). Thus φ is surjective modulo J 2.
+i j
+Hence φ is surjective by Benson (1991, Proposition 1.2.8). (cid:3)
+Corollary 19. ψ is surjective.
+Proposition 20. ψ is an F-algebra isomorphism.
+Proof. For a nonzero z in F Q, let supp(z) be the set of paths appearing in the linear combination
+representing z with nonzero coefficients, and let t (z) be the largest path among supp(z). For a
+subset Z of F Q, let t (Z ) be the set of t (z) where z ∈ Z \{0}, and let u(Z ) be the set of all
+paths which are divided by some path from t (Z ) (cf. Farkas et al. (1993)). Let F = {0, 1} ⊂ F.
+2
+Let F Q be the path algebra of Q over F . Let Y be the two-sided ideal of F Q generated by
+2 2 2
+α , α , . . . , α . Note that F Q ⊂ F Q and Y ⊂ X . We are going to use p3.opal. There is
+1 2 23 2
+correspondence e˙ ↔ (1), e˙ ↔ (2),. . ., e˙ ↔ (7), A˙ ↔ A, B˙ ↔ B,. . ., M˙ ↔ M between
+1 2 7
+the quiver Q and the graph g of p3.opal. Since IsGrobner(S) returns True, the identifier S is
+bound to the Gro¨bner basis for Y . Thus u(S) = t (Y ) (see Farkas et al. (1993, p. 731)). Let Π be
+the set of all paths in the quiver Q. Then Π\t (X ) ⊂ Π\u(S) because t (Y ) ⊂ t (X ). The function
+Nontips(S,18) returns the intersection of Π\u(S) and the set of paths of length less than or
+
+===== PAGE 8 =====
+436 H. Koshita / Journal of Symbolic Computation 42 (2007) 429–442
+equal to 18. The function Nontips(S,19) returns the same result in our case. This means that
+u(S) contains all paths of length 19. Hence u(S) contains all paths of length greater than or equal
+to 19. Therefore Nontips(S,18) returns Π\u(S) itself. The result of Nontips(S,18) is the
+set of 1192 paths. Thus |Π\t (X )| ≤ 1192. By Farkas et al. (1993, Theorem 4), F Q is a direct
+sum of X and the F-space spanned by the whole paths in Π\t (X ). Hence dim F Q/ X ≤ 1192.
+F
+The sum of all entries in the Cartan matrix for the principal block is equal to dim Λ. Thus
+F
+dim Λ = 1192 by Schneider (1993, Appendix). Since ψ is surjective, it turns out that ψ is
+F
+bijective. (cid:3)
+6. GAP program p1.g
+The function f5(x,y,z) defined in (26)–(28) returns the same Boolean value as
+x * y = y * z but seems to be faster in our case. The following program is p1.g.
+g1 := Sz(8); (1)
+Read("./p2.g"); (2)
+ans := []; (3)
+g2 := GeneratorsOfGroup(g1); r0 := g2[1]; s0 := g2[2]; (4)
+ans[1] := Length(g2) = 2; (5)
+ans[2] := r0 = [[Z(2)^0,0*Z(2),0*Z(2),0*Z(2)], (6)
+[Z(2)^0,Z(2)^0,0*Z(2),0*Z(2)], (7)
+[Z(8)^3,Z(2)^0,Z(2)^0,0*Z(2)], (8)
+[Z(8)^6,Z(8)^1,Z(2)^0,Z(2)^0]]; (9)
+ans[3] := s0 = [[0*Z(2),0*Z(2),0*Z(2),Z(2)^0], (10)
+[0*Z(2),0*Z(2),Z(2)^0,0*Z(2)], (11)
+[0*Z(2),Z(2)^0,0*Z(2),0*Z(2)], (12)
+[Z(2)^0,0*Z(2),0*Z(2),0*Z(2)]]; (13)
+r1 := List(r0,x->List(x,y->y^4)); (14)
+r2 := List(r0,x->List(x,y->y^2)); (15)
+r3 := Iterated([r0,r0,r1,r2],KroneckerProduct); (16)
+r4 := Iterated([r0,r1,r1,r2],KroneckerProduct); (17)
+r5 := Iterated([r0,r1,r2,r2],KroneckerProduct); (18)
+s1 := Iterated([s0,s0,s0,s0],KroneckerProduct); (19)
+r6 := Iterated([r0,r1,r1,r2,r2],KroneckerProduct); (20)
+r7 := Iterated([r0,r0,r1,r2,r2],KroneckerProduct); (21)
+r8 := Iterated([r0,r0,r1,r1,r2],KroneckerProduct); (22)
+s2 := Iterated([s0,s0,s0,s0,s0],KroneckerProduct); (23)
+r9 := Iterated([r0,r0,r1,r1,r2,r2],KroneckerProduct); (24)
+s3 := Iterated([s0,s0,s0,s0,s0,s0],KroneckerProduct); (25)
+f5 := function(x,y,z) (26)
+return TransposedMat(y) * TransposedMat(x) (27)
+= TransposedMat(y * z); end; (28)
+ans[4] := f5(r9,e0,r9); ans[5] := f5(s3,e0,s3); (29)
+ans[6] := f5(r9,e1,r9); ans[7] := f5(s3,e1,s3); (30)
+ans[8] := f5(r6,e2,r6); ans[9] := f5(s2,e2,s2); (31)
+ans[10] := f5(r7,e3,r7); ans[11] := f5(s2,e3,s2); (32)
+ans[12] := f5(r8,e4,r8); ans[13] := f5(s2,e4,s2); (33)
+
+===== PAGE 9 =====
+H. Koshita / Journal of Symbolic Computation 42 (2007) 429–442 437
+ans[14] := e0 * e0 = e0; (34)
+ans[15] := e1 * e1 = e1; (35)
+ans[16] := e2 * e2 = e2; (36)
+ans[17] := e3 * e3 = e3; (37)
+ans[18] := e4 * e4 = e4; (38)
+ans[19] := RankMat(e0) = 576; (39)
+ans[20] := RankMat(e1) = 1984; (40)
+ans[21] := RankMat(e2) = 896; (41)
+ans[22] := RankMat(e3) = 896; (42)
+ans[23] := RankMat(e4) = 896; (43)
+ans[24] := IsZero(e0 * e1); ans[25] := IsZero(e1 * e0); (44)
+ans[26] := A * e1 = A; (45)
+ans[27] := B * e1 = B; (46)
+ans[28] := C * e1 = C; (47)
+ans[29] := D * e2 = D; (48)
+ans[30] := F * e3 = F; (49)
+ans[31] := G * e4 = G; (50)
+ans[32] := H * e3 = H; (51)
+ans[33] := I * e4 = I; (52)
+ans[34] := J * e2 = J; (53)
+ans[35] := f5(r6,A,r9); ans[36] := f5(s2,A,s3); (54)
+ans[37] := f5(r7,B,r9); ans[38] := f5(s2,B,s3); (55)
+ans[39] := f5(r8,C,r9); ans[40] := f5(s2,C,s3); (56)
+ans[41] := f5(r9,D,r6); ans[42] := f5(s3,D,s2); (57)
+ans[43] := f5(r9,F,r7); ans[44] := f5(s3,F,s2); (58)
+ans[45] := f5(r9,G,r8); ans[46] := f5(s3,G,s2); (59)
+ans[47] := f5(r5,H,r7); ans[48] := f5(s1,H,s2); (60)
+ans[49] := f5(r3,I,r8); ans[50] := f5(s1,I,s2); (61)
+ans[51] := f5(r4,J,r6); ans[52] := f5(s1,J,s2); (62)
+ans[53] := f5(r7,K,r5); ans[54] := f5(s2,K,s1); (63)
+ans[55] := f5(r8,L,r3); ans[56] := f5(s2,L,s1); (64)
+ans[57] := f5(r6,M,r4); ans[58] := f5(s2,M,s1); (65)
+ans[59] := t1 * e1 = t1; (66)
+ans[60] := t2 * e2 = t2; (67)
+ans[61] := t3 * e3 = t3; (68)
+ans[62] := t4 * e4 = t4; (69)
+ans[63] := not IsZero(t1*F*B*D*M*J*A*F*B*D*A*G*L*I (70)
+*C*D*A*F*B*D*A*G*L*I*C*D*A); (71)
+ans[64] := not IsZero(t2*A*F*B*D*M*J*A*F*B*D*A*G*L (72)
+*I*C*D*A*F*B*D*A*G*L*I*C*D); (73)
+ans[65] := not IsZero(t3*B*G*C*F*K*H*B*G*C*F*B*D*M (74)
+*J*A*F*B*G*C*F*B*D*M*J*A*F); (75)
+ans[66] := not IsZero(t4*C*D*A*G*L*I*C*D*A*G*C*F*K (76)
+*H*B*G*C*D*A*G*C*F*K*H*B*G); (77)
+ans[67] := not IsZero(t5*I*C*D*A*F*B*D*M*J*A*F*B*D (78)
+*A*G*L*I*C*D*A*F*B*D*A*G*L); (79)
+ans[68] := not IsZero(t6*J*A*F*B*G*C*F*K*H*B*G*C*F (80)
+
+===== PAGE 10 =====
+438 H. Koshita / Journal of Symbolic Computation 42 (2007) 429–442
+*B*D*M*J*A*F*B*G*C*F*B*D*M); (81)
+ans[69] := not IsZero(t7*H*B*G*C*D*A*G*L*I*C*D*A*G (82)
+*C*F*K*H*B*G*C*D*A*G*C*F*K); (83)
+ans[70] := IsZero(t2*A*D); (84)
+ans[71] := IsZero(t3*B*F); (85)
+ans[72] := IsZero(t4*C*G); (86)
+ans[73] := IsZero(t7*H*K); (87)
+ans[74] := IsZero(t5*I*L); (88)
+ans[75] := IsZero(t6*J*M); (89)
+ans[76] := IsZero(t7*H*B*D); (90)
+ans[77] := IsZero(t5*I*C*F); (91)
+ans[78] := IsZero(t6*J*A*G); (92)
+ans[79] := IsZero(t2*A*F*K); (93)
+ans[80] := IsZero(t3*B*G*L); (94)
+ans[81] := IsZero(t4*C*D*M); (95)
+ans[82] := IsZero(t7*H*B*G*C*F*K); (96)
+ans[83] := IsZero(t5*I*C*D*A*G*L); (97)
+ans[84] := IsZero(t6*J*A*F*B*D*M); (98)
+ans[85] := IsZero(t2*A*G*C*D (99)
++ t2*M*J*A*F*B*D (100)
++ t2*A*F*B*D*M*J); (101)
+ans[86] := IsZero(t3*B*D*A*F (102)
++ t3*K*H*B*G*C*F (103)
++ t3*B*G*C*F*K*H); (104)
+ans[87] := IsZero(t4*C*F*B*G (105)
++ t4*L*I*C*D*A*G (106)
++ t4*C*D*A*G*L*I); (107)
+ans[88] := IsZero(t2*A*G*C*F*B*D (108)
++ t2*A*F*B*G*C*D (109)
++ t2*A*G*C*F*B*D*A*F*B*D (110)
++ t2*A*G*L*I*C*D*A*F*B*D (111)
++ t2*A*F*B*D*A*G*C*F*B*D (112)
++ t2*A*G*C*F*B*D*A*G*C*D (113)
++ t2*A*G*C*F*K*H*B*G*C*D (114)
++ t2*A*F*B*D*A*G*L*I*C*D (115)
++ t2*A*G*C*F*B*G*C*D*A*F*B*D); (116)
+ans[89] := IsZero(t3*B*D*A*G*C*F (117)
++ t3*B*G*C*D*A*F (118)
++ t3*B*D*A*G*C*F*B*G*C*F (119)
++ t3*B*D*M*J*A*F*B*G*C*F (120)
++ t3*B*G*C*F*B*D*A*G*C*F (121)
++ t3*B*D*A*G*C*F*B*D*A*F (122)
++ t3*B*D*A*G*L*I*C*D*A*F (123)
++ t3*B*G*C*F*B*D*M*J*A*F (124)
++ t3*B*D*A*G*C*D*A*F*B*G*C*F); (125)
+ans[90] := IsZero(t4*C*F*B*D*A*G (126)
++ t4*C*D*A*F*B*G (127)
+
+===== PAGE 11 =====
+H. Koshita / Journal of Symbolic Computation 42 (2007) 429–442 439
++ t4*C*F*B*D*A*G*C*D*A*G (128)
++ t4*C*F*K*H*B*G*C*D*A*G (129)
++ t4*C*D*A*G*C*F*B*D*A*G (130)
++ t4*C*F*B*D*A*G*C*F*B*G (131)
++ t4*C*F*B*D*M*J*A*F*B*G (132)
++ t4*C*D*A*G*C*F*K*H*B*G (133)
++ t4*C*F*B*D*A*F*B*G*C*D*A*G); (134)
+x := t1*G*C*F*B*D*A (135)
++ t1*D*A*F*B*G*C (136)
++ t1*G*C*F*K*H*B*G*C*D*A (137)
++ t1*G*C*D*A*G*C*F*K*H*B (138)
++ t1*F*K*H*B*G*C*D*A*G*C (139)
++ t1*D*A*G*C*F*K*H*B*G*C (140)
++ t1*G*C*F*B*D*A*F*B*D*M*J*A (141)
++ t1*D*M*J*A*F*B*D*A*F*B*G*C (142)
++ t1*G*L*I*C*D*A*G*C*D*A*F*B*D*A (143)
++ t1*D*A*F*B*D*A*G*L*I*C*D*A*G*C (144)
++ t1*D*A*G*C*F*B*D*A*G*L*I*C*D*A*G*C; (145)
+y := t1*D*A*G*C*F*B (146)
++ t1*F*B*G*C*D*A (147)
++ t1*D*A*G*L*I*C*D*A*F*B (148)
++ t1*D*A*F*B*D*A*G*L*I*C (149)
++ t1*G*L*I*C*D*A*F*B*D*A (150)
++ t1*F*B*D*A*G*L*I*C*D*A (151)
++ t1*D*A*G*C*F*B*G*C*F*K*H*B (152)
++ t1*F*K*H*B*G*C*F*B*G*C*D*A (153)
++ t1*D*M*J*A*F*B*D*A*F*B*G*C*F*B (154)
++ t1*F*B*G*C*F*B*D*M*J*A*F*B*D*A (155)
++ t1*F*B*D*A*G*C*F*B*D*M*J*A*F*B*D*A; (156)
+z := t1*F*B*D*A*G*C (157)
++ t1*G*C*D*A*F*B (158)
++ t1*F*B*D*M*J*A*F*B*G*C (159)
++ t1*F*B*G*C*F*B*D*M*J*A (160)
++ t1*D*M*J*A*F*B*G*C*F*B (161)
++ t1*G*C*F*B*D*M*J*A*F*B (162)
++ t1*F*B*D*A*G*C*D*A*G*L*I*C (163)
++ t1*G*L*I*C*D*A*G*C*D*A*F*B (164)
++ t1*F*K*H*B*G*C*F*B*G*C*D*A*G*C (165)
++ t1*G*C*D*A*G*C*F*K*H*B*G*C*F*B (166)
++ t1*G*C*F*B*D*A*G*C*F*K*H*B*G*C*F*B; (167)
+ans[91] := x = y; ans[92] := y = z; (168)
+7. GAP program p2.g
+P g
+T
+∈
+h
+G
+e
+2 τ
+f
+(
+u
+0
+n
+,0
+c
+,1
+ti
+,
+o
+1,
+n
+2,2
+f
+) (
+2
+g)
+w
+w
+it
+h
+h
+er
+t
+e
+he
+G 2
+as
+i
+s
+s
+is
+t
+t
+h
+a
+e
+nc
+s
+e
+ub
+o
+se
+f
+t
+f
+o
+1
+f G
+is
+co
+u
+n
+se
+si
+d
+sti
+t
+n
+o
+g
+g
+o
+e
+f
+t
+al
+P
+l e
+g
+l
+∈
+em
+G2
+e
+τ
+n
+(
+t
+0
+s
+,1
+o
+,1
+f
+,2
+e
+,
+v
+2)
+e
+(
+n
+g)
+ord
+an
+er
+d
+.
+The functions f3 and f4 are used to get the matrix of which the entries are permuted according
+
+===== PAGE 12 =====
+440 H. Koshita / Journal of Symbolic Computation 42 (2007) 429–442
+to 4-adic representations of nonnegative integers depending on a position of each entry. The
+following program is p2.g.
+f1 := function(x) local a,b,c,d,e,f,g,h,i;
+a := List(x,y->List([1..4^Length(y)],z->[]));
+b := [[1,2],[1,4],[2,1],[4,2]];
+for c in ConjugacyClasses(g1) do
+if IsEvenInt(Order(Representative(c))) then
+for d in AsList(c) do
+e := PositionProperty(b,y->not d[y[1]][y[2]]
+in [0*Z(2),Z(2)^0]);
+if e = fail or d[b[e][1]][b[e][2]] in [Z(8)^1,Z(8)^3]
+then f := [d,List(d,y->List(y,z->z^4))
+,List(d,y->List(y,z->z^2))];
+for g in [1..Length(x)] do
+h := Iterated(List(x[g],y->f[y]),KroneckerProduct);
+for i in [1..Length(h)] do
+Add(a[g][i],h[i]); od; od; fi; od; fi; od;
+for b in [1..Length(x)] do
+for c in [1..Length(a[b])] do
+TransposedMatDestructive(a[b][c]); od; od;
+return a; end;
+f2 := function(x,y) local a,b,c,d,e,f,g,h;
+a := Length(x) * Length(y); b := NullMat(a,a,Z(2)); a := 0;
+for c in x do for d in y do a := a + 1; e := 0;
+for f in c do for g in d do e := e + 1;
+h := f * g; b[a][e] := h + h^2 + h^4; od; od; od; od;
+return b; end;
+f3 := function(x,y,z) local a,b,c,d,e,f,g,h,i,j,k;
+a := Length(y); b := Length(z); c := 4^a; d := 4^b;
+e := List(y,x->4^x); f := List(z,x->4^x);
+g := NullMat(c,d,Z(2));
+for h in [1..c] do i := g[h];
+j := x[e * CoefficientsQadic(h + c - 1,4){[1..a]} + 1];
+for k in [1..d] do
+i[k] := j[f * CoefficientsQadic(k + d - 1,4){[1..b]} + 1];
+od; od; return g; end;
+f4 := function(x,y) return f3(x,y,y); end;
+x := f1([[1,2],[1,1,2],[2,3,3]]); e2 := f2(x[1],x[3]);
+e3 := f4(e2,[2,3,4,0,1]); e4 := f4(e2,[4,0,1,2,3]);
+e0 := f2(x[2],x[3]); e0 := e0^2 + IdentityMat(4096,Z(2));
+h0 := IdentityMat(4,Z(2)); h1 := KroneckerProduct(h0,e2);
+h2 := f4(h1,[2,3,4,5,0,1]); h3 := f4(h1,[4,5,0,1,2,3]);
+e1 := (e0 + h1 + h2 + h3)^4; e5 := IdentityMat(256,Z(2));
+t1 := e1[820]; t2 := e2[52]; t3 := e3[196]; t4 := e4[205];
+t5 := e5[49]; t6 := e5[13]; t7 := e5[4];
+x := []; for y in [1..4] do x[y] := NullMat(4,4,Z(2)); od;
+
+===== PAGE 13 =====
+H. Koshita / Journal of Symbolic Computation 42 (2007) 429–442 441
+for y in [[1,1,3],[1,2,4],[2,1,2],[2,3,4],[3,2,1],[3,4,3],
+[4,3,1],[4,4,2]] do x[y[1]][y[2]][y[3]] := Z(2)^0; od;
+h4 := NullMat(16,64,Z(2)); for y in [1..4] do
+z := KroneckerProduct(x[y],h0) + KroneckerProduct(h0,x[y]);
+h4 := h4 + KroneckerProduct(z,[h0[y]]); od;
+I := Iterated([h4,h0,h0],KroneckerProduct);
+H := f3(I,[2,3,0,1],[3,4,0,1,2]);
+J := f3(I,[1,2,3,0],[1,2,3,4,0]);
+B := KroneckerProduct(I,h0);
+A := f3(B,[3,4,0,1,2],[4,5,0,1,2,3]);
+C := f3(B,[2,3,4,0,1],[2,3,4,5,0,1]);
+A := e2 * A * e1; B := e3 * B * e1; C := e4 * C * e1;
+H := H * e3; I := I * e4; J := J * e2;
+D := TransposedMat(A); K := TransposedMat(H);
+F := TransposedMat(B); L := TransposedMat(I);
+G := TransposedMat(C); M := TransposedMat(J);
+x := A + A*G*L*I*C + A*G*C*F*B*D*A + A*G*C*D*A*F*B*D*A;
+y := B + B*D*M*J*A + B*D*A*G*C*F*B + B*D*A*F*B*G*C*F*B;
+z := C + C*F*K*H*B + C*F*B*D*A*G*C + C*F*B*G*C*D*A*G*C;
+A := x; B := y; C := z; D := TransposedMat(A);
+F := TransposedMat(B); G := TransposedMat(C);
+8. Opal script p3.opal
+let g = Graph([(1),(2),(3),(4),(5),(6),(7)],
+[A : (1) -> (2), B : (1) -> (3), C : (1) -> (4),
+D : (2) -> (1), F : (3) -> (1), G : (4) -> (1),
+H : (3) -> (7), I : (4) -> (5), J : (2) -> (6),
+K : (7) -> (3), L : (5) -> (4), M : (6) -> (2)]);
+assume PathAlgebra(Integer(2),g);
+let R = {D*A, F*B, G*C, K*H, L*I, M*J,
+D*B*H, F*C*I, G*A*J, K*F*A, L*G*B, M*D*C,
+K*F*C*G*B*H, L*G*A*D*C*I, M*D*B*F*A*J,
+D*C*G*A + D*B*F*A*J*M + J*M*D*B*F*A,
+F*A*D*B + F*C*G*B*H*K + H*K*F*C*G*B,
+G*B*F*C + G*A*D*C*I*L + I*L*G*A*D*C,
+D*B*F*C*G*A + D*C*G*B*F*A + D*B*F*A*D*B*F*C*G*A
++ D*B*F*A*D*C*I*L*G*A + D*B*F*C*G*A*D*B*F*A
++ D*C*G*A*D*B*F*C*G*A + D*C*G*B*H*K*F*C*G*A
++ D*C*I*L*G*A*D*B*F*A + D*B*F*A*D*C*G*B*F*C*G*A,
+F*C*G*A*D*B + F*A*D*C*G*B + F*C*G*B*F*C*G*A*D*B
++ F*C*G*B*F*A*J*M*D*B + F*C*G*A*D*B*F*C*G*B
++ F*A*D*B*F*C*G*A*D*B + F*A*D*C*I*L*G*A*D*B
++ F*A*J*M*D*B*F*C*G*B + F*C*G*B*F*A*D*C*G*A*D*B,
+G*A*D*B*F*C + G*B*F*A*D*C + G*A*D*C*G*A*D*B*F*C
++ G*A*D*C*G*B*H*K*F*C + G*A*D*B*F*C*G*A*D*C
++ G*B*F*C*G*A*D*B*F*C + G*B*F*A*J*M*D*B*F*C
+
+===== PAGE 14 =====
+442 H. Koshita / Journal of Symbolic Computation 42 (2007) 429–442
++ G*B*H*K*F*C*G*A*D*C + G*A*D*C*G*B*F*A*D*B*F*C,
+A*D*B*F*C*G + C*G*B*F*A*D + C*G*A*D*C*I*L*G*A*D*B*F*C*G*A*D
++ A*D*C*G*B*H*K*F*C*G + B*H*K*F*C*G*A*D*C*G
++ C*G*A*D*C*G*B*H*K*F + C*G*B*H*K*F*C*G*A*D
++ A*J*M*D*B*F*A*D*B*F*C*G + C*G*B*F*A*D*B*F*A*J*M*D
++ A*D*B*F*A*D*C*G*A*D*C*I*L*G + C*G*A*D*C*I*L*G*A*D*B*F*A*D
++ B*F*C*G*A*D + A*D*C*G*B*F + A*D*B*F*A*J*M*D*B*F*C*G*A*D*B*F
++ B*F*A*D*C*I*L*G*A*D + C*I*L*G*A*D*B*F*A*D
++ A*D*B*F*A*D*C*I*L*G + A*D*C*I*L*G*A*D*B*F
++ B*H*K*F*C*G*B*F*C*G*A*D + A*D*C*G*B*F*C*G*B*H*K*F
++ B*F*C*G*B*F*A*D*B*F*A*J*M*D + A*D*B*F*A*J*M*D*B*F*C*G*B*F,
+B*F*C*G*A*D + A*D*C*G*B*F + A*D*B*F*A*J*M*D*B*F*C*G*A*D*B*F
++ B*F*A*D*C*I*L*G*A*D + C*I*L*G*A*D*B*F*A*D
++ A*D*B*F*A*D*C*I*L*G + A*D*C*I*L*G*A*D*B*F
++ B*H*K*F*C*G*B*F*C*G*A*D + A*D*C*G*B*F*C*G*B*H*K*F
++ B*F*C*G*B*F*A*D*B*F*A*J*M*D + A*D*B*F*A*J*M*D*B*F*C*G*B*F
++ C*G*A*D*B*F + B*F*A*D*C*G + B*F*C*G*B*H*K*F*C*G*A*D*B*F*C*G
++ C*G*B*F*A*J*M*D*B*F + A*J*M*D*B*F*C*G*B*F
++ B*F*C*G*B*F*A*J*M*D + B*F*A*J*M*D*B*F*C*G
++ C*I*L*G*A*D*C*G*A*D*B*F + B*F*A*D*C*G*A*D*C*I*L*G
++ C*G*A*D*C*G*B*F*C*G*B*H*K*F + B*F*C*G*B*H*K*F*C*G*A*D*C*G};
+let S = Basis(R,600);
+IsGrobner(S);
+Nontips(S,18);
+Acknowledgement
+I would like to thank Professor S. Koshitani for his valuable advice.
+References
+Benson, D.J., 1991. Representations and Cohomology I: Basic Representation Theory of Finite Groups and Associative
+Algebras. In: Cambridge Studies in Advanced Mathematics, vol. 30. Cambridge University Press, Cambridge.
+Farkas, D.R., Feustel, C.D., Green, E.L., 1993. Synergy in the theories of Gro¨bner bases and path algebras. Canad. J.
+Math. 45 (4), 727–739.
+Feit, W., 1982. The Representation Theory of Finite Groups. North-Holland, Amsterdam.
+GAP, 2004. GAP — Groups, Algorithms, and Programming, Version 4.4. The GAP Group. http://www.gap-system.org.
+Keller, B.J., 1999. User reference for Opal: A noncommutative Gro¨bner basis system. http://hal.cs.vt.edu/opal/.
+Schneider, G.J.A., 1993. The structure of the projective indecomposable modules of the Suzuki group Sz(8) in
+characteristic 2. Math. Comput. 60 (202), 779–786. S29–S32.
+Sin, P., 1992. Extensions of simple modules for Sp (2n) and Suz(2m). Bull. London Math. Soc. 24 (2), 159–164.
+4

@@ -1,0 +1,521 @@
+
+===== PAGE 1 =====
+MATHEMATICOS F COMPUTATION
+VOLUME6 0, NUMBER 202
+APRIL 1993,P AGES7 79-786
+THE STRUCTURE OF THE
+PROJECTIVE INDECOMPOSABLEM ODULES
+OF THE SUZUKI GROUP Sz(8) IN CHARACTERISTIC2
+GERHARD J. A. SCHNEIDER
+Abstract. This paper describes the socle series of the projective indecompos-
+able modules and of tensor products of simple modules for the simple group
+Sz(8) in characteristic 2. The results have been obtained by computational
+means and the various steps are described. The main algorithm was modified
+to allow for parallel execution on a network of workstations. This made possible
+the effective handling of modules of degree 4030.
+In this note we want to describe how to determine the Loewy series of
+the projective indecomposable modules of the smallest Suzuki group of order
+29120 = 26 • 5 • 7 • 13 in characteristic 2. The computer will be the main
+tool used to achieve this goal, in particular, the Cayley system (see [1]) will
+be applied with the author's implementation of various representation-theoretic
+algorithms. These algorithms have been explained in detail in [6, 7]. This shows
+how the computer helps to gain insight into examples that seem to be difficult
+to analyze by purely theoretical means, once the required methods are available
+and implemented. The notation used in this paper is standard (see [6, 4] for
+further information).
+For convenience, we include both the ordinary and 2-modular character table
+of this group in the appendix (see the Supplement section at the end of this
+issue). The tables are taken from [3, 5]. The group Sz(8) has eight modular
+characters. Seven lie in the principal block and are denoted by /, 4a , 4¡,, 4C,
+16a , 16ft, and 16C. The module 64 lies in a block of defect 0.
+With the help of the information in the character tables the computation of
+the decomposition and Cartan matrix is a standard task, and the results are
+included in the appendix as well.
+Since the computer is used to do most of the work, the representations have
+to be constructed explicitly. The four-dimensional representations are easy to
+obtain, as they are described in the Atlas. The field GF(8) is the smallest field
+over which all representations can be realized. The 64-dimensional represen-
+tation can be constructed from the permutation representation of Sz(8) on 65
+letters (which is provided as part of the Cayley library facility), and thus it can
+be realized over GF(2). While the naming of the four-dimensional modules
+may be arbitrary, some care has to be used in distinguishing the 16-dimensional
+Received by the editor November 12, 1991.
+1991M athematicsS ubjectC lassification.P rimary 20C20,2 0C40, 20C05,2 0H20.
+©1993 American Mathematical Society
+0025-5718/93 $1.00+ $.25 per page
+779
+License or copyright restrictions may apply to redistribution; see http://www.ams.org/journal-terms-of-use
+
+===== PAGE 2 =====
+780 G. J. A. SCHNEIDER
+modules in order to have a naming convention consistent with the Atlas. How-
+ever, as the 16-dimensional representations may be obtained as tensor products,
+we can use the following proposition to overcome this difficulty.
+Proposition 1. There holds 4a ® 4b =: 16ft, 4a® 4C= : 16a, and 4b ® 4C= : 16,
+c
+Once the modules are known, we can easily determine their vertices and
+sources, using the standard Cayley procedures explained in [6]. In fact, the
+computer quickly realizes that all seven modules have a simple socle / when
+restricted to a Sylow-2 subgroup and to any subgroup of order 32; this proves
+the following proposition:
+Proposition 2. All seven modules in the principal block have a Sylow-2 subgroup
+P as a vertex. They remain indecomposable when restricted to a Sylow-2 sub-
+group. When restricted to P, the four-dimensional simple modules become uni-
+serial, whereas the socle series of the 16-dimensional modules reads
+I
+II
+III
+IIII
+III
+II
+I
+Let N denote the normalizer of a Sylow-2 subgroup in Sz(8) ; it is the sta-
+bilizer of a point in the permutation representation on 65 letters. It has order
+448 = 26 • 7 and seven one-dimensional irreducible modules in the principal
+block. They are denoted by la, 1¿,, lc, 1¿, le , l/,and In and are obtained
+as successive tensor products of la with itself.
+Proposition 3. The simple modules of Sz(8) become their own Green correspon-
+dents when restricted to N and have the following socle series:
+4a In 4b [N 4C Iff
+If le U
+Irf lb la
+le le 1/
+la Id h
+16fl Iff 16¿ Iff 16c if/
+Id lb !a
+II* II« lid
+lal,l, \dlflf \h\c\
+c
+la lc lrf 1/ Ifj L lrf le laUlel/
+1/ h h la la le Id Id 1
+e
+Ile H/ He
+le le 1/
+License or copyright restrictions may apply to redistribution; see http://www.ams.org/journal-terms-of-use
+
+===== PAGE 3 =====
+PROJECTIVEI NDECOMPOSABLEM ODULESO F Sz(8) 781
+64 i„
+I
+lelel/
+la la Ifi U Id ld
+lal*lelrflrl/IHI
+la U le le le Id le le le 1/ 1/ 1/
+la la la 1¿>1 ¿>U le Id Id ld le 1/
+lfll6 1,1,1,1,1111
+le le le le 1/ 1/
+la lft ld
+I
+Since 64 iff is the projective cover of the trivial module for N, the socle
+series of the other projective modules for N can easily be derived, using tensor
+products.
+The determination of the restricted modules as well as their socle series is a
+straightforward application of the Cayley function RESTRICT in combination
+with the Cayley procedures given in [7]; user intervention is not required.
+The process of inducing simple modules from N to Sz(8) is just as easy as
+the restriction. We obtain
+Proposition 4. The modules for Sz(8) that are obtained by inducting simple N-
+modules have the following socle series:
+laîSz(8) lèîSz(8) lcîSz(8) lrfîSz(8) Xg fSzfS) \f |Sz(8)
+4a 4C 16a 4b 16b 16c
+I I 4a I 4b 4C
+4C 4b I 4a I I
+I I 4b I 4C 4a
+4b 4a I 4C I I
+166 16, 4a 16c 4b 4C
+4b 4fl I 4C I I
+I I 4C I 4a 4b
+4C 4b 16c 4a 16a 16ft
+I I 4C I 4a 4ft
+4a 4C I 4ft I I
+I I 4a I 4ft 4C
+4c 4ft I 4a I I
+16c 16ft 4ft 16fl 4C 4a
+The structure of the tensor products of the simple Sz(8)-modules may also be
+of interest. The determination of the series is yet another automated application
+of the Cayley procedures given in [7].
+Proposition 5. There holds 4a ®4 b® 4 C= 64, thus 4a <g1>6 C= 64, 4¿ ® 16C= 64,
+and 4C® 16ft = 64. The modules that are obtained as tensor products of the four-
+dimensional modules with themselves have the socle series:
+License or copyright restrictions may apply to redistribution; see http://www.ams.org/journal-terms-of-use
+
+===== PAGE 4 =====
+782 G. J. A. SCHNEIDER
+4a ® 4a 4ft ® 4ft 4C ® 4C
+I I I
+4ft 4C 4a
+1 1 I
+4c 4a 4ft
+I I I
+4ft 4C 4a
+I I 1
+The socle series of the remaining tensor products are listed in Table 1 (in the
+Supplement section).
+The projective modules are also fairly easy to construct. Let Us denote the
+projective cover of the simple module S of Sz(8). The proof of the following
+facts is a simple application of the Nakayama relations in combination with
+Proposition 1 and 5.
+Proposition 6. We have
+4a®64 = n16í, 16a® 16¿ = n16f, 16c®64 = n4a©64©64,
+4ft®64 = rii6a, 16a® 16c = n.6t, 16a®64 = n46©64©64,
+4C® 64 = IIx6b, 16ft® 16c = rii6a, 16ft®64 = n4c©64©64,
+64 ® 64 = n¡ © 2 • nx6a © 2 • nx6b e 2 • n16f © 9 • 64.
+Proof. Let [M, N] denote dimHomGF(8)Sz(8)(Af, N). Now,
+[64® 64, 64] = [4a® 16c®64, 4a ® 16c]= [4a ® 16c®4a, 64® 16c]
+= [4a ® 64, n4o © 64 © 64] = [64, YI4a® 4a © 4a ® 64 © 4a ® 64]
+= [64, n4a ® 4a] = [64 ® 4a, n4j = [n16f, n4j - 9.
+The other statements can be proved in a similar way. D
+Since the projective covers of the 16-dimensional simple modules are of small
+degree 256, we can directly apply the methods in [7] to these modules and obtain
+Theorem 7. The projective covers of the simple 16-dimensional modules of Sz(8)
+have socle series as listed in Table 2 (in the Supplement section).
+Once the modules are constructed, the computation can be carried out in the
+Cayley system, without any user intervention, merely by calling the appropriate
+procedures.
+We now proceed to analyze the projective covers of the four-dimensional
+simple modules. Although the dimension of 16 ® 64 is still within reach of
+our methods, the computation can be speeded up by first removing the two
+summands of dimension 64. This is best done by applying the MeatAxe. Since
+the MeatAxe is a random method, there is no guarantee that it will return a
+64-dimensional simple module as a submodule or factor module when applied
+to 16 ® 64. However, the Cayley implementation also returns the base change
+that the MeatAxe applies. Therefore, one can apply this process iteratively,
+until the desired modules are found, and then determine their preimages in the
+original module. Thus, the modules n4a, n4ft, and n4r can be constructed.
+The proof of the following theorem may then be left to the computer.
+License or copyright restrictions may apply to redistribution; see http://www.ams.org/journal-terms-of-use
+
+===== PAGE 5 =====
+PROJECTIVE INDECOMPOSABLEM ODULES OF Sz(8) 783
+Theorem 8. The projective covers of the simple four-dimensional modules of
+Sz(8) have socle series as listed in Table 3 (in the Supplement section).
+The remaining projective module, the projective cover 11/ of the trivial mod-
+ule, presents some challenge. Not only is its degree 1984 too large for a direct
+application of the Cayley routines, but its construction involves a module of
+dimension 4096. Therefore, we will use the extended methods described in [7].
+This means that we shall compute socle series of subquotients of the module
+until the series for the whole module is found. Rather than using the MeatAxe
+to compute some initial series of submodules, a good filtration of the module
+can be found by observing
+YiiN îSz(8)^ iN îSz(8) ®64 s n7 © 2 • n,6. © 2 • n16a © 2 • n16f © 10 ■6 4.
+Using the socle series from Proposition 3 for the module 64 i¡f= YI[¡Vw, e can
+choose a basis for the induced module such that the filtration given by
+sociTI/J îSz<8,<s oc2(n7„) îSz<8><•• • < soc9(n/jv) îSz<8><so coCII/J îSzw
+can immediately be read off the representing matrices. Then we may compute
+the socle series of each of the quotients of these submodules. This yields an
+even finer filtration of the induced module with the property that each chief
+factor is indeed semisimple. We call this series a layer series of our module.
+Without loosing information we can reduce the degree of the induced module
+by only inducing the heart of Yl[fl= Çl(lN)/lN t as we then obtain the heart of
+TI¡ plus projective modules:
+Wn)/In fm= «(/)// © 2 • n16o © 2 • n16i © 2 • n,6f © 8 • 64.
+The eight composition factors 64 are relatively easy to remove, as they are all
+in the nonprincipal block. We denote the remaining module by M ; it is of
+dimension 3518. This module will be used for the actual computation.
+Observe that we know most of the composition factors of M, as the number
+of composition factors isomorphic to the simple module S in a given layer of
+11/ is equal to the number of trivial composition factors in the same layer of
+the projective Sz(8)-module Us, by [4, Lemma 1.9.10]. It now happens that all
+composition factors isomorphic to a given S in a given socle layer of M are
+either all from 0.(I)/I or from the projective modules.
+The following table describes the distribution of the composition factors of
+M as it is known at the beginning. The number of composition factors in socle
+layer i are listed in column i of the table. The number of factors coming from
+the projective modules are printed in italics.
+12 3 4 5 6 7 8 9 10 11 12 13 14
+I 0?6?6?72?6?72?7c??
+4a 1232541416 9 6 9 6
+4¿ 1232547476 9 6 9 6
+4C 1232541 4169 69 6
+16fl 2101020 14 2 2 3 0 3
+16ft 2101020 14 2 2 3 0 3
+16c 2101020 142 2 3 0 3
+License or copyright restrictions may apply to redistribution; see http://www.ams.org/journal-terms-of-use
+
+===== PAGE 6 =====
+784 G. J. A. SCHNEIDER
+15 16 17 18 19 20 21 22 23 24 25 26 27
+I 18 ? 12 ? 6 ? 12 ? 6 ? 6 0 0
+4a 9616144432120
+4ft 9676744432120
+4C 9616144432120
+16a 0221420101002
+16ft 0221420 101002
+16c 0221420 101002
+Only the positions with a question mark have to be computed. Although this
+provides no shortcut to the main computation, we can use the information from
+this table as termination criteria for the following working algorithm:
+- Compute a layer series of M, using the filtration that can be derived from
+the socle series of il(iN)/iN |Sz(8)
+- Choose subquotients of M of reasonable size that contain only complete
+layers and start with odd-numbered layers of M. Compute their socle series
+and apply the resulting base change to M to get a new layer series for M.
+- If the number of nontrivial composition factors in each layer is correct, and
+if the number of trivial modules in the odd-numbered layers is correct, then we
+have computed the complete socle series of M.
+The actual computation involved the determination of the series of half the
+induced module, i.e., soc<,(YliN)s/ oci(n/w) fSz(8), a module of dimension 2015.
+Since the result seems somewhat surprising, we give the details.
+Proposition 9. We have
+socsíTI/J/ sociíTI/J îSz<8)=M 2 © n16. © ïlx6b © n16c © 4 • 64.
+M2 has dimension 1759 and its socle series reads:
+4a 4b 4C
+III
+4a 4ft 4C4 a 4ft 4C
+IIIIII16a16ft16f
+4a 4ft 4C4 a 4ft 4C4 a 4b 4C4 a 4b 4C
+IIIIIIIII16a16ft16e16a16ft16c
+4a 4ft 4C4 a 4ft 4C4 a 4b 4C4 a 4b 4C4 a 4b 4C
+IIIIIIIIIIII16a16ftl6c
+4a 4ft 4C4 a 4¿ 4C4 a 4b 4C4 a 4b 4C4 a 4b 4C
+IIIIIIIIIIII16a16ft16c
+4a 4ft 4C4 a 4ft 4C4 a 4b 4C4 a 4b 4C4 a 4b 4C
+IIIIIIIIIIII16a16ft16c
+4a 4ft 4C4 a 4ft 4C4 a 4b 4C4 a 4b 4C4 a 4b 4C
+IIIIIIIIIIIII16a 16ft16c16a16ft16,
+4a 4b 4C 4a 4ft 4C 4a 4b 4C 4a 4b 4C4 a 4b 4C
+IIIIIIIII16a16ft 16c
+4a 4b 4C4 a 4ft 4C4 a 4b 4C
+III16a16ft16c
+4a4ft4c
+License or copyright restrictions may apply to redistribution; see http://www.ams.org/journal-terms-of-use
+
+===== PAGE 7 =====
+PROJECTIVEI NDECOMPOSABLEM ODULESO F Sz(8) 785
+The computation can easily be parallelized and run on a network of work-
+stations with a shared file system, as the socle series of various subquotients
+of M can be determined simultaneously. The workloads as well as different
+speeds and available user memory of the various machines have to be taken
+into account when setting up the jobs. These factors can be compensated by
+running subquotients of different sizes on the individual machines. Successful
+termination of a job on a machine is marked by a control file. Although this is
+a rather crude way of synchronizing parallel jobs, it worked well under the local
+conditions.
+The result of the computations with Yl¡ can be summarized as follows:
+Theorem 10. The projective cover 11/ of the trivial module of Sz(8) has socle
+series as listed in Table 4 (in the Supplement section). The number of composition
+factors isomorphic to I in each socle layer can also be described by the following
+table:
+12 3 4 5 6 7 8 9 10 11 12 13 14
+I 1 0 3 0 9 0 13 0 18 0 18 0 18 0
+15 16 17 18 19 20 21 22 23 24 25 26 27
+/ 21 0 19 0 18 09090301
+For convenience, we include the number of extensions between modules of
+Sz(8) in characteristic 2 (see also [8]). The following table has
+dimGF(8) ExtGF(g)s z(8)(^' > Sj)
+in position (i, j), for any two simple Sz(8)-modules S¡, Sj :
+I 4a 4ft 4C 16a 16ft 16c 64
+7 0 1110 0 0 0
+4a 1 0 0 0 1 0 0 0
+4ft 1 0 0 0 0 1 0 0
+4C 1 0 0 0 0 0 1 0
+16a 0 1 0 0 0 0 0 0
+16ft 0 0 1 0 0 0 0 0
+16c 0 0 0 1 0 0 0 0
+64 00000 0 0 0
+A final word should be said about the reliability of the results, as they have
+been achieved almost solely by means of a computer. Such an approach could
+give rise to additional nonmathematical errors, like programming bugs or com-
+piler problems. However, the mathematical context that effectively controls the
+implementation of our algorithms is quite rigid: only eight different modules
+may show up in our computations and, as explained, the results can be cross-
+checked for consistency. Thus, any bug in the program will almost certainly
+License or copyright restrictions may apply to redistribution; see http://www.ams.org/journal-terms-of-use
+
+===== PAGE 8 =====
+786 G. J. A. SCHNEIDER
+yield a result that no longer conforms to the general mathematical context of
+the problem, like modules of dimension 0, etc. Since the results computed are
+consistent, this gives additional reassurance of the correctness of the theorems
+stated, although this argument is of course no proof.
+The CPU requirements differed greatly for the various computations. While
+a lunch break was enough to do the series for ü^, the series for n4 was
+computed over a weekend. The preparation and actual runs for the module
+Til (including the work on the module of dimension 4030) spread over several
+weeks.
+ACKNOWLEDGMENT
+This research was started during visits to Professor E. Green at the Virginia
+Polytechnic Institute and Professor J. Carlson at the University of Georgia. The
+author thanks both for the great hospitality they offered as well as for many
+interesting discussions. The visits were supported by the DFG-NFS exchange
+scheme.
+The computation with ni6a was carried out on an IBM 6150 at the Mathe-
+matical Sciences Research Institute in Berkeley. The analysis of the remaining
+modules was done on the two IBM RS6000 (models 320 and 540) and the
+three IBM 6150's at the Institut für Experimentelle Mathematik, Universität
+GH Essen, using the IBM implementation of Cayley Version 3.7.
+Bibliography
+1 J. J. Cannon, An introduction to the group theory language CAYLEY, Computational Group
+Theory (M. Atkinson, ed.), Academic Press, London, 1984.
+2. L. Chastkofsky and W. Feit, On the projective characters in characteristic 2 of the groups
+Suz(2m) and Sp4(2"), Inst. Hautes Études Sei. Publ. Math. 51 (1980), 9-35.
+3. J. H. Conway, R. T. Curtis, S. P. Norton, R. A. Parker, and R. A. Wilson, The ATLAS of
+finite groups, Clarendon Press, Oxford, 1985.
+4. P. Landrock, Finite group algebras and their modules, London Math. Soc. Lecture Note
+Ser., vol. 84, Cambridge Univ. Press, Cambridge and New York, 1983.
+5. R. A. Parker, The modular atlas, preprint.
+6. G. J. A. Schneider, Computing with endomorphism rings of modular representations, J.
+SymbolicC omput. 9 (1990), 607-636.
+7. _, Computing socle series of modules and submodule lattices, preprint.
+8. P. Sin, Extensions of simple modules for Sp4(2") and Suz(2m), preprint.
+Rechenzentrum der Universität Karlsruhe, Zirkel 2, D-7500 Karlsruhe, Germany
+E-mail address: schneider@dkauni2.bitnet
+schneider@rz.uni-karlsruhe.de
+License or copyright restrictions may apply to redistribution; see http://www.ams.org/journal-terms-of-use
+
+===== PAGE 9 =====
+mathematics of computation
+volume 60,n umber 202
+april 1993p, ages s29-s32
+Supplement to
+THE STRUCTUREO F THE PROJECTIVE INDECOMPOSABLEM ODULES
+OF THE SUZUKI GROUP Sz(8) IN CHARACTERISTIC 2
+GERHARDJ . A. SCHNEIDER
+Table 1. Tensor products of simple Sz(S)-modules
+4„ <g1>6 „ 4,, ® 16,, 4C® 16c
+4e 4„ 4,,
+16e 1G„ 16t
+4c 4„ 4t
+I I I
+4„ 4,, ic
+I I I
+4i 4C 4„
+I I I
+4„ 4„ 4,,
+I I I
+ic 4„ 4,,
+16c lCa 16,,
+4e 4„ 4,,
+4„ ® 16,, 4,, © IG, 4,. ® 10„
+il, i, 4„
+I I I
+4c 4„ 4,,
+I I I
+4„ 4,, 4c
+I I I
+4,, 4c 4„ 4c 4„ 4,,
+I IC,. I 1C„ I IC,,
+4c 4„ 4,,
+II II II
+4„ ii, ii, i, 4„ 4C
+I I I
+4, 4„ 4,,
+1 I I
+4,, 4,. 4„
+© 1993 American Mathematical Society
+0025-5718/93$ 1.00+ $.25 per page
+S29
+License or copyright restrictions may apply to redistribution; see http://www.ams.org/journal-terms-of-use
+
+===== PAGE 10 =====
+S30 SUPPLEMENT
+1
+u
+1o,
+"3 Tf' _ ifg^f^^^Tt^V^TT^ ,,
+g
+c
+O ^Î HH ^ U M 8^ s ^ •* _ -<? [*3 Ü " '* ' IZ ^ ^ ■_ i "^ ,
+I—.
+■a
+aj . u y *° «* O ^* i— i ^ >— h^ o '«'S t<
+"§ S ttno 8 .«a ——- — --* '-M'* ^ *- ^ "^ " --^•- < ««¡_^. *_< ^m a■ ^^ - -^= w ■^ *" ■»-( ^ „ , ■
+^ '«'Se
+* -^ "* Tf <tf _
+ri
+^ ■* « u -a S 0 U Tf
+= ^ U , 2 ^ M V 2 ^ ïï t. " b
+u u u««*« .* 2 *** - ai_ v ji ■* ° «•
+1 ■**• ^ •«• - _ ** ^o'«'__'«'l—'Tî',—' -» -= '
+•"• ^f ^ -* t? r-< . _s l"H - —' -«J- •— rP
+Tfi-H a_V'—' *& — ^T ~ ~ •—>
+u ^r «O.ai-H^l'H-^Jl^^l -a -=> -a
+-<*<• o ■<r*« «II-* ^o'*Z:-*M-*ta- .* ^ «■
+License or copyright restrictions may apply to redistribution; see http://www.ams.org/journal-terms-of-use
+
+===== PAGE 11 =====
+SUPPLEMENT S31
+»1 * " * "
+1" t 2° ■*S •* *° ■
+"i
+3
+S
+u „ o 2 „ - IL2 * s •» 2 ■* - _" 2 .*, » »
+. *»» ■* "1 4f s *•¿ * s*t s't i i j * s t «j ^uo '
+Tj«_Tf'-',|í''*HH'«''_' a'—.= ,-,.a,— '*»<M - ^ _
+a1-1 a1"1 a*-1 .»,-,,«'t-i*,»-<'*'-' « "-' ■* '"'
+,j<,-,Tr,-'-<i<N-.'<t<i— s nh a N-. .. _ tî" —. 9V J
+^ W Tf M ^ M , _ Sl— S,-,-*1-« „
+-, _ BM Tf M Tf M Tf M a ^
+"* ^ — e—, s — a ■*
+*r
+. «* O ^ O ^O _ ^
+_ « ^. '-, f "^ ^r o ^ TT
+= so^oíc%! B * o ^¡? * „
+J3 ■^ ÍD T? » ^ .* - e ° ■*? -2Tf'
+. r? O T? <¿>■ *S * 2 ,2 «<£■*- * o * » *■ =
+a O a e ZI «f ^ ai— a^-^i—-•4^1l— n™-. i -"h^ n-. '^ S -- ■i——< "«*** ^— aa1-1 eO
+r .—« s *- ■"* '-, -f ^ ■
+•—I y ■—l y H_| y _ _ -çj. _ ^ ^> ,- —. -^H* « w,_, •— v "-i
+,ÍH^H^h^H^H ^l-H (M g •"* ^1" __ .__ " ^" * NI ^
+_•"¿T"t —"I"^"^'T F " " -«l,Jj,nNm-l « *"* a "^ ■ * U* M• '" ' - ^ ^|_h" "' t C _~« ■"■ ^1 « _ tF^ ~ ^
+U |_| U'"' e M ^ M ^, „ ^* M "^Ü"*1-1
+ON-. (jHH«'N-<'^'l-ITjï'l-l <J -^t
+"* Tf NH <J N« u _ ,, "^
+w "* -^ <■#
+Tt" « u
+License or copyright restrictions may apply to redistribution; see http://www.ams.org/journal-terms-of-use
+
+===== PAGE 12 =====
+S32 SUPPLEMENT
+ü ö a o a a
+- — O O O O -g
+1 — O O O O a o a a o a i
++ + +
+* — o o o o +
+|í 31 CO 2 .N !N ■
+a a a a a a
+' o o o o o - + + +
+= 2 = « ■«^■ i
+— o o o o o -
+Sí~ <s
+cí ^i oá. si. ^s. r* £¿ íí 5: oo ^i ■
+' O => O O O :
++ n
+' o o o — o o o ■
+oi <^_o ¿ ci. ^_ ^ hM!,«.
+l l l
+7 7 7 ■ r- r- c^ r^ 34
++ +
+i r. :n « M n .o .
+il»
+d CÜ <3¿ OC^l íj. <^
+N II
++ ™
+- +
+w
+f S
+■* y '
+a tO
+to
+■* ^"
+"o
+u «3 -* 2 ■
+"5 g!0t ou ■^ _ *. ? t•H o - > ^ i o© ^■
+I "* j. * t£ a a ,^2
+■*2 ^"¿' « ' ¿«* ", '* o" ■*1 * O
+■ - ^ a ^ T e u û H -O ^ t f - H-ato-5 Tfi rt Tf O "J rj" O
+iaS^UaHHae«'^ a
+Tf h f « '
+>T^Í2 0-0•«r;'>-,'*NH•*'-, ^"2 rP Ö TT
+■ÖN-i^lS -= "* -3N-, -=tQ
+a ■**• tJ^ll»—^í'_1,'*'_í
+3 -""W s .m - -
+" «w■*1 1 «-- «« ^n *J" ""J1 l—' "^ NI ^"
+H^jiN-i a'-'Tfl_|TJ•'~''TJ•'-, * HH ^ M ^ ^ •qi' '
+«* N^ y l-H ^í* -^ >—I ^ N-l ^« M ^ ,_| ^ -^* N—< -étJI ,__,
+'s NH «• N-. ■* ,
+■* n- -a ^
+M ^ W ^ M f ' ■«? N- '
+.Í
+License or copyright restrictions may apply to redistribution; see http://www.ams.org/journal-terms-of-use
