@@ -1,0 +1,1779 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem,microtype,xcolor,booktabs,tabularx}
+\usepackage[hyperpageref]{backref}
+\usepackage[pagebackref]{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=red,
+    filecolor=blue,
+    urlcolor=orange,
+    citecolor=violet
+}
+\renewcommand*{\backref}[1]{}
+\renewcommand*{\backrefalt}[4]{
+  \ifcase #1 Not cited.
+  \or Cited on page #2.
+  \else Cited on pages #2.
+  \fi}
+\definecolor{darkblue}{rgb}{0,0,0.7}
+\newcommand{\defn}[1]{\textsl{\color{darkblue} #1}}
+\setlist[enumerate]{leftmargin=*,itemsep=.5em,topsep=.4em}
+\setlength{\emergencystretch}{2em}
+\newcommand{\D}{\mathcal D}
+\renewcommand{\H}{\mathcal H}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\RR}{\mathbf{R}}
+\newcommand{\std}{\Delta}
+\newcommand{\costd}{\nabla}
+\newcommand{\dual}{\mathbb D}
+\newcommand{\Ker}{\operatorname{Ker}}
+\DeclareMathOperator{\fd}{fd}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\REnd}{\RR End}
+\DeclareMathOperator{\add}{add}
+\DeclareMathOperator{\thick}{thick}
+\DeclareMathOperator{\per}{per}
+\DeclareMathOperator{\Filt}{Filt}
+\let\mod\relax
+\DeclareMathOperator{\mod}{mod}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\numberwithin{equation}{section}
+\title{$m$-qh dgas}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+We formulate quasi-heredity for basic proper connective dg algebras
+using exceptional standard objects and projective presentations in
+$\H_A^m$. Kernels admit finite filtrations by non-negative shifts of
+standards with larger weights, with every factor in $\H_A^m$.
+The axioms imply fullness in $\D_{\fd}(A)=\per A$, determine the
+standard objects from the ordered projectives, and place the left-dual
+objects in $\H_A^m[1-m]$. Graded path dg algebras admit such structures
+for every ordering at a width controlled by path degrees. We obtain
+an intrinsic criterion for shifted filtrations, an exact least-width
+formula, and the corresponding injective presentations. The remaining
+foundational questions concern recognition and comparison of the axioms.
+We compare replacements for the exceptional-sequence axiom, with
+counterexamples and a separate summary for each proposal. Finite
+projective tests can make exceptionality and smoothness consequences;
+tests using only non-negative shifts fail to control negative cohomology.
+\end{abstract}
+
+\section{Conventions and definition}\label{sec:definition}
+
+Fix an algebraically closed field $\Bbbk$ and integers $m,n\geq1$.
+All dg modules are right modules, and complexes are cochain complexes:
+$d_X:X^q\to X^{q+1}$ and $H^q(X[s])=H^{q+s}(X)$.
+Let $A$ be a proper connective dg algebra with
+\begin{equation}\label{eq:standing}
+ \dim_{\Bbbk}H^*(A)<\infty,\qquad
+ H^q(A)=0\quad(q\notin[1-m,0]).
+\end{equation}
+Assume that $B=H^0(A)$ is basic and that closed degree-zero orthogonal
+idempotents $e_1,\ldots,e_n$ sum to $1$, with classes forming a complete
+set of primitive idempotents of $B$. Use $e_v$ also for its class in $B$,
+and let $S_v$ be the simple top of $e_vB$. Set
+\begin{equation}\label{eq:categories}
+ \begin{gathered}
+ P_v=e_vA,\qquad
+ \D_{\fd}(A)=\{X\in\D(A):\dim_{\Bbbk}H^*(X)<\infty\},\\
+ \per A=\thick_{\D(A)}(A),\qquad
+ \H_A^m=\D_{\fd}(A)^{[1-m,0]}.
+ \end{gathered}
+\end{equation}
+The notation $\thick$ denotes closure under shifts, cones, and direct
+summands. Properness gives $\per A\subseteq\D_{\fd}(A)$.
+For a complex $V$ of vector spaces, write
+$\dual V=\Hom^\bullet_{\Bbbk}(V,\Bbbk)$ for its complex dual.
+
+The category $\H_A^m$ is extriangulated, with
+\begin{equation}\label{eq:extriangulated}
+ \begin{gathered}
+ \mathbb E_{\H_A^m}(X,Y)=\Hom_{\D_{\fd}(A)}(X,Y[1]),\\
+ \mathcal P(\H_A^m)=\add A,\qquad
+ \mathcal I(\H_A^m)=\add(\dual A[m-1]).
+ \end{gathered}
+\end{equation}
+Here $X,Y\in\H_A^m$; see \cite[Corollary 2.3]{MP25}.
+A conflation $K\to P\to X\dashrightarrow$ is induced by a triangle
+$K\to P\to X\to K[1]$ with all three objects in $\H_A^m$.
+For $\mathcal S\subseteq\H_A^m$, write $\Filt_{\H_A^m}(\mathcal S)$
+for the objects $M$ admitting a finite sequence of conflations
+\begin{equation}\label{eq:filtration}
+ M_{a-1}\longrightarrow M_a\longrightarrow F_a\dashrightarrow,
+ \quad M_0=0,\quad M_\ell=M,\quad F_a\in\mathcal S
+ \quad(1\leq a\leq\ell).
+\end{equation}
+All $M_a$ belong to $\H_A^m$. Empty filtrations are allowed, and finite
+direct sums belong to $\Filt_{\H_A^m}(\mathcal S)$; closure under direct
+summands is not imposed. The inflations in \eqref{eq:filtration} need
+not be monomorphisms of dg modules.
+
+An object $E\in\D_{\fd}(A)$ is \defn{exceptional} if
+\begin{equation}\label{eq:exceptional}
+ \Hom_{\D_{\fd}(A)}(E,E[t])\cong
+ \begin{cases}\Bbbk,&t=0,\\0,&t\neq0\end{cases}
+\qquad(t\in\ZZ).
+\end{equation}
+An ordered tuple $(E_1,\ldots,E_n)$ of exceptional objects is an
+\defn{exceptional sequence} if
+\begin{equation}\label{eq:exceptional-sequence}
+ \Hom_{\D_{\fd}(A)}(E_i,E_j[t])=0
+ \qquad(1\leq j<i\leq n,\ t\in\ZZ).
+\end{equation}
+The indices $i,j$ in \eqref{eq:exceptional-sequence} denote positions
+in the sequence.
+For exceptional objects $\std_1,\ldots,\std_n$, a permutation
+$\sigma\in S_n$ lists the vertex labels in the standard sequence
+\begin{equation}\label{eq:standard-sequence}
+ \boldsymbol\std^\sigma
+ =(\std_{\sigma(1)},\ldots,\std_{\sigma(n)}).
+\end{equation}
+Thus $\sigma^{-1}(v)$ is the position of $\std_v$ in
+$\boldsymbol\std^\sigma$. Define the total order $\leq_\sigma$ on
+$\{1,\ldots,n\}$ by
+\begin{equation}\label{eq:order}
+ u\leq_\sigma v\quad\Longleftrightarrow\quad
+ \sigma^{-1}(u)\leq\sigma^{-1}(v).
+\end{equation}
+Write $u<_\sigma v$ if $u\leq_\sigma v$ and $u\neq v$.
+The least and greatest weights are $\sigma(1)$ and $\sigma(n)$,
+respectively. Thus smaller weights occur earlier in
+\eqref{eq:standard-sequence}. By \eqref{eq:exceptional-sequence},
+the sequence $\boldsymbol\std^\sigma$ is exceptional precisely when
+\begin{equation}\label{eq:semiorthogonal}
+ \Hom_{\D_{\fd}(A)}(\std_w,\std_v[t])=0
+ \qquad(v<_\sigma w,\ t\in\ZZ).
+\end{equation}
+The sequence $\boldsymbol\std^\sigma$ is \defn{full in $\D_{\fd}(A)$}
+if its terms thickly generate $\D_{\fd}(A)$.
+
+\begin{definition}[$m$-qh dga]
+\label{def:shifted}
+An algebra $A$ satisfying \eqref{eq:standing} is an
+\defn{$m$-qh dga} with
+respect to $\sigma$ if there are objects $\std_v\in\H_A^m$ such that:
+\begin{enumerate}[label=\textup{(Q\arabic*)},ref=Q\arabic*]
+ \item\label{ax:exceptional}
+ $\boldsymbol\std^\sigma$ is an exceptional sequence;
+ \item\label{ax:filtration}
+ for every vertex $v$, there is a conflation
+ \begin{equation}\label{eq:presentation}
+ K_v\longrightarrow P_v\xrightarrow{p_v}\std_v\dashrightarrow
+ \qquad\text{in }\H_A^m,
+ \end{equation}
+ with
+ \begin{equation}\label{eq:kernel}
+ \begin{aligned}
+ K_v&\in\Filt_{\H_A^m}(\mathcal S_{>v}^{m}),\\
+ \mathcal S_{>v}^{m}
+ &=\{\std_w[s]:v<_\sigma w,\ 0\leq s<m,
+                         \ \std_w[s]\in\H_A^m\}.
+ \end{aligned}
+ \end{equation}
+\end{enumerate}
+\end{definition}
+
+The shifts in \eqref{eq:kernel} are cohomological. The membership
+$\std_w[s]\in\H_A^m$ is required for each factor, not only for $K_v$.
+For $v=\sigma(n)$, the set $\mathcal S_{>v}^{m}$ is empty, so
+$K_v=0$ and $p_v:P_v\xrightarrow{\sim}\std_v$.
+A particular filtration \eqref{eq:filtration} is a witness for
+\eqref{eq:kernel}, rather than additional chosen structure.
+
+\section{Consequences of the axioms}\label{sec:consequences}
+
+Throughout this section, fix a structure satisfying
+Definition~\ref{def:shifted}.
+
+\begin{proposition}[Perfection and fullness]\label{prop:fullness}
+Conditions~\ref{ax:exceptional} and \ref{ax:filtration} imply
+\begin{equation}\label{eq:fullness}
+ \std_v\in\per A\quad(1\leq v\leq n),\qquad
+ \thick_{\D_{\fd}(A)}(\std_1,\ldots,\std_n)
+ =\per A=\D_{\fd}(A).
+\end{equation}
+\end{proposition}
+\begin{proof}
+\noindent\textit{Step 1: generation of $\per A$.}
+Starting with $\std_{\sigma(n)}\cong P_{\sigma(n)}$, descending
+induction in $\leq_\sigma$ and \eqref{eq:kernel} show that $K_v$ and
+$\std_v$ are perfect. Conversely, \eqref{eq:presentation} and
+\eqref{eq:kernel} put every $P_v$ in
+$\thick_{\D_{\fd}(A)}(\std_1,\ldots,\std_n)$.
+
+\noindent\textit{Step 2: generation of $\D_{\fd}(A)$.}
+For $X\in\D_{\fd}(A)$, put $X_n=X$. For $a=n,\ldots,1$, take the
+evaluation triangle
+\begin{equation}\label{eq:evaluation}
+ \begin{gathered}
+ V_a=\bigoplus_{t\in\ZZ}
+ \Hom_{\D_{\fd}(A)}(\std_{\sigma(a)},X_a[t])[-t],\\
+ V_a\otimes_{\Bbbk}\std_{\sigma(a)}
+ \xrightarrow{\mathrm{ev}_a}X_a\longrightarrow X_{a-1}
+ \longrightarrow (V_a\otimes_{\Bbbk}\std_{\sigma(a)})[1].
+ \end{gathered}
+\end{equation}
+Each $V_a$ is a complex with zero differential.
+The sums are finite: the first argument is perfect, and the second
+has finite-dimensional total cohomology. Exceptionality gives
+$\Hom_{\D_{\fd}(A)}(\std_{\sigma(a)},X_{a-1}[t])=0$ for all $t$;
+\eqref{eq:semiorthogonal} preserves the vanishings for positions
+$b>a$. Thus $\Hom_{\D_{\fd}(A)}(P_v,X_0[t])=0$ for every $v,t$.
+Since $\Hom_{\D_{\fd}(A)}(P_v,X_0[t])=H^t(X_0)e_v$, we obtain
+$X_0=0$. The triangles \eqref{eq:evaluation} now express $X$ in
+$\thick_{\D_{\fd}(A)}(\std_1,\ldots,\std_n)$.
+\end{proof}
+
+\begin{corollary}[Smoothness]\label{cor:smooth}
+Every algebra satisfying Definition~\ref{def:shifted} is
+\defn{homologically smooth}: its diagonal bimodule belongs to
+$\per(A^{\op}\otimes_{\Bbbk}A)$.
+\end{corollary}
+\begin{proof}
+Proposition~\ref{prop:fullness} makes every simple $B$-module $S_v$
+perfect over $A$. Since $B$ is split basic,
+$B/\operatorname{rad}B\cong\Bbbk^n$ is separable over $\Bbbk$.
+The smoothness criterion \cite[Theorem 5.8]{RS22} applies.
+\end{proof}
+
+The \defn{left-dual sequence} of $\boldsymbol\std^\sigma$ is the
+exceptional sequence
+$(\costd_{\sigma(n)},\ldots,\costd_{\sigma(1)})$, listed in decreasing
+order for $\leq_\sigma$, with terms in
+$\thick_{\D_{\fd}(A)}(\std_1,\ldots,\std_n)$, satisfying
+\begin{equation}\label{eq:pairing}
+ \Hom_{\D_{\fd}(A)}(\std_u,\costd_v[t])\cong
+ \begin{cases}\Bbbk,&u=v,\ t=0,\\0,&\text{otherwise}
+ \end{cases}
+ \qquad(1\leq u,v\leq n,\ t\in\ZZ).
+\end{equation}
+This is the convention of \cite[\S2.3]{BB26}.
+
+\begin{proposition}[Left-dual objects]\label{prop:costandards}
+The sequence $\boldsymbol\std^\sigma$ has a unique left-dual sequence
+up to isomorphism of its terms. Its objects satisfy
+\begin{equation}\label{eq:costandard-window}
+ \costd_v\in\H_A^m[1-m],\qquad
+ \H_A^m[1-m]=\D_{\fd}(A)^{[0,m-1]}.
+\end{equation}
+\end{proposition}
+\begin{proof}
+Perfection and properness make all mutation triangles finite.
+For $v=\sigma(a)$, successively take evaluation cones of
+$\std_v$ against
+$\std_{\sigma(a-1)},\ldots,\std_{\sigma(1)}$; for $a=1$ take
+$\costd_{\sigma(1)}=\std_{\sigma(1)}$.
+Semiorthogonality gives \eqref{eq:pairing}, and the mutation
+construction gives the reversed exceptional sequence
+$(\costd_{\sigma(n)},\ldots,\costd_{\sigma(1)})$
+\cite[\S2.3]{BB26}.
+Proposition~\ref{prop:fullness} and the characterisation by
+\eqref{eq:pairing} for a full exceptional sequence give uniqueness
+\cite[\S2.3]{BB26}.
+
+For every factor $\std_w[s]\in\mathcal S_{>v}^{m}$,
+\begin{equation}\label{eq:factor-pairing}
+ \Hom_{\D_{\fd}(A)}(\std_w[s],\costd_u[t])\cong
+ \begin{cases}\Bbbk,&w=u,\ t=s,\\0,&\text{otherwise}.
+ \end{cases}
+\end{equation}
+The long exact sequences from the filtrations of $K_v$ therefore give
+$\Hom_{\D_{\fd}(A)}(K_v,\costd_u[t])=0$ for
+$t\notin[0,m-1]$. Applying $\Hom_{\D_{\fd}(A)}(-,\costd_u[t])$
+to \eqref{eq:presentation} gives
+\[
+ H^t(\costd_u)e_v
+ =\Hom_{\D_{\fd}(A)}(P_v,\costd_u[t])=0
+ \qquad(t\notin[0,m-1]).
+\]
+Summing over $v$ proves \eqref{eq:costandard-window}.
+\end{proof}
+
+The fullness of $\boldsymbol\std^\sigma$, existence of its left-dual
+sequence $(\costd_{\sigma(n)},\ldots,\costd_{\sigma(1)})$, and
+\eqref{eq:costandard-window} are consequences of
+Definition~\ref{def:shifted}.
+
+\begin{proposition}[Standards determined by the ordered projectives]
+\label{prop:canonical}
+For $1\leq v\leq n$, put
+\begin{equation}\label{eq:tail}
+ \mathcal Q_v=\thick_{\D_{\fd}(A)}\{P_w:v<_\sigma w\},\qquad
+ e_{>v}^\sigma=\sum_{v<_\sigma w}e_w.
+\end{equation}
+Write $\mathcal Q_v^\perp$ for the objects $X\in\D_{\fd}(A)$ such that
+$\Hom_{\D_{\fd}(A)}(Y,X[t])=0$ for every $Y\in\mathcal Q_v$ and
+$t\in\ZZ$. Then
+\begin{equation}\label{eq:localisation}
+ \begin{gathered}
+ K_v\in\mathcal Q_v,\qquad \std_v\in\mathcal Q_v^\perp,\\
+ p_v^*:\Hom_{\D_{\fd}(A)}(\std_v,X[t])
+ \xrightarrow{\sim}\Hom_{\D_{\fd}(A)}(P_v,X[t])
+ \qquad(X\in\mathcal Q_v^\perp,\ t\in\ZZ).
+ \end{gathered}
+\end{equation}
+Consequently $(\std_v,p_v)$ is determined by $(A,\sigma)$ up to a
+unique isomorphism compatible with $p_v$, and $K_v$ is determined up to
+isomorphism. Moreover,
+\begin{equation}\label{eq:support}
+ \begin{gathered}
+ H^t(\std_v)e_w=0\quad(v<_\sigma w,\ t\in\ZZ),\\
+ H^t(\std_v)e_v\cong
+ \begin{cases}\Bbbk,&t=0,\\0,&t\neq0,
+ \end{cases}
+ \qquad
+ H^0(\std_v)\cong e_vB/e_vBe_{>v}^\sigma B.
+ \end{gathered}
+\end{equation}
+The morphism $H^0(p_v):e_vB\to H^0(\std_v)$ is a projective cover
+with simple top $S_v$.
+\end{proposition}
+\begin{proof}
+The induction in Step~1 of Proposition~\ref{prop:fullness}, restricted
+to weights $w>_\sigma v$, gives
+$\mathcal Q_v=\thick_{\D_{\fd}(A)}\{\std_w:v<_\sigma w\}$.
+Equations \eqref{eq:kernel} and \eqref{eq:semiorthogonal} imply
+$K_v\in\mathcal Q_v$ and $\std_v\in\mathcal Q_v^\perp$.
+Applying $\Hom_{\D_{\fd}(A)}(-,X[t])$ to
+\eqref{eq:presentation} proves \eqref{eq:localisation} and its
+uniqueness assertion. Taking $X=\std_v$ gives
+$\Hom_{\D_{\fd}(A)}(P_v,\std_v[t])\cong
+\Hom_{\D_{\fd}(A)}(\std_v,\std_v[t])$; the other vertex vanishings
+follow from $\std_v\in\mathcal Q_v^\perp$.
+
+For the degree-zero formula, set $D_v^0=e_vB/e_vBe_{>v}^\sigma B$.
+The module $D_v^0$ belongs to $\mathcal Q_v^\perp$, so the quotient
+$P_v\to D_v^0$ factors through $p_v$ by \eqref{eq:localisation}.
+Conversely, the support vanishings and the epimorphism $H^0(p_v)$
+give a factorisation $e_vB\to D_v^0\to H^0(\std_v)$.
+The two induced maps between $D_v^0$ and $H^0(\std_v)$ are inverse,
+as can be checked after precomposition with their epimorphisms from
+$e_vB$. Finally, $H^0(\std_v)e_v\cong\Bbbk$, so $H^0(\std_v)$ is a
+non-zero quotient of the indecomposable projective $e_vB$.
+Thus $H^0(p_v)$ is a projective cover with top $S_v$.
+\end{proof}
+
+\begin{corollary}[Classical specialisation]\label{cor:classical}
+For $m=1$, Definition~\ref{def:shifted} is equivalent to classical
+quasi-heredity of $B=H^0(A)$ with respect to $\leq_\sigma$.
+\end{corollary}
+\begin{proof}
+The standard $t$-structure identifies $\H_A^1$ with $\mod B$, and
+$A$ is quasi-isomorphic to $B$ under \eqref{eq:standing} with $m=1$.
+
+\noindent\underline{Shifted axioms $\Rightarrow$ classical axioms.}
+Only $s=0$ occurs in \eqref{eq:kernel}. The standard objects are the
+usual standard modules by \eqref{eq:support}, and
+\eqref{eq:presentation} becomes a short exact sequence whose kernel
+is filtered by standards of larger weights. These are the classical
+projective-filtration conditions \cite[\S3]{Kra17}.
+
+\noindent\underline{Classical axioms $\Rightarrow$ shifted axioms.}
+Classical standard modules satisfy \eqref{eq:presentation} and
+\eqref{eq:kernel} with $s=0$. They form an exceptional sequence
+\cite[Lemma 2.2]{BB26}, so condition~\ref{ax:exceptional} holds.
+\end{proof}
+
+\begin{example}[The order for two classical standards]\label{ex:classical-order}
+Take $A=B=\Bbbk(1\xrightarrow{a}2)$ concentrated in degree zero,
+with $e_1a=a=ae_2$, $m=1$, and $\sigma=\mathrm{id}$. Thus $1<_\sigma2$.
+Let $S_v$ be the simple top of $P_v=e_vB$, for $v=1,2$. Then
+\begin{equation}\label{eq:classical-order-objects}
+ \std_1=S_1,\qquad \std_2=S_2=P_2,\qquad
+ \costd_1=S_1,\qquad \costd_2=P_1.
+\end{equation}
+The projective presentation
+\begin{equation}\label{eq:classical-order-extension}
+ 0\longrightarrow S_2\longrightarrow P_1\longrightarrow S_1
+ \longrightarrow0
+\end{equation}
+gives
+\begin{equation}\label{eq:classical-order-hom}
+ \Hom_{\D_{\fd}(B)}(S_2,S_1[t])=0\quad(t\in\ZZ),\qquad
+ \Hom_{\D_{\fd}(B)}(S_1,S_2[1])\cong\Bbbk.
+\end{equation}
+Consequently $(\std_1,\std_2)=(S_1,S_2)$ is full exceptional,
+whereas $(\std_2,\std_1)$ is not exceptional. The left-dual sequence
+of $(\std_1,\std_2)$ specified by \eqref{eq:pairing} is
+$(\costd_2,\costd_1)=(P_1,S_1)$.
+\end{example}
+
+\section{Graded path dg algebras}\label{sec:paths}
+
+Let $Q$ be a finite acyclic quiver on $\{1,\ldots,n\}$, with all arrow
+degrees at most zero. Paths are concatenated from left to right:
+$e_ua=a=ae_v$ for an arrow $a:u\to v$. Let
+$A=(\Bbbk Q,d_A)$, where $d_A$ is any graded derivation of degree $1$
+with $d_A^2=0$. All vertex idempotents are closed. For a path $p$, let
+$|p|$ denote its degree, including $|e_v|=0$, and put
+\begin{equation}\label{eq:path-width}
+ M=1-\min\{|p|:p\text{ is a path in }Q\}.
+\end{equation}
+Thus the underlying graded algebra is concentrated in degrees
+$[1-M,0]$.
+
+\begin{theorem}[Every ordering]\label{thm:paths}
+For every $\sigma\in S_n$, define
+\begin{equation}\label{eq:path-objects}
+ B_v=A/Ae_{>v}^\sigma A,\qquad
+ \std_v=e_vB_v,\qquad K_v=e_vAe_{>v}^\sigma A.
+\end{equation}
+The objects \eqref{eq:path-objects} give an $M$-qh dga.
+The same presentations and filtrations give an $m$-qh dga
+for every $m\geq M$.
+\end{theorem}
+\begin{proof}
+\noindent\textit{Step 1: the kernel filtration.}
+Fix $v=\sigma(i)$. If $i=n$, then $K_v=0$ and its filtration is empty.
+For $i<n$, define dg ideals and dg submodules by
+\begin{equation}\label{eq:path-tower}
+ \begin{gathered}
+ J_j=A\left(\sum_{b=j}^n e_{\sigma(b)}\right)A,\quad
+ F_j=e_vJ_j,\quad J_{n+1}=0,\\
+ 0=F_{n+1}\subseteq F_n\subseteq\cdots\subseteq F_{i+1}=K_v.
+ \end{gathered}
+\end{equation}
+For $i<j\leq n$ and $w=\sigma(j)$, put $L_{vw}=e_vB_we_w$,
+a finite complex of vector spaces. Multiplication gives a dg
+isomorphism
+\begin{equation}\label{eq:path-layer}
+ L_{vw}\otimes_{\Bbbk}\std_w
+ \xrightarrow{\sim}F_j/F_{j+1},\qquad p\otimes q\longmapsto pq.
+\end{equation}
+Indeed, a basis path in $F_j/F_{j+1}$ has greatest vertex $w$ in
+$\leq_\sigma$. Acyclicity permits a unique cut at the sole occurrence
+of $w$. The Leibniz rule makes \eqref{eq:path-layer} a morphism of
+complexes. Splitting $L_{vw}$ over $\Bbbk$ gives
+\begin{equation}\label{eq:path-factors}
+ F_j/F_{j+1}\simeq
+ \bigoplus_{h=1-M}^{0}
+ \std_w[-h]^{\oplus\dim_{\Bbbk}H^h(L_{vw})}
+ \qquad\text{in }\D_{\fd}(A).
+\end{equation}
+
+\noindent\textit{Step 2: every factor stays in $\H_A^M$.}
+If $H^h(L_{vw})\neq0$, there is a prefix path $p:v\to w$ of degree
+$h$. For every basis path $q$ of $\std_w$, the concatenation $pq$ is
+a path, and $h+|q|\geq1-M$. Thus
+$\std_w[-h]\in\H_A^M$ and $0\leq-h<M$.
+All submodules and quotients in \eqref{eq:path-tower} are themselves
+concentrated in $[1-M,0]$. Their short exact sequences induce
+conflations in $\H_A^M$; refining \eqref{eq:path-factors} gives
+\eqref{eq:kernel}. The short exact sequence
+$0\to K_v\to P_v\to\std_v\to0$ gives \eqref{eq:presentation}.
+
+\noindent\textit{Step 3: exceptionality.}
+Fix $v$. The path basis gives $\std_ve_w=0$ for $v<_\sigma w$ and
+$\std_ve_v=\Bbbk$ in degree zero. Descending induction on
+$w>_\sigma v$, using the presentations of $\std_w$ and the
+filtrations of $K_w$, gives
+$\Hom_{\D_{\fd}(A)}(\std_w,\std_v[t])=0$ for every $t$.
+The filtration of $K_v$ then gives
+$\Hom_{\D_{\fd}(A)}(K_v,\std_v[t])=0$. Consequently
+\[
+ \Hom_{\D_{\fd}(A)}(\std_v,\std_v[t])
+ \cong\Hom_{\D_{\fd}(A)}(P_v,\std_v[t])
+ =H^t(\std_ve_v),
+\]
+which is $\Bbbk$ for $t=0$ and zero otherwise.
+For $m\geq M$, every object in the presentations and filtrations still
+belongs to $\H_A^m$, and every factor shift still satisfies $0\leq s<m$.
+\end{proof}
+
+\begin{example}[A graded quiver of type $A_4$]\label{ex:a4}
+Take $Q:1\xrightarrow{a}2\xrightarrow{b}3\xrightarrow{c}4$, with
+$|a|=|b|=|c|=-1$ and $d_A=0$. Then $M=4$.
+Choose $(\sigma(1),\sigma(2),\sigma(3),\sigma(4))=(2,4,1,3)$,
+and put $U=P_1/(abA)$. The standard objects and their kernels are
+\begin{equation}\label{eq:a4}
+ \begin{array}{c|c|c}
+ v&\std_v&K_v\\\hline
+ 1&U&abA\cong\std_3[2]\\
+ 2&S_2&bA\cong\std_3[1]\\
+ 3&P_3&0\\
+ 4&S_4&0
+ \end{array}
+ \qquad
+ \boldsymbol\std^\sigma=(S_2,S_4,U,P_3).
+\end{equation}
+The object $P_3$ has cohomology $S_3$ in degree $0$ and $S_4$ in
+degree $-1$. Thus the two non-zero kernels in \eqref{eq:a4} occupy
+degrees $[-3,-2]$ and $[-2,-1]$, respectively, and both are single
+allowed factors in $\H_A^4$.
+\end{example}
+
+\begin{example}[A graded quiver of type $D_4$]\label{ex:d4}
+Take $Q:1\xrightarrow{a}2\xrightarrow{b}3$, $2\xrightarrow{c}4$,
+with $|a|=|c|=-1$, $|b|=0$, and $d_A=0$. Then $M=3$.
+Choose $(\sigma(1),\sigma(2),\sigma(3),\sigma(4))=(1,3,2,4)$,
+and put $V=P_2/cA$. Then
+\begin{equation}\label{eq:d4}
+ \begin{array}{c|c|c}
+ v&\std_v&K_v\\\hline
+ 1&S_1&aA\cong P_2[1]\\
+ 2&V&cA\cong\std_4[1]\\
+ 3&S_3&0\\
+ 4&S_4&0
+ \end{array}
+ \qquad
+ \boldsymbol\std^\sigma=(S_1,S_3,V,S_4).
+\end{equation}
+The kernel $K_1$ has the two-factor filtration
+\begin{equation}\label{eq:d4-filtration}
+ 0\subset acA\subset aA,\qquad
+ acA\cong\std_4[2],\qquad aA/acA\cong\std_2[1].
+\end{equation}
+Both factors belong to $\H_A^3$, with $1<_\sigma4$ and
+$1<_\sigma2$. The filtration \eqref{eq:d4-filtration} refines the
+shifted-projective description of $K_1$ into shifted standard factors.
+\end{example}
+
+\begin{example}[A differential and the required width]\label{ex:differential}
+Take arrows $a:1\to2$, $b:2\to3$, and $c:1\to3$, with
+\begin{equation}\label{eq:differential}
+ |a|=|b|=0,\qquad |c|=-1,\qquad
+ d_A(c)=ab,\qquad d_A(a)=d_A(b)=0.
+\end{equation}
+Here $M=2$, but $H^q(A)=0$ for $q\neq0$ and
+$B=H^0(A)=\Bbbk(1\xrightarrow{a}2\xrightarrow{b}3)/(ab)$.
+For $(\sigma(1),\sigma(2),\sigma(3))=(1,3,2)$,
+\begin{equation}\label{eq:differential-standards}
+ (\std_1,\std_2,\std_3)=(S_1,P_2,S_3),\qquad
+ K_1=\Bbbk\{a,ab,c\},\qquad K_2=K_3=0.
+\end{equation}
+There is a filtration by dg submodules
+\begin{equation}\label{eq:differential-filtration}
+ 0\subset aA\subset K_1,\qquad
+ aA\cong\std_2,\qquad K_1/aA\cong\std_3[1].
+\end{equation}
+Theorem~\ref{thm:paths} gives a structure of width $2$.
+Although $K_1\simeq S_2$ and all the objects in
+\eqref{eq:differential-standards} lie in $\H_A^1$, the factor
+$\std_3[1]$ does not. There is no width-$1$ structure for this
+ordering: Proposition~\ref{prop:canonical} fixes the standard objects.
+Write $[X]$ for the class of a module $X$ in $K_0(\mod B)$, whose
+basis is $[S_1],[S_2],[S_3]$. A filtration of $S_2$ by $P_2$ and $S_3$
+in $\mod B$ would require
+\[
+ [S_2]=x[P_2]+y[S_3]=x[S_2]+(x+y)[S_3],
+ \qquad x,y\in\ZZ_{\geq0},
+\]
+which forces $x=1$ and $y=-1$, a contradiction.
+\end{example}
+
+\section{Filtrations, width, and opposite algebras}\label{sec:filtrations}
+
+Fix a structure satisfying Definition~\ref{def:shifted}.
+For an integer $\ell\geq1$, define
+\begin{equation}\label{eq:allowed}
+ I_w^\ell=\{s\in\ZZ:0\leq s<\ell,\ \std_w[s]\in\H_A^\ell\},
+ \qquad
+ \mathcal S_{>v}^\ell=\{\std_w[s]:v<_\sigma w,\ s\in I_w^\ell\}.
+\end{equation}
+For $1\leq v,w\leq n$ and $t\in\ZZ$, put
+\begin{equation}\label{eq:numerical}
+ b_{vw,t}=\dim_{\Bbbk}\Hom_{\D_{\fd}(A)}(P_v,\costd_w[t])
+         =\dim_{\Bbbk}H^t(\costd_w)e_v.
+\end{equation}
+
+\begin{proposition}[A criterion for shifted filtrations]\label{prop:criterion}
+For $X\in\mathcal Q_v$, where $\mathcal Q_v$ is \eqref{eq:tail},
+\begin{equation}\label{eq:criterion}
+ \begin{split}
+ X\in\Filt_{\H_A^\ell}(\mathcal S_{>v}^\ell)
+ \quad\Longleftrightarrow\quad&
+ \Hom_{\D_{\fd}(A)}(X,\costd_w[t])=0\\[-2pt]
+ &\text{for }v<_\sigma w,\ t\notin I_w^\ell.
+ \end{split}
+\end{equation}
+When \eqref{eq:criterion} holds, $X$ has a filtration by decreasing
+weights whose weight-$w$ factor is
+\begin{equation}\label{eq:weight-block}
+ G_w(X)\cong
+ \bigoplus_{s\in I_w^\ell}
+ \std_w[s]^{\oplus\dim_{\Bbbk}
+                    \Hom_{\D_{\fd}(A)}(X,\costd_w[s])}.
+\end{equation}
+The category $\Filt_{\H_A^\ell}(\mathcal S_{>v}^\ell)$ is closed under
+direct summands. For $X=K_v$, the multiplicities in
+\eqref{eq:weight-block} are $b_{vw,s}$.
+\end{proposition}
+\begin{proof}
+We prove necessity, construct the filtration for sufficiency, and
+then deduce the assertions about multiplicities and direct summands.
+
+\noindent\underline{Necessity.}
+By \eqref{eq:factor-pairing}, an allowed factor $\std_u[s]$ has a
+non-zero morphism to $\costd_w[t]$ only when $u=w$ and $t=s$.
+The long exact sequences of a filtration give the vanishings in
+\eqref{eq:criterion}.
+
+\noindent\underline{Sufficiency.}
+Put $a=\sigma^{-1}(v)$ and apply the evaluation construction
+\eqref{eq:evaluation} to $X$ in the exceptional subcategory
+$\mathcal Q_v$. The resulting triangles, combined by the octahedral
+axiom, give an ordered tower with successive factors in
+$\thick_{\D_{\fd}(A)}(\std_{\sigma(b)})$
+for $b=n,n-1,\ldots,a+1$. If $a=n$, then $\mathcal Q_v=0$ and the
+tower is empty.
+For each weight $w$, exceptionality identifies
+$\thick_{\D_{\fd}(A)}(\std_w)$ with $\D^b(\mod\Bbbk)$, so its factor
+is a finite direct sum of shifts of $\std_w$.
+Applying $\Hom_{\D_{\fd}(A)}(-,\costd_w[t])$ to the tower kills every
+factor of weight different from $w$. The pairing \eqref{eq:pairing}
+therefore identifies the multiplicity of $\std_w[t]$ with
+$\dim_{\Bbbk}\Hom_{\D_{\fd}(A)}(X,\costd_w[t])$.
+The vanishings in \eqref{eq:criterion} give precisely
+\eqref{eq:weight-block}. Every factor and, by extension closure, every
+intermediate object belongs to $\H_A^\ell$.
+Splitting the finite direct sums refines the tower to a filtration
+by $\mathcal S_{>v}^\ell$.
+
+Both $\mathcal Q_v$ and the vanishing conditions in
+\eqref{eq:criterion} are closed under direct summands.
+For $v<_\sigma w$, applying
+$\Hom_{\D_{\fd}(A)}(-,\costd_w[t])$ to \eqref{eq:presentation} gives
+$\Hom_{\D_{\fd}(A)}(K_v,\costd_w[t])
+ \cong\Hom_{\D_{\fd}(A)}(P_v,\costd_w[t])$.
+This proves the final assertion using \eqref{eq:numerical}.
+\end{proof}
+
+Arbitrary filtrations still need not have invariant multiplicities.
+For $v<_\sigma w$ and $0\leq s<m-1$ with
+$\std_w[s],\std_w[s+1]\in\H_A^m$, the conflations
+\begin{equation}\label{eq:cancellation}
+ 0\longrightarrow\std_w[s]\xrightarrow{1}\std_w[s]\dashrightarrow,
+ \qquad
+ \std_w[s]\longrightarrow0\longrightarrow\std_w[s+1]\dashrightarrow
+\end{equation}
+give a two-factor filtration of zero.
+In contrast, the multiplicities in the ordered factors
+\eqref{eq:weight-block} are fixed by the left-dual pairing.
+If $c_{vw,s}$ counts factors $\std_w[s]$ in any filtration of $K_v$,
+Euler additivity gives
+\begin{equation}\label{eq:signed-multiplicity}
+ \sum_{s=0}^{m-1}(-1)^s c_{vw,s}
+ =\sum_{s=0}^{m-1}(-1)^s b_{vw,s}
+ \qquad(v<_\sigma w).
+\end{equation}
+Proposition~\ref{prop:criterion} supplies a filtration with
+$c_{vw,s}=b_{vw,s}$ for all $v<_\sigma w$ and $0\leq s<m$.
+
+\begin{corollary}[Least width]\label{cor:width}
+Suppose $(A,\sigma)$ admits a structure of
+Definition~\ref{def:shifted} for at least one width. For its canonical
+standard objects and specified left-dual objects, put
+\begin{equation}\label{eq:depths}
+ \begin{aligned}
+ \alpha_A&=-\min\{q:H^q(A)\neq0\},\\
+ \alpha_w&=-\min\{q:H^q(\std_w)\neq0\},&
+ \beta_w&=\max\{q:H^q(\costd_w)\neq0\}.
+ \end{aligned}
+\end{equation}
+Then $\alpha_A,\alpha_w,\beta_w\geq0$, and the least width is
+\begin{equation}\label{eq:minimal-width}
+ m_{\min}(A,\sigma)
+ =1+\max\left\{\alpha_A,\ \max_{1\leq w\leq n}
+                         (\alpha_w+\beta_w)\right\}.
+\end{equation}
+\end{corollary}
+\begin{proof}
+Proposition~\ref{prop:canonical} makes $\std_w$ and $\costd_w$
+independent of the chosen width. Its proof, together with
+\eqref{eq:pairing}, also gives
+\begin{equation}\label{eq:dual-support}
+ H^t(\costd_w)e_v=0\quad(w<_\sigma v),\qquad
+ H^t(\costd_w)e_w\cong
+ \begin{cases}\Bbbk,&t=0,\\0,&t\neq0.\end{cases}
+\end{equation}
+Thus $\beta_w\geq0$, and if $\beta_w>0$, then
+$b_{vw,\beta_w}\neq0$ for some $v<_\sigma w$.
+Since $H^0(\std_w)\neq0$, membership of a shifted standard is
+equivalent to
+\[
+ \std_w[s]\in\H_A^\ell
+ \quad\Longleftrightarrow\quad
+ 0\leq s\leq\ell-1-\alpha_w
+ \qquad(s\geq0).
+\]
+Necessity in \eqref{eq:criterion} therefore forces
+$\alpha_w+\beta_w\leq\ell-1$ whenever width $\ell$ is possible;
+when $\beta_w=0$, the same inequality follows from
+$\std_w\in\H_A^\ell$. Also $\alpha_A\leq\ell-1$ is necessary.
+
+Conversely, these inequalities put every non-zero factor
+$\std_w[s]$ of the ordered kernel tower in $\H_A^\ell$, with
+$0\leq s<\ell$. Proposition~\ref{prop:criterion} gives
+$K_v\in\Filt_{\H_A^\ell}(\mathcal S_{>v}^\ell)$.
+The objects $P_v$ and $\std_v$ also lie in $\H_A^\ell$, so their
+presentation triangles are conflations. This proves
+\eqref{eq:minimal-width}.
+\end{proof}
+
+\begin{proposition}[Injective presentations and opposite algebras]
+\label{prop:injectives}
+Set $\widehat{\costd}_v=\costd_v[m-1]$ and
+$I_v=\dual(Ae_v)[m-1]$. There are conflations
+\begin{equation}\label{eq:injective}
+ \begin{gathered}
+ \widehat{\costd}_v\longrightarrow I_v\longrightarrow L_v
+ \dashrightarrow\quad\text{in }\H_A^m,\\
+ L_v\in\Filt_{\H_A^m}
+ \{\widehat{\costd}_w[-s]:v<_\sigma w,\ 0\leq s<m,\
+                         \widehat{\costd}_w[-s]\in\H_A^m\}.
+ \end{gathered}
+\end{equation}
+The algebra $A^{\op}$ satisfies Definition~\ref{def:shifted} for the
+same $m$ and $\sigma$, with standards $\dual\costd_v$ and specified
+left-dual objects $\dual\std_v$.
+\end{proposition}
+\begin{proof}
+Decompose $I_v$ along the full exceptional sequence
+$(\costd_{\sigma(n)},\ldots,\costd_{\sigma(1)})$.
+The factors of $I_v$ occur in increasing order in $\leq_\sigma$.
+The pairing \eqref{eq:pairing} and the identity
+\[
+ \Hom_{\D_{\fd}(A)}(\std_w,I_v[t])
+ \cong\dual\bigl(H^{1-m-t}(\std_w)e_v\bigr)
+\]
+identify the weight-$w$ factor as
+\begin{equation}\label{eq:injective-factors}
+ \bigoplus_{s\geq0}
+ \costd_w[m-1-s]^{\oplus\dim_{\Bbbk}H^{-s}(\std_w)e_v}.
+\end{equation}
+By \eqref{eq:support}, weights $w<_\sigma v$ contribute zero, and
+the first non-zero factor is $\widehat{\costd}_v$.
+Every occurring $s$ satisfies $s\leq\alpha_w$; hence
+$\beta_w+s\leq m-1$ by Corollary~\ref{cor:width}.
+Thus all factors in \eqref{eq:injective-factors} belong to $\H_A^m$,
+giving \eqref{eq:injective}.
+
+The contravariant equivalence
+$\dual(-)[m-1]:\H_A^m\to\H_{A^{\op}}^m$
+takes \eqref{eq:injective} to the required projective presentation:
+\[
+ \dual L_v[m-1]\longrightarrow Ae_v
+ \longrightarrow\dual\costd_v\dashrightarrow.
+\]
+Its kernel factors are $(\dual\costd_w)[s]$ with $v<_\sigma w$.
+Vector-space duality reverses the costandard exceptional sequence,
+giving $(\dual\costd_{\sigma(1)},\ldots,\dual\costd_{\sigma(n)})$.
+Finally,
+\[
+ \Hom_{\D_{\fd}(A^{\op})}(\dual\costd_u,\dual\std_v[t])
+ \cong\Hom_{\D_{\fd}(A)}(\std_v,\costd_u[t])
+\]
+proves the asserted left-dual pairing.
+\end{proof}
+
+\section{Framework for replacing (Q1)}\label{sec:comparison-framework}
+
+In Sections~\ref{sec:proposal-hom}--\ref{sec:proposal-negative}, retain
+the standing assumptions \eqref{eq:standing}, the order \eqref{eq:order},
+and condition~\ref{ax:filtration}. The objects $\std_v\in\H_A^m$
+are not assumed exceptional. Each proposal retains the
+\defn{brick condition}
+\begin{equation}\label{eq:trial-brick}
+ \End_{\H_A^m}(\std_v)\cong\Bbbk\qquad(1\leq v\leq n),
+\end{equation}
+unless \eqref{eq:trial-brick} is explicitly proved from stronger
+conditions. The purpose of replacing condition~\ref{ax:exceptional}
+is to obtain homological smoothness as a theorem. Smoothness as an
+additional assumption is considered only for comparison in
+Section~\ref{sec:proposal-assumed-smooth}.
+
+For a finite-dimensional $B$-module $M$, write $[M:S_w]$ for its
+composition multiplicity. Since $B$ is split basic,
+\begin{equation}\label{eq:trial-projective-test}
+ [M:S_w]=\dim_{\Bbbk}Me_w,\qquad
+ \Hom_{\D_{\fd}(A)}(P_w,X[t])\cong H^t(X)e_w
+ \quad(X\in\D_{\fd}(A),\ t\in\ZZ).
+\end{equation}
+The equality
+$\Hom_{\H_A^m}(X,Y)=\Hom_{\D_{\fd}(A)}(X,Y)$
+applies only when $X,Y\in\H_A^m$.
+
+\begin{proposition}[Generation from the filtration axiom]
+\label{prop:trial-generation}
+Condition~\ref{ax:filtration} alone implies
+\begin{equation}\label{eq:trial-generation}
+ \std_v\in\per A\quad(1\leq v\leq n),\qquad
+ \thick_{\D_{\fd}(A)}(\std_1,\ldots,\std_n)=\per A.
+\end{equation}
+\end{proposition}
+\begin{proof}
+The greatest weight has $K_{\sigma(n)}=0$ and
+$\std_{\sigma(n)}\cong P_{\sigma(n)}$. Descending induction using
+\eqref{eq:kernel} and \eqref{eq:presentation} makes every $K_v$ and
+$\std_v$ perfect. Conversely, the same triangles put every $P_v$ in
+the thick subcategory generated by the standards.
+\end{proof}
+
+\begin{proposition}[The classical projective test]
+\label{prop:trial-classical}
+For $m=1$, the brick condition \eqref{eq:trial-brick},
+condition~\ref{ax:filtration}, and either of the conditions
+\begin{align}
+ \Hom_B(P_w,\std_v)&=0\quad(v<_\sigma w),
+ \label{eq:trial-classical-projectives}\\
+ \Hom_B(\std_w,\std_v)&=0\quad(v<_\sigma w)
+ \label{eq:trial-classical-standards}
+\end{align}
+are equivalent to classical quasi-heredity. Here the equivalence
+$\H_A^1\simeq\mod B$ identifies $P_w$ with $e_wB$.
+\end{proposition}
+\begin{proof}
+First prove the equivalence of
+\eqref{eq:trial-classical-projectives} and
+\eqref{eq:trial-classical-standards}.
+
+\noindent\underline{Projective test $\Rightarrow$ standard test.}
+Precomposition with the epimorphism $P_w\twoheadrightarrow\std_w$
+embeds $\Hom_B(\std_w,\std_v)$ in $\Hom_B(P_w,\std_v)$.
+
+\noindent\underline{Standard test $\Rightarrow$ projective test.}
+The filtration of $K_w$ and
+\eqref{eq:trial-classical-standards} give
+$\Hom_B(K_w,\std_v)=0$ for $v<_\sigma w$.
+Apply $\Hom_B(-,\std_v)$ to
+$0\to K_w\to P_w\to\std_w\to0$.
+
+Under either test, $\std_v$ is supported on weights at most $v$,
+and $\Hom_B(K_v,\std_v)=0$. Consequently
+\[
+ \Bbbk\cong\End_B(\std_v)
+ \cong\Hom_B(P_v,\std_v)\cong\std_ve_v.
+\]
+The quotient $P_v\twoheadrightarrow\std_v$ has simple top $S_v$,
+with $S_v$ occurring once. The projective kernels are filtered by
+standards of larger weights. These are the classical axioms
+\cite[\S2.1]{BB26}; classical standards conversely satisfy both tests.
+\end{proof}
+
+The brick condition cannot be omitted from
+Proposition~\ref{prop:trial-classical}. The ordinary algebra
+$B=\Bbbk[x]/(x^2)$ with one standard $\std_1=P_1=B$ and $K_1=0$
+satisfies both off-diagonal tests, whose index sets are empty,
+but is not quasi-hereditary.
+
+\begin{proposition}[Cohomological support]
+\label{prop:trial-support}
+Assume condition~\ref{ax:filtration} and
+\begin{equation}\label{eq:trial-support}
+ H^t(\std_v)e_w=0\qquad(v<_\sigma w,\ t\in\ZZ).
+\end{equation}
+Then
+\begin{align}
+ \Hom_{\D_{\fd}(A)}(\std_w,\std_v[t])&=0
+       &&(v<_\sigma w,\ t\in\ZZ),\label{eq:trial-backward}\\
+ \Hom_{\D_{\fd}(A)}(\std_v,\std_v[t])&\cong H^t(\std_v)e_v
+       &&(1\leq v\leq n,\ t\in\ZZ).
+       \label{eq:trial-diagonal}
+\end{align}
+In particular, \eqref{eq:trial-brick} is equivalent to
+$[H^0(\std_v):S_v]=1$ for every $v$ under these hypotheses.
+\end{proposition}
+\begin{proof}
+Fix $v$ and descend through the weights $w>_\sigma v$.
+Equation~\eqref{eq:trial-projective-test} gives
+\[
+ \Hom_{\D_{\fd}(A)}(P_w,\std_v[t])=0\qquad(t\in\ZZ).
+\]
+Once the standards of weight greater than $w$ are orthogonal to
+$\std_v$ in every degree, their shifted filtration of $K_w$ gives
+\[
+ \Hom_{\D_{\fd}(A)}(K_w,\std_v[t])=0\qquad(t\in\ZZ).
+\]
+The presentation of $\std_w$ proves \eqref{eq:trial-backward}.
+The filtration of $K_v$ now gives the same vanishing for $K_v$;
+precomposition with $p_v:P_v\to\std_v$ proves
+\eqref{eq:trial-diagonal}.
+\end{proof}
+
+\begin{example}[A non-smooth dga with one brick standard]
+\label{ex:trial-dualnumbers}
+Let
+\begin{equation}\label{eq:trial-dualnumbers}
+ R=\Bbbk[\varepsilon]/(\varepsilon^2),\qquad
+ |\varepsilon|=-1,\qquad d_R=0,
+ \qquad m=2,\quad \std_1=P_1=R,\quad K_1=0.
+\end{equation}
+The object $R\in\H_R^2$ is a brick, and
+\begin{equation}\label{eq:trial-dualnumbers-self}
+ \Hom_{\D_{\fd}(R)}(R,R[t])\cong
+ \begin{cases}\Bbbk,&t=0,-1,\\0,&\text{otherwise}.
+ \end{cases}
+\end{equation}
+To verify non-smoothness, put $S=R/(\varepsilon)$.
+A semifree resolution $F\to S$ is given by
+\begin{equation}\label{eq:trial-dualnumbers-resolution}
+ F=\bigoplus_{a\geq0}x_aR,\quad |x_a|=-2a,\quad
+ d_F(x_0)=0,\quad d_F(x_a)=x_{a-1}\varepsilon\ (a\geq1),
+\end{equation}
+where the augmentation sends $x_0$ to $1$ and $x_a$ to $0$ for $a>0$.
+Each $x_a\varepsilon$ is the boundary of $x_{a+1}$, so $H^*(F)=S$.
+Applying the dg Hom complex into $S$ gives
+\begin{equation}\label{eq:trial-dualnumbers-ext}
+ \Hom_{\D_{\fd}(R)}(S,S[t])\cong
+ \begin{cases}\Bbbk,&t\in2\ZZ_{\geq0},\\0,&\text{otherwise}.
+ \end{cases}
+\end{equation}
+Thus $S\notin\per R$, since a perfect object has finite-dimensional
+total derived Hom into $S$. Smoothness would put every
+cohomologically finite-dimensional module in $\per R$: tensor a
+finite construction of the diagonal bimodule with that module.
+Therefore $R$ is not smooth and $\per R\subsetneq\D_{\fd}(R)$.
+\end{example}
+
+\section{Bricks and backward Hom-orthogonality}
+\label{sec:proposal-hom}
+
+Replace condition~\ref{ax:exceptional} by
+\eqref{eq:trial-brick} and
+\begin{equation*}\tag{H}\label{eq:proposal-hom}
+ \Hom_{\H_A^m}(\std_w,\std_v)=0
+ \qquad(v<_\sigma w).
+\end{equation*}
+Together with condition~\ref{ax:filtration},
+\eqref{eq:proposal-hom} has the correct classical specialisation by
+Proposition~\ref{prop:trial-classical}. For $m>1$, a factor
+$\std_u[s]$ of $K_w$ contributes
+$\Hom_{\D_{\fd}(A)}(\std_u,\std_v[-s])$ to
+$\Hom_{\D_{\fd}(A)}(K_w,\std_v)$.
+Equation~\eqref{eq:proposal-hom} controls only $s=0$.
+
+\begin{example}[Backward extensions on a graded fork]
+\label{ex:trial-fork}
+Take
+\[
+ A=\Bbbk(1\xrightarrow{a}3\xleftarrow{b}2),\qquad
+ |a|=|b|=-1,\quad d_A=0,\quad m=2,
+\]
+with $e_1a=a=ae_3$, $e_2b=b=be_3$, and order $1<2<3$.
+Choose
+\begin{equation}\label{eq:trial-fork-standards}
+ (\std_1,\std_2,\std_3)=(P_1,S_2,P_3),\qquad
+ (K_1,K_2,K_3)=(0,P_3[1],0).
+\end{equation}
+The short exact sequence of dg modules
+\begin{equation}\label{eq:trial-fork-presentation}
+ 0\longrightarrow P_3[1]\xrightarrow{b}P_2
+ \longrightarrow S_2\longrightarrow0
+\end{equation}
+induces the required conflation in $\H_A^2$.
+Every $\std_v$ is individually exceptional and
+$H^0(\std_v)=S_v$. Nevertheless,
+\begin{equation}\label{eq:trial-fork-homs}
+ \Hom_{\D_{\fd}(A)}(\std_w,\std_v[t])\cong
+ \begin{cases}
+ \Bbbk,&(w,v,t)=(3,1,-1)\text{ or }(2,1,1),\\
+ 0,&w>v\text{ otherwise}.
+ \end{cases}
+\end{equation}
+Indeed, $\Hom_{\D_{\fd}(A)}(P_2,P_1[t])=0$ for every $t$;
+applying derived Hom into $P_1$ to
+\eqref{eq:trial-fork-presentation} computes the pair $(2,1)$.
+Equation~\eqref{eq:trial-fork-homs} proves
+\eqref{eq:proposal-hom} but disproves backward orthogonality in
+degrees $1$ and $-1$. The algebra is smooth; the failure concerns
+the proposed standards and their order.
+\end{example}
+
+\begin{example}[Individual exceptionality does not ensure smoothness]
+\label{ex:trial-cycle}
+Let $A$ have vertices $1,2$, arrows $a:1\to2$ and $b:2\to1$,
+with $|a|=|b|=-1$, $d_A=0$, and relations $ab=ba=0$.
+Paths are concatenated from left to right. Take $m=2$, order $1<2$,
+and $\std_i=P_i$, $K_i=0$ for $i=1,2$.
+Since $e_iAe_i=\Bbbk$, both standards are exceptional, and
+\eqref{eq:proposal-hom} holds. But
+\[
+ \Hom_{\D_{\fd}(A)}(P_2,P_1[-1])=\Bbbk a.
+\]
+An alternating semifree resolution $F\to S_1$ has generators $x_j$
+of degree $-2j$, at vertex $1$ for even $j$ and at vertex $2$ for
+odd $j$. Its differential is
+$d_F(x_j)=x_{j-1}a$ for odd $j$ and
+$d_F(x_j)=x_{j-1}b$ for even $j>0$; $d_F(x_0)=0$.
+The augmentation $F\to S_1$ sends $x_0$ to a generator of $S_1$
+and every $x_j$, $j>0$, to zero.
+The relations $ab=ba=0$ make $d_F^2=0$, and the augmentation is a
+quasi-isomorphism. Hence
+\begin{equation}\label{eq:trial-cycle-ext}
+ \Hom_{\D_{\fd}(A)}(S_1,S_1[4j])\cong\Bbbk
+ \qquad(j\geq0).
+\end{equation}
+The module $S_1$ is not perfect, so $A$ is not smooth.
+Thus even supplementing \eqref{eq:proposal-hom} with individual
+exceptionality leaves a non-smooth example.
+\end{example}
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{.36\linewidth}>{\raggedright\arraybackslash}X@{}}
+\toprule
+Property under \eqref{eq:proposal-hom} & Result with
+\eqref{eq:trial-brick} and condition~\ref{ax:filtration} \\\midrule
+Classical specialisation & Yes; Proposition~\ref{prop:trial-classical}.\\
+Bricks; backward degree-zero Hom & Required.\\
+Standards generate $\per A$ & Yes; Proposition~\ref{prop:trial-generation}.\\
+Backward Hom in every degree & No; Example~\ref{ex:trial-fork}.\\
+Self-exceptionality & Not forced; Example~\ref{ex:trial-dualnumbers}.\\
+Standards generate $\D_{\fd}(A)$ & Not forced; Example~\ref{ex:trial-dualnumbers}.\\
+Smoothness as a consequence & No, even with exceptional terms;
+Example~\ref{ex:trial-cycle}.\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Cohomological support with a simple diagonal}
+\label{sec:proposal-strong}
+
+Replace condition~\ref{ax:exceptional} by
+\begin{equation*}\tag{C}\label{eq:proposal-strong}
+ \begin{gathered}
+ H^q(\std_v)e_w=0\quad(v<_\sigma w,\ q\in\ZZ),\\
+ H^q(\std_v)e_v\cong
+ \begin{cases}\Bbbk,&q=0,\\0,&q\neq0\end{cases}
+ \quad(1\leq v\leq n).
+ \end{gathered}
+\end{equation*}
+Equivalently, $H^0(\std_v)$ has weights at most $v$, with $S_v$
+occurring once, and $H^q(\std_v)$ has weights strictly smaller than
+$v$ for $q<0$. No Hom- or Ext-vanishing between standards is imposed.
+In the formulation \eqref{eq:proposal-strong} and
+condition~\ref{ax:filtration}, neither brickness, exceptionality,
+fullness, nor smoothness is an additional axiom.
+
+\begin{proposition}[An equivalent composition-factor definition]
+\label{prop:trial-strong}
+Under condition~\ref{ax:filtration},
+\eqref{eq:proposal-strong} is equivalent to
+condition~\ref{ax:exceptional}. In particular, the brick condition,
+fullness in $\D_{\fd}(A)=\per A$, and smoothness follow.
+\end{proposition}
+\begin{proof}
+\noindent\underline{\eqref{eq:proposal-strong} $\Rightarrow$
+condition~\ref{ax:exceptional}.}
+Proposition~\ref{prop:trial-support} proves backward orthogonality
+in every degree. Its diagonal identity
+\eqref{eq:trial-diagonal} and \eqref{eq:proposal-strong} prove
+exceptionality of each $\std_v$.
+
+\noindent\underline{Condition~\ref{ax:exceptional} $\Rightarrow$
+\eqref{eq:proposal-strong}.}
+Apply Proposition~\ref{prop:canonical}, specifically
+\eqref{eq:support}. Proposition~\ref{prop:fullness} and
+Corollary~\ref{cor:smooth} give the remaining assertions.
+\end{proof}
+
+\begin{proposition}[Smoothness directly from composition factors]
+\label{prop:trial-strong-direct-smooth}
+Under the standing assumptions \eqref{eq:standing},
+\eqref{eq:proposal-strong} and condition~\ref{ax:filtration} imply
+\begin{equation}\label{eq:trial-strong-simple-perfect}
+ S_v\in\per A\quad(1\leq v\leq n),\qquad
+ \D_{\fd}(A)=\per A,\qquad
+ A\in\per(A^{\op}\otimes_{\Bbbk}A).
+\end{equation}
+\end{proposition}
+\begin{proof}
+\noindent\textit{Step 1: descending induction makes the standards perfect.}
+Condition~\ref{ax:filtration} gives
+$\std_{\sigma(n)}\cong P_{\sigma(n)}$.
+For each $v$, once the standards $\std_w$ with $w>_\sigma v$ are
+perfect, their shifted filtration \eqref{eq:kernel} makes $K_v$
+perfect. The triangle \eqref{eq:presentation} then makes $\std_v$
+perfect.
+
+\noindent\textit{Step 2: ascending induction makes the simples perfect.}
+Since $H^1(K_v)=0$, the morphism
+$H^0(p_v):e_vB\twoheadrightarrow H^0(\std_v)$ is surjective.
+Condition~\eqref{eq:proposal-strong} gives
+$[H^0(\std_v):S_v]=1$, so $H^0(\std_v)$ has simple top $S_v$.
+Let $q_v:H^0(\std_v)\twoheadrightarrow S_v$ be a top quotient,
+let $a_v:\std_v\to S_v$ be the composite of the canonical
+truncation morphism $\std_v\to H^0(\std_v)$ with $q_v$, and take
+the triangle
+\begin{equation}\label{eq:trial-strong-simple-triangle}
+ T_v\longrightarrow\std_v\xrightarrow{a_v}S_v
+ \longrightarrow T_v[1].
+\end{equation}
+The cohomology of $T_v$ satisfies
+\begin{equation}\label{eq:trial-strong-simple-fibre}
+ H^q(T_v)\cong
+ \begin{cases}
+ H^q(\std_v),&q<0,\\
+ \Ker q_v,&q=0,\\
+ 0,&q>0.
+ \end{cases}
+\end{equation}
+By \eqref{eq:proposal-strong}, every composition factor of every
+$H^q(T_v)$ is $S_w$ with $w<_\sigma v$. Finite truncation triangles
+and composition series therefore give
+$T_v\in\thick_{\D_{\fd}(A)}\{S_w:w<_\sigma v\}$.
+For the least weight, $T_{\sigma(1)}=0$ and
+$S_{\sigma(1)}\cong\std_{\sigma(1)}$ is perfect. Ascending
+induction and \eqref{eq:trial-strong-simple-triangle} make every
+$S_v$ perfect. Every object of $\D_{\fd}(A)$ is obtained from the
+$S_v$ by finite truncation triangles and composition series, so
+$\D_{\fd}(A)=\per A$.
+
+\noindent\textit{Step 3: perfect simples imply smoothness.}
+The radical quotient $B/\operatorname{rad}B\cong\Bbbk^n$ is
+separable over $\Bbbk$ and perfect over $A$. The criterion
+\cite[Theorem 5.8]{RS22} gives
+$A\in\per(A^{\op}\otimes_{\Bbbk}A)$.
+\end{proof}
+
+The obstruction excluded by \eqref{eq:proposal-strong} is explicit:
+for $R=\Bbbk[\varepsilon]/(\varepsilon^2)$, $|\varepsilon|=-1$,
+$d_R=0$, and $\std_1=R$, the group
+$H^{-1}(\std_1)e_1=\Bbbk\varepsilon$ violates the diagonal condition.
+Example~\ref{ex:trial-dualnumbers} proves that removing precisely
+that restriction admits a non-smooth algebra. There is no admitted
+non-smooth counterexample under \eqref{eq:proposal-strong} and
+condition~\ref{ax:filtration}, by Proposition~\ref{prop:trial-strong}.
+
+Negative cohomology of standards is still permitted at smaller
+weights. For example, take
+$A=\Bbbk(1\xrightarrow{a}2)$ with $|a|=-1$, $d_A=0$, $m=2$,
+and order $2<_\sigma1$. Then $\std_1=P_1$, $\std_2=P_2$,
+$K_1=K_2=0$, and $H^{-1}(\std_1)=S_2$.
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{.36\linewidth}>{\raggedright\arraybackslash}X@{}}
+\toprule
+Property under \eqref{eq:proposal-strong} & Result with
+condition~\ref{ax:filtration} \\\midrule
+Classical specialisation & Yes; Corollary~\ref{cor:classical}.\\
+Bricks and backward Hom in every degree & Consequences of
+Proposition~\ref{prop:trial-support}.\\
+Exceptional standard sequence & A consequence, not an axiom.\\
+Generation of $\per A$ and $\D_{\fd}(A)$ & Both hold.\\
+Smoothness as a consequence & Yes; the direct proof is
+Proposition~\ref{prop:trial-strong-direct-smooth}.\\
+Negative cohomology of standards & Allowed at strictly smaller weights.\\
+Non-smooth algebras excluded & Yes, as a consequence of the axioms.
+In particular, the dg dual numbers fail the diagonal requirement
+in \eqref{eq:proposal-strong}.\\
+Additional restriction compared with (Q1) and (Q2) & None;
+Proposition~\ref{prop:trial-strong} proves equivalence.\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Allowing the diagonal in negative cohomology}
+\label{sec:proposal-weak}
+
+Retain \eqref{eq:trial-brick} and replace
+condition~\ref{ax:exceptional} by
+\begin{equation*}\tag{C'}\label{eq:proposal-weak}
+ H^q(\std_v)e_w=0\qquad(v<_\sigma w,\ q\in\ZZ).
+\end{equation*}
+Under condition~\ref{ax:filtration},
+Proposition~\ref{prop:trial-support} shows that
+$[H^0(\std_v):S_v]=1$ follows from brickness. It also proves all
+backward derived orthogonality and
+\begin{equation}\label{eq:trial-weak-self}
+ \Hom_{\D_{\fd}(A)}(\std_v,\std_v[t])
+ \cong H^t(\std_v)e_v=0\qquad(t>0).
+\end{equation}
+Negative self-Hom spaces remain unrestricted by
+\eqref{eq:proposal-weak}.
+
+The data
+\[
+ A=\Bbbk[\varepsilon]/(\varepsilon^2),\quad
+ |\varepsilon|=-1,\quad d_A=0,\quad
+ m=2,\quad\std_1=P_1=A,\quad K_1=0
+\]
+satisfy \eqref{eq:trial-brick}, \eqref{eq:proposal-weak}, and
+condition~\ref{ax:filtration}. Example~\ref{ex:trial-dualnumbers}
+proves that $A$ is not smooth and that
+$\operatorname{thick}_{\D_{\fd}(A)}(\std_1)=\per A
+\subsetneq\D_{\fd}(A)$.
+Even the pairing object cannot be a left-dual exceptional object:
+requiring
+$\Hom_{\D_{\fd}(A)}(A,N[t])=\Bbbk$ for $t=0$ and zero otherwise
+forces $N\simeq\Bbbk$, which is neither perfect nor exceptional by
+\eqref{eq:trial-dualnumbers-ext}.
+
+\begin{proposition}[Smoothness and the diagonal]
+\label{prop:trial-smooth-diagonal}
+Assume \eqref{eq:trial-brick}, \eqref{eq:proposal-weak}, and
+condition~\ref{ax:filtration}. Then the following are equivalent:
+\begin{enumerate}[label=\textup{(\roman*)}]
+ \item $A$ is homologically smooth;
+ \item $H^{q}(\std_v)e_v=0$ for all $v$ and all $q<0$;
+ \item $\boldsymbol\std^\sigma$ is an exceptional sequence.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+We prove $(\mathrm{i})\Rightarrow(\mathrm{ii})
+\Rightarrow(\mathrm{iii})\Rightarrow(\mathrm{i})$.
+
+\noindent\underline{$(\mathrm{i})\Rightarrow(\mathrm{ii})$.}
+Put $E_v=\REnd_A(\std_v)$. Equations
+\eqref{eq:trial-diagonal} and \eqref{eq:trial-brick} imply that
+$E_v$ is proper and connective, with $H^0(E_v)\cong\Bbbk$.
+Choose homotopically projective representatives of the standards.
+In their dg endomorphism category, the backward morphism complexes
+are acyclic by \eqref{eq:trial-backward}. Replacing those complexes
+by zero gives a quasi-equivalent upper triangular dg category,
+whose diagonal dg algebras are the $E_v$.
+Proposition~\ref{prop:trial-generation} makes that dg category
+Morita equivalent to $A$. The smoothness theorem for dg gluings
+\cite[Theorem 3.25]{Orl16} implies that every $E_v$ is smooth.
+Now \cite[Proposition 7.4]{RS22} gives $E_v\simeq\Bbbk$.
+Equation~\eqref{eq:trial-diagonal} proves (ii).
+
+\noindent\underline{$(\mathrm{ii})\Rightarrow(\mathrm{iii})$.}
+The brick condition and \eqref{eq:trial-diagonal} give the
+degree-zero diagonal multiplicity. Thus (ii) strengthens
+\eqref{eq:proposal-weak} to \eqref{eq:proposal-strong}.
+Apply Proposition~\ref{prop:trial-strong}.
+
+\noindent\underline{$(\mathrm{iii})\Rightarrow(\mathrm{i})$.}
+Apply Corollary~\ref{cor:smooth}.
+\end{proof}
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{.36\linewidth}>{\raggedright\arraybackslash}X@{}}
+\toprule
+Property under \eqref{eq:proposal-weak} & Result with
+\eqref{eq:trial-brick} and condition~\ref{ax:filtration} \\\midrule
+Classical specialisation & Yes; the negative degrees disappear.\\
+Backward Hom in every degree & Yes; \eqref{eq:trial-backward}.\\
+Bricks; positive self-Hom vanishing & Yes; \eqref{eq:trial-weak-self}.\\
+Standards generate $\per A$ & Yes; \eqref{eq:trial-generation}.\\
+Self-exceptionality; generation of $\D_{\fd}(A)$ & Not forced;
+Example~\ref{ex:trial-dualnumbers}.\\
+Smoothness as a consequence & No; the dg dual numbers are admitted.\\
+Exact obstruction to smoothness & Negative diagonal cohomology;
+Proposition~\ref{prop:trial-smooth-diagonal}.\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Adding smoothness as an assumption}
+\label{sec:proposal-assumed-smooth}
+
+For comparison, replace condition~\ref{ax:exceptional} by
+\eqref{eq:trial-brick} and
+\begin{equation*}\tag{C${}_{\mathrm{sm}}$}\label{eq:proposal-assumed-smooth}
+ \text{\eqref{eq:proposal-weak} holds, and }
+ A\in\per(A^{\op}\otimes_{\Bbbk}A).
+\end{equation*}
+Proposition~\ref{prop:trial-smooth-diagonal} proves that
+\eqref{eq:proposal-assumed-smooth}, together with
+condition~\ref{ax:filtration}, is equivalent to
+Definition~\ref{def:shifted}. In particular, the attempted allowance
+of negative diagonal cohomology disappears.
+
+The algebra $\Bbbk[\varepsilon]/(\varepsilon^2)$ with
+$|\varepsilon|=-1$ and $d=0$ is excluded precisely by the smoothness
+assumption; it satisfies the other requirements by
+Example~\ref{ex:trial-dualnumbers}. No non-smooth example satisfies
+\eqref{eq:proposal-assumed-smooth}, by definition. The defect of this
+proposal is axiomatic: smoothness is required rather than obtained
+from the standard-module conditions.
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{.36\linewidth}>{\raggedright\arraybackslash}X@{}}
+\toprule
+Property under \eqref{eq:proposal-assumed-smooth} & Result with
+\eqref{eq:trial-brick} and condition~\ref{ax:filtration} \\\midrule
+Classical specialisation & Yes.\\
+Backward orthogonality and self-exceptionality & Consequences of
+Proposition~\ref{prop:trial-smooth-diagonal}.\\
+Generation of $\per A=\D_{\fd}(A)$ & Yes.\\
+Negative diagonal cohomology & Necessarily zero.\\
+Non-smooth examples & Excluded by assumption.\\
+Smoothness as a consequence of standard-module axioms & No;
+smoothness is a separate hypothesis.\\
+Distinct class from \eqref{eq:proposal-strong} & No;
+the two formulations are equivalent under the filtration axiom.\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Projective tests with non-negative shifts}
+\label{sec:proposal-positive}
+
+Retain the brick requirement \eqref{eq:trial-brick} and the projective
+presentations in condition~\ref{ax:filtration}. Consider replacing
+condition~\ref{ax:exceptional} by
+\begin{equation*}\tag{P+}\label{eq:proposal-positive}
+ \Hom_{\D_{\fd}(A)}(P_w,\std_v[k])=0
+ \qquad(v<_\sigma w,\ 0\leq k<m).
+\end{equation*}
+The ambient category in \eqref{eq:proposal-positive} is essential:
+$\Hom_{\H_A^m}(P_w,\std_v[k])$ is defined only when
+$\std_v[k]\in\H_A^m$. For every $v,w$ and $k\in\ZZ$, however,
+\begin{equation}\label{eq:positive-projective-cohomology}
+ \Hom_{\D_{\fd}(A)}(P_w,\std_v[k])
+ \cong H^k(\std_v)e_w.
+\end{equation}
+Since $\std_v\in\H_A^m\subseteq\D_{\fd}(A)^{\leq0}$,
+the terms in \eqref{eq:positive-projective-cohomology} vanish
+automatically for $k>0$. Hence
+\begin{equation}\label{eq:positive-reduction}
+ \eqref{eq:proposal-positive}
+ \quad\Longleftrightarrow\quad
+ H^0(\std_v)e_w=0\qquad(v<_\sigma w).
+\end{equation}
+Restricting \eqref{eq:proposal-positive} to those $k$ for which
+$\std_v[k]\in\H_A^m$ gives the same condition
+\eqref{eq:positive-reduction}, since $k=0$ is always admissible.
+
+For $m=1$, the standards are $H^0(A)$-modules, and
+\eqref{eq:positive-reduction} says that the composition factors of
+$\std_v$ have weights $u\leq_\sigma v$. Together with
+\eqref{eq:trial-brick} and condition~\ref{ax:filtration}, these are
+classical quasi-hereditary axioms. For arbitrary $m$,
+Proposition~\ref{prop:trial-generation} gives
+\begin{equation}\label{eq:positive-perfect-generation}
+ \std_v\in\per A\quad(1\leq v\leq n),\qquad
+ \thick_{\D_{\fd}(A)}(\std_1,\ldots,\std_n)=\per A.
+\end{equation}
+Indeed, descending induction in $\leq_\sigma$ proves perfection
+from $\std_{\sigma(n)}\cong P_{\sigma(n)}$, while the projective
+presentations express every $P_v$ in the thick subcategory generated
+by the standards.
+
+\begin{example}[Two failures of standard orthogonality]
+\label{ex:positive-fork}
+For $d\in\{1,2\}$, let
+\begin{equation}\label{eq:positive-fork-algebra}
+ A_d=\Bbbk\bigl(1\xrightarrow{a}3\xleftarrow{b}2\bigr),
+ \qquad |a|=-d,\quad |b|=-1,\quad d_{A_d}=0,\quad m=d+1.
+\end{equation}
+Use right modules, so $e_1a=a=ae_3$ and $e_2b=b=be_3$.
+Take $\sigma=\mathrm{id}$ and
+\begin{equation}\label{eq:positive-fork-standards}
+ (\std_1,\std_2,\std_3)=(P_1,S_2,P_3),\qquad
+ (K_1,K_2,K_3)=(0,P_3[1],0).
+\end{equation}
+The presentations for vertices $1$ and $3$ are identities. For
+vertex $2$, the short exact sequence of dg modules
+\begin{equation}\label{eq:positive-fork-presentation}
+ 0\longrightarrow P_3[1]\xrightarrow{\iota_b}P_2
+ \xrightarrow{p_2}S_2\longrightarrow0,
+ \qquad \iota_b(e_3)=b,
+\end{equation}
+has all terms in $\H_{A_d}^{d+1}$; here $p_2$ is the quotient map.
+Thus condition~\ref{ax:filtration} holds, with the single allowed
+factor $K_2=\std_3[1]$. Each $\std_i$ is exceptional, and
+$H^0(\std_i)=S_i$ for $i\in\{1,2,3\}$, so both
+\eqref{eq:trial-brick} and \eqref{eq:proposal-positive} hold.
+
+For every $t\in\ZZ$, the backward derived Hom spaces are
+\begin{equation}\label{eq:positive-fork-hom}
+ \begin{aligned}
+ \Hom_{\D_{\fd}(A_d)}(\std_2,\std_1[t])
+   &\cong\begin{cases}\Bbbk,&t=2-d,\\0,&t\neq2-d,\end{cases}\\
+ \Hom_{\D_{\fd}(A_d)}(\std_3,\std_1[t])
+   &\cong\begin{cases}\Bbbk,&t=-d,\\0,&t\neq-d,\end{cases}\\
+ \Hom_{\D_{\fd}(A_d)}(\std_3,\std_2[t])&=0.
+ \end{aligned}
+\end{equation}
+The second and third equalities follow from
+\eqref{eq:positive-projective-cohomology}. For the first equality,
+$\Hom_{\D_{\fd}(A_d)}(P_2,P_1[t])=0$ for every $t$, and the triangle
+associated with \eqref{eq:positive-fork-presentation} gives
+\begin{equation}\label{eq:positive-fork-calculation}
+ \Hom_{\D_{\fd}(A_d)}(S_2,P_1[t])
+ \cong\Hom_{\D_{\fd}(A_d)}(P_3[1],P_1[t-1])
+ \cong H^{t-2}(P_1)e_3.
+\end{equation}
+Consequently:
+\begin{enumerate}[label=\textup{(\roman*)}]
+ \item $d=1$: backward degree-zero orthogonality holds, but
+ $\Hom_{\D_{\fd}(A_1)}(\std_2,\std_1[1])\cong\Bbbk$;
+ \item $d=2$: even backward degree-zero orthogonality fails,
+ since $\Hom_{\D_{\fd}(A_2)}(\std_2,\std_1)\cong\Bbbk$.
+\end{enumerate}
+Both choices also violate backward negative-degree orthogonality
+by \eqref{eq:positive-fork-hom}.
+\end{example}
+
+\begin{example}[Membership imposed only for ordered pairs]
+\label{ex:positive-pair-membership}
+Let
+\begin{equation}\label{eq:positive-product-algebra}
+ R=\Bbbk[\varepsilon]/(\varepsilon^2),\qquad
+ |\varepsilon|=-1,\quad d_R=0,\qquad
+ A=\Bbbk\times R,
+\end{equation}
+and take $m=2$, $\sigma=\mathrm{id}$, $\std_i=P_i$, and $K_i=0$
+for $i\in\{1,2\}$. Each standard is a brick, and
+\eqref{eq:proposal-positive} holds. Suppose additionally that
+$\std_v[k]\in\H_A^2$ is required for the same pairs and shifts as
+in \eqref{eq:proposal-positive}. The only pair is $(v,w)=(1,2)$,
+and both $\std_1$ and $\std_1[1]$ belong to $\H_A^2$.
+This pairwise membership requirement places no restriction on
+$\std_2[1]$, which does not belong to $\H_A^2$.
+
+The second direct factor of \eqref{eq:positive-product-algebra}
+is the algebra in Example~\ref{ex:trial-dualnumbers}. Consequently,
+$A$ is not homologically smooth,
+$\Hom_{\D_{\fd}(A)}(\std_2,\std_2[-1])\cong\Bbbk$, and
+\begin{equation}\label{eq:positive-product-not-full}
+ \thick_{\D_{\fd}(A)}(\std_1,\std_2)
+ =\per A\subsetneq\D_{\fd}(A).
+\end{equation}
+\end{example}
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{.36\linewidth}>{\raggedright\arraybackslash}X@{}}
+\toprule
+Property under \eqref{eq:proposal-positive} & Result with
+\eqref{eq:trial-brick} and condition~\ref{ax:filtration} \\
+\midrule
+Classical specialisation at $m=1$
+ & Yes: \eqref{eq:positive-reduction} is the classical support condition. \\
+Generation of $\per A$
+ & Yes, by \eqref{eq:positive-perfect-generation}. \\
+Backward degree-zero orthogonality
+ & Not forced: Example~\ref{ex:positive-fork}, $d=2$. \\
+Backward positive-degree orthogonality
+ & Not forced: Example~\ref{ex:positive-fork}, $d=1$. \\
+Exceptionality of individual standards
+ & Not forced: Example~\ref{ex:positive-pair-membership}. \\
+Homological smoothness
+ & Not forced: Example~\ref{ex:positive-pair-membership}. \\
+Generation of $\D_{\fd}(A)$
+ & Not forced: \eqref{eq:positive-product-not-full}. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+
+\section{Requiring every shifted standard to remain in the extended category}
+\label{sec:proposal-heart}
+
+Retain \eqref{eq:trial-brick}, condition~\ref{ax:filtration}, and
+\eqref{eq:proposal-positive}, and additionally require shift membership
+for every standard, including the greatest weight:
+\begin{equation}\label{eq:positive-all-membership}
+ \std_v[k]\in\H_A^m
+ \qquad(1\leq v\leq n,\ 0\leq k<m)
+ \quad\Longleftrightarrow\quad
+ \std_v\in\mod H^0(A)\qquad(1\leq v\leq n).
+\end{equation}
+Equation~\eqref{eq:positive-all-membership} is not part of
+\eqref{eq:proposal-positive}. With
+\eqref{eq:positive-all-membership},
+\eqref{eq:positive-reduction} controls all cohomology of each
+standard. Descending induction using
+condition~\ref{ax:filtration} then gives
+\eqref{eq:semiorthogonal}; the same projective presentations give
+\begin{equation}\label{eq:positive-heart-self-hom}
+ \Hom_{\D_{\fd}(A)}(\std_v,\std_v[t])
+ \cong H^t(\std_v)e_v
+ \qquad(1\leq v\leq n,\ t\in\ZZ).
+\end{equation}
+The heart condition in \eqref{eq:positive-all-membership} and the
+brick requirement \eqref{eq:trial-brick} make each standard
+exceptional. Thus imposing \eqref{eq:positive-all-membership}
+restricts the standards to ordinary $H^0(A)$-modules and recovers
+condition~\ref{ax:exceptional}.
+
+
+\begin{example}[An excluded order on a graded arrow]
+\label{ex:heart-excluded-order}
+Let $A=\Bbbk(1\xrightarrow{a}2)$, with $e_1a=a=ae_2$,
+$|a|=-1$, $d_A=0$, and $m=2$. For the order $2<_\sigma1$,
+condition~\ref{ax:filtration} forces $K_1=0$ and $\std_1\cong P_1$.
+Since $H^{-1}(P_1)=S_2$, we have $\std_1[1]\notin\H_A^2$.
+No choice of standards for this order can satisfy
+\eqref{eq:positive-all-membership}. The presentation
+$\std_i=P_i$, $K_i=0$ satisfies \eqref{eq:proposal-strong}, so the
+extra membership condition excludes an order admitted by the
+exceptional-standard definition.
+
+For the opposite order $1<_\sigma2$, the standards
+$\std_1=S_1$, $\std_2=S_2$ and kernels $K_1=S_2[1]$, $K_2=0$
+satisfy \eqref{eq:positive-all-membership},
+\eqref{eq:proposal-positive}, and condition~\ref{ax:filtration}.
+Thus this stronger condition restricts orders without requiring
+$A$ itself to be concentrated in degree zero.
+\end{example}
+
+The dg dual numbers of Example~\ref{ex:trial-dualnumbers} are
+excluded because the unique standard is $R$ and
+$R[1]\notin\H_R^2$. No non-smooth algebra satisfies the requirements
+of Section~\ref{sec:proposal-heart}: exceptionality follows from
+\eqref{eq:positive-heart-self-hom}, and Corollary~\ref{cor:smooth}
+applies.
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{.36\linewidth}>{\raggedright\arraybackslash}X@{}}
+\toprule
+Property & Result with \eqref{eq:positive-all-membership},
+\eqref{eq:proposal-positive}, \eqref{eq:trial-brick}, and condition~\ref{ax:filtration}\\
+\midrule
+Classical specialisation & Yes; shift membership adds nothing for $m=1$.\\
+Backward orthogonality; exceptional terms & Both are consequences.\\
+Generation of $\per A=\D_{\fd}(A)$ & Yes.\\
+Smoothness as a consequence & Yes; Corollary~\ref{cor:smooth}.\\
+Negative cohomology of standards & Forbidden at every vertex.\\
+Orders on graded acyclic path algebras & Some are excluded;
+Example~\ref{ex:heart-excluded-order}.\\
+Non-smooth examples & None satisfy these requirements.\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\section{Projective tests detecting negative cohomology}
+\label{sec:proposal-negative}
+
+Retain the brick condition \eqref{eq:trial-brick}, the shifted-filtration
+axiom~\ref{ax:filtration}, and $\std_v\in\H_A^m$ for every vertex $v$.
+For $v,w\in\{1,\ldots,n\}$, consider the following
+\defn{projective tests} $(\mathrm P^-)$:
+\begin{equation*}\tag{P-}\label{eq:proposal-negative}
+ \begin{aligned}
+ \Hom_{\D_{\fd}(A)}(P_w,\std_v[-s])&=0
+ &&(v<_\sigma w,\ 0\leq s<m),\\
+ \Hom_{\D_{\fd}(A)}(P_v,\std_v[-s])&=0
+ &&(1\leq s<m).
+ \end{aligned}
+\end{equation*}
+Since
+\begin{equation}\label{eq:proposal-projective-cohomology}
+ \Hom_{\D_{\fd}(A)}(P_w,\std_v[-s])
+ \cong H^{-s}(\std_v)e_w,
+\end{equation}
+the first line of \eqref{eq:proposal-negative} requires every
+$H^t(\std_v)$ to have composition factors labelled $\leq_\sigma v$.
+The second line excludes $S_v$ from $H^t(\std_v)$ for $t<0$.
+Under the first line, Proposition~\ref{prop:trial-support} gives
+\[
+ H^0(\std_v)e_v
+ \cong\Hom_{\D_{\fd}(A)}(\std_v,\std_v)
+ \cong\Bbbk,
+\]
+where the last isomorphism uses \eqref{eq:trial-brick}.
+Consequently \eqref{eq:proposal-negative} is equivalent to
+\eqref{eq:proposal-strong} under the retained axioms.
+Proposition~\ref{prop:trial-strong} therefore gives the exceptional
+sequence condition, fullness in $\D_{\fd}(A)=\per A$, and smoothness
+as consequences. For $m=1$, the second line of
+\eqref{eq:proposal-negative} is empty, and the first line is an
+ordinary Hom-vanishing condition for modules.
+
+The tests \eqref{eq:proposal-negative} also admit a formulation using
+only Hom spaces in $\H_A^m$. For every vertex $w$ and $0\leq s<m$, set
+\begin{equation}\label{eq:proposal-truncated-projectives}
+ U_{w,s}:=\tau^{\geq1-m}(P_w[s]),\qquad
+ L_{w,s}:=\tau^{\leq-m}(P_w[s]).
+\end{equation}
+The amplitude of $P_w[s]$ implies $U_{w,s}\in\H_A^m$. The truncation
+triangle is
+\begin{equation}\label{eq:proposal-truncation-triangle}
+ L_{w,s}\longrightarrow P_w[s]
+ \xrightarrow{q_{w,s}}U_{w,s}\longrightarrow L_{w,s}[1].
+\end{equation}
+For $r\in\{0,1\}$, we have
+$L_{w,s}[r]\in\D_{\fd}(A)^{\leq-m}$ and
+$\std_v\in\D_{\fd}(A)^{\geq1-m}$. Thus
+\[
+ \Hom_{\D_{\fd}(A)}(L_{w,s}[r],\std_v)=0
+ \qquad(r\in\{0,1\}).
+\]
+Applying $\Hom_{\D_{\fd}(A)}(-,\std_v)$ to
+\eqref{eq:proposal-truncation-triangle} gives the natural isomorphisms
+\begin{equation}\label{eq:proposal-intrinsic-projective-tests}
+ \Hom_{\H_A^m}(U_{w,s},\std_v)
+ \xrightarrow[\sim]{q_{w,s}^{*}}
+ \Hom_{\D_{\fd}(A)}(P_w[s],\std_v)
+ \cong H^{-s}(\std_v)e_w.
+\end{equation}
+Thus \eqref{eq:proposal-negative} can equivalently be imposed on
+$\Hom_{\H_A^m}(U_{w,s},\std_v)$ with exactly the same ranges of
+$v,w,s$. The truncations in \eqref{eq:proposal-truncated-projectives}
+are necessary in this formulation: $P_w[s]$ need not belong to
+$\H_A^m$ when $s>0$.
+
+\begin{example}[An excluded one-vertex algebra]
+\label{ex:proposal-negative-dual-numbers}
+Let $m=2$, let
+$R=\Bbbk[\varepsilon]/(\varepsilon^2)$ with
+$|\varepsilon|=-1$ and $d_R=0$, and take $\std_1=P_1=R$ and $K_1=0$.
+The brick condition and shifted-filtration axiom hold. The first line
+of \eqref{eq:proposal-negative} is vacuous, whereas
+\[
+ U_{1,1}=\tau^{\geq-1}(R[1])\simeq\Bbbk[1],\qquad
+ \Hom_{\H_R^2}(U_{1,1},R)
+ \cong H^{-1}(R)\cong\Bbbk.
+\]
+Here $\Bbbk$ is the right $R$-module defined by the augmentation
+$R\to\Bbbk$. Thus the second line of
+\eqref{eq:proposal-negative} excludes $R$; imposing only the first
+line would still admit $R$.
+\end{example}
+
+\begin{example}[Standards with negative cohomology]
+\label{ex:proposal-negative-graded-arrow}
+Let $A=\Bbbk Q$ for $Q=(1\xrightarrow{a}2)$, with $|a|=-1$ and
+$d_A=0$. Take $m=2$, $2<_\sigma1$, and
+$\std_1=P_1$, $\std_2=P_2$. Both presentation kernels are zero, and
+\[
+ H^0(\std_1)\cong S_1,\qquad
+ H^{-1}(\std_1)\cong S_2,\qquad
+ H^0(\std_2)\cong S_2.
+\]
+All other cohomology groups vanish. Therefore
+\eqref{eq:proposal-negative} holds, and the standard sequence is
+$(\std_2,\std_1)=(P_2,P_1)$. In particular, the projective tests permit
+negative cohomology at strictly smaller vertices and do not require
+the standards to lie in the heart $\mod H^0(A)$.
+\end{example}
+
+\begin{center}\small
+\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{.36\linewidth}>{\raggedright\arraybackslash}X@{}}
+\toprule
+Property & Consequence of \eqref{eq:proposal-negative},
+\eqref{eq:trial-brick}, and \ref{ax:filtration}\\
+\midrule
+Specialisation at $m=1$ & The classical quasi-hereditary definition.\\
+Backward orthogonality & Vanishing in every degree.\\
+Self-orthogonality & Every $\std_v$ is exceptional.\\
+Fullness & $\boldsymbol\std^\sigma$ is full in
+$\D_{\fd}(A)=\per A$.\\
+Smoothness & A consequence of Proposition~\ref{prop:trial-strong}.\\
+Negative standard cohomology & Allowed at vertices strictly smaller
+than the label of the standard.\\
+Non-smooth counterexamples & None, by
+Proposition~\ref{prop:trial-strong}.\\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+
+\section{Immediate problems}\label{sec:immediate}
+
+\begin{enumerate}[label=\textbf{U\arabic*.},ref=U\arabic*]
+\item\label{prob:comparison}
+\textbf{Compare separate and combined amplitude bounds.}
+Suppose a full exceptional sequence has presentations
+\eqref{eq:presentation} with
+$K_v\in\mathcal Q_v$, $\std_v\in\mathcal Q_v^\perp$,
+$\std_v\in\H_A^m$, and $\costd_v\in\H_A^m[1-m]$.
+The two amplitude conditions separately give
+$\alpha_v\leq m-1$ and $\beta_v\leq m-1$.
+Determine whether there are such examples with
+$\alpha_v+\beta_v>m-1$ for some $v$.
+An example would separate these conditions from
+Definition~\ref{def:shifted} at the same width.
+The degreewise obstruction is precisely the non-vanishing in
+\eqref{eq:criterion} outside the allowed shifts.
+
+\item\label{prob:recognition}
+\textbf{Recognise the canonical standards from the dga.}
+Given a basic proper connective dga $A$ and an order $\sigma$,
+determine when every $P_v$ admits a triangle
+$K_v\to P_v\to\std_v\to K_v[1]$ with
+$K_v\in\mathcal Q_v$ and $\std_v\in\mathcal Q_v^\perp$,
+where $\std_v$ is exceptional and lies in $\D_{\fd}(A)^{\leq0}$.
+Seek criteria on the dg ideals $Ae_{>v}^\sigma A$ and their gluing
+bimodules. Once the exceptional standard and left-dual objects
+are constructed, Proposition~\ref{prop:criterion} tests the
+filtration axiom, and Corollary~\ref{cor:width} determines the width
+whenever one width exists.
+\end{enumerate}
+
+\section{Further problems}\label{sec:further}
+
+\begin{enumerate}[label=\textbf{P\arabic*.}]
+\item \textbf{Standardisation.}
+Starting from an ordered exceptional family and allowed shifted
+filtrations in an extriangulated category, determine the conditions
+for a dg algebra to realise Definition~\ref{def:shifted}.
+Specify the necessary enhancement and higher-composition data.
+Compare with \cite{AT24}, checking its negative-extension hypotheses.
+
+\item \textbf{Ringel duality.}
+Determine when the categories generated by allowed shifted standards
+and by the shifted costandards in \eqref{eq:injective} admit a common
+tilting or silting object $T\in\D_{\fd}(A)$.
+For the derived endomorphism dga $\REnd_A(T)$, determine connectivity,
+the induced ordering, the width, and the effect of iterating the
+construction.
+
+\item \textbf{Homological bounds.}
+Seek bounds depending on $m$ and $n$ for lengths of standard
+resolutions and for
+\[
+ \sup\{t\in\ZZ:\Hom_{\D_{\fd}(A)}(S_u,S_v[t])\neq0
+                \text{ for some }1\leq u,v\leq n\}.
+\]
+
+\item \textbf{Heredity ideals and degree-zero reduction.}
+Relate \eqref{eq:localisation} to derived idempotent quotients and
+chains of dg ideals. Determine the additional conditions on the
+gluing data that encode \eqref{eq:kernel}, in comparison with the
+classical recollement characterisation \cite{Kra17}.
+Although \eqref{eq:support} identifies $H^0(\std_v)$ with the
+ordinary standard module, Example~\ref{ex:differential} shows that
+$H^0(A)$ need not be quasi-hereditary for the same ordering.
+Characterise when quasi-heredity descends to $H^0(A)$.
+
+\item \textbf{Changes of order and equivalence.}
+Determine which mutations of $\boldsymbol\std^\sigma$ preserve
+\eqref{eq:presentation} and \eqref{eq:kernel} at a fixed width.
+Study how the standard objects and the least-width formula
+\eqref{eq:minimal-width} change under silting mutation of the
+projective generator and under changes of total order on the fixed
+vertex labels.
+\end{enumerate}
+
+\begin{thebibliography}{Kra17}
+\bibitem[AT24]{AT24} T. Adachi and M. Tsukamoto,
+\emph{Mixed standardization and Ringel duality},
+J. Algebra \textbf{641} (2024), 546--586.
+\href{https://arxiv.org/abs/2202.06057}{arXiv:2202.06057}.
+
+\bibitem[BB26]{BB26} A. Bodzenta and A. Bondal,
+\emph{Highest weight categories via pairs of dual exceptional sequences},
+2026. \href{https://arxiv.org/abs/2601.22004}{arXiv:2601.22004}.
+
+\bibitem[Kra17]{Kra17} H. Krause,
+\emph{Highest weight categories and recollements},
+Ann. Inst. Fourier \textbf{67} (2017), 2679--2701.
+\href{https://arxiv.org/abs/1506.01485}{arXiv:1506.01485}.
+
+\bibitem[MP25]{MP25} N. Mochizuki and M. Plogmann,
+\emph{On the Auslander--Reiten theory for extended hearts of proper
+connective dg algebras}, 2025.
+\href{https://arxiv.org/abs/2505.16560}{arXiv:2505.16560}.
+
+\bibitem[Orl16]{Orl16} D. Orlov,
+\emph{Smooth and proper noncommutative schemes and gluing of DG categories},
+Adv. Math. \textbf{302} (2016), 59--105.
+\href{https://arxiv.org/abs/1402.7364}{arXiv:1402.7364}.
+
+\bibitem[RS22]{RS22} T. Raedschelders and G. Stevenson,
+\emph{Proper connective differential graded algebras and their geometric
+realizations}, European J. Math. \textbf{8} (2022), S574--S598.
+\href{https://arxiv.org/abs/1903.02849}{arXiv:1903.02849}.
+
+\end{thebibliography}
+\end{document}

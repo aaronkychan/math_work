@@ -1,0 +1,728 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem,microtype,xcolor,booktabs}
+\usepackage[hyperpageref]{backref}
+\usepackage[pagebackref]{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=red,
+    filecolor=blue,
+    urlcolor=orange,
+    citecolor=violet
+}
+\renewcommand*{\backref}[1]{}
+\renewcommand*{\backrefalt}[4]{
+  \ifcase #1 Not cited.
+  \or Cited on page #2.
+  \else Cited on pages #2.
+  \fi}
+\definecolor{darkblue}{rgb}{0,0,0.7}
+\newcommand{\defn}[1]{\textsl{\color{darkblue} #1}}
+\setlist[enumerate]{leftmargin=*,itemsep=.5em,topsep=.4em}
+\setlength{\emergencystretch}{2em}
+\newcommand{\D}{\mathcal D}
+\renewcommand{\H}{\mathcal H}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\RR}{\mathbf{R}}
+\newcommand{\std}{\Delta}
+\newcommand{\costd}{\nabla}
+\newcommand{\dual}{\mathbb D}
+\newcommand{\dgHom}{\mathcal{H}\!om}
+\DeclareMathOperator{\fd}{fd}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\RHom}{\RR Hom}
+\DeclareMathOperator{\REnd}{\RR End}
+\DeclareMathOperator{\add}{add}
+\DeclareMathOperator{\thick}{thick}
+\DeclareMathOperator{\per}{per}
+\DeclareMathOperator{\Filt}{Filt}
+\let\mod\relax
+\DeclareMathOperator{\mod}{mod}
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\numberwithin{equation}{section}
+\title{$m$-reflexive qh dgas}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+We study exceptional standard objects in the $m$-extended module category
+whose left-dual objects have cohomology in degrees $0,\ldots,m-1$.
+The definition specialises to classical quasi-heredity for $m=1$.
+For every ordering of the vertices of a finite acyclic graded quiver,
+we construct suitable standard dg modules and prove fullness in both
+$\per A$ and $\D_{\fd}(A)$. The construction allows a non-zero differential;
+its cohomological bounds are controlled by the degrees of paths.
+\end{abstract}
+
+\section{Definition and classical specialisation}\label{sec:definition}
+
+Fix an algebraically closed field $\Bbbk$ and an integer $m\geq1$.
+All dg modules are right modules, and all complexes are cochain complexes:
+$d_X:X^q\to X^{q+1}$ and $H^q(X[s])=H^{q+s}(X)$.
+Let $A$ be a proper connective dg algebra satisfying
+\begin{equation}\label{eq:standing}
+ \dim_{\Bbbk}H^*(A)<\infty,\qquad
+ H^q(A)=0\quad(q\notin[1-m,0]).
+\end{equation}
+Assume that $H^0(A)$ is basic and that closed degree-zero orthogonal
+idempotents $e_1,\ldots,e_n$ sum to $1$, with classes forming a complete
+set of primitive idempotents of $H^0(A)$. Set
+\begin{equation}\label{eq:categories}
+ \begin{gathered}
+ P_v=e_vA,\qquad
+ \D_{\fd}(A)=\{X\in\D(A):\dim_{\Bbbk}H^*(X)<\infty\},\\
+ \per A=\thick_{\D(A)}(A),\qquad
+ \H_A^m=\D_{\fd}(A)^{[1-m,0]}.
+ \end{gathered}
+\end{equation}
+For a class $\mathcal S\subseteq\D_{\fd}(A)$,
+$\thick_{\D_{\fd}(A)}(\mathcal S)$ denotes closure under shifts, cones,
+and direct summands. Properness gives $\per A\subseteq\D_{\fd}(A)$.
+
+The category $\H_A^m$ is extriangulated, with
+\begin{equation}\label{eq:extension}
+ \mathbb E_{\H_A^m}(X,Y)=\Hom_{\D_{\fd}(A)}(X,Y[1]),
+ \qquad \mathcal P(\H_A^m)=\add A
+ \quad(X,Y\in\H_A^m)
+\end{equation}
+\cite[Corollary 2.3]{MP25}. A conflation
+$K\to P\to X\dashrightarrow$ in $\H_A^m$ is induced by a triangle
+$K\to P\to X\to K[1]$ in $\D_{\fd}(A)$ with $K,P,X\in\H_A^m$.
+We write $\Filt_{\H_A^m}(\mathcal S)$ for the finite extension closure
+of $\mathcal S$ in $\H_A^m$, including zero and finite direct sums.
+
+An object $E\in\D_{\fd}(A)$ is \defn{exceptional} if
+\begin{equation}\label{eq:exceptional}
+ \Hom_{\D_{\fd}(A)}(E,E[t])\cong
+ \begin{cases}
+ \Bbbk,&t=0,\\
+ 0,&t\neq0
+ \end{cases}
+\qquad(t\in\ZZ).
+\end{equation}
+An ordered tuple $(E_1,\ldots,E_n)$ of exceptional objects is an
+\defn{exceptional sequence} if
+\begin{equation}\label{eq:exceptional-sequence}
+ \Hom_{\D_{\fd}(A)}(E_i,E_j[t])=0
+ \qquad(1\leq j<i\leq n,\ t\in\ZZ).
+\end{equation}
+The indices $i,j$ in \eqref{eq:exceptional-sequence} denote positions
+in the sequence.
+For exceptional objects $\std_1,\ldots,\std_n$, a permutation
+$\sigma\in S_n$ lists the vertex labels in the standard sequence
+\begin{equation}\label{eq:standard-sequence}
+ \boldsymbol\std^\sigma
+ =(\std_{\sigma(1)},\ldots,\std_{\sigma(n)}).
+\end{equation}
+Thus $\sigma^{-1}(v)$ is the position of $\std_v$ in
+$\boldsymbol\std^\sigma$. Define the total order $\leq_\sigma$ on
+the vertex labels $\{1,\ldots,n\}$ by
+\begin{equation}\label{eq:order}
+ u\leq_\sigma v\quad\Longleftrightarrow\quad
+ \sigma^{-1}(u)\leq\sigma^{-1}(v).
+\end{equation}
+We write $u<_\sigma v$ if $u\leq_\sigma v$ and $u\neq v$.
+The least and greatest weights are $\sigma(1)$ and $\sigma(n)$,
+respectively. Thus smaller weights occur earlier in
+\eqref{eq:standard-sequence}. By \eqref{eq:exceptional-sequence},
+the sequence $\boldsymbol\std^\sigma$ is exceptional precisely when
+\begin{equation}\label{eq:semiorthogonal}
+ \Hom_{\D_{\fd}(A)}(\std_w,\std_v[t])=0
+ \qquad(v<_\sigma w,\ t\in\ZZ).
+\end{equation}
+The \defn{left-dual sequence} of $\boldsymbol\std^\sigma$ is an
+exceptional sequence $(\costd_{\sigma(n)},\ldots,\costd_{\sigma(1)})$,
+listed in decreasing order for $\leq_\sigma$, whose terms satisfy
+\begin{equation}\label{eq:left-dual-membership}
+ \costd_v\in\thick_{\D_{\fd}(A)}(\std_1,\ldots,\std_n)
+ \qquad(1\leq v\leq n)
+\end{equation}
+and whose pairing with the standard objects is
+\begin{equation}\label{eq:pairing}
+ \Hom_{\D_{\fd}(A)}(\std_u,\costd_v[t])\cong
+ \begin{cases}
+ \Bbbk,&u=v,\ t=0,\\
+ 0,&\text{otherwise}
+ \end{cases}
+ \qquad(1\leq u,v\leq n,\ t\in\ZZ).
+\end{equation}
+We use the convention of \cite[\S2.3]{BB26}. The objects $\costd_v$,
+when they exist, are determined up to isomorphism in
+$\thick_{\D_{\fd}(A)}(\std_1,\ldots,\std_n)$ by \eqref{eq:pairing}.
+
+\begin{definition}[$m$-reflexive qh dga]\label{def:reflexive}
+An algebra $A$ satisfying \eqref{eq:standing} is an
+\defn{$m$-reflexive qh dga with respect to $\sigma$} if there exist
+objects $\std_v\in\H_A^m$ such that:
+\begin{enumerate}[label=\textup{(R\arabic*)},ref=R\arabic*]
+ \item\label{ax:exceptional}
+ $\boldsymbol\std^\sigma$ satisfies
+ \eqref{eq:exceptional} and \eqref{eq:semiorthogonal};
+ \item\label{ax:presentation}
+ for each vertex $v$, there is a conflation
+ \begin{equation}\label{eq:presentation}
+ K_v\longrightarrow P_v\xrightarrow{p_v}\std_v\dashrightarrow
+ \qquad\text{in }\H_A^m;
+ \end{equation}
+ \item\label{ax:costandard}
+ the left-dual sequence of $\boldsymbol\std^\sigma$ exists, with
+ \begin{equation}\label{eq:costandard-window}
+ \costd_v\in\D_{\fd}(A)^{[0,m-1]}
+ \qquad(1\leq v\leq n);
+ \end{equation}
+ \item\label{ax:full}
+ $\boldsymbol\std^\sigma$ is full:
+ \begin{equation}\label{eq:full}
+ \thick_{\D_{\fd}(A)}(\std_1,\ldots,\std_n)=\D_{\fd}(A).
+ \end{equation}
+\end{enumerate}
+\end{definition}
+
+In Definition~\ref{def:reflexive}, $\boldsymbol\std^\sigma$ is the chosen
+exceptional sequence; condition~\ref{ax:costandard} concerns the
+left-dual objects $\costd_v$ specified by \eqref{eq:pairing}.
+Equation~\eqref{eq:pairing} implies $H^0(\std_v)\neq0$:
+otherwise $\std_v\in\D_{\fd}(A)^{\leq-1}$ and
+$\costd_v\in\D_{\fd}(A)^{\geq0}$ would give
+$\Hom_{\D_{\fd}(A)}(\std_v,\costd_v)=0$.
+The epimorphism
+$H^0(p_v):H^0(P_v)\to H^0(\std_v)$ is therefore a projective cover.
+In particular, the top of $H^0(\std_v)$ is the simple $H^0(A)$-module
+at vertex $v$.
+
+\begin{proposition}[Classical specialisation]\label{prop:classical}
+Suppose $H^q(A)=0$ for $q\neq0$, and put $B=H^0(A)$.
+The following conditions are equivalent:
+\begin{enumerate}[label=\textup{(\roman*)}]
+ \item $A$ is a $1$-reflexive qh dga with respect to $\sigma$;
+ \item $B$ is quasi-hereditary with respect to $\sigma$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+The quasi-isomorphism $A\simeq B$ identifies $\H_A^1$ with $\mod B$.
+
+\noindent$\underline{(\mathrm{ii})\Rightarrow(\mathrm{i})}$.
+The classical standard modules have projective-cover presentations
+$P_v\twoheadrightarrow\std_v$ whose kernels are filtered by
+$\std_w$ with $v<_\sigma w$ \cite{DR92}.
+The classical standard and costandard sequences are full exceptional
+sequences satisfying \eqref{eq:pairing}
+\cite[Lemma 2.2]{BB26}. The classical projective-cover presentations
+and standard and costandard sequences satisfy
+conditions~\ref{ax:exceptional}--\ref{ax:full}.
+
+\noindent$\underline{(\mathrm{i})\Rightarrow(\mathrm{ii})}$.
+Conditions~\ref{ax:exceptional}, \ref{ax:costandard}, and \ref{ax:full}
+give full exceptional sequences
+$(\std_{\sigma(1)},\ldots,\std_{\sigma(n)})$ and
+$(\costd_{\sigma(n)},\ldots,\costd_{\sigma(1)})$ in
+$\D^b(\mod B)$, with all terms in $\mod B$.
+By \cite[Theorem 3.8]{BB26}, the sequences
+$\boldsymbol\std^\sigma$ and
+$(\costd_{\sigma(n)},\ldots,\costd_{\sigma(1)})$
+determine a highest weight structure on $\mod B$.
+The projective covers $H^0(p_v)$ identify the highest weight structure's
+standard-object labels with the vertices ordered by $\sigma$.
+\end{proof}
+
+\begin{example}[The order for two classical standards]\label{ex:classical-order}
+Take $A=B=\Bbbk(1\xrightarrow{a}2)$ concentrated in degree zero,
+with $e_1a=a=ae_2$, $m=1$, and $\sigma=\mathrm{id}$. Thus $1<_\sigma2$.
+Let $S_v$ be the simple top of $P_v=e_vB$, for $v=1,2$. Then
+\begin{equation}\label{eq:classical-order-objects}
+ \std_1=S_1,\qquad \std_2=S_2=P_2,\qquad
+ \costd_1=S_1,\qquad \costd_2=P_1.
+\end{equation}
+The projective presentation
+\begin{equation}\label{eq:classical-order-extension}
+ 0\longrightarrow S_2\longrightarrow P_1\longrightarrow S_1
+ \longrightarrow0
+\end{equation}
+gives
+\begin{equation}\label{eq:classical-order-hom}
+ \Hom_{\D_{\fd}(B)}(S_2,S_1[t])=0\quad(t\in\ZZ),\qquad
+ \Hom_{\D_{\fd}(B)}(S_1,S_2[1])\cong\Bbbk.
+\end{equation}
+Consequently $(\std_1,\std_2)=(S_1,S_2)$ is full exceptional,
+whereas $(\std_2,\std_1)$ is not exceptional. The left-dual sequence
+of $(\std_1,\std_2)$ specified by \eqref{eq:pairing} is
+$(\costd_2,\costd_1)=(P_1,S_1)$.
+\end{example}
+
+\section{Graded path dg algebras}\label{sec:paths}
+
+Let $Q$ be a finite acyclic quiver with vertex set
+$Q_0=\{1,\ldots,n\}$, where $n\geq1$.
+Give each arrow an integer degree at most $0$.
+For a path $p$, let $s(p)$, $t(p)$, and $|p|$ denote its source,
+target, and degree. Trivial paths have degree $0$.
+We concatenate paths from left to right, so
+$e_ua=a=ae_v$ for an arrow $a:u\to v$.
+Let
+\begin{equation}\label{eq:path-dga}
+ A=(\Bbbk Q,d_A),\qquad
+ d_A:A^q\longrightarrow A^{q+1},\qquad d_A^2=0,
+\end{equation}
+where $d_A$ is a graded derivation. Since $A^1=0$, all $e_v$ are closed.
+Define
+\begin{equation}\label{eq:path-width}
+ M=1-\min\{|p|:p\text{ is a path in }Q\}.
+\end{equation}
+Thus $A^q=0$ for $q\notin[1-M,0]$.
+
+For complexes of $\Bbbk$-vector spaces, write
+$\dual V=\Hom^\bullet_{\Bbbk}(V,\Bbbk)$, with
+\[
+ (\dual V)^q=\Hom_{\Bbbk}(V^{-q},\Bbbk),
+ \qquad d_{\dual V}(\varphi)=(-1)^{q+1}\varphi d_V
+ \quad(\varphi\in(\dual V)^q).
+\]
+For a left dg $A$-module $V$, the right action on $\dual V$ is
+$(\varphi a)(x)=\varphi(ax)$.
+For right dg modules $X,Y$, let $\dgHom_A(X,Y)$ be the cochain complex
+of homogeneous $A$-linear maps, with
+\[
+ d(f)=d_Yf-(-1)^q f d_X
+ \quad\bigl(f\in\dgHom_A(X,Y)^q\bigr).
+\]
+We write $\RHom_A(X,Y)$ for the corresponding derived Hom complex.
+
+\begin{theorem}[Standards for every ordering]\label{thm:paths}
+Let $A$ be the path dga \eqref{eq:path-dga}, and fix $\sigma\in S_n$.
+For each vertex $v$, set
+\begin{equation}\label{eq:path-objects}
+ \begin{gathered}
+ e_{>v}^{\sigma}=\sum_{v<_\sigma w}e_w,\qquad
+ B_v=A/Ae_{>v}^{\sigma}A,\qquad
+ K_v=e_vAe_{>v}^{\sigma}A,\\
+ \std_v=e_vB_v=P_v/K_v,\qquad
+ C_v=B_ve_v,\qquad
+ \costd_v=\dual C_v.
+ \end{gathered}
+\end{equation}
+Then $A$ is an $M$-reflexive qh dga with respect to $\sigma$, with
+standard objects $\std_v$, left-dual objects $\costd_v$, and
+conflations induced by
+\begin{equation}\label{eq:path-short-exact}
+ 0\longrightarrow K_v\longrightarrow P_v
+       \xrightarrow{p_v}\std_v\longrightarrow0.
+\end{equation}
+Moreover,
+\begin{equation}\label{eq:path-full}
+ \thick_{\D_{\fd}(A)}(\std_1,\ldots,\std_n)
+       =\per A=\D_{\fd}(A).
+\end{equation}
+The objects in \eqref{eq:path-objects} also satisfy
+Definition~\ref{def:reflexive} for every $m\geq M$.
+\end{theorem}
+
+\begin{proof}
+The ideals $Ae_{>v}^{\sigma}A$ are dg ideals, because the idempotents
+$e_w$ are closed. Thus every object in \eqref{eq:path-objects} is a dg
+module, and \eqref{eq:path-short-exact} is a short exact sequence of dg
+modules.
+
+\begin{enumerate}[label=\textbf{\arabic*.},ref=\arabic*]
+\item\label{step:kernels}
+\textbf{Finite projective filtrations of the kernels.}
+Let $\mathcal F_v$ be the set of paths
+$p=(v=v_0\to v_1\to\cdots\to v_\ell)$ such that
+\[
+ v<_\sigma v_\ell,\qquad
+ v_j\leq_\sigma v\quad(0\leq j<\ell).
+\]
+Every basis path of $K_v$ has a unique prefix in $\mathcal F_v$.
+As graded right modules,
+\begin{equation}\label{eq:graded-kernel}
+ K_v=\bigoplus_{p\in\mathcal F_v}pA
+       \cong\bigoplus_{p\in\mathcal F_v}P_{t(p)}[-|p|].
+\end{equation}
+The summands $pA$ need not be dg submodules.
+Write the unique expansion
+\begin{equation}\label{eq:generator-differential}
+ \begin{gathered}
+ d_A(p)=\sum_{p'\in\mathcal F_v}p'a_{p'p},\\
+ a_{p'p}\in e_{t(p')}A^{|p|+1-|p'|}e_{t(p)}.
+ \end{gathered}
+\end{equation}
+Every non-zero homogeneous coefficient $a_{p'p}$ satisfies
+$|p'|=|p|+1-|a_{p'p}|\geq |p|+1$.
+Consequently,
+\begin{equation}\label{eq:kernel-filtration}
+ F^hK_v=\bigoplus_{\substack{p\in\mathcal F_v\\|p|\geq h}}pA,
+ \qquad
+ F^hK_v/F^{h+1}K_v
+ \cong\bigoplus_{\substack{p\in\mathcal F_v\\|p|=h}}P_{t(p)}[-h]
+\end{equation}
+is a finite filtration by dg submodules, with $h\in\ZZ$.
+Indeed, modulo $F^{h+1}K_v$,
+$d_A(px)=(-1)^h p\,d_A(x)$ for $|p|=h$, which is the differential
+on $P_{t(p)}[-h]$. Each vertex $t(p)$ satisfies $v<_\sigma t(p)$.
+
+Filtration \eqref{eq:kernel-filtration} makes $K_v$ perfect and
+homotopically projective: $\dgHom_A(K_v,-)$ preserves
+quasi-isomorphisms. Sequence \eqref{eq:path-short-exact} then makes
+$\std_v$ perfect. Descending induction in $<_\sigma$, using
+\eqref{eq:kernel-filtration} and \eqref{eq:path-short-exact}, gives
+\begin{equation}\label{eq:perfect-generation}
+ P_v\in\thick_{\D_{\fd}(A)}(\std_v,\std_w:v<_\sigma w),
+ \qquad
+ \thick_{\D_{\fd}(A)}(\std_1,\ldots,\std_n)=\per A.
+\end{equation}
+
+\item\label{step:exceptional}
+\textbf{Exceptionality of the standard sequence.}
+Suppose $v\leq_\sigma u$. Every projective factor of $K_u$ in
+\eqref{eq:kernel-filtration} is a shift of $P_w$ with
+$u<_\sigma w$. Since $\std_v e_w=0$,
+\[
+ \RHom_A(K_u,\std_v)=0,\qquad
+ \RHom_A(P_u,\std_v)\simeq\std_v e_u
+ =
+ \begin{cases}\Bbbk,&u=v,\\0,&v<_\sigma u.\end{cases}
+\]
+The triangle induced by \eqref{eq:path-short-exact} yields
+\eqref{eq:exceptional} for $\std_v$ and
+\eqref{eq:semiorthogonal} for $\boldsymbol\std^\sigma$.
+
+\item\label{step:fullness}
+\textbf{Fullness in $\D_{\fd}(A)$.}
+Let $J\subseteq A$ be the ideal generated by all arrows.
+Acyclicity implies $d_A(J)\subseteq J$.
+For each vertex $v$, define the simple dg module
+$S_v=P_v/e_vJ$, concentrated in degree $0$.
+The outgoing arrows form a graded free basis of $e_vJ$ over the
+corresponding projectives. The generator-degree argument of
+\eqref{eq:generator-differential}--\eqref{eq:kernel-filtration}
+therefore gives a finite projective filtration of $e_vJ$.
+The exact sequence
+$0\to e_vJ\to P_v\to S_v\to0$ makes every $S_v$ perfect.
+The modules $S_1,\ldots,S_n$ are the simple $H^0(A)$-modules.
+Finite-length filtrations and cohomological truncations give
+\[
+ \D_{\fd}(A)=\thick_{\D_{\fd}(A)}(S_1,\ldots,S_n)\subseteq\per A.
+\]
+Properness and \eqref{eq:perfect-generation} prove \eqref{eq:path-full}.
+
+\item\label{step:pairing}
+\textbf{The specified left-dual objects.}
+For vertices $u,v$, restriction along $K_u\hookrightarrow P_u$ defines
+a cochain map
+\begin{equation}\label{eq:restriction}
+ \rho_{uv}:\dgHom_A(P_u,\costd_v)
+       \longrightarrow\dgHom_A(K_u,\costd_v).
+\end{equation}
+If $u<_\sigma v$, a basis of $e_uC_v$ consists of paths
+$q:u\rightsquigarrow v$ all of whose vertices are
+$\leq_\sigma v$. Each such $q$ has a unique factorisation
+$q=ps$ with $p\in\mathcal F_u$.
+Write $q^\vee$ and $s^\vee$ for the corresponding basis functionals.
+The homogeneous $A$-linear map
+$f_q\in\dgHom_A(P_u,\costd_v)^{-|q|}$ determined by
+$f_q(e_u)=q^\vee$ satisfies
+\begin{equation}\label{eq:restriction-basis}
+ \rho_{uv}(f_q)(p')=
+ \begin{cases}
+ s^\vee,&p'=p,\\
+ 0,&p'\neq p
+ \end{cases}
+ \qquad(p'\in\mathcal F_u).
+\end{equation}
+Conversely, every generator-assignment basis vector of
+$\dgHom_A(K_u,\costd_v)$ equals $\rho_{uv}(f_q)$ for a unique
+path $q$ belonging to the stated basis of $e_uC_v$.
+Hence $\rho_{uv}$ is an isomorphism of cochain complexes.
+
+If $v<_\sigma u$, both complexes in \eqref{eq:restriction} vanish.
+If $u=v$, the source of \eqref{eq:restriction} is $\Bbbk$ in degree $0$
+and its target is zero. Applying $\RHom_A(-,\costd_v)$ to
+\eqref{eq:path-short-exact}, using the homotopical projectivity of
+$P_u$ and $K_u$, proves \eqref{eq:pairing}.
+
+To verify exceptionality of
+$(\costd_{\sigma(n)},\ldots,\costd_{\sigma(1)})$,
+apply Steps~\ref{step:kernels}--\ref{step:fullness} to the graded
+opposite algebra $A^{\op}$.
+The left dg modules $C_v=B_ve_v$ are the resulting standard objects.
+Thus $(C_{\sigma(1)},\ldots,C_{\sigma(n)})$ is exceptional in
+$\D_{\fd}(A^{\op})$. Finite-dimensional vector-space duality gives
+\[
+ \Hom_{\D_{\fd}(A)}(\costd_u,\costd_v[t])
+ \cong
+ \Hom_{\D_{\fd}(A^{\op})}(C_v,C_u[t]).
+\]
+The sequence $(\costd_{\sigma(n)},\ldots,\costd_{\sigma(1)})$
+is therefore exceptional.
+Equation~\eqref{eq:path-full} places every $\costd_v$ in
+$\thick_{\D_{\fd}(A)}(\std_1,\ldots,\std_n)$.
+
+\item\label{step:amplitudes}
+\textbf{Cohomological bounds and deflations.}
+The modules $P_v,K_v,\std_v$, and $C_v$ have graded components only in
+$[1-M,0]$, by \eqref{eq:path-width} and \eqref{eq:path-objects}.
+Therefore
+\[
+ P_v,K_v,\std_v\in\H_A^M,\qquad
+ \costd_v=\dual C_v\in\D_{\fd}(A)^{[0,M-1]}.
+\]
+Sequence \eqref{eq:path-short-exact} induces a conflation in $\H_A^M$,
+so $p_v$ is a deflation. Conditions~\ref{ax:exceptional}--\ref{ax:full}
+follow from Steps~\ref{step:exceptional}--\ref{step:amplitudes}.
+For $m\geq M$, both cohomological windows only enlarge.
+\end{enumerate}
+\end{proof}
+
+\begin{corollary}[Zero differential]\label{cor:zero-differential}
+If $d_A=0$, then $M$ in \eqref{eq:path-width} is the smallest integer
+for which $A$ satisfies \eqref{eq:standing}. Every ordering $\sigma$
+therefore gives an $M$-reflexive qh dga.
+\end{corollary}
+\begin{proof}
+For $d_A=0$, a path of minimal degree represents a non-zero class in
+$H^{1-M}(A)$. Apply Theorem~\ref{thm:paths}.
+\end{proof}
+
+\begin{proposition}[Differentials on tree quivers]\label{prop:trees}
+If the underlying unoriented graph of $Q$ is a tree, then the
+differential $d_A$ in \eqref{eq:path-dga} is zero.
+\end{proposition}
+\begin{proof}
+For an arrow $a:u\to v$, closure of $e_u,e_v$ gives
+$d_A(a)\in e_uA^{|a|+1}e_v$. The only path from $u$ to $v$ is $a$,
+so $e_uAe_v=\Bbbk a$ is concentrated in degree $|a|$.
+Thus $d_A(a)=0$ for every arrow $a$; the derivation $d_A$ vanishes.
+\end{proof}
+
+\section{Examples}\label{sec:examples}
+
+In Examples~\ref{ex:a4}--\ref{ex:differential}, the objects
+$\std_v,K_v,C_v$, and $\costd_v$ are defined by
+\eqref{eq:path-objects}. The symbol $S_v$ denotes the simple module
+at vertex $v$, as in Step~\ref{step:fullness} of the proof of
+Theorem~\ref{thm:paths}. All quotient modules inherit the indicated
+path actions.
+
+\begin{example}[A graded quiver of type $A_4$]\label{ex:a4}
+Let
+\[
+ Q:\ 1\xrightarrow{a}2\xrightarrow{b}3\xrightarrow{c}4,
+ \qquad |a|=|b|=|c|=-1,\qquad d_A=0.
+\]
+The path $abc$ has degree $-3$, so $M=4$.
+Choose $2<_\sigma4<_\sigma1<_\sigma3$, and put
+$U=P_1/(abA)$, with basis $e_1,a$. Formula~\eqref{eq:path-objects} gives
+\begin{equation}\label{eq:a4-objects}
+\begin{array}{c|c|c|c}
+ v&\std_v&K_v&\costd_v\\ \hline
+ 1&U&abA\cong P_3[2]&S_1\\
+ 2&S_2&bA\cong P_3[1]&S_2\\
+ 3&P_3&0&\dual(Ae_3)\\
+ 4&S_4&0&S_4
+\end{array}
+\end{equation}
+The module $Ae_3$ has basis $e_3,b,ab$ in degrees $0,-1,-2$.
+Hence
+\begin{equation}\label{eq:a4-cohomology}
+ \begin{gathered}
+ H^0(U)=S_1,\quad H^{-1}(U)=S_2,\qquad
+ H^0(P_3)=S_3,\quad H^{-1}(P_3)=S_4,\\
+ H^0(\costd_3)=S_3,\quad H^1(\costd_3)=S_2,\quad
+ H^2(\costd_3)=S_1.
+ \end{gathered}
+\end{equation}
+Theorem~\ref{thm:paths} gives the full exceptional sequence
+$(S_2,S_4,U,P_3)$ with left-dual sequence
+$(\costd_3,S_1,S_4,S_2)$.
+The presentations of $U$ and $S_2$ are the conflations
+\[
+ P_3[2]\xrightarrow{x\mapsto abx}P_1\longrightarrow U\dashrightarrow,
+ \qquad
+ P_3[1]\xrightarrow{x\mapsto bx}P_2\longrightarrow S_2\dashrightarrow
+ \quad\text{in }\H_A^4.
+\]
+\end{example}
+
+\begin{example}[A graded quiver of type $D_4$]\label{ex:d4}
+Let
+\[
+ Q:\ 1\xrightarrow{a}2\xrightarrow{b}3,\quad 2\xrightarrow{c}4,
+ \qquad |a|=|c|=-1,\quad |b|=0,\quad d_A=0.
+\]
+The path $ac$ has degree $-2$, so $M=3$.
+Choose $1<_\sigma3<_\sigma2<_\sigma4$, and set
+$V=P_2/(cA)$, with basis $e_2,b$ in degree $0$. Then
+\begin{equation}\label{eq:d4-objects}
+\begin{array}{c|c|c|c}
+ v&\std_v&K_v&\costd_v\\ \hline
+ 1&S_1&aA\cong P_2[1]&S_1\\
+ 2&V&cA\cong P_4[1]&\dual(Ae_2)\\
+ 3&S_3&0&S_3\\
+ 4&S_4&0&\dual(Ae_4)
+\end{array}
+\end{equation}
+The left modules $Ae_2$ and $Ae_4$ have respective bases
+$e_2,a$ and $e_4,c,ac$. Consequently,
+\begin{equation}\label{eq:d4-cohomology}
+ \begin{gathered}
+ H^0(\costd_2)=S_2,\quad H^1(\costd_2)=S_1,\\
+ H^0(\costd_4)=S_4,\quad H^1(\costd_4)=S_2,\quad
+ H^2(\costd_4)=S_1.
+ \end{gathered}
+\end{equation}
+The standard sequence $(S_1,S_3,V,S_4)$ and its left-dual sequence
+$(\costd_4,\costd_2,S_3,S_1)$ satisfy
+Definition~\ref{def:reflexive} with $m=3$.
+For example,
+$H^{-1}(K_1)=V$ and $H^{-2}(K_1)=S_4$, so the conflation
+$K_1\to P_1\to S_1\dashrightarrow$ belongs to $\H_A^3$.
+\end{example}
+
+\begin{example}[A non-zero differential and the choice of width]
+\label{ex:differential}
+Take
+\begin{equation}\label{eq:differential-example}
+ \begin{gathered}
+ Q:\ 1\xrightarrow{a}2\xrightarrow{b}3\xrightarrow{h}4,
+ \qquad c:1\to3,\\
+ |a|=|b|=0,\quad |c|=|h|=-1,\qquad
+ d_A(c)=ab,\quad d_A(a)=d_A(b)=d_A(h)=0.
+ \end{gathered}
+\end{equation}
+The only non-zero path differentials are $d_A(c)=ab$ and
+$d_A(ch)=abh$. Thus
+\begin{equation}\label{eq:differential-cohomology}
+ H^0(A)=\Bbbk\{e_1,e_2,e_3,e_4,a,b\},\qquad
+ H^{-1}(A)=\Bbbk\{h,bh\},
+ \qquad H^q(A)=0\ (q\notin[-1,0]).
+\end{equation}
+The smallest parameter allowed by \eqref{eq:standing} is $m=2$,
+whereas the path $ch$ gives $M=3$ in \eqref{eq:path-width}.
+
+Choose $3<_\sigma4<_\sigma1<_\sigma2$, and put
+$X=P_1/(aA)$. The quotient $X$ has basis $e_1,c,ch$ and zero
+differential. Formula~\eqref{eq:path-objects} gives
+\begin{equation}\label{eq:differential-standards}
+ \begin{gathered}
+ (\std_{\sigma(1)},\std_{\sigma(2)},\std_{\sigma(3)},\std_{\sigma(4)})
+       =(S_3,S_4,X,P_2),\\
+ (K_1,K_2,K_3,K_4)=(aA,0,hA,0),\\
+ H^0(X)=S_1,\qquad H^{-1}(X)=S_3,\qquad H^{-2}(X)=S_4.
+ \end{gathered}
+\end{equation}
+The objects in \eqref{eq:differential-standards}, with the objects
+$\costd_v$ of \eqref{eq:path-objects}, define a $3$-reflexive qh dga
+by Theorem~\ref{thm:paths}. The same standard $X$ does not belong to
+$\H_A^2$, because the class of $ch$ generates $H^{-2}(X)$.
+
+A different order isolates the condition on the left-dual objects.
+Choose $1<_\tau3<_\tau4<_\tau2$, and denote the objects
+of \eqref{eq:path-objects} for $\tau$ by
+$\std_v^\tau,K_v^\tau,C_v^\tau$, and $\costd_v^\tau$.
+Then
+\begin{equation}\label{eq:differential-costandards}
+ \begin{gathered}
+ (\std_1^\tau,\std_2^\tau,\std_3^\tau,\std_4^\tau)
+       =(S_1,P_2,S_3,S_4),\\
+ C_4^\tau=(A/Ae_2A)e_4=\Bbbk\{e_4,h,ch\},
+ \qquad d_{C_4^\tau}=0,\\
+ H^0(\costd_4^\tau)=S_4,\quad H^1(\costd_4^\tau)=S_3,\quad
+ H^2(\costd_4^\tau)=S_1.
+ \end{gathered}
+\end{equation}
+Every $\std_v^\tau$ and $K_v^\tau$ belongs to $\H_A^2$.
+Indeed, $K_1^\tau=\Bbbk\{a,ab,abh,c,ch\}$ has cohomology $S_2$
+in degree $0$, $K_3^\tau=hA\cong P_4[1]$, and
+$K_2^\tau=K_4^\tau=0$.
+However, $\costd_4^\tau$ in \eqref{eq:differential-costandards} violates
+\eqref{eq:costandard-window} for $m=2$.
+Theorem~\ref{thm:paths} applies to $\tau$ with $m=3$.
+
+Equations~\eqref{eq:differential-standards} and
+\eqref{eq:differential-costandards} concern the specific construction
+\eqref{eq:path-objects}; they do not exclude other standard families
+for $\sigma$ or $\tau$ at width $2$.
+\end{example}
+
+\section{Questions}\label{sec:questions}
+
+Theorem~\ref{thm:paths} settles existence for graded path dg algebras
+at every width $m\geq M$. For a general algebra satisfying
+\eqref{eq:standing}, several structural questions remain.
+
+\subsection*{Foundational questions}
+\begin{enumerate}[label=\textbf{F\arabic*.}]
+ \item \textbf{Generation and perfection.}
+ If conditions~\ref{ax:exceptional}--\ref{ax:costandard} hold, when does
+ \eqref{eq:full} follow? For an $m$-reflexive qh dga, when do the
+ standard objects $\std_v$ belong to $\per A$?
+ \item \textbf{A prescribed cohomological width.}
+ Characterise the orders admitting Definition~\ref{def:reflexive}
+ for a fixed $m$ satisfying \eqref{eq:standing}.
+ In Example~\ref{ex:differential}, determine whether standard families
+ other than \eqref{eq:path-objects} exist at width $2$ for the orders
+ $\sigma$ and $\tau$.
+ \item \textbf{Filtrations by shifted standards.}
+ Determine hypotheses under which the presentations
+ \eqref{eq:presentation} can be chosen with
+ \begin{equation}\label{eq:shifted-question}
+ K_v\in\Filt_{\H_A^m}
+ \{\std_w[s]:v<_\sigma w,\ 0\leq s<m,\ \std_w[s]\in\H_A^m\}.
+ \end{equation}
+ Establish the relation between \eqref{eq:shifted-question} and the
+ cohomological requirement \eqref{eq:costandard-window}.
+\end{enumerate}
+
+\subsection*{Further directions}
+\begin{enumerate}[label=\textbf{P\arabic*.}]
+ \item \textbf{Heredity and recollement.}
+ Relate Definition~\ref{def:reflexive} to filtrations by dg ideals and
+ recollements whose successive factors are equivalent to
+ $\D^b(\mod\Bbbk)$.
+ \item \textbf{Standardisation and Ringel duality.}
+ Study the extension-closed subcategories
+ $\Filt_{\H_A^m}\{\std_v\}$ and
+ $\Filt_{\H_A^m}\{\costd_v[m-1]\}$.
+ Determine conditions producing a tilting or silting object $T$ and an
+ $m'$-reflexive qh structure on $\REnd_A(T)$; determine the resulting
+ integer $m'\geq1$.
+ \item \textbf{Reciprocity and dimension bounds.}
+ Seek a graded form of BGG reciprocity and homological bounds in terms
+ of $m$ and $n$. In the Grothendieck group $K_0(\D_{\fd}(A))$, write
+ $[Y]$ for the class of $Y\in\D_{\fd}(A)$. Filtrations in
+ \eqref{eq:shifted-question} must account for
+ $[Y[s]]=(-1)^s[Y]$ for $s\in\ZZ$.
+\end{enumerate}
+
+\begin{thebibliography}{MP25}
+\bibitem[BB26]{BB26}
+A. Bodzenta and A. Bondal,
+\emph{Highest weight categories via pairs of dual exceptional sequences},
+2026, \href{https://arxiv.org/abs/2601.22004}{arXiv:2601.22004}.
+
+\bibitem[DR92]{DR92}
+V. Dlab and C. M. Ringel,
+\emph{The module theoretical approach to quasi-hereditary algebras},
+in \emph{Representations of algebras and related topics},
+London Mathematical Society Lecture Note Series 168,
+Cambridge University Press, 1992, pp.~200--224.
+\href{https://www.math.uni-bielefeld.de/~ringel/opus/good-d-r.pdf}{Author's manuscript}.
+
+\bibitem[MP25]{MP25}
+N. Mochizuki and M. Plogmann,
+\emph{On the Auslander--Reiten theory for extended hearts of proper
+connective dg algebras},
+2025, \href{https://arxiv.org/abs/2505.16560}{arXiv:2505.16560}.
+
+\end{thebibliography}
+\end{document}
