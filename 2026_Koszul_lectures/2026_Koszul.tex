@@ -193,176 +193,191 @@ When we discuss dimensions, we mean dimensions as $\Bbbk$-vector spaces.
 
 \section{Lecture 1: Graded rings and modules}
 
-\subsection*{Algebras}
-
-We begin with the basic object of the course.
+\subsection*{Algebras and semisimplicity}
 
 \begin{definition}
-A \defn{$\Bbbk$-algebra} is a ring $A$ together with a ring homomorphism
-\[
-\Bbbk \longrightarrow Z(A),
-\]
-where $Z(A)=\{a\in A\mid ab=ba\text{ for all }b\in A\}$ is the center of $A$.
-Equivalently, $A$ is a $\Bbbk$-vector space with an associative multiplication
-\[
-A\times A\to A,\qquad (a,b)\mapsto ab,
-\]
-which is $\Bbbk$-bilinear and has an identity element $1_A$.
+A \defn{$\Bbbk$-algebra} is a $\Bbbk$-vector space with an associative unital multiplication that is \defn{bilinear}, meaning linear in each variable.
 \end{definition}
 
-The equivalence in the definition is useful.
-The ring point of view remembers multiplication; the vector space point of view makes clear that multiplication distributes over linear combinations.
+A right $A$-module is understood to be a $\Bbbk$-vector space $M$ with a bilinear action satisfying $(ma)b=m(ab)$ and $m1_A=m$ for $m\in M$ and $a,b\in A$.
 
-\begin{example}
-\begin{enumerate}
-\item The field $\Bbbk$ is a $\Bbbk$-algebra.
-\item The polynomial ring $\Bbbk[x]$ is a $\Bbbk$-algebra.
-\item The matrix ring $\Mat_n(\Bbbk)$ is a $\Bbbk$-algebra.  It is usually non-commutative when $n\geq 2$.
-\item If $V$ is a $\Bbbk$-vector space, then $\End_{\Bbbk}(V)$ is a $\Bbbk$-algebra under composition.
-\item The quotient $\Bbbk[x]/(x^2)$ is a $\Bbbk$-algebra.  It has basis $\{1,x\}$ and relation $x^2=0$.
-\end{enumerate}
+\begin{example}\label{ex:triangular-algebra}
+The matrix algebra $\Mat_n(\Bbbk)$ and its upper triangular subalgebra $\Bbbk A_n$ are $\Bbbk$-algebras.
+For the matrix units $e_{ij}$, multiplication is $e_{ij}e_{k\ell}=\delta_{jk}e_{i\ell}$.
+Each row space $e_{ii}\Bbbk A_n$ is a right $\Bbbk A_n$-module.
 \end{example}
 
 \begin{definition}
-Let $A$ be a $\Bbbk$-algebra.
-A \defn{right $A$-module} is a $\Bbbk$-vector space $M$ together with a map
+A module $L$ is \defn{simple} if $L\neq 0$ and its only submodules are $0$ and $L$.
+A module is \defn{semisimple} if it is a direct sum of simple modules.
+An algebra $B$ is \defn{semisimple} if its right regular module $B_B$ is semisimple.
+The \defn{Jacobson radical} $\rad B$ is the intersection of all maximal right ideals of $B$.
+\end{definition}
+
+We use the following standard facts without proof.
+A \defn{division $\Bbbk$-algebra} is a non-zero $\Bbbk$-algebra whose non-zero elements are invertible.
+
+\begin{theorem}[Artin--Wedderburn]\label{thm:artin-wedderburn}\label{prop:semisimple}
+For a non-zero finite-dimensional $\Bbbk$-algebra $B$,
 \[
-M\times A\to M,\qquad (m,a)\mapsto ma
+B\text{ is semisimple}
+\quad\Longleftrightarrow\quad
+\rad B=0
+\quad\Longleftrightarrow\quad
+B\cong\prod_{i=1}^r\Mat_{n_i}(D_i),
 \]
-such that, for all $m,n\in M$, $a,b\in A$, and $\lambda\in\Bbbk$,
+where $r,n_i\geq 1$ and each $D_i$ is a finite-dimensional division $\Bbbk$-algebra.
+If $\Bbbk$ is algebraically closed, then $D_i=\Bbbk$ for every $i$.
+For semisimple $B$, every finite-dimensional left or right $B$-module is semisimple, and every submodule has a complement.
+\end{theorem}
+
+When all $D_i=\Bbbk$, the algebra is called \defn{split semisimple}: it is a product of independent matrix blocks.
+For example, $\Mat_2(\Bbbk)\times\Mat_3(\Bbbk)$ is the algebra of block-diagonal matrices with blocks of sizes $2$ and $3$.
+We do not require semisimple algebras to be split.
+
+\begin{example}\label{ex:semisimple-algebras}
+For $S=\Bbbk^{\oplus r}$ with coordinate idempotents $e_1,\ldots,e_r$,
 \[
-(m+n)a=ma+na,\quad m(a+b)=ma+mb,\quad (\lambda m)a=\lambda(ma),
+1=\sum_{i=1}^r e_i,\qquad e_ie_j=\delta_{ij}e_i,\qquad
+M=\bigoplus_{i=1}^r Me_i
+\quad\text{for every right }S\text{-module }M.
 \]
+Thus $S$ is semisimple.
+In contrast, $\rad(\Bbbk A_2)=\Bbbk e_{12}\neq 0$.
+\end{example}
+
+\subsection*{Tensor products of vector spaces}
+
+\begin{definition}\label{def:vector-tensor}
+For vector spaces $U,V$, the \defn{tensor product} $U\otimes_\Bbbk V$ is equipped with a bilinear map $(u,v)\mapsto u\otimes v$ such that every bilinear map $b:U\times V\to W$ has a unique linear factorisation:
 \[
-m(ab)=(ma)b,\qquad m1_A=m.
+\xymatrix@C=35pt@R=22pt{
+U\times V \ar[r]^{(u,v)\mapsto u\otimes v} \ar[dr]_{b}
+& U\otimes_\Bbbk V \ar@{-->}[d]^{\exists!\,\widetilde b}\\
+& W.
+}
 \]
 \end{definition}
 
-Thus a module is a vector space on which elements of $A$ act as linear operators, compatibly with multiplication in $A$.
-For instance, a module over $\Bbbk[x]$ is the same thing as a vector space $M$ together with one linear operator $T:M\to M$, where $m x:=T(m)$.
+If $(u_i)_{i=1}^r$ and $(v_j)_{j=1}^s$ are bases, then $(u_i\otimes v_j)_{i,j}$ is a basis of $U\otimes_\Bbbk V$; hence $\dim_\Bbbk(U\otimes_\Bbbk V)=rs$.
+We use the canonical identifications $(U\otimes_\Bbbk V)\otimes_\Bbbk W\cong U\otimes_\Bbbk(V\otimes_\Bbbk W)$ and $\Bbbk\otimes_\Bbbk U\cong U$, and write $U^{\otimes 0}=\Bbbk$.
 
 \subsection*{Graded algebras}
 
-Koszul duality is a graded theory.
-The grading records a notion of degree, and the main results compare algebraic multiplication with homological degree.
-
-\begin{definition}
-A \defn{$\Z_{\geq 0}$-graded $\Bbbk$-algebra} is a $\Bbbk$-algebra $A$ with a direct sum decomposition
+\begin{definition}\label{def:group-grading}
+Let $G$ be a group with identity $e$.
+A \defn{$G$-graded $\Bbbk$-algebra} is a $\Bbbk$-algebra $A$ with $1_A\in A_e$ and a decomposition
 \[
-A=\bigoplus_{i\geq 0} A_i
+A=\bigoplus_{g\in G}A_g
+\quad\text{such that}\quad
+A_gA_h\subset A_{gh}
+\quad\text{for all }g,h\in G.
 \]
-as $\Bbbk$-vector spaces such that
-\[
-A_iA_j\subset A_{i+j}
-\]
-for all $i,j\geq 0$, and $1_A\in A_0$.
-An element $a\in A_i$ is called \defn{homogeneous of degree $i$}.
+An element of $A_g$ is \defn{homogeneous of degree $g$}.
 \end{definition}
 
-Every element $a\in A$ is a finite sum
+Every $a\in A$ is a finite sum of elements of the spaces $A_g$, called its \defn{homogeneous components}.
+
+\begin{example}\label{ex:matrix-group-grading}
+Choose $g_1,\ldots,g_n\in G$ and grade $\Mat_n(\Bbbk)$ by
 \[
-a=a_0+a_1+\cdots +a_N,\qquad a_i\in A_i.
+A_h=\operatorname{span}_\Bbbk\{e_{ij}\mid g_i^{-1}g_j=h\}
+\quad(h\in G).
 \]
-The summands $a_i$ are called the \defn{homogeneous components} of $a$.
+The rule $e_{ij}e_{j\ell}=e_{i\ell}$ respects degrees because $(g_i^{-1}g_j)(g_j^{-1}g_\ell)=g_i^{-1}g_\ell$.
+For $G=\Z$ and $g_i=i$, we obtain $\deg e_{ij}=j-i$; the full matrix algebra then has negative as well as positive degrees.
+\end{example}
+
+\begin{convention}
+Unless stated otherwise, a \defn{graded algebra} means a $\Z$-graded algebra concentrated in non-negative degrees:
+\[
+A=\bigoplus_{i\in\Z}A_i,\qquad
+A_i=0\text{ for }i<0,\qquad A_iA_j\subset A_{i+j}.
+\]
+\end{convention}
+
+\begin{example}\label{ex:triangular-grading}
+For the upper triangular algebra $\Bbbk A_n$ of Example~\ref{ex:triangular-algebra}, set
+\[
+(\Bbbk A_n)_d=\operatorname{span}_\Bbbk\{e_{ij}\mid j-i=d\},
+\qquad
+S=(\Bbbk A_n)_0=\bigoplus_{i=1}^n\Bbbk e_{ii}\cong\Bbbk^{\oplus n}.
+\]
+Since $e_{ij}e_{k\ell}=\delta_{jk}e_{i\ell}$, multiplication adds degrees.
+For $n=2$, the left and right actions on $e_{12}$ differ:
+\[
+e_{11}e_{12}=e_{12}=e_{12}e_{22},
+\qquad e_{22}e_{12}=e_{12}e_{11}=e_{12}^2=0.
+\]
+\end{example}
+
+\begin{remark}
+The algebra $\Bbbk A_n$ is the path algebra of a linearly oriented type $A_n$ quiver.
+The matrix-unit calculations in Example~\ref{ex:triangular-grading} express concatenation of composable paths; no quiver terminology is needed for the calculations.
+\end{remark}
 
 \begin{example}
-The polynomial ring $\Bbbk[x]$ is graded by degree:
+The algebra $\Bbbk A_3$ also has a $\Z^{\oplus 2}$-grading with
 \[
-\Bbbk[x]=\bigoplus_{i\geq 0}\Bbbk x^i.
+\deg e_{ii}=(0,0),\qquad
+\deg e_{12}=(1,0),\qquad
+\deg e_{23}=(0,1),\qquad
+\deg e_{13}=(1,1).
 \]
-Here $A_i=\Bbbk x^i$.
-More generally,
-\[
-\Bbbk[x_1,\ldots,x_n]=\bigoplus_{i\geq 0}\Bbbk[x_1,\ldots,x_n]_i,
-\]
-where $\Bbbk[x_1,\ldots,x_n]_i$ is the span of monomials of total degree $i$.
+The homomorphism $\Z^{\oplus 2}\to\Z$, $(p,q)\mapsto p+q$, gives the grading of Example~\ref{ex:triangular-grading}.
+Alternatively, setting $\deg e_{ij}=2(j-i)$ gives a $\Z$-grading with $A_1=0$ but $A_2\neq 0$.
 \end{example}
 
 \begin{example}
-Let $V$ be a $\Bbbk$-vector space.
-The \defn{tensor algebra} on $V$ is
-\[
-T(V):=\bigoplus_{i\geq 0}V^{\otimes i}
-\]
-where $V^{\otimes 0}:=\Bbbk$.
-Multiplication is concatenation of tensors:
-\[
-(v_1\otimes\cdots\otimes v_i)(w_1\otimes\cdots\otimes w_j)
-=v_1\otimes\cdots\otimes v_i\otimes w_1\otimes\cdots\otimes w_j.
-\]
-Thus $T(V)_i=V^{\otimes i}$.
-If $V=\Bbbk x\oplus \Bbbk y$, then $T(V)$ is the free non-commutative polynomial algebra $\Bbbk\langle x,y\rangle$.
-For example, $xy$ and $yx$ are different basis elements of degree $2$.
-\end{example}
-
-\begin{example}
-The exterior algebra on an $n$-dimensional vector space $V$ is
-\[
-\bigwedge V=\bigoplus_{i=0}^{n}\bigwedge^i V.
-\]
-It is graded by exterior degree.
-If $V=\Bbbk x\oplus \Bbbk y$, then
-\[
-\bigwedge V=\Bbbk\oplus \Bbbk x\oplus \Bbbk y\oplus \Bbbk(x\wedge y),
-\]
-with $x^2=y^2=0$ and $xy=-yx$.
+Every algebra $B$ has the \defn{trivial grading}: $B_0=B$ and $B_i=0$ for $i\neq 0$.
+Thus a grading alone imposes no restriction on $B_0$.
 \end{example}
 
 \begin{definition}
-Let $A=\bigoplus_{i\geq 0}A_i$ and $B=\bigoplus_{i\geq 0}B_i$ be graded $\Bbbk$-algebras.
-A \defn{homomorphism of graded algebras} $f:A\to B$ is a $\Bbbk$-algebra homomorphism such that
-\[
-f(A_i)\subset B_i
-\]
-for all $i\geq 0$.
+A \defn{homomorphism of graded algebras} $f:A\to B$ is a $\Bbbk$-algebra homomorphism with $f(A_i)\subset B_i$ for all $i\in\Z$.
 \end{definition}
 
 \begin{definition}
-A graded algebra $A=\bigoplus_{i\geq 0}A_i$ is called \defn{connected} if $A_0=\Bbbk$.
-It is called \defn{locally finite} if $\dim_\Bbbk A_i<\infty$ for all $i$.
+A graded algebra $A$ is \defn{locally finite} if $\dim_\Bbbk A_i<\infty$ for every $i\in\Z$.
 \end{definition}
 
-Most examples in the first part of the course will be connected and locally finite.
-Connectedness means that there is only one copy of the ground field in degree $0$.
-Local finiteness means that each degree can be handled by finite-dimensional linear algebra.
+\begin{assumption}\label{ass:degree-zero}
+For quadratic and Koszul algebras, $S:=A_0$ is finite-dimensional semisimple.
+\end{assumption}
 
-\begin{example}
-\begin{enumerate}
-\item $\Bbbk[x_1,\ldots,x_n]$ is connected and locally finite.
-\item $T(V)$ is connected and locally finite if $\dim_\Bbbk V<\infty$.
-\item $\Bbbk[x]$ with $\deg x=2$ is also a graded algebra, but it is not generated in degree $1$.
-\item The Laurent polynomial ring $\Bbbk[x,x^{-1}]$ is naturally $\Z$-graded, but not $\Z_{\geq 0}$-graded in the above sense.
-\end{enumerate}
-\end{example}
+For $\Bbbk A_n$, the degree zero algebra is $\Bbbk^{\oplus n}$; for $\Mat_n(\Bbbk)$ with the trivial grading, it is $\Mat_n(\Bbbk)$.
+Both satisfy Assumption~\ref{ass:degree-zero}.
+Definitions of graded algebras and modules do not require Assumption~\ref{ass:degree-zero}.
 
 \subsection*{Graded modules}
 
 \begin{definition}
-Let $A=\bigoplus_{i\geq 0}A_i$ be a graded algebra.
-A \defn{graded right $A$-module} is a right $A$-module $M$ with a direct sum decomposition
+Let $A=\bigoplus_{g\in G}A_g$ be a $G$-graded algebra.
+A \defn{$G$-graded right $A$-module} is a right $A$-module $M$ with a direct sum decomposition
 \[
-M=\bigoplus_{j\in\Z}M_j
+M=\bigoplus_{g\in G}M_g
+\quad\text{such that}\quad
+M_gA_h\subset M_{gh}
+\quad\text{for all }g,h\in G.
 \]
-such that
-\[
-M_jA_i\subset M_{i+j}
-\]
-for all $i\geq 0$ and all $j\in\Z$.
-An element of $M_j$ is called \defn{homogeneous of degree $j$}.
+An element of $M_g$ is called \defn{homogeneous of degree $g$}.
 \end{definition}
 
-We allow negative degrees for modules because shifts are unavoidable.
-Even if an algebra only has non-negative degrees, its modules may naturally be shifted left or right.
+For the $\Z$-grading used in the course, this means
+\[
+M=\bigoplus_{j\in\Z}M_j,
+\qquad
+M_jA_i\subset M_{i+j}
+\quad\text{for all }i,j\in\Z.
+\]
+We allow negative degrees for modules because shifts are unavoidable, even when the algebra is concentrated in non-negative degrees.
 
 \begin{example}
-The algebra $A$ itself is a graded right $A$-module:
-\[
-A=\bigoplus_{i\geq 0}A_i.
-\]
+The decomposition $A=\bigoplus_{i\in\Z}A_i$ makes the right regular module $A_A$ a graded module.
 More generally, $A^{\oplus r}$ is a graded free module with each basis vector placed in degree $0$.
 \end{example}
 
-\begin{definition}
+\begin{definition}\label{def:shift}
 Let $M$ be a graded $A$-module and let $d\in\Z$.
 The \defn{shift} $M(d)$ is the graded $A$-module whose underlying $A$-module is $M$, but whose grading is
 \[
@@ -370,21 +385,16 @@ M(d)_j=M_{j+d}.
 \]
 \end{definition}
 
-This convention means that $A(-d)$ has a generator in degree $d$.
-Indeed, $1\in A_0=A(-d)_d$.
+By Definition~\ref{def:shift}, $1\in A_0=A(-d)_d$, so $A(-d)$ has a generator in degree $d$.
 
-\begin{example}
-Let $A=\Bbbk[x]$ with $\deg x=1$.
-The graded module $A(-2)$ has basis
+\begin{example}\label{ex:shifted-row}
+Let $A=\Bbbk A_3$ and $P=e_{11}A$ with the grading of Example~\ref{ex:triangular-grading}.
+The shifted module $P(-2)$ has basis
 \[
-1,x,x^2,\ldots
+e_{11},e_{12},e_{13}
+\quad\text{in degrees}\quad
+2,3,4,\quad\text{respectively}.
 \]
-in degrees
-\[
-2,3,4,\ldots
-\]
-respectively.
-Thus multiplication by $x$ still raises degree by $1$.
 \end{example}
 
 \begin{definition}
@@ -392,31 +402,29 @@ Let $M,N$ be graded $A$-modules.
 A homomorphism $f:M\to N$ is \defn{homogeneous of degree $d$} if
 \[
 f(M_j)\subset N_{j+d}
+\quad\text{for all }j\in\Z.
 \]
-for all $j\in\Z$.
 A \defn{homomorphism of graded modules} means a homogeneous $A$-module homomorphism of degree $0$.
 \end{definition}
 
 \begin{example}
-For $A=\Bbbk[x]$, multiplication by $x^r$ gives a homogeneous map
+For $A=\Bbbk A_3$, left multiplication by $e_{12}$ gives a right $A$-module homomorphism $e_{22}A\to e_{11}A$ of degree $1$.
+Equivalently,
 \[
-A\to A
+e_{22}A(-1)\longrightarrow e_{11}A,\qquad
+u\longmapsto e_{12}u
+\quad\text{has degree }0.
 \]
-of degree $r$.
-The same multiplication can be regarded as a degree $0$ map
-\[
-A(-r)\to A.
-\]
-This is why shifts appear constantly in graded free resolutions.
+Right $A$-linearity is the identity $e_{12}(ua)=(e_{12}u)a$ for $u\in e_{22}A$ and $a\in A$.
 \end{example}
 
 \subsection*{Homogeneous ideals and quotients}
 
 \begin{definition}
-Let $A=\bigoplus_{i\geq 0}A_i$ be a graded algebra.
+Let $A=\bigoplus_{i\in\Z}A_i$ be a graded algebra.
 A right ideal $I\subset A$ is \defn{homogeneous} if
 \[
-I=\bigoplus_{i\geq 0}(I\cap A_i).
+I=\bigoplus_{i\in\Z}(I\cap A_i).
 \]
 Equivalently, whenever $a\in I$ and $a=a_0+\cdots+a_N$ is its decomposition into homogeneous components, each $a_i$ also belongs to $I$.
 \end{definition}
@@ -424,44 +432,45 @@ Equivalently, whenever $a\in I$ and $a=a_0+\cdots+a_N$ is its decomposition into
 For quotient algebras we need two-sided ideals.
 If $I$ is a homogeneous two-sided ideal, then
 \[
-A/I=\bigoplus_{i\geq 0} A_i/(I\cap A_i)
+A/I=\bigoplus_{i\in\Z} A_i/(I\cap A_i)
 \]
 is again a graded algebra.
 
-\begin{example}
-In $\Bbbk[x,y]$ with the usual grading, the ideal
+\begin{example}\label{ex:quadratic-matrix-quotient}
+In $A=\Bbbk A_3$ with the grading of Example~\ref{ex:triangular-grading}, the two-sided ideal $I=(e_{13})=\Bbbk e_{13}$ is homogeneous.
+Writing $\overline e_{ij}$ for the image of $e_{ij}$,
 \[
-I=(x^2,xy,y^3)
+(A/I)_0\cong\Bbbk^{\oplus 3},\qquad
+(A/I)_1=\Bbbk\overline e_{12}\oplus\Bbbk\overline e_{23},\qquad
+(A/I)_d=0\quad(d\geq 2).
 \]
-is homogeneous.
-The quotient $A=\Bbbk[x,y]/I$ is graded.
-Its degree $0$ part is $\Bbbk$, its degree $1$ part has basis $x,y$, and its degree $2$ part has basis $y^2$.
-All degrees $\geq 3$ vanish.
+In particular, $\overline e_{12}\overline e_{23}=0$.
 \end{example}
 
 \begin{example}
-The ideal $(x-1)\subset \Bbbk[x]$ is not homogeneous for the usual grading.
-Indeed $x-1$ is in the ideal, but its homogeneous components $x$ and $-1$ are not in the ideal.
-The quotient $\Bbbk[x]/(x-1)\cong \Bbbk$ should not be regarded as a graded quotient of $\Bbbk[x]$ by this ideal.
+In $A=\Bbbk A_2$, the subspace $I=\Bbbk(e_{22}+e_{12})$ is a right ideal: $Ie_{11}=Ie_{12}=0$ and $Ie_{22}=I$.
+However, $e_{22},e_{12}\notin I$, so $I$ is not homogeneous.
+The right module $A/I$ therefore does not inherit the quotient grading.
 \end{example}
 
 \begin{definition}
-Let $A=\bigoplus_{i\geq 0}A_i$ be a connected graded algebra.
-The ideal
+Let $A$ be a graded algebra and set
 \[
-A_+:=\bigoplus_{i>0}A_i
+A_{>0}:=\bigoplus_{i>0}A_i.
 \]
-is called the \defn{augmentation ideal}.
-The quotient
-\[
-\Bbbk_A:=A/A_+
-\]
-is called the \defn{trivial module}.
+The subspace $A_{>0}$ is a homogeneous two-sided ideal, called the \defn{positive degree ideal}.\footnote{The ideal $A_{>0}$ is also called the augmentation ideal, relative to the projection $A\to A_0$. We avoid this terminology in these notes.}
+The quotient $A/A_{>0}\cong A_0=:S$ is called the \defn{degree zero quotient}.
 \end{definition}
 
-The trivial module is the simplest graded module over $A$.
-Every positive degree element acts by zero.
-Koszulness will later be a statement about the shape of the minimal graded free resolution of this module.
+The quotient map
+\[
+\pi:A\longrightarrow S,\qquad
+\pi\left(\sum_{i\in\Z}a_i\right)=a_0,
+\]
+makes $S$ into both a left and a right $A$-module, with commuting actions.
+
+The degree zero quotient is the basic module in the definition of a Koszul algebra.
+Every positive degree element acts by zero, but $S$ may have dimension greater than one and may itself be non-commutative.
 
 \subsection*{Hilbert series}
 
@@ -478,7 +487,7 @@ The Hilbert series records the size of each degree.
 It forgets multiplication, but it is still strong enough to give numerical tests for Koszulness later.
 
 \begin{lemma}
-Let $M,N$ be locally finite graded vector spaces.
+Let $M,N$ be locally finite graded vector spaces concentrated in degrees bounded below.
 \begin{enumerate}
 \item If $M\cong N$ as graded vector spaces, then $h_M(t)=h_N(t)$.
 \item If $0\to L\to M\to N\to 0$ is an exact sequence of graded vector spaces with degree $0$ maps, then
@@ -500,42 +509,26 @@ h_{M(d)}(t)=\sum_j \dim_\Bbbk(M_{j+d})t^j=t^{-d}\sum_i \dim_\Bbbk(M_i)t^i.
 \]
 \end{proof}
 
+
 \begin{example}
-For $A=\Bbbk[x]$ with $\deg x=1$, we have $\dim_\Bbbk A_i=1$ for all $i\geq 0$.
-Hence
+For the upper triangular matrix algebra $\Bbbk A_n$,
 \[
-h_A(t)=1+t+t^2+\cdots=\frac{1}{1-t}.
+h_{\Bbbk A_n}(t)
+=n+(n-1)t+(n-2)t^2+\cdots+t^{n-1}.
 \]
-For $\Bbbk[x_1,\ldots,x_n]$ with all variables in degree $1$,
-\[
-h_{\Bbbk[x_1,\ldots,x_n]}(t)=\frac{1}{(1-t)^n}.
-\]
-Indeed, this follows by multiplying the $n$ geometric series, one for each variable.
+The coefficient of $t^d$ counts the matrix units $e_{ij}$ with $j-i=d$.
 \end{example}
 
 \begin{example}
-Let $V$ be $n$-dimensional.
-Then $\dim_\Bbbk T(V)_i=n^i$, so
+For $A=\Bbbk A_3$ and $I=(e_{13})$ from Example~\ref{ex:quadratic-matrix-quotient},
 \[
-h_{T(V)}(t)=1+nt+n^2t^2+\cdots=\frac{1}{1-nt}.
+h_A(t)=3+2t+t^2,\qquad h_I(t)=t^2,\qquad h_{A/I}(t)=3+2t.
 \]
-On the other hand,
-\[
-h_{\bigwedge V}(t)=\sum_{i=0}^{n}\binom{n}{i}t^i=(1+t)^n.
-\]
-\end{example}
-
-\begin{example}
-Let $A=\Bbbk[x,y]/(x^2,xy,y^3)$.
-From the basis calculation above,
-\[
-h_A(t)=1+2t+t^2.
-\]
-This series already tells us that $A$ is $4$-dimensional as a vector space.
+Thus $h_A=h_I+h_{A/I}$.
 \end{example}
 
 \begin{lemma}
-If $V,W$ are locally finite graded vector spaces, and each graded piece of $V\otimes_\Bbbk W$ is finite-dimensional, then
+If $V,W$ are locally finite graded vector spaces concentrated in degrees bounded below, then
 \[
 h_{V\otimes W}(t)=h_V(t)h_W(t),
 \]
@@ -550,519 +543,634 @@ The degree $n$ part has dimension
 This is exactly the coefficient of $t^n$ in the product $h_V(t)h_W(t)$.
 \end{proof}
 
-\subsection*{Graded duals}
+\subsection*{Graded $\Bbbk$-linear duals}
 
-\begin{definition}
-Let $V=\bigoplus_{i\in\Z}V_i$ be a locally finite graded vector space.
-Its \defn{graded dual} is
+A linear functional on a graded vector space need not have a degree: it may be non-zero on infinitely many homogeneous components.
+To obtain a graded vector space, we retain only finite sums of homogeneous functionals.
+
+\begin{definition}\label{def:linear-duals}
+For a vector space $V$, its \defn{$\Bbbk$-linear dual} is $D(V):=\Hom_\Bbbk(V,\Bbbk)$.
+For a graded vector space $V=\bigoplus_{i\in\Z}V_i$, its \defn{graded $\Bbbk$-linear dual} is
 \[
-V^\vee:=\bigoplus_{i\in\Z}\Hom_\Bbbk(V_i,\Bbbk).
+\mathbb D(V):=\bigoplus_{i\in\Z}D(V_{-i}),
+\qquad\text{with}\qquad
+\mathbb D(V)_i=D(V_{-i}).
 \]
-We regard $\Hom_\Bbbk(V_i,\Bbbk)$ as sitting in degree $-i$.
 \end{definition}
 
-The ordinary dual $\Hom_\Bbbk(V,\Bbbk)$ is a direct product of the duals of the graded pieces.
-The graded dual is the direct sum.
-For finite-dimensional graded spaces there is no difference as vector spaces, but for infinite-dimensional examples such as $\Bbbk[x]$ the distinction matters.
+A functional on $V_{-i}$ extends by zero on the other components and has degree $i$.
+Thus $\mathbb D(V)\subset D(V)$, whereas $D(V)\cong\prod_{i\in\Z}D(V_i)$.
+These spaces coincide when $V$ is finite-dimensional.
+Local finiteness alone does not make them equal.
 
-\begin{example}
-Let $A=\Bbbk[x]$ with $\deg x=1$.
-The graded dual $A^\vee$ has one-dimensional piece in each degree $0,-1,-2,\ldots$ and no other degrees.
-The functional dual to $x^i$ has degree $-i$.
+Linear duality reverses the side of a module action.
+For a right $A$-module $M$ and a left $A$-module $N$, define
+\begin{equation}\label{eq:linear-dual-actions}
+(a f)(m):=f(ma),\qquad (g a)(n):=g(an)
+\quad(a\in A,\ f\in D(M),\ g\in D(N)).
+\end{equation}
+Here $m\in M$ and $n\in N$; the first formula makes $D(M)$ a left module and the second makes $D(N)$ a right module.
+For graded modules, the same formulas preserve the graded $\Bbbk$-linear dual: if $a\in A_p$ and $f\in\mathbb D(M)_q$, then $af$ vanishes outside $M_{-p-q}$ and hence has degree $p+q$.
+There are no signs in these actions.
+
+\begin{example}\label{ex:row-linear-dual}
+Let $A=\Bbbk A_3$ and $P=e_{11}A$ as in Example~\ref{ex:shifted-row}.
+The functionals $\varepsilon_{1j}(e_{1\ell})=\delta_{j\ell}$ for $1\leq j,\ell\leq 3$ form a basis of $\mathbb D(P)$, with
+\[
+\deg\varepsilon_{1j}=1-j,\qquad
+e_{12}\varepsilon_{12}=\varepsilon_{11},\qquad
+e_{23}\varepsilon_{13}=\varepsilon_{12},\qquad
+e_{jj}\varepsilon_{1j}=\varepsilon_{1j}.
+\]
+The actions follow from \eqref{eq:linear-dual-actions}.
+For comparison with an infinite-dimensional space, take $V=\bigoplus_{i\geq 0}\Bbbk v_i$ with $\deg v_i=i$.
+The functional $\lambda(v_i)=1$ for every $i$ belongs to $D(V)$ but not to $\mathbb D(V)$.
 \end{example}
 
-\subsection*{Left, right, and two-sided duals}
-
-The previous definition is enough for connected algebras, where $A_0=\Bbbk$.
-However, many natural Koszul algebras have degree zero part a semisimple algebra $S$ rather than just $\Bbbk$.
-For example, the path algebra of a quiver has
-\[
-S=\bigoplus_{i\in Q_0}\Bbbk e_i
-\]
-in degree $0$.
-In that setting one must keep track of left and right actions.
-
-\begin{definition}
-Let $S$ be a finite-dimensional semisimple $\Bbbk$-algebra.
-\begin{enumerate}
-\item If ${}_S V$ is a finite-dimensional left $S$-module, define its \defn{right $S$-dual}
-\[
-V^*:=\Hom_S(V,S).
-\]
-It is a right $S$-module by
-\[
-(fs)(v):=f(v)s.
-\]
-
-\item If $W_S$ is a finite-dimensional right $S$-module, define its \defn{left $S$-dual}
-\[
-{}^*W:=\Hom_{S^\op}(W,S).
-\]
-It is a left $S$-module by
-\[
-(sg)(w):=sg(w).
-\]
-\end{enumerate}
-\end{definition}
-
-Thus duality reverses sides.
-This is already familiar over a field: if $M$ is a right $A$-module, then $\Hom_\Bbbk(M,\Bbbk)$ is naturally a left $A$-module by
-\[
-(af)(m):=f(ma).
-\]
-The same formula explains the general case.
-
-\begin{lemma}
-Let $S$ be finite-dimensional semisimple.
-For finite-dimensional modules, the evaluation maps
-\[
-V\to {}^*(V^*),\qquad W\to ({}^*W)^*
-\]
-are isomorphisms.
+\begin{lemma}\label{lem:linear-bidual}
+On locally finite graded modules, $\mathbb D$ reverses arrows and short exact sequences, and evaluation gives a graded module isomorphism $M\cong\mathbb D(\mathbb D(M))$.
 \end{lemma}
 
 \begin{proof}
-Since $S$ is semisimple, every finite-dimensional $S$-module is a direct summand of a finite direct sum of copies of $S$.
-The statement is immediate for $S$ itself, and then follows for finite direct sums and direct summands.
+A homomorphism $u:M\to N$ of degree $0$ induces $\mathbb D(u):\mathbb D(N)\to\mathbb D(M)$ by $f\mapsto f\circ u$.
+Dualising a short exact sequence in each degree is exact, since every linear functional on a subspace extends to the whole vector space.
+The evaluation map sends $m$ to $(f\mapsto f(m))$.
+It is an isomorphism in each degree by finite-dimensional linear algebra, and \eqref{eq:linear-dual-actions} makes it a module homomorphism.
 \end{proof}
 
-\begin{definition}
-An \defn{$S$-bimodule} is a vector space $V$ which is both a left and right $S$-module, with
+\subsection*{Left, right, and two-sided duals over $S$}
+
+Fix a finite-dimensional semisimple $\Bbbk$-algebra $S$, concentrated in degree $0$.
+Besides the $\Bbbk$-linear dual, we need duals defined by left $S$-linear maps, right $S$-linear maps, and maps respecting both actions.
+Their definitions differ, even though the resulting spaces can be identified after a choice of form.
+
+Write $S^\op$ for the \defn{opposite algebra}, with multiplication $s^\op t^\op=(ts)^\op$.
+A right $S$-module is a left $S^\op$-module.
+In the duality notation, $\Hom_S$ means left $S$-linear maps, and $\Hom_{S^\op}$ means right $S$-linear maps.
+
+\begin{definition}\label{def:S-duals}
+For a left $S$-module $V$ and a right $S$-module $W$, define their \defn{$S$-duals} by
 \[
-(sv)t=s(vt)
+\begin{aligned}
+V^*&:=\Hom_S(V,S),&
+(fs)(v)&:=f(v)s,\\
+{}^*W&:=\Hom_{S^\op}(W,S),&
+(sg)(w)&:=sg(w).
+\end{aligned}
 \]
-for all $s,t\in S$ and $v\in V$.
-Equivalently, it is a left module over the \defn{enveloping algebra}
+Here $s\in S$, $v\in V$, $w\in W$, $f\in V^*$, and $g\in{}^*W$.
+\end{definition}
+
+Thus $V^*$ is a right $S$-module and $ {}^*W$ is a left $S$-module.
+We use the notation of \cite[\S2.7]{BGS96}; the position of the star records the resulting side.
+
+\begin{definition}\label{def:bimodule}
+An \defn{$S$-bimodule} is a vector space $M$ with $\Bbbk$-bilinear left and right $S$-module actions satisfying
 \[
-S^{\mathrm{en}}:=S\otimes_\Bbbk S^\op.
+(sm)t=s(mt)\quad\text{for all }s,t\in S,\ m\in M.
+\]
+The \defn{enveloping algebra} of $S$ is $S^{\mathrm{en}}:=S\otimes_\Bbbk S^\op$, with multiplication
+\[
+(s\otimes t^\op)(s'\otimes (t')^\op)=ss'\otimes(t't)^\op
+\quad(s,t,s',t'\in S).
 \]
 \end{definition}
 
-The bimodule viewpoint is the correct two-sided language.
-If $V$ is an $S$-bimodule, then both $V^*$ and ${}^*V$ are again $S$-bimodules, but the missing action must be defined carefully:
-\[
-(sf)(v):=f(vs)\qquad \text{for }f\in V^*,
-\]
-and
-\[
-(gt)(v):=g(tv)\qquad \text{for }g\in {}^*V.
-\]
-Together with the actions in the previous definition, these formulas make $V^*$ and ${}^*V$ into bimodules.
+An $S$-bimodule is equivalently a left $S^{\mathrm{en}}$-module, with $(s\otimes t^\op)m=smt$.
+The two actions of $\Bbbk$ agree because the module actions are $\Bbbk$-bilinear.
+All three spaces $D(M)$, $M^*$, and $ {}^*M$ inherit bimodule structures:
+\begin{equation}\label{eq:bimodule-dual-actions}
+(s\lambda t)(m)=\lambda(tms),\qquad
+(sft)(m)=f(ms)t,\qquad
+(sgt)(m)=sg(tm),
+\end{equation}
+where $\lambda\in D(M)$, $f\in M^*$, $g\in{}^*M$, $s,t\in S$, and $m\in M$.
 
-\begin{example}
-Take $S=\Bbbk^r$ with primitive idempotents $e_1,\ldots,e_r$.
-An $S$-bimodule decomposes as
+\begin{definition}\label{def:en-dual}
+The \defn{two-sided dual} of an $S$-bimodule $M$ is
 \[
-V=\bigoplus_{i,j}e_iVe_j.
+M^{*_{\mathrm{en}}}:=\Hom_{S^{\mathrm{en}}}(M,S^{\mathrm{en}}),
+\qquad (sFt)(m):=F(m)(t\otimes s^\op)
+\quad(s,t\in S,\ F\in M^{*_{\mathrm{en}}},\ m\in M).
 \]
-The summand $e_iVe_j$ should be thought of as arrows whose left end is $i$ and right end is $j$.
-Duality reverses the two sides:
-\[
-e_jV^*e_i\cong \Hom_\Bbbk(e_iVe_j,\Bbbk).
-\]
-This is the linear algebra reason that dual quivers reverse arrows.
-\end{example}
+\end{definition}
 
-\begin{example}
-If $S=\Bbbk^r$ with primitive idempotents $e_1,\ldots,e_r$, then an $S$-module is the same as a direct sum of vector spaces
-\[
-V=Ve_1\oplus\cdots\oplus Ve_r.
-\]
-Duality over $S$ dualizes each component separately.
-This is the linear algebra shadow of what happens for quivers with several vertices.
-\end{example}
+The output is initially a right $S^{\mathrm{en}}$-module by multiplication on the values.
+The formula in Definition~\ref{def:en-dual} converts that right action into an $S$-bimodule structure by interchanging the factors.
+In particular, the two-sided dual is not $\Hom_{S^{\mathrm{en}}}(M,S)$.
 
-Tensor products also reverse order under duality.
-For finite-dimensional $S$-bimodules there are natural isomorphisms
+For comparison, the four notations in \cite[\S2.1]{GI20} translate as follows:
 \[
-W^*\otimes_S V^*\cong (V\otimes_S W)^*,
+\begin{array}{c|cccc}
+\text{these notes}&D(M)&M^*&{}^*M&M^{*_{\mathrm{en}}}\\
+\text{Grant--Iyama}&M^*&M^{*_\ell}&M^{*_r}&M^\vee
+\end{array}
+\]
+The subscripts $\ell$ and $r$ in their notation specify left and right linearity, respectively.
+
+\subsection*{Comparing the duals}
+
+To compare an $S$-valued map with a $\Bbbk$-valued map, we need a linear functional on $S$ that retains all the information in its multiplication.
+
+\begin{definition}\label{def:symmetrising-form}
+A \defn{symmetrising form} on a finite-dimensional $\Bbbk$-algebra $S$ is a linear map $\tau:S\to\Bbbk$ satisfying
+\[
+\tau(st)=\tau(ts)\quad\text{for all }s,t\in S,
 \qquad
-{}^*W\otimes_S {}^*V\cong {}^*(V\otimes_S W).
+\bigl(\tau(st)=0\text{ for all }t\in S\bigr)\ \Longrightarrow\ s=0.
 \]
-The reversal is not cosmetic: a functional on $V\otimes_S W$ first sees an element of $V$, then an element of $W$, while the dual tensor product records the corresponding operations in the opposite order.
-
-\begin{example}
-When $S=\Bbbk$, this reduces to the usual isomorphism
-\[
-W^*\otimes_\Bbbk V^*\cong (V\otimes_\Bbbk W)^*
-\]
-for finite-dimensional vector spaces.
-The order reversal is usually hidden because vector spaces have no left/right distinction.
-\end{example}
-
-\begin{definition}
-Let $V$ be a finite-dimensional $S$-bimodule and let $U\subset V$ be a sub-bimodule.
-Define the \defn{right orthogonal complement}
-\[
-U^\perp:=\{f\in V^*\mid f(U)=0\},
-\]
-and the \defn{left orthogonal complement}
-\[
-{}^\perp U:=\{g\in {}^*V\mid g(U)=0\}.
-\]
-Both are $S$-sub-bimodules.
+An algebra admitting such a form is \defn{symmetric}.
 \end{definition}
 
-This is the notation needed for quadratic duality.
-If
+We use the standard theorem that every finite-dimensional semisimple $\Bbbk$-algebra is symmetric; see \cite[\S2.1, p.~2593]{GI20}.
+We do not prove this structure theorem here.
+The forms needed in our basic examples are explicit.
+
+\begin{example}\label{ex:symmetrising-form}
+For $S=\Bbbk^{\oplus r}$, take $\tau(a_1,\ldots,a_r)=\sum_i a_i$.
+For $S=\Mat_n(\Bbbk)$, take $\tau(a)=\Tr(a)$.
+Indeed, $\Tr(ab)=\Tr(ba)$ and $\Tr(ae_{ji})=a_{ij}$, so the pairing is non-degenerate in every characteristic.
+More generally, the sum of the matrix traces works on $\prod_{j=1}^r\Mat_{n_j}(\Bbbk)$, so it gives a symmetrising form for every split semisimple algebra in Theorem~\ref{thm:artin-wedderburn}.
+\end{example}
+
+\begin{proposition}\label{prop:dual-comparison}
+Choose a symmetrising form $\tau$ on $S$.
+For every finite-dimensional $S$-bimodule $M$, there are isomorphisms of $S$-bimodules
+\begin{equation}\label{eq:dual-comparison}
+\alpha_M:M^*\longrightarrow D(M),\quad f\longmapsto\tau\circ f,
+\qquad
+\beta_M:{}^*M\longrightarrow D(M),\quad g\longmapsto\tau\circ g.
+\end{equation}
+There is also an isomorphism $\gamma_M:M^{*_{\mathrm{en}}}\to{}^*M$ given by
+\begin{equation}\label{eq:en-dual-comparison}
+\gamma_M(F)(m)=\sum_j\tau(a_j)b_j
+\quad\text{where}\quad
+F(m)=\sum_j a_j\otimes b_j^\op.
+\end{equation}
+The maps $\alpha_M,\beta_M,\gamma_M$ commute with precomposition by bimodule homomorphisms.
+The maps $\alpha_M$ and $\beta_M$ also apply to left and right $S$-modules, respectively, with the opposite side on the duals.
+\end{proposition}
+
+\begin{proof}
+For $\lambda\in D(M)$, non-degeneracy of $\tau$ determines $f(m),g(m)\in S$ uniquely by
+\begin{equation}\label{eq:dual-inverses}
+\tau(sf(m))=\lambda(sm),\qquad
+\tau(g(m)s)=\lambda(ms)
+\quad(s\in S,\ m\in M).
+\end{equation}
+Equation~\eqref{eq:dual-inverses} gives $f(sm)=sf(m)$, $g(ms)=g(m)s$, and $\alpha_M(f)=\beta_M(g)=\lambda$.
+Hence $\alpha_M,\beta_M$ are bijective.
+For bimodule compatibility, use \eqref{eq:bimodule-dual-actions} and $\tau(f(ms)t)=\tau(f(tms))$; the calculation for $\beta_M$ uses $\tau(sg(tm))=\tau(g(tms))$.
+
+The form $\tau_{\mathrm{en}}(a\otimes b^\op)=\tau(a)\tau(b)$ is symmetrising on $S^{\mathrm{en}}$.
+The formula \eqref{eq:en-dual-comparison} satisfies
 \[
-A=T_S(V)/(R),\qquad R\subset V\otimes_S V,
+\gamma_M(F)(ms)=\gamma_M(F)(m)s,\qquad
+\beta_M(\gamma_M(F))=\tau_{\mathrm{en}}\circ F.
 \]
-then the \defn{left quadratic dual} in the sense of BGS is
+The argument \eqref{eq:dual-inverses}, applied to $S^{\mathrm{en}}$ and $\tau_{\mathrm{en}}$, makes $F\mapsto\tau_{\mathrm{en}}\circ F$ an isomorphism.
+Thus $\gamma_M$ is an isomorphism.
+Composition with $\tau$ and $\tau_{\mathrm{en}}$ commutes with precomposition, giving naturality.
+\end{proof}
+
+The identifications \eqref{eq:dual-comparison} and \eqref{eq:en-dual-comparison} depend on $\tau$.
+For instance, $\tau(a_1,\ldots,a_r)=\sum_i c_i a_i$ is symmetrising on $\Bbbk^{\oplus r}$ for any $c_i\neq 0$.
+No semisimplicity assumption on $S^{\mathrm{en}}$ was used.
+
+\begin{definition}\label{def:graded-S-duals}
+For a graded $S$-bimodule $M$, define its \defn{graded $S$-duals} and \defn{graded two-sided dual} by
 \[
-A^!:=T_S(V^*)/(R^\perp),
+M^{(*)}:=\bigoplus_{i\in\Z}(M_{-i})^*,\qquad
+{}^{(*)}M:=\bigoplus_{i\in\Z}{}^*(M_{-i}),\qquad
+M^{(*_{\mathrm{en}})}:=\bigoplus_{i\in\Z}(M_{-i})^{*_{\mathrm{en}}},
 \]
-where $R^\perp\subset V^*\otimes_S V^*\cong (V\otimes_S V)^*$.
-There is also a \defn{right quadratic dual}
+where each indicated summand has degree $i$.
+The first construction also applies to graded left $S$-modules, and the second to graded right $S$-modules.
+\end{definition}
+
+Parentheses on the stars distinguish the graded constructions from the full $S$-duals, as in \cite[\S2.1]{GI20}.
+
+\begin{corollary}\label{cor:graded-dual-comparison}
+For a locally finite graded $S$-bimodule $M$, a choice of symmetrising form gives natural isomorphisms of graded $S$-bimodules
 \[
-{}^!A:=T_S({}^*V)/({}^\perp R).
+M^{(*)}\cong\mathbb D(M)\cong{}^{(*)}M\cong M^{(*_{\mathrm{en}})}.
 \]
-When $S=\Bbbk$, the two constructions identify canonically with the usual quadratic dual.
-For general semisimple $S$, distinguishing them prevents left modules, right modules, and bimodules from being silently interchanged.
+In particular, $\mathbb D(M)\cong M^{(*)}$ for a graded left $S$-module, and $\mathbb D(M)\cong{}^{(*)}M$ for a graded right $S$-module.
+\end{corollary}
+
+\begin{proof}
+Apply Proposition~\ref{prop:dual-comparison} to $M_{-i}$ and take the direct sum over $i\in\Z$.
+Every comparison preserves degree because $\tau$ has degree $0$.
+\end{proof}
+
+For a graded $A$-module, $\mathbb D(M)$ has the opposite $A$-action in \eqref{eq:linear-dual-actions}.
+An identification in Corollary~\ref{cor:graded-dual-comparison} transports that action to the corresponding graded $S$-dual.
+These remain duals over $S$, not duals taking values in $A$.
+
+\begin{example}\label{ex:dual-blocks}
+Let $S=\Bbbk^{\oplus r}$ with coordinate idempotents $e_1,\ldots,e_r$ and the form $\tau(e_i)=1$.
+For an $S$-bimodule $M$, the decompositions and the reversal of sides are
+\[
+M=\bigoplus_{i,j}e_iMe_j,
+\qquad
+e_jD(M)e_i\cong D(e_iMe_j)\cong e_jM^*e_i\cong e_j({}^*M)e_i.
+\]
+For the degree $1$ piece $V=\Bbbk e_{12}$ of $\Bbbk A_2$, we have $e_1Ve_2=V$.
+Its graded $\Bbbk$-linear dual is spanned by $\varepsilon$ of degree $-1$, with $\varepsilon(e_{12})=1$ and $e_2\varepsilon e_1=\varepsilon$.
+The corresponding elements of $V^*$ and $ {}^*V$ send $e_{12}$ to $e_1$ and $e_2$, respectively.
+Thus equal scalar-valued functionals can correspond to different $S$-valued maps.
+\end{example}
+
+\begin{lemma}\label{lem:S-bidual}
+For finite-dimensional left $S$-modules $V$ and right $S$-modules $W$, evaluation gives canonical isomorphisms $V\cong{}^*(V^*)$ and $W\cong({}^*W)^*$.
+For bimodules, both are bimodule isomorphisms.
+No symmetrising form is needed.
+\end{lemma}
+
+\begin{proof}
+By Theorem~\ref{prop:semisimple}, every finite-dimensional $S$-module is a direct summand of some $S^{\oplus n}$.
+Evaluation is an isomorphism for $S$, hence for such summands; \eqref{eq:bimodule-dual-actions} gives bimodule compatibility.
+\end{proof}
 
 \pagebreak
 
 \section{Lecture 2: Tensor and quadratic algebras}
 
-\subsection*{Generated algebras}
+\subsection*{Tensor products over an algebra}
 
-Let $A=\bigoplus_{i\geq 0}A_i$ be a connected graded algebra.
-The multiplication maps give linear maps
-\[
-A_1^{\otimes i}\to A_i,\qquad a_1\otimes\cdots\otimes a_i\mapsto a_1\cdots a_i.
-\]
-If these maps are surjective for all $i\geq 0$, then every homogeneous element of positive degree can be written as a linear combination of products of degree $1$ elements.
+The degree zero algebra acts on both sides of the degree $1$ piece.
+We therefore need the tensor product over an algebra, not only the tensor product over $\Bbbk$.
 
 \begin{definition}
-A connected graded algebra $A$ is \defn{generated in degree $1$} if the smallest graded subalgebra of $A$ containing $A_0=\Bbbk$ and $A_1$ is all of $A$.
-Equivalently, the maps
+Let $M$ be a right $S$-module, let $N$ be a left $S$-module, and let $W$ be a $\Bbbk$-vector space.
+The \defn{tensor product} $M\otimes_S N$ is the quotient of $M\otimes_\Bbbk N$ by the subspace generated by
 \[
-A_1^{\otimes i}\to A_i
+ms\otimes n-m\otimes sn
+\qquad (m\in M,\ n\in N,\ s\in S).
 \]
-are surjective for all $i\geq 0$.
+Equivalently, a bilinear map $b:M\times N\to W$ factors uniquely through a linear map $M\otimes_S N\to W$ precisely when $b(ms,n)=b(m,sn)$ for all $m\in M$, $s\in S$, and $n\in N$.
 \end{definition}
 
-\begin{example}
-\begin{enumerate}
-\item $\Bbbk[x_1,\ldots,x_n]$ with $\deg x_i=1$ is generated in degree $1$.
-\item $T(V)$ is generated in degree $1$, since every tensor is a product of elements of $V=T(V)_1$.
-\item $\bigwedge V$ is generated in degree $1$.
-\item $\Bbbk[x]$ with $\deg x=2$ is not generated in degree $1$, since $A_1=0$ but $A_2=\Bbbk x\neq 0$.
-\end{enumerate}
-\end{example}
-
-The main construction today explains why tensor algebras are the natural starting point.
-Every algebra generated in degree $1$ is a quotient of a tensor algebra.
-
-\subsection*{Tensor algebras and the universal property}
-
-\begin{definition}
-Let $V$ be a $\Bbbk$-vector space.
-The \defn{tensor algebra} of $V$ is
+The equality $ms\otimes_S n=m\otimes_S sn$ allows a scalar from $S$ to pass between adjacent factors.
+For an $S$-bimodule $V$, define
 \[
-T(V):=\bigoplus_{i\geq 0}V^{\otimes i},
+V^{\otimes_S 0}:=S,\qquad
+V^{\otimes_S i}:=
+\underbrace{V\otimes_S\cdots\otimes_S V}_{i\text{ factors}}
+\quad (i\geq 1).
 \]
-with $V^{\otimes 0}=\Bbbk$ and multiplication given by concatenation.
-\end{definition}
 
-Thus $T(V)$ consists of finite linear combinations of words in elements of $V$.
-It is the algebra with no relations among the generators except those forced by linearity and associativity.
+Tensor duality reverses the order of the factors.
+We record the four compatible forms used in \cite[\S2.7]{BGS96} and \cite[\S2.1, (1)--(4)]{GI20}.
 
-\begin{example}
-If $V=\Bbbk x$, then
-\[
-T(V)\cong \Bbbk[x].
-\]
-There is only one letter, so non-commutativity is invisible.
-If $V=\Bbbk x\oplus \Bbbk y$, then
-\[
-T(V)\cong \Bbbk\langle x,y\rangle,
-\]
-with basis all words in $x$ and $y$:
-\[
-1,\quad x,y,\quad x^2,xy,yx,y^2,\quad x^3,x^2y,xyx,\ldots.
-\]
-\end{example}
-
-\begin{proposition}[Universal property of the tensor algebra]
-Let $B$ be a $\Bbbk$-algebra and let $f:V\to B$ be a $\Bbbk$-linear map.
-There exists a unique $\Bbbk$-algebra homomorphism
-\[
-\widetilde f:T(V)\to B
-\]
-such that $\widetilde f(v)=f(v)$ for all $v\in V$.
+\begin{proposition}\label{prop:tensor-duals}
+Let $S$ be finite-dimensional semisimple and let $V,W$ be finite-dimensional $S$-bimodules.
+There are natural bimodule isomorphisms
+\begin{equation}\label{eq:tensor-duals}
+\begin{aligned}
+\theta_D &: W^*\otimes_S D(V)\xrightarrow{\sim}D(V\otimes_S W),\\
+\theta_\ell &: W^*\otimes_S V^*\xrightarrow{\sim}(V\otimes_S W)^*,\\
+\theta_r &: {}^*W\otimes_S {}^*V\xrightarrow{\sim}{}^*(V\otimes_S W),\\
+\theta_{\mathrm{en}} &: {}^*W\otimes_S V^{*_{\mathrm{en}}}
+\xrightarrow{\sim}(V\otimes_S W)^{*_{\mathrm{en}}},
+\end{aligned}
+\end{equation}
+defined by
+\begin{equation}\label{eq:tensor-evaluations}
+\begin{aligned}
+\theta_D(g\otimes\lambda)(v\otimes w)&=\lambda(vg(w)),\\
+\theta_\ell(g\otimes f)(v\otimes w)&=f(vg(w)),\\
+\theta_r(g\otimes f)(v\otimes w)&=g(f(v)w),\\
+\theta_{\mathrm{en}}(g\otimes F)(v\otimes w)&=\sum_j a_j\otimes g(b_jw)^\op,
+\quad\text{where }F(v)=\sum_j a_j\otimes b_j^\op.
+\end{aligned}
+\end{equation}
 \end{proposition}
 
 \begin{proof}
-Define
+The formulas in \eqref{eq:tensor-evaluations} respect the tensor relations and bimodule actions.
+The maps $\theta_D$ and $\theta_\ell$ are isomorphisms for $W=S$ as a left module, hence for direct sums and direct summands of $S$.
+For $\theta_r$, apply the same argument to the right module $V$.
+Choose a symmetrising form $\tau$ as in Definition~\ref{def:symmetrising-form}, and use $\gamma_V,\gamma_{V\otimes_S W}$ from \eqref{eq:en-dual-comparison}.
+Then
 \[
-\widetilde f(v_1\otimes\cdots\otimes v_i)=f(v_1)\cdots f(v_i)
+\gamma_{V\otimes_S W}\circ\theta_{\mathrm{en}}
+=\theta_r\circ(\id_{{}^*W}\otimes\gamma_V),
 \]
-on pure tensors and extend linearly.
-This gives a homomorphism of algebras because concatenation of tensors is sent to multiplication in $B$.
-The formula is forced on every product of elements of $V$, so the homomorphism is unique.
+since both sides evaluate $g\otimes F$ at $v\otimes w$ as $\sum_j\tau(a_j)g(b_jw)$.
+Proposition~\ref{prop:dual-comparison} makes both $\gamma$ maps isomorphisms, so $\theta_{\mathrm{en}}$ is an isomorphism.
 \end{proof}
 
-\begin{corollary}
-Let $A$ be a connected graded algebra generated in degree $1$.
-Then there is a surjective homomorphism of graded algebras
+For a fixed symmetrising form $\tau$, let $\alpha_M(f)=\tau\circ f$ as in \eqref{eq:dual-comparison}.
+Then tensor evaluation satisfies
 \[
-T(A_1)\onto A.
+\alpha_{V\otimes_S W}\circ\theta_\ell
+=\theta_D\circ(\id_{W^*}\otimes\alpha_V).
 \]
+Both sides send $g\otimes f$ to $v\otimes w\mapsto\tau(f(vg(w)))$.
+
+\begin{example}
+Let $S=\Bbbk^{\oplus r}$ with coordinate idempotents $e_1,\ldots,e_r$, and suppose $V=e_iVe_j$ and $W=e_jWe_\ell$.
+By \eqref{eq:bimodule-dual-actions},
+\[
+V\otimes_S W=e_i(V\otimes_S W)e_\ell,\qquad
+W^*\otimes_S V^*=e_\ell(W^*\otimes_S V^*)e_i.
+\]
+Thus $\theta_\ell$ in \eqref{eq:tensor-duals} reverses the two outer idempotents.
+\end{example}
+
+\subsection*{Generated algebras}
+
+Let $A$ be graded with $S=A_0$.
+Multiplication makes $A_1$ an $S$-bimodule and gives
+\begin{equation}\label{eq:multiplication-maps}
+\mu_i:A_1^{\otimes_S i}\longrightarrow A_i,\qquad
+a_1\otimes\cdots\otimes a_i\longmapsto a_1\cdots a_i
+\quad(i\geq 1),\qquad \mu_0=\id_S.
+\end{equation}
+
+\begin{definition}
+The algebra $A$ is \defn{generated in degree $1$ over $S$} if every $\mu_i$ in \eqref{eq:multiplication-maps} is surjective.
+\end{definition}
+
+Equivalently, $S$ and $A_1$ generate $A$ as an algebra.
+
+\begin{example}
+The algebra $\Bbbk A_n$ of Example~\ref{ex:triangular-grading} is generated in degree $1$ over $S=\bigoplus_i\Bbbk e_{ii}$:
+\[
+e_{ij}=e_{i,i+1}e_{i+1,i+2}\cdots e_{j-1,j}
+\quad(1\leq i<j\leq n).
+\]
+For the grading $\deg e_{ij}=2(j-i)$, the same algebra has $A_1=0$ and $A_2\neq 0$, so it is not generated in degree $1$.
+\end{example}
+
+\subsection*{Tensor algebras and the universal property}
+
+\begin{definition}\label{def:tensor-algebra}
+Let $S$ be a $\Bbbk$-algebra and $V$ an $S$-bimodule.
+The \defn{tensor algebra of $V$ over $S$} is
+\[
+T_S(V):=\bigoplus_{i\in\Z}T_S(V)_i,
+\quad\text{where}\quad
+T_S(V)_i=
+\begin{cases}
+V^{\otimes_S i},&i\geq 1,\\
+S,&i=0,\\
+0,&i<0,
+\end{cases}
+\]
+with multiplication given by concatenation of tensors and the given $S$-actions.
+\end{definition}
+
+The left and right $S$-actions determine which factors can be concatenated.
+For $S=\bigoplus_{i=1}^r\Bbbk e_i$ with coordinate idempotents,
+\begin{equation}\label{eq:composable-tensors}
+V=\bigoplus_{i,j}e_iVe_j,\qquad
+(e_iVe_j)\otimes_S(e_\ell Ve_m)=0
+\quad\text{if }j\neq\ell.
+\end{equation}
+Indeed, $v\otimes w=ve_j\otimes w=v\otimes e_jw=0$ when $v\in e_iVe_j$, $w\in e_\ell Ve_m$, and $j\neq\ell$.
+
+\begin{example}\label{ex:tensor-A3}
+Let $S=\Bbbk^{\oplus 3}$ with coordinate idempotents $e_1,e_2,e_3$, and let $V=\Bbbk a\oplus\Bbbk b$ have actions $e_1ae_2=a$ and $e_2be_3=b$, with all other idempotent actions zero.
+By \eqref{eq:composable-tensors},
+\[
+V\otimes_S V=\Bbbk(a\otimes b),\qquad
+V^{\otimes_S 3}=0,\qquad
+T_S(V)=S\oplus\Bbbk a\oplus\Bbbk b\oplus\Bbbk ab.
+\]
+Here $ab=a\otimes b$.
+The assignments $e_i\mapsto e_{ii}$, $a\mapsto e_{12}$, and $b\mapsto e_{23}$ give $T_S(V)\cong\Bbbk A_3$; the tensor $ab$ maps to $e_{13}$.
+\end{example}
+
+\begin{proposition}[Universal property of the tensor algebra]\label{prop:tensor-universal}
+Let $\iota_S:S\to T_S(V)$ and $\iota_V:V\to T_S(V)$ be the canonical inclusions.
+Given a unital $\Bbbk$-algebra homomorphism $\varphi:S\to B$ and an $S$-bimodule map $f:V\to B$, where $sbt=\varphi(s)b\varphi(t)$ on $B$, there is a unique $\Bbbk$-algebra homomorphism $\widetilde f:T_S(V)\to B$ making the diagram commute:
+\begin{equation}\label{eq:tensor-universal}
+\xymatrix@C=42pt@R=28pt{
+V \ar[r]^{\iota_V} \ar[dr]_{f}
+& T_S(V) \ar@{-->}[d]^{\exists!\,\widetilde f}
+& S \ar[l]_{\iota_S} \ar[dl]^{\varphi}\\
+& B. &
+}
+\end{equation}
+\end{proposition}
+
+\begin{proof}
+Define $\widetilde f$ linearly by
+\begin{equation}\label{eq:tensor-extension}
+\widetilde f(s)=\varphi(s),\qquad
+\widetilde f(v_1\otimes_S\cdots\otimes_S v_i)=f(v_1)\cdots f(v_i)
+\quad(s\in S,\ i\geq 1).
+\end{equation}
+The identity $f(svt)=\varphi(s)f(v)\varphi(t)$ makes $\widetilde f$ well-defined on tensor products and compatible with multiplication.
+Every homomorphism satisfying \eqref{eq:tensor-universal} has the values in \eqref{eq:tensor-extension}, proving uniqueness.
+\end{proof}
+
+\begin{corollary}\label{cor:tensor-presentation}
+If $A$ is generated in degree $1$ over $S=A_0$, there is a surjective graded algebra homomorphism $\mu:T_S(A_1)\onto A$ whose degree $i$ component is $\mu_i$ from \eqref{eq:multiplication-maps}.
 \end{corollary}
 
 \begin{proof}
-Apply the universal property to the inclusion $A_1\into A$.
-Since $A$ is generated in degree $1$, the induced map is surjective.
+Apply Proposition~\ref{prop:tensor-universal} to the inclusions $S\to A$ and $A_1\to A$.
+Surjectivity of each $\mu_i$ gives surjectivity of $\mu$.
 \end{proof}
 
-\begin{definition}
-Let $A$ be a connected graded algebra generated in degree $1$.
-Choose $V=A_1$ and write
-\[
-A\cong T(V)/I
-\]
-for a homogeneous two-sided ideal $I\subset T(V)$.
-The ideal $I$ is called the \defn{ideal of relations}.
+\begin{definition}\label{def:relations}
+For the map $\mu$ in Corollary~\ref{cor:tensor-presentation}, the homogeneous two-sided ideal $I:=\Ker\mu$ is the \defn{ideal of relations}.
 \end{definition}
 
-The vector space $V$ gives the generators.
-The ideal $I$ tells us which linear combinations of words are declared to be zero.
-This is the same principle as writing
-\[
-\Bbbk[x,y]\cong \Bbbk\langle x,y\rangle/(xy-yx).
-\]
+Writing $V=A_1$, we obtain $A\cong T_S(V)/I$ with $I_0=I_1=0$.
+The bimodule $V$ specifies the generators and their left and right $S$-actions; $I$ specifies the relations between their products.
 
-\subsection*{Relations in degree 2}
+\subsection*{Quadratic algebras}
 
-Since $T(V)$ is graded, every homogeneous relation has a degree.
-Relations in degree $2$ are linear combinations of words of length $2$, hence elements of $V\otimes V$.
-
-\begin{definition}
-Let $V$ be a finite-dimensional $\Bbbk$-vector space and let
-\[
-R\subset V\otimes V
-\]
-be a subspace.
-The algebra
-\[
-A=T(V)/(R)
-\]
-is called a \defn{quadratic algebra}.
-Here $(R)$ denotes the two-sided ideal of $T(V)$ generated by $R$.
+\begin{definition}\label{def:quadratic}
+Let $S$ be finite-dimensional semisimple, $V$ a finite-dimensional $S$-bimodule, and $R\subset V\otimes_S V$ an $S$-sub-bimodule.
+The algebra $T_S(V)/(R)$ is a \defn{quadratic algebra}, where $(R)$ denotes the two-sided ideal generated by $R$.
 \end{definition}
 
-In other words, a quadratic algebra is an algebra generated by degree $1$ elements whose defining relations are homogeneous relations of degree $2$.
-The word ``quadratic'' refers to degree, not to commutativity.
+\begin{proposition}\label{prop:quadratic-basic}
+A quadratic algebra $A=T_S(V)/(R)$ has $A_0=S$ and $A_1=V$, is locally finite, and is generated in degree $1$ over $S$.
+\end{proposition}
 
-\begin{example}
-Let $V=\Bbbk x\oplus \Bbbk y$.
-The commutative polynomial ring is
+\begin{proof}
+The ideal $(R)$ has no components in degrees $0$ and $1$.
+Each $A_i$ is a quotient of the finite-dimensional space $V^{\otimes_S i}$, and multiplication maps $V^{\otimes_S i}$ onto $A_i$.
+\end{proof}
+
+\begin{example}\label{ex:tensor-An}
+Let $S=\bigoplus_{i=1}^n\Bbbk e_{ii}$ and $V=\bigoplus_{i=1}^{n-1}\Bbbk e_{i,i+1}$ inside $\Bbbk A_n$.
+By \eqref{eq:composable-tensors}, the basis tensors of positive length are
 \[
-\Bbbk[x,y]\cong T(V)/(x\otimes y-y\otimes x).
+e_{i,i+1}\otimes_S e_{i+1,i+2}\otimes_S\cdots\otimes_S e_{j-1,j}
+\longmapsto e_{ij}
+\quad(1\leq i<j\leq n).
 \]
-We usually write this as
-\[
-\Bbbk[x,y]\cong \Bbbk\langle x,y\rangle/(xy-yx).
-\]
-Thus the polynomial ring is quadratic.
+Thus multiplication gives $T_S(V)\cong\Bbbk A_n$, a quadratic algebra with $R=0$.
 \end{example}
 
-\begin{example}
-Let $V$ have basis $x_1,\ldots,x_n$.
-The polynomial ring is
+\begin{example}\label{ex:zero-composition}
+For $S,V,a,b$ from Example~\ref{ex:tensor-A3}, the quotient
 \[
-\Bbbk[x_1,\ldots,x_n]\cong
-T(V)\Big/
-\left(x_ix_j-x_jx_i\mid 1\leq i<j\leq n\right).
+T_S(V)/(ab)\cong\Bbbk A_3/(e_{13})
 \]
-There are $\binom n2$ independent quadratic commutativity relations.
+is quadratic with $R=\Bbbk(a\otimes b)$.
+Its basis is $e_1,e_2,e_3,a,b$, and $h_A(t)=3+2t$, as calculated in Example~\ref{ex:quadratic-matrix-quotient}.
 \end{example}
 
-\begin{example}
-Let $V$ have basis $x_1,\ldots,x_n$.
-The exterior algebra is
+\begin{example}\label{ex:two-vertex-relations}
+Let $S=\Bbbk^{\oplus 2}$ with coordinate idempotents $e_1,e_2$, and let $V=\Bbbk a\oplus\Bbbk b$ satisfy $e_1ae_2=a$ and $e_2be_1=b$, with all other idempotent actions zero.
+In $T_S(V)$ only alternating words in $a,b$ survive.
+The quadratic algebra $A=T_S(V)/(ab)$ has
 \[
-\bigwedge V\cong
-T(V)\Big/
-\left(x_i^2,\ x_ix_j+x_jx_i\mid 1\leq i<j\leq n\right),
+A=S\oplus\Bbbk a\oplus\Bbbk b\oplus\Bbbk ba,
+\qquad h_A(t)=2+2t+t^2.
 \]
-provided $\Char\Bbbk\neq 2$.
-If $\Char\Bbbk=2$, the signs require more care; one should define the exterior algebra by the alternating relation $v\otimes v=0$ for all $v\in V$.
+Every alternating word of length at least $3$ contains $ab$, so all higher components vanish.
 \end{example}
 
-\begin{example}
-Let
-\[
-A=\Bbbk\langle x,y\rangle/(x^2,xy).
-\]
-Then $A$ is quadratic.
-A basis of $A$ is given by words in $x,y$ which do not contain $x^2$ or $xy$ as consecutive subwords.
-Thus after an $x$ appears, no letter may follow it.
-The first few basis elements are
-\[
-1,\quad x,y,\quad yx,y^2,\quad y^2x,y^3,\quad \ldots.
-\]
-Hence
-\[
-h_A(t)=1+2t+2t^2+2t^3+\cdots=1+\frac{2t}{1-t}.
-\]
+\begin{example}\label{ex:cubic-quotient}
+Let $B=\Bbbk A_4$ and $A=B/(e_{14})$, with the grading of Example~\ref{ex:triangular-grading}.
+The ideal $I=(e_{14})=\Bbbk e_{14}$ has $I_2=0$ but $I_3\neq 0$.
+Since $e_{14}=e_{12}e_{23}e_{34}$, the algebra $A$ is generated in degree $1$ with a relation of degree $3$ and no relations of degree $2$.
+Hence $A$ is not quadratic.
 \end{example}
 
-\begin{example}
-The algebra
+\begin{example}[Polynomial and exterior algebras]\label{ex:polynomial-exterior}
+For the classical comparison, take $S=\Bbbk$ and $V=\bigoplus_{i=1}^n\Bbbk x_i$.
+The \defn{symmetric algebra} and \defn{exterior algebra} are
+\begin{equation}\label{eq:polynomial-exterior}
+\begin{aligned}
+P:=\Symm(V)&=T_\Bbbk(V)/(x_ix_j-x_jx_i\mid i<j)
+            \cong\Bbbk[x_1,\ldots,x_n],\\
+E:=\bigwedge V&=T_\Bbbk(V)/(x_i^2,\ x_ix_j+x_jx_i\mid i<j).
+\end{aligned}
+\end{equation}
+Both are quadratic.
+The polynomial basis allows repetitions; the exterior basis consists of $1$ and $x_{i_1}\cdots x_{i_d}$ with $i_1<\cdots<i_d$.
+Consequently
 \[
-\Bbbk[x]/(x^3)
+h_P(t)=\frac{1}{(1-t)^n},\qquad h_E(t)=(1+t)^n.
 \]
-with $\deg x=1$ is generated in degree $1$, but it is not quadratic.
-Its defining relation has degree $3$.
-This algebra is important in ring theory, but it is not in the basic class governed by quadratic duality.
-\end{example}
-
-\begin{example}
-The algebra
-\[
-\Bbbk[x]/(x^2)
-\]
-with $\deg x=1$ is quadratic:
-\[
-\Bbbk[x]/(x^2)\cong T(\Bbbk x)/(x\otimes x).
-\]
-As a graded vector space it has basis $1,x$, so
-\[
-h_A(t)=1+t.
-\]
+The relations for $E$ are equivalent to $v^2=0$ for every $v\in V$, in every characteristic.
 \end{example}
 
 \subsection*{The degree 2 relations of a quotient}
 
-Let $A=T(V)/I$ be a connected graded algebra generated in degree $1$.
-The degree $2$ part of $T(V)$ is $V\otimes V$.
-The degree $2$ part of the ideal $I$ is
+Let $A=T_S(V)/I$ be generated in degree $1$, with $I_0=I_1=0$ as in Definition~\ref{def:relations}.
+In degree $2$,
 \[
-I_2:=I\cap (V\otimes V).
+A_2\cong(V\otimes_S V)/I_2,
+\quad\text{where}\quad
+I_2=I\cap(V\otimes_S V).
 \]
-The quotient map gives
-\[
-A_2\cong (V\otimes V)/I_2.
-\]
-Thus $I_2$ is exactly the space of quadratic relations visible in $A$.
 
-\begin{definition}
-Let $A=T(V)/I$ be generated in degree $1$.
-The \defn{quadratic part} of $A$ is
+\begin{definition}\label{def:quadratic-part}
+The \defn{quadratic part} of $A$ is $qA:=T_S(V)/(I_2)$.
+\end{definition}
+
+The inclusion $(I_2)\subset I$ induces a surjective graded homomorphism $\pi_A:qA\onto A$, and
 \[
-qA:=T(V)/(I_2).
+\pi_A\text{ is an isomorphism}
+\quad\Longleftrightarrow\quad I=(I_2)
+\quad\Longleftrightarrow\quad A\text{ is quadratic}.
 \]
-There is a natural surjective homomorphism
+
+\begin{example}
+For $A=\Bbbk A_4/(e_{14})$ from Example~\ref{ex:cubic-quotient}, we have $I_2=0$, so
 \[
-qA\onto A.
+qA=\Bbbk A_4,\qquad
+\pi_A:\Bbbk A_4\onto\Bbbk A_4/(e_{14}),\qquad
+\Ker\pi_A=\Bbbk e_{14}.
+\]
+Thus $qA$ does not impose the cubic relation $e_{12}e_{23}e_{34}=0$.
+\end{example}
+
+\subsection*{Orthogonal complements and quadratic duality}
+
+\begin{definition}\label{def:orthogonals}
+For an $S$-sub-bimodule $U$ of a finite-dimensional $S$-bimodule $M$, define the \defn{right orthogonal complement} and \defn{left orthogonal complement} by
+\[
+U^\perp:=\{f\in M^*\mid f(U)=0\},
+\qquad
+{}^\perp U:=\{g\in{}^*M\mid g(U)=0\}.
 \]
 \end{definition}
 
-The algebra $qA$ keeps the same generators and the same degree $2$ relations as $A$, but forgets all relations of degree $3$ or higher.
-Thus $A$ is quadratic precisely when $qA\to A$ is an isomorphism.
+Both $U^\perp$ and $ {}^\perp U$ are $S$-sub-bimodules by \eqref{eq:bimodule-dual-actions}.
+Fix a symmetrising form $\tau$ as in Definition~\ref{def:symmetrising-form}.
+For the comparison maps $\alpha_M(f)=\tau\circ f$ and $\beta_M(g)=\tau\circ g$ in \eqref{eq:dual-comparison},
+\begin{equation}\label{eq:orthogonal-comparison}
+\alpha_M(U^\perp)=\beta_M({}^\perp U)
+=\{\lambda\in D(M)\mid\lambda(U)=0\}.
+\end{equation}
+Indeed, if $\alpha_M(f)(U)=0$, then
+\[
+\tau(sf(u))=\tau(f(su))=0
+\quad\text{for all }s\in S,\ u\in U,
+\]
+so non-degeneracy of $\tau$ gives $f(U)=0$.
+For $\beta_M$, use $\tau(g(u)s)=\tau(g(us))$ instead.
+
+For $A=T_S(V)/(R)$, the map $\theta_\ell$ in \eqref{eq:tensor-duals} identifies $R^\perp$ with a sub-bimodule of $V^*\otimes_S V^*$.
+These are the generators and relations used for the quadratic dual in Lecture~3:
+\[
+V^*=\Hom_S(V,S),\qquad
+R^\perp\subset V^*\otimes_S V^*.
+\]
+The generators $V^*$ are assigned degree $1$.
+In contrast, the graded $S$-dual $V^{(*)}$ from Definition~\ref{def:graded-S-duals} has degree $-1$ when $V=A_1$.
 
 \begin{example}
-Let $A=\Bbbk[x]/(x^3)$ with $\deg x=1$.
-Then $V=\Bbbk x$ and $I=(x^3)$.
-Since $I_2=0$, we have
+For the pair $P=\Symm(V)$ and $E=\bigwedge V$ in Example~\ref{ex:polynomial-exterior}, take $V=\Bbbk x\oplus\Bbbk y$.
+The relation spaces are
 \[
-qA=T(V)\cong \Bbbk[x].
+\begin{aligned}
+R_P&=\Bbbk(x\otimes y-y\otimes x),\\
+R_E&=\Bbbk(x\otimes x)\oplus\Bbbk(y\otimes y)\oplus\Bbbk(x\otimes y+y\otimes x).
+\end{aligned}
 \]
-The natural map $qA\to A$ is the quotient map $\Bbbk[x]\to \Bbbk[x]/(x^3)$, not an isomorphism.
+Let $x^*,y^*\in V^*$ be the coordinate functionals.
+With the tensor evaluation $\theta_\ell$ in \eqref{eq:tensor-evaluations},
+\[
+\begin{aligned}
+R_P^\perp&=\operatorname{span}_\Bbbk\{x^*\otimes x^*,\,y^*\otimes y^*,\,x^*\otimes y^*+y^*\otimes x^*\},\\
+R_E^\perp&=\Bbbk(x^*\otimes y^*-y^*\otimes x^*).
+\end{aligned}
+\]
+Thus the quadratic dual presentations exchange the symmetric and exterior relations.
 \end{example}
-
-\begin{example}
-Let
-\[
-A=\Bbbk\langle x,y\rangle/(xy-yx,\ x^3).
-\]
-Then $A$ is generated in degree $1$ but not quadratic.
-Its quadratic part is
-\[
-qA=\Bbbk\langle x,y\rangle/(xy-yx)\cong \Bbbk[x,y].
-\]
-The cubic relation $x^3=0$ is invisible to $qA$.
-\end{example}
-
-\subsection*{Why quadratic algebras are the right class}
-
-Koszul duality begins with the observation that degree $2$ relations have a linear dual.
-If $A=T(V)/(R)$ with $R\subset V\otimes V$, then the dual vector space $V^*$ gives dual generators, while the orthogonal subspace
-\[
-R^\perp\subset V^*\otimes V^*
-\]
-will give the dual quadratic relations.
-This construction will be made precise next lecture.
-
-For now, note why degree $2$ is special.
-The dual of $V\otimes V$ is naturally $V^*\otimes V^*$ when $V$ is finite-dimensional.
-Thus a subspace of quadratic relations has an orthogonal complement which is again a space of quadratic relations.
-There is no similarly simple operation that turns arbitrary cubic and quartic relations into relations of the same kind without adding more structure.
-
-\begin{example}
-For the polynomial ring
-\[
-\Bbbk[x,y]\cong \Bbbk\langle x,y\rangle/(xy-yx),
-\]
-the space of quadratic relations is one-dimensional, spanned by $xy-yx$.
-The quadratic dual will have two generators $x^*,y^*$ and relations corresponding to the orthogonal complement of this line in
-\[
-V^*\otimes V^*.
-\]
-This produces the exterior algebra on two generators.
-The full computation will be done in Lecture 3.
-\end{example}
-
-\begin{example}
-For the exterior algebra
-\[
-\bigwedge(\Bbbk x\oplus\Bbbk y)
-\cong \Bbbk\langle x,y\rangle/(x^2,\ y^2,\ xy+yx),
-\]
-the quadratic dual will be the polynomial ring in two variables.
-This is the first sign of the duality between symmetric and exterior algebras.
-\end{example}
-
-\subsection*{First checks and non-examples}
-
-\begin{proposition}
-Let $A=T(V)/(R)$ be quadratic, where $V$ is finite-dimensional and $R\subset V\otimes V$.
-Then $A$ is connected, locally finite, and generated in degree $1$.
-\end{proposition}
-
-\begin{proof}
-The tensor algebra $T(V)$ is connected and generated in degree $1$.
-The ideal $(R)$ is homogeneous because it is generated by homogeneous elements of degree $2$.
-Therefore the quotient inherits a connected grading and is generated by the image of $V$.
-Since $V$ is finite-dimensional, each $T(V)_i=V^{\otimes i}$ is finite-dimensional, and hence each quotient $A_i$ is finite-dimensional.
-\end{proof}
-
-\begin{remark}
-The converse is false.
-A connected locally finite algebra generated in degree $1$ need not be quadratic.
-The example $\Bbbk[x]/(x^3)$ is the smallest warning.
-\end{remark}
 
 \begin{exercise}
-Let $A=\Bbbk\langle x,y\rangle/(x^2,y^2,xy)$.
-Find a basis for $A_i$ for $i=0,1,2,3$, and compute the Hilbert series.
+Let $A=\Bbbk A_4/(e_{13},e_{24})$ with the grading of Example~\ref{ex:triangular-grading}.
+Find a homogeneous basis, compute $h_A(t)$, and write $A=T_S(V)/(R)$ with explicit $S,V,R$.
 \end{exercise}
 
 \begin{exercise}
-Let $A=\Bbbk[x,y]/(x^2,xy,y^2)$ with the usual grading.
-Show that $A$ is quadratic and compute $h_A(t)$.
+For the bimodule $V$ in Example~\ref{ex:two-vertex-relations}, find a basis of each $T_S(V)_d$ and show that $h_{T_S(V)}(t)=2/(1-t)$.
+Compare with the quotient $T_S(V)/(ab)$.
 \end{exercise}
 
 \begin{exercise}
-Let $V$ be $n$-dimensional.
-Show directly that
+For $P=\Symm(V)$ and $E=\bigwedge V$ in Example~\ref{ex:polynomial-exterior}, prove
 \[
-\dim_\Bbbk \Symm^2(V)=\frac{n(n+1)}{2},\qquad
-\dim_\Bbbk \bigwedge^2 V=\frac{n(n-1)}{2}.
+\dim_\Bbbk P_2=\frac{n(n+1)}2,\qquad
+\dim_\Bbbk E_2=\frac{n(n-1)}2
+\quad\text{where }n=\dim_\Bbbk V.
 \]
-Interpret these dimensions as the number of independent quadratic monomials in the commutative and anti-commutative cases.
 \end{exercise}
+
+\begin{thebibliography}{BGS96}
+\bibitem[BGS96]{BGS96}
+A.~Beilinson, V.~Ginzburg, and W.~Soergel,
+\emph{Koszul duality patterns in representation theory},
+J.~Amer.~Math.~Soc.~9 (1996), 473--527.
+
+\bibitem[GI20]{GI20}
+J.~Grant and O.~Iyama,
+\emph{Higher preprojective algebras, Koszul algebras, and superpotentials},
+Compos.~Math.~156 (2020), 2588--2627.
+\end{thebibliography}
 
 \end{document}
