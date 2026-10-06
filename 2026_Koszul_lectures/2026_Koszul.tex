@@ -360,18 +360,19 @@ $f(M_j)\subset N_{j+d}$ for all $j\in\Z$. A \defn{homomorphism of graded modules
 \end{definition}
 
 \begin{notation}\label{not:graded-hom}
-For graded right $A$-modules $M,N$, $\Hom_A(M,N)$ denotes all right $A$-module homomorphisms, without a grading condition. We use
+For graded right $A$-modules $M,N$, $\Hom_A(M,N)$ denotes all right $A$-module homomorphisms, without a grading condition. The space of homomorphisms preserving degrees is
 \begin{equation}\label{eq:graded-hom}
-\begin{aligned}
-\Hom_{\Grmod A}(M,N)&=\{f\in\Hom_A(M,N)\mid f(M_j)\subset N_j\text{ for all }j\in\Z\},\\
-\underline{\Hom}_A(M,N)&=\bigoplus_{d\in\Z}\Hom_{\Grmod A}(M,N(d)).
-\end{aligned}
+\Hom_A^{\Z}(M,N)=\{f\in\Hom_A(M,N)\mid f(M_j)\subset N_j\text{ for all }j\in\Z\}.
 \end{equation}
-The degree $d$ component of $\underline{\Hom}_A(M,N)$ consists of homomorphisms $M\to N$ of degree $d$, since $N(d)_j=N_{j+d}$.
-For left modules we use $\Hom_{A^\op}$ and $\Hom_{\Grmod A^\op}$.
+Thus $\Hom_A^{\Z}(M,N(d))$ consists of homomorphisms $M\to N$ of degree $d$, since $N(d)_j=N_{j+d}$.
+For left modules we use $\Hom_{A^\op}$ and $\Hom_{A^\op}^{\Z}$.
 \end{notation}
 
-There is a natural inclusion $\underline{\Hom}_A(M,N)\subset\Hom_A(M,N)$: an element on the left is a finite sum of homogeneous homomorphisms. Equality holds when $M$ is finitely generated, but need not hold for arbitrary $M$.
+Finite sums of homogeneous homomorphisms give a natural inclusion
+\[
+\bigoplus_{d\in\Z}\Hom_A^{\Z}(M,N(d))\subset\Hom_A(M,N).
+\]
+Equality holds when $M$ is finitely generated, but need not hold for arbitrary $M$.
 
 \begin{example}\label{ex:matrix-hom}
 For $A=\Bbbk A_3$, left multiplication by $e_{12}$ gives
@@ -384,7 +385,7 @@ e_{22}A&\longrightarrow e_{11}A,\\[-2pt]
 \qquad(u,v\in\Bbbk).
 \end{aligned}
 \]
-The $u$ and $v$ entries have degrees $0,1$ in the source and $1,2$ in the target. Thus the map has degree $1$; after replacing the source by $e_{22}A(-1)$, it belongs to $\Hom_{\Grmod A}(e_{22}A(-1),e_{11}A)$.
+The $u$ and $v$ entries have degrees $0,1$ in the source and $1,2$ in the target. Thus the map has degree $1$; after replacing the source by $e_{22}A(-1)$, it belongs to $\Hom_A^{\Z}(e_{22}A(-1),e_{11}A)$.
 Right $A$-linearity follows from associativity of matrix multiplication.
 \end{example}
 
@@ -512,7 +513,7 @@ The evaluation map sends $m$ to $(f\mapsto f(m))$.
 It is an isomorphism in each degree by finite-dimensional linear algebra, and \eqref{eq:linear-dual-actions} makes it a module homomorphism.
 \end{proof}
 
-\subsection*{Left, right, and two-sided duals over $S$}
+\subsection{\texorpdfstring{Left, right, and two-sided duals over $S$}{Left, right, and two-sided duals over S}}
 
 Fix a finite-dimensional semisimple $\Bbbk$-algebra $S$, concentrated in degree $0$.
 Besides the $\Bbbk$-linear dual, we need duals defined by left $S$-linear maps, right $S$-linear maps, and maps respecting both actions.
@@ -655,8 +656,8 @@ The first construction also applies to graded right $S$-modules, and the second 
 
 Parentheses on the stars distinguish the graded constructions from the full $S$-duals. In the notation \eqref{eq:graded-hom},
 \[
-M^{(*)}=\underline{\Hom}_S(M,S),\qquad
-{}^{(*)}M=\underline{\Hom}_{S^\op}(M,S).
+M^{(*)}=\bigoplus_{i\in\Z}\Hom_S^{\Z}(M,S(i)),\qquad
+{}^{(*)}M=\bigoplus_{i\in\Z}\Hom_{S^\op}^{\Z}(M,S(i)).
 \]
 
 \begin{corollary}\label{cor:graded-dual-comparison}
@@ -711,7 +712,7 @@ Evaluation is an isomorphism for $S$, hence for such summands; \eqref{eq:bimodul
 
 \section{Lecture 2: Tensor and quadratic algebras}
 
-\subsection*{Tensor products over an algebra}
+\subsection{Tensor products over an algebra}
 
 The degree zero algebra acts on both sides of the degree $1$ piece.
 We therefore need the tensor product over an algebra, not only the tensor product over $\Bbbk$.
@@ -793,7 +794,7 @@ W^*\otimes_S V^*=e_\ell(W^*\otimes_S V^*)e_i.
 Thus $\theta_r$ in \eqref{eq:tensor-duals} reverses the two outer idempotents.
 \end{example}
 
-\subsection*{Generated algebras}
+\subsection{Generated algebras}
 
 Let $A$ be graded with $S=A_0$.
 Multiplication makes $A_1$ an $S$-bimodule and gives
@@ -818,7 +819,7 @@ e_{ij}=e_{i,i+1}e_{i+1,i+2}\cdots e_{j-1,j}
 For the grading $\deg e_{ij}=2(j-i)$, the same algebra has $A_1=0$ and $A_2\neq 0$, so it is not generated in degree $1$.
 \end{example}
 
-\subsection*{Tensor algebras and the universal property}
+\subsection{Tensor algebras and the universal property}
 
 \begin{definition}\label{def:tensor-algebra}
 Let $S$ be a $\Bbbk$-algebra and $V$ an $S$-bimodule.
@@ -897,7 +898,7 @@ For the map $\mu$ in Corollary~\ref{cor:tensor-presentation}, the homogeneous tw
 Writing $V=A_1$, we obtain $A\cong T_S(V)/I$ with $I_0=I_1=0$.
 The bimodule $V$ specifies the generators and their left and right $S$-actions; $I$ specifies the relations between their products.
 
-\subsection*{Quadratic algebras}
+\subsection{Quadratic algebras}
 
 \begin{definition}\label{def:quadratic}
 Let $S$ be finite-dimensional semisimple, $V$ a finite-dimensional $S$-bimodule, and $R\subset V\otimes_S V$ an $S$-sub-bimodule.
@@ -966,7 +967,7 @@ The polynomial basis allows repetitions; the exterior basis consists of $1$ and 
 The exterior relations are equivalently $x_i^2=0$ for $1\leq i\leq n$ and $x_ix_j+x_jx_i=0$ for $i<j$, in every characteristic.
 \end{example}
 
-\subsection*{Hilbert series}
+\subsection{Hilbert series}
 
 A Hilbert series records the dimension of each homogeneous component.
 
@@ -1024,7 +1025,7 @@ h_{V\otimes_\Bbbk W}(t)=h_V(t)h_W(t),\qquad
 The coefficient of $t^n$ on either side is $\sum_{i+j=n}\dim_\Bbbk V_i\dim_\Bbbk W_j$. Only finitely many summands are non-zero because both gradings are bounded below.
 \end{proof}
 
-\subsection*{The degree 2 relations of a quotient}
+\subsection{The degree 2 relations of a quotient}
 
 Let $S$ be finite-dimensional semisimple and $V$ a finite-dimensional $S$-bimodule.
 Let $A=T_S(V)/I$ with $I_0=I_1=0$ as in Definition~\ref{def:relations}.
@@ -1056,7 +1057,7 @@ qA=\Bbbk A_4,\qquad
 Thus $qA$ does not impose the cubic relation $e_{12}e_{23}e_{34}=0$.
 \end{example}
 
-\subsection*{Orthogonal complements and quadratic duality}
+\subsection{Orthogonal complements and quadratic duality}
 
 \begin{definition}\label{def:orthogonals}
 For an $S$-sub-bimodule $U$ of a finite-dimensional $S$-bimodule $M$, define the \defn{right orthogonal complement} and \defn{left orthogonal complement} by
@@ -1083,7 +1084,7 @@ so non-degeneracy of $\tau$ gives $f(U)=0$.
 For $\beta_M$, use $\tau(sg(u))=\tau(g(su))$ instead.
 
 For $A=T_S(V)/(R)$, the map $\theta_r$ in \eqref{eq:tensor-duals} identifies $R^\perp$ with a sub-bimodule of $V^*\otimes_S V^*$.
-These are the generators and relations used for the quadratic dual in Lecture~3:
+These are the generators and relations in Definition~\ref{def:quadratic-duals}:
 \[
 V^*=\Hom_S(V,S),\qquad
 R^\perp\subset V^*\otimes_S V^*.
@@ -1091,7 +1092,7 @@ R^\perp\subset V^*\otimes_S V^*.
 The generators $V^*$ are assigned degree $1$.
 In contrast, the graded $S$-dual $V^{(*)}$ from Definition~\ref{def:graded-S-duals} has degree $-1$ when $V=A_1$.
 
-\begin{example}
+\begin{example}\label{ex:symmetric-orthogonals}
 For $\Symm(V)$ and $\bigwedge V$ in Example~\ref{ex:polynomial-exterior}, take $V=\Bbbk x\oplus\Bbbk y$.
 The relation spaces are
 \[
@@ -1128,6 +1129,344 @@ For the algebras in Example~\ref{ex:polynomial-exterior}, prove
 \dim_\Bbbk\bigwedge\nolimits^2 V=\frac{n(n-1)}2
 \quad\text{where }n=\dim_\Bbbk V.
 \]
+\end{exercise}
+
+\pagebreak
+
+\section{Lecture 3: The quadratic dual}\label{sec:quadratic-dual}
+
+\subsection{Generators and orthogonal relations}
+
+Throughout this lecture, $S$ is a finite-dimensional semisimple $\Bbbk$-algebra and $A=T_S(V)/(R)$ is quadratic, with $V$ finite-dimensional and $R\subset V\otimes_S V$ an $S$-sub-bimodule.
+Recall that $V^*=\Hom_S(V,S)$ uses right $S$-linear maps, whereas ${}^*V=\Hom_{S^\op}(V,S)$ uses left $S$-linear maps.
+The tensor evaluations in \eqref{eq:tensor-evaluations} are
+\begin{equation}\label{eq:quadratic-pairings}
+\begin{aligned}
+\theta_r(g\otimes f)(v\otimes w)&=g(f(v)w),
+& f,g&\in V^*,\\
+\theta_\ell(g\otimes f)(v\otimes w)&=f(vg(w)),
+& f,g&\in{}^*V.
+\end{aligned}
+\end{equation}
+Both reverse the order of the factors. The quadratic dual replaces $V$ by an $S$-dual and $R$ by the maps vanishing on $R$.
+
+\begin{definition}\label{def:quadratic-duals}
+The \defn{right quadratic dual} and \defn{left quadratic dual} of $A$ are
+\begin{equation}\label{eq:quadratic-duals}
+\begin{aligned}
+A^!&:=T_S(V^*)/(R^\perp),
+&R^\perp&=\{F\in V^*\otimes_S V^*\mid\theta_r(F)(R)=0\},\\
+{}^!A&:=T_S({}^*V)/({}^\perp R),
+&{}^\perp R&=\{F\in{}^*V\otimes_S{}^*V\mid\theta_\ell(F)(R)=0\}.
+\end{aligned}
+\end{equation}
+The generators $V^*$ and ${}^*V$ have degree $1$.
+\end{definition}
+
+We use $A^!$ unless a side is specified. The construction uses the ordinary $S$-dual of $V$, placed in degree $1$, not the graded $S$-dual $V^{(*)}$, which has degree $-1$.
+It is independent of a chosen presentation: $V=A_1$ and $R=\Ker(A_1\otimes_S A_1\to A_2)$ are intrinsic to $A$.
+
+\begin{proposition}\label{prop:dual-low-degrees}
+The algebra $A^!$ is quadratic and
+\[
+A^!_0=S,\qquad A^!_1=V^*,\qquad A^!_2\cong R^*.
+\]
+In particular, $\dim_\Bbbk A^!_2=\dim_\Bbbk R$.
+\end{proposition}
+
+\begin{proof}
+Restriction to $R$ gives an exact sequence of $S$-bimodules
+\begin{equation}\label{eq:restriction-relations}
+0\longrightarrow R^\perp\longrightarrow V^*\otimes_S V^*
+\xrightarrow{F\mapsto\theta_r(F)|_R}R^*\longrightarrow0.
+\end{equation}
+Surjectivity follows because $R$ is a direct summand of $V\otimes_S V$ as a right $S$-module, so a right $S$-linear map $R\to S$ extends to $V\otimes_S V$.
+Now use Proposition~\ref{prop:quadratic-basic}; the dimension statement follows from Proposition~\ref{prop:dual-comparison}.
+\end{proof}
+
+Adding relations has the opposite effect after dualising. For $S$-sub-bimodules $R\subset R'\subset V\otimes_S V$,
+\[
+R\subset R'\quad\Longrightarrow\quad(R')^\perp\subset R^\perp
+\quad\Longrightarrow\quad
+\bigl(T_S(V)/(R')\bigr)^!\onto\bigl(T_S(V)/(R)\bigr)^!.
+\]
+
+\subsection{Recovering the original algebra}
+
+\begin{lemma}\label{lem:double-orthogonal}
+Let $U\subset M$ be an $S$-sub-bimodule of a finite-dimensional $S$-bimodule. Under the evaluation isomorphisms of Lemma~\ref{lem:S-bidual},
+\[
+{}^\perp(U^\perp)=U,\qquad ({}^\perp U)^\perp=U.
+\]
+\end{lemma}
+
+\begin{proof}
+Every $u\in U$ is annihilated by every $f\in U^\perp$, so $U\subset{}^\perp(U^\perp)$.
+If $m\notin U$, then $m+U\neq0$ in $M/U$. Since $M/U$ is a direct summand of some $S^{\oplus n}$ as a right module, a coordinate map gives a right $S$-linear map $M/U\to S$ non-zero on $m+U$.
+Its composite with $M\to M/U$ belongs to $U^\perp$ and does not vanish on $m$. Hence $m\notin{}^\perp(U^\perp)$.
+The proof of $({}^\perp U)^\perp=U$ uses left modules instead.
+\end{proof}
+
+\begin{theorem}\label{thm:quadratic-bidual}
+Left and right quadratic duality are canonically inverse:
+\[
+{}^!(A^!)\cong A\cong({}^!A)^!
+\quad\text{as graded algebras over }S.
+\]
+\end{theorem}
+
+\begin{proof}
+The evaluation isomorphism $V\cong{}^*(V^*)$ from Lemma~\ref{lem:S-bidual} identifies the generators of $A$ and ${}^!(A^!)$.
+Under the tensor evaluation $\theta_\ell$ in \eqref{eq:quadratic-pairings}, the tensor $v\otimes w$ then acts on $g\otimes f\in V^*\otimes_S V^*$ by $g(f(v)w)$.
+Thus the two evaluations in \eqref{eq:quadratic-pairings} agree under biduality, and Lemma~\ref{lem:double-orthogonal} identifies ${}^\perp(R^\perp)$ with $R$.
+The presentations \eqref{eq:quadratic-duals} give ${}^!(A^!)\cong A$.
+Interchanging left and right gives $({}^!A)^!\cong A$.
+\end{proof}
+
+\begin{proposition}\label{prop:quadratic-dual-sides}
+A choice of symmetrising form $\tau:S\to\Bbbk$ gives isomorphisms $A^!\cong{}^!A$ and $(A^!)^!\cong A$ of graded algebras over $S$.
+\end{proposition}
+
+\begin{proof}
+The maps $\alpha_V(f)=\tau\circ f$ and $\beta_V(g)=\tau\circ g$ in \eqref{eq:dual-comparison} give a bimodule isomorphism $\beta_V^{-1}\alpha_V:V^*\to{}^*V$.
+For $f,g\in V^*$, write $f'=\beta_V^{-1}\alpha_V(f)$ and $g'=\beta_V^{-1}\alpha_V(g)$. Then
+\[
+\begin{aligned}
+\tau\bigl(f'(vg'(w))\bigr)
+&=\tau\bigl(f(v)g'(w)\bigr)
+=\tau\bigl(g'(f(v)w)\bigr)\\
+&=\tau\bigl(g(f(v)w)\bigr)
+\qquad(v,w\in V).
+\end{aligned}
+\]
+By \eqref{eq:orthogonal-comparison}, $(\beta_V^{-1}\alpha_V)^{\otimes_S2}$ therefore identifies $R^\perp$ with ${}^\perp R$.
+It induces $A^!\cong{}^!A$ on the presentations \eqref{eq:quadratic-duals}.
+Apply the same comparison to $A^!$ and then Theorem~\ref{thm:quadratic-bidual} to obtain $(A^!)^!\cong{}^!(A^!)\cong A$.
+\end{proof}
+
+Theorem~\ref{thm:quadratic-bidual} needs no choice of form. Proposition~\ref{prop:quadratic-dual-sides} permits the usual statement that quadratic duality is an involution, but the identification of left and right duals uses $\tau$.
+
+\subsection{Tensor algebras and monomial relations}
+
+\begin{example}\label{ex:tensor-square-zero-dual}
+Taking $R=0$ or $R=V\otimes_S V$ in \eqref{eq:quadratic-duals} gives
+\[
+\begin{aligned}
+\bigl(T_S(V)\bigr)^!
+&=T_S(V^*)/(V^*\otimes_S V^*)\cong S\oplus V^*,\\
+\bigl(T_S(V)/(V\otimes_S V)\bigr)^!&=T_S(V^*).
+\end{aligned}
+\]
+In the first algebra, $(V^*)^2=0$ and $(s,f)(t,g)=(st,sg+ft)$.
+Thus a tensor algebra with no relations is dual to an algebra in which every product of two positive degree elements is zero.
+\end{example}
+
+For the rest of this subsection, take $S=\bigoplus_{i=1}^r\Bbbk e_i$, with $e_ie_j=\delta_{ij}e_i$ and $\sum_i e_i=1$.
+Choose a basis $\mathcal B_{ij}$ of each $e_iVe_j$ and let $\mathcal B=\bigcup_{i,j}\mathcal B_{ij}$.
+A word $b_1\cdots b_d$ in $\mathcal B$ represents a non-zero basis tensor precisely when the adjacent idempotents match, as in \eqref{eq:composable-tensors}. We call such a word \defn{composable}.
+
+\begin{definition}
+The presentation $A=T_S(V)/(R)$ is \defn{monomial quadratic} with respect to $\mathcal B$ if $R$ is spanned by a subset $\mathcal R$ of the composable words of length $2$ in $\mathcal B$.
+\end{definition}
+
+For $b\in\mathcal B_{ij}$, define $b^*\in V^*$ by
+\begin{equation}\label{eq:dual-basis-idempotents}
+b^*(c)=\delta_{bc}e_j\quad(c\in\mathcal B),
+\qquad e_jb^*e_i=b^*.
+\end{equation}
+The elements $b^*$ form a basis of $V^*$; their left and right idempotents are reversed.
+
+\begin{proposition}\label{prop:monomial-dual}
+For a monomial quadratic presentation:
+\begin{enumerate}
+\item A basis of $A$ consists of the $e_i$ and the composable words containing no adjacent pair from $\mathcal R$.
+\item The quadratic dual is monomial, with
+\begin{equation}\label{eq:monomial-dual}
+R^\perp=\operatorname{span}_\Bbbk
+\{c^*b^*\mid bc\text{ is composable and }bc\notin\mathcal R\}.
+\end{equation}
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The ideal generated by $\mathcal R$ is spanned by the composable words containing an element of $\mathcal R$ as an adjacent pair. Removing those basis words proves (1).
+For $b\in\mathcal B_{ij}$ and $c\in\mathcal B_{j\ell}$, \eqref{eq:quadratic-pairings} and \eqref{eq:dual-basis-idempotents} give
+\[
+\theta_r(c^*\otimes b^*)(b\otimes c)=c^*(e_jc)=e_\ell.
+\]
+The functional vanishes on every other basis tensor. Hence $c^*b^*$ belongs to $R^\perp$ exactly when $bc\notin\mathcal R$, proving (2).
+\end{proof}
+
+\begin{example}\label{ex:An-quadratic-dual}
+For $A=\Bbbk A_n$, take $S=\bigoplus_i\Bbbk e_{ii}$ and $V=\bigoplus_{i=1}^{n-1}\Bbbk e_{i,i+1}$ as in Example~\ref{ex:tensor-An}.
+There are no quadratic relations, so $A^!$ has the reversed generators $e_{i,i+1}^*\in e_{i+1,i+1}V^*e_{ii}$ and every composable product of two generators is zero.
+Consequently $h_{A^!}(t)=n+(n-1)t$.
+For $n=3$,
+\[
+(\Bbbk A_3)^!\cong\bigl(\Bbbk A_3/(e_{13})\bigr)^\op,
+\qquad
+\bigl(\Bbbk A_3/(e_{13})\bigr)^!\cong(\Bbbk A_3)^\op.
+\]
+These are graded isomorphisms fixing the diagonal idempotents.
+\end{example}
+
+\begin{example}\label{ex:alternating-quadratic-dual}
+Take $A=T_S(V)/(ab)$ from Example~\ref{ex:two-vertex-relations}, where $S=\Bbbk e_1\oplus\Bbbk e_2$, $e_1ae_2=a$, and $e_2be_1=b$.
+The only composable words of length $2$ are $ab$ and $ba$. Thus
+\[
+A^!=T_S(V^*)/(a^*b^*),\qquad
+A^!=S\oplus\Bbbk a^*\oplus\Bbbk b^*\oplus\Bbbk b^*a^*.
+\]
+The original relation $ab=0$ corresponds to the surviving word $b^*a^*$; the surviving word $ba$ corresponds to the dual relation $a^*b^*=0$.
+In both algebras the Hilbert series is $2+2t+t^2$.
+\end{example}
+
+\subsection{Symmetric and exterior algebras}
+
+\begin{proposition}\label{prop:symmetric-exterior-dual}
+For a finite-dimensional $\Bbbk$-vector space $V$,
+\[
+\Symm(V)^!\cong\bigwedge D(V),\qquad
+\bigl(\bigwedge V\bigr)^!\cong\Symm(D(V)).
+\]
+\end{proposition}
+
+\begin{proof}
+Here $S=\Bbbk$ and $V^*=D(V)$. Choose a basis $x_1,\ldots,x_n$ of $V$, with coordinate functionals $x_1^*,\ldots,x_n^*$.
+The evaluation \eqref{eq:quadratic-pairings} reads
+\[
+\theta_r(x_j^*\otimes x_i^*)(x_p\otimes x_q)=\delta_{ip}\delta_{jq}.
+\]
+For $F=\sum_{i,j}c_{ij}x_i^*\otimes x_j^*$, vanishing on each $x_p\otimes x_q-x_q\otimes x_p$ is equivalent to $c_{pq}=c_{qp}$.
+Thus the orthogonal complement of the symmetric relations is spanned by $(x_i^*)^2$ and $x_i^*x_j^*+x_j^*x_i^*$ for $i<j$, which are the exterior relations.
+Vanishing on the exterior relations instead gives $c_{ii}=0$ and $c_{pq}+c_{qp}=0$. The orthogonal complement is therefore spanned by $x_i^*x_j^*-x_j^*x_i^*$ for $i<j$.
+Now use the presentations in \eqref{eq:polynomial-exterior}.
+\end{proof}
+
+The proof works in characteristic $2$: the relations $(x_i^*)^2=0$ remain part of the exterior presentation even when the signs $+$ and $-$ coincide.
+Example~\ref{ex:symmetric-orthogonals} is the calculation for two generators.
+
+\subsection{Direct sums}
+
+For graded algebras $A,B$, the finite direct sum $A\oplus B$ has componentwise multiplication, unit $(1_A,1_B)$, and $(A\oplus B)_i=A_i\oplus B_i$.
+In particular, its degree zero algebra is $A_0\oplus B_0$.
+
+\begin{proposition}\label{prop:dual-direct-sum}
+Let $A=T_S(V)/(R)$ and $B=T_T(W)/(Q)$ be quadratic algebras. Then $A\oplus B$ is quadratic over $S\oplus T$, and
+\[
+(A\oplus B)^!\cong A^!\oplus B^!.
+\]
+\end{proposition}
+
+\begin{proof}
+Regard $V$ and $W$ as $(S\oplus T)$-bimodules supported on the two respective factors.
+Mixed tensors vanish, so
+\[
+\begin{aligned}
+T_{S\oplus T}(V\oplus W)&\cong T_S(V)\oplus T_T(W),\\
+(V\oplus W)\otimes_{S\oplus T}(V\oplus W)
+&\cong(V\otimes_S V)\oplus(W\otimes_T W).
+\end{aligned}
+\]
+The relations are $R\oplus Q$. Right module homomorphisms also split over the two factors, and their annihilator is $R^\perp\oplus Q^\perp$.
+Apply Definition~\ref{def:quadratic-duals}.
+\end{proof}
+
+For example, $(\Bbbk A_2\oplus\Bbbk A_2)^!\cong(\Bbbk A_2)^\op\oplus(\Bbbk A_2)^\op$. Both degree zero algebras are $\Bbbk^{\oplus4}$; there are no products connecting the two summands.
+
+\subsection{Tensor products and signs}
+
+\begin{definition}\label{def:algebra-tensor-products}
+The \defn{ordinary tensor product} of graded $\Bbbk$-algebras $A,B$ has underlying vector space $A\otimes_\Bbbk B$, total grading $(A\otimes_\Bbbk B)_n=\bigoplus_{i+j=n}A_i\otimes_\Bbbk B_j$, and multiplication
+\[
+(a\otimes b)(a'\otimes b')=aa'\otimes bb'.
+\]
+The \defn{graded tensor product} $A\otimes_\Bbbk^{\mathrm{gr}}B$ has the same graded vector space, with multiplication
+\begin{equation}\label{eq:signed-tensor-product}
+(a\otimes b)(a'\otimes b')=(-1)^{\deg b\,\deg a'}aa'\otimes bb'
+\quad\text{for homogeneous }a,a',b,b'.
+\end{equation}
+\end{definition}
+
+In the ordinary tensor product, $a\otimes1$ and $1\otimes b$ commute. In the graded tensor product they satisfy
+\[
+(1\otimes b)(a\otimes1)=(-1)^{\deg a\,\deg b}(a\otimes1)(1\otimes b).
+\]
+The sign does not change the underlying graded vector space, so both tensor products have Hilbert series $h_A(t)h_B(t)$ by Lemma~\ref{lem:hilbert-tensor}.
+
+\begin{proposition}\label{prop:dual-tensor-products}
+Let $A=T_S(V)/(R)$ and $B=T_T(W)/(Q)$ be quadratic algebras, and assume that $S\otimes_\Bbbk T$ is semisimple.
+Then both tensor products are quadratic over $S\otimes_\Bbbk T$, and
+\begin{equation}\label{eq:dual-tensor-products}
+(A\otimes_\Bbbk B)^!\cong A^!\otimes_\Bbbk^{\mathrm{gr}}B^!,\qquad
+(A\otimes_\Bbbk^{\mathrm{gr}}B)^!\cong A^!\otimes_\Bbbk B^!.
+\end{equation}
+\end{proposition}
+
+The assumption on $S\otimes_\Bbbk T$ holds, for example, when both $S$ and $T$ are products of matrix algebras over $\Bbbk$. Over a general field it does not follow from semisimplicity of $S$ and $T$ alone.
+
+\begin{proof}
+The degree $1$ part of $A\otimes_\Bbbk B$ is $(V\otimes_\Bbbk T)\oplus(S\otimes_\Bbbk W)$.
+Its quadratic relations consist of $R\otimes_\Bbbk T$, $S\otimes_\Bbbk Q$, and the mixed relations
+\begin{equation}\label{eq:mixed-tensor-relations}
+(v\otimes1)(1\otimes w)-(1\otimes w)(v\otimes1)
+\quad(v\in V,\ w\in W).
+\end{equation}
+Here the products are taken in the tensor algebra on the degree $1$ part, and their span is an $(S\otimes_\Bbbk T)$-sub-bimodule.
+These relations allow every $W$ letter to move past every $V$ letter; the remaining relations are exactly the presentations of $A$ and $B$. Thus they present $A\otimes_\Bbbk B$.
+
+The right $(S\otimes_\Bbbk T)$-duals of the two generator summands are $V^*\otimes_\Bbbk T$ and $S\otimes_\Bbbk W^*$, with evaluations
+\[
+(f\otimes t)(v\otimes t')=f(v)\otimes tt',\qquad
+(s\otimes g)(s'\otimes w)=ss'\otimes g(w).
+\]
+These identifications hold for finite free right modules and hence for their direct summands.
+The pure relation spaces have orthogonal complements $R^\perp\otimes_\Bbbk T$ and $S\otimes_\Bbbk Q^\perp$ in the corresponding pure summands.
+For mixed tensors, the two reversed evaluations of $f\in V^*$ and $g\in W^*$ both give $f(v)\otimes g(w)$.
+Consequently the annihilator of the mixed relations \eqref{eq:mixed-tensor-relations} is generated by
+\[
+(f\otimes1)(1\otimes g)+(1\otimes g)(f\otimes1)
+\quad(f\in V^*,\ g\in W^*).
+\]
+These are the mixed relations of $A^!\otimes_\Bbbk^{\mathrm{gr}}B^!$, proving the first isomorphism in \eqref{eq:dual-tensor-products}.
+For $A\otimes_\Bbbk^{\mathrm{gr}}B$, the minus sign in \eqref{eq:mixed-tensor-relations} is a plus sign. Its annihilator has a minus sign, giving the ordinary tensor product on the dual side.
+\end{proof}
+
+\begin{example}\label{ex:commuting-square-dual}
+Take $A=\Bbbk A_2\otimes_\Bbbk\Bbbk A_2$.
+Its degree zero algebra has basis $e_{ii}\otimes e_{jj}$ for $i,j\in\{1,2\}$, and its degree $1$ part has basis
+\[
+a=e_{12}\otimes e_{11},\quad
+b=e_{22}\otimes e_{12},\quad
+c=e_{11}\otimes e_{12},\quad
+d=e_{12}\otimes e_{22}.
+\]
+The only composable words of length $2$ are $ab$ and $cd$, and both map to $e_{12}\otimes e_{12}$. Thus the relation space is $\Bbbk(ab-cd)$.
+Using the reversed generators from \eqref{eq:dual-basis-idempotents}, its orthogonal complement is $\Bbbk(b^*a^*+d^*c^*)$.
+Hence the commuting square becomes an anticommuting square:
+\[
+ab=cd\text{ in }A,\qquad
+b^*a^*=-d^*c^*\text{ in }A^!,\qquad
+h_A(t)=h_{A^!}(t)=4+4t+t^2.
+\]
+The signs agree with Proposition~\ref{prop:dual-tensor-products}; in characteristic $2$, the same presentations remain valid with $-1=1$.
+\end{example}
+
+\subsection{Exercises}
+
+\begin{exercise}
+For $A=\Bbbk A_4/(e_{13})$, write a presentation of $A^!$ using reversed generators and find homogeneous bases of $A$ and $A^!$.
+Check the double dual using Proposition~\ref{prop:monomial-dual}.
+\end{exercise}
+
+\begin{exercise}
+Let $S=\Bbbk e_1\oplus\Bbbk e_2$ and let $V$ have basis $a,b$ with $e_1ae_2=a$ and $e_2be_1=b$.
+Compute the quadratic dual and Hilbert series of $T_S(V)/(ab,ba)$ and of its quadratic dual.
+\end{exercise}
+
+\begin{exercise}
+For the four generators in Example~\ref{ex:commuting-square-dual}, replace the relation $ab-cd$ by $ab-\lambda cd$, where $\lambda\in\Bbbk$.
+Compute the quadratic dual relation for every $\lambda$, including $\lambda=0$, and recover the original relation by dualising again.
 \end{exercise}
 
 \begin{thebibliography}{BGS96}
