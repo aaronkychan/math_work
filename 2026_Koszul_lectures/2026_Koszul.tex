@@ -189,6 +189,8 @@ All rings are unital and associative.
 All modules are right modules unless otherwise specified.
 When we discuss dimensions, we mean dimensions as $\Bbbk$-vector spaces.
 
+\comm{note for AI:  no need to put ``Lecture x" everytime, just put lecture title.  Restore the numbering on TOC}
+
 
 \section{Lecture 1: Graded algebras, modules, and duals}
 
@@ -281,6 +283,8 @@ It is a natural isomorphism when $c\neq0$.
 A functor $F:\CC\to\CD$ is an \defn{equivalence} if there is a functor $G:\CD\to\CC$ with natural isomorphisms $GF\cong\id_{\CC}$ and $FG\cong\id_{\CD}$.
 A \defn{duality} between $\CC$ and $\CD$ is an equivalence $\CC^\op\to\CD$.
 Thus an equivalence recovers objects and maps up to natural isomorphism; a duality also reverses the direction of maps.
+
+\comm{add: notation for ungraded module categories, example of $\Bbbk$-linear dual is a duality functor}
 
 \subsection{Semisimple algebras}
 
@@ -407,14 +411,15 @@ It is graded if $M=\bigoplus_{j\in\Z}M_j$ and $A_iM_jA_k\subset M_{i+j+k}$ for a
 
 The algebra $A$ is a graded $A$-bimodule by multiplication, and each $A_i$ is an $A_0$-bimodule.
 Bilinearity forces the left and right scalar actions to agree: $(c1_A)m=cm=m(c1_A)$ for $c\in\Bbbk$.
+More precisely, we should have speak of `$\Bbbk$-central $A$-bimodule' instead; but we will always work over a field $\Bbbk$ and so will not make such distinction.
 
 \begin{example}
-The decomposition $A=\bigoplus_{i\in\Z}A_i$ makes the right regular module $A_A$ a graded module.
+The decomposition $A=\bigoplus_{i\in\Z}A_i$ makes the right regular module $A_A$ a graded module, and ${}_AA_A$ a graded bimodule.
 \end{example}
 
 \begin{definition}\label{def:shift}
 Let $M$ be a graded $A$-module and let $d\in\Z$.
-The \defn{shift} $M(d)$ is the graded $A$-module whose underlying $A$-module is $M$, but whose grading is
+The (degree/grading) \defn{shift} $M(d)$ is the graded $A$-module whose underlying $A$-module is $M$, but whose grading is
 \[
 M(d)_j=M_{j+d}.
 \]
@@ -434,23 +439,45 @@ A homomorphism $f:M\to N$ is \defn{homogeneous of degree $d$} if
 $f(M_j)\subset N_{j+d}$ for all $j\in\Z$. A \defn{homomorphism of graded modules} means a homogeneous $A$-module homomorphism of degree $0$, also said to \defn{preserve degrees}.
 \end{definition}
 
+\begin{example}\label{ex:infinite-hom}
+Take $S=\Bbbk e_1\oplus\Bbbk e_2$ in degree $0$, $M=\bigoplus_{i\geq0}(e_1S)(-i)$, and $N=e_1S$ in degree $0$.
+The $S$-linear map $M\to N$ sending the copy of $e_1$ in every summand to $e_1$ has a non-zero component in every degree $-i$. \comm{write more symbolically, use less words}
+It is not a finite sum of homogeneous maps.
+\end{example}
+
+\begin{example}\label{ex:matrix-hom}
+For $A=\Bbbk A_3$, left multiplication by $e_{12}$ yields a map
+\[
+\begin{aligned}
+e_{22}A&\longrightarrow e_{11}A,\\[-2pt]
+\begin{pmatrix}0&0&0\\0&u&v\\0&0&0\end{pmatrix}
+&\longmapsto
+\begin{pmatrix}0&u&v\\0&0&0\\0&0&0\end{pmatrix}
+\qquad(u,v\in\Bbbk).
+\end{aligned}
+\]
+The $u$ and $v$ entries have degrees $0,1$ in the source and $1,2$ in the target, and so the map has degree $1$.
+\end{example}
+
 \begin{notation}\label{not:graded-hom}
-For graded right $A$-modules $M,N$, $\Hom_A(M,N)$ denotes all right $A$-module homomorphisms, without a grading condition. The space of homomorphisms preserving degrees is
+The space of homomorphisms preserving degrees is
 \begin{equation}\label{eq:graded-hom}
 \Hom_A^{\Z}(M,N)=\{f\in\Hom_A(M,N)\mid f(M_j)\subset N_j\text{ for all }j\in\Z\}.
 \end{equation}
 Thus $\Hom_A^{\Z}(M,N(d))$ consists of homomorphisms $M\to N$ of degree $d$, since $N(d)_j=N_{j+d}$.
-For left modules we use $\Hom_{A^\op}$ and $\Hom_{A^\op}^{\Z}$.
 \end{notation}
 
-We write $\Grmod A$ for the category of graded right $A$-modules with morphism spaces $\Hom_A^{\Z}(M,N)$, identity maps, and the usual composition.
-Its full subcategory $\grmod A$ consists of locally finite modules; here $\grmod A$ does not mean finitely generated graded modules.
+We write 
+\begin{align*}
+\Grmod A &:= \text{category of graded right $A$-modules with morphism spaces $\Hom_A^{\Z}(M,N)$},\\
+\grmod A &:= \text{full subcategory of $\Grmod A$ consisting of locally finite modules}.
+\end{align*}
 Forgetting the grading gives a functor $\Grmod A\to\Mod A$.
 The distinction between its source and target is the grading on objects and the degree condition on morphisms.
 
-For $d\in\Z$, the shift of Definition~\ref{def:shift} is a functor $(d):\Grmod A\to\Grmod A$.
+For $d\in\Z$, the shift of Definition~\ref{def:shift} is a functor \[(d):\Grmod A\to\Grmod A.\]
 It sends $f:M\to N$ to the same underlying map $f(d):M(d)\to N(d)$.
-Since $M(d)(-d)=M$ and $f(d)(-d)=f$, the shift is an equivalence with inverse $(-d)$; it restricts to $\grmod A$.
+Since $M(d)(-d)=M$ and $f(d)(-d)=f$, the shift is an equivalence with inverse $(-d)$; it restricts to an endo-functor on $\grmod A$.
 
 \begin{lemma}\label{lem:homogeneous-hom-sum}
 For graded right $A$-modules $M,N$, the following inclusion is an equality when $M$ is finitely generated:
@@ -463,28 +490,9 @@ For graded right $A$-modules $M,N$, the following inclusion is an equality when 
 For $f\in\Hom_A(M,N)$, define $f_d(m)=f(m)_{j+d}$ when $m\in M_j$, and extend linearly.
 For $a\in A_i$, we have $f_d(ma)=f(ma)_{j+i+d}=f(m)_{j+d}a$, so $f_d$ is $A$-linear of degree $d$.
 The sum of the homogeneous Hom spaces is direct: on $M_j$, distinct degrees have values in distinct summands of $N$.
-If $M$ is finitely generated, the homogeneous components of a finite generating set still generate $M$. Only finitely many $f_d$ are non-zero on those generators, hence on $M$, giving $f=\sum_d f_d$.
+If $M$ is finitely generated, then there is a finite generaing set, which can be decomposed to a, still, finite set of \emph{homogeneous} generating elements.
+Only finitely many $f_d$ are non-zero on these homogeneous generators, hence on $M$, giving $f=\sum_d f_d$.
 \end{proof}
-
-\begin{example}\label{ex:infinite-hom}
-Take $S=\Bbbk e_1\oplus\Bbbk e_2$ in degree $0$, $M=\bigoplus_{i\geq0}(e_1S)(-i)$, and $N=e_1S$ in degree $0$.
-The $S$-linear map $M\to N$ sending the copy of $e_1$ in every summand to $e_1$ has a non-zero component in every degree $-i$. It is not a finite sum of homogeneous maps.
-\end{example}
-
-\begin{example}\label{ex:matrix-hom}
-For $A=\Bbbk A_3$, left multiplication by $e_{12}$ gives
-\[
-\begin{aligned}
-e_{22}A&\longrightarrow e_{11}A,\\[-2pt]
-\begin{pmatrix}0&0&0\\0&u&v\\0&0&0\end{pmatrix}
-&\longmapsto
-\begin{pmatrix}0&u&v\\0&0&0\\0&0&0\end{pmatrix}
-\qquad(u,v\in\Bbbk).
-\end{aligned}
-\]
-The $u$ and $v$ entries have degrees $0,1$ in the source and $1,2$ in the target. Thus the map has degree $1$; after replacing the source by $e_{22}A(-1)$, it belongs to $\Hom_A^{\Z}(e_{22}A(-1),e_{11}A)$.
-Right $A$-linearity follows from associativity of matrix multiplication.
-\end{example}
 
 \subsection{Homogeneous ideals and quotients}
 
@@ -516,10 +524,14 @@ In particular, $\overline e_{12}\overline e_{23}=0$.
 \end{example}
 
 \begin{example}
-In $A=\Bbbk A_2$, the subspace $I=\Bbbk(e_{22}+e_{12})$ is a right ideal: $Ie_{11}=Ie_{12}=0$ and $Ie_{22}=I$.
+In $A=\Bbbk A_2$, the subspace \[
+I=\Bbbk(e_{22}+e_{12})= \left\{\begin{pmatrix}
+0 & a \\ 0& a
+\end{pmatrix} \middle| a\in \Bbbk \right\}
+\]
+is a right ideal: $Ie_{11}=Ie_{12}=0$ and $Ie_{22}=I$.
 However, $e_{22},e_{12}\notin I$, so $I$ is not homogeneous.
-In $A/I$, the non-zero element $\overline e_{12}=-\overline e_{22}$ lies in the images of both $A_1$ and $A_0$, so those images do not form a direct sum.
-The right module $A/I$ therefore does not inherit the quotient grading.
+Note that we have $\overline e_{12}=-\overline e_{22} \in A/I$ and they lies in $(A_1\cap A_0)/I$, so we do not a direct sum $A_1/(I\cap A_1) \oplus A_0/(I\cap A_0)$, i.e. the quotient $A/I$ does not inherit a grading from $A$.
 \end{example}
 
 \begin{definition}
@@ -532,8 +544,6 @@ The subspace $A_{>0}$ is a homogeneous two-sided ideal. The quotient map
 \sum_{i\in\Z}a_i\mapsto a_0,
 \]
 makes $A_0$ a graded $A$-bimodule concentrated in degree $0$, with $a\cdot s\cdot b=\pi(a)s\pi(b)$ for $a,b\in A$ and $s\in A_0$.
-Resolutions of this module $A_0$ will define Koszul algebras in Lecture~5.
-
 
 \subsection{Tensor products of vector spaces}
 
@@ -548,12 +558,17 @@ U\times V \ar[r]^{(u,v)\mapsto u\otimes v} \ar[dr]_{b}
 \]
 \end{definition}
 
-An element of the form $u\otimes v$ is called a \defn{pure tensor}.
-To construct $U\otimes_\Bbbk V$, choose bases $(u_i)_{i\in I}$ and $(v_j)_{j\in J}$ and take the vector space with basis symbols $u_i\otimes v_j$.
-Extend $(u_i,v_j)\mapsto u_i\otimes v_j$ bilinearly. A bilinear map $b$ determines exactly one linear map by $u_i\otimes v_j\mapsto b(u_i,v_j)$, proving the required property.
-For two spaces satisfying Definition~\ref{def:vector-tensor}, the induced maps in both directions are inverse by uniqueness. Thus the construction is independent of the bases up to a unique isomorphism preserving pure tensors.
-For finite bases of sizes $r,s$, we obtain $\dim_\Bbbk(U\otimes_\Bbbk V)=rs$.
-We use the canonical identifications $(U\otimes_\Bbbk V)\otimes_\Bbbk W\cong U\otimes_\Bbbk(V\otimes_\Bbbk W)$ and $\Bbbk\otimes_\Bbbk U\cong U$, and write $U^{\otimes 0}=\Bbbk$.
+% An element of the form $u\otimes v$ is called a \defn{pure tensor}.
+% \comm{do not introduce useless terminology!}
+If both $U$ and $V$ has a basis, say, $(u_i)_{i\in I}$ and $(v_j)_{j\in J}$ respectively, then we can construct $U\otimes_\Bbbk V$ explicitly as the vector space with basis $\{ u_i\otimes v_j\mid i\in I, j\in J\}$.
+It is routine to check that any bilinear map $b:U\times V\to W$ determines exactly one linear map $\widetilde{b}$ by $u_i\otimes v_j\mapsto b(u_i,v_j)$, which gives the desired universal property.
+
+For two spaces satisfying Definition~\ref{def:vector-tensor}, the induced maps in both directions are inverse by uniqueness. 
+Thus the construction is independent of the bases up to a unique isomorphism preserving pure tensors.
+
+For finite bases with $|I|=r$ and $|J|=s$, we obtain $\dim_\Bbbk(U\otimes_\Bbbk V)=rs$.
+There is a canonical identifications $(U\otimes_\Bbbk V)\otimes_\Bbbk W\cong U\otimes_\Bbbk(V\otimes_\Bbbk W)$ and $\Bbbk\otimes_\Bbbk U\cong U$.
+It is also customary to take $U^{\otimes_{\Bbbk} 0}:=\Bbbk$.
 
 
 
@@ -562,8 +577,7 @@ We use the canonical identifications $(U\otimes_\Bbbk V)\otimes_\Bbbk W\cong U\o
 \subsection{\texorpdfstring{Graded $\Bbbk$-linear duals}{Graded k-linear duals}}
 
 A linear functional on a graded vector space need not have a degree: it may be non-zero on infinitely many homogeneous components.
-To obtain a graded vector space, we retain only finite sums of homogeneous functionals.
-The resulting dual reverses left and right graded module structures, as needed later for linear complexes and the BGG correspondence.
+To obtain a graded vector space from taking linear functional, we take only finite sums of homogeneous functionals.
 
 \begin{definition}\label{def:linear-duals}
 For a vector space $V$, its \defn{$\Bbbk$-linear dual} is $D(V):=\Hom_\Bbbk(V,\Bbbk)$.
@@ -608,11 +622,12 @@ e_{23}\varepsilon_{13}=\varepsilon_{12},\qquad
 e_{jj}\varepsilon_{1j}=\varepsilon_{1j}.
 \]
 The actions follow from \eqref{eq:linear-dual-actions}.
-For comparison with an infinite-dimensional space, take $V=\bigoplus_{i\geq 0}\Bbbk v_i$ with $\deg v_i=i$.
-The functional $\lambda(v_i)=1$ for every $i$ belongs to $D(V)$ but not to $\bbD(V)$.
+%For comparison with an infinite-dimensional space, take $V=\bigoplus_{i\geq 0}\Bbbk v_i$ with $\deg v_i=i$.
+%The functional $\lambda(v_i)=1$ for every $i$ belongs to $D(V)$ but not to $\bbD(V)$.
 \end{example}
 
-Recall that $0\to L\xrightarrow{i}M\xrightarrow{p}N\to0$ is \defn{short exact} if $i$ is injective, $p$ is surjective, and $\Im i=\Ker p$.
+\comm{do a more proper definition! this is super important!}
+Recall that a sequence $0\to L\xrightarrow{i}M\xrightarrow{p}N\to0$ is \defn{short exact} if $i$ is injective, $p$ is surjective, and $\Im i=\Ker p$.
 In $\Grmod A$ the maps must preserve degrees; exactness can then be checked in each degree.
 
 \begin{lemma}\label{lem:linear-bidual}
@@ -644,10 +659,11 @@ Without finite dimensionality for $D$, or local finiteness for $\bbD$, evaluatio
 
 \subsection{\texorpdfstring{Left, right, and two-sided duals over $S$}{Left, right, and two-sided duals over S}}
 
-Fix a finite-dimensional semisimple $\Bbbk$-algebra $S$, concentrated in degree $0$.
-Besides the $\Bbbk$-linear dual, we need duals defined by left $S$-linear maps, right $S$-linear maps, and maps respecting both actions.
+Fix a finite-dimensional semisimple $\Bbbk$-algebra $S$, which is regarded as concentrated in degree $0$ when treated as a graded algebra.
+Besides the $\Bbbk$-linear dual, we will also work with duals defined by left $S$-linear maps, right $S$-linear maps, and maps respecting both actions.
 Their definitions differ, even though the resulting spaces can be identified after a choice of form.
-The $S$-duals retain $S$-valued evaluation without choosing such a form. Their tensor and biduality isomorphisms in Proposition~\ref{prop:tensor-duals} and Lemma~\ref{lem:S-bidual} therefore construct quadratic duality without a choice of form; replacing them throughout by $D$ requires an identification $S\cong D(S)$.
+%Their tensor and biduality isomorphisms in Proposition~\ref{prop:tensor-duals} and Lemma~\ref{lem:S-bidual} therefore construct quadratic duality without a choice of form; replacing them throughout by $D$ requires an identification $S\cong D(S)$.
+%\comm{what is said here is not understandable to beginner; you should not mention `quadratic dual' when nobody knows what it is yet}
 
 \begin{definition}\label{def:S-duals}
 For a right $S$-module $M$ and a left $S$-module $N$, define their \defn{$S$-duals} by
@@ -662,8 +678,10 @@ M^*&:=\Hom_S(M,S),&
 Here $s\in S$, $m\in M$, $n\in N$, $f\in M^*$, and $g\in{}^*N$.
 \end{definition}
 
-Thus $M^*$ is a left $S$-module and $ {}^*N$ is a right $S$-module.
-The position of the star records the side of the original action: $f(ms)=f(m)s$ in $M^*$, whereas $g(sn)=sg(n)$ in $ {}^*N$.
+Thus $M^*$ is a left $S$-module and $ {}^*N$ is a right $S$-module \comm{write this in equation environment $M\in \mod A \Rightarrow M^*\in \mod A^\op$}.
+%The position of the star records the side of the original action: $f(ms)=f(m)s$ in $M^*$, whereas $g(sn)=sg(n)$ in $ {}^*N$.
+%\comm{why repeat what is already written????}
+
 For a right module map $u:M\to N$, define $u^*:N^*\to M^*$ by $u^*(f)=f\circ u$; for a left module map $u:M\to N$, the same recipe defines ${}^*u:{}^*N\to{}^*M$.
 Precomposition gives functors
 \[
@@ -673,13 +691,17 @@ Precomposition gives functors
 \]
 
 \begin{definition}\label{def:enveloping-algebra}
+\comm{should introduce this after tensor product of vector space, and should mention its relation with bimodules immediate after its introduction}
+\comm{setup macro for superscript en, like op; always use macro for enveloping algebra notation}
 The \defn{enveloping algebra} of $S$ is $S^{\mathrm{en}}:=S\otimes_\Bbbk S^\op$, with multiplication
 \[
 (s\otimes t^\op)(s'\otimes (t')^\op)=ss'\otimes(t't)^\op
 \quad(s,t,s',t'\in S).
 \]
+\comm{after introduce this, there should be some remark about the necessary condition for $S^{\mathrm{en}}$ to remain semisimple when $S$ is semisimple; DO NOT CITE ANYTHING and only note as a fact.}
 \end{definition}
 
+\comm{after moving definition; use a `recall that...' to begin this part}
 An $S$-bimodule is equivalently a right $S^{\mathrm{en}}$-module via
 \begin{equation}\label{eq:enveloping-action}
 m\cdot(s\otimes t^\op)=tms
@@ -714,7 +736,7 @@ It is useful when dualising maps with two module actions at once. The two-sided 
 
 \subsection{Comparing the duals}
 
-An $S$-dual consists of $S$-valued maps; the $\Bbbk$-linear dual consists of scalar-valued maps. A suitable linear functional $S\to\Bbbk$ identifies these constructions.
+To identify $S$-dual with $\Bbbk$-dual, we need a suitable linear functional $S\to\Bbbk$.
 
 \begin{definition}\label{def:symmetrising-form}
 A \defn{symmetrising form} on a finite-dimensional $\Bbbk$-algebra $S$ is a linear map $\tau:S\to\Bbbk$ satisfying
@@ -726,18 +748,22 @@ A \defn{symmetrising form} on a finite-dimensional $\Bbbk$-algebra $S$ is a line
 An algebra admitting such a form is \defn{symmetric}.
 \end{definition}
 
+\old{
 Every finite-dimensional semisimple $\Bbbk$-algebra is symmetric, over an arbitrary field; see \cite[Introduction]{DNN17} for this theorem and its original reference.
 We use the theorem without proof and do not restrict $S$ to products of matrix algebras over $\Bbbk$.
 The forms needed in our basic examples are explicit.
+}
+\comm{we only use the following, so we do not need to cite anything heavy; as instructed, you should NOT cite anything in the beginning lectures.  all material should be self-contained.  Just say specifically that we will only use the following.}
 
 \begin{example}\label{ex:symmetrising-form}
 For $S=\Bbbk^{\oplus r}$, take $\tau(a_1,\ldots,a_r)=\sum_i a_i$.
 For $S=\Mat_n(\Bbbk)$, take $\tau(a)=\Tr(a)$.
 Indeed, $\Tr(ab)=\Tr(ba)$ and $\Tr(ae_{ji})=a_{ij}$, so the pairing is non-degenerate in every characteristic.
 More generally, the sum of the matrix traces works on every product $\prod_{j=1}^r\Mat_{n_j}(\Bbbk)$ in Theorem~\ref{thm:artin-wedderburn}.
+\comm{rewrite more clearly using equation environment for easy reading}
 \end{example}
 
-\begin{proposition}[Dual comparison, {\cite[\S2.1]{GI20}}]\label{prop:dual-comparison}
+\begin{proposition}[Dual comparison, {\cite[\S2.1]{GI20}}]\label{prop:dual-comparison} \comm{do not cite anything!}
 Choose a symmetrising form $\tau$ on $S$.
 For every finite-dimensional $S$-bimodule $M$, there are isomorphisms of $S$-bimodules
 \begin{equation}\label{eq:dual-comparison}
@@ -792,13 +818,14 @@ The argument \eqref{eq:dual-inverses}, applied to $S^{\mathrm{en}}$ and $\tau_{\
 Thus $\gamma_M$ is an isomorphism.
 For \eqref{eq:dual-comparison-naturality}, both routes send $f\in N^*$ to $\tau\circ f\circ u$; the checks for $\beta$ and $\gamma$ are identical.
 \end{proof}
-
+\begin{remark}
 The identifications \eqref{eq:dual-comparison} and \eqref{eq:en-dual-comparison} depend on $\tau$.
 For instance, $\tau(a_1,\ldots,a_r)=\sum_i c_i a_i$ is symmetrising on $\Bbbk^{\oplus r}$ for any $c_i\neq 0$.
 No semisimplicity assumption on $S^{\mathrm{en}}$ was used.
+\end{remark}
 
 \begin{definition}\label{def:graded-S-duals}
-For a graded $S$-bimodule $M$, define its \defn{graded $S$-duals} and \defn{graded two-sided dual} by
+For a graded $S$-bimodule $M$, define its \defn{graded $S$-duals} and \defn{graded two-sided dual} by \comm{setup macro called "grstar" for $(*)$, always use macro instead of typing in everytime}
 \[
 M^{(*)}:=\bigoplus_{i\in\Z}(M_{-i})^*,\qquad
 {}^{(*)}M:=\bigoplus_{i\in\Z}{}^*(M_{-i}),\qquad
@@ -808,7 +835,7 @@ where each indicated summand has degree $i$.
 The first construction also applies to graded right $S$-modules, and the second to graded left $S$-modules.
 \end{definition}
 
-On degree $0$ maps, the graded duals act by precomposition in each degree, so they are contravariant functors on the corresponding categories of graded modules.
+On degree $0$ maps, the graded duals act by precomposition in each degree, so they are contravariant functors on the corresponding categories of graded modules. \comm{write out as equation!!! clarify whether they restricts to lf (locally finite) mods}
 
 Parentheses on the stars distinguish the graded constructions from the full $S$-duals. In the notation \eqref{eq:graded-hom},
 \[
@@ -817,7 +844,7 @@ M^{(*)}=\bigoplus_{i\in\Z}\Hom_S^{\Z}(M,S(i)),\qquad
 \]
 
 \begin{corollary}\label{cor:graded-dual-comparison}
-For a fixed symmetrising form, the graded dual functors on the category of locally finite graded $S$-bimodules are naturally isomorphic:
+For a fixed symmetrising form, the graded dual functors on the category of locally finite graded $S$-bimodules are naturally isomorphic:  \comm{if it is nat. isom. as functors; then write as such, not applied them on objects}
 \[
 M^{(*)}\cong\bbD(M)\cong{}^{(*)}M\cong M^{(*_{\mathrm{en}})}.
 \]
@@ -856,7 +883,7 @@ Thus changing the form can change the action on the same vector space. Two choic
 \begin{example}\label{ex:dual-blocks}
 Let $S=\Bbbk^{\oplus r}$ with coordinate idempotents $e_1,\ldots,e_r$ and the form $\tau(e_i)=1$.
 When $S$ is realised as diagonal matrices, $e_i$ means the matrix unit $e_{ii}$.
-For an $S$-bimodule $M$, the decompositions and the reversal of sides are
+For an $S$-bimodule $M$, the decompositions and the reversal of sides are \comm{this is difficult to read, write $M$ more naturally; see what I did in Example 1.27 and 1.23}
 \[
 M=\bigoplus_{i,j}e_iMe_j,
 \qquad
@@ -869,6 +896,7 @@ Thus equal scalar-valued functionals can correspond to different $S$-valued maps
 \end{example}
 
 \begin{lemma}\label{lem:S-bidual}
+\comm{this lemma is difficult to read; too many words clutter together; use equation environment; use proper formula; categorical symbols, etc.}
 For finite-dimensional right $S$-modules $M$ and left $S$-modules $N$, evaluation gives natural isomorphisms $M\cong{}^*(M^*)$ and $N\cong({}^*N)^*$, sending $m$ to $(f\mapsto f(m))$ and $n$ to $(g\mapsto g(n))$, respectively.
 For bimodules, both are bimodule isomorphisms.
 Consequently, $(-)^*$ and ${}^*(-)$ give inverse dualities between $\mod S$ and $\mod(S^\op)$, without choosing a symmetrising form.
