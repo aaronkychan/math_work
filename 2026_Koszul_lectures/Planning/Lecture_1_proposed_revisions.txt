@@ -1,0 +1,1121 @@
+LECTURE 1: EXACT PROPOSED REPLACEMENTS
+Prepared 8 October 2026
+
+Source: /Users/aaronchan/Documents/GitHub/math_work/2026_Koszul_lectures/2026_Koszul.tex
+Status: proposal only. The TeX source has NOT been changed.
+
+The math-discussion plugin requires explicit confirmation after the exact existing and replacement contents have been quoted. Every replacement is quoted below without omissions. Unchanged context at the edges identifies each passage. Line numbers refer to the source read for this proposal.
+
+Scope:
+- Section 1 only, plus the requested supporting preamble changes: restore contents numbering and add \\en and \\grstar.
+- Only Section 1 loses the 'Lecture 1:' prefix. Sections 2 and 3, including their titles, are byte-for-byte unchanged.
+- All commented-out passages are preserved. Active \\comm comments are removed after their instructions are addressed.
+- The mathematical content remains over general semisimple degree zero algebras. A comparison with a linear dual requires a specified symmetrising form; the explicit forms are proved directly.
+- The additional correction to the quotient example replaces the undefined expression (A_1 intersection A_0)/I by the intersection of the images under the quotient map.
+
+Main changes:
+- Display the ungraded module categories and introduce the linear-dual functor before its later uses.
+- Move the enveloping algebra and its bimodule interpretation immediately after vector-space tensor products; state the separability criterion without citation.
+- Define exactness, short exact sequences, and degreewise exactness explicitly, with a matrix-algebra example.
+- Specify the graded dual functors, their source and target categories, and preservation of local finiteness.
+- Express graded dual comparisons as natural isomorphisms of functors; display bimodule blocks and bidual evaluation maps.
+- Remove citations from active Section 1 and keep the requested elementary trace-form calculations self-contained.
+
+Validation of the proposed source: all labels are unique; all references resolve; no active Section 1 reference points forward; all active Section 1 comments are addressed. Compilation is deferred until approval and application to the existing open document. No replacement TeX document or separate PDF has been created.
+
+======================================================================
+REPLACEMENT 1: original lines 64-72
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+%add dots to sections in TOC
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+%remove section number in TOC
+\makeatletter
+\renewcommand{\cftsecpresnum}{\begin{lrbox}{\@tempboxa}}
+\renewcommand{\cftsecaftersnum}{\end{lrbox}}
+\makeatother
+
+%abovespace,belowspace,bodyfont,indent,headfont,headpunct(e.g.\newline),headspace,custom-head-spec
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+%add dots to sections in TOC
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+%show section numbers in TOC
+\renewcommand{\cftsecpresnum}{}
+\renewcommand{\cftsecaftersnum}{}
+
+%abovespace,belowspace,bodyfont,indent,headfont,headpunct(e.g.\newline),headspace,custom-head-spec
+```
+
+======================================================================
+REPLACEMENT 2: original lines 127-130
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+\newcommand{\Aut}{\operatorname{Aut}\nolimits}
+\newcommand{\op}{\mathrm{op}}
+\renewcommand{\Im}{\operatorname{Im}\nolimits}
+\newcommand{\Ker}{\operatorname{Ker}\nolimits}
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+\newcommand{\Aut}{\operatorname{Aut}\nolimits}
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\en}{\mathrm{en}}
+\newcommand{\grstar}[1][]{(*#1)}
+\renewcommand{\Im}{\operatorname{Im}\nolimits}
+\newcommand{\Ker}{\operatorname{Ker}\nolimits}
+```
+
+======================================================================
+REPLACEMENT 3: original lines 190-198
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+When we discuss dimensions, we mean dimensions as $\Bbbk$-vector spaces.
+
+\comm{note for AI:  no need to put ``Lecture x" everytime, just put lecture title.  Restore the numbering on TOC}
+
+
+\section{Lecture 1: Graded algebras, modules, and duals}
+
+\subsection{Algebras and modules}
+
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+When we discuss dimensions, we mean dimensions as $\Bbbk$-vector spaces.
+
+\section{Graded algebras, modules, and duals}
+
+\subsection{Algebras and modules}
+
+```
+
+======================================================================
+REPLACEMENT 4: original lines 241-247
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+
+\begin{example}\label{ex:module-categories}
+The category $\Mod A$ has right $A$-modules as objects; its morphism set $\Hom_A(M,N)$ consists of right $A$-linear maps $M\to N$, with the usual composition.
+Its full subcategory $\mod A$ consists of finite-dimensional modules.
+In particular, $\Mod\Bbbk$ and $\mod\Bbbk$ are the categories of all and of finite-dimensional vector spaces, respectively, with linear maps.
+\end{example}
+
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+
+\begin{example}\label{ex:module-categories}
+For a $\Bbbk$-algebra $A$, we use the notation
+\[
+\begin{aligned}
+\Mod A&:=\text{category of right $A$-modules and $A$-linear maps},\\
+\mod A&:=\text{full subcategory of finite-dimensional right $A$-modules}.
+\end{aligned}
+\]
+In either category, $\Hom_A(M,N)$ is the space of $A$-linear maps $M\to N$; composition is the usual composition of maps.
+For $A=\Bbbk$, these are the categories of all and of finite-dimensional vector spaces, respectively.
+\end{example}
+
+```
+
+======================================================================
+REPLACEMENT 5: original lines 285-289
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+Thus an equivalence recovers objects and maps up to natural isomorphism; a duality also reverses the direction of maps.
+
+\comm{add: notation for ungraded module categories, example of $\Bbbk$-linear dual is a duality functor}
+
+\subsection{Semisimple algebras}
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+Thus an equivalence recovers objects and maps up to natural isomorphism; a duality also reverses the direction of maps.
+
+\begin{example}[$\Bbbk$-linear duality]\label{ex:linear-duality}
+For a vector space $V$, define its \defn{$\Bbbk$-linear dual} by $D(V):=\Hom_\Bbbk(V,\Bbbk)$.
+For a linear map $u:V\to W$, set
+\[
+D(u):D(W)\longrightarrow D(V),\qquad \lambda\longmapsto\lambda\circ u.
+\]
+The identities $D(\id_V)=\id_{D(V)}$ and $D(v\circ u)=D(u)\circ D(v)$ make $D:(\Mod\Bbbk)^\op\to\Mod\Bbbk$ a functor.
+On finite-dimensional spaces, evaluation gives a natural isomorphism
+\[
+\mathrm{ev}:\id_{\mod\Bbbk}\xrightarrow{\sim}D\circ D,
+\qquad
+\mathrm{ev}_V:V\longrightarrow D(D(V)),\quad
+x\longmapsto(\lambda\mapsto\lambda(x)).
+\]
+Indeed, if $x\neq0$, some $\lambda\in D(V)$ satisfies $\lambda(x)\neq0$, so $\mathrm{ev}_V$ is injective; equal finite dimensions give surjectivity.
+Naturality follows from
+\[
+D(D(u))(\mathrm{ev}_V(x))(\lambda)
+=\lambda(u(x))
+=\mathrm{ev}_W(u(x))(\lambda)
+\quad(x\in V,\ \lambda\in D(W)).
+\]
+Consequently, $D:(\mod\Bbbk)^\op\to\mod\Bbbk$ is a duality.
+\end{example}
+
+\subsection{Semisimple algebras}
+```
+
+======================================================================
+REPLACEMENT 6: original lines 296-300
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+\end{definition}
+
+We use the following standard facts without proof; see \cite[Lecture~2]{Bez23}.
+Recall that a \defn{division $\Bbbk$-algebra} is a non-zero $\Bbbk$-algebra whose non-zero elements are invertible.
+
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+\end{definition}
+
+We use the following standard ring-theoretic facts without proof.
+Recall that a \defn{division $\Bbbk$-algebra} is a non-zero $\Bbbk$-algebra whose non-zero elements are invertible.
+
+```
+
+======================================================================
+REPLACEMENT 7: original lines 411-416
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+
+The algebra $A$ is a graded $A$-bimodule by multiplication, and each $A_i$ is an $A_0$-bimodule.
+Bilinearity forces the left and right scalar actions to agree: $(c1_A)m=cm=m(c1_A)$ for $c\in\Bbbk$.
+More precisely, we should have speak of `$\Bbbk$-central $A$-bimodule' instead; but we will always work over a field $\Bbbk$ and so will not make such distinction.
+
+\begin{example}
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+
+The algebra $A$ is a graded $A$-bimodule by multiplication, and each $A_i$ is an $A_0$-bimodule.
+Our bimodules are \defn{$\Bbbk$-central}: bilinearity and the unit axioms give $(c1_A)m=cm=m(c1_A)$ for every $c\in\Bbbk$ and $m\in M$.
+
+\begin{example}
+```
+
+======================================================================
+REPLACEMENT 8: original lines 441-447
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+
+\begin{example}\label{ex:infinite-hom}
+Take $S=\Bbbk e_1\oplus\Bbbk e_2$ in degree $0$, $M=\bigoplus_{i\geq0}(e_1S)(-i)$, and $N=e_1S$ in degree $0$.
+The $S$-linear map $M\to N$ sending the copy of $e_1$ in every summand to $e_1$ has a non-zero component in every degree $-i$. \comm{write more symbolically, use less words}
+It is not a finite sum of homogeneous maps.
+\end{example}
+
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+
+\begin{example}\label{ex:infinite-hom}
+Let $S=\Bbbk e_1\oplus\Bbbk e_2$ with componentwise multiplication, concentrated in degree $0$.
+Write
+\[
+M=\bigoplus_{i\geq0}(e_1S)(-i)=\bigoplus_{i\geq0}\Bbbk m_i,
+\qquad
+\deg m_i=i,\quad m_ie_1=m_i,\quad m_ie_2=0,
+\]
+and let $N=e_1S$ be concentrated in degree $0$.
+The $S$-linear map
+\[
+f:M\longrightarrow N,\qquad
+\sum_{i\geq0}c_i m_i\longmapsto\Bigl(\sum_{i\geq0}c_i\Bigr)e_1
+\quad\text{for finitely supported }(c_i)_{i\geq0}
+\]
+satisfies $f(m_i)=e_1\neq0$ for every $i\geq0$.
+A homogeneous map $M\to N$ of degree $d$ vanishes on $m_i$ unless $d=-i$.
+Hence $f$ is not a finite sum of homogeneous maps.
+\end{example}
+
+```
+
+======================================================================
+REPLACEMENT 9: original lines 461-465
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+
+\begin{notation}\label{not:graded-hom}
+The space of homomorphisms preserving degrees is
+\begin{equation}\label{eq:graded-hom}
+\Hom_A^{\Z}(M,N)=\{f\in\Hom_A(M,N)\mid f(M_j)\subset N_j\text{ for all }j\in\Z\}.
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+
+\begin{notation}\label{not:graded-hom}
+For graded right $A$-modules $M,N$, the space of homomorphisms preserving degrees is
+\begin{equation}\label{eq:graded-hom}
+\Hom_A^{\Z}(M,N)=\{f\in\Hom_A(M,N)\mid f(M_j)\subset N_j\text{ for all }j\in\Z\}.
+```
+
+======================================================================
+REPLACEMENT 10: original lines 478-482
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+For $d\in\Z$, the shift of Definition~\ref{def:shift} is a functor \[(d):\Grmod A\to\Grmod A.\]
+It sends $f:M\to N$ to the same underlying map $f(d):M(d)\to N(d)$.
+Since $M(d)(-d)=M$ and $f(d)(-d)=f$, the shift is an equivalence with inverse $(-d)$; it restricts to an endo-functor on $\grmod A$.
+
+\begin{lemma}\label{lem:homogeneous-hom-sum}
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+For $d\in\Z$, the shift of Definition~\ref{def:shift} is a functor \[(d):\Grmod A\to\Grmod A.\]
+It sends $f:M\to N$ to the same underlying map $f(d):M(d)\to N(d)$.
+Since $M(d)(-d)=M$ and $f(d)(-d)=f$, the shift is an equivalence with inverse $(-d)$; it restricts to an equivalence $\grmod A\to\grmod A$.
+
+\begin{lemma}\label{lem:homogeneous-hom-sum}
+```
+
+======================================================================
+REPLACEMENT 11: original lines 491-495
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+For $a\in A_i$, we have $f_d(ma)=f(ma)_{j+i+d}=f(m)_{j+d}a$, so $f_d$ is $A$-linear of degree $d$.
+The sum of the homogeneous Hom spaces is direct: on $M_j$, distinct degrees have values in distinct summands of $N$.
+If $M$ is finitely generated, then there is a finite generaing set, which can be decomposed to a, still, finite set of \emph{homogeneous} generating elements.
+Only finitely many $f_d$ are non-zero on these homogeneous generators, hence on $M$, giving $f=\sum_d f_d$.
+\end{proof}
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+For $a\in A_i$, we have $f_d(ma)=f(ma)_{j+i+d}=f(m)_{j+d}a$, so $f_d$ is $A$-linear of degree $d$.
+The sum of the homogeneous Hom spaces is direct: on $M_j$, distinct degrees have values in distinct summands of $N$.
+If $M$ is finitely generated, the homogeneous components of a finite generating set form a finite homogeneous generating set.
+Only finitely many $f_d$ are non-zero on these homogeneous generators, hence on $M$, giving $f=\sum_d f_d$.
+\end{proof}
+```
+
+======================================================================
+REPLACEMENT 12: original lines 532-536
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+is a right ideal: $Ie_{11}=Ie_{12}=0$ and $Ie_{22}=I$.
+However, $e_{22},e_{12}\notin I$, so $I$ is not homogeneous.
+Note that we have $\overline e_{12}=-\overline e_{22} \in A/I$ and they lies in $(A_1\cap A_0)/I$, so we do not a direct sum $A_1/(I\cap A_1) \oplus A_0/(I\cap A_0)$, i.e. the quotient $A/I$ does not inherit a grading from $A$.
+\end{example}
+
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+is a right ideal: $Ie_{11}=Ie_{12}=0$ and $Ie_{22}=I$.
+However, $e_{22},e_{12}\notin I$, so $I$ is not homogeneous.
+For the quotient map $q:A\to A/I$, we have
+\[
+0\neq q(e_{12})=-q(e_{22})\in q(A_1)\cap q(A_0).
+\]
+Thus $q(A_0)+q(A_1)$ is not a direct sum, so $A/I$ does not inherit the quotient grading.
+\end{example}
+
+```
+
+======================================================================
+REPLACEMENT 13: original lines 561-573
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+% An element of the form $u\otimes v$ is called a \defn{pure tensor}.
+% \comm{do not introduce useless terminology!}
+If both $U$ and $V$ has a basis, say, $(u_i)_{i\in I}$ and $(v_j)_{j\in J}$ respectively, then we can construct $U\otimes_\Bbbk V$ explicitly as the vector space with basis $\{ u_i\otimes v_j\mid i\in I, j\in J\}$.
+It is routine to check that any bilinear map $b:U\times V\to W$ determines exactly one linear map $\widetilde{b}$ by $u_i\otimes v_j\mapsto b(u_i,v_j)$, which gives the desired universal property.
+
+For two spaces satisfying Definition~\ref{def:vector-tensor}, the induced maps in both directions are inverse by uniqueness. 
+Thus the construction is independent of the bases up to a unique isomorphism preserving pure tensors.
+
+For finite bases with $|I|=r$ and $|J|=s$, we obtain $\dim_\Bbbk(U\otimes_\Bbbk V)=rs$.
+There is a canonical identifications $(U\otimes_\Bbbk V)\otimes_\Bbbk W\cong U\otimes_\Bbbk(V\otimes_\Bbbk W)$ and $\Bbbk\otimes_\Bbbk U\cong U$.
+It is also customary to take $U^{\otimes_{\Bbbk} 0}:=\Bbbk$.
+
+
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+% An element of the form $u\otimes v$ is called a \defn{pure tensor}.
+% \comm{do not introduce useless terminology!}
+Choose bases $(u_i)_{i\in I}$ of $U$ and $(v_j)_{j\in J}$ of $V$.
+Construct $U\otimes_\Bbbk V$ as the vector space with basis $\{u_i\otimes v_j\mid i\in I,\ j\in J\}$, and extend $(u_i,v_j)\mapsto u_i\otimes v_j$ bilinearly.
+For $b:U\times V\to W$ bilinear, the unique required map is
+\[
+\widetilde b:U\otimes_\Bbbk V\longrightarrow W,
+\qquad u_i\otimes v_j\longmapsto b(u_i,v_j).
+\]
+If $(T,t)$ and $(T',t')$ both satisfy Definition~\ref{def:vector-tensor}, the universal properties give unique linear maps $a:T\to T'$ and $b:T'\to T$ with $a\circ t=t'$ and $b\circ t'=t$.
+Uniqueness gives $b\circ a=\id_T$ and $a\circ b=\id_{T'}$.
+Thus the tensor product is independent of the chosen bases up to the unique isomorphism carrying $t(u,v)$ to $t'(u,v)$.
+
+For finite bases with $|I|=r$ and $|J|=s$, we obtain $\dim_\Bbbk(U\otimes_\Bbbk V)=rs$.
+We use the canonical identifications
+\[
+\begin{aligned}
+(U\otimes_\Bbbk V)\otimes_\Bbbk W&\xrightarrow{\sim}U\otimes_\Bbbk(V\otimes_\Bbbk W),
+& (u\otimes v)\otimes w&\longmapsto u\otimes(v\otimes w),\\
+\Bbbk\otimes_\Bbbk U&\xrightarrow{\sim}U,
+& c\otimes u&\longmapsto cu,
+\end{aligned}
+\]
+and set $U^{\otimes_\Bbbk 0}:=\Bbbk$.
+
+\subsection{Enveloping algebras and bimodules}
+
+\begin{definition}\label{def:enveloping-algebra}
+For a $\Bbbk$-algebra $A$, its \defn{enveloping algebra} is $A^\en:=A\otimes_\Bbbk A^\op$, with multiplication extended bilinearly from
+\[
+(a\otimes b^\op)(a'\otimes(b')^\op)=aa'\otimes(b'b)^\op,
+\qquad 1_{A^\en}=1_A\otimes1_A^\op
+\quad(a,b,a',b'\in A).
+\]
+\end{definition}
+
+An $A$-bimodule becomes a right $A^\en$-module by
+\begin{equation}\label{eq:enveloping-action}
+m\cdot(a\otimes b^\op)=bma
+\quad(a,b\in A,\ m\in M).
+\end{equation}
+The first tensor factor records the right action, and the second the left action:
+\[
+\bigl(m\cdot(a\otimes b^\op)\bigr)\cdot(a'\otimes(b')^\op)
+=b'bmaa'
+=m\cdot\bigl(aa'\otimes(b'b)^\op\bigr).
+\]
+Conversely, for $M\in\Mod A^\en$, define $ma=m\cdot(a\otimes1)$ and $bm=m\cdot(1\otimes b^\op)$.
+The two actions commute because $a\otimes1$ and $1\otimes b^\op$ commute in $A^\en$.
+For $A$-bimodules $M,N$, a linear map $u:M\to N$ satisfies
+\[
+u(bma)=bu(m)a\quad(a,b\in A,\ m\in M)
+\quad\Longleftrightarrow\quad
+u\in\Hom_{A^\en}(M,N).
+\]
+Thus $\Mod A^\en$ is also the category of $A$-bimodules and maps preserving both actions.
+
+\begin{remark}\label{rem:enveloping-semisimple}
+For a finite-dimensional semisimple $\Bbbk$-algebra $S$, semisimplicity of $S^\en$ requires an additional condition.
+For a field extension $K/\Bbbk$, give $K\otimes_\Bbbk S$ the multiplication $(c\otimes s)(d\otimes t)=cd\otimes st$.
+The algebra $S$ is called \defn{separable over $\Bbbk$} if $K\otimes_\Bbbk S$ is semisimple for every field extension $K/\Bbbk$.
+We record the following fact without proof:
+\[
+S^\en\text{ is semisimple}
+\quad\Longleftrightarrow\quad
+S\text{ is separable over }\Bbbk.
+\]
+In particular, the condition holds if $S$ is a product of matrix algebras over $\Bbbk$, and hence whenever $\Bbbk$ is algebraically closed.
+Semisimplicity of $S$ alone does not imply semisimplicity of $S^\en$ over an arbitrary field.
+\end{remark}
+
+
+```
+
+======================================================================
+REPLACEMENT 14: original lines 578-586
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+
+A linear functional on a graded vector space need not have a degree: it may be non-zero on infinitely many homogeneous components.
+To obtain a graded vector space from taking linear functional, we take only finite sums of homogeneous functionals.
+
+\begin{definition}\label{def:linear-duals}
+For a vector space $V$, its \defn{$\Bbbk$-linear dual} is $D(V):=\Hom_\Bbbk(V,\Bbbk)$.
+For a graded vector space $V=\bigoplus_{i\in\Z}V_i$, its \defn{graded $\Bbbk$-linear dual} is the graded vector space given by
+\[
+\bbD(V)=\bigoplus_{i\in \Z} \bbD(V)_i
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+
+A linear functional on a graded vector space need not have a degree: it may be non-zero on infinitely many homogeneous components.
+To obtain a graded vector space, we retain only finite sums of homogeneous functionals.
+
+\begin{definition}\label{def:linear-duals}
+For a graded vector space $V=\bigoplus_{i\in\Z}V_i$, its \defn{graded $\Bbbk$-linear dual} is
+the graded vector space defined using the linear dual $D$ of Example~\ref{ex:linear-duality} by
+\[
+\bbD(V)=\bigoplus_{i\in \Z} \bbD(V)_i
+```
+
+======================================================================
+REPLACEMENT 15: original lines 627-633
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+\end{example}
+
+\comm{do a more proper definition! this is super important!}
+Recall that a sequence $0\to L\xrightarrow{i}M\xrightarrow{p}N\to0$ is \defn{short exact} if $i$ is injective, $p$ is surjective, and $\Im i=\Ker p$.
+In $\Grmod A$ the maps must preserve degrees; exactness can then be checked in each degree.
+
+\begin{lemma}\label{lem:linear-bidual}
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+\end{example}
+
+\begin{definition}\label{def:exact-sequence}
+Let $L,M,N\in\Mod A$, with $i:L\to M$ and $p:M\to N$ module homomorphisms.
+The sequence $L\xrightarrow{i}M\xrightarrow{p}N$ is \defn{exact at $M$} if
+\[
+\Im i=\Ker p,
+\qquad\text{that is,}\qquad
+\{i(\ell)\mid\ell\in L\}=\{m\in M\mid p(m)=0\}.
+\]
+A sequence of module homomorphisms is \defn{exact} if it is exact at every term with an incoming and an outgoing map.
+A \defn{short exact sequence} is an exact sequence
+\begin{equation}\label{eq:short-exact-sequence}
+0\longrightarrow L\xrightarrow{i}M\xrightarrow{p}N\longrightarrow0,
+\qquad
+\Ker i=0,\quad\Im i=\Ker p,\quad\Im p=N.
+\end{equation}
+A sequence in $\Grmod A$ has maps of degree $0$ and is exact if the underlying sequence in $\Mod A$ is exact.
+\end{definition}
+
+In \eqref{eq:short-exact-sequence}, the map $i$ identifies $L$ with the submodule $\Ker p\subset M$, and $p$ gives $M/i(L)\cong N$.
+For degree $0$ maps $i,p$, exactness is equivalent to exactness of
+\[
+0\longrightarrow L_j\xrightarrow{i|_{L_j}}M_j\xrightarrow{p|_{M_j}}N_j\longrightarrow0
+\quad\text{for every }j\in\Z.
+\]
+Indeed, $i$ and $p$ preserve the direct sum decompositions, so their kernels and images decompose into the kernels and images of the restrictions.
+
+\begin{example}\label{ex:short-exact-row}
+Let $A=\Bbbk A_2$. The inclusion and quotient maps give a short exact sequence in $\Grmod A$:
+\[
+0\longrightarrow\Bbbk e_{12}\xrightarrow{i}e_{11}A
+\xrightarrow{p}e_{11}A/\Bbbk e_{12}\longrightarrow0,
+\qquad
+i(c e_{12})=c e_{12},\quad p(m)=\overline m.
+\]
+The source is concentrated in degree $1$, the quotient in degree $0$, and $\Ker p=\Bbbk e_{12}=\Im i$.
+\end{example}
+
+\begin{lemma}\label{lem:linear-bidual}
+```
+
+======================================================================
+REPLACEMENT 16: original lines 652-656
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+Hence $\bbD(\bbD(u))\circ\mathrm{ev}_M=\mathrm{ev}_N\circ u$, which is naturality as in \eqref{eq:naturality-square}.
+Evaluation on left modules gives the other natural isomorphism required for a duality.
+Finally, dualising a short exact sequence in each degree is exact, since every linear functional on a subspace extends to the whole vector space.
+\end{proof}
+
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+Hence $\bbD(\bbD(u))\circ\mathrm{ev}_M=\mathrm{ev}_N\circ u$, which is naturality as in \eqref{eq:naturality-square}.
+Evaluation on left modules gives the other natural isomorphism required for a duality.
+For a short exact sequence as in \eqref{eq:short-exact-sequence}, the maps on the dual sequence are $\bbD(p):\bbD(N)\to\bbD(M)$ and $\bbD(i):\bbD(M)\to\bbD(L)$.
+In each degree, $\bbD(p)$ is injective because $p$ is surjective, and $\bbD(i)$ is surjective because a functional on a subspace extends to the whole vector space.
+For $\lambda\in\bbD(M)_d$ with $\lambda\circ i=0$, define $\mu:N\to\Bbbk$ by $\mu(p(m))=\lambda(m)$.
+This is well-defined because $\lambda$ vanishes on $\Ker p=i(L)$; since $p$ preserves degrees, $\mu\in\bbD(N)_d$.
+Thus $\lambda=\bbD(p)(\mu)$.
+Conversely, $p\circ i=0$ gives $\bbD(i)\circ\bbD(p)=0$, proving $\Ker\bbD(i)=\Im\bbD(p)$.
+\end{proof}
+
+```
+
+======================================================================
+REPLACEMENT 17: original lines 679-683
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+\end{definition}
+
+Thus $M^*$ is a left $S$-module and $ {}^*N$ is a right $S$-module \comm{write this in equation environment $M\in \mod A \Rightarrow M^*\in \mod A^\op$}.
+%The position of the star records the side of the original action: $f(ms)=f(m)s$ in $M^*$, whereas $g(sn)=sg(n)$ in $ {}^*N$.
+%\comm{why repeat what is already written????}
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+\end{definition}
+
+\[
+M\in\Mod S\ \Longrightarrow\ M^*\in\Mod(S^\op),
+\qquad
+N\in\Mod(S^\op)\ \Longrightarrow\ {}^*N\in\Mod S.
+\]
+The same implications hold with $\Mod$ replaced by $\mod$, since $S$ is finite-dimensional.
+%The position of the star records the side of the original action: $f(ms)=f(m)s$ in $M^*$, whereas $g(sn)=sg(n)$ in $ {}^*N$.
+%\comm{why repeat what is already written????}
+```
+
+======================================================================
+REPLACEMENT 18: original lines 691-715
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+\]
+
+\begin{definition}\label{def:enveloping-algebra}
+\comm{should introduce this after tensor product of vector space, and should mention its relation with bimodules immediate after its introduction}
+\comm{setup macro for superscript en, like op; always use macro for enveloping algebra notation}
+The \defn{enveloping algebra} of $S$ is $S^{\mathrm{en}}:=S\otimes_\Bbbk S^\op$, with multiplication
+\[
+(s\otimes t^\op)(s'\otimes (t')^\op)=ss'\otimes(t't)^\op
+\quad(s,t,s',t'\in S).
+\]
+\comm{after introduce this, there should be some remark about the necessary condition for $S^{\mathrm{en}}$ to remain semisimple when $S$ is semisimple; DO NOT CITE ANYTHING and only note as a fact.}
+\end{definition}
+
+\comm{after moving definition; use a `recall that...' to begin this part}
+An $S$-bimodule is equivalently a right $S^{\mathrm{en}}$-module via
+\begin{equation}\label{eq:enveloping-action}
+m\cdot(s\otimes t^\op)=tms
+\quad(s,t\in S,\ m\in M).
+\end{equation}
+The first tensor factor acts on the right because we are using right $S^{\mathrm{en}}$-modules; the second records the left $S$-action.
+For example, $(m\cdot(s\otimes t^\op))\cdot(s'\otimes(t')^\op)=t'tmss'=m\cdot(ss'\otimes(t't)^\op)$.
+A morphism of $S$-bimodules is a linear map preserving both actions.
+Such a map is exactly a right $S^{\mathrm{en}}$-module homomorphism under \eqref{eq:enveloping-action}, so this identifies the category of $S$-bimodules with $\Mod S^{\mathrm{en}}$.
+All three spaces $D(M)$, $M^*$, and $ {}^*M$ inherit bimodule structures:
+\begin{equation}\label{eq:bimodule-dual-actions}
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+\]
+
+Recall from Definition~\ref{def:enveloping-algebra} and \eqref{eq:enveloping-action} that
+\[
+S^\en=S\otimes_\Bbbk S^\op,\qquad
+m\cdot(s\otimes t^\op)=tms,
+\]
+so $S$-bimodules are the objects of $\Mod S^\en$.
+All three spaces $D(M)$, $M^*$, and $ {}^*M$ inherit bimodule structures:
+\begin{equation}\label{eq:bimodule-dual-actions}
+```
+
+======================================================================
+REPLACEMENT 19: original lines 723-737
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+The \defn{two-sided dual} of an $S$-bimodule $M$ is
+\[
+M^{*_{\mathrm{en}}}:=\Hom_{S^{\mathrm{en}}}(M,S^{\mathrm{en}}),
+\qquad (sFt)(m):=(s\otimes t^\op)F(m)
+\quad(s,t\in S,\ F\in M^{*_{\mathrm{en}}},\ m\in M).
+\]
+\end{definition}
+
+In Definition~\ref{def:en-dual}, $M$ has the right action \eqref{eq:enveloping-action}, so $F(tms)=F(m)(s\otimes t^\op)$.
+The output is a left $S^{\mathrm{en}}$-module by multiplication on the values, which gives the displayed bimodule action.
+The two-sided dual takes values in $S^{\mathrm{en}}$, not in $S$.
+On bimodule morphisms it acts by precomposition, as do $D$, $(-)^*$, and ${}^*(-)$; each is a contravariant functor on the category of $S$-bimodules.
+It is useful when dualising maps with two module actions at once. The two-sided comparisons are included for reference; the construction of quadratic duals uses only the left and right $S$-duals. See \cite[\S2.1]{GI20} for applications to bimodule resolutions.
+
+\subsection{Comparing the duals}
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+The \defn{two-sided dual} of an $S$-bimodule $M$ is
+\[
+M^{*_{\en}}:=\Hom_{S^{\en}}(M,S^{\en}),
+\qquad (sFt)(m):=(s\otimes t^\op)F(m)
+\quad(s,t\in S,\ F\in M^{*_{\en}},\ m\in M).
+\]
+\end{definition}
+
+In Definition~\ref{def:en-dual}, $M$ has the right action \eqref{eq:enveloping-action}, so $F(tms)=F(m)(s\otimes t^\op)$.
+The output is a left $S^{\en}$-module by multiplication on the values, which gives the displayed bimodule action.
+The two-sided dual takes values in $S^{\en}$, not in $S$.
+On bimodule morphisms it acts by precomposition, as do $D$, $(-)^*$, and ${}^*(-)$; each is a contravariant functor on the category of $S$-bimodules.
+The two-sided dual records both module actions in the target algebra $S^\en$.
+
+\subsection{Comparing the duals}
+```
+
+======================================================================
+REPLACEMENT 20: original lines 749-768
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+\end{definition}
+
+\old{
+Every finite-dimensional semisimple $\Bbbk$-algebra is symmetric, over an arbitrary field; see \cite[Introduction]{DNN17} for this theorem and its original reference.
+We use the theorem without proof and do not restrict $S$ to products of matrix algebras over $\Bbbk$.
+The forms needed in our basic examples are explicit.
+}
+\comm{we only use the following, so we do not need to cite anything heavy; as instructed, you should NOT cite anything in the beginning lectures.  all material should be self-contained.  Just say specifically that we will only use the following.}
+
+\begin{example}\label{ex:symmetrising-form}
+For $S=\Bbbk^{\oplus r}$, take $\tau(a_1,\ldots,a_r)=\sum_i a_i$.
+For $S=\Mat_n(\Bbbk)$, take $\tau(a)=\Tr(a)$.
+Indeed, $\Tr(ab)=\Tr(ba)$ and $\Tr(ae_{ji})=a_{ij}$, so the pairing is non-degenerate in every characteristic.
+More generally, the sum of the matrix traces works on every product $\prod_{j=1}^r\Mat_{n_j}(\Bbbk)$ in Theorem~\ref{thm:artin-wedderburn}.
+\comm{rewrite more clearly using equation environment for easy reading}
+\end{example}
+
+\begin{proposition}[Dual comparison, {\cite[\S2.1]{GI20}}]\label{prop:dual-comparison} \comm{do not cite anything!}
+Choose a symmetrising form $\tau$ on $S$.
+For every finite-dimensional $S$-bimodule $M$, there are isomorphisms of $S$-bimodules
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+\end{definition}
+
+We will only use the following explicit symmetrising forms.
+
+\begin{example}\label{ex:symmetrising-form}
+The following maps are symmetrising forms:
+\[
+\begin{aligned}
+\tau:\Bbbk^{\oplus r}&\longrightarrow\Bbbk,
+& (a_1,\ldots,a_r)&\longmapsto\sum_{j=1}^r a_j,\\
+\tau:\Mat_n(\Bbbk)&\longrightarrow\Bbbk,
+& a&\longmapsto\Tr(a):=\sum_{i=1}^n a_{ii},\\
+\tau:\prod_{j=1}^r\Mat_{n_j}(\Bbbk)&\longrightarrow\Bbbk,
+& (a_1,\ldots,a_r)&\longmapsto\sum_{j=1}^r\Tr(a_j).
+\end{aligned}
+\]
+For matrices $a,b\in\Mat_n(\Bbbk)$,
+\[
+\Tr(ab)=\sum_{i,j=1}^n a_{ij}b_{ji}=\Tr(ba),
+\qquad
+\Tr(ae_{ji})=a_{ij}
+\quad(1\leq i,j\leq n).
+\]
+Thus $\Tr(ab)=0$ for all $b$ forces $a=0$.
+For the product, take $b$ supported on a single matrix factor; the same calculation detects every entry of every $a_j$.
+The first form is the case $n_j=1$ for all $j$.
+\end{example}
+
+\begin{proposition}[Dual comparison]\label{prop:dual-comparison}
+Choose a symmetrising form $\tau$ on $S$.
+For every finite-dimensional $S$-bimodule $M$, there are isomorphisms of $S$-bimodules
+```
+
+======================================================================
+REPLACEMENT 21: original lines 772-776
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+\beta_M:{}^*M\longrightarrow D(M),\quad g\longmapsto\tau\circ g.
+\end{equation}
+There is also an isomorphism of $S$-bimodules $\gamma_M:M^{*_{\mathrm{en}}}\to M^*$ given by
+\begin{equation}\label{eq:en-dual-comparison}
+\gamma_M(F)(m)=\sum_j a_j\tau(b_j)
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+\beta_M:{}^*M\longrightarrow D(M),\quad g\longmapsto\tau\circ g.
+\end{equation}
+There is also an isomorphism of $S$-bimodules $\gamma_M:M^{*_{\en}}\to M^*$ given by
+\begin{equation}\label{eq:en-dual-comparison}
+\gamma_M(F)(m)=\sum_j a_j\tau(b_j)
+```
+
+======================================================================
+REPLACEMENT 22: original lines 807-819
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+\]
+
+The form $\tau_{\mathrm{en}}(a\otimes b^\op)=\tau(a)\tau(b)$ is symmetrising on $S^{\mathrm{en}}$.
+Indeed, $\tau_{\mathrm{en}}((a\otimes b^\op)(c\otimes d^\op))=\tau(ac)\tau(db)=\tau(ca)\tau(bd)$, and its pairing is the tensor product of two non-degenerate pairings.
+The formula \eqref{eq:en-dual-comparison} satisfies
+\[
+\gamma_M(F)(ms)=\gamma_M(F)(m)s,\qquad
+\gamma_M(sFt)=s\gamma_M(F)t,\qquad
+\alpha_M(\gamma_M(F))=\tau_{\mathrm{en}}\circ F.
+\]
+The argument \eqref{eq:dual-inverses}, applied to $S^{\mathrm{en}}$ and $\tau_{\mathrm{en}}$, makes $F\mapsto\tau_{\mathrm{en}}\circ F$ an isomorphism.
+Thus $\gamma_M$ is an isomorphism.
+For \eqref{eq:dual-comparison-naturality}, both routes send $f\in N^*$ to $\tau\circ f\circ u$; the checks for $\beta$ and $\gamma$ are identical.
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+\]
+
+The form $\tau_{\en}(a\otimes b^\op)=\tau(a)\tau(b)$ is symmetrising on $S^{\en}$.
+Indeed, $\tau_{\en}((a\otimes b^\op)(c\otimes d^\op))=\tau(ac)\tau(db)=\tau(ca)\tau(bd)$, and its pairing is the tensor product of two non-degenerate pairings.
+The formula \eqref{eq:en-dual-comparison} satisfies
+\[
+\gamma_M(F)(ms)=\gamma_M(F)(m)s,\qquad
+\gamma_M(sFt)=s\gamma_M(F)t,\qquad
+\alpha_M(\gamma_M(F))=\tau_{\en}\circ F.
+\]
+The argument \eqref{eq:dual-inverses}, applied to $S^{\en}$ and $\tau_{\en}$, makes $F\mapsto\tau_{\en}\circ F$ an isomorphism.
+Thus $\gamma_M$ is an isomorphism.
+For \eqref{eq:dual-comparison-naturality}, both routes send $f\in N^*$ to $\tau\circ f\circ u$; the checks for $\beta$ and $\gamma$ are identical.
+```
+
+======================================================================
+REPLACEMENT 23: original lines 822-834
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+The identifications \eqref{eq:dual-comparison} and \eqref{eq:en-dual-comparison} depend on $\tau$.
+For instance, $\tau(a_1,\ldots,a_r)=\sum_i c_i a_i$ is symmetrising on $\Bbbk^{\oplus r}$ for any $c_i\neq 0$.
+No semisimplicity assumption on $S^{\mathrm{en}}$ was used.
+\end{remark}
+
+\begin{definition}\label{def:graded-S-duals}
+For a graded $S$-bimodule $M$, define its \defn{graded $S$-duals} and \defn{graded two-sided dual} by \comm{setup macro called "grstar" for $(*)$, always use macro instead of typing in everytime}
+\[
+M^{(*)}:=\bigoplus_{i\in\Z}(M_{-i})^*,\qquad
+{}^{(*)}M:=\bigoplus_{i\in\Z}{}^*(M_{-i}),\qquad
+M^{(*_{\mathrm{en}})}:=\bigoplus_{i\in\Z}(M_{-i})^{*_{\mathrm{en}}},
+\]
+where each indicated summand has degree $i$.
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+The identifications \eqref{eq:dual-comparison} and \eqref{eq:en-dual-comparison} depend on $\tau$.
+For instance, $\tau(a_1,\ldots,a_r)=\sum_i c_i a_i$ is symmetrising on $\Bbbk^{\oplus r}$ for any $c_i\neq 0$.
+No semisimplicity assumption on $S^{\en}$ was used.
+\end{remark}
+
+\begin{definition}\label{def:graded-S-duals}
+For a graded $S$-bimodule $M$, define its \defn{graded $S$-duals} and \defn{graded two-sided dual} by
+\[
+M^{\grstar}:=\bigoplus_{i\in\Z}(M_{-i})^*,\qquad
+{}^{\grstar}M:=\bigoplus_{i\in\Z}{}^*(M_{-i}),\qquad
+M^{\grstar[_{\en}]}:=\bigoplus_{i\in\Z}(M_{-i})^{*_{\en}},
+\]
+where each indicated summand has degree $i$.
+```
+
+======================================================================
+REPLACEMENT 24: original lines 836-859
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+\end{definition}
+
+On degree $0$ maps, the graded duals act by precomposition in each degree, so they are contravariant functors on the corresponding categories of graded modules. \comm{write out as equation!!! clarify whether they restricts to lf (locally finite) mods}
+
+Parentheses on the stars distinguish the graded constructions from the full $S$-duals. In the notation \eqref{eq:graded-hom},
+\[
+M^{(*)}=\bigoplus_{i\in\Z}\Hom_S^{\Z}(M,S(i)),\qquad
+{}^{(*)}M=\bigoplus_{i\in\Z}\Hom_{S^\op}^{\Z}(M,S(i)).
+\]
+
+\begin{corollary}\label{cor:graded-dual-comparison}
+For a fixed symmetrising form, the graded dual functors on the category of locally finite graded $S$-bimodules are naturally isomorphic:  \comm{if it is nat. isom. as functors; then write as such, not applied them on objects}
+\[
+M^{(*)}\cong\bbD(M)\cong{}^{(*)}M\cong M^{(*_{\mathrm{en}})}.
+\]
+In particular, $\bbD(M)\cong M^{(*)}$ for a graded right $S$-module, and $\bbD(M)\cong{}^{(*)}M$ for a graded left $S$-module.
+\end{corollary}
+
+\begin{proof}
+Apply Proposition~\ref{prop:dual-comparison} to $M_{-i}$ and take the direct sum over $i\in\Z$.
+Every comparison preserves degree because $\tau$ has degree $0$.
+Naturality is the degreewise version of \eqref{eq:dual-comparison-naturality}.
+\end{proof}
+
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+\end{definition}
+
+For a degree $0$ right $S$-module map $u:M\to N$, define $u^{\grstar}:N^{\grstar}\to M^{\grstar}$ by
+\[
+(u^{\grstar})_i:(N_{-i})^*\longrightarrow(M_{-i})^*,
+\qquad f\longmapsto f\circ u|_{M_{-i}}
+\quad(i\in\Z).
+\]
+For left module maps $u:M\to N$ and bimodule maps $u:M\to N$, respectively, the same formula in each degree defines
+\[
+{}^{\grstar}u:{}^{\grstar}N\longrightarrow{}^{\grstar}M,
+\qquad
+u^{\grstar[_{\en}]}:N^{\grstar[_{\en}]}\longrightarrow M^{\grstar[_{\en}]}.
+\]
+With the bimodule actions from \eqref{eq:bimodule-dual-actions} and Definition~\ref{def:en-dual}, we obtain functors
+\begin{equation}\label{eq:graded-S-dual-functors}
+\begin{aligned}
+(-)^{\grstar}&:(\Grmod S)^\op\longrightarrow\Grmod(S^\op),\\
+{}^{\grstar}(-)&:(\Grmod(S^\op))^\op\longrightarrow\Grmod S,\\
+(-)^{\grstar},\ {}^{\grstar}(-),\ (-)^{\grstar[_{\en}]}
+&:(\Grmod S^\en)^\op\longrightarrow\Grmod S^\en.
+\end{aligned}
+\end{equation}
+Each functor in \eqref{eq:graded-S-dual-functors} restricts to locally finite modules: replace $\Grmod$ by $\grmod$ in its source and target.
+Indeed, for $R=S,S^\op$, or $S^\en$ and $M\in\grmod R$,
+\[
+\dim_\Bbbk\Hom_R(M_{-i},R)
+\leq(\dim_\Bbbk M_{-i})(\dim_\Bbbk R)<\infty
+\quad(i\in\Z).
+\]
+
+Parentheses on the stars distinguish the graded constructions from the full $S$-duals. In the notation \eqref{eq:graded-hom},
+\[
+M^{\grstar}=\bigoplus_{i\in\Z}\Hom_S^{\Z}(M,S(i)),\qquad
+{}^{\grstar}M=\bigoplus_{i\in\Z}\Hom_{S^\op}^{\Z}(M,S(i)).
+\]
+
+\begin{corollary}\label{cor:graded-dual-comparison}
+Fix a symmetrising form $\tau:S\to\Bbbk$.
+There are natural isomorphisms of functors $(\grmod S^\en)^\op\to\grmod S^\en$:
+\[
+(-)^{\grstar[_{\en}]}
+\xrightarrow[\gamma]{\sim}(-)^{\grstar}
+\xrightarrow[\alpha]{\sim}\bbD
+\xleftarrow[\beta]{\sim}{}^{\grstar}(-).
+\]
+For one-sided modules, the natural isomorphisms are
+\[
+\begin{aligned}
+\alpha:(-)^{\grstar}&\xrightarrow{\sim}\bbD
+&&\text{as functors }(\grmod S)^\op\to\grmod(S^\op),\\
+\beta:{}^{\grstar}(-)&\xrightarrow{\sim}\bbD
+&&\text{as functors }(\grmod(S^\op))^\op\to\grmod S.
+\end{aligned}
+\]
+\end{corollary}
+
+\begin{proof}
+For a locally finite graded module $M$, the components $\alpha_M,\beta_M,\gamma_M$ are the direct sums over $i\in\Z$ of the corresponding maps on $M_{-i}$ in Proposition~\ref{prop:dual-comparison}.
+They are isomorphisms of degree $0$, and their naturality squares are the direct sums of the squares in \eqref{eq:dual-comparison-naturality} and its counterparts for $\beta$ and $\gamma$.
+\end{proof}
+
+```
+
+======================================================================
+REPLACEMENT 25: original lines 864-868
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+ga=\beta_M^{-1}(\beta_M(g)a)\quad\text{for left }M.
+\]
+Here $\alpha_M(f)=\tau\circ f$ and $\beta_M(g)=\tau\circ g$ are the restrictions of \eqref{eq:dual-comparison}; $a\in A$, $f\in M^{(*)}$, and $g\in{}^{(*)}M$.
+The restrictions to $S$ agree with Definition~\ref{def:S-duals}.
+These remain duals over $S$, not duals taking values in $A$.
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+ga=\beta_M^{-1}(\beta_M(g)a)\quad\text{for left }M.
+\]
+Here $\alpha_M(f)=\tau\circ f$ and $\beta_M(g)=\tau\circ g$ are the restrictions of \eqref{eq:dual-comparison}; $a\in A$, $f\in M^{\grstar}$, and $g\in{}^{\grstar}M$.
+The restrictions to $S$ agree with Definition~\ref{def:S-duals}.
+These remain duals over $S$, not duals taking values in $A$.
+```
+
+======================================================================
+REPLACEMENT 26: original lines 872-876
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+Let $A=\Bbbk A_2$, $S=\Bbbk e_{11}\oplus\Bbbk e_{22}$, and $M=e_{11}A$.
+Take $\tau(e_{11})=c_1$ and $\tau(e_{22})=c_2$ with $c_1,c_2\neq0$.
+The right $S$-linear maps $\varphi_0,\varphi_1\in M^{(*)}$ are specified by $\varphi_0(e_{11})=e_{11}$ and $\varphi_1(e_{12})=e_{22}$, with their other basis values zero. Their degrees are $0,-1$, and
+\[
+\alpha_M(e_{12}\varphi_1)(e_{11})
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+Let $A=\Bbbk A_2$, $S=\Bbbk e_{11}\oplus\Bbbk e_{22}$, and $M=e_{11}A$.
+Take $\tau(e_{11})=c_1$ and $\tau(e_{22})=c_2$ with $c_1,c_2\neq0$.
+The right $S$-linear maps $\varphi_0,\varphi_1\in M^{\grstar}$ are specified by $\varphi_0(e_{11})=e_{11}$ and $\varphi_1(e_{12})=e_{22}$, with their other basis values zero. Their degrees are $0,-1$, and
+\[
+\alpha_M(e_{12}\varphi_1)(e_{11})
+```
+
+======================================================================
+REPLACEMENT 27: original lines 882-910
+======================================================================
+
+EXISTING CONTENT (exact):
+```tex
+
+\begin{example}\label{ex:dual-blocks}
+Let $S=\Bbbk^{\oplus r}$ with coordinate idempotents $e_1,\ldots,e_r$ and the form $\tau(e_i)=1$.
+When $S$ is realised as diagonal matrices, $e_i$ means the matrix unit $e_{ii}$.
+For an $S$-bimodule $M$, the decompositions and the reversal of sides are \comm{this is difficult to read, write $M$ more naturally; see what I did in Example 1.27 and 1.23}
+\[
+M=\bigoplus_{i,j}e_iMe_j,
+\qquad
+e_jD(M)e_i\cong D(e_iMe_j)\cong e_jM^*e_i\cong e_j({}^*M)e_i.
+\]
+For the degree $1$ piece $V=\Bbbk e_{12}$ of $\Bbbk A_2$, we have $e_1Ve_2=V$.
+Its graded $\Bbbk$-linear dual is spanned by $\varepsilon$ of degree $-1$, with $\varepsilon(e_{12})=1$ and $e_2\varepsilon e_1=\varepsilon$.
+The corresponding elements of $V^*$ and $ {}^*V$ send $e_{12}$ to $e_2$ and $e_1$, respectively.
+Thus equal scalar-valued functionals can correspond to different $S$-valued maps.
+\end{example}
+
+\begin{lemma}\label{lem:S-bidual}
+\comm{this lemma is difficult to read; too many words clutter together; use equation environment; use proper formula; categorical symbols, etc.}
+For finite-dimensional right $S$-modules $M$ and left $S$-modules $N$, evaluation gives natural isomorphisms $M\cong{}^*(M^*)$ and $N\cong({}^*N)^*$, sending $m$ to $(f\mapsto f(m))$ and $n$ to $(g\mapsto g(n))$, respectively.
+For bimodules, both are bimodule isomorphisms.
+Consequently, $(-)^*$ and ${}^*(-)$ give inverse dualities between $\mod S$ and $\mod(S^\op)$, without choosing a symmetrising form.
+\end{lemma}
+
+\begin{proof}
+By Corollary~\ref{cor:semisimple-summands}, every finite-dimensional $S$-module is a direct summand of some $S^{\oplus n}$.
+Evaluation is an isomorphism for $S$, hence for such summands; \eqref{eq:bimodule-dual-actions} gives bimodule compatibility.
+For $u:M\to N$ and $f\in N^*$, evaluation at $m\in M$ gives $(u^*f)(m)=f(u(m))$, proving naturality. The left module calculation is the same.
+\end{proof}
+
+```
+
+REPLACEMENT CONTENT (exact):
+```tex
+
+\begin{example}\label{ex:dual-blocks}
+Let $S=\Bbbk^{\oplus r}$ with coordinate idempotents $e_1,\ldots,e_r$ and $\tau(e_i)=1$.
+Thus $1=\sum_i e_i$ and $e_ie_j=\delta_{ij}e_i$; in the diagonal matrix realisation, $e_i=e_{ii}$.
+For an $S$-bimodule $M$, write its elements in blocks:
+\[
+M\cong
+\begin{pmatrix}
+e_1Me_1&\cdots&e_1Me_r\\
+\vdots&\ddots&\vdots\\
+e_rMe_1&\cdots&e_rMe_r
+\end{pmatrix},
+\qquad m\longmapsto(e_i m e_j)_{i,j}.
+\]
+The block matrix denotes the direct sum of its entries; its inverse sends $(m_{ij})_{i,j}$ to $\sum_{i,j}m_{ij}$.
+The action $(s\lambda t)(m)=\lambda(tms)$ from \eqref{eq:bimodule-dual-actions} reverses the blocks:
+\[
+D(M)\cong
+\begin{pmatrix}
+D(e_1Me_1)&\cdots&D(e_rMe_1)\\
+\vdots&\ddots&\vdots\\
+D(e_1Me_r)&\cdots&D(e_rMe_r)
+\end{pmatrix},
+\qquad
+e_jD(M)e_i\cong D(e_iMe_j).
+\]
+The last isomorphism restricts a functional to $e_iMe_j$; its inverse extends that functional by zero on the other blocks.
+
+For $V=(\Bbbk A_2)_1=\Bbbk e_{12}$, the block positions are
+\[
+V=
+\begin{pmatrix}0&\Bbbk\\0&0\end{pmatrix},
+\qquad
+D(V)\cong
+\begin{pmatrix}0&0\\\Bbbk&0\end{pmatrix}.
+\]
+Let $\varepsilon\in D(V)$ satisfy $\varepsilon(e_{12})=1$.
+Then $e_2\varepsilon e_1=\varepsilon$, and $\varepsilon$ has degree $-1$ in $\bbD(V)$.
+Under \eqref{eq:dual-comparison}, the corresponding right and left $S$-linear maps are
+\[
+\alpha_V^{-1}(\varepsilon):V\to S,\quad e_{12}\mapsto e_2,
+\qquad
+\beta_V^{-1}(\varepsilon):V\to S,\quad e_{12}\mapsto e_1.
+\]
+Thus the same scalar-valued functional corresponds to distinct $S$-valued maps on the two sides.
+\end{example}
+
+\begin{lemma}\label{lem:S-bidual}
+Evaluation gives natural isomorphisms of functors
+\[
+\id_{\mod S}\xrightarrow{\sim}{}^*((-)^*),
+\qquad
+\id_{\mod(S^\op)}\xrightarrow{\sim}({}^*(-))^*,
+\]
+with components
+\[
+\begin{aligned}
+\mathrm{ev}_M:M&\xrightarrow{\sim}{}^*(M^*),
+& m&\longmapsto(f\mapsto f(m))
+&& (M\in\mod S),\\
+\mathrm{ev}_N:N&\xrightarrow{\sim}({}^*N)^*,
+& n&\longmapsto(g\mapsto g(n))
+&& (N\in\mod(S^\op)).
+\end{aligned}
+\]
+Thus $(-)^*:(\mod S)^\op\to\mod(S^\op)$ and $ {}^*(-):(\mod(S^\op))^\op\to\mod S$ are inverse dualities.
+For $S$-bimodules, the evaluation maps preserve both actions.
+No symmetrising form is required.
+\end{lemma}
+
+\begin{proof}
+For $u:M\to N$ in $\mod S$, $m\in M$, and $f\in N^*$,
+\[
+\bigl({}^*(u^*)(\mathrm{ev}_M(m))\bigr)(f)
+=(u^*f)(m)=f(u(m))=\mathrm{ev}_N(u(m))(f).
+\]
+Hence $ {}^*(u^*)\circ\mathrm{ev}_M=\mathrm{ev}_N\circ u$.
+For $M=S$, evaluation is an isomorphism: its inverse sends $F\in{}^*(S^*)$ to $F(\id_S)$.
+Indeed, every $f\in S^*$ satisfies $f(s)=f(1)s$, so $F(f)=f(1)F(\id_S)=f(F(\id_S))$.
+Restriction to summands identifies the dual of a finite direct sum with the direct sum of the duals; evaluation therefore is an isomorphism for $S^{\oplus n}$.
+By Corollary~\ref{cor:semisimple-summands}, $M\oplus L\cong S^{\oplus n}$ for some $L$.
+Under the direct sum identifications, $\mathrm{ev}_{M\oplus L}=\mathrm{ev}_M\oplus\mathrm{ev}_L$, so $\mathrm{ev}_M$ is an isomorphism.
+Replacing $S$ by $S^\op$ proves the left module statement.
+For a bimodule $M$, \eqref{eq:bimodule-dual-actions} gives
+\[
+(s\,\mathrm{ev}_M(m)\,t)(f)=f(sm)t=f(smt)=\mathrm{ev}_M(smt)(f)
+\quad(s,t\in S,\ m\in M,\ f\in M^*),
+\]
+which proves bimodule compatibility.
+\end{proof}
+
+```
+
+
