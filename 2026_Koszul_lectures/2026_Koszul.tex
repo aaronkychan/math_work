@@ -692,6 +692,7 @@ u(bma)=bu(m)a\quad(a,b\in A,\ m\in M)
 \quad\Longleftrightarrow\quad
 u\in\Hom_{A^\en}(M,N).
 \]
+\comm{add a reference to this fact (we should avoid citing things in min lecture content, but advanced material are fine.)}
 Thus $\Mod A^\en$ is also the category of $A$-bimodules and maps preserving both actions.
 
 \begin{advanced}
@@ -947,6 +948,8 @@ The output is a left $S^{\en}$-module by multiplication on the values, which giv
 The two-sided dual takes values in $S^{\en}$, not in $S$.
 On bimodule morphisms it acts by precomposition, as do $D$, $(-)^*$, and ${}^*(-)$; each is a contravariant functor on the category of $S$-bimodules.
 The two-sided dual records both module actions in the target algebra $S^\en$.
+
+\comm{add notes about difference of notations compare to Grant-Iyama and things that are taken from it.}
 \end{advanced}
 
 \subsection{Comparing the duals}
@@ -964,9 +967,8 @@ An algebra admitting such a form is \defn{symmetric}.
 \end{definition}
 
 The second condition in Definition~\ref{def:symmetrising-form} says that the bilinear form $(s,t)\mapsto\tau(st)$ is \defn{non-degenerate}: every non-zero $s\in S$ pairs non-trivially with some $t\in S$.
-The first condition makes this form symmetric, so the analogous assertion holds with the two arguments interchanged.
 
-We will only use the following explicit symmetrising forms.
+In practice (including within the scope of these lectures), we only really use the following explicit symmetrising forms.
 
 \begin{example}\label{ex:symmetrising-form}
 The following maps are symmetrising forms:
@@ -976,50 +978,33 @@ The following maps are symmetrising forms:
 & (a_1,\ldots,a_r)&\longmapsto\sum_{j=1}^r a_j,\\
 \tau:\Mat_n(\Bbbk)&\longrightarrow\Bbbk,
 & a&\longmapsto\Tr(a):=\sum_{i=1}^n a_{ii},\\
-\tau:\prod_{j=1}^r\Mat_{n_j}(\Bbbk)&\longrightarrow\Bbbk,
+\text{and more generally,}\quad \tau:\prod_{j=1}^r\Mat_{n_j}(\Bbbk)&\longrightarrow\Bbbk,
 & (a_1,\ldots,a_r)&\longmapsto\sum_{j=1}^r\Tr(a_j).
 \end{aligned}
 \]
-For matrices $a,b\in\Mat_n(\Bbbk)$,
-\[
-\Tr(ab)=\sum_{i,j=1}^n a_{ij}b_{ji}=\Tr(ba),
-\qquad
-\Tr(ae_{ji})=a_{ij}
-\quad(1\leq i,j\leq n).
-\]
-Thus $\Tr(ab)=0$ for all $b$ forces $a=0$.
-For the product, take $b$ supported on a single matrix factor; the same calculation detects every entry of every $a_j$.
-The first form is the case $n_j=1$ for all $j$.
 \end{example}
 
 \begin{proposition}[Dual comparison]\label{prop:dual-comparison}
 Choose a symmetrising form $\tau$ on $S$.
-For finite-dimensional right and left $S$-modules $M$, respectively, the maps
+For finite-dimensional right $S$-module $M$ and left $S$-modules $N$, the maps
 \begin{equation}\label{eq:dual-comparison}
 \alpha_M:M^*\longrightarrow D(M),\quad f\longmapsto\tau\circ f,
 \qquad
-\beta_M:{}^*M\longrightarrow D(M),\quad g\longmapsto\tau\circ g
+\beta_N:{}^*N\longrightarrow D(N),\quad g\longmapsto\tau\circ g
 \end{equation}
-are isomorphisms of left and right $S$-modules, respectively.
-For fixed $\tau$, they are natural isomorphisms of the corresponding contravariant functors.
-For example, every right $S$-module map $u:M\to N$ between finite-dimensional modules gives a commuting square
-\begin{equation}\label{eq:dual-comparison-naturality}
-\xymatrix@C=48pt@R=20pt{
-N^* \ar[r]^{\alpha_N} \ar[d]_{u^*} & D(N) \ar[d]^{D(u)}\\
-M^* \ar[r]_{\alpha_M} & D(M).
-}
-\end{equation}
-The corresponding squares for $\beta$ commute for left $S$-module maps.
+are isomorphisms of $S$-modules, which induces a natural isomorphisms of the corresponding contravariant functors.
+\[
+\comm{write them out}
+\]
 
 \begin{advanced}
 If $M$ is an $S$-bimodule, $\alpha_M$ and $\beta_M$ preserve both actions from \eqref{eq:bimodule-dual-actions}.
-There is also an isomorphism of $S$-bimodules $\gamma_M:M^{*_{\en}}\to M^*$ given by
+There is also a natural isomorphism $\gamma:(-)^{*_\en}\xrightarrow{\sim}(-)^*$ given by
 \begin{equation}\label{eq:en-dual-comparison}
-\gamma_M(F)(m)=\sum_j a_j\tau(b_j)
-\quad\text{where}\quad
+\gamma_M:M^{*_{\en}}\to M^*, \qquad F\mapsto \big(m\mapsto \sum_j a_j\tau(b_j)\big)
+\quad\text{for}\quad
 F(m)=\sum_j a_j\otimes b_j^\op.
 \end{equation}
-For fixed $\tau$, $\gamma$ is a natural isomorphism of contravariant functors on finite-dimensional $S$-bimodules.
 \end{advanced}
 \end{proposition}
 
@@ -1041,7 +1026,7 @@ For $s\in S$, $f\in M^*$, and $m\in M$, symmetry and right $S$-linearity give
 \alpha_M(sf)(m)=\tau(sf(m))=\tau(f(m)s)=\tau(f(ms))=(s\alpha_M(f))(m).
 \]
 Likewise, $\beta_M(gs)(m)=\tau(g(m)s)=\tau(sg(m))=\tau(g(sm))=(\beta_M(g)s)(m)$ for a left module $M$ and $g\in{}^*M$.
-For \eqref{eq:dual-comparison-naturality}, both routes send $f\in N^*$ to $\tau\circ f\circ u$; the calculation for $\beta$ is identical.
+\old{For \eqref{eq:dual-comparison-naturality}, both routes send $f\in N^*$ to $\tau\circ f\circ u$; the calculation for $\beta$ is identical.}\comm{say something like routine to check something something commutes}
 
 \begin{advanced}
 For bimodule compatibility, use \eqref{eq:bimodule-dual-actions} and
@@ -1112,7 +1097,7 @@ M^{\grstar}=\bigoplus_{i\in\Z}\Hom_S^{\Z}(M,S(i)),\qquad
 For a graded $S$-bimodule $M$, define its \defn{graded two-sided dual} by
 \[
 M^{\grstar[_{\en}]}:=\bigoplus_{i\in\Z}(M_{-i})^{*_{\en}},
-\qquad (M^{\grstar[_{\en}]})_i=(M_{-i})^{*_{\en}}.
+\qquad (M^{\grstar[_{\en}]})f_i=(M_{-i})^{*_{\en}}.
 \]
 The bimodule actions in \eqref{eq:bimodule-dual-actions} and Definition~\ref{def:en-dual} give functors
 \begin{equation}\label{eq:graded-bimodule-dual-functors}
@@ -1191,10 +1176,10 @@ Their degrees in $M^{\grstar}$ are $0,-1$, respectively, and
 =\alpha_M(\varphi_1)(e_{12})=c_2,
 \qquad e_{12}\varphi_1=\frac{c_2}{c_1}\varphi_0.
 \]
-Thus changing the form can change the action on the same vector space. Two choices give isomorphic $A$-modules by composing their identifications with $\bbD(M)$.
+Thus changing the form can change the action on the same vector space. Two choices give isomorphic $A$-modules by composing their identifications with $\bbD(M)$.\comm{make this an exercise (hide the solution); exercise should also give two different choices of symmeterising form and ask for how things change; prepare full solution to this.}
 \end{example}
 
-\begin{example}\label{ex:dual-blocks}
+\begin{example}\label{ex:dual-blocks}\comm{starting saying the purpose of the example first.}
 Let $S=\Bbbk^{\oplus r}$ with coordinate idempotents $e_1,\ldots,e_r$ and $\tau(e_i)=1$.
 Thus $1=\sum_i e_i$ and $e_ie_j=\delta_{ij}e_i$; in the diagonal matrix realisation, $e_i=e_{ii}$.
 For an $S$-bimodule $M$, write its elements in blocks:
@@ -1237,7 +1222,7 @@ Under \eqref{eq:dual-comparison}, the corresponding right and left $S$-linear ma
 \qquad
 \beta_V^{-1}(\varepsilon):V\to S,\quad e_{12}\mapsto e_1.
 \]
-Thus the same scalar-valued functional corresponds to distinct $S$-valued maps on the two sides.
+Thus the same scalar-valued functional corresponds to distinct $S$-valued maps on the two sides.\comm{this sentence is hard to read, use symbols, not words.}
 \end{example}
 
 \begin{lemma}\label{lem:S-bidual}
@@ -1364,7 +1349,7 @@ V\otimes_S S&\xrightarrow{\sim}V,
 \Bigl(\bigoplus_{i\in I}M_i\Bigr)\otimes_S N
 \xrightarrow{\sim}\bigoplus_{i\in I}(M_i\otimes_S N),
 \qquad (m_i)_i\otimes n\longmapsto(m_i\otimes n)_i.
-\]
+\]\comm{add also interaction of direct sum with Hom.  add remark about direct product interaction with Hom and tensor}
 \end{enumerate}
 \end{lemma}
 
@@ -1448,6 +1433,7 @@ defined by
 \end{equation}
 \end{proposition}
 
+\comm{hide proof and make proof an exercise }
 \begin{proof}
 \emph{Well-definedness.}
 For the right duals, right $S$-linearity gives
@@ -1494,7 +1480,7 @@ For $\theta_\ell$, the corresponding two routes give $f(p(v)g(q(w)))$.
 \end{proof}
 
 Neither map in \eqref{eq:tensor-duals} requires a symmetrising form.
-These canonical identifications are the reason for using $S$-duals in tensor calculations; see \cite[\S2.7]{BGS96}.
+These canonical identifications are the reason for using $S$-duals in tensor calculations; see \cite[\S2.7]{BGS96}. \comm{no citation!!! in fact, the statement here is imprecise.  what is the canonical identification you are talk about.  if there is something we can identified cananoically and used throughout, then it should be highlighted much more properly, much earlier.  what's the point of doing all the dual isomorphisms if there are cananoical identification????  if there is something canonical we can use, then exposition should be significantly shorten by using it; any pedantic detail drilling using non-canonical thing should be put as advanced material}
 
 \begin{advanced}
 For the ungraded $\Bbbk$-linear dual $D$, there is also a natural bimodule isomorphism \cite[\S2.1]{GI20}
@@ -1578,6 +1564,8 @@ e_{ij}=e_{i,i+1}e_{i+1,i+2}\cdots e_{j-1,j}
 \]
 For the grading $\deg e_{ij}=2(j-i)$, the same algebra has $A_1=0$ and $A_2\neq 0$, so it is not generated in degree $1$.
 \end{example}
+
+\comm{we avoid leaning towards commutative algebras, but it does not mean that we should remove them.  it is unnatural to not give symmetric algebra and exterior algebra as examples.  remember this for all future lecture notes preparation.  we should give sporadic local finite-dimensional algebra examples because they are easy to descibe but we should avoid using too much; the reader needs to be reminded there are many non-commutative algebra with multiple primitive idempotents}
 
 \subsection{Tensor algebras and the universal property}
 
