@@ -1399,12 +1399,6 @@ Exercise~\ref{ex:transported-dual-action} computes this dependence.
 
 \subsection{Exercises}
 
-\begin{exercise}[Categories and shifts]
-Let $A=\Bbbk A_2$ with the grading of Example~\ref{ex:triangular-grading}.
-Show that $e_{11}A$ and $(e_{11}A)(1)$ are isomorphic in $\Mod A$ but not in $\Grmod A$.
-\emph{Hint.} Compare their degree $1$ components. Explain why this does not contradict the fact that the shift functor is an equivalence.
-\end{exercise}
-
 \begin{exercise}[Matrix calculations]
 Verify the grading on $\Bbbk A_n$ in Example~\ref{ex:triangular-grading} using $e_{ij}e_{pq}=\delta_{jp}e_{iq}$.
 Compute $\rad(\Bbbk A_3)$ from the definition.
@@ -1573,7 +1567,7 @@ s(ma\otimes n-m\otimes an)t
 The module axioms follow from those on $M,N$.
 In (3), both parenthesisations impose the relations that move an element of $S$ between adjacent factors, so the displayed associativity map and its reverse are well-defined.
 Their composites fix every $(u\otimes v)\otimes w$ and $u\otimes(v\otimes w)$.
-The unit inverses are $V\to S\otimes_S V$, $v\mapsto1\otimes v$, and $V\to V\otimes_S S$, $v\mapsto v\otimes1$; the tensor relations give the required identities.
+The unit inverses are $V\to S\otimes_S V$, $v\mapsto1\otimes v$, and $V\to V\otimes_S S$, $v\mapsto v\otimes1$; the equalities $1\otimes sv=s\otimes v$ and $vs\otimes1=v\otimes s$ show that these maps are inverses.
 
 For (4), the displayed map has finite support because $(m_i)_i$ does.
 It is well-defined by (1).
@@ -1636,7 +1630,9 @@ Moreover, $\kappa_N$ is an isomorphism when $N$ is finite-dimensional, and $\lam
 \end{proposition}
 
 \begin{proof}
-The formulas in \eqref{eq:module-tensor-products} respect the tensor relations in Definition~\ref{def:module-tensor}, so both maps are well-defined.
+The formulas in \eqref{eq:module-tensor-products} are bilinear. For $s\in S$, the component identities
+$(m_is)\otimes n=m_i\otimes sn$ and $(ms)\otimes n_i=m\otimes sn_i$
+show that both formulas give well-defined maps from the indicated tensor products.
 For finite $I$, products equal sums, and Lemma~\ref{lem:tensor-properties}(4) proves (1).
 
 For $N=S$, the map $\kappa_S$ is the identity on $\prod_iM_i$ under $m\otimes s\mapsto ms$.
@@ -1758,7 +1754,10 @@ For the ungraded $\Bbbk$-linear dual $D$, there is also a natural bimodule isomo
 \end{aligned}
 \]
 The actions on $D(W)$ are those in \eqref{eq:bimodule-dual-actions}.
-The tensor relations are checked as for $\theta_r$.
+For $s\in S$, the equalities
+$\lambda(f(vs)w)=\lambda(f(v)sw)$ and
+$(\lambda s)(f(v)w)=\lambda(sf(v)w)=\lambda((sf)(v)w)$
+show that the formula gives the same value on $vs\otimes w$ and $v\otimes sw$, and on $\lambda s\otimes f$ and $\lambda\otimes sf$.
 For $V=S$, the map is the isomorphism $D(W)\otimes_S S\to D(W)$, $\lambda\otimes s\mapsto\lambda s$.
 The formula commutes with right $S$-module maps in $V$, so finite direct sums and direct summands preserve bijectivity; Corollary~\ref{cor:semisimple-summands} applies to $V$.
 
@@ -1773,7 +1772,7 @@ The two-sided dual of Definition~\ref{def:en-dual} satisfies
 \qquad F(v)=\sum_j a_j\otimes b_j^\op.
 \end{aligned}
 \end{equation}
-The formula respects the tensor relations and both outer actions.
+We check that the formula defines a map on the two indicated tensor products and preserves both outer actions.
 For example, $F(vs)=F(v)(s\otimes1)$ replaces $a_j$ by $a_js$, while
 $(Fs)(v)=(1\otimes s^\op)F(v)$ replaces $b_j$ by $b_js$.
 These give, respectively, compatibility with $vs\otimes w=v\otimes sw$ and with the right outer action.
@@ -1967,7 +1966,7 @@ Define $\widetilde f$ on $S$ and each tensor power by
 \widetilde f(v_1\otimes_S\cdots\otimes_S v_i)=f(v_1)\cdots f(v_i)
 \quad(s\in S,\ i\geq1).
 \end{equation}
-The identity $f(vs)f(w)=f(v)\varphi(s)f(w)=f(v)f(sw)$ respects the tensor relations.
+The identity $f(vs)f(w)=f(v)\varphi(s)f(w)=f(v)f(sw)$ shows that replacing adjacent factors $vs\otimes w$ by $v\otimes sw$ does not change the value in \eqref{eq:tensor-extension}.
 Since every element of $T_S(V)$ has finitely many non-zero components, these formulas extend to a linear map $T_S(V)\to B$.
 Concatenation of tensors becomes multiplication in $B$, and the identities $f(sv)=\varphi(s)f(v)$ and $f(vs)=f(v)\varphi(s)$ handle the degree $0$ factors.
 Also, $\widetilde f(1_S)=\varphi(1_S)=1_B$.
@@ -2067,82 +2066,216 @@ The symmetric and exterior algebras of Example~\ref{ex:polynomial-exterior} are 
 
 \subsection{Hilbert series}
 
-A Hilbert series records the dimension of each homogeneous component.
+Fix a finite-dimensional semisimple $\Bbbk$-algebra $S$, concentrated in degree $0$.
+We record dimensions relative to all simple right $S$-modules.
+For an $S$-bimodule, we retain both the left and the right indices.
 
-\begin{definition}\label{def:hilbert-series}
-Let $M$ be a locally finite graded vector space such that $M_j=0$ for all $j<j_0$, for some $j_0\in\Z$.
-Its \defn{Hilbert series} is the formal Laurent series $h_M(t):=\sum_{j\in\Z}(\dim_\Bbbk M_j)t^j$.
+\begin{definition}\label{def:dimension-vector}
+Choose representatives $L_1,\ldots,L_r$ of the isomorphism classes of simple right $S$-modules.
+For a finite-dimensional right $S$-module $M$, write, with $m_j\in\Z_{\geq0}$,
+\[
+M\cong\bigoplus_{j=1}^r L_j^{\oplus m_j},
+\qquad \dimvec M:=(m_1,\ldots,m_r).
+\]
+The row vector $\dimvec M$ is the \defn{dimension vector} of $M$.
+For a finite-dimensional $S$-bimodule $U$, we record its \defn{dimension vector} with two indices, whose rows are the dimension vectors of $L_i\otimes_S U$ for $1\leq i\leq r$:
+\[
+\dimvec U=(u_{ij})_{1\leq i,j\leq r},
+\qquad L_i\otimes_S U\cong\bigoplus_{j=1}^r L_j^{\oplus u_{ij}}.
+\]
+Here $u_{ij}\in\Z_{\geq0}$, and row $i$ is $\dimvec(L_i\otimes_S U)$.
 \end{definition}
 
-For a locally finite graded algebra $A$, $h_A(t)$ refers to its underlying graded vector space; the series does not record multiplication.
-Its constant coefficient is $\dim_\Bbbk A_0$, which need not be $1$.
+The decompositions exist by Theorem~\ref{thm:artin-wedderburn}.
+Their multiplicities are unique: a non-zero homomorphism between simple modules is an isomorphism, since its kernel and image are submodules.
+Consequently
+\[
+m_j=\frac{\dim_\Bbbk\Hom_S(L_j,M)}{\dim_\Bbbk\End_S(L_j)},
+\]
+and the same formula applies to each $L_i\otimes_S U$.
+In particular, the dimension data do not depend on choices of decompositions.
+For the $S$-bimodule $S$, we have $\dimvec S=I_r$, the $r\times r$ identity array.
+
+\begin{example}\label{ex:dimension-vector-coordinate}
+If $S=\bigoplus_{i=1}^r\Bbbk e_i$ with coordinate idempotents, take $L_i=e_iS$.
+Then
+\[
+\dimvec M=(\dim_\Bbbk Me_j)_{j=1}^r,
+\qquad (\dimvec U)_{ij}=\dim_\Bbbk(e_iUe_j).
+\]
+Indeed, $L_i\otimes_S U\cong e_iU$ by multiplication, and the multiplicity of $e_jS$ in $e_iU$ is $\dim_\Bbbk(e_iUe_j)$.
+For $S=\Bbbk$, the dimension vector has one entry, the usual vector-space dimension.
+\end{example}
+
+\begin{definition}\label{def:hilbert-series}
+Let $M=\bigoplus_{d\in\Z}M_d$ be a locally finite graded right $S$-module, with $M_d=0$ for all sufficiently negative $d$.
+Its \defn{Hilbert series} is
+\[
+H_M(t):=\sum_{d\in\Z}(\dimvec M_d)t^d.
+\]
+For a locally finite graded $S$-bimodule $U$, bounded below in the same sense, define $H_U(t)$ by the same formula using the two-index dimension data of Definition~\ref{def:dimension-vector}.
+For a locally finite graded algebra $A$ with $A_0=S$, its Hilbert series $H_A(t)$ uses the $S$-bimodule structure on each $A_d$.
+In particular, $H_A(0)=I_r$ and, when $S=\bigoplus_i\Bbbk e_i$,
+\[
+H_A(t)_{ij}=\sum_{d\geq0}\dim_\Bbbk(e_iA_de_j)t^d.
+\]
+\end{definition}
+
+The entries are formal Laurent series with integer coefficients; for algebras they are formal power series.
+A finite-dimensional graded module or algebra gives a Laurent polynomial or polynomial, respectively.
+No numerical convergence is required: a coefficient is specified degree by degree.
+This is one definition of Hilbert series, with the appropriate dimension data for a right module or a bimodule.
+For an algebra, keeping both indices records where products can be formed.
 
 \begin{lemma}\label{lem:hilbert-operations}
-Let $L,M,N$ be locally finite graded vector spaces concentrated in degrees bounded below.
+For locally finite graded right $S$-modules, or graded $S$-bimodules, bounded below:
 \begin{enumerate}
-\item A graded isomorphism $M\cong N$ implies $h_M(t)=h_N(t)$.
-\item A short exact sequence $0\to L\to M\to N\to0$ in $\grmod\Bbbk$ gives $h_M(t)=h_L(t)+h_N(t)$.
-\item For every $d\in\Z$, $h_{M(d)}(t)=t^{-d}h_M(t)$.
+\item A graded isomorphism $M\cong N$ implies $H_M(t)=H_N(t)$.
+\item A short exact sequence $0\to L\to M\to N\to0$ gives $H_M(t)=H_L(t)+H_N(t)$.
+\item For every $a\in\Z$, $H_{M(a)}(t)=t^{-a}H_M(t)$.
 \end{enumerate}
 \end{lemma}
 
 \begin{proof}
-A graded isomorphism restricts to an isomorphism in each degree.
-By Remark~\ref{rem:graded-exactness}, the sequence in (2) is exact in each degree, so $\dim_\Bbbk M_j=\dim_\Bbbk L_j+\dim_\Bbbk N_j$ for every $j\in\Z$.
-For shifts, Definition~\ref{def:shift} gives
+A graded isomorphism preserves each degree and its simple-module multiplicities.
+A short exact sequence of right $S$-modules splits by semisimplicity, so multiplicities add.
+For bimodules, apply $L_i\otimes_S(-)$ in each degree: the original sequence splits as a sequence of left $S$-modules, so its tensor sequence is exact, and right-module multiplicities again add.
+Finally, $M(a)_d=M_{d+a}$ gives
 \[
-h_{M(d)}(t)=\sum_j\dim_\Bbbk(M_{j+d})t^j=t^{-d}\sum_i\dim_\Bbbk(M_i)t^i.\qedhere
+H_{M(a)}(t)=\sum_d(\dimvec M_{d+a})t^d
+=t^{-a}\sum_j(\dimvec M_j)t^j.\qedhere
 \]
 \end{proof}
 
-\begin{example}
-For the upper triangular algebra in Example~\ref{ex:triangular-grading}, counting matrix entries on each diagonal gives
+\begin{definition}\label{def:total-tensor-grading}
+For graded right and left $S$-modules $M,N$, their tensor product has \defn{total grading}
 \[
-h_{\Bbbk A_n}(t)=n+(n-1)t+\cdots+t^{n-1},\qquad
-h_{\Bbbk A_3/(e_{13})}(t)=3+2t.
+(M\otimes_S N)_d=\bigoplus_{p+q=d}M_p\otimes_S N_q.
 \]
-The second equality also follows by subtracting $h_{(e_{13})}(t)=t^2$ from $h_{\Bbbk A_3}(t)$, as in Lemma~\ref{lem:hilbert-operations}(2).
-For $A=T_S(V)/(ab)$ in Example~\ref{ex:two-vertex-relations}, the basis $e_1,e_2,a,b,ba$ gives $h_A(t)=2+2t+t^2$.
+The same definition applies to bimodules, and to vector spaces by taking $S=\Bbbk$.
+\end{definition}
+
+The decomposition follows by distributing tensor products over direct sums, as in Lemma~\ref{lem:tensor-properties}(4).
+When $M,N$ are locally finite and bounded below, only finitely many pairs $(p,q)$ contribute in a fixed degree, so the tensor product is locally finite and bounded below.
+
+To multiply two arrays $C=(c_{ij})$ and $D=(d_{ij})$, or a row vector $m=(m_i)$ and an array $C$, use
+\[
+(CD)_{i\ell}=\sum_{j=1}^r c_{ij}d_{j\ell},
+\qquad (mC)_j=\sum_{i=1}^r m_i c_{ij}.
+\]
+Thus multiplication sums over the matching middle index, rather than multiplying individual entries independently.
+For series, use the same products on coefficients and collect terms with the same total power of $t$.
+
+\begin{lemma}\label{lem:dimension-tensor}\label{lem:hilbert-tensor}
+Let $U,W$ be finite-dimensional $S$-bimodules and $M$ a finite-dimensional right $S$-module. Then
+\[
+\dimvec(U\otimes_S W)=(\dimvec U)(\dimvec W),
+\qquad \dimvec(M\otimes_S U)=(\dimvec M)(\dimvec U).
+\]
+For locally finite graded modules with the indicated actions, bounded below, this gives
+\[
+H_{U\otimes_S W}(t)=H_U(t)H_W(t),
+\qquad H_{M\otimes_S U}(t)=H_M(t)H_U(t).
+\]
+\end{lemma}
+
+\begin{proof}
+Write $C=\dimvec U$ and $D=\dimvec W$.
+Associativity and distribution over direct sums give
+\[
+\begin{aligned}
+L_i\otimes_S(U\otimes_S W)
+&\cong (L_i\otimes_S U)\otimes_S W\\
+&\cong\bigoplus_j(L_j\otimes_S W)^{\oplus c_{ij}}
+\cong\bigoplus_\ell L_\ell^{\oplus\sum_j c_{ij}d_{j\ell}}.
+\end{aligned}
+\]
+This proves the first equality. Decomposing $M\cong\bigoplus_iL_i^{\oplus m_i}$ proves the second in the same way.
+Apply these equalities to each $U_p\otimes_S W_q$ or $M_p\otimes_S U_q$ and sum over $p+q=d$ to obtain the series identities.
+\end{proof}
+
+\begin{example}[Hilbert series of a tensor algebra]\label{ex:hilbert-tensor-algebra}
+Let $V$ be a finite-dimensional $S$-bimodule, placed in degree $1$, and put $C=\dimvec V$.
+Since $T_S(V)_d=V^{\otimes_S d}$ and $V^{\otimes_S0}=S$, Lemma~\ref{lem:dimension-tensor} gives
+\[
+\dimvec T_S(V)_d=C^d\quad(d\geq0),\qquad C^0=I_r.
+\]
+Consequently,
+\begin{equation}\label{eq:hilbert-tensor-algebra}
+\boxed{\displaystyle
+H_{T_S(V)}(t)=\sum_{d\geq0}t^dC^d
+=(I_r-tC)^{-1}=(I_r-t\,\dimvec V)^{-1}.}
+\end{equation}
+Indeed, multiplying the series on either side by $I_r-tC$ gives constant coefficient $I_r$; the coefficient of $t^d$ for $d\geq1$ is $C^d-C^d=0$.
+The inverse is therefore an identity of formal power series with the coefficient multiplication defined above.
+
+For $S=\Bbbk$ and $\dim_\Bbbk V=m$, the formula is $H_{T_\Bbbk(V)}(t)=1/(1-mt)$.
+More generally, for $S=\operatorname{Mat}_n(\Bbbk)$ and $V=S^{\oplus m}$ as an $S$-bimodule, there is one simple right $S$-module $L=\Bbbk^{1\times n}$.
+Since $L\otimes_S V\cong L^{\oplus m}$, we again have $C=(m)$ and $H_{T_S(V)}(t)=1/(1-mt)$.
+Here the coefficient records simple-module multiplicities, not $\dim_\Bbbk V=mn^2$.
+\end{example}
+
+\begin{example}[Upper triangular algebras and a quotient]\label{ex:hilbert-triangular}
+For $A=\Bbbk A_n$, order the coordinate idempotents as $e_{11},\ldots,e_{nn}$.
+Let $C$ have $C_{i,i+1}=1$ for $1\leq i<n$ and all other entries zero.
+The tensor presentation in Example~\ref{ex:tensor-An} and \eqref{eq:hilbert-tensor-algebra} give
+\[
+H_A(t)=I_n+tC+\cdots+t^{n-1}C^{n-1},
+\qquad H_A(t)_{ij}=\begin{cases}t^{j-i},&i\leq j,\\0,&i>j.\end{cases}
+\]
+For $n=3$, killing $e_{13}$ removes the degree $2$ contribution in entry $(1,3)$:
+\[
+H_{\Bbbk A_3}(t)=\begin{pmatrix}1&t&t^2\\0&1&t\\0&0&1\end{pmatrix},
+\qquad
+H_{\Bbbk A_3/(e_{13})}(t)=\begin{pmatrix}1&t&0\\0&1&t\\0&0&1\end{pmatrix}.
+\]
+This also follows from additivity in Lemma~\ref{lem:hilbert-operations}.
+\end{example}
+
+\begin{example}[Two alternating generators]\label{ex:hilbert-alternating}
+For $S,V,a,b$ in Example~\ref{ex:two-vertex-relations}, use the order $e_1,e_2$. Then
+\[
+C=\dimvec V=\begin{pmatrix}0&1\\1&0\end{pmatrix},
+\qquad C^2=I_2,
+\qquad
+H_{T_S(V)}(t)=\frac{1}{1-t^2}\begin{pmatrix}1&t\\t&1\end{pmatrix}.
+\]
+In $A=T_S(V)/(ab)$, the degree $2$ basis vector $ba$ belongs to $e_2Ae_2$, so
+\[
+H_A(t)=\begin{pmatrix}1&t\\t&1+t^2\end{pmatrix}.
+\]
 \end{example}
 
 \begin{example}\label{ex:hilbert-polynomial-exterior}
-For the algebras in Example~\ref{ex:polynomial-exterior}, each polynomial generator may occur any number of times, whereas each exterior generator occurs at most once. Thus
+For the algebras in Example~\ref{ex:polynomial-exterior}, $S=\Bbbk$ and there is one dimension entry.
+Each polynomial generator may occur any number of times, whereas each exterior generator occurs at most once. Thus
 \[
-h_{\Symm(V)}(t)=\frac{1}{(1-t)^n},\qquad
-h_{\bigwedge W}(t)=(1+t)^m
+H_{\Symm(V)}(t)=\frac{1}{(1-t)^n},\qquad
+H_{\bigwedge W}(t)=(1+t)^m
 \quad\text{where }n=\dim_\Bbbk V,\ m=\dim_\Bbbk W.
 \]
 \end{example}
 
-\begin{definition}\label{def:total-tensor-grading}
-For graded vector spaces $V,W$, the \defn{total grading} on their tensor product is
+\begin{lemma}\label{lem:hilbert-field-tensor}
+For locally finite graded vector spaces $U,W$ bounded below,
+$H_{U\otimes_\Bbbk W}(t)=H_U(t)H_W(t)$; this is the case $S=\Bbbk$ of Lemma~\ref{lem:hilbert-tensor}.
+More generally, let $U$ be a graded $\Bbbk^{\oplus r}$-bimodule and $W$ a graded $\Bbbk^{\oplus s}$-bimodule, locally finite and bounded below.
+Write $e_1,\ldots,e_r$ and $f_1,\ldots,f_s$ for their coordinate idempotents.
+As a bimodule over $\Bbbk^{\oplus r}\otimes_\Bbbk\Bbbk^{\oplus s}\cong\Bbbk^{\oplus rs}$, with idempotents $e_i\otimes f_p$, the total tensor product satisfies
 \[
-(V\otimes_\Bbbk W)_n=\bigoplus_{i+j=n}V_i\otimes_\Bbbk W_j.
+H_{U\otimes_\Bbbk W}(t)_{(i,p),(j,q)}
+=H_U(t)_{ij}H_W(t)_{pq}
+\quad(1\leq i,j\leq r,\ 1\leq p,q\leq s).
 \]
-\end{definition}
-
-The decomposition in Definition~\ref{def:total-tensor-grading} follows from Lemma~\ref{lem:tensor-properties}(4), applied over $\Bbbk$:
-\[
-\Bigl(\bigoplus_iV_i\Bigr)\otimes_\Bbbk
-\Bigl(\bigoplus_jW_j\Bigr)
-\cong\bigoplus_{i,j}(V_i\otimes_\Bbbk W_j).
-\]
-An individual tensor has finitely many non-zero components, even if the sum defining a fixed total degree has infinitely many summands.
-
-\begin{lemma}\label{lem:hilbert-tensor}
-For locally finite graded vector spaces $V,W$ concentrated in degrees bounded below, $V\otimes_\Bbbk W$ is locally finite and bounded below, and
-$h_{V\otimes_\Bbbk W}(t)=h_V(t)h_W(t)$.
 \end{lemma}
 
 \begin{proof}
-Choose integers $a,b$ with $V_i=0$ for $i<a$ and $W_j=0$ for $j<b$.
-For total degree $n$, only $a\leq i\leq n-b$ can contribute, so
+The second formula follows from
 \[
-\dim_\Bbbk(V\otimes_\Bbbk W)_n
-=\sum_{i+j=n}\dim_\Bbbk V_i\dim_\Bbbk W_j
+(e_i\otimes f_p)(U_a\otimes_\Bbbk W_b)(e_j\otimes f_q)
+=(e_iU_ae_j)\otimes_\Bbbk(f_pW_bf_q)
 \]
-is a finite sum and is zero for $n<a+b$.
-The sum is precisely the coefficient of $t^n$ in $h_V(t)h_W(t)$.
+by multiplying vector-space dimensions and summing over $a+b=d$ in degree $d$.
 \end{proof}
 
 \begin{advanced}[suppressfirstparskip=true,innertopmargin=0pt]
@@ -2246,22 +2379,31 @@ R_{\bigwedge W}^\perp&=\Bbbk(y_1^*\otimes y_2^*-y_2^*\otimes y_1^*).
 The first space consists of the exterior relations on $D(V)$; the second consists of the symmetric relations on $D(W)$.
 \end{example}
 
+\Needspace{12\baselineskip}
 \subsection{Exercises}
 
-\begin{exercise}[Tensor duality]\label{ex:tensor-duality-proof}
-Prove Proposition~\ref{prop:tensor-duals}.
+\begin{exercise}[Interaction of tensor product with $S$-dual]\label{ex:tensor-duality-proof}
+For $S,V,W$ as in Proposition~\ref{prop:tensor-duals}, prove the assertion about right $S$-duals.
 \begin{enumerate}
-\item Check that the formulas in \eqref{eq:tensor-evaluations} respect the tensor relations and define $S$-bimodule maps.
-\item Prove bijectivity by first taking $V=S$ for $\theta_r$ and $W=S$ for $\theta_\ell$, and then using Corollary~\ref{cor:semisimple-summands}.
+\item Check that the formula for $\theta_r$ in \eqref{eq:tensor-evaluations} is bilinear in each pair of variables, is unchanged by
+\[
+vs\otimes w\longleftrightarrow v\otimes sw,
+\qquad gs\otimes f\longleftrightarrow g\otimes sf
+\quad(s\in S),
+\]
+and gives a right $S$-linear map $V\otimes_S W\to S$ for each $g\otimes f$.
+Verify $\theta_r(sg\otimes ft)=s\theta_r(g\otimes f)t$ for $s,t\in S$.
+\item Prove that $\theta_r$ is bijective.
 \item For bimodule maps $p:V\to V'$ and $q:W\to W'$, prove
 \[
-(p\otimes q)^*\circ\theta_r
-=\theta_r\circ(q^*\otimes p^*),
-\qquad
-{}^*(p\otimes q)\circ\theta_\ell
-=\theta_\ell\circ({}^*q\otimes{}^*p).
+(p\otimes q)^*\circ\theta_r^{V',W'}
+=\theta_r^{V,W}\circ(q^*\otimes p^*).
 \]
+Here the superscripts specify the pair of bimodules, and $p^*,q^*$, and $(p\otimes q)^*$ are given by precomposition with $p,q$, and $p\otimes q$, respectively.
 \end{enumerate}
+\emph{Hint for (2).} First take $V=S$, then use Corollary~\ref{cor:semisimple-summands}.
+
+\emph{Remark.} The analogous assertions hold for left $S$-duals, with left and right interchanged.
 \end{exercise}
 
 \begin{hidden}
@@ -2313,12 +2455,15 @@ For $\theta_\ell$, the corresponding two routes give $f(p(v)g(q(w)))$.
 
 \begin{exercise}
 Let $A=\Bbbk A_4/(e_{13},e_{24})$ with the grading of Example~\ref{ex:triangular-grading}.
-Find a homogeneous basis, compute $h_A(t)$, and write $A=T_S(V)/(R)$ with explicit $S,V,R$.
-\emph{Hint.} Use Lemma~\ref{lem:idempotent-tensors}; the ideal contains $e_{14}$ as well as $e_{13},e_{24}$. The Hilbert series is $4+3t$.
+Find a homogeneous basis, compute $H_A(t)$, and write $A=T_S(V)/(R)$ with explicit $S,V,R$.
+\emph{Hint.} Use Lemma~\ref{lem:idempotent-tensors}; the ideal contains $e_{14}$ as well as $e_{13},e_{24}$.
 \end{exercise}
 
 \begin{exercise}
-For the bimodule $V$ in Example~\ref{ex:two-vertex-relations}, find a basis of each $T_S(V)_d$ and show that $h_{T_S(V)}(t)=2/(1-t)$.
+For the bimodule $V$ in Example~\ref{ex:two-vertex-relations}, find a basis of each $T_S(V)_d$ and show that
+\[
+H_{T_S(V)}(t)=\frac{1}{1-t^2}\begin{pmatrix}1&t\\t&1\end{pmatrix}.
+\]
 Compare with the quotient $T_S(V)/(ab)$.
 \emph{Hint.} Count alternating words separately in each degree, including degree $0$.
 \end{exercise}
@@ -2545,7 +2690,11 @@ Thus the annihilator is the span of the complementary basis tensors, proving (2)
 We apply Example~\ref{ex:tensor-square-zero-dual} to the tensor algebra description of $\Bbbk A_n$ in Example~\ref{ex:tensor-An}.
 Take $A=\Bbbk A_n$, $S=\bigoplus_{i=1}^n\Bbbk e_{ii}$, and $V=\bigoplus_{i=1}^{n-1}\Bbbk e_{i,i+1}$.
 There are no quadratic relations, so $A^!$ has the reversed generators $e_{i,i+1}^*\in e_{i+1,i+1}V^*e_{ii}$ and every composable product of two generators is zero.
-Consequently $h_{A^!}(t)=n+(n-1)t$.
+With $C$ as in Example~\ref{ex:hilbert-triangular}, this gives
+\[
+H_{A^!}(t)=I_n+tC^{\mathsf T}.
+\]
+Here ${}^{\mathsf T}$ denotes transpose: $(C^{\mathsf T})_{ij}=C_{ji}$.
 For $n=3$,
 \[
 (\Bbbk A_3)^!\cong\bigl(\Bbbk A_3/(e_{13})\bigr)^\op,
@@ -2554,6 +2703,18 @@ For $n=3$,
 \]
 These are graded isomorphisms fixing the diagonal idempotents.
 \end{example}
+
+\begin{example}\label{ex:hilbert-dual-An}
+For $A=\Bbbk A_2$, Examples~\ref{ex:hilbert-triangular} and~\ref{ex:An-quadratic-dual} give
+\[
+H_A(t)=\begin{pmatrix}1&t\\0&1\end{pmatrix},\qquad
+H_{A^!}(-t)^{\mathsf T}=\begin{pmatrix}1&-t\\0&1\end{pmatrix},\qquad
+H_A(t)H_{A^!}(-t)^{\mathsf T}=I_2.
+\]
+The transpose aligns the indices because an $S$-dual reverses the two idempotents in \eqref{eq:dual-basis-idempotents}.
+\end{example}
+
+
 
 \begin{example}\label{ex:alternating-quadratic-dual}
 Proposition~\ref{prop:monomial-dual} exchanges the forbidden and surviving composable pairs.
@@ -2564,7 +2725,12 @@ A^!=T_S(V^*)/(a^*b^*),\qquad
 A^!=S\oplus\Bbbk a^*\oplus\Bbbk b^*\oplus\Bbbk b^*a^*.
 \]
 The original relation $ab=0$ corresponds to the surviving word $b^*a^*$; the surviving word $ba$ corresponds to the dual relation $a^*b^*=0$.
-In both algebras the Hilbert series is $2+2t+t^2$.
+In the order $e_1,e_2$, their Hilbert series are
+\[
+H_A(t)=\begin{pmatrix}1&t\\t&1+t^2\end{pmatrix},\qquad
+H_{A^!}(t)=\begin{pmatrix}1+t^2&t\\t&1\end{pmatrix}.
+\]
+The degree $2$ terms occur in different entries: $ba\in e_2Ae_2$, whereas $b^*a^*\in e_1A^!e_1$.
 \end{example}
 
 \subsection{Symmetric and exterior algebras}
@@ -2597,6 +2763,18 @@ Evaluation $D(D(V))\cong V$ from Example~\ref{ex:linear-duality} then identifies
 
 The proof works in characteristic $2$: the relations $(x_i^*)^2=0$ remain part of the exterior presentation even when the signs $+$ and $-$ coincide.
 Example~\ref{ex:symmetric-orthogonals} is the calculation for two generators.
+Quadratic duality need not preserve Hilbert series: if $\dim_\Bbbk V>0$, Example~\ref{ex:hilbert-polynomial-exterior} gives different series for $\Symm(V)$ and $\Symm(V)^!\cong\bigwedge D(V)$.
+
+\begin{advanced}
+The \emph{Koszul condition}, to be defined in Lecture~5, implies the identity
+\begin{equation}\label{eq:matrix-koszul-preview}
+H_A(t)H_{A^!}(-t)^{\mathsf T}=I_r
+\qquad\text{when }A_0=\bigoplus_{i=1}^r\Bbbk e_i.
+\end{equation}
+This is \cite[Lemma~2.11.1]{BGS96}; the proof will be given in Lecture~8.
+Equation~\eqref{eq:matrix-koszul-preview} is not asserted for arbitrary quadratic algebras.
+For $\Symm(V)$ and its quadratic dual $\bigwedge D(V)$, with $n=\dim_\Bbbk V$, the case $S=\Bbbk$ gives $(1-t)^{-n}(1-t)^n=1$.
+\end{advanced}
 
 \subsection{Direct sums}
 
@@ -2659,7 +2837,14 @@ For homogeneous $a\in A$ and $b\in B$, the elements $a\otimes1$ and $1\otimes b$
 \[
 (1\otimes b)(a\otimes1)=(-1)^{\deg a\,\deg b}(a\otimes1)(1\otimes b).
 \]
-The sign does not change the underlying graded vector space, so both tensor products have Hilbert series $h_A(t)h_B(t)$ by Lemma~\ref{lem:hilbert-tensor}.
+Suppose $A_0=S$ and $B_0=T$ are finite-dimensional semisimple and $S\otimes_\Bbbk T$ is semisimple.
+The sign does not change the underlying graded $(S\otimes_\Bbbk T)$-bimodule, so the two tensor products have the same Hilbert series whenever $A,B$ are locally finite.
+For $S=\Bbbk^{\oplus r}$ and $T=\Bbbk^{\oplus s}$, Lemma~\ref{lem:hilbert-field-tensor} gives its entries:
+\[
+H_{A\otimes_\Bbbk B}(t)_{(i,p),(j,q)}
+=H_A(t)_{ij}H_B(t)_{pq}.
+\]
+In particular, when $S=T=\Bbbk$, this is $H_A(t)H_B(t)$.
 
 \begin{proposition}\label{prop:dual-tensor-products}
 Let $A=T_S(V)/(R)$ and $B=T_T(W)/(Q)$ be quadratic algebras, and assume that $S\otimes_\Bbbk T$ is semisimple.
@@ -2733,8 +2918,19 @@ Using the reversed generators from \eqref{eq:dual-basis-idempotents}, its orthog
 Hence the dual presentation has an anticommuting relation:
 \[
 ab=cd\text{ in }A,\qquad
-b^*a^*=-d^*c^*\text{ in }A^!,\qquad
-h_A(t)=h_{A^!}(t)=4+4t+t^2.
+b^*a^*=-d^*c^*\text{ in }A^!.
+\]
+Order the degree $0$ idempotents as
+$e_{11}\otimes e_{11},e_{22}\otimes e_{11},e_{11}\otimes e_{22},e_{22}\otimes e_{22}$.
+The homogeneous bases give
+\[
+H_A(t)=\begin{pmatrix}
+1&t&t&t^2\\
+0&1&0&t\\
+0&0&1&t\\
+0&0&0&1
+\end{pmatrix},\qquad
+H_{A^!}(t)=H_A(t)^{\mathsf T}.
 \]
 The signs agree with Proposition~\ref{prop:dual-tensor-products}; in characteristic $2$, the same presentations remain valid with $-1=1$.
 Here replacing $d^*$ by $-d^*$ removes the minus sign. In this example the sign distinguishes the specified presentations, not the isomorphism classes of algebras.
@@ -2754,41 +2950,6 @@ If $\Char\Bbbk\neq2$, the ordinary tensor product of the two square-zero algebra
 They are therefore not isomorphic. This sign cannot be removed by a change of generators.
 \end{example}
 
-\subsection{Matrix Hilbert series}
-
-Quadratic duality need not preserve Hilbert series: for $\dim_\Bbbk V>0$, Proposition~\ref{prop:symmetric-exterior-dual} and Example~\ref{ex:hilbert-polynomial-exterior} give different series for $\Symm(V)$ and $\Symm(V)^!$.
-When $A_0$ has several coordinate idempotents, the scalar series also loses the dimensions of the individual subspaces $e_iA_de_j$.
-
-\begin{definition}\label{def:matrix-hilbert}
-For a locally finite graded algebra with $A_0=\bigoplus_{i=1}^r\Bbbk e_i$, its \defn{matrix Hilbert series} is
-\[
-H_A(t)_{ij}:=\sum_{d\geq0}\dim_\Bbbk(e_iA_de_j)t^d
-\quad(1\leq i,j\leq r).
-\]
-\end{definition}
-
-The scalar series $h_A(t)$ is the sum of all entries of $H_A(t)$.
-Equation~\eqref{eq:idempotent-tensor-decomposition} computes tensor products by summing over the matching middle idempotent; \eqref{eq:dual-basis-idempotents} shows that an $S$-dual reverses the two outer idempotents.
-Write $I_r$ for the $r\times r$ identity matrix; the superscript ${}^{\mathsf T}$ denotes transpose.
-For $A=\Bbbk A_2$, the matrix series records an identity that the scalar series cannot:
-\[
-H_A(t)=\begin{pmatrix}1&t\\0&1\end{pmatrix},\qquad
-H_{A^!}(-t)^{\mathsf T}=\begin{pmatrix}1&-t\\0&1\end{pmatrix},\qquad
-H_A(t)H_{A^!}(-t)^{\mathsf T}=I_2.
-\]
-In contrast, $h_A(t)h_{A^!}(-t)=4-t^2$, not $1$.
-
-\begin{advanced}
-The \emph{Koszul condition}, to be defined in Lecture~5, implies the matrix identity
-\begin{equation}\label{eq:matrix-koszul-preview}
-H_A(t)H_{A^!}(-t)^{\mathsf T}=I_r
-\qquad\text{when }A_0=\bigoplus_{i=1}^r\Bbbk e_i.
-\end{equation}
-This is \cite[Lemma~2.11.1]{BGS96}; the proof will be given in Lecture~8.
-Equation~\eqref{eq:matrix-koszul-preview} is not asserted for arbitrary quadratic algebras.
-For $\Symm(V)$ and its quadratic dual $\bigwedge D(V)$, with $n=\dim_\Bbbk V$, the scalar instance is $(1-t)^{-n}(1-t)^n=1$.
-\end{advanced}
-
 \subsection{Exercises}
 
 \begin{exercise}
@@ -2800,7 +2961,12 @@ Check the double dual using Proposition~\ref{prop:monomial-dual}.
 \begin{exercise}
 Let $S=\Bbbk e_1\oplus\Bbbk e_2$ and let $V$ have basis $a,b$ with $e_1ae_2=a$ and $e_2be_1=b$.
 Compute the quadratic dual of $T_S(V)/(ab,ba)$ and the Hilbert series of both algebras.
-\emph{Check.} The two series are $2+2t$ and $2/(1-t)$.
+\emph{Check.} In the order $e_1,e_2$, the two series are
+\[
+\begin{pmatrix}1&t\\t&1\end{pmatrix}
+\qquad\text{and}\qquad
+\frac{1}{1-t^2}\begin{pmatrix}1&t\\t&1\end{pmatrix}.
+\]
 \end{exercise}
 
 \begin{exercise}
