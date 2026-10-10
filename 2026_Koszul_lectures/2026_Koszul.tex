@@ -2975,6 +2975,305 @@ Compute the quadratic dual relation for every $\lambda$, including $\lambda=0$, 
 \emph{Hint.} Evaluate $\mu b^*a^*+\nu d^*c^*$ on $ab-\lambda cd$. For $\lambda\neq0$, rescale $d$ to compare with Example~\ref{ex:commuting-square-dual}.
 \end{exercise}
 
+\clearpage
+\section{Minimal graded resolutions}\label{sec:minimal-resolutions}
+
+\subsection{Projective covers and the graded Nakayama lemma}
+
+Let $A=\bigoplus_{d\geq0}A_d$ be a locally finite graded algebra with $S=A_0$ finite-dimensional semisimple.
+Write
+\[
+A_+:=\bigoplus_{d>0}A_d.
+\]
+The grading makes $A_+$ a two-sided ideal, and projection onto degree $0$ identifies $A/A_+$ with $S$.
+We regard $S$ as a graded right $A$-module concentrated in degree $0$, with action $s\cdot a=sa_0$ for $s\in S$ and $a=\sum_{d\geq0}a_d\in A$.
+
+All complexes below are chain complexes of graded right $A$-modules: their terms $P_i$ are indexed by homological degrees $i\geq0$, and their differentials are degree preserving maps $d_i:P_i\to P_{i-1}$ satisfying $d_{i-1}d_i=0$ for $i\geq2$.
+An augmented complex to a module $M$ also has a degree preserving map $p_0:P_0\to M$ with $p_0d_1=0$.
+The augmented complex is exact when $\Im d_{i+1}=\Ker d_i$ for $i\geq1$, $\Im d_1=\Ker p_0$, and $p_0$ is surjective.
+
+For a graded right $A$-module $M$, define its \defn{graded top} by
+\[
+\overline M:=M/MA_+.
+\]
+The quotient $\overline M$ is a graded right $S$-module.
+We call $M$ \defn{bounded below} if $M_d=0$ for all sufficiently small $d$.
+Every finitely generated graded module is bounded below: a finite generating set can be replaced by its finitely many homogeneous components, and $A$ has no negative degrees.
+
+\begin{definition}\label{def:graded-projective}
+A graded right $A$-module $P$ is \defn{projective} if, for every surjective degree preserving map $q:X\to Y$ and every degree preserving map $f:P\to Y$, there is a degree preserving map $\widetilde f:P\to X$ such that $q\widetilde f=f$.
+\end{definition}
+
+The shifted free module $A(-d)$ has its generator $1$ in degree $d$.
+If $Q$ is a finite-dimensional projective right $S$-module, then $Q\otimes_S A(-d)$ is a projective graded right $A$-module: $Q$ is a direct summand of a finite free right $S$-module, so $Q\otimes_S A(-d)$ is a direct summand of a finite direct sum of copies of $A(-d)$.
+
+\begin{lemma}[Graded Nakayama lemma]\label{lem:graded-nakayama}
+If a bounded below graded right $A$-module $M$ satisfies $M=MA_+$, then $M=0$.
+\end{lemma}
+
+\begin{proof}
+If $M\neq0$, let $d$ be the least degree with $M_d\neq0$.
+Every degree $d$ element of $MA_+$ is a sum of products $m_j a_{d-j}$ with $j<d$ and $d-j>0$.
+All such $m_j$ vanish by the choice of $d$, so $(MA_+)_d=0$, contradicting $M_d=(MA_+)_d$.
+\end{proof}
+
+\begin{definition}\label{def:graded-projective-cover}
+A \defn{graded projective cover} of a bounded below locally finite graded right $A$-module $M$ is a surjective degree preserving map $p:P\to M$ from a bounded below locally finite graded projective module such that
+\[
+\overline p:P/PA_+\xrightarrow{\sim}M/MA_+.
+\]
+\end{definition}
+
+For a surjection $p:P\to M$, the condition in Definition~\ref{def:graded-projective-cover} is equivalent to $\Ker p\subseteq PA_+$, since $p(PA_+)=MA_+$.
+
+\begin{proposition}\label{prop:graded-projective-covers}
+Every bounded below locally finite graded right $A$-module has a graded projective cover, unique up to isomorphism over $M$.
+\end{proposition}
+
+\begin{proof}
+Put $\overline M_d=(M/MA_+)_d$. Since $S$ is semisimple, the quotient map $M_d\to\overline M_d$ has a right $S$-linear section $s_d:\overline M_d\to M_d$.
+Set
+\[
+P:=\bigoplus_{d\in\mathbb Z}(\overline M_d\otimes_S A)(-d).
+\]
+Each $\overline M_d$ is projective over $S$, so $P$ is a graded projective right $A$-module.
+Since $M$ is bounded below and locally finite, each degree of $P$ is a finite sum of finite-dimensional spaces; hence $P$ is locally finite.
+The maps
+\[
+\overline M_d\otimes_S A\longrightarrow M,\qquad
+\overline m\otimes a\longmapsto s_d(\overline m)a
+\]
+define a degree preserving map $p:P\to M$.
+On graded tops, $\overline p$ identifies each copy of $\overline M_d$ with $(M/MA_+)_d$.
+Thus $\overline p$ is an isomorphism.
+The quotient $C:=M/p(P)$ satisfies $C/CA_+=0$, hence $C=CA_+$; Lemma~\ref{lem:graded-nakayama} gives $C=0$.
+Therefore $p$ is a projective cover.
+
+For uniqueness, let $p:P\to M$ and $q:Q\to M$ be projective covers.
+Projectivity gives a map $f:P\to Q$ with $qf=p$.
+The maps $\overline p$ and $\overline q$ are isomorphisms, so $\overline f=\overline q^{-1}\overline p$ is an isomorphism.
+The quotient $Q/f(P)$ has zero graded top and is bounded below, hence is zero by Lemma~\ref{lem:graded-nakayama}.
+Thus $f$ is surjective; since $Q$ is projective, $f$ splits.
+Its kernel is a direct summand of $P$, and its graded top is zero because $\overline f$ is injective.
+Lemma~\ref{lem:graded-nakayama} gives $\Ker f=0$, so $f$ is an isomorphism over $M$.
+\end{proof}
+
+\subsection{Minimal resolutions and graded Betti numbers}
+
+\begin{definition}\label{def:minimal-resolution}
+A \defn{graded projective resolution} of $M$ is an exact sequence of degree preserving maps
+\[
+\cdots\longrightarrow P_2\xrightarrow{d_2}P_1\xrightarrow{d_1}P_0\xrightarrow{p_0}M\longrightarrow0
+\]
+with every $P_i$ graded projective.
+It is \defn{minimal} if $p_0:P_0\to M$ is a graded projective cover and, for each $i\geq1$, the map $d_i$ with codomain restricted to $\Ker d_{i-1}$ is a graded projective cover, where $d_0:=p_0$.
+\end{definition}
+
+\begin{theorem}\label{thm:minimal-resolution}
+Every bounded below locally finite graded right $A$-module has a minimal graded projective resolution.
+For any two such resolutions $P_\bullet\to M$ and $P'_\bullet\to M$, there are degree preserving isomorphisms $P_i\to P'_i$ commuting with the differentials and the maps to $M$.
+\end{theorem}
+
+\begin{proof}
+Take a projective cover $p_0:P_0\to M$ using Proposition~\ref{prop:graded-projective-covers}, and set $K_1=\Ker p_0$.
+The module $K_1$ is bounded below and locally finite, so it has a projective cover $q_1:P_1\to K_1$.
+Repeat: after defining $q_i:P_i\to K_i$, set $K_{i+1}=\Ker q_i$ and cover $K_{i+1}$ by $q_{i+1}:P_{i+1}\to K_{i+1}$.
+Composing each $q_i$ with the inclusion $K_i\hookrightarrow P_{i-1}$ gives $d_i$ and an exact minimal resolution.
+
+For uniqueness, Proposition~\ref{prop:graded-projective-covers} identifies the covers of $M$ in two minimal resolutions.
+The resulting isomorphism identifies their kernels; applying the same proposition to those kernels identifies the next projective covers.
+Induction gives an isomorphism in every homological degree, compatible with the differentials and the maps to $M$.
+\end{proof}
+
+Choose representatives $L_1,\ldots,L_r$ of the simple right $S$-modules, as in Definition~\ref{def:dimension-vector}.
+For a minimal resolution $P_\bullet\to M$, define the \defn{graded Betti numbers} $\beta_{i,d,j}(M)$ by
+\[
+\left(P_i/P_iA_+\right)_d
+\cong\bigoplus_{j=1}^r L_j^{\oplus\beta_{i,d,j}(M)},
+\qquad
+\beta_{i,d}(M):=(\beta_{i,d,1}(M),\ldots,\beta_{i,d,r}(M)).
+\]
+Here $i$ is the homological degree, $d$ is the grading degree, and $j$ records the simple right $S$-module.
+Theorem~\ref{thm:minimal-resolution} shows these multiplicities do not depend on the chosen minimal resolution.
+The projective cover construction also gives
+\[
+P_i\cong\bigoplus_{d\in\mathbb Z}\bigoplus_{j=1}^r
+(L_j\otimes_S A)(-d)^{\oplus\beta_{i,d,j}(M)}.
+\]
+For $S=\bigoplus_{j=1}^r\Bbbk e_j$, the simple modules are $L_j=e_jS$ and $L_j\otimes_S A\cong e_jA$.
+
+\begin{example}\label{ex:minimal-A2}
+This example shows how a non-field degree zero algebra gives distinct projective covers for its different simple modules.
+Let $A=\Bbbk A_2$, with $S=\Bbbk e_{11}\oplus\Bbbk e_{22}$ and $A_1=\Bbbk e_{12}$.
+The simple right $S$-modules are $L_1=e_{11}S$ and $L_2=e_{22}S$, with projective lifts $Q_1=e_{11}A$ and $Q_2=e_{22}A$.
+The quotient map $Q_1\to L_1$ has kernel $\Bbbk e_{12}$, while $Q_2=L_2$.
+Sending the degree $1$ generator $e_{22}$ to $e_{12}$ gives the minimal resolution
+\[
+0\longrightarrow Q_2(-1)\xrightarrow{d_1}Q_1\longrightarrow L_1\longrightarrow0,
+\qquad d_1(e_{22})=e_{12}.
+\]
+\end{example}
+
+\begin{example}\label{ex:minimal-polynomial}
+For $A=\Bbbk[x]$, with $\deg x=1$, the degree zero quotient module is $\Bbbk=A/(x)$.
+Multiplication by $x$ gives the minimal resolution
+\[
+0\longrightarrow A(-1)\xrightarrow{d_1}A\xrightarrow{\pi}\Bbbk\longrightarrow0,
+\qquad d_1(a)=xa,\quad \pi(f)=f(0).
+\]
+The map $d_1$ has degree $0$, is injective, and has image $xA=\Ker\pi\subset AA_+$.
+Thus $\beta_{0,0}=1$ and $\beta_{1,1}=1$.
+\end{example}
+
+\begin{example}\label{ex:minimal-exterior}
+The exterior algebra on one generator gives an infinite minimal resolution, although the algebra itself is finite-dimensional.
+Let $E=\Bbbk[\epsilon]/(\epsilon^2)$ with $\deg\epsilon=1$ and $E_+=\Bbbk\epsilon$.
+The degree zero quotient is $\Bbbk=E/E_+$, and
+\[
+\cdots\xrightarrow{d_3}E(-2)\xrightarrow{d_2}E(-1)
+\xrightarrow{d_1}E\xrightarrow{\pi}\Bbbk\longrightarrow0,
+\qquad d_i(a)=\epsilon a,\quad \pi(a)=a_0.
+\]
+Each $d_i$ is degree preserving and right $E$-linear.
+Since $\Ker(\epsilon\cdot -)=\epsilon E=\Im(\epsilon\cdot -)$, the sequence is exact at every $E(-i)$ and at $E$.
+Every differential has image in the preceding term times $E_+$, so the resolution is minimal and $\beta_{i,i}=1$ for all $i\geq0$.
+\end{example}
+
+\begin{advanced}
+If $M$ is finitely generated, its first projective cover is finitely generated.
+Without a noetherian hypothesis on $A$, later kernels need not be finitely generated, so later terms of the minimal resolution need not be finitely generated.
+The bounded below locally finite setting above still gives projective covers and a minimal resolution.
+\end{advanced}
+
+\clearpage
+\section{Koszul complex and Koszul algebras}\label{sec:koszul-complex}
+
+\subsection{The Koszul complex of a polynomial algebra}
+
+Let $V$ be an $n$-dimensional $\Bbbk$-vector space, choose a basis $x_1,\ldots,x_n$, and let $A=\Symm(V)=\Bbbk[x_1,\ldots,x_n]$, with each $x_j$ in degree $1$.
+Let $\pi:A\to\Bbbk$ be projection onto degree $0$, so $\Bbbk=A/A_+$.
+For $0\leq i\leq n$, put
+\[
+K_i:=\bigwedge^i V\otimes_\Bbbk A(-i),
+\qquad K_0=A.
+\]
+The right $A$-action is on the second factor.
+The factor $\bigwedge^iV$ is placed in grading degree $0$, so the generators of $K_i$ have grading degree $i$.
+
+\begin{definition}\label{def:koszul-complex}
+For $1\leq i\leq n$, define the \defn{Koszul differential}
+\begin{equation}\label{eq:koszul-differential}
+\begin{aligned}
+d_i:K_i&\longrightarrow K_{i-1},\\
+(v_1\wedge\cdots\wedge v_i)\otimes a
+&\longmapsto
+\sum_{r=1}^i(-1)^{r-1}
+(v_1\wedge\cdots\wedge\widehat{v_r}\wedge\cdots\wedge v_i)
+\otimes v_ra .
+\end{aligned}
+\end{equation}
+The formula is multilinear and alternating in $v_1,\ldots,v_i$, so it defines a map on $\bigwedge^iV$.
+The augmented chain complex $K_\bullet\to\Bbbk$ consists of these maps and $\pi:K_0=A\to\Bbbk$.
+\end{definition}
+
+\begin{proposition}\label{prop:koszul-complex-resolution}
+The augmented complex
+\[
+0\longrightarrow K_n\xrightarrow{d_n}\cdots\xrightarrow{d_2}K_1
+\xrightarrow{d_1}K_0\xrightarrow{\pi}\Bbbk\longrightarrow0
+\]
+is an exact minimal graded free resolution of $\Bbbk$ over $A$.
+\end{proposition}
+
+\begin{proof}
+Each $d_i$ preserves degree and is right $A$-linear.
+For $i\geq2$, compute $d_{i-1}d_i$ on a basis wedge.
+Every term is indexed by two distinct positions $r<s$ deleted from that wedge.
+Deleting position $r$ and then $s$ gives coefficient $(-1)^{r+s-3}x_{j_s}x_{j_r}$; deleting $s$ and then $r$ gives coefficient $(-1)^{r+s-2}x_{j_r}x_{j_s}$.
+Since $x_{j_s}x_{j_r}=x_{j_r}x_{j_s}$, these two terms sum to zero. Hence $d_{i-1}d_i=0$; also $\pi d_1=0$ because every term of $d_1$ is divisible by a variable.
+
+To prove exactness, give $A$ and $\bigwedge V$ the multigrading with $\deg x_j$ equal to the $j$th standard basis vector.
+For $\alpha\in\mathbb Z_{\geq0}^n$, let $\operatorname{supp}(\alpha)=\{j\mid\alpha_j>0\}$.
+The degree $\alpha$ part of $K_i$ has basis
+\[
+b_J:=(x_{j_1}\wedge\cdots\wedge x_{j_i})\otimes x^{\alpha-\mathbf1_J},
+\qquad
+J=\{j_1<\cdots<j_i\}\subseteq\operatorname{supp}(\alpha),
+\]
+where $\mathbf1_J$ has entry $1$ at indices in $J$ and $0$ elsewhere.
+The differential is $d_i(b_J)=\sum_{r=1}^i(-1)^{r-1}b_{J\setminus\{j_r\}}$.
+
+If $\alpha\neq0$, let $q$ be the least index in $\operatorname{supp}(\alpha)$.
+For each $i\geq0$, define $h_{\alpha,i}:K_{i,\alpha}\to K_{i+1,\alpha}$ on basis vectors by
+\[
+h_{\alpha,i}(b_J)=
+\begin{cases}
+b_{\{q\}\cup J},&q\notin J,\\
+0,&q\in J,
+\end{cases}
+\]
+inserting $q$ first in the ordered wedge.
+For $q\notin J$ and $i\geq1$, direct substitution gives
+\[
+\begin{aligned}
+d_{i+1}h_{\alpha,i}(b_J)
+&=b_J-\sum_{r=1}^i(-1)^{r-1}b_{\{q\}\cup(J\setminus\{j_r\})},\\
+h_{\alpha,i-1}d_i(b_J)
+&=\sum_{r=1}^i(-1)^{r-1}b_{\{q\}\cup(J\setminus\{j_r\})}.
+\end{aligned}
+\]
+For $i=0$, $J=\varnothing$ and $d_1h_{\alpha,0}(b_\varnothing)=b_\varnothing$.
+For $q\in J$, the term of $d_i(b_J)$ deleting $q$ is the only term on which $h_{\alpha,i-1}$ is nonzero, and it gives $h_{\alpha,i-1}d_i(b_J)=b_J$ while $d_{i+1}h_{\alpha,i}(b_J)=0$.
+Thus $d_{i+1}h_{\alpha,i}+h_{\alpha,i-1}d_i=\id_{K_{i,\alpha}}$ for every $i\geq1$ in positive multidegree; the case $i=0$ was checked separately.
+All positive multidegrees are therefore exact.
+In multidegree $0$, only $K_0\cong\Bbbk$ is nonzero and $\pi$ is the identity onto $\Bbbk$.
+This proves exactness of the augmented complex.
+
+Finally, each $K_i$ is a finite direct sum of copies of $A(-i)$, and \eqref{eq:koszul-differential} has image in $K_{i-1}A_+$.
+Exactness gives $\Ker d_i=\Im d_{i+1}\subseteq K_iA_+$ for $i<n$, and $\Ker d_n=0$.
+Also, $\Ker\pi=AA_+$.
+Thus each map from $K_i$ onto the preceding kernel has kernel contained in $K_iA_+$, so it is a projective cover by Definition~\ref{def:graded-projective-cover}.
+The resolution is therefore minimal.
+\end{proof}
+
+\subsection{Koszul algebras}
+
+\begin{definition}\label{def:linear-resolution}
+A minimal graded projective resolution $P_\bullet\to M$ is \defn{linear} if $P_i/P_iA_+$ is concentrated in degree $i$ for every $i\geq0$.
+This is equivalent to $P_i$ being generated in degree $i$: generation in degree $i$ implies the stated concentration because $A_+$ raises degree.
+Conversely, if the top is concentrated in degree $i$, boundedness below and Lemma~\ref{lem:graded-nakayama} show that $P_i$ has no components below degree $i$; the quotient $P_i/(P_i)_iA$ then has zero graded top, so Lemma~\ref{lem:graded-nakayama} makes that quotient zero.
+\end{definition}
+
+\begin{definition}\label{def:koszul-algebra}
+Let $A=T_S(V)/(R)$ be a quadratic algebra with $S=A_0$ finite-dimensional semisimple.
+The algebra $A$ is \defn{Koszul} if the degree zero quotient module $S=A/A_+$ has a linear minimal graded projective resolution as a right $A$-module.
+\end{definition}
+
+The generators in homological degree $i$ must then all have grading degree $i$.
+Since $S$ can have several simple modules, the definition requires a linear resolution of their direct sum, not just of one chosen simple module.
+For a minimal resolution, Definition~\ref{def:linear-resolution} is equivalently the vanishing $\beta_{i,d,j}(S)=0$ whenever $d\neq i$.
+
+\begin{proposition}\label{prop:polynomial-koszul}
+For every finite-dimensional vector space $V$, the symmetric algebra $\Symm(V)$ is Koszul.
+\end{proposition}
+
+\begin{proof}
+Proposition~\ref{prop:koszul-complex-resolution} gives a minimal resolution with $K_i=\bigwedge^iV\otimes_\Bbbk A(-i)$.
+Thus $K_i$ is generated in degree $i$ for every $i$.
+\end{proof}
+
+\begin{example}\label{ex:koszul-nonconnected}
+The definition also applies when $S$ has several simple modules.
+For $A=\Bbbk A_2$, the resolution in Example~\ref{ex:minimal-A2} is linear for $L_1$, and $L_2=e_{22}A$ is projective in degree $0$.
+Taking their direct sum gives a linear resolution of $S=L_1\oplus L_2$; hence $\Bbbk A_2$ is Koszul.
+\end{example}
+
+\begin{example}
+The exterior algebra $E=\Bbbk[\epsilon]/(\epsilon^2)$ is quadratic, and Example~\ref{ex:minimal-exterior} gives a minimal resolution of its degree zero quotient with $P_i=E(-i)$.
+Thus $E$ is Koszul, although its minimal resolution is infinite.
+\end{example}
+
+\clearpage
 \begin{thebibliography}{BGS96}
 \bibitem[Bez23]{Bez23}
 R.~Bezrukavnikov,
