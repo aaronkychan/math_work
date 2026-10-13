@@ -98,14 +98,16 @@
 \definecolor{darkblue}{rgb}{0,0,0.7}
 \newcommand{\defn}[1]{\textsl{\color{darkblue} #1}}
 
-\definecolor{advancedgreen}{rgb}{0,0.35,0.20}
+\definecolor{supplementarygreen}{rgb}{0,0.35,0.20}
+\definecolor{supplementarybackground}{HTML}{E8F5E9}
 \definecolor{advancedbackground}{HTML}{EDE8D0}
+\definecolor{advancedred}{HTML}{B22222}
 \newmdenv[
   leftline=true,
   rightline=false,
   topline=false,
   bottomline=false,
-  linecolor=advancedgreen,
+  linecolor=advancedred,
   linewidth=1.5pt,
   backgroundcolor=advancedbackground,
   suppressfirstparskip=false,
@@ -120,6 +122,26 @@
   skipabove=8pt,
   skipbelow=8pt
 ]{advanced}
+\newmdenv[
+  leftline=true,
+  rightline=false,
+  topline=false,
+  bottomline=false,
+  linecolor=supplementarygreen,
+  linewidth=1.5pt,
+  backgroundcolor=supplementarybackground,
+  suppressfirstparskip=false,
+  leftmargin=1em,
+  rightmargin=0pt,
+  innerleftmargin=0.8em,
+  innerrightmargin=0.8em,
+  innertopmargin=10pt,
+  innerbottommargin=10pt,
+  splittopskip=\dimexpr\topskip+10pt\relax,
+  splitbottomskip=10pt,
+  skipabove=8pt,
+  skipbelow=8pt
+]{supplementary}
 
 \newif\ifshowhidden
 \showhiddenfalse % Change to \showhiddentrue to include hidden material.
@@ -223,7 +245,7 @@ All rings are unital and associative.
 All modules are right modules unless otherwise specified.
 When we discuss dimensions, we mean dimensions as $\Bbbk$-vector spaces.
 
-Indented passages with a pale beige background and a dark green left rule contain advanced material for readers seeking greater depth; beginners may omit them.
+Pale green passages with a dark green left rule contain supplementary material; pale beige passages with a red left rule contain advanced material and may be skipped by beginners.
 
 \section{Graded algebras, modules, and duals}
 
