@@ -1,0 +1,1164 @@
+% !TEX root = Lecture_Koszul.tex
+\section{Tensor and quadratic algebras}
+
+% TODO (ChangeProposal9, Lecture 2 follow-up): Introduce tensor products over
+% arbitrary algebras, with the defining identities explicit. References now
+% use prop:vector-tensor-universal for the universal property and
+% def:vector-tensor for the basis construction. Keep routine
+% verification supplementary; retain the existing editorial comments below.
+
+\subsection{Tensor products over an algebra}
+
+Let $A$ be any $\Bbbk$-algebra, $M$ a right $A$-module, and $N$ a left $A$-module.
+The tensor product over $A$ imposes the identities $ma\otimes n=m\otimes an$ for $m\in M$, $n\in N$, and $a\in A$.
+
+\begin{definition}\label{def:module-tensor}
+The \defn{tensor product of $M$ and $N$ over $A$}, denoted $M\otimes_A N$, is the quotient of the vector space $M\otimes_\Bbbk N$ by
+\[
+\operatorname{span}_\Bbbk\{ma\otimes n-m\otimes an\mid m\in M,\ n\in N,\ a\in A\}.
+\]
+\end{definition}
+
+
+By abuse of notation, we write $m\otimes n$ for the its own image in the $M\otimes_\Bbbk N \to M\otimes_AN$; if clarity is needed, then we will write $m\otimes_A n$.
+
+%No semisimplicity or finiteness assumption on $S,M,N$ is needed for the following properties.
+
+\begin{lemma}[Basic properties of tensor products]\label{lem:tensor-properties}
+Let $A$ be any $\Bbbk$-algebra, $M$ a right $A$-module, and $N$ a left $A$-module.
+\begin{enumerate}
+\item For a vector space $W$ and a bilinear map $b:M\times N\to W$ satisfying $b(ma,n)=b(m,an)$ for all $m\in M$, $a\in A$, and $n\in N$, there is a unique linear factorisation (commutative diagram)
+\[
+\xymatrix@C=55pt@R=22pt{
+M\times N \ar[r]^{(m,n)\mapsto m\otimes_A n} \ar[dr]_{\forall \text{ bilinear }b\phantom{...}}
+& M\otimes_A N \ar@{-->}[d]^{\exists!\,\widetilde b}\\
+& W.
+}
+\]
+%Conversely, every linear map $M\otimes_A N\to W$ defines such a bilinear map.
+%not sure what this line wants to say really. just ignore it
+
+\item If $B,C$ are $\Bbbk$-algebras and ${}_BM_A$, ${}_AN_C$ are bimodules, then $M\otimes_A N$ is a bimodule ${}_B(M\otimes_A N)_C$ with
+\[
+b(m\otimes_A n)c=bm\otimes_A nc
+\qquad(b\in B,\ c\in C,\ m\in M,\ n\in N).
+\]
+For right $A$-module maps $u:M\to M'$ and left $A$-module maps $v:N\to N'$, the assignment $(m,n)\mapsto u(m)\otimes v(n)$ induces
+\[
+u\otimes_A v:M\otimes_A N\longrightarrow M'\otimes_A N',
+\qquad m\otimes n\longmapsto u(m)\otimes v(n).
+\]
+These define functors
+\[
+(-)\otimes_A N:\Mod A\longrightarrow\Mod C,\qquad
+M\otimes_A(-):\Mod(A^\op)\longrightarrow\Mod(B^\op).
+\]
+On bimodule maps, they retain the outer actions:
+\[
+(-)\otimes_A N:\Mod A\otimes_\Bbbk B^\op \longrightarrow \Mod C\otimes_\Bbbk B^\op,\qquad
+M\otimes_A(-):\Mod C\otimes_\Bbbk A\longrightarrow\Mod C\otimes_\Bbbk B.
+\]
+\item For $\Bbbk$-algebras $A,B$, a right $A$-module $U$, a bimodule ${}_AV_B$, and a left $B$-module $W$, there is a natural linear isomorphism
+\[
+(U\otimes_A V)\otimes_B W\xrightarrow{\sim}U\otimes_A(V\otimes_B W),
+\qquad (u\otimes v)\otimes w\longmapsto u\otimes(v\otimes w).
+\]
+There are also natural module isomorphisms
+\[
+M\otimes_A A\xrightarrow{\sim}M,\quad m\otimes a\longmapsto ma,
+\qquad
+A\otimes_A N\xrightarrow{\sim}N,\quad a\otimes n\longmapsto an.
+\]
+Moreover, these maps are linear with respect to any additional bimodule action on $U, W, M, N$.
+
+\item Tensor products distribute over direct sums in either variable. For arbitrary families $(M_i)_{i\in I}$ of right $A$-modules and $(N_j)_{j\in J}$ of left $A$-modules, indexed by sets $I,J$,
+\[
+\begin{aligned}
+\Bigl(\bigoplus_{i\in I}M_i\Bigr)\otimes_A N
+&\xrightarrow{\sim}\bigoplus_{i\in I}(M_i\otimes_A N),
+& (m_i)_{i\in I}\otimes n&\longmapsto(m_i\otimes n)_{i\in I},\\
+M\otimes_A\Bigl(\bigoplus_{j\in J}N_j\Bigr)
+&\xrightarrow{\sim}\bigoplus_{j\in J}(M\otimes_A N_j),
+& m\otimes(n_j)_{j\in J}&\longmapsto(m\otimes n_j)_{j\in J}.
+\end{aligned}
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{supplementary}
+\begin{proof}
+For (1), Proposition~\ref{prop:vector-tensor-universal} gives a unique linear map $M\otimes_\Bbbk N\to W$, $m\otimes n\mapsto b(m,n)$.
+The map vanishes on the defining subspace precisely when $b(ma,n)=b(m,an)$.
+
+For (2), the outer actions preserve that subspace: for $b\in B$, $c\in C$, and $a\in A$,
+\[
+b(ma\otimes n-m\otimes an)c
+=(bm)a\otimes nc-bm\otimes a(nc).
+\]
+The module axioms follow from those on $M$ and $N$.
+For module maps $u,v$,
+\[
+u(ma)\otimes v(n)=u(m)a\otimes v(n)
+=u(m)\otimes av(n)=u(m)\otimes v(an),
+\]
+so the displayed formula induces $u\otimes_A v$.
+The functor identities follow from
+$(u'\otimes v')(u(m)\otimes v(n))=u'u(m)\otimes v'v(n)$ and
+$(\id_M\otimes\id_N)(m\otimes n)=m\otimes n$.
+If $u,v$ preserve the outer actions, then $u\otimes_A v$ does as well.
+
+For (3), both parenthesisations impose
+\[
+(ua)\otimes v\otimes w=u\otimes(av)\otimes w,\qquad
+u\otimes(vb)\otimes w=u\otimes v\otimes(bw)
+\quad(a\in A,\ b\in B).
+\]
+Thus the displayed associativity map and the reverse assignment are well-defined and inverse.
+The unit inverses are $M\to M\otimes_A A$, $m\mapsto m\otimes1$, and $N\to A\otimes_A N$, $n\mapsto1\otimes n$.
+
+For (4), the bilinear map $((m_i)_{i\in I},n)\mapsto(m_i\otimes n)_{i\in I}$ satisfies the identity in (1), so it induces the displayed linear map.
+For each $i\in I$, let $\iota_i:M_i\to\bigoplus_{j\in I}M_j$ be the inclusion.
+The inverse sends $m\otimes n$ in the $i$th summand to $\iota_i(m)\otimes n$ and extends over the direct sum.
+Both composites fix every element $m\otimes n$ from a summand.
+The other variable is handled in the same way.
+\end{proof}
+\end{supplementary}
+
+For finite sets $I,J$ and right $A$-modules $M_j,N_i$, there is a natural isomorphism
+\begin{equation}\label{eq:hom-finite-sums}
+\begin{aligned}
+\Hom_A\Bigl(\bigoplus_{j\in J}M_j,\bigoplus_{i\in I}N_i\Bigr)
+&\xrightarrow{\sim}\bigoplus_{\substack{i\in I\\j\in J}}\Hom_A(M_j,N_i),\\
+f&\longmapsto(\pi_i f\iota_j)_{i\in I,\ j\in J},
+\end{aligned}
+\end{equation}
+where $\iota_j:M_j\to\bigoplus_{j'\in J}M_{j'}$ and $\pi_i:\bigoplus_{i'\in I}N_{i'}\to N_i$ are the inclusions and projections.
+
+\begin{advanced}
+\begin{lemma}[Hom, direct sums, and direct products]\label{lem:hom-sums-products}
+Let $M,N$ be right $A$-modules, and let $(M_i)_{i\in I}$ and $(N_i)_{i\in I}$ be arbitrary families of right $A$-modules, indexed by a set $I$.
+Write $\iota_i:M_i\to\bigoplus_{j\in I}M_j$ for the inclusions and $\pi_i:\prod_{j\in I}N_j\to N_i$ for the projections.
+There are natural linear isomorphisms
+\[
+\begin{aligned}
+\Hom_A\Bigl(\bigoplus_{i\in I}M_i,N\Bigr)&\xrightarrow{\sim}\prod_{i\in I}\Hom_A(M_i,N),
+& f&\longmapsto(f\circ\iota_i)_{i\in I},\\
+\Hom_A\Bigl(M,\prod_{i\in I}N_i\Bigr)&\xrightarrow{\sim}\prod_{i\in I}\Hom_A(M,N_i),
+& f&\longmapsto(\pi_i\circ f)_{i\in I}.
+\end{aligned}
+\]
+There is also a natural injection
+\[
+\bigoplus_{i\in I}\Hom_A(M,N_i)\longrightarrow
+\Hom_A\Bigl(M,\bigoplus_{i\in I}N_i\Bigr),
+\qquad (f_i)_{i\in I}\longmapsto\bigl(m\mapsto(f_i(m))_{i\in I}\bigr),
+\]
+which is an isomorphism when $M$ is finitely generated.
+\end{lemma}
+
+\begin{proof}
+The inverse of the first map sends $(f_i)_{i\in I}$ to $(m_i)_{i\in I}\mapsto\sum_{i\in I}f_i(m_i)$; the sum is finite because $(m_i)_{i\in I}$ has finite support.
+The inverse of the second sends $(f_i)_{i\in I}$ to $m\mapsto(f_i(m))_{i\in I}$; a direct product imposes no support condition.
+For the third map, coordinate projections recover each $f_i$, proving injectivity.
+If $m_1,\ldots,m_r$ generate $M$, the images of these generators under $f:M\to\bigoplus_{i\in I}N_i$ are supported on a common finite subset $J\subset I$.
+Then $f(M)\subset\bigoplus_{i\in J}N_i$, so $f$ comes from a finite family of maps.
+All three constructions commute with precomposition and postcomposition.
+\end{proof}
+
+\begin{proposition}[Tensor products and direct products]\label{prop:tensor-direct-products}
+Let $A$ be a $\Bbbk$-algebra, $M,M_i$ right $A$-modules, and $N,N_i$ left $A$-modules, with $i\in I$.
+The coordinate projections define linear maps
+\begin{equation}\label{eq:module-tensor-products}
+\begin{aligned}
+\kappa_N:\Bigl(\prod_iM_i\Bigr)\otimes_A N
+&\longrightarrow\prod_i(M_i\otimes_A N),
+& (m_i)_i\otimes n&\longmapsto(m_i\otimes n)_i,\\
+\lambda_M:M\otimes_A\Bigl(\prod_iN_i\Bigr)
+&\longrightarrow\prod_i(M\otimes_A N_i),
+& m\otimes(n_i)_i&\longmapsto(m\otimes n_i)_i.
+\end{aligned}
+\end{equation}
+\begin{enumerate}
+\item If $I$ is finite, both maps are isomorphisms.
+\item The map $\kappa_N$ is an isomorphism if $N$ is a direct summand of $A^{\oplus r}$ as a left module for some finite $r$.
+The corresponding condition on the right module $M$ makes $\lambda_M$ an isomorphism.
+\item If $A$ is finite-dimensional semisimple, both maps are injective.
+Moreover, $\kappa_N$ is an isomorphism when $N$ is finite-dimensional, and $\lambda_M$ is an isomorphism when $M$ is finite-dimensional.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+The formulas in \eqref{eq:module-tensor-products} are bilinear. For $s\in A$, the component identities
+$(m_is)\otimes n=m_i\otimes sn$ and $(ms)\otimes n_i=m\otimes sn_i$
+show that both formulas give well-defined maps from the indicated tensor products.
+For finite $I$, products equal sums, and Lemma~\ref{lem:tensor-properties}(4) proves (1).
+
+For $N=A$, the map $\kappa_A$ is the identity on $\prod_iM_i$ under $m\otimes s\mapsto ms$.
+For $N=A^{\oplus r}$, both sides are $(\prod_iM_i)^{\oplus r}$, since a finite direct sum commutes with a direct product.
+If $N\oplus N'\cong A^{\oplus r}$, the comparison for $N\oplus N'$ is $\kappa_N\oplus\kappa_{N'}$.
+Its bijectivity implies the bijectivity of $\kappa_N$.
+This proves the assertion about $\kappa_N$ in (2).
+
+Now let $A$ be finite-dimensional semisimple.
+For finite-dimensional $N$, Corollary~\ref{cor:semisimple-summands} gives (2).
+For arbitrary $N$, take $z=\sum_{\ell=1}^r m^{(\ell)}\otimes n_\ell$ in $\Ker\kappa_N$ and set $N_0=\sum_{\ell=1}^r An_\ell$.
+The submodule $N_0$ is finite-dimensional and has a complement in $N$ by Theorem~\ref{thm:artin-wedderburn}.
+Thus the inclusions
+\[
+\Bigl(\prod_iM_i\Bigr)\otimes_A N_0
+\longrightarrow\Bigl(\prod_iM_i\Bigr)\otimes_A N,
+\qquad
+M_i\otimes_A N_0\longrightarrow M_i\otimes_A N
+\]
+are injective, by the direct sum formula in Lemma~\ref{lem:tensor-properties}(4).
+Regard $z$ as an element with second factors in $N_0$.
+The equality $\kappa_N(z)=0$ then gives $\kappa_{N_0}(z)=0$.
+Aince $\kappa_{N_0}$ is an isomorphism, $z=0$.
+
+For $\lambda_M$, apply the same arguments over $A^\op$, using
+$N\otimes_{A^\op}M\cong M\otimes_A N$, $n\otimes m\mapsto m\otimes n$.
+\end{proof}
+
+The finite-dimensional hypothesis on the fixed factor cannot be dropped from the isomorphism assertion: Example~\ref{ex:tensor-product-product-failure} gives a non-surjective comparison even for vector spaces.
+Thus tensor products always distribute over direct sums, but not over arbitrary direct products.
+
+\begin{remark}\label{rem:infinite-products}
+For infinite families, $\Hom$ need not preserve direct sums in its second variable.
+For $M=\bigoplus_{i\geq1}\Bbbk v_i$, the identity $M\to M$ does not come from $\bigoplus_i\Hom_\Bbbk(M,\Bbbk v_i)$: its projection onto every $\Bbbk v_i$ is non-zero.
+Thus the injection in Lemma~\ref{lem:hom-sums-products} need not be surjective.
+
+A product in the source of $\Hom$ behaves differently from a product in the target.
+For example, a linear map $\prod_{i\geq1}\Bbbk\to\Bbbk$ need not be determined by its restrictions to the coordinate copies of $\Bbbk$.
+Indeed, $(1,1,\ldots)\notin\bigoplus_{i\geq1}\Bbbk$.
+Define a functional on $\bigoplus_{i\geq1}\Bbbk+\Bbbk(1,1,\ldots)$ to vanish on the direct sum and take value $1$ at $(1,1,\ldots)$, and extend it to the product by extending a basis.
+The resulting non-zero functional vanishes on every coordinate copy.
+\end{remark}
+\end{advanced}
+
+
+
+For a bimodule ${}_AV_A$, define
+\[
+V^{\otimes_A 0}:=A,\qquad
+V^{\otimes_A i}:=
+\underbrace{V\otimes_A\cdots\otimes_A V}_{i\text{ factors}}
+\quad(i\geq1).
+\]
+Note that there is no parenthesis in the definition of $V^{\otimes_A i}$ since Lemma~\ref{lem:tensor-properties}(3) says that tenso product is an associatitive operation.
+
+\begin{advanced}
+Let $A,B,C$ be $\Bbbk$-algebras.
+For bimodules ${}_AM_B$, ${}_CX_B$, we have $\Hom_B(M,X)\in C\Mod A$, with
+\begin{equation}\label{eq:general-tensor-dual-actions}
+(cfa)(m)=cf(am)
+\quad(f\in\Hom_B(M,X),\ c\in C,\ a\in A,\ m\in M).
+\end{equation}
+If $X\in\Mod B$ has no specified left action, the same formula defines the right $A$-action $(fa)(m)=f(am)$.
+The left-module version follows by passing to opposite algebras.
+
+\begin{proposition}[Tensor and Hom]\label{prop:tensor-duals}
+% TODO (ChangeProposal9, Lecture 2 follow-up): Explain the general case for
+% an (A,B)-bimodule M and a (B,C)-bimodule N. For right duals, require M_B
+% finitely generated projective; for left duals, require _B N finitely generated
+% projective. Finite k-dimension alone does not suffice over a general algebra.
+% Keep the idempotent-matching calculation in the main exposition and move
+% routine verification to supplementary material. Use the one-sided bimodule
+% actions from eq:bimodule-dual-actions, independently of a symmetrising form.
+Consider bimodules ${}_AM_B$, ${}_BN_C$, a right $C$-module $X$, and a left $A$-module $Y$.
+There are maps, natural in $M,N$,
+\begin{equation}\label{eq:general-tensor-duals}
+\begin{aligned}
+\theta_r:\Hom_C(N,X)\otimes_B\Hom_B(M,B)
+&\longrightarrow\Hom_C(M\otimes_B N,X),\\
+\theta_r(g\otimes f)(m\otimes n)&=g(f(m)n),\\
+\theta_\ell:\Hom_{B^\op}(N,B)\otimes_B\Hom_{A^\op}(M,Y)
+&\longrightarrow\Hom_{A^\op}(M\otimes_B N,Y),\\
+\theta_\ell(g\otimes f)(m\otimes n)&=f(mg(n)).
+\end{aligned}
+\end{equation}
+The maps $\theta_r$ and $\theta_\ell$ are right $A$-linear and left $C$-linear, respectively.
+\begin{enumerate}
+\item The map $\theta_r$ is an isomorphism if $M\in\add B$ as a right $B$-module.
+\item The map $\theta_\ell$ is an isomorphism if ${}_BN\in\add_{\mod B^\op}(B)$.
+\end{enumerate}
+Here $\add B=\add_{\mod B}(B)$, as in Example~\ref{ex:add-category}.
+If ${}_CX_C$ and ${}_AY_A$ are bimodules, the respective maps also preserve the additional actions and are morphisms in $C\Mod A$.
+\end{proposition}
+
+\begin{proof}
+\emph{Well-definedness of $\theta_r$.}
+For $f\in\Hom_B(M,B)$, $g\in\Hom_C(N,X)$, and $b\in B$,
+\[
+g(f(mb)n)=g(f(m)bn),\qquad
+(gb)(f(m)n)=g(bf(m)n)=g((bf)(m)n).
+\]
+These identities respect the defining identifications in both tensor products.
+Right $C$-linearity follows from $g(f(m)nc)=g(f(m)n)c$ for $c\in C$.
+For $a\in A$,
+\[
+\theta_r(g\otimes fa)(m\otimes n)
+=g(f(am)n)=(\theta_r(g\otimes f)a)(m\otimes n).
+\]
+If $X$ also has a commuting left $C$-action, replacing $g$ by $cg$ multiplies the value by $c$, so $\theta_r$ preserves that action as well.
+
+\emph{Bijectivity of $\theta_r$.}
+Regard $M$ only as a right $B$-module.
+For $M=B$, evaluation at $1$ identifies $\Hom_B(B,B)\cong B$, while multiplication identifies $B\otimes_B N\cong N$.
+Under these isomorphisms, $\theta_r$ becomes
+\[
+\Hom_C(N,X)\otimes_B B\longrightarrow\Hom_C(N,X),
+\qquad g\otimes b\longmapsto gb,
+\]
+which is an isomorphism by Lemma~\ref{lem:tensor-properties}(3).
+Finite direct sums commute with both constructions by Lemma~\ref{lem:tensor-properties}(4) and \eqref{eq:hom-finite-sums}.
+Thus $\theta_r$ is bijective for $M=B^{\oplus r}$, where $r\geq0$ is finite.
+If $M\in\add B$, choose $M'$ with $M\oplus M'\cong B^{\oplus r}$.
+The comparison for $M\oplus M'$ is the direct sum of the comparisons for $M$ and $M'$, so both summand maps are bijective.
+
+\emph{The left comparison.}
+For $f\in\Hom_{A^\op}(M,Y)$ and $g\in\Hom_{B^\op}(N,B)$, well-definedness follows from
+\[
+f(mb\,g(n))=f(mg(bn)),\qquad
+f(m(gb)(n))=f(mg(n)b)=(bf)(mg(n))
+\quad(b\in B).
+\]
+Left $A$-linearity of $f$ makes the resulting functional left $A$-linear.
+For $c\in C$,
+\[
+\theta_\ell(cg\otimes f)(m\otimes n)
+=f(mg(nc))=(c\theta_\ell(g\otimes f))(m\otimes n).
+\]
+If $Y$ also has a commuting right $A$-action, replacing $f$ by $fa$ multiplies the value by $a$, so $\theta_\ell$ preserves that action as well.
+For $N=B$ as a left module, evaluation at $1$ identifies $\Hom_{B^\op}(B,B)\cong B$ and turns $\theta_\ell$ into
+\[
+B\otimes_B\Hom_{A^\op}(M,Y)\longrightarrow\Hom_{A^\op}(M,Y),
+\qquad b\otimes f\longmapsto bf.
+\]
+The same finite-sum and direct-summand argument proves (2).
+
+\emph{Naturality.}
+Let $p:M\to M'$ and $q:N\to N'$ be bimodule maps.
+For $f\in\Hom_B(M',B)$ and $g\in\Hom_C(N',X)$, applying $\theta_r$ before or after precomposition gives $g(f(p(m))q(n))$ at $m\otimes n$.
+For $f\in\Hom_{A^\op}(M',Y)$ and $g\in\Hom_{B^\op}(N',B)$, the two orders give $f(p(m)g(q(n)))$ for $\theta_\ell$.
+Thus both comparisons are natural.
+\end{proof}
+\end{advanced}
+
+Let $S$ be finite-dimensional semisimple, and consider bimodules ${}_SV_S$, ${}_SW_S$ finitely generated on the right and left, respectively.
+Corollary~\ref{cor:semisimple-summands} gives $V_S\in\add S$ and ${}_SW\in\add_{\mod S^\op}(S)$.
+Thus the semisimple case of tensor duality, Proposition~\ref{prop:tensor-duals}, gives natural bimodule isomorphisms
+\begin{equation}\label{eq:tensor-duals}
+\theta_r:W^*\otimes_S V^*\xrightarrow{\sim}(V\otimes_S W)^*,
+\qquad
+\theta_\ell:{}^*W\otimes_S{}^*V\xrightarrow{\sim}{}^*(V\otimes_S W),
+\end{equation}
+\begin{equation}\label{eq:tensor-evaluations}
+\theta_r(g\otimes f)(v\otimes w)=g(f(v)w),
+\qquad
+\theta_\ell(g\otimes f)(v\otimes w)=f(vg(w)).
+\end{equation}
+For $M\in\{V,W\}$, the actions from \eqref{eq:bimodule-dual-actions} are
+\begin{equation}\label{eq:tensor-dual-actions}
+(sft)(m)=sf(tm),\qquad (sgt)(m)=g(ms)t
+\quad\text{for all }s,t\in S,\ f\in M^*,\ g\in{}^*M,\ m\in M.
+\end{equation}
+
+\begin{hidden}
+\begin{convention}[Tensor duals]
+For $S,V,W$ as in \eqref{eq:tensor-duals}, identify the dual of a tensor product with the tensor product of the corresponding duals in reverse order, using the maps in \eqref{eq:tensor-evaluations}.
+No basis or symmetrising form is needed.
+Comparisons of $M^*$, $ {}^*M$, and $D(M)$ instead use a chosen symmetrising form, as in \eqref{eq:dual-comparison}.
+\end{convention}
+\end{hidden}
+
+\begin{advanced}
+\begin{example}\label{ex:tensor-dual-finite-generation}
+Finite generation alone does not suffice in Proposition~\ref{prop:tensor-duals} over a general algebra.
+Take $A=C=\Bbbk$, $B=\Bbbk[x]$, and $X=Y=\Bbbk$.
+Consider bimodules ${}_\Bbbk M_B$, ${}_BN_\Bbbk$ with $M=N=B/(x)\cong\Bbbk$ and the outer $\Bbbk$-actions given by scalar multiplication.
+Every $f\in\Hom_B(M,B)$ satisfies $f(\overline1)x=f(\overline1x)=0$, hence $f=0$.
+Consequently
+\[
+\Hom_\Bbbk(N,\Bbbk)\otimes_B\Hom_B(M,B)=0,\qquad
+\Hom_\Bbbk(M\otimes_B N,\Bbbk)\cong\Bbbk.
+\]
+Both $M_B$ and $ {}_B N$ are generated by $\overline1$, so neither direct-summand hypothesis can be replaced by finite generation alone.
+For the left comparison, $\Hom_{B^\op}(N,B)=0$, whereas $\Hom_\Bbbk(M\otimes_B N,\Bbbk)\cong\Bbbk$.
+\end{example}
+
+For $S,V,W$ as in \eqref{eq:tensor-duals}, take $A=B=S$, $C=\Bbbk$, $M=V$, $N=W$, and $X=\Bbbk$ in Proposition~\ref{prop:tensor-duals}(1).
+Since $\Hom_\Bbbk(W,\Bbbk)=D(W)$, we obtain the natural bimodule isomorphism \cite[\S2.1]{GI20}
+\[
+\begin{aligned}
+\theta_D:D(W)\otimes_S V^*&\xrightarrow{\sim}D(V\otimes_S W),\\
+\theta_D(\lambda\otimes f)(v\otimes w)&=\lambda(f(v)w).
+\end{aligned}
+\]
+The actions on $D(W)$ are those in \eqref{eq:bimodule-dual-actions}.
+For $s\in S$, naturality with respect to $W\to W$, $w\mapsto ws$, gives left $S$-linearity of $\theta_D$.
+
+Suppose now that $S$ is equipped with a symmetrising form $\tau:S\to\Bbbk$, as in Definition~\ref{def:symmetrising-form}.
+The two-sided dual of Definition~\ref{def:en-dual} satisfies
+\begin{equation}\label{eq:tensor-two-sided-dual}
+\begin{aligned}
+\theta_{\en}:W^*\otimes_S V^{*_{\en}}
+&\xrightarrow{\sim}(V\otimes_S W)^{*_{\en}},\\
+\theta_{\en}(g\otimes F)(v\otimes w)
+&=\sum_j g(a_jw)\otimes b_j^\op,
+\qquad F(v)=\sum_j a_j\otimes b_j^\op.
+\end{aligned}
+\end{equation}
+We check that the formula defines a map on the two indicated tensor products and preserves both outer actions.
+For example, $F(vs)=F(v)(s\otimes1)$ replaces $a_j$ by $a_js$, while
+$(Fs)(v)=(1\otimes s^\op)F(v)$ replaces $b_j$ by $b_js$.
+These give, respectively, compatibility with $vs\otimes w=v\otimes sw$ and with the right outer action.
+Compatibility with $(gs)\otimes F=g\otimes(sF)$ follows from $(gs)(a_jw)=g(sa_jw)$.
+The other actions follow from right $S$-linearity of $g$ and $F(tv)=F(v)(1\otimes t^\op)$.
+
+The comparison maps $\gamma_M$ in \eqref{eq:en-dual-comparison} give
+\[
+\gamma_{V\otimes_S W}\circ\theta_{\en}
+=\theta_r\circ(\id_{W^*}\otimes\gamma_V),
+\]
+since both sides send $g\otimes F$, evaluated at $v\otimes w$, to $\sum_j g(a_jw)\tau(b_j)$.
+Thus $\theta_{\en}$ is an isomorphism by Theorem~\ref{prop:dual-comparison}.
+Precomposition shows that $\theta_D$ and $\theta_{\en}$ are natural.
+No assumption that $S^\en$ is semisimple is used; compare Remark~\ref{rem:enveloping-semisimple}.
+
+For the maps $\alpha_M(f)=\tau\circ f$ in \eqref{eq:dual-comparison},
+\[
+\alpha_{V\otimes_S W}\circ\theta_r
+=\theta_D\circ(\alpha_W\otimes\id_{V^*}),
+\]
+because both sides send $g\otimes f$ to the functional $v\otimes w\mapsto\tau(g(f(v)w))$.
+\end{advanced}
+
+
+\subsection{Generated algebras}
+
+\begin{definition}
+Let $A$ be graded with $S=A_0$.
+Multiplication makes $A_1$ an $S$-bimodule and gives
+\begin{equation}\label{eq:multiplication-maps}
+\mu_i:A_1^{\otimes_S i}\longrightarrow A_i,\qquad
+a_1\otimes\cdots\otimes a_i\longmapsto a_1\cdots a_i
+\quad(i\geq 1),\qquad \mu_0=\id_S.
+\end{equation}
+The algebra $A$ is \defn{generated in degree $1$ (over $S$)} if every $\mu_i$ in \eqref{eq:multiplication-maps} is surjective.
+\end{definition}
+
+Equivalently, $S$ and $A_1$ generate $A$ as an algebra.
+
+\begin{example}
+The algebra $\Bbbk A_n$ of Example~\ref{ex:triangular-grading} is generated in degree $1$ over $S=\bigoplus_i\Bbbk e_{ii}$.
+%\[
+%e_{ij}=e_{i,i+1}e_{i+1,i+2}\cdots e_{j-1,j}\quad(1\leq i<j\leq n).
+%\]
+%For the grading $\deg e_{ij}=2(j-i)$, the same algebra has $A_1=0$ and $A_2\neq 0$, so it is not generated in degree $1$.
+\end{example}
+
+\begin{example}\label{ex:polynomial-generators}
+The polynomial algebra $\Bbbk[x_1,\ldots,x_n]$, with each $\deg x_i=1$ for all $i$, is generated in degree $1$ over $\Bbbk$.
+Indeed, every monomial of total degree $d$ is a product of $d$ variables, and these monomials span the degree $d$ component.
+\end{example}
+
+\begin{supplementary}
+\begin{example}\label{ex:triangular-polynomials}
+\emergencystretch=1em
+Let
+\[
+A=\begin{pmatrix}\Bbbk[x]&\Bbbk[x]\\0&\Bbbk[x]\end{pmatrix},
+\qquad \deg(x^m e_{ij})=m+j-i
+\quad(m\geq0,\ 1\leq i\leq j\leq2).
+\]
+Then
+\[
+A_0=\Bbbk e_{11}\oplus\Bbbk e_{22},\qquad
+A_d=\Bbbk x^d e_{11}\oplus\Bbbk x^d e_{22}\oplus\Bbbk x^{d-1}e_{12}
+\quad(d\geq1).
+\]
+It is generated in degree $1$ over $A_0$, since
+\[
+x^d e_{11}=(xe_{11})^d,\qquad
+x^d e_{22}=(xe_{22})^d,\qquad
+x^{d-1}e_{12}=(xe_{11})^{d-1}e_{12}
+\quad(d\geq1).
+\]
+Here $A_0$ has two simple summands, $A_d\neq0$ for every $d\geq0$, and $A$ is non-commutative: $e_{11}e_{12}=e_{12}$ whereas $e_{12}e_{11}=0$.
+\end{example}
+\end{supplementary}
+
+\subsection{Tensor algebras and the universal property}
+
+% TODO (ChangeProposal9, Lecture 2 follow-up): Keep the tensor-algebra universal
+% property and its explicit formula in the main text; shorten its proof or put
+% routine verification in supplementary material. Address the remaining local
+% editorial comments when revising Lecture 2, not as part of the Lecture 1 edit.
+
+\begin{definition}\label{def:tensor-algebra}
+Let $S$ be a $\Bbbk$-algebra and consider a bimodule ${}_SV_S$.
+The \defn{tensor algebra of $V$ over $S$} is
+\[
+T_S(V):=\bigoplus_{i\in\Z}T_S(V)_i,
+\quad\text{where}\quad
+T_S(V)_i=
+\begin{cases}
+V^{\otimes_S i},&i\geq1,\\
+S,&i=0,\\
+0,&i<0,
+\end{cases}.
+\]
+For $v_1,\ldots,v_{p+q}\in V$, multiplication is determined $\Bbbk$-bilinearly by
+\[
+(v_1\otimes_S\cdots\otimes_S v_p)(v_{p+1}\otimes_S\cdots\otimes_S v_{p+q})
+=v_1\otimes_S\cdots\otimes_S v_{p+q}
+\qquad(p,q\geq1),
+\]
+and by the left and right $S$-actions when a factor has degree $0$.
+\end{definition}
+
+We also call $T_S(V)$ the tensor algebra generated by $V$ over $S$.
+Every element has finitely many non-zero homogeneous components.
+The unit is $1_S$, and associativity follows from Lemma~\ref{lem:tensor-properties}(3).
+Write $v_1\cdots v_d$ for $v_1\otimes_S\cdots\otimes_S v_d$ in $T_S(V)$.
+In a quotient algebra (including $T_S(V)$ itself) of $T_S(V)$, the notation $v_1\cdots v_d$ denotes the image of $v_1\otimes_S\cdots\otimes_S v_d$.
+
+\begin{example}[Polynomial and exterior algebras]\label{ex:polynomial-exterior}
+Let $V,W$ be finite-dimensional vector spaces with bases $\{x_i\mid1\leq i\leq n\}$ and $\{y_j\mid1\leq j\leq m\}$, respectively.
+The \defn{symmetric algebra} of $V$ and the \defn{exterior algebra} of $W$ are
+\begin{equation}\label{eq:polynomial-exterior}
+\begin{aligned}
+\SymAlg(V)&=T_\Bbbk(V)/(x_ix_j-x_jx_i\mid1\leq i<j\leq n)
+            \cong\Bbbk[x_1,\ldots,x_n],\\
+\bigwedge W&=T_\Bbbk(W)/(w^2\mid w\in W).
+\end{aligned}
+\end{equation}
+They are generated in degree $1$, with
+\[
+\SymAlg(V)_0=(\bigwedge W)_0=\Bbbk,\qquad
+\SymAlg(V)_1=V,\qquad(\bigwedge W)_1=W.
+\]
+Their respective bases are
+\[
+\begin{gathered}
+\{x_1^{a_1}\cdots x_n^{a_n}\mid a_1,\ldots,a_n\in\Z,\ a_1,\ldots,a_n\geq0\},\\
+\{y_{j_1}\cdots y_{j_d}\mid0\leq d\leq m,\ 1\leq j_1<\cdots<j_d\leq m\},
+\end{gathered}
+\]
+where the empty product is $1$.
+The exterior relations are equivalently $y_j^2=0$ for $1\leq j\leq m$ and $y_iy_j+y_jy_i=0$ for $1\leq i<j\leq m$, in every characteristic.
+\end{example}
+
+\begin{supplementary}
+The bases in Example~\ref{ex:polynomial-exterior} can be checked directly.
+For $\SymAlg(V)$, commuting adjacent generators gives the ordered monomials, which are independent under the map to the polynomial ring.
+For $\bigwedge W$, the relations reduce every product of basis elements to a multiple of a strictly increasing product or to zero.
+For $1\leq d\leq m$, fix $j_1<\cdots<j_d$ and consider the linear functional $W^{\otimes_\Bbbk d}\to\Bbbk$ sending $w_1\otimes\cdots\otimes w_d$ to the determinant of their coordinates in rows $j_1,\ldots,j_d$ relative to the basis $\{y_j\mid1\leq j\leq m\}$.
+The determinant vanishes whenever two adjacent factors agree, hence on the degree $d$ component of $(w^2\mid w\in W)$.
+On increasing products it is $1$ on $y_{j_1}\cdots y_{j_d}$ and $0$ on the others, proving independence in every characteristic.
+\end{supplementary}
+
+\begin{lemma}\label{lem:idempotent-tensors}
+Let $S=\bigoplus_{i=1}^r\Bbbk e_i$ with coordinate idempotents, and consider bimodules ${}_SV_S$, ${}_SW_S$.
+There is a bimodule isomorphism
+\begin{equation}\label{eq:idempotent-tensor-decomposition}
+V\otimes_S W\cong\bigoplus_{i,j,k=1}^r e_iVe_j\otimes_\Bbbk e_jWe_k.
+\end{equation}
+Consequently, after choosing a basis of each $e_iVe_j$, a basis of $V^{\otimes_S d}$ for $d\geq1$ consists of products of $d$ chosen basis elements whose adjacent idempotents match.
+\end{lemma}
+\begin{supplementary}
+\begin{proof}
+The orthogonal idempotents sum to $1$, so
+\begin{equation}\label{eq:composable-tensors}
+V=\bigoplus_{i,j=1}^r e_iVe_j,\qquad
+(e_iVe_j)\otimes_S(e_pWe_k)=0
+\quad(1\leq i,j,p,k\leq r,\ j\neq p).
+\end{equation}
+Indeed, $v\otimes_S w=ve_j\otimes_S w=v\otimes_S e_jw=0$ for $v\in e_iVe_j$, $w\in e_pWe_k$, and $j\neq p$.
+The map from right to left in \eqref{eq:idempotent-tensor-decomposition} sends $v\otimes_\Bbbk w$ to $v\otimes_S w$ on each summand.
+Its inverse is
+\[
+V\otimes_S W\longrightarrow\bigoplus_{i,j,k=1}^r e_iVe_j\otimes_\Bbbk e_jWe_k,
+\qquad
+v\otimes_S w\longmapsto\sum_{i,j,k=1}^r e_ive_j\otimes_\Bbbk e_jwe_k.
+\]
+Checking that these two assignments induce well-defined, mutually inverse maps is left to the reader.
+Iterating \eqref{eq:idempotent-tensor-decomposition} and using Definition~\ref{def:vector-tensor} gives the stated basis.
+\end{proof}
+\end{supplementary}
+
+
+\begin{example}\label{ex:tensor-A3}
+We apply Lemma~\ref{lem:idempotent-tensors} to realise $\Bbbk A_3$ as a tensor algebra.
+Let $S=\Bbbk^{\oplus3}$ with coordinate idempotents $e_1,e_2,e_3$, and take the bimodule ${}_SV_S$ with $V=\Bbbk a\oplus\Bbbk b$, $e_1ae_2=a$, and $e_2be_3=b$; all other idempotent actions are zero.
+By Lemma~\ref{lem:idempotent-tensors},
+\[
+V\otimes_S V=\Bbbk(a\otimes b),\qquad
+V^{\otimes_S3}=0,\qquad
+T_S(V)=S\oplus\Bbbk a\oplus\Bbbk b\oplus\Bbbk ab.
+\]
+Here $ab=a\otimes b$.
+The linear map $T_S(V)\to\Bbbk A_3$ given by $e_i\mapsto e_{ii}$, $a\mapsto e_{12}$, $b\mapsto e_{23}$, and $ab\mapsto e_{13}$ preserves multiplication and sends a basis to a basis, hence is an algebra isomorphism.
+\end{example}
+
+\begin{proposition}[Universal property of the tensor algebra]\label{prop:tensor-universal}
+Let $S$ be a $\Bbbk$-algebra, consider a bimodule ${}_SV_S$, and let $\iota_S:S\to T_S(V)$ and $\iota_V:V\to T_S(V)$ be the canonical inclusions.
+Given a unital $\Bbbk$-algebra homomorphism $\varphi:S\to B$ and a bimodule map $f:{}_SV_S\to{}_SB_S$, where $sbt=\varphi(s)b\varphi(t)$ on $B$, there is a unique $\Bbbk$-algebra homomorphism $\widetilde f:T_S(V)\to B$ making the diagram commute:
+\begin{equation}\label{eq:tensor-universal}
+\xymatrix@C=42pt@R=28pt{
+V \ar@{^{(}->}[r]^{\iota_V} \ar[dr]_{\forall\,\text{bimodule map }f\phantom{...}}
+& T_S(V) \ar@{-->}[d]^{\exists!\,\widetilde f}
+& S \ar@{^{(}->}[l]_{\iota_S} \ar[dl]^{\phantom{...}\forall\,\text{algebra map }\varphi}\\
+& B. &
+}
+\end{equation}
+\end{proposition}
+\begin{supplementary}
+\begin{proof}
+Define $\widetilde f$ on $S$ and each tensor power by
+\begin{equation}\label{eq:tensor-extension}
+\widetilde f(s)=\varphi(s),\qquad
+\widetilde f(v_1\otimes_S\cdots\otimes_S v_i)=f(v_1)\cdots f(v_i)
+\quad(s\in S,\ i\geq1).
+\end{equation}
+The identity $f(vs)f(w)=f(v)\varphi(s)f(w)=f(v)f(sw)$ shows that replacing adjacent factors $vs\otimes w$ by $v\otimes sw$ does not change the value in \eqref{eq:tensor-extension}.
+The formulas therefore induce linear maps on the tensor powers, which extend to their direct sum.
+Multiplication is preserved by \eqref{eq:tensor-extension}, including the degree $0$ factors because $f(sv)=\varphi(s)f(v)$ and $f(vs)=f(v)\varphi(s)$.
+Also, $\widetilde f(1_S)=1_B$.
+Every algebra homomorphism making \eqref{eq:tensor-universal} commute must have the values in \eqref{eq:tensor-extension}, proving uniqueness.
+\end{proof}
+
+If $B$ is graded, $\varphi(S)\subset B_0$, and $f(V)\subset B_1$, then \eqref{eq:tensor-extension} gives $\widetilde f(V^{\otimes_S i})\subset B_i$ for every $i\geq0$.
+Thus $\widetilde f$ is a graded algebra homomorphism.
+\end{supplementary}
+
+
+\begin{corollary}\label{cor:tensor-presentation}
+If $A$ is generated in degree $1$ over $S=A_0$, multiplication gives a surjective graded algebra homomorphism
+\[
+\mu:T_S(A_1)\onto A,\qquad
+a_1\otimes_S\cdots\otimes_S a_i\longmapsto a_1\cdots a_i
+\quad(i\geq1),\qquad \mu(s)=s\quad(s\in S).
+\]
+Its degree $i$ component is $\mu_i$ from \eqref{eq:multiplication-maps}.
+\end{corollary}
+
+\begin{supplementary}
+\begin{proof}
+In Proposition~\ref{prop:tensor-universal}, take $V=A_1$, $B=A$, and the inclusions
+\[
+\varphi:S\hookrightarrow A,\quad s\longmapsto s,
+\qquad f:A_1\hookrightarrow A,\quad a\longmapsto a.
+\]
+Then \eqref{eq:tensor-extension} gives $\widetilde f=\mu$.
+The map $\mu$ preserves degrees, and each component $\mu_i$ is surjective by the assumption that $A$ is generated in degree $1$.
+\end{proof}
+\end{supplementary}
+
+\begin{definition}\label{def:relations}
+For the map $\mu$ in Corollary~\ref{cor:tensor-presentation}, the homogeneous two-sided ideal $I:=\Ker\mu$ is the \defn{ideal of relations}.
+\end{definition}
+
+Writing $V=A_1$, the components $\mu_0=\id_S$ and $\mu_1=\id_V$ give $I_0=I_1=0$.
+Since $\mu$ preserves degrees, its kernel is homogeneous, and
+\[
+T_S(V)/I\xrightarrow{\sim}A,\qquad z+I\longmapsto\mu(z)
+\]
+is a graded algebra isomorphism.
+The bimodule $V$ specifies the generators and their left and right $S$-actions; $I$ specifies the relations between their products.
+Homogeneity is essential for the quotient grading: the relation $x-x^2$ in Example~\ref{ex:nonhomogeneous-ideal} does not satisfy this condition.
+
+\subsection{Quadratic algebras}
+
+We now consider algebras whose ideal of relations is generated in degree $2$.
+
+\begin{definition}\label{def:quadratic}
+A graded algebra $A$ is \defn{quadratic} if there exist a finite-dimensional semisimple $\Bbbk$-algebra $S$, a finite-dimensional $S$-bimodule $V$, and an $S$-sub-bimodule $R\subset V\otimes_S V$ such that $A\cong T_S(V)/(R)$ as graded algebras, where $V$ is in degree $1$ and $(R)$ is the two-sided ideal of $T_S(V)$ generated by $R$.
+\end{definition}
+
+An isomorphism $A\cong T_S(V)/(R)$ as in Definition~\ref{def:quadratic} is called a \defn{quadratic presentation} of $A$.
+
+\begin{proposition}\label{prop:quadratic-basic}
+A quadratic algebra $A=T_S(V)/(R)$ has $A_0=S$, $A_1=V$, and $A_2=(V\otimes_S V)/R$, is locally finite, and is generated in degree $1$ over $S$.
+\end{proposition}
+
+\begin{proof}
+The ideal $(R)$ has no components in degrees $0$ and $1$.
+Its degree $2$ component is exactly $R$.
+Each $A_i$ is a quotient of the finite-dimensional space $V^{\otimes_S i}$, and multiplication maps $V^{\otimes_S i}$ onto $A_i$.
+\end{proof}
+
+Thus a quadratic presentation recovers $S\cong A_0$, $V\cong A_1$, and $R\cong\Ker(A_1\otimes_{A_0}A_1\to A_2)$.
+In particular, the kernel of the canonical map $T_{A_0}(A_1)\onto A$ is generated by its degree $2$ component.
+Quadraticity depends on the grading: for $n\geq2$, the grading $\deg e_{ij}=2(j-i)$ on $\Bbbk A_n$ is not quadratic, since it has no degree $1$ generators.
+
+\begin{example}\label{ex:tensor-An}
+Let $S=\bigoplus_{i=1}^n\Bbbk e_{ii}$ and $V=\bigoplus_{i=1}^{n-1}\Bbbk e_{i,i+1}$ inside $\Bbbk A_n$.
+By Lemma~\ref{lem:idempotent-tensors}, the basis tensors of positive length are
+\[
+e_{i,i+1}\otimes_S e_{i+1,i+2}\otimes_S\cdots\otimes_S e_{j-1,j}
+\longmapsto e_{ij}
+\quad(1\leq i<j\leq n).
+\]
+Thus multiplication gives $T_S(V)\cong\Bbbk A_n$, a quadratic algebra with $R=0$.
+\end{example}
+
+\begin{example}\label{ex:zero-composition}
+For $S,V,a,b$ from Example~\ref{ex:tensor-A3}, the quotient
+\[
+T_S(V)/(ab)\cong\Bbbk A_3/(e_{13})
+\]
+is quadratic with $R=\Bbbk(a\otimes b)$.
+Its basis is $e_1,e_2,e_3,a,b$, in degrees $0,0,0,1,1$, as in Example~\ref{ex:quadratic-matrix-quotient}.
+\end{example}
+
+\begin{example}\label{ex:two-vertex-relations}
+Let $S=\Bbbk^{\oplus 2}$ with coordinate idempotents $e_1,e_2$, and let $V=\Bbbk a\oplus\Bbbk b$ satisfy $e_1ae_2=a$ and $e_2be_1=b$, with all other idempotent actions zero.
+By Lemma~\ref{lem:idempotent-tensors}, the alternating words in $a,b$ form the basis of positive degree tensors in $T_S(V)$.
+The quadratic algebra $A=T_S(V)/(ab)$ has
+\[
+A=S\oplus\Bbbk a\oplus\Bbbk b\oplus\Bbbk ba,
+\qquad \dim_\Bbbk A_0=2,\quad \dim_\Bbbk A_1=2,\quad \dim_\Bbbk A_2=1.
+\]
+Every alternating word of length at least $3$ contains $ab$, so all higher components vanish.
+\end{example}
+
+\begin{example}\label{ex:cubic-quotient}
+Let $B=\Bbbk A_4$ and $A=B/(e_{14})$, with the grading of Example~\ref{ex:triangular-grading}.
+The ideal $I=(e_{14})=\Bbbk e_{14}$ has $I_2=0$ but $I_3\neq 0$.
+Since $e_{14}=e_{12}e_{23}e_{34}$, the algebra $A$ is generated in degree $1$ with a relation of degree $3$ and no relations of degree $2$.
+By Proposition~\ref{prop:quadratic-basic}, any quadratic presentation would have the same generators and zero quadratic relation space, hence would give $\Bbbk A_4$ itself. Thus $A$ is not quadratic.
+\end{example}
+
+\begin{example}
+The symmetric and exterior algebras of Example~\ref{ex:polynomial-exterior} are quadratic: the defining relations in \eqref{eq:polynomial-exterior} belong to $V\otimes_\Bbbk V$ and $W\otimes_\Bbbk W$, respectively.
+\end{example}
+
+\subsection{Hilbert series}
+
+Fix a finite-dimensional semisimple $\Bbbk$-algebra $S$, concentrated in degree $0$.
+We record dimensions relative to all simple right $S$-modules.
+We define module series first, then collect them in an array for a graded algebra.
+
+\begin{definition}\label{def:dimension-vector}
+Choose representatives $L_1,\ldots,L_r$ of the isomorphism classes of simple right $S$-modules.
+For a finite-dimensional right $S$-module $M$, write, with $m_j\in\Z_{\geq0}$,
+\[
+M\cong\bigoplus_{j=1}^r L_j^{\oplus m_j},
+\qquad \dimvec M:=(m_1,\ldots,m_r).
+\]
+The row vector $\dimvec M$ is the \defn{dimension vector} of $M$.
+For a finite-dimensional bimodule ${}_SU_S$, arrange the vectors $\dimvec(L_i\otimes_S U)$ as rows:
+\[
+\dimvec U=(u_{ij})_{1\leq i,j\leq r},
+\qquad (\dimvec U)_{ij}:=\bigl(\dimvec(L_i\otimes_S U)\bigr)_j.
+\]
+Thus $L_i\otimes_S U\cong\bigoplus_{j=1}^rL_j^{\oplus u_{ij}}$.
+\end{definition}
+
+The decompositions exist by Theorem~\ref{thm:artin-wedderburn}.
+Their multiplicities are unique: a non-zero homomorphism between simple modules is an isomorphism, since its kernel and image are submodules.
+Consequently
+\[
+m_j=\frac{\dim_\Bbbk\Hom_S(L_j,M)}{\dim_\Bbbk\End_S(L_j)},
+\]
+and the same formula applies to each $L_i\otimes_S U$.
+In particular, the dimension data do not depend on choices of decompositions.
+For the $S$-bimodule $S$, we have $\dimvec S=I_r$, the $r\times r$ identity array.
+
+\begin{example}\label{ex:dimension-vector-coordinate}
+If $S=\bigoplus_{i=1}^r\Bbbk e_i$ with coordinate idempotents, take $L_i=e_iS$.
+Then
+\[
+\dimvec M=(\dim_\Bbbk Me_j)_{j=1}^r,
+\qquad (\dimvec U)_{ij}=\dim_\Bbbk(e_iUe_j).
+\]
+Indeed, $L_i\otimes_S U\cong e_iU$ by multiplication, and the multiplicity of $e_jS$ in $e_iU$ is $\dim_\Bbbk(e_iUe_j)$.
+For $S=\Bbbk$, the dimension vector has one entry, the usual vector space dimension.
+\end{example}
+
+\begin{definition}\label{def:hilbert-series}
+Let $M=\bigoplus_{d\in\Z}M_d$ be a locally finite graded right $S$-module, with $M_d=0$ for all sufficiently negative $d$.
+Its \defn{Hilbert series} is
+\[
+H_M(t):=\sum_{d\in\Z}(\dimvec M_d)t^d.
+\]
+For a locally finite graded algebra $A$ with $A_0=S$, its \defn{Hilbert series} records the preceding module series row by row:
+\[
+H_A(t)_{ij}:=\bigl(H_{L_i\otimes_S A}(t)\bigr)_j
+\quad(1\leq i,j\leq r),
+\qquad
+H_A(t)=\sum_{d\geq0}(\dimvec A_d)t^d.
+\]
+Here each $L_i$ is placed in degree $0$, and $L_i\otimes_S A$ is regarded as a right $S$-module by restriction.
+In particular, $H_A(0)=I_r$.
+For $S=\bigoplus_{i=1}^r\Bbbk e_i$, this gives
+\[
+H_A(t)_{ij}=\sum_{d\geq0}\dim_\Bbbk(e_iA_de_j)t^d
+\quad(1\leq i,j\leq r).
+\]
+\end{definition}
+
+The entries are formal Laurent series with integer coefficients; for algebras they are formal power series.
+A finite-dimensional graded module or algebra gives a Laurent polynomial or polynomial, respectively.
+No numerical convergence is required: a coefficient is specified degree by degree.
+For an algebra, keeping both indices records where products can be formed.
+
+\begin{lemma}\label{lem:hilbert-operations}
+For locally finite graded right $S$-modules bounded below:
+\begin{enumerate}
+\item A graded isomorphism $M\cong N$ implies $H_M(t)=H_N(t)$.
+\item A short exact sequence $0\to L\to M\to N\to0$ gives $H_M(t)=H_L(t)+H_N(t)$.
+\item For every $a\in\Z$, $H_{M(a)}(t)=t^{-a}H_M(t)$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+A graded isomorphism preserves each degree and its simple-module multiplicities.
+A short exact sequence of right $S$-modules splits by semisimplicity, so multiplicities add.
+Finally, $M(a)_d=M_{d+a}$ gives
+\[
+H_{M(a)}(t)=\sum_d(\dimvec M_{d+a})t^d
+=t^{-a}\sum_j(\dimvec M_j)t^j.\qedhere
+\]
+\end{proof}
+
+\begin{definition}\label{def:total-tensor-grading}
+For graded right and left $S$-modules $M,N$, their tensor product has \defn{total grading}
+\[
+(M\otimes_S N)_d=\bigoplus_{p+q=d}M_p\otimes_S N_q.
+\]
+The same definition applies to bimodules, and to vector spaces by taking $S=\Bbbk$.
+\end{definition}
+
+The decomposition follows by distributing tensor products over direct sums, as in Lemma~\ref{lem:tensor-properties}(4).
+When $M,N$ are locally finite and bounded below, only finitely many pairs $(p,q)$ contribute in a fixed degree, so the tensor product is locally finite and bounded below.
+
+To multiply two arrays $C=(c_{ij})$ and $D=(d_{ij})$, or a row vector $m=(m_i)$ and an array $C$, use
+\[
+(CD)_{i\ell}=\sum_{j=1}^r c_{ij}d_{j\ell},
+\qquad (mC)_j=\sum_{i=1}^r m_i c_{ij}.
+\]
+Thus multiplication sums over the matching middle index, rather than multiplying individual entries independently.
+For series, use the same products on coefficients and collect terms with the same total power of $t$.
+
+\begin{lemma}\label{lem:dimension-tensor}\label{lem:hilbert-tensor}
+Let ${}_SU_S$, ${}_SW_S$ be finite-dimensional bimodules and $M$ a finite-dimensional right $S$-module. Then
+\[
+\dimvec(U\otimes_S W)=(\dimvec U)(\dimvec W),
+\qquad \dimvec(M\otimes_S U)=(\dimvec M)(\dimvec U).
+\]
+For a locally finite graded right $S$-module $M$ bounded below and a locally finite graded algebra $A$ with $A_0=S$, this gives
+\[
+H_{M\otimes_S A}(t)=H_M(t)H_A(t).
+\]
+\end{lemma}
+
+\begin{proof}
+Write $C=\dimvec U$ and $D=\dimvec W$.
+Associativity and distribution over direct sums give
+\[
+\begin{aligned}
+L_i\otimes_S(U\otimes_S W)
+&\cong (L_i\otimes_S U)\otimes_S W\\
+&\cong\bigoplus_j(L_j\otimes_S W)^{\oplus c_{ij}}
+\cong\bigoplus_\ell L_\ell^{\oplus\sum_j c_{ij}d_{j\ell}}.
+\end{aligned}
+\]
+This proves the first equality. Decomposing $M\cong\bigoplus_iL_i^{\oplus m_i}$ proves the second in the same way.
+Apply the second equality to each $M_p\otimes_S A_q$ and sum over $p+q=d$ to obtain the series identity.
+\end{proof}
+
+\begin{example}[Hilbert series of a tensor algebra]\label{ex:hilbert-tensor-algebra}
+Let ${}_SV_S$ be a finite-dimensional bimodule, placed in degree $1$, and put $C=\dimvec V$.
+Since $T_S(V)_d=V^{\otimes_S d}$ and $V^{\otimes_S0}=S$, Lemma~\ref{lem:dimension-tensor} gives
+\[
+\dimvec T_S(V)_d=C^d\quad(d\geq0),\qquad C^0=I_r.
+\]
+Consequently,
+\begin{equation}\label{eq:hilbert-tensor-algebra}
+\boxed{\displaystyle
+H_{T_S(V)}(t)=\sum_{d\geq0}t^dC^d
+=(I_r-tC)^{-1}=(I_r-t\,\dimvec V)^{-1}.}
+\end{equation}
+Indeed, multiplying the series on either side by $I_r-tC$ gives constant coefficient $I_r$; the coefficient of $t^d$ for $d\geq1$ is $C^d-C^d=0$.
+The inverse is therefore an identity of formal power series with the coefficient multiplication defined above.
+
+For $S=\Bbbk$ and $\dim_\Bbbk V=m$, the formula is $H_{T_\Bbbk(V)}(t)=1/(1-mt)$.
+More generally, for $S=\operatorname{Mat}_n(\Bbbk)$ and $V=S^{\oplus m}$ as an $S$-bimodule, there is one simple right $S$-module $L=\Bbbk^{1\times n}$.
+Since $L\otimes_S V\cong L^{\oplus m}$, we again have $C=(m)$ and $H_{T_S(V)}(t)=1/(1-mt)$.
+Here the coefficient records simple-module multiplicities, not $\dim_\Bbbk V=mn^2$.
+\end{example}
+
+\begin{example}[Upper triangular algebras and a quotient]\label{ex:hilbert-triangular}
+For $A=\Bbbk A_n$, order the coordinate idempotents as $e_{11},\ldots,e_{nn}$.
+Let $C$ have $C_{i,i+1}=1$ for $1\leq i<n$ and all other entries zero.
+The tensor presentation in Example~\ref{ex:tensor-An} and \eqref{eq:hilbert-tensor-algebra} give
+\[
+H_A(t)=I_n+tC+\cdots+t^{n-1}C^{n-1},
+\qquad H_A(t)_{ij}=\begin{cases}t^{j-i},&i\leq j,\\0,&i>j.\end{cases}
+\]
+For $n=3$, killing $e_{13}$ removes the degree $2$ contribution in entry $(1,3)$:
+\[
+H_{\Bbbk A_3}(t)=\begin{pmatrix}1&t&t^2\\0&1&t\\0&0&1\end{pmatrix},
+\qquad
+H_{\Bbbk A_3/(e_{13})}(t)=\begin{pmatrix}1&t&0\\0&1&t\\0&0&1\end{pmatrix}.
+\]
+The quotient removes $\Bbbk e_{13}$ from degree $2$, and hence removes $t^2$ from entry $(1,3)$.
+\end{example}
+
+\begin{example}[Two alternating generators]\label{ex:hilbert-alternating}
+For $S,V,a,b$ in Example~\ref{ex:two-vertex-relations}, use the order $e_1,e_2$. Then
+\[
+C=\dimvec V=\begin{pmatrix}0&1\\1&0\end{pmatrix},
+\qquad C^2=I_2,
+\qquad
+H_{T_S(V)}(t)=\frac{1}{1-t^2}\begin{pmatrix}1&t\\t&1\end{pmatrix}.
+\]
+In $A=T_S(V)/(ab)$, the degree $2$ basis vector $ba$ belongs to $e_2Ae_2$, so
+\[
+H_A(t)=\begin{pmatrix}1&t\\t&1+t^2\end{pmatrix}.
+\]
+\end{example}
+
+\begin{example}\label{ex:hilbert-polynomial-exterior}
+For the algebras in Example~\ref{ex:polynomial-exterior}, $S=\Bbbk$ and there is one dimension entry.
+Each polynomial generator may occur any number of times, whereas each exterior generator occurs at most once. Thus
+\[
+H_{\SymAlg(V)}(t)=\frac{1}{(1-t)^n},\qquad
+H_{\bigwedge W}(t)=(1+t)^m
+\quad\text{where }n=\dim_\Bbbk V,\ m=\dim_\Bbbk W.
+\]
+\end{example}
+
+\begin{lemma}\label{lem:hilbert-field-tensor}
+For locally finite graded vector spaces $U,W$ bounded below,
+\[
+H_{U\otimes_\Bbbk W}(t)=H_U(t)H_W(t).
+\]
+Let $A,B$ be locally finite graded algebras with $A_0=\Bbbk^{\oplus r}$ and $B_0=\Bbbk^{\oplus s}$.
+Write $e_1,\ldots,e_r$ and $f_1,\ldots,f_s$ for the coordinate idempotents.
+Give $A\otimes_\Bbbk B$ the total grading and multiplication
+$(a\otimes b)(a'\otimes b')=aa'\otimes bb'$.
+Then
+\[
+H_{A\otimes_\Bbbk B}(t)_{(i,p),(j,q)}
+=H_A(t)_{ij}H_B(t)_{pq}
+\quad(1\leq i,j\leq r,\ 1\leq p,q\leq s).
+\]
+\end{lemma}
+
+\begin{proof}
+For vector spaces, take dimensions in each summand of the total grading.
+For algebras,
+\[
+(e_i\otimes f_p)(A_a\otimes_\Bbbk B_b)(e_j\otimes f_q)
+=(e_iA_ae_j)\otimes_\Bbbk(f_pB_bf_q).
+\]
+Take vector space dimensions and sum over $a+b=d$ to obtain the coefficient of $t^d$.
+\end{proof}
+
+\begin{advanced}[suppressfirstparskip=true,innertopmargin=0pt]
+\subsection{The degree 2 relations of a quotient}
+
+Let $S$ be finite-dimensional semisimple, $V$ a finite-dimensional $S$-bimodule, and $I\subset T_S(V)$ a homogeneous two-sided ideal with $I_0=I_1=0$.
+Set $A=T_S(V)/I$.
+In degree $2$,
+\[
+A_2\cong(V\otimes_S V)/I_2,
+\quad\text{where}\quad
+I_2=I\cap(V\otimes_S V).
+\]
+
+\begin{definition}\label{def:quadratic-part}
+The \defn{quadratic part} of $A$ is $qA:=T_S(V)/(I_2)$.
+\end{definition}
+
+Since $(I_2)\subset I$, there is a surjective graded algebra homomorphism
+\[
+\pi_A:qA\longrightarrow A,\qquad z+(I_2)\longmapsto z+I,
+\qquad \Ker\pi_A=I/(I_2).
+\]
+Consequently,
+\[
+\pi_A\text{ is an isomorphism}
+\quad\Longleftrightarrow\quad I=(I_2)
+\quad\Longleftrightarrow\quad A\text{ is quadratic}.
+\]
+For the last equivalence, $(I_2)$ gives a quadratic presentation, while Proposition~\ref{prop:quadratic-basic} identifies the generators and degree $2$ relations of any quadratic presentation with $A_1$ and $I_2$.
+
+\begin{example}
+For $A=\Bbbk A_4/(e_{14})$ from Example~\ref{ex:cubic-quotient}, we have $I_2=0$, so
+\[
+qA=\Bbbk A_4,\qquad
+\pi_A:\Bbbk A_4\onto\Bbbk A_4/(e_{14}),\qquad
+\Ker\pi_A=\Bbbk e_{14}.
+\]
+Thus $qA$ does not impose the cubic relation $e_{12}e_{23}e_{34}=0$.
+\end{example}
+\end{advanced}
+
+\subsection{Orthogonal complements and quadratic duality}
+
+Let $S$ be finite-dimensional semisimple.
+
+\begin{definition}\label{def:orthogonals}
+For an $S$-sub-bimodule $U$ of a finite-dimensional $S$-bimodule $M$, its \defn{right orthogonal complement} and \defn{left orthogonal complement} are
+\[
+\begin{aligned}
+U^\perp&:=\{f\in M^*\mid f(u)=0\text{ for all }u\in U\},\\
+{}^\perp U&:=\{g\in{}^*M\mid g(u)=0\text{ for all }u\in U\}.
+\end{aligned}
+\]
+\end{definition}
+
+Both orthogonal complements are $S$-sub-bimodules.
+Indeed, for $s,t\in S$ and $u\in U$, \eqref{eq:tensor-dual-actions} gives
+\[
+(sft)(u)=sf(tu)=0\quad(f\in U^\perp),\qquad
+(sgt)(u)=g(us)t=0\quad(g\in{}^\perp U),
+\]
+since $tu,us\in U$.
+The orthogonal complements are defined without choosing a symmetrising form.
+
+\begin{advanced}
+If $S$ is equipped with a symmetrising form $\tau:S\to\Bbbk$, the comparison maps $\alpha_M,\beta_M$ of \eqref{eq:dual-comparison} satisfy
+\begin{equation}\label{eq:orthogonal-comparison}
+\alpha_M(U^\perp)=\beta_M({}^\perp U)
+=\{\lambda\in D(M)\mid\lambda(u)=0\text{ for all }u\in U\}.
+\end{equation}
+The forward inclusions follow by composing with $\tau$.
+Conversely, $\alpha_M(f)(U)=0$ gives
+\[
+\tau(f(u)s)=\tau(f(us))=0
+\quad\text{for all }s\in S,\ u\in U.
+\]
+Non-degeneracy of $\tau$ forces $f(u)=0$ for every $u\in U$.
+For the left dual, $\tau(sg(u))=\tau(g(su))=0$ gives $g(u)=0$ instead.
+Bijectivity of $\alpha_M,\beta_M$ in Theorem~\ref{prop:dual-comparison} proves \eqref{eq:orthogonal-comparison}.
+\end{advanced}
+
+\begin{example}\label{ex:symmetric-orthogonals}
+We compute the orthogonal complements of the symmetric and exterior relation spaces separately.
+Take $V=\Bbbk x_1\oplus\Bbbk x_2$ and $W=\Bbbk y_1\oplus\Bbbk y_2$ in Example~\ref{ex:polynomial-exterior}.
+The relation spaces in $V\otimes_\Bbbk V$ and $W\otimes_\Bbbk W$, respectively, are
+\[
+\begin{aligned}
+R_{\SymAlg(V)}&=\Bbbk(x_1\otimes x_2-x_2\otimes x_1),\\
+R_{\bigwedge W}&=\Bbbk(y_1\otimes y_1)\oplus\Bbbk(y_2\otimes y_2)\oplus\Bbbk(y_1\otimes y_2+y_2\otimes y_1).
+\end{aligned}
+\]
+Let $x_1^*,x_2^*$ and $y_1^*,y_2^*$ be the dual bases of $D(V)$ and $D(W)$, respectively.
+Under the tensor-dual identification \eqref{eq:tensor-evaluations},
+\[
+\begin{aligned}
+R_{\SymAlg(V)}^\perp&=\operatorname{span}_\Bbbk\{x_1^*\otimes x_1^*,\,x_2^*\otimes x_2^*,\,x_1^*\otimes x_2^*+x_2^*\otimes x_1^*\},\\
+R_{\bigwedge W}^\perp&=\Bbbk(y_1^*\otimes y_2^*-y_2^*\otimes y_1^*).
+\end{aligned}
+\]
+The first space consists of the exterior relations on $D(V)$; the second consists of the symmetric relations on $D(W)$.
+\end{example}
+
+\Needspace{12\baselineskip}
+\subsection{Exercises}
+
+\begin{exercise}[Interaction of tensor product with $S$-dual]\label{ex:tensor-duality-proof}
+Let $S$ be finite-dimensional semisimple, and consider finite-dimensional bimodules ${}_SV_S$, ${}_SW_S$.
+Prove the right $S$-dual isomorphism \eqref{eq:tensor-duals}, the semisimple case of Proposition~\ref{prop:tensor-duals}.
+\begin{enumerate}
+\item Check that the formula for $\theta_r$ in \eqref{eq:tensor-evaluations} is bilinear in each pair of variables, is unchanged by
+\[
+vs\otimes w\longleftrightarrow v\otimes sw,
+\qquad gs\otimes f\longleftrightarrow g\otimes sf
+\quad(s\in S),
+\]
+and gives a right $S$-linear map $V\otimes_S W\to S$ for each $g\otimes f$.
+Verify $\theta_r(sg\otimes ft)=s\theta_r(g\otimes f)t$ for $s,t\in S$.
+\item Prove that $\theta_r$ is bijective.
+\item For bimodule maps $p:V\to V'$ and $q:W\to W'$, prove
+\[
+(p\otimes q)^*\circ\theta_r^{V',W'}
+=\theta_r^{V,W}\circ(q^*\otimes p^*).
+\]
+Here the superscripts specify the pair of bimodules, and $p^*,q^*$, and $(p\otimes q)^*$ are given by precomposition with $p,q$, and $p\otimes q$, respectively.
+\end{enumerate}
+\emph{Hint for (2).} First take $V=S$, then use Corollary~\ref{cor:semisimple-summands}.
+
+\emph{Remark.} The analogous assertions hold for left $S$-duals, with left and right interchanged.
+\end{exercise}
+
+\begin{hidden}
+\begin{proof}
+\emph{Well-definedness.}
+For the right duals, right $S$-linearity gives
+\[
+g(f(vs)w)=g(f(v)sw),\qquad
+(gs)(f(v)w)=g(sf(v)w)=g((sf)(v)w).
+\]
+The first identity respects the relation in $V\otimes_S W$, and the second respects the relation in $W^*\otimes_S V^*$.
+The resulting functional is right $S$-linear because $g$ is.
+For the left duals, the corresponding identities are
+\[
+f(vs\,g(w))=f(vg(sw)),\qquad
+f(v(gs)(w))=f(vg(w)s)=(sf)(vg(w)).
+\]
+Left $S$-linearity of $f$ makes the resulting functional left $S$-linear.
+The outer actions in \eqref{eq:tensor-dual-actions} give
+\[
+\begin{aligned}
+\theta_r(sg\otimes ft)(v\otimes w)&=s\,g(f(tv)w),\\
+\theta_\ell(sg\otimes ft)(v\otimes w)&=f(vg(ws))t,
+\end{aligned}
+\]
+which are the required bimodule identities.
+
+\emph{Bijectivity.}
+To check $\theta_r$, forget the left action on $V$.
+For $V=S$, identify $S^*\cong S$ by $f\mapsto f(1)$; then $\theta_r$ is $W^*\otimes_S S\to W^*$, $g\otimes s\mapsto gs$, an isomorphism by Lemma~\ref{lem:tensor-properties}(3).
+The formula commutes with maps of right $S$-modules in $V$, so it is an isomorphism for finite direct sums and direct summands of $S$.
+Corollary~\ref{cor:semisimple-summands} applies to $V$.
+For $\theta_\ell$, use $W=S$ as a left module, where the map is $S\otimes_S{}^*V\to{}^*V$, $s\otimes f\mapsto sf$, and apply the same argument to $W$.
+
+\emph{Naturality.}
+For bimodule maps $p:V\to V'$ and $q:W\to W'$, the square
+\[
+\xymatrix@C=48pt@R=22pt{
+(W')^*\otimes_S(V')^* \ar[r]^{\theta_r} \ar[d]_{q^*\otimes p^*}
+& (V'\otimes_S W')^* \ar[d]^{(p\otimes q)^*}\\
+W^*\otimes_S V^* \ar[r]_{\theta_r}
+& (V\otimes_S W)^*
+}
+\]
+commutes: both routes send $g\otimes f$, evaluated at $v\otimes w$, to $g(f(p(v))q(w))$.
+For $\theta_\ell$, the corresponding two routes give $f(p(v)g(q(w)))$.
+\end{proof}
+
+\end{hidden}
+
+\begin{exercise}
+Let $A=\Bbbk A_4/(e_{13},e_{24})$ with the grading of Example~\ref{ex:triangular-grading}.
+Find a homogeneous basis, compute $H_A(t)$, and write $A=T_S(V)/(R)$ with explicit $S,V,R$.
+\emph{Hint.} Use Lemma~\ref{lem:idempotent-tensors}; the ideal contains $e_{14}$ as well as $e_{13},e_{24}$.
+\end{exercise}
+
+\begin{exercise}
+For the bimodule $V$ in Example~\ref{ex:two-vertex-relations}, find a basis of each $T_S(V)_d$ and show that
+\[
+H_{T_S(V)}(t)=\frac{1}{1-t^2}\begin{pmatrix}1&t\\t&1\end{pmatrix}.
+\]
+Compare with the quotient $T_S(V)/(ab)$.
+\emph{Hint.} Count alternating words separately in each degree, including degree $0$.
+\end{exercise}
+
+\begin{exercise}
+For the algebras in Example~\ref{ex:polynomial-exterior}, prove
+\[
+\dim_\Bbbk\SymAlg(V)_2=\frac{n(n+1)}2,\qquad
+\dim_\Bbbk(\bigwedge W)_2=\frac{m(m-1)}2
+\quad\text{where }n=\dim_\Bbbk V,\ m=\dim_\Bbbk W.
+\]
+\emph{Hint.} Count the ordered pairs allowed in the two bases of Example~\ref{ex:polynomial-exterior}.
+\end{exercise}
+
+\pagebreak
+

@@ -1,0 +1,297 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{amsmath,amsxtra,amsthm,amssymb,mathrsfs}
+\usepackage{hyperref}
+\usepackage[margin=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[normalem]{ulem}
+\usepackage[shortlabels]{enumitem}
+%\usepackage[small,nohug,noPostScript]{diagrams}
+%\usepackage{stmaryrd}
+\usepackage[all]{xy}
+\usepackage{float}
+\usepackage{tocloft}
+\usepackage{tikz}
+\usepackage{mdframed}
+\usepackage{comment}
+%\usetikzlibrary{positioning}
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{patterns}
+\usetikzlibrary{decorations.shapes}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{decorations.pathmorphing}
+\numberwithin{equation}{section}
+
+\setlength{\parindent}{0mm}
+\setlength{\parskip}{11pt}
+
+%set default enumerate environment
+\setlist[enumerate]{label={\rm(\arabic*)},itemsep=3pt,topsep=-6pt}
+\setlist[itemize]{itemsep=3pt,topsep=-6pt}
+
+\newenvironment{claim}[1][]
+{\begin{list}{}{\setlength{\itemsep}{0pt}
+	\setlength{\listparindent}{0pt}
+	\setlength{\labelsep}{0.2cm}
+	\setlength{\topsep}{2pt}
+	\setlength{\leftmargin}{0.5cm}}
+
+	\item[] \textbf{Claim:$\mbox{}\quad$}#1
+	\item[] \textbf{Proof of Claim: }\\
+}
+{\end{list}}
+
+%%% set up proof environment
+\makeatletter
+\renewenvironment{proof}[1][\proofname]{\par
+    \pushQED{\qed}%
+    \normalfont \topsep0\p@\@plus6\p@ \labelsep1em\relax
+    \trivlist
+    \item[\hskip\labelsep\indent
+        \bfseries #1]\ignorespaces
+    \mbox{}
+}{
+    \popQED\endtrivlist\@endpefalse
+}
+\makeatother
+
+%%% Remove section numbering but retain section counting
+%\makeatletter
+%\def\@seccntformat#1{%
+%  \expandafter\ifx\csname c@#1\endcsname\c@section\else
+%  \csname the#1\endcsname\quad
+%  \fi}
+%\makeatother
+
+%add dots to sections in TOC
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+%show section numbers in TOC
+\renewcommand{\cftsecpresnum}{}
+\renewcommand{\cftsecaftersnum}{}
+
+%abovespace,belowspace,bodyfont,indent,headfont,headpunct(e.g.\newline),headspace,custom-head-spec
+\newtheoremstyle{all}{10pt}{0pt}{\itshape}{0pt}
+{\bfseries}{.}{5pt plus 1pt minus 1pt}{\thmname{#1}\thmnumber{ #2}\thmnote{ (#3)}}
+\theoremstyle{all}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{example}[theorem]{Example}
+\newtheorem*{example*}{Example}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{exercise}[theorem]{Exercise}
+\newtheorem*{exercise*}{Exercise}
+\newtheorem{assumption}[theorem]{Assumption}
+\newtheorem*{convention}{Convention}
+\newtheorem*{notation}{Notation}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem*{remark*}{Remark}
+
+
+\newcommand{\comm}[1]{{\color[rgb]{0.1,0.9,0.1}#1}}
+\newcommand{\old}[1]{{\color{red}#1}}
+\newcommand{\new}[1]{{\color{blue}#1}}
+\definecolor{darkblue}{rgb}{0,0,0.7}
+\newcommand{\defn}[1]{\textsl{\color{darkblue} #1}}
+
+\definecolor{supplementarygreen}{rgb}{0,0.35,0.20}
+\definecolor{supplementarybackground}{HTML}{E8F5E9}
+\definecolor{advancedbackground}{HTML}{EDE8D0}
+\definecolor{advancedred}{HTML}{B22222}
+\newmdenv[
+  leftline=true,
+  rightline=false,
+  topline=false,
+  bottomline=false,
+  linecolor=advancedred,
+  linewidth=1.5pt,
+  backgroundcolor=advancedbackground,
+  suppressfirstparskip=false,
+  leftmargin=1em,
+  rightmargin=0pt,
+  innerleftmargin=0.8em,
+  innerrightmargin=0.8em,
+  innertopmargin=10pt,
+  innerbottommargin=10pt,
+  splittopskip=\dimexpr\topskip+10pt\relax,
+  splitbottomskip=10pt,
+  skipabove=8pt,
+  skipbelow=8pt
+]{advanced}
+\newmdenv[
+  leftline=true,
+  rightline=false,
+  topline=false,
+  bottomline=false,
+  linecolor=supplementarygreen,
+  linewidth=1.5pt,
+  backgroundcolor=supplementarybackground,
+  suppressfirstparskip=false,
+  leftmargin=1em,
+  rightmargin=0pt,
+  innerleftmargin=0.8em,
+  innerrightmargin=0.8em,
+  innertopmargin=10pt,
+  innerbottommargin=10pt,
+  splittopskip=\dimexpr\topskip+10pt\relax,
+  splitbottomskip=10pt,
+  skipabove=8pt,
+  skipbelow=8pt
+]{supplementary}
+
+\newif\ifshowhidden
+\showhiddenfalse % Change to \showhiddentrue to include hidden material.
+% Put \begin{hidden} and \end{hidden} on separate, unindented lines.
+\ifshowhidden
+  \includecomment{hidden}
+\else
+  \excludecomment{hidden}
+\fi
+
+\DeclareMathOperator{\isom}{\cong}
+\DeclareMathOperator{\ifonlyif}{\Leftrightarrow}
+\DeclareMathOperator{\imply}{\Rightarrow}
+\DeclareMathOperator{\onto}{\twoheadrightarrow}
+\DeclareMathOperator{\into}{\hookrightarrow}
+\newcommand{\ses}[3]{0\rightarrow #1 \rightarrow #2 \rightarrow #3 \rightarrow 0}
+
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\CB}{\mathcal{B}}
+\newcommand{\CC}{\mathcal{C}}
+\newcommand{\CD}{\mathcal{D}}
+\newcommand{\rmC}{\mathrm{C}}
+\newcommand{\calX}{\mathcal{X}}
+
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\soc}{\operatorname{soc}\nolimits}
+\newcommand{\rad}{\operatorname{rad}\nolimits}
+\renewcommand{\top}{\operatorname{top}\nolimits}
+\newcommand{\Ext}{\operatorname{Ext}\nolimits}
+\newcommand{\Tor}{\operatorname{Tor}\nolimits}
+\newcommand{\Hom}{\operatorname{Hom}\nolimits}
+\newcommand{\End}{\operatorname{End}\nolimits}
+\newcommand{\Aut}{\operatorname{Aut}\nolimits}
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\en}{\mathrm{en}}
+\newcommand{\grstar}[1][]{(*#1)}
+\renewcommand{\Im}{\operatorname{Im}\nolimits}
+\newcommand{\Ker}{\operatorname{Ker}\nolimits}
+\newcommand{\Cok}{\operatorname{Cok}\nolimits}
+
+\DeclareMathOperator{\moduleCategory}{\mathrm{mod}} \renewcommand{\mod}{\moduleCategory}
+\DeclareMathOperator{\Mod}{\mathrm{Mod}}
+\DeclareMathOperator{\proj}{\mathrm{proj}}
+\DeclareMathOperator{\inj}{\mathrm{inj}}
+\DeclareMathOperator{\ind}{\mathrm{ind}}
+\DeclareMathOperator{\Grmod}{\mathrm{GrMod}}
+\DeclareMathOperator{\grmod}{\mathrm{grmod}}
+
+\DeclareMathOperator{\Char}{char}
+\newcommand{\triv}{\operatorname{triv}\nolimits}
+\newcommand{\Mat}{\operatorname{Mat}\nolimits}
+\newcommand{\GL}{\operatorname{GL}\nolimits}
+\DeclareMathOperator{\Sn}{\mathfrak{S}}
+\newcommand{\Res}{\operatorname{Res}\nolimits}
+\newcommand{\Ind}{\operatorname{Ind}\nolimits}
+\newcommand{\Symm}{\operatorname{Sym}\nolimits}
+\newcommand{\SymAlg}{\mathsf{S}}
+\newcommand{\Stab}{\operatorname{Stab}\nolimits}
+\newcommand{\Tr}{\operatorname{Tr}\nolimits}
+
+\newcommand{\Ann}{\operatorname{Ann}\nolimits}
+\newcommand{\pdim}{\operatorname{pdim}}
+\newcommand{\idim}{\operatorname{idim}}
+\newcommand{\gldim}{\operatorname{gldim}\nolimits}
+\newcommand{\Rej}{\operatorname{Rej}\nolimits}
+\newcommand{\std}{\Delta}
+\newcommand{\costd}{\nabla}
+\newcommand{\filt}{\mathcal{F}}
+\newcommand{\add}{\operatorname{add}}
+\newcommand{\dimvec}{\mathbf{dim}}
+\newcommand{\nunlhd}{\ntrianglelefteq}
+\newcommand{\nlhd}{\ntriangleleft}
+\newcommand{\nunrhd}{\ntrianglerighteq}
+\newcommand{\nrhd}{\ntriangleright}
+\newcommand{\LL}{\mathrm{LL}}
+\newcommand{\Ab}{\operatorname{\mathcal{A}b}}
+\newcommand{\bbD}{\mathbb{D}}
+
+
+\begin{document}
+\begin{center}
+\textsc{{\LARGE Topics in Mathematics Science VII}\\
+Spring 2026}\\
+\textsc{\Large Introduction to Koszul Duality}
+
+\textsc{Aaron Chan}
+\end{center}
+
+Last update: 6 October 2026
+
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+\section*{Convention}
+
+Throughout the course, $\Bbbk$ is a field.
+All rings are unital and associative.
+All modules are right modules unless otherwise specified.
+When we discuss dimensions, we mean dimensions as $\Bbbk$-vector spaces.
+
+There are a lot of contents not covered in lecture:
+\begin{supplementary}
+This is supplementary material; often for `unnecessarily long pedantic check of definitions' or content of similar nature -- things that are only there for rigour
+\end{supplementary}
+\begin{advanced}
+This is advanced material; things that I personally would like to add, from personal experience in the theory, but definitely not necessary for lecture purpose.
+\end{advanced}
+Neither of these are rigourously checked since they are mostly produced by AI, so the reader should read these contents with extra cares themselves.  All other contents are drafted by AI and QA'ed (heavily edited) by myself.
+
+
+\input{Lecture_Koszul_S1.tex}
+\input{Lecture_Koszul_S2.tex}
+\input{Lecture_Koszul_S3.tex}
+\input{Lecture_Koszul_S4.tex}
+\input{Lecture_Koszul_S5.tex}
+% TODO (Deferred global request): Insert a linked table of notation, with a
+% page break before it, before this bibliography. This lies outside the present
+% Lecture 1-only proposal; use first-definition labels when it is authorised.
+\clearpage
+\begin{thebibliography}{BGS96}
+\bibitem[Bez23]{Bez23}
+R.~Bezrukavnikov,
+\emph{Noncommutative Algebra}, MIT OpenCourseWare 18.706 (2023),
+\href{https://ocw.mit.edu/courses/18-706-noncommutative-algebra-spring-2023/resources/mit18_706_s23_lec02_pdf/}{Lecture~2: Semisimple Modules, Socles, Artinian Rings, Wedderburn's Theorem}.
+
+\bibitem[BGS96]{BGS96}
+A.~Beilinson, V.~Ginzburg, and W.~Soergel,
+\emph{Koszul duality patterns in representation theory},
+J.~Amer.~Math.~Soc.~9 (1996), 473--527.
+
+\bibitem[DK94]{DK94}
+Yu.~A.~Drozd and V.~V.~Kirichenko,
+\emph{Finite Dimensional Algebras},
+Springer-Verlag, Berlin, 1994,
+\href{https://doi.org/10.1007/978-3-642-76244-4}{doi:10.1007/978-3-642-76244-4}.
+
+\bibitem[DNN17]{DNN17}
+S.~D\u{a}sc\u{a}lescu, C.~N\u{a}st\u{a}sescu, and L.~N\u{a}st\u{a}sescu,
+\emph{Graded semisimple algebras are symmetric},
+J.~Algebra~491 (2017), 207--218,
+\href{https://arxiv.org/abs/1504.04868}{arXiv:1504.04868}.
+
+\bibitem[GI20]{GI20}
+J.~Grant and O.~Iyama,
+\emph{Higher preprojective algebras, Koszul algebras, and superpotentials},
+Compos.~Math.~156 (2020), 2588--2627.
+\end{thebibliography}
+
+\end{document}

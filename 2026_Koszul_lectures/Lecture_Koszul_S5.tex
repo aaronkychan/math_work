@@ -1,0 +1,129 @@
+% !TEX root = Lecture_Koszul.tex
+\clearpage
+\section{Koszul complex and Koszul algebras}\label{sec:koszul-complex}
+
+\subsection{The Koszul complex of a polynomial algebra}
+
+Let $V$ be an $n$-dimensional $\Bbbk$-vector space, choose a basis $x_1,\ldots,x_n$, and let $A=\SymAlg(V)=\Bbbk[x_1,\ldots,x_n]$, with each $x_j$ in degree $1$.
+Let $\pi:A\to\Bbbk$ be projection onto degree $0$, so $\Bbbk=A/A_+$.
+For $0\leq i\leq n$, put
+\[
+K_i:=\bigwedge^i V\otimes_\Bbbk A(-i),
+\qquad K_0=A.
+\]
+The right $A$-action is on the second factor.
+The factor $\bigwedge^iV$ is placed in grading degree $0$, so the generators of $K_i$ have grading degree $i$.
+
+\begin{definition}\label{def:koszul-complex}
+For $1\leq i\leq n$, define the \defn{Koszul differential}
+\begin{equation}\label{eq:koszul-differential}
+\begin{aligned}
+d_i:K_i&\longrightarrow K_{i-1},\\
+(v_1\wedge\cdots\wedge v_i)\otimes a
+&\longmapsto
+\sum_{r=1}^i(-1)^{r-1}
+(v_1\wedge\cdots\wedge\widehat{v_r}\wedge\cdots\wedge v_i)
+\otimes v_ra .
+\end{aligned}
+\end{equation}
+The formula is multilinear and alternating in $v_1,\ldots,v_i$, so it defines a map on $\bigwedge^iV$.
+The augmented chain complex $K_\bullet\to\Bbbk$ consists of these maps and $\pi:K_0=A\to\Bbbk$.
+\end{definition}
+
+\begin{proposition}\label{prop:koszul-complex-resolution}
+The augmented complex
+\[
+0\longrightarrow K_n\xrightarrow{d_n}\cdots\xrightarrow{d_2}K_1
+\xrightarrow{d_1}K_0\xrightarrow{\pi}\Bbbk\longrightarrow0
+\]
+is an exact minimal graded free resolution of $\Bbbk$ over $A$.
+\end{proposition}
+
+\begin{proof}
+Each $d_i$ preserves degree and is right $A$-linear.
+For $i\geq2$, compute $d_{i-1}d_i$ on a basis wedge.
+Every term is indexed by two distinct positions $r<s$ deleted from that wedge.
+Deleting position $r$ and then $s$ gives coefficient $(-1)^{r+s-3}x_{j_s}x_{j_r}$; deleting $s$ and then $r$ gives coefficient $(-1)^{r+s-2}x_{j_r}x_{j_s}$.
+Since $x_{j_s}x_{j_r}=x_{j_r}x_{j_s}$, these two terms sum to zero. Hence $d_{i-1}d_i=0$; also $\pi d_1=0$ because every term of $d_1$ is divisible by a variable.
+
+To prove exactness, give $A$ and $\bigwedge V$ the multigrading with $\deg x_j$ equal to the $j$th standard basis vector.
+For $\alpha\in\mathbb Z_{\geq0}^n$, let $\operatorname{supp}(\alpha)=\{j\mid\alpha_j>0\}$.
+The degree $\alpha$ part of $K_i$ has basis
+\[
+b_J:=(x_{j_1}\wedge\cdots\wedge x_{j_i})\otimes x^{\alpha-\mathbf1_J},
+\qquad
+J=\{j_1<\cdots<j_i\}\subseteq\operatorname{supp}(\alpha),
+\]
+where $\mathbf1_J$ has entry $1$ at indices in $J$ and $0$ elsewhere.
+The differential is $d_i(b_J)=\sum_{r=1}^i(-1)^{r-1}b_{J\setminus\{j_r\}}$.
+
+If $\alpha\neq0$, let $q$ be the least index in $\operatorname{supp}(\alpha)$.
+For each $i\geq0$, define $h_{\alpha,i}:K_{i,\alpha}\to K_{i+1,\alpha}$ on basis vectors by
+\[
+h_{\alpha,i}(b_J)=
+\begin{cases}
+b_{\{q\}\cup J},&q\notin J,\\
+0,&q\in J,
+\end{cases}
+\]
+inserting $q$ first in the ordered wedge.
+For $q\notin J$ and $i\geq1$, direct substitution gives
+\[
+\begin{aligned}
+d_{i+1}h_{\alpha,i}(b_J)
+&=b_J-\sum_{r=1}^i(-1)^{r-1}b_{\{q\}\cup(J\setminus\{j_r\})},\\
+h_{\alpha,i-1}d_i(b_J)
+&=\sum_{r=1}^i(-1)^{r-1}b_{\{q\}\cup(J\setminus\{j_r\})}.
+\end{aligned}
+\]
+For $i=0$, $J=\varnothing$ and $d_1h_{\alpha,0}(b_\varnothing)=b_\varnothing$.
+For $q\in J$, the term of $d_i(b_J)$ deleting $q$ is the only term on which $h_{\alpha,i-1}$ is nonzero, and it gives $h_{\alpha,i-1}d_i(b_J)=b_J$ while $d_{i+1}h_{\alpha,i}(b_J)=0$.
+Thus $d_{i+1}h_{\alpha,i}+h_{\alpha,i-1}d_i=\id_{K_{i,\alpha}}$ for every $i\geq1$ in positive multidegree; the case $i=0$ was checked separately.
+All positive multidegrees are therefore exact.
+In multidegree $0$, only $K_0\cong\Bbbk$ is nonzero and $\pi$ is the identity onto $\Bbbk$.
+This proves exactness of the augmented complex.
+
+Finally, each $K_i$ is a finite direct sum of copies of $A(-i)$, and \eqref{eq:koszul-differential} has image in $K_{i-1}A_+$.
+Exactness gives $\Ker d_i=\Im d_{i+1}\subseteq K_iA_+$ for $i<n$, and $\Ker d_n=0$.
+Also, $\Ker\pi=AA_+$.
+Thus each map from $K_i$ onto the preceding kernel has kernel contained in $K_iA_+$, so it is a projective cover by Definition~\ref{def:graded-projective-cover}.
+The resolution is therefore minimal.
+\end{proof}
+
+\subsection{Koszul algebras}
+
+\begin{definition}\label{def:linear-resolution}
+A minimal graded projective resolution $P_\bullet\to M$ is \defn{linear} if $P_i/P_iA_+$ is concentrated in degree $i$ for every $i\geq0$.
+This is equivalent to $P_i$ being generated in degree $i$: generation in degree $i$ implies the stated concentration because $A_+$ raises degree.
+Conversely, if the top is concentrated in degree $i$, boundedness below and Lemma~\ref{lem:graded-nakayama} show that $P_i$ has no components below degree $i$; the quotient $P_i/(P_i)_iA$ then has zero graded top, so Lemma~\ref{lem:graded-nakayama} makes that quotient zero.
+\end{definition}
+
+\begin{definition}\label{def:koszul-algebra}
+Let $A=T_S(V)/(R)$ be a quadratic algebra with $S=A_0$ finite-dimensional semisimple.
+The algebra $A$ is \defn{Koszul} if the degree zero quotient module $S=A/A_+$ has a linear minimal graded projective resolution as a right $A$-module.
+\end{definition}
+
+The generators in homological degree $i$ must then all have grading degree $i$.
+Since $S$ can have several simple modules, the definition requires a linear resolution of their direct sum, not just of one chosen simple module.
+For a minimal resolution, Definition~\ref{def:linear-resolution} is equivalently the vanishing $\beta_{i,d,j}(S)=0$ whenever $d\neq i$.
+
+\begin{proposition}\label{prop:polynomial-koszul}
+For every finite-dimensional vector space $V$, the symmetric algebra $\SymAlg(V)$ is Koszul.
+\end{proposition}
+
+\begin{proof}
+Proposition~\ref{prop:koszul-complex-resolution} gives a minimal resolution with $K_i=\bigwedge^iV\otimes_\Bbbk A(-i)$.
+Thus $K_i$ is generated in degree $i$ for every $i$.
+\end{proof}
+
+\begin{example}\label{ex:koszul-nonconnected}
+The definition also applies when $S$ has several simple modules.
+For $A=\Bbbk A_2$, the resolution in Example~\ref{ex:minimal-A2} is linear for $L_1$, and $L_2=e_{22}A$ is projective in degree $0$.
+Taking their direct sum gives a linear resolution of $S=L_1\oplus L_2$; hence $\Bbbk A_2$ is Koszul.
+\end{example}
+
+\begin{example}
+The exterior algebra $E=\Bbbk[\epsilon]/(\epsilon^2)$ is quadratic, and Example~\ref{ex:minimal-exterior} gives a minimal resolution of its degree zero quotient with $P_i=E(-i)$.
+Thus $E$ is Koszul, although its minimal resolution is infinite.
+\end{example}
+
