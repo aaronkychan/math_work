@@ -328,12 +328,7 @@ N\oplus N'\cong M^{\oplus r}
 Thus $\add M$ consists of direct summands of finite direct sums of $M$.
 \end{example}
 
-In representation theory, one often studies $A$ through $\add A$.
-The distinguished object $A$ recovers the algebra:
-\[
-A\xrightarrow{\sim}\End_A(A),\qquad a\longmapsto(x\mapsto ax),
-\]
-where $\End_A(A):=\Hom_A(A,A)$ has multiplication given by composition.
+In modern representation theory, remembering $A$ and $\add A$ holds the same categorical information is crucial in utilising cateogircal technique in representation theory; this allows one to push many results to a more abstract framework.
 
 \begin{definition}\label{def:functor}
 A \defn{functor} $F:\CC\to\CD$ assigns an object $F(X)$ to each object $X$ and a morphism $F(f):F(X)\to F(Y)$ to each $f:X\to Y$, such that
@@ -1122,19 +1117,19 @@ Exactness follows from Example~\ref{ex:linear-duality}, degree by degree for $\b
 For these to be duality, we need to recover a module from its bidual; this requires some finiteness conditions.
 
 \begin{lemma}\label{lem:linear-bidual}
-Let $A$ be a $\Bbbk$-algebra, graded in (2).
+Let $A$ be a $\Bbbk$-algebra.
 \begin{enumerate}
 \item The functor $D$ defines a duality between finite-dimensional right and left $A$-modules.  In particular, if $A$ is finite-dimensional, then we have a duality on finitely generated modules
 \[
 D: (\mod A)^\op \xrightarrow{\sim}\mod (A^\op), \qquad D: (\mod (A^\op))^\op \xrightarrow{\sim}\mod A.
 \]
 
-\item For locally finite $M$, evaluation is a natural graded module isomorphism
+\item Suppose that $A$ is graded.  For locally finite $M\in \grmod A$, evaluation is a natural graded module isomorphism
 \begin{equation}\label{eq:linear-bidual-evaluation}
 \mathrm{ev}_M:M\xrightarrow{\sim}\bbD(\bbD(M)),\qquad
 m\longmapsto(f\mapsto f(m)).
 \end{equation}
-In particular, the functor $\bbD$ defines a duality between locally finite graded right and left $A$-modules:
+In particular, we have a duality between locally finite graded right and left $A$-modules:
 \begin{equation}\label{eq:graded-linear-dual}
 \bbD:(\grmod A)^\op\xrightarrow{\sim}\grmod(A^\op),\qquad
 \bbD:(\grmod(A^\op))^\op\xrightarrow{\sim}\grmod A.
@@ -1143,18 +1138,17 @@ In particular, the functor $\bbD$ defines a duality between locally finite grade
 \end{lemma}
 
 \begin{proof}
-The vector-space evaluation isomorphism must preserve the $A$-action to give an isomorphism in $\Mod A$.
-For a right module $M$,
+First we show that $\mathrm{ev}_M$ is $A$-linear.
+Indeed, 
 \[
 \mathrm{ev}_M(ma)(f)=f(ma)
 =\mathrm{ev}_M(m)(af)
 =(\mathrm{ev}_M(m)a)(f)
 \quad(m\in M,\ a\in A,\ f\in D(M)).
 \]
-Thus $\mathrm{ev}_M$ is right $A$-linear.
-Example~\ref{ex:linear-duality} supplies bijectivity and naturality in finite dimension, proving (1); replacing $A$ by $A^\op$ gives the left module statement.
-For (2), apply the same evaluation maps to each finite-dimensional component $M_i$.
-Their direct sum is the graded module isomorphism \eqref{eq:linear-bidual-evaluation}, and naturality follows degree by degree from \eqref{eq:vector-bidual-evaluation}.
+
+For (1), the claim follows from Example~\ref{ex:linear-duality}.
+For (2), apply (1) degree-wise.
 \end{proof}
 
 \begin{advanced}
@@ -1315,8 +1309,7 @@ The corresponding checks for $D$ and the left dual use the same evaluation formu
 
 \begin{advanced}
 Recall from Definition~\ref{def:enveloping-algebra} and \eqref{eq:enveloping-action} that
-$S^\en=S\otimes_\Bbbk S^\op$ and $m\cdot(s\otimes t^\op)=tms$.
-Thus $S$-bimodules are the objects of $\Mod S^\en$.
+$S^\en=S\otimes_\Bbbk S^\op$ and $S$-bimodules are the same thing as $S^\en$-modules via $m\cdot(s\otimes t^\op)=tms$.
 
 \begin{definition}\label{def:en-dual}
 The \defn{two-sided dual} of a bimodule ${}_SM_S$ is
@@ -1425,7 +1418,7 @@ Then the semisimple algebra $S=\prod_{j=1}^r\Mat_{n_j}(\Delta_j)$ has a symmetri
 
 \begin{theorem}[Comparison of duals]\label{prop:dual-comparison}\label{cor:graded-dual-comparison}
 Choose a symmetrising form $\tau:S\to\Bbbk$.
-Postcomposition with $\tau$, given by $\tau_*(f)=\tau\circ f$, defines natural isomorphisms from the right and left $S$-dual functors to $D$, and from their graded versions to $\bbD$.
+Postcomposition with $\tau$ defines natural isomorphisms from the $S$-dual (on either side) to $D$, and also from the graded $S$-dual (on either side) to $\bbD$.
 \end{theorem}
 
 \begin{supplementary}
@@ -1463,9 +1456,9 @@ For $M\in\grmod S$ and $N\in\grmod(S^\op)$, the degree $i$ components are $\alph
 \end{supplementary}
 
 \begin{proof}
-We prove the right module statement, i.e.
+We prove the right module statement, i.e. taking $\alpha_M(f):= \tau\circ f$ yields 
 \[
-\text{ungraded case } \alpha:=\tau_*: (-)^*\xrightarrow{\sim} D, \quad \text{and}\quad \text{graded case }\alpha:=\tau_*: (-)^{(*)}\xrightarrow{\sim} \bbD.
+\text{ungraded case } \alpha: (-)^*\xrightarrow{\sim} D, \quad \text{and}\quad \text{graded case }\alpha: (-)^{(*)}\xrightarrow{\sim} \bbD.
 \]
 First, non-degeneracy of $\tau$ gives an isomorphism $S\to D(S)$, $a\mapsto(s\mapsto\tau(as))$.
 Hence, for $\lambda\in D(M)$, there is a unique linear map $f:M\to S$ satisfying
@@ -1490,16 +1483,9 @@ Both $M^*$ and $D(M)$ are left $S$-modules, so the component $\alpha_M:M^*\to D(
 For a right module map $u:M\to N$ and $f\in N^*$, associativity of composition gives
 $\alpha_M(f\circ u)=\alpha_N(f)\circ u$, proving naturality.
 
-\begin{supplementary}
-Apply the same argument to $S^\op$ to obtain $\beta$.
-For a bimodule ${}_SM_S$, \eqref{eq:bimodule-dual-actions} gives
-\[
-\tau(sf(tm))=\tau(f(tms)),\qquad
-\tau(g(ms)t)=\tau(g(tms)),
-\]
-which proves that $\alpha_M$ and $\beta_M$ preserve both actions.
-\end{supplementary}
 For the graded comparisons, apply the ungraded natural isomorphism degree-wise. 
+
+Same argument applies dually to $S^\op$ and $\beta$.
 \end{proof}
 
 \begin{remark}
@@ -1508,27 +1494,20 @@ For example, every choice $c_1,\ldots,c_r\in\Bbbk\setminus\{0\}$ gives a form
 $\tau(a_1,\ldots,a_r)=\sum_{i=1}^r c_i a_i$ on $\Bbbk^{\oplus r}$.
 \end{remark}
 
-\begin{advanced}
 \begin{remark}\label{rem:transported-dual-action}
 Let $A$ be a graded algebra with $A_0=S$.
-For a right $A$-module $M$, the formula $(af)(m)=f(ma)$ need not preserve $\Hom_S(M,S)$: the subalgebra $S$ need not be central in $A$.
-After choosing $\tau$, the comparison \eqref{eq:graded-dual-comparison} transports the canonical action on $\bbD(M)$ to the graded $S$-dual of a locally finite module:
+The space $\Hom_S(M,S)$ do not have a natural left $A$-module on the spot, but can be after \emph{picking a symmetrising form $\tau$ of $S$}.
+Indeed, the comparison \eqref{eq:graded-dual-comparison} transports the canonical left $A$-action on $\bbD(M)$ to the graded $S$-dual of a locally finite module:
 \[
 af=\alpha_M^{-1}(a\alpha_M(f))\quad\text{for right }M,
 \qquad ga=\beta_N^{-1}(\beta_N(g)a)\quad\text{for left }N,
 \]
 where $a\in A$, $f\in M^{\grstar}$, and $g\in{}^{\grstar}N$.
-The action on the right-hand sides is \eqref{eq:linear-dual-actions}.
-The restrictions to $S$ are the actions in Definition~\ref{def:S-duals}.
-No extra hypothesis on $A$ is needed, but the transported actions depend on $\tau$; the canonical module is $\bbD(M)$.
-The ungraded construction works in the same way for finite-dimensional $A$-modules.
-
-For comparison, a bimodule ${}_AX_S$ gives a bimodule ${}_S\bigl(\Hom_S(X,S)\bigr)_A$ by
-$(sfa)(x)=s f(ax)$.
-This is the construction used in \cite[\S2.2]{BGS96}; it uses commuting actions on opposite sides, not merely restriction of a right $A$-module to $S$.
-Exercise~\ref{ex:transported-dual-action} compares two transported actions on one graded $S$-dual.
+Similarly for right action on left dual.
+%For comparison, a bimodule ${}_AX_S$ gives a bimodule ${}_S\bigl(\Hom_S(X,S)\bigr)_A$ by$(sfa)(x)=s f(ax)$.
+%This is the construction used in \cite[\S2.2]{BGS96}; it uses commuting actions on opposite sides, not merely restriction of a right $A$-module to $S$.
+%Exercise~\ref{ex:transported-dual-action} compares two transported actions on one graded $S$-dual.
 \end{remark}
-\end{advanced}
 
 
 \begin{advanced}
@@ -1782,15 +1761,15 @@ For right $A$-module maps $u:M\to M'$ and left $A$-module maps $v:N\to N'$, the 
 u\otimes_A v:M\otimes_A N\longrightarrow M'\otimes_A N',
 \qquad m\otimes n\longmapsto u(m)\otimes v(n).
 \]
-Fixing $N$ or $M$ gives functors
+These define functors
 \[
 (-)\otimes_A N:\Mod A\longrightarrow\Mod C,\qquad
 M\otimes_A(-):\Mod(A^\op)\longrightarrow\Mod(B^\op).
 \]
 On bimodule maps, they retain the outer actions:
 \[
-(-)\otimes_A N:{}_B\Mod_A\longrightarrow{}_B\Mod_C,\qquad
-M\otimes_A(-):{}_A\Mod_C\longrightarrow{}_B\Mod_C.
+(-)\otimes_A N:\Mod A\otimes_\Bbbk B^\op \longrightarrow \Mod C\otimes_\Bbbk B^\op,\qquad
+M\otimes_A(-):\Mod C\otimes_\Bbbk A\longrightarrow\Mod C\otimes_\Bbbk B.
 \]
 \item For $\Bbbk$-algebras $A,B$, a right $A$-module $U$, a bimodule ${}_AV_B$, and a left $B$-module $W$, there is a natural linear isomorphism
 \[
@@ -1803,7 +1782,7 @@ M\otimes_A A\xrightarrow{\sim}M,\quad m\otimes a\longmapsto ma,
 \qquad
 A\otimes_A N\xrightarrow{\sim}N,\quad a\otimes n\longmapsto an.
 \]
-Moreover, these maps are linear with respect to any additional bimodule action on $U$ or $W$.
+Moreover, these maps are linear with respect to any additional bimodule action on $U, W, M, N$.
 
 \item Tensor products distribute over direct sums in either variable. For arbitrary families $(M_i)_{i\in I}$ of right $A$-modules and $(N_j)_{j\in J}$ of left $A$-modules, indexed by sets $I,J$,
 \[
@@ -1980,17 +1959,12 @@ V^{\otimes_A i}:=
 \]
 Note that there is no parenthesis in the definition of $V^{\otimes_A i}$ since Lemma~\ref{lem:tensor-properties}(3) says that tenso product is an associatitive operation.
 
-
+\comm{this is more general $\Hom_B(M,X)$ has $(B,A)$-bimodule action for any $X\in \Mod B$; then we don't need to do $A$ and $B$ separately....}
 Let $A,B,C$ be arbitrary $\Bbbk$-algebras, and consider bimodules ${}_AM_B$, ${}_BN_C$.
-The Hom spaces below carry the actions
+The Hom spaces below carry the actions: for any $f\in\Hom_B(M,B)$ and $g\in \Hom_{A^\op}(M,A)$, we have
 \begin{equation}\label{eq:general-tensor-dual-actions}
-\begin{aligned}
-(bfa)(m)&=bf(am)
-&&\bigl(f\in\Hom_B(M,B)\bigr),\\
-(bga)(m)&=g(mb)a
-&&\bigl(g\in\Hom_{A^\op}(M,A)\bigr)
-\end{aligned}
-\quad(a\in A,\ b\in B,\ m\in M).
+(bfa)(m)=bf(am) \text{ and } (bga)(m)=g(mb)a
+\quad \text{for all } a\in A,\ b\in B,\ m\in M.
 \end{equation}
 Replacing $(A,B,M)$ by $(B,C,N)$ gives the actions on $\Hom_C(N,C)$ and $\Hom_{B^\op}(N,B)$.
 
@@ -2002,7 +1976,7 @@ Replacing $(A,B,M)$ by $(B,C,N)$ gives the actions on $\Hom_C(N,C)$ and $\Hom_{B
 % Keep the idempotent-matching calculation in the main exposition and move
 % routine verification to supplementary material. Use the one-sided bimodule
 % actions from eq:bimodule-dual-actions, independently of a symmetrising form.
-There are maps preserving the left $C$-action and right $A$-action, natural in $M,N$,
+The following maps are left $C$-linear and right $A$-linear, natural in $M,N$, \comm{do these have to be $C$-dual and $B$-dual and $A$-dual?? general Hom-ing on fixed $C, B, A$-module (respectively) still OK??  Of course for (1) and (2), we need to specialise to $B$, but only for $B$ only??}
 \begin{equation}\label{eq:general-tensor-duals}
 \begin{aligned}
 \theta_r:\Hom_C(N,C)\otimes_B\Hom_B(M,B)
@@ -2504,7 +2478,7 @@ Then
 \qquad (\dimvec U)_{ij}=\dim_\Bbbk(e_iUe_j).
 \]
 Indeed, $L_i\otimes_S U\cong e_iU$ by multiplication, and the multiplicity of $e_jS$ in $e_iU$ is $\dim_\Bbbk(e_iUe_j)$.
-For $S=\Bbbk$, the dimension vector has one entry, the usual vector-space dimension.
+For $S=\Bbbk$, the dimension vector has one entry, the usual vector space dimension.
 \end{example}
 
 \begin{definition}\label{def:hilbert-series}
@@ -2685,7 +2659,7 @@ For algebras,
 (e_i\otimes f_p)(A_a\otimes_\Bbbk B_b)(e_j\otimes f_q)
 =(e_iA_ae_j)\otimes_\Bbbk(f_pB_bf_q).
 \]
-Take vector-space dimensions and sum over $a+b=d$ to obtain the coefficient of $t^d$.
+Take vector space dimensions and sum over $a+b=d$ to obtain the coefficient of $t^d$.
 \end{proof}
 
 \begin{advanced}[suppressfirstparskip=true,innertopmargin=0pt]
