@@ -1,4 +1,5 @@
 \documentclass[11pt,a4paper]{exam}
+\noprintanswers
 
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
@@ -97,6 +98,19 @@ Write every non-zero homogeneous component $f_d:M\to N$ explicitly,
 where a degree $d$ map sends $M_j$ into $N_{j+d}$.
 Prove that $f$ is not a finite sum of homogeneous maps.
 
+\begin{solution}
+For every $r\geq0$, the degree $-r$ component is
+\[
+  f_{-r}:M\longrightarrow N,\qquad f_{-r}(m_i)=\delta_{ri}e_1
+  \quad(i\geq0),
+\]
+and $f_d=0$ for $d>0$.
+A homogeneous map of degree $d$ vanishes on $m_i$ unless $i=-d$,
+since $N$ is concentrated in degree $0$.
+Every finite sum of homogeneous maps therefore vanishes on all but
+finitely many $m_i$, whereas $f(m_i)=e_1$ for every $i\geq0$.
+\end{solution}
+
 \part 
 Let $A=\kk A_3$ and $P_i=e_{ii}A$ for $i\in\{1,2,3\}$, with the
 inherited grading.
@@ -133,7 +147,8 @@ Recall that $M^{\grstar}=\bigoplus_{d\in\mathbb Z}\Hom_S(M_{-d},S)$,
 with the displayed summand in degree $d$.
 A form is symmetrising when $\tau(st)=\tau(ts)$ for all $s,t\in S$
 and the pairing $(s,t)\mapsto\tau(st)$ is non-degenerate.
-For parts (3)--(4), take $\kk=\mathbb Q$.
+Parts (3)--(4) concern the transported $A$-actions and are advanced material.
+For these parts, assume $\operatorname{char}\kk\neq2$.
 \begin{parts}
 \part Verify that $\tau$ is symmetrising. Define
 $\varepsilon:V\to\kk$ by $\varepsilon(ue_{12})=u$ for $u\in\kk$.
@@ -142,7 +157,26 @@ $g:V\to S$ satisfying $\tau\circ f=\varepsilon=\tau\circ g$.
 Verify the stated linearities and determine whether $f$ is also left
 $S$-linear and whether $g$ is also right $S$-linear.
 
-\emph{Check.} $f(e_{12})=c_2^{-1}e_{22}$ and $g(e_{12})=c_1^{-1}e_{11}$.
+\begin{solution}
+The algebra $S$ is commutative, so $\tau(st)=\tau(ts)$.
+For $s=ae_{11}+be_{22}$, the equalities
+$\tau(se_{11})=c_1a=0$ and $\tau(se_{22})=c_2b=0$ imply $s=0$;
+hence $\tau$ is non-degenerate.
+Right $S$-linearity requires $f(e_{12})\in\kk e_{22}$, and left
+$S$-linearity requires $g(e_{12})\in\kk e_{11}$.
+The equations $\tau\circ f=\varepsilon=\tau\circ g$ give
+\[
+  f(e_{12})=c_2^{-1}e_{22},\qquad g(e_{12})=c_1^{-1}e_{11}.
+\]
+For $s=ae_{11}+be_{22}$,
+\[
+  f(e_{12}s)=bc_2^{-1}e_{22}=f(e_{12})s,\qquad
+  g(se_{12})=ac_1^{-1}e_{11}=sg(e_{12}).
+\]
+Neither map has the opposite linearity:
+$f(e_{11}e_{12})=c_2^{-1}e_{22}\neq0=e_{11}f(e_{12})$, whereas
+$g(e_{12}e_{22})=c_1^{-1}e_{11}\neq0=g(e_{12})e_{22}$.
+\end{solution}
 
 \part Consider the right $S$-linear maps
 \[
