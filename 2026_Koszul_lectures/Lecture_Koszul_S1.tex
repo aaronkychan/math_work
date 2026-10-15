@@ -85,6 +85,7 @@ For example, forgetting the $A$-action gives a functor $\Mod A\to\Mod\Bbbk$: it 
 The \defn{identity functor} $\id_{\CC}$ leaves every object and morphism unchanged; functors compose by applying one after the other.
 Every functor preserves isomorphisms, since $F(f^{-1})$ is inverse to $F(f)$.
 
+\phantomsection\label{not:opposite-category}
 The \defn{opposite category} $\CC^\op$ has the same objects as $\CC$, with $\Hom_{\CC^\op}(X,Y)=\Hom_{\CC}(Y,X)$ and composition reversed.
 A \defn{contravariant functor} from $\CC$ to $\CD$ means a functor $\CC^\op\to\CD$.
 Thus it sends $f:X\to Y$ in $\CC$ to $F(f):F(Y)\to F(X)$ and satisfies $F(g\circ f)=F(f)\circ F(g)$.
@@ -190,7 +191,7 @@ Thus the displayed formula is the inverse of \eqref{eq:vector-bidual-evaluation}
 
 \subsection{Semisimple algebras}
 
-\begin{definition}
+\begin{definition}\label{def:semisimple}
 A module $L$ is \defn{simple} if $L\neq 0$ and its only submodules are $0$ and $L$.
 A module is \defn{semisimple} if it is a direct sum of simple modules.
 An algebra $B$ is \defn{semisimple} if it is semisimple as a right module $B_B$ over itself.
@@ -346,7 +347,7 @@ A graded algebra $A$ is \defn{locally finite} if $\dim_\Bbbk A_i<\infty$ for eve
 
 \subsection{Graded modules}
 
-\begin{definition}
+\begin{definition}\label{def:graded-module}
 Let $A=\bigoplus_{g\in G}A_g$ be a $G$-graded algebra.
 A \defn{$G$-graded right $A$-module} is a right $A$-module $M$ with a direct sum decomposition
 \[
@@ -362,6 +363,7 @@ A $G$-graded $A$-module $M=\bigoplus_{g\in G} M_g$ is \defn{locally finite} if $
 
 Unless specified otherwise, graded modules are $\Z$-graded; their degrees need not be non-negative.
 
+\phantomsection\label{not:opposite-algebra}
 For an algebra $A$, the \defn{opposite algebra} $A^\op$ has the same vector space as $A$, with multiplication $a^\op b^\op=(ba)^\op$.
 A left $A$-module is a right $A^\op$-module by $m\cdot a^\op=am$.
 Thus $\Mod(A^\op)$ is the category of left $A$-modules and left $A$-linear maps; not to be confused with the opposite category $(\Mod A)^\op$ though.
@@ -417,6 +419,7 @@ Thus $\Hom_A^{\Z}(M,N(d))$ consists of homomorphisms $M\to N$ of degree $d$, sin
 Note that, like the grading shift functor, different literature has different notation for this (there does not seem to be any widely agreed notation).
 \end{notation}
 
+\phantomsection\label{not:graded-module-categories}
 We write 
 \begin{align*}
 \Grmod A &:= \text{category of graded right $A$-modules with morphism spaces $\Hom_A^{\Z}(M,N)$},\\
@@ -604,7 +607,7 @@ The map $(u,v)\mapsto u\otimes v$ can be defined as the linear extension of
 Then universal property still holds for the $U\otimes_\Bbbk V$.
 \end{advanced}
 
-\subsection{Direct sums and direct products}
+\subsection{Direct sums and direct products}\label{subsec:sums-products}
 
 For an arbitrary family $(M_i)_{i\in I}$ of right $A$-modules, indexed by a set $I$, the \defn{direct product} and \defn{direct sum} are
 \[
@@ -622,6 +625,7 @@ For instance, ordinary polynomials use non-negative powers, whereas Laurent poly
 \Bbbk[x]=\bigoplus_{n\geq0}\Bbbk x^n,\qquad
 \Bbbk[x,x^{-1}]=\bigoplus_{n\in\Z}\Bbbk x^n.
 \]
+\phantomsection\label{not:formal-power-series}
 The \defn{formal power series ring} allows arbitrary coefficients:
 \[
 \Bbbk[[x]]=\left\{\sum_{n\geq0}a_nx^n\;\middle|\;a_n\in\Bbbk\text{ for every }n\geq0\right\}
@@ -707,6 +711,7 @@ When $B=C=A$, we call $M$ an \defn{$A$-bimodule}.
 For graded $B,C$, a bimodule $M$ is \defn{graded} if $M=\bigoplus_{i\in \Z}M_i$ as vector space and $B_iM_jC_k\subset M_{i+j+k}$ for all $i,j,k\in\Z$.
 \end{definition}
 
+\phantomsection\label{not:bimodule-notation}
 \begin{convention}
 \begin{itemize}
 \item  Instead of saying $(B,C)$-bimodule everytime, we usually just write ${}_BM_C$.
@@ -914,6 +919,7 @@ Thus $\bbD(A)$ is locally finite but not finitely generated.
 
 \subsection{\texorpdfstring{Left, right, and two-sided duals over $S$}{Left, right, and two-sided duals over S}}
 
+\phantomsection\label{not:semisimple-base}
 Fix a finite-dimensional semisimple $\Bbbk$-algebra $S$, which is regarded as concentrated in degree $0$ when treated as a graded algebra.
 For a graded algebra $A$ with $A_0=S$, each degree component is a bimodule ${}_S(A_i)_S$.
 %To dualise these components while retaining both actions, we distinguish maps to $S$ that are right or left $S$-linear.
@@ -1069,6 +1075,7 @@ The two-sided dual takes values in $S^{\en}$, not in $S$.
 On bimodule morphisms it acts by precomposition, as do $D$, $(-)^*$, and ${}^*(-)$; each is a contravariant functor on the category of $S$-bimodules.
 The two-sided dual records both module actions in the target algebra $S^\en$.
 
+\phantomsection\label{not:graded-en-dual}
 For a graded bimodule ${}_SM_S$, define its \defn{graded two-sided dual} by
 \[
 M^{\grstar[_{\en}]}:=\bigoplus_{i\in\Z}(M_{-i})^{*_{\en}},

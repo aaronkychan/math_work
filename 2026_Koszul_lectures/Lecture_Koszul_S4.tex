@@ -22,10 +22,12 @@ A_+:=\bigoplus_{d>0}A_d.
 The grading makes $A_+$ a two-sided ideal, and projection onto degree $0$ identifies $A/A_+$ with $S$.
 We regard $S$ as a graded right $A$-module concentrated in degree $0$, with action $s\cdot a=sa_0$ for $s\in S$ and $a=\sum_{d\geq0}a_d\in A$.
 
+\phantomsection\label{not:chain-differentials}
 All complexes below are chain complexes of graded right $A$-modules: their terms $P_i$ are indexed by homological degrees $i\geq0$, and their differentials are degree preserving maps $d_i:P_i\to P_{i-1}$ satisfying $d_{i-1}d_i=0$ for $i\geq2$.
 An augmented complex to a module $M$ also has a degree preserving map $p_0:P_0\to M$ with $p_0d_1=0$.
 The augmented complex is exact when $\Im d_{i+1}=\Ker d_i$ for $i\geq1$, $\Im d_1=\Ker p_0$, and $p_0$ is surjective.
 
+\phantomsection\label{not:graded-top}
 For a graded right $A$-module $M$, define its \defn{graded top} by
 \[
 \overline M:=M/MA_+.
@@ -120,6 +122,7 @@ Induction gives an isomorphism in every homological degree, compatible with the 
 \end{proof}
 
 Choose representatives $L_1,\ldots,L_r$ of the simple right $S$-modules, as in Definition~\ref{def:dimension-vector}.
+\phantomsection\label{not:graded-betti}
 For a minimal resolution $P_\bullet\to M$, define the \defn{graded Betti numbers} $\beta_{i,d,j}(M)$ by
 \[
 \left(P_i/P_iA_+\right)_d

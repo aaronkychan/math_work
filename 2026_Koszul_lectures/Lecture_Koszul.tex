@@ -11,6 +11,7 @@
 \usepackage[all]{xy}
 \usepackage{float}
 \usepackage{tocloft}
+\usepackage{longtable}
 \usepackage{tikz}
 \usepackage{mdframed}
 \usepackage{comment}
@@ -241,6 +242,7 @@ Last update: 6 October 2026
 
 \section*{Convention}
 
+\phantomsection\label{not:base-field}
 Throughout the course, $\Bbbk$ is a field.
 All rings are unital and associative.
 All modules are right modules unless otherwise specified.
@@ -264,6 +266,112 @@ Neither of these are rigourously checked since they are mostly produced by AI, s
 % TODO (Deferred global request): Insert a linked table of notation, with a
 % page break before it, before this bibliography. This lies outside the present
 % Lecture 1-only proposal; use first-definition labels when it is authorised.
+\clearpage
+\section*{List of Symbols}
+\addcontentsline{toc}{section}{List of Symbols}
+Page numbers link to the first defining passage. Entries marked advanced refer to optional material.
+
+\begingroup
+\small
+\setlength{\parskip}{0pt}
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{\fill}
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{@{}p{0.28\textwidth}p{0.60\textwidth}r@{}}
+\hline
+\textbf{Symbol} & \textbf{Meaning} & \textbf{Page}\\
+\hline
+\endfirsthead
+\multicolumn{3}{@{}l}{\textbf{List of Symbols (continued)}}\\[4pt]
+\hline
+\textbf{Symbol} & \textbf{Meaning} & \textbf{Page}\\
+\hline
+\endhead
+\hline
+\endfoot
+\hline
+\endlastfoot
+
+\multicolumn{3}{@{}l}{\textbf{Algebras and categories}}\\*[4pt]
+$\Bbbk$ & Base field. & \hyperref[not:base-field]{\pageref*{not:base-field}}\\[3pt]
+$\Mat_n(\Bbbk)$ & Algebra of $n\times n$ matrices over $\Bbbk$. & \hyperref[ex:triangular-algebra]{\pageref*{ex:triangular-algebra}}\\[3pt]
+$\Bbbk A_n$ & Upper triangular $n\times n$ matrix algebra. & \hyperref[ex:triangular-algebra]{\pageref*{ex:triangular-algebra}}\\[3pt]
+$e_{ij}$ & Matrix unit with $1$ in position $(i,j)$. & \hyperref[ex:triangular-algebra]{\pageref*{ex:triangular-algebra}}\\[3pt]
+$\Hom_{\CC}(X,Y),\ \id_X$ & Morphisms from $X$ to $Y$; identity of $X$. & \hyperref[def:category]{\pageref*{def:category}}\\[3pt]
+$\Mod A$ & Right $A$-modules and $A$-linear maps. & \hyperref[ex:module-categories]{\pageref*{ex:module-categories}}\\[3pt]
+$\mod A$ & Finitely generated right $A$-modules. & \hyperref[ex:module-categories]{\pageref*{ex:module-categories}}\\[3pt]
+$\Hom_A(M,N)$ & $A$-linear maps, with no degree restriction. & \hyperref[ex:module-categories]{\pageref*{ex:module-categories}}\\[3pt]
+$\add M$ & Direct summands of finite direct sums of the right module $M$. & \hyperref[ex:add-category]{\pageref*{ex:add-category}}\\[3pt]
+$\CC^\op$ & Opposite category: morphisms have their directions reversed. & \hyperref[not:opposite-category]{\pageref*{not:opposite-category}}\\[3pt]
+$\rad A$ & Jacobson radical of the algebra $A$. & \hyperref[def:semisimple]{\pageref*{def:semisimple}}\\[3pt]
+$eA,\ eAe$ & Right ideal and corner algebra associated with an idempotent $e$. & \hyperref[rem:idempotent-units]{\pageref*{rem:idempotent-units}}\\[3pt]
+$A^\op$ & Opposite algebra: $a^\op b^\op=(ba)^\op$. & \hyperref[not:opposite-algebra]{\pageref*{not:opposite-algebra}}\\[3pt]
+$\Mod(A^\op)$ & Left $A$-modules, viewed as right $A^\op$-modules. & \hyperref[not:opposite-algebra]{\pageref*{not:opposite-algebra}}\\[3pt]
+$\add_{\mod A^\op}(A)$ & Direct summands of finite direct sums of the left regular module. & \hyperref[prop:tensor-duals]{\pageref*{prop:tensor-duals}}\\[3pt]
+
+\multicolumn{3}{@{}l}{\textbf{Gradings, sums, and bimodules}}\\*[4pt]
+$A_g$ & Degree $g$ component of a group-graded algebra. & \hyperref[def:group-grading]{\pageref*{def:group-grading}}\\[3pt]
+$M_g$ & Degree $g$ component of a graded module. & \hyperref[def:graded-module]{\pageref*{def:graded-module}}\\[3pt]
+$M(d)$ & Grading shift: $M(d)_j=M_{j+d}$. & \hyperref[def:shift]{\pageref*{def:shift}}\\[3pt]
+$\Hom_A^\Z(M,N)$ & Degree-preserving $A$-linear maps. & \hyperref[eq:graded-hom]{\pageref*{eq:graded-hom}}\\[3pt]
+$\Hom_A^\Z(M,N(d))$ & $A$-linear maps $M\to N$ of degree $d$. & \hyperref[eq:graded-hom]{\pageref*{eq:graded-hom}}\\[3pt]
+$\Grmod A$ & Graded right $A$-modules and degree-preserving maps. & \hyperref[not:graded-module-categories]{\pageref*{not:graded-module-categories}}\\[3pt]
+$\grmod A$ & Locally finite graded right $A$-modules; finite generation is not required. & \hyperref[not:graded-module-categories]{\pageref*{not:graded-module-categories}}\\[3pt]
+$A_+$ & Positive degree ideal $\bigoplus_{i>0}A_i$. & \hyperref[def:positive-ideal]{\pageref*{def:positive-ideal}}\\[3pt]
+$\pi:A\to A_0$ & Projection onto degree $0$, identifying $A/A_+$ with $A_0$. & \hyperref[eq:degree-zero-projection]{\pageref*{eq:degree-zero-projection}}\\[3pt]
+$\bigoplus_{i\in I}M_i$ & Direct sum, with finite support. & \hyperref[subsec:sums-products]{\pageref*{subsec:sums-products}}\\[3pt]
+$M^{\oplus r}$ & Direct sum of $r$ copies of $M$. & \hyperref[ex:add-category]{\pageref*{ex:add-category}}\\[3pt]
+$\prod_{i\in I}M_i$ & Direct product, allowing arbitrary coordinates. & \hyperref[subsec:sums-products]{\pageref*{subsec:sums-products}}\\[3pt]
+$\Bbbk[[x]]$ & Formal power series ring. & \hyperref[not:formal-power-series]{\pageref*{not:formal-power-series}}\\[3pt]
+${}_BM_C$ & Bimodule with left $B$-action and right $C$-action. & \hyperref[not:bimodule-notation]{\pageref*{not:bimodule-notation}}\\[3pt]
+$A^\en$ & Enveloping algebra $A\otimes_\Bbbk A^\op$. & \hyperref[def:enveloping-algebra]{\pageref*{def:enveloping-algebra}}\\[3pt]
+$S=A_0$ & Finite-dimensional semisimple degree zero algebra. & \hyperref[not:semisimple-base]{\pageref*{not:semisimple-base}}\\[3pt]
+
+\multicolumn{3}{@{}l}{\textbf{Duals and comparison maps}}\\*[4pt]
+$D(V)$ & $\Bbbk$-linear dual $\Hom_\Bbbk(V,\Bbbk)$. & \hyperref[ex:linear-duality]{\pageref*{ex:linear-duality}}\\[3pt]
+$D(u)$ & Dual map, given by precomposition with $u$. & \hyperref[ex:linear-duality]{\pageref*{ex:linear-duality}}\\[3pt]
+$\mathrm{ev}_V$ & Evaluation $V\to D(D(V))$, sending $v$ to $\lambda\mapsto\lambda(v)$. & \hyperref[eq:vector-bidual-evaluation]{\pageref*{eq:vector-bidual-evaluation}}\\[3pt]
+$\bbD(V)$ & Graded $\Bbbk$-linear dual, with $\bbD(V)_i=D(V_{-i})$. & \hyperref[def:linear-duals]{\pageref*{def:linear-duals}}\\[3pt]
+$M^*,\ {}^*N$ & Right and left $S$-linear duals: $\Hom_S(M,S)$ and $\Hom_{S^\op}(N,S)$. & \hyperref[def:S-duals]{\pageref*{def:S-duals}}\\[3pt]
+$M^{\grstar},\ {}^{\grstar}N$ & Graded right and left $S$-duals, with degrees reversed. & \hyperref[def:graded-S-duals]{\pageref*{def:graded-S-duals}}\\[3pt]
+$M^{*_{\en}}$ & Two-sided dual $\Hom_{S^\en}(M,S^\en)$; advanced. & \hyperref[def:en-dual]{\pageref*{def:en-dual}}\\[3pt]
+$M^{\grstar[_{\en}]}$ & Graded two-sided dual, with degrees reversed; advanced. & \hyperref[not:graded-en-dual]{\pageref*{not:graded-en-dual}}\\[3pt]
+$\tau:S\to\Bbbk$ & Symmetrising form on $S$. & \hyperref[def:symmetrising-form]{\pageref*{def:symmetrising-form}}\\[3pt]
+$\alpha_M,\ \beta_N$ & Comparisons from $S$-duals to linear duals, by composition with $\tau$. & \hyperref[eq:dual-comparison]{\pageref*{eq:dual-comparison}}\\[3pt]
+$\gamma_M$ & Comparison from the two-sided dual to the right $S$-dual; advanced. & \hyperref[eq:en-dual-comparison]{\pageref*{eq:en-dual-comparison}}\\[3pt]
+
+\multicolumn{3}{@{}l}{\textbf{Tensor products, presentations, and Hilbert series}}\\*[4pt]
+$U\otimes_\Bbbk V$ & Tensor product of vector spaces. & \hyperref[def:vector-tensor]{\pageref*{def:vector-tensor}}\\[3pt]
+$M\otimes_A N$ & Tensor product over $A$, with $ma\otimes n=m\otimes an$. & \hyperref[def:module-tensor]{\pageref*{def:module-tensor}}\\[3pt]
+$V^{\otimes_A i}$ & $i$th tensor power over $A$; $V^{\otimes_A0}=A$. & \hyperref[not:tensor-powers]{\pageref*{not:tensor-powers}}\\[3pt]
+$\theta_r,\ \theta_\ell$ & Tensor-Hom comparison maps; tensor-dual isomorphisms in the semisimple case. & \hyperref[eq:general-tensor-duals]{\pageref*{eq:general-tensor-duals}}\\[3pt]
+$\mu_i:A_1^{\otimes_S i}\to A_i$ & Multiplication of $i$ elements of degree $1$. & \hyperref[eq:multiplication-maps]{\pageref*{eq:multiplication-maps}}\\[3pt]
+$T_S(V)$ & Tensor algebra generated by the bimodule ${}_SV_S$. & \hyperref[def:tensor-algebra]{\pageref*{def:tensor-algebra}}\\[3pt]
+$\SymAlg(V)$ & Symmetric algebra of $V$. & \hyperref[eq:polynomial-exterior]{\pageref*{eq:polynomial-exterior}}\\[3pt]
+$\bigwedge W$ & Exterior algebra of $W$. & \hyperref[eq:polynomial-exterior]{\pageref*{eq:polynomial-exterior}}\\[3pt]
+$I=\Ker\mu$ & Ideal of relations for $\mu:T_S(A_1)\to A$. & \hyperref[def:relations]{\pageref*{def:relations}}\\[3pt]
+$A=T_S(V)/(R)$ & Quadratic presentation: generators $V$ in degree $1$, relations $R$ in degree $2$. & \hyperref[def:quadratic]{\pageref*{def:quadratic}}\\[3pt]
+$L_1,\ldots,L_r$ & Representatives of the simple right $S$-modules. & \hyperref[def:dimension-vector]{\pageref*{def:dimension-vector}}\\[3pt]
+$\dimvec M$ & Row vector of simple-module multiplicities in $M_S$. & \hyperref[def:dimension-vector]{\pageref*{def:dimension-vector}}\\[3pt]
+$\dimvec U$ & Bimodule dimension array; row $i$ is $\dimvec(L_i\otimes_S U)$. & \hyperref[def:dimension-vector]{\pageref*{def:dimension-vector}}\\[3pt]
+$H_M(t)$ & Module Hilbert series $\sum_{d\in\Z}(\dimvec M_d)t^d$. & \hyperref[def:hilbert-series]{\pageref*{def:hilbert-series}}\\[3pt]
+$H_A(t)$ & Algebra Hilbert series, with entries recording both simple-module indices. & \hyperref[def:hilbert-series]{\pageref*{def:hilbert-series}}\\[3pt]
+$qA$ & Quadratic part $T_S(V)/(I_2)$ of $A=T_S(V)/I$; advanced. & \hyperref[def:quadratic-part]{\pageref*{def:quadratic-part}}\\[3pt]
+$U^\perp,\ {}^\perp U$ & Right and left $S$-linear functionals vanishing on $U$. & \hyperref[def:orthogonals]{\pageref*{def:orthogonals}}\\[3pt]
+
+\multicolumn{3}{@{}l}{\textbf{Quadratic duality and resolutions}}\\*[4pt]
+$A^!,\ {}^!A$ & Right and left quadratic dual algebras. & \hyperref[def:quadratic-duals]{\pageref*{def:quadratic-duals}}\\[3pt]
+$A\otimes_\Bbbk B$ & Ordinary algebra tensor product, without signs in multiplication. & \hyperref[def:algebra-tensor-products]{\pageref*{def:algebra-tensor-products}}\\[3pt]
+$A\otimes_\Bbbk^{\mathrm{gr}}B$ & Graded algebra tensor product, with the sign in \eqref{eq:signed-tensor-product}. & \hyperref[def:algebra-tensor-products]{\pageref*{def:algebra-tensor-products}}\\[3pt]
+$d_i:P_i\to P_{i-1}$ & Chain differential; preserves grading degree and lowers homological degree. & \hyperref[not:chain-differentials]{\pageref*{not:chain-differentials}}\\[3pt]
+$\overline M$ & Graded top $M/MA_+$. & \hyperref[not:graded-top]{\pageref*{not:graded-top}}\\[3pt]
+$P_\bullet\to M$ & Graded projective resolution of $M$. & \hyperref[def:minimal-resolution]{\pageref*{def:minimal-resolution}}\\[3pt]
+$\beta_{i,d,j}(M),\ \beta_{i,d}(M)$ & Graded Betti multiplicities and their row vector; $i$ is homological degree, $d$ is grading degree, and $j$ indexes the simple module. & \hyperref[not:graded-betti]{\pageref*{not:graded-betti}}\\[3pt]
+$K_i,\ K_\bullet$ & Koszul terms $K_i=\bigwedge^iV\otimes_\Bbbk A(-i)$ and their complex, for $A=\SymAlg(V)$. & \hyperref[not:koszul-terms]{\pageref*{not:koszul-terms}}\\[3pt]
+$d_i:K_i\to K_{i-1}$ & Koszul differential. & \hyperref[def:koszul-complex]{\pageref*{def:koszul-complex}}\\[3pt]
+\end{longtable}
+\endgroup
+
 \clearpage
 \begin{thebibliography}{BGS96}
 \bibitem[Bez23]{Bez23}
