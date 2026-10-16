@@ -29,8 +29,8 @@ Let $A$ be any $\Bbbk$-algebra, $M$ a right $A$-module, and $N$ a left $A$-modul
 \begin{enumerate}
 \item For a vector space $W$ and a bilinear map $b:M\times N\to W$ satisfying $b(ma,n)=b(m,an)$ for all $m\in M$, $a\in A$, and $n\in N$, there is a unique linear factorisation (commutative diagram)
 \[
-\xymatrix@C=55pt@R=22pt{
-M\times N \ar[r]^{(m,n)\mapsto m\otimes_A n} \ar[dr]_{\forall \text{ bilinear }b\phantom{...}}
+\xymatrix@C=75pt@R=22pt{
+M\times N \ar[r]^{(m,n)\mapsto m\otimes_A n} \ar[dr]_{\forall \text{ bilinear }b \text{ s.t. } b(-\cdot a,-)=b(-,a\cdot-)\phantom{aaaaaaaaaa}}
 & M\otimes_A N \ar@{-->}[d]^{\exists!\,\widetilde b}\\
 & W.
 }
@@ -55,8 +55,8 @@ M\otimes_A(-):\Mod(A^\op)\longrightarrow\Mod(B^\op).
 \]
 On bimodule maps, they retain the outer actions:
 \[
-(-)\otimes_A N:\Mod A\otimes_\Bbbk B^\op \longrightarrow \Mod C\otimes_\Bbbk B^\op,\qquad
-M\otimes_A(-):\Mod C\otimes_\Bbbk A\longrightarrow\Mod C\otimes_\Bbbk B.
+(-)\otimes_A N: B\Mod A \longrightarrow B\Mod C,\qquad
+M\otimes_A(-):A\Mod C\longrightarrow B\Mod C.
 \]
 \item For $\Bbbk$-algebras $A,B$, a right $A$-module $U$, a bimodule ${}_AV_B$, and a left $B$-module $W$, there is a natural linear isomorphism
 \[
@@ -82,6 +82,16 @@ M\otimes_A\Bigl(\bigoplus_{j\in J}N_j\Bigr)
 & m\otimes(n_j)_{j\in J}&\longmapsto(m\otimes n_j)_{j\in J}.
 \end{aligned}
 \]
+
+\item For finite sets $I,J$ and right $A$-modules $M_j,N_i$, there is a natural isomorphism
+\begin{equation}\label{eq:hom-finite-sums}
+\begin{aligned}
+\Hom_A\Bigl(\bigoplus_{j\in J}M_j,\bigoplus_{i\in I}N_i\Bigr)
+&\xrightarrow{\sim}\bigoplus_{\substack{i\in I\\j\in J}}\Hom_A(M_j,N_i),\\
+f&\longmapsto(\pi_i f\iota_j)_{i\in I,\ j\in J},
+\end{aligned}
+\end{equation}
+where $\iota_j:M_j\to\bigoplus_{j'\in J}M_{j'}$ and $\pi_i:\bigoplus_{i'\in I}N_{i'}\to N_i$ are the inclusions and projections.
 \end{enumerate}
 \end{lemma}
 
@@ -124,15 +134,6 @@ The other variable is handled in the same way.
 \end{proof}
 \end{supplementary}
 
-For finite sets $I,J$ and right $A$-modules $M_j,N_i$, there is a natural isomorphism
-\begin{equation}\label{eq:hom-finite-sums}
-\begin{aligned}
-\Hom_A\Bigl(\bigoplus_{j\in J}M_j,\bigoplus_{i\in I}N_i\Bigr)
-&\xrightarrow{\sim}\bigoplus_{\substack{i\in I\\j\in J}}\Hom_A(M_j,N_i),\\
-f&\longmapsto(\pi_i f\iota_j)_{i\in I,\ j\in J},
-\end{aligned}
-\end{equation}
-where $\iota_j:M_j\to\bigoplus_{j'\in J}M_{j'}$ and $\pi_i:\bigoplus_{i'\in I}N_{i'}\to N_i$ are the inclusions and projections.
 
 \begin{advanced}
 \begin{lemma}[Hom, direct sums, and direct products]\label{lem:hom-sums-products}
@@ -531,12 +532,12 @@ The \defn{symmetric algebra} of $V$ and the \defn{exterior algebra} of $W$ are
 \begin{aligned}
 \SymAlg(V)&=T_\Bbbk(V)/(x_ix_j-x_jx_i\mid1\leq i<j\leq n)
             \cong\Bbbk[x_1,\ldots,x_n],\\
-\bigwedge W&=T_\Bbbk(W)/(w^2\mid w\in W).
+\bigwedge W&=T_\Bbbk(W)/(w^2\mid w\in W) = T_\Bbbk(W)/(y_j^2, y_iy_j+y_jy_i \mid 1\le i<j\le m).
 \end{aligned}
 \end{equation}
 They are generated in degree $1$, with
 \[
-\SymAlg(V)_0=(\bigwedge W)_0=\Bbbk,\qquad
+\SymAlg(V)_0=\Bbbk=(\bigwedge W)_0,\qquad
 \SymAlg(V)_1=V,\qquad(\bigwedge W)_1=W.
 \]
 Their respective bases are
@@ -547,7 +548,6 @@ Their respective bases are
 \end{gathered}
 \]
 where the empty product is $1$.
-The exterior relations are equivalently $y_j^2=0$ for $1\leq j\leq m$ and $y_iy_j+y_jy_i=0$ for $1\leq i<j\leq m$, in every characteristic.
 \end{example}
 
 \begin{supplementary}
@@ -609,7 +609,7 @@ Given a unital $\Bbbk$-algebra homomorphism $\varphi:S\to B$ and a bimodule map 
 \xymatrix@C=42pt@R=28pt{
 V \ar@{^{(}->}[r]^{\iota_V} \ar[dr]_{\forall\,\text{bimodule map }f\phantom{...}}
 & T_S(V) \ar@{-->}[d]^{\exists!\,\widetilde f}
-& S \ar@{^{(}->}[l]_{\iota_S} \ar[dl]^{\phantom{...}\forall\,\text{algebra map }\varphi}\\
+& S \ar@{_{(}->}[l]_{\iota_S} \ar[dl]^{\phantom{...}\forall\,\text{algebra map }\varphi}\\
 & B. &
 }
 \end{equation}
@@ -742,6 +742,7 @@ We record dimensions relative to all simple right $S$-modules.
 We define module series first, then collect them in an array for a graded algebra.
 
 \begin{definition}\label{def:dimension-vector}
+\comm{why do $S$-module.  It should be do-able for any $A$-module???  If needed, can just assume $A$ is lfd graded algebra.}
 Choose representatives $L_1,\ldots,L_r$ of the isomorphism classes of simple right $S$-modules.
 For a finite-dimensional right $S$-module $M$, write, with $m_j\in\Z_{\geq0}$,
 \[
@@ -749,6 +750,7 @@ M\cong\bigoplus_{j=1}^r L_j^{\oplus m_j},
 \qquad \dimvec M:=(m_1,\ldots,m_r).
 \]
 The row vector $\dimvec M$ is the \defn{dimension vector} of $M$.
+\comm{we don't use bimodule???}
 For a finite-dimensional bimodule ${}_SU_S$, arrange the vectors $\dimvec(L_i\otimes_S U)$ as rows:
 \[
 \dimvec U=(u_{ij})_{1\leq i,j\leq r},
@@ -771,7 +773,7 @@ For the $S$-bimodule $S$, we have $\dimvec S=I_r$, the $r\times r$ identity arra
 If $S=\bigoplus_{i=1}^r\Bbbk e_i$ with coordinate idempotents, take $L_i=e_iS$.
 Then
 \[
-\dimvec M=(\dim_\Bbbk Me_j)_{j=1}^r,
+\dimvec M=(\dim_\Bbbk Me_j)_{1\le j\le r},
 \qquad (\dimvec U)_{ij}=\dim_\Bbbk(e_iUe_j).
 \]
 Indeed, $L_i\otimes_S U\cong e_iU$ by multiplication, and the multiplicity of $e_jS$ in $e_iU$ is $\dim_\Bbbk(e_iUe_j)$.
@@ -779,23 +781,24 @@ For $S=\Bbbk$, the dimension vector has one entry, the usual vector space dimens
 \end{example}
 
 \begin{definition}\label{def:hilbert-series}
+\comm{why this definition is separated with graded $S$-modules first then graded $A$ modules.  It can be just with graded $A$-modules from the get go?? }
 Let $M=\bigoplus_{d\in\Z}M_d$ be a locally finite-dimensional graded right $S$-module, with $M_d=0$ for all sufficiently negative $d$.
 Its \defn{Hilbert series} is
 \[
-H_M(t):=\sum_{d\in\Z}(\dimvec M_d)t^d.
+h_M(t):=\sum_{d\in\Z}(\dimvec M_d)t^d.
 \]
 For a locally finite-dimensional graded algebra $A$ with $A_0=S$, its \defn{Hilbert series} records the preceding module series row by row:
 \[
-H_A(t)_{ij}:=\bigl(H_{L_i\otimes_S A}(t)\bigr)_j
+h_A(t)_{ij}:=\bigl(h_{L_i\otimes_S A}(t)\bigr)_j
 \quad(1\leq i,j\leq r),
 \qquad
-H_A(t)=\sum_{d\geq0}(\dimvec A_d)t^d.
+h_A(t)=\sum_{d\geq0}(\dimvec A_d)t^d.
 \]
 Here each $L_i$ is placed in degree $0$, and $L_i\otimes_S A$ is regarded as a right $S$-module by restriction.
-In particular, $H_A(0)=I_r$.
+In particular, $h_A(0)=I_r$.
 For $S=\bigoplus_{i=1}^r\Bbbk e_i$, this gives
 \[
-H_A(t)_{ij}=\sum_{d\geq0}\dim_\Bbbk(e_iA_de_j)t^d
+h_A(t)_{ij}=\sum_{d\geq0}\dim_\Bbbk(e_iA_de_j)t^d
 \quad(1\leq i,j\leq r).
 \]
 \end{definition}
@@ -808,9 +811,9 @@ For an algebra, keeping both indices records where products can be formed.
 \begin{lemma}\label{lem:hilbert-operations}
 For locally finite-dimensional graded right $S$-modules bounded below:
 \begin{enumerate}
-\item A graded isomorphism $M\cong N$ implies $H_M(t)=H_N(t)$.
-\item A short exact sequence $0\to L\to M\to N\to0$ gives $H_M(t)=H_L(t)+H_N(t)$.
-\item For every $a\in\Z$, $H_{M(a)}(t)=t^{-a}H_M(t)$.
+\item A graded isomorphism $M\cong N$ implies $h_M(t)=h_N(t)$.
+\item A short exact sequence $0\to L\to M\to N\to0$ gives $h_M(t)=h_L(t)+h_N(t)$.
+\item For every $a\in\Z$, $h_{M(a)}(t)=t^{-a}h_M(t)$.
 \end{enumerate}
 \end{lemma}
 
@@ -819,7 +822,7 @@ A graded isomorphism preserves each degree and its simple-module multiplicities.
 A short exact sequence of right $S$-modules splits by semisimplicity, so multiplicities add.
 Finally, $M(a)_d=M_{d+a}$ gives
 \[
-H_{M(a)}(t)=\sum_d(\dimvec M_{d+a})t^d
+h_{M(a)}(t)=\sum_d(\dimvec M_{d+a})t^d
 =t^{-a}\sum_j(\dimvec M_j)t^j.\qedhere
 \]
 \end{proof}
@@ -851,7 +854,7 @@ Let ${}_SU_S$, ${}_SW_S$ be finite-dimensional bimodules and $M$ a finite-dimens
 \]
 For a locally finite-dimensional graded right $S$-module $M$ bounded below and a locally finite-dimensional graded algebra $A$ with $A_0=S$, this gives
 \[
-H_{M\otimes_S A}(t)=H_M(t)H_A(t).
+h_{M\otimes_S A}(t)=h_M(t)h_A(t).
 \]
 \end{lemma}
 
@@ -879,15 +882,15 @@ Since $T_S(V)_d=V^{\otimes_S d}$ and $V^{\otimes_S0}=S$, Lemma~\ref{lem:dimensio
 Consequently,
 \begin{equation}\label{eq:hilbert-tensor-algebra}
 \boxed{\displaystyle
-H_{T_S(V)}(t)=\sum_{d\geq0}t^dC^d
+h_{T_S(V)}(t)=\sum_{d\geq0}t^dC^d
 =(I_r-tC)^{-1}=(I_r-t\,\dimvec V)^{-1}.}
 \end{equation}
 Indeed, multiplying the series on either side by $I_r-tC$ gives constant coefficient $I_r$; the coefficient of $t^d$ for $d\geq1$ is $C^d-C^d=0$.
 The inverse is therefore an identity of formal power series with the coefficient multiplication defined above.
 
-For $S=\Bbbk$ and $\dim_\Bbbk V=m$, the formula is $H_{T_\Bbbk(V)}(t)=1/(1-mt)$.
+For $S=\Bbbk$ and $\dim_\Bbbk V=m$, the formula is $h_{T_\Bbbk(V)}(t)=1/(1-mt)$.
 More generally, for $S=\operatorname{Mat}_n(\Bbbk)$ and $V=S^{\oplus m}$ as an $S$-bimodule, there is one simple right $S$-module $L=\Bbbk^{1\times n}$.
-Since $L\otimes_S V\cong L^{\oplus m}$, we again have $C=(m)$ and $H_{T_S(V)}(t)=1/(1-mt)$.
+Since $L\otimes_S V\cong L^{\oplus m}$, we again have $C=(m)$ and $h_{T_S(V)}(t)=1/(1-mt)$.
 Here the coefficient records simple-module multiplicities, not $\dim_\Bbbk V=mn^2$.
 \end{example}
 
@@ -896,12 +899,12 @@ For $A=\Bbbk A_n$, order the coordinate idempotents as $e_{11},\ldots,e_{nn}$.
 Let $C$ have $C_{i,i+1}=1$ for $1\leq i<n$ and all other entries zero.
 The tensor presentation in Example~\ref{ex:tensor-An} and \eqref{eq:hilbert-tensor-algebra} give
 \[
-H_A(t)=I_n+tC+\cdots+t^{n-1}C^{n-1},
-\qquad H_A(t)_{ij}=\begin{cases}t^{j-i},&i\leq j,\\0,&i>j.\end{cases}
+h_A(t)=I_n+tC+\cdots+t^{n-1}C^{n-1},
+\qquad h_A(t)_{ij}=\begin{cases}t^{j-i},&i\leq j,\\0,&i>j.\end{cases}
 \]
 For $n=3$, killing $e_{13}$ removes the degree $2$ contribution in entry $(1,3)$:
 \[
-H_{\Bbbk A_3}(t)=\begin{pmatrix}1&t&t^2\\0&1&t\\0&0&1\end{pmatrix},
+h_{\Bbbk A_3}(t)=\begin{pmatrix}1&t&t^2\\0&1&t\\0&0&1\end{pmatrix},
 \qquad
 H_{\Bbbk A_3/(e_{13})}(t)=\begin{pmatrix}1&t&0\\0&1&t\\0&0&1\end{pmatrix}.
 \]
@@ -914,11 +917,11 @@ For $S,V,a,b$ in Example~\ref{ex:two-vertex-relations}, use the order $e_1,e_2$.
 C=\dimvec V=\begin{pmatrix}0&1\\1&0\end{pmatrix},
 \qquad C^2=I_2,
 \qquad
-H_{T_S(V)}(t)=\frac{1}{1-t^2}\begin{pmatrix}1&t\\t&1\end{pmatrix}.
+h_{T_S(V)}(t)=\frac{1}{1-t^2}\begin{pmatrix}1&t\\t&1\end{pmatrix}.
 \]
 In $A=T_S(V)/(ab)$, the degree $2$ basis vector $ba$ belongs to $e_2Ae_2$, so
 \[
-H_A(t)=\begin{pmatrix}1&t\\t&1+t^2\end{pmatrix}.
+h_A(t)=\begin{pmatrix}1&t\\t&1+t^2\end{pmatrix}.
 \]
 \end{example}
 
@@ -926,8 +929,8 @@ H_A(t)=\begin{pmatrix}1&t\\t&1+t^2\end{pmatrix}.
 For the algebras in Example~\ref{ex:polynomial-exterior}, $S=\Bbbk$ and there is one dimension entry.
 Each polynomial generator may occur any number of times, whereas each exterior generator occurs at most once. Thus
 \[
-H_{\SymAlg(V)}(t)=\frac{1}{(1-t)^n},\qquad
-H_{\bigwedge W}(t)=(1+t)^m
+h_{\SymAlg(V)}(t)=\frac{1}{(1-t)^n},\qquad
+h_{\bigwedge W}(t)=(1+t)^m
 \quad\text{where }n=\dim_\Bbbk V,\ m=\dim_\Bbbk W.
 \]
 \end{example}
@@ -935,7 +938,7 @@ H_{\bigwedge W}(t)=(1+t)^m
 \begin{lemma}\label{lem:hilbert-field-tensor}
 For locally finite-dimensional graded vector spaces $U,W$ bounded below,
 \[
-H_{U\otimes_\Bbbk W}(t)=H_U(t)H_W(t).
+h_{U\otimes_\Bbbk W}(t)=h_U(t)h_W(t).
 \]
 Let $A,B$ be locally finite-dimensional graded algebras with $A_0=\Bbbk^{\oplus r}$ and $B_0=\Bbbk^{\oplus s}$.
 Write $e_1,\ldots,e_r$ and $f_1,\ldots,f_s$ for the coordinate idempotents.
@@ -943,8 +946,8 @@ Give $A\otimes_\Bbbk B$ the total grading and multiplication
 $(a\otimes b)(a'\otimes b')=aa'\otimes bb'$.
 Then
 \[
-H_{A\otimes_\Bbbk B}(t)_{(i,p),(j,q)}
-=H_A(t)_{ij}H_B(t)_{pq}
+h_{A\otimes_\Bbbk B}(t)_{(i,p),(j,q)}
+=h_A(t)_{ij}h_B(t)_{pq}
 \quad(1\leq i,j\leq r,\ 1\leq p,q\leq s).
 \]
 \end{lemma}
