@@ -680,7 +680,7 @@ A graded algebra $A$ is \defn{quadratic} if there exist a finite-dimensional sem
 An isomorphism $A\cong T_S(V)/(R)$ as in Definition~\ref{def:quadratic} is called a \defn{quadratic presentation} of $A$.
 
 \begin{proposition}\label{prop:quadratic-basic}
-A quadratic algebra $A=T_S(V)/(R)$ has $A_0=S$, $A_1=V$, and $A_2=(V\otimes_S V)/R$, is locally finite, and is generated in degree $1$ over $S$.
+A quadratic algebra $A=T_S(V)/(R)$ has $A_0=S$, $A_1=V$, and $A_2=(V\otimes_S V)/R$, is locally finite-dimensional-dimensional, and is generated in degree $1$ over $S$.
 \end{proposition}
 
 \begin{proof}
@@ -779,12 +779,12 @@ For $S=\Bbbk$, the dimension vector has one entry, the usual vector space dimens
 \end{example}
 
 \begin{definition}\label{def:hilbert-series}
-Let $M=\bigoplus_{d\in\Z}M_d$ be a locally finite graded right $S$-module, with $M_d=0$ for all sufficiently negative $d$.
+Let $M=\bigoplus_{d\in\Z}M_d$ be a locally finite-dimensional graded right $S$-module, with $M_d=0$ for all sufficiently negative $d$.
 Its \defn{Hilbert series} is
 \[
 H_M(t):=\sum_{d\in\Z}(\dimvec M_d)t^d.
 \]
-For a locally finite graded algebra $A$ with $A_0=S$, its \defn{Hilbert series} records the preceding module series row by row:
+For a locally finite-dimensional graded algebra $A$ with $A_0=S$, its \defn{Hilbert series} records the preceding module series row by row:
 \[
 H_A(t)_{ij}:=\bigl(H_{L_i\otimes_S A}(t)\bigr)_j
 \quad(1\leq i,j\leq r),
@@ -806,7 +806,7 @@ No numerical convergence is required: a coefficient is specified degree by degre
 For an algebra, keeping both indices records where products can be formed.
 
 \begin{lemma}\label{lem:hilbert-operations}
-For locally finite graded right $S$-modules bounded below:
+For locally finite-dimensional graded right $S$-modules bounded below:
 \begin{enumerate}
 \item A graded isomorphism $M\cong N$ implies $H_M(t)=H_N(t)$.
 \item A short exact sequence $0\to L\to M\to N\to0$ gives $H_M(t)=H_L(t)+H_N(t)$.
@@ -833,7 +833,7 @@ The same definition applies to bimodules, and to vector spaces by taking $S=\Bbb
 \end{definition}
 
 The decomposition follows by distributing tensor products over direct sums, as in Lemma~\ref{lem:tensor-properties}(4).
-When $M,N$ are locally finite and bounded below, only finitely many pairs $(p,q)$ contribute in a fixed degree, so the tensor product is locally finite and bounded below.
+When $M,N$ are locally finite-dimensional and bounded below, only finitely many pairs $(p,q)$ contribute in a fixed degree, so the tensor product is locally finite-dimensional and bounded below.
 
 To multiply two arrays $C=(c_{ij})$ and $D=(d_{ij})$, or a row vector $m=(m_i)$ and an array $C$, use
 \[
@@ -849,7 +849,7 @@ Let ${}_SU_S$, ${}_SW_S$ be finite-dimensional bimodules and $M$ a finite-dimens
 \dimvec(U\otimes_S W)=(\dimvec U)(\dimvec W),
 \qquad \dimvec(M\otimes_S U)=(\dimvec M)(\dimvec U).
 \]
-For a locally finite graded right $S$-module $M$ bounded below and a locally finite graded algebra $A$ with $A_0=S$, this gives
+For a locally finite-dimensional graded right $S$-module $M$ bounded below and a locally finite-dimensional graded algebra $A$ with $A_0=S$, this gives
 \[
 H_{M\otimes_S A}(t)=H_M(t)H_A(t).
 \]
@@ -933,11 +933,11 @@ H_{\bigwedge W}(t)=(1+t)^m
 \end{example}
 
 \begin{lemma}\label{lem:hilbert-field-tensor}
-For locally finite graded vector spaces $U,W$ bounded below,
+For locally finite-dimensional graded vector spaces $U,W$ bounded below,
 \[
 H_{U\otimes_\Bbbk W}(t)=H_U(t)H_W(t).
 \]
-Let $A,B$ be locally finite graded algebras with $A_0=\Bbbk^{\oplus r}$ and $B_0=\Bbbk^{\oplus s}$.
+Let $A,B$ be locally finite-dimensional graded algebras with $A_0=\Bbbk^{\oplus r}$ and $B_0=\Bbbk^{\oplus s}$.
 Write $e_1,\ldots,e_r$ and $f_1,\ldots,f_s$ for the coordinate idempotents.
 Give $A\otimes_\Bbbk B$ the total grading and multiplication
 $(a\otimes b)(a'\otimes b')=aa'\otimes bb'$.

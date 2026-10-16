@@ -14,7 +14,7 @@
 
 \subsection{Projective covers and the graded Nakayama lemma}
 
-Let $A=\bigoplus_{d\geq0}A_d$ be a locally finite graded algebra with $S=A_0$ finite-dimensional semisimple.
+Let $A=\bigoplus_{d\geq0}A_d$ be a locally finite-dimensional graded algebra with $S=A_0$ finite-dimensional semisimple.
 Write
 \[
 A_+:=\bigoplus_{d>0}A_d.
@@ -54,7 +54,7 @@ All such $m_j$ vanish by the choice of $d$, so $(MA_+)_d=0$, contradicting $M_d=
 \end{proof}
 
 \begin{definition}\label{def:graded-projective-cover}
-A \defn{graded projective cover} of a bounded below locally finite graded right $A$-module $M$ is a surjective degree preserving map $p:P\to M$ from a bounded below locally finite graded projective module such that
+A \defn{graded projective cover} of a bounded below locally finite-dimensional graded right $A$-module $M$ is a surjective degree preserving map $p:P\to M$ from a bounded below locally finite-dimensional graded projective module such that
 \[
 \overline p:P/PA_+\xrightarrow{\sim}M/MA_+.
 \]
@@ -63,7 +63,7 @@ A \defn{graded projective cover} of a bounded below locally finite graded right 
 For a surjection $p:P\to M$, the condition in Definition~\ref{def:graded-projective-cover} is equivalent to $\Ker p\subseteq PA_+$, since $p(PA_+)=MA_+$.
 
 \begin{proposition}\label{prop:graded-projective-covers}
-Every bounded below locally finite graded right $A$-module has a graded projective cover, unique up to isomorphism over $M$.
+Every bounded below locally finite-dimensional graded right $A$-module has a graded projective cover, unique up to isomorphism over $M$.
 \end{proposition}
 
 \begin{proof}
@@ -73,7 +73,7 @@ Set
 P:=\bigoplus_{d\in\mathbb Z}(\overline M_d\otimes_S A)(-d).
 \]
 Each $\overline M_d$ is projective over $S$, so $P$ is a graded projective right $A$-module.
-Since $M$ is bounded below and locally finite, each degree of $P$ is a finite sum of finite-dimensional spaces; hence $P$ is locally finite.
+Since $M$ is bounded below and locally finite-dimensional, each degree of $P$ is a finite sum of finite-dimensional spaces; hence $P$ is locally finite-dimensional.
 The maps
 \[
 \overline M_d\otimes_S A\longrightarrow M,\qquad
@@ -106,13 +106,13 @@ It is \defn{minimal} if $p_0:P_0\to M$ is a graded projective cover and, for eac
 \end{definition}
 
 \begin{theorem}\label{thm:minimal-resolution}
-Every bounded below locally finite graded right $A$-module has a minimal graded projective resolution.
+Every bounded below locally finite-dimensional graded right $A$-module has a minimal graded projective resolution.
 For any two such resolutions $P_\bullet\to M$ and $P'_\bullet\to M$, there are degree preserving isomorphisms $P_i\to P'_i$ commuting with the differentials and the maps to $M$.
 \end{theorem}
 
 \begin{proof}
 Take a projective cover $p_0:P_0\to M$ using Proposition~\ref{prop:graded-projective-covers}, and set $K_1=\Ker p_0$.
-The module $K_1$ is bounded below and locally finite, so it has a projective cover $q_1:P_1\to K_1$.
+The module $K_1$ is bounded below and locally finite-dimensional, so it has a projective cover $q_1:P_1\to K_1$.
 Repeat: after defining $q_i:P_i\to K_i$, set $K_{i+1}=\Ker q_i$ and cover $K_{i+1}$ by $q_{i+1}:P_{i+1}\to K_{i+1}$.
 Composing each $q_i$ with the inclusion $K_i\hookrightarrow P_{i-1}$ gives $d_i$ and an exact minimal resolution.
 
@@ -179,6 +179,6 @@ Every differential has image in the preceding term times $E_+$, so the resolutio
 \begin{advanced}
 If $M$ is finitely generated, its first projective cover is finitely generated.
 Without a noetherian hypothesis on $A$, later kernels need not be finitely generated, so later terms of the minimal resolution need not be finitely generated.
-The bounded below locally finite setting above still gives projective covers and a minimal resolution.
+The bounded below locally finite-dimensional setting above still gives projective covers and a minimal resolution.
 \end{advanced}
 

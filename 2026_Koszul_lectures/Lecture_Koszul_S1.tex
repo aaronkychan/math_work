@@ -106,6 +106,8 @@ If every $\eta_X$ is an isomorphism, $\eta$ is a \defn{natural isomorphism}, wri
 \end{definition}
 
 The square in \eqref{eq:naturality-square} is said to \defn{commute}: its two routes from $F(X)$ to $G(Y)$ give the same morphism.
+We often say a family of morphisms (resp. isomorphisms) in a category $\CC$ is \defn{natural in $M\in\CC$} to mean that it defines a natural transformation (resp. isomorphism).
+
 For example, for fixed $c\in\Bbbk$, the maps $c\id_M:M\to M$ define a natural transformation $\id_{\Mod A}\to\id_{\Mod A}$ because $f(cm)=cf(m)$ for every module homomorphism $f:M\to N$.
 It is a natural isomorphism when $c\neq0$.
 
@@ -216,11 +218,11 @@ For semisimple $B$, every left or right $B$-module is semisimple, and every subm
 \end{theorem}
 
 \begin{corollary}\label{cor:semisimple-summands}
-Every finite-dimensional left or right module over a semisimple algebra $S$ is a direct summand of $S^{\oplus n}$ for some $n$.
+Every finite-dimensional left or right module over a finite-diemnsional semisimple algebra $S$ is a direct summand of $S^{\oplus n}$ for some $n$, i.e. $M\in \add(S)$ for all $M\in \mod S$.
 \end{corollary}
 
 \begin{proof}
-A finite generating set gives a surjection $S^{\oplus n}\onto M$. By Theorem~\ref{thm:artin-wedderburn}, its kernel has a complement, which maps isomorphically onto $M$.
+A finite generating set gives a surjection $S^{\oplus n}\onto M$. By Theorem~\ref{thm:artin-wedderburn}, its kernel has a complement, which maps isomorphically onto $M$. \comm{what is this talking about?? we need kernel to be direct summand of $S^{\oplus n}$??}
 \end{proof}
 
 \begin{example}\label{ex:semisimple-algebras}
@@ -275,7 +277,7 @@ eAe=\left\{\begin{pmatrix}B&0\\0&0\end{pmatrix}\;\middle|\;B\in\Bbbk A_{n-1}\rig
 
 Idempotents also describe maps out of the summands of $A_A$.
 \begin{lemma}[Yoneda lemma]\label{lem:idempotent-hom}
-For an idempotent $e\in A$ and a right $A$-module $M$, evaluation at $e$ gives a natural vector space isomorphism
+For an idempotent $e\in A$ and a right $A$-module $M$, evaluation at $e$ gives a natural (in $M$) vector space isomorphism
 \[
 \Hom_A(eA,M)\xrightarrow{\sim}Me,\qquad f\longmapsto f(e),
 \quad\text{with inverse}\quad m\longmapsto(ea\mapsto ma).
@@ -338,7 +340,7 @@ A \defn{homomorphism of graded algebras} $f:A\to B$ is a $\Bbbk$-algebra homomor
 \end{definition}
 
 \begin{definition}
-A graded algebra $A$ is \defn{locally finite} if $\dim_\Bbbk A_i<\infty$ for every $i\in\Z$.
+A graded algebra $A$ is \defn{locally finite-dimensional} (\defn{lfd}) if $\dim_\Bbbk A_i<\infty$ for every $i\in\Z$.
 \end{definition}
 %
 %\begin{assumption}\label{ass:degree-zero}
@@ -358,7 +360,7 @@ M_gA_h\subset M_{gh}
 \]
 An element of $M_g$ is called \defn{homogeneous of degree $g$}.
 
-A $G$-graded $A$-module $M=\bigoplus_{g\in G} M_g$ is \defn{locally finite} if $\dim_{\Bbbk} M_g <\infty$ for all $g\in G$.
+A $G$-graded $A$-module $M=\bigoplus_{g\in G} M_g$ is \defn{locally finite-dimensional} (\defn{lfd}) if $\dim_{\Bbbk} M_g <\infty$ for all $g\in G$.
 \end{definition}
 
 Unless specified otherwise, graded modules are $\Z$-graded; their degrees need not be non-negative.
@@ -423,14 +425,14 @@ Note that, like the grading shift functor, different literature has different no
 We write 
 \begin{align*}
 \Grmod A &:= \text{category of graded right $A$-modules with morphism spaces $\Hom_A^{\Z}(M,N)$},\\
-\grmod A &:= \text{full subcategory of $\Grmod A$ consisting of locally finite modules}.
+\grmod A &:= \text{full subcategory of $\Grmod A$ consisting of locally finite-dimensional modules}.
 \end{align*}
 Thus $\Grmod(A^\op)$ is the category of graded left $A$-modules and degree-preserving maps.
 Forgetting the grading gives a functor $\Grmod A\to\Mod A$.
 
 \begin{remark}
 $\grmod A$ is somewhat analogous to $\mod A$ but not really the same:
-If $A$ is locally finite, every finitely generated graded $A$-module $M$ is locally finite. ($\because$ a finite homogeneous generating set of a graded $A$-module $M$ gives a surjection from a finite direct sum of shifts of $A$ to $M$, so every $M_i$ has to be finite-dimensional.)  However, a locally finite $M$ need not be finitely generated.
+If $A$ is locally finite-dimensional, every finitely generated graded $A$-module $M$ is locally finite-dimensional. ($\because$ a finite homogeneous generating set of a graded $A$-module $M$ gives a surjection from a finite direct sum of shifts of $A$ to $M$, so every $M_i$ has to be finite-dimensional.)  However, a locally finite-dimensional $M$ need not be finitely generated.
 \end{remark}
  
 For $d\in\Z$, the shift of Definition~\ref{def:shift} is a functor \[(d):\Grmod A\to\Grmod A.\]
@@ -470,7 +472,7 @@ Note that $\deg \rad P_1 = 1$ and $\deg S_1=0$.  Let $S_2:=\Bbbk e_{22} = e_{22}
 \begin{lemma}\label{lem:homogeneous-hom-sum}
 For graded right $A$-modules $M,N$, there is an inclusion 
 \[
-\bigoplus_{d\in\Z}\Hom_A^{\Z}(M,N(d))\subset\Hom_A(M,N), \text{ which is equality when } M\in \mod A.
+\bigoplus_{d\in\Z}\Hom_A^{\Z}(M,N(d))\subset\Hom_A(M,N), \text{ which is equality when $M$ is finitely generated.}
 \]
 \end{lemma}
 
@@ -545,7 +547,7 @@ Choose a basis $\{u_i\mid i\in I\}$ of $U$ and a basis $\{v_j\mid j\in J\}$ of $
 The \defn{tensor product} $U\otimes_\Bbbk V$ is the vector space with basis $\{u_i\otimes v_j\mid i\in I,\ j\in J\}$.
 \end{definition}
 
-The assignment $(u_i,v_j)\mapsto u_i\otimes v_j$ extends uniquely to a bilinear map $U\times V\to U\otimes_\Bbbk V$ sending $(u,v)\mapsto u\otimes v$.  
+The assignment $(u_i,v_j)\mapsto u_i\otimes v_j$ extends uniquely to a bilinear map $U\times V\to U\otimes_\Bbbk V$ sending $(u,v)\mapsto u\otimes v$.  Note that this means that elements like $(au_1+bu_2)\otimes (cv_1+dv_2)$ in $U\otimes_\Bbbk V$ is by definition the linear combination $ac(u_1\otimes v_1) + ad(u_1\otimes v_2) + bc(u_2\otimes v_1) + bd(u_2\otimes v_2)$.
 
 
 % An element of the form $u\otimes v$ is called a \defn{pure tensor}.
@@ -706,19 +708,21 @@ Since the $v_i$ are linearly independent, $(v_i)_i$ is not in the image.
 
 
 \begin{definition}\label{def:bimodule}
-For $\Bbbk$-algebras $B,C$, a \defn{$(B,C)$-bimodule} $M$ is a vector space $M$ where left $B$- and right $C$-module actions commute, i.e. $(bm)c=b(mc)$ for all $b\in B$, $c\in C$, and $m\in M$.
-When $B=C=A$, we call $M$ an \defn{$A$-bimodule}.
-For graded $B,C$, a bimodule $M$ is \defn{graded} if $M=\bigoplus_{i\in \Z}M_i$ as vector space and $B_iM_jC_k\subset M_{i+j+k}$ for all $i,j,k\in\Z$.
+For $\Bbbk$-algebras $B,C$, we say that $M$ is a \defn{left $B$ right $C$ bimodule}, or simply \defn{$(B,C)$-bimodule}, if it is a vector space equipped with commuting left $B$-action and right $C$-action, i.e. $(bm)c=b(mc)$ for all $b\in B$, $c\in C$, and $m\in M$.
+When $B=C=A$, we simply call $M$ an \defn{$A$-bimodule}.
+\comm{check}
+A homomorphism of bimodule is a homorphism of both left $B$-module and right $C$-module.
+For graded $B,C$, a bimodule $M$ is \defn{graded} if $M=\bigoplus_{i\in \Z}M_i$ as vector space and $B_iM_jC_k\subset M_{i+j+k}$ for all $i,j,k\in\Z$.   Homomorphisms of graded bimodules are defined analogously.
 \end{definition}
 
 \phantomsection\label{not:bimodule-notation}
 \begin{convention}
 \begin{itemize}
 \item Bilinearity implies that $\Bbbk$ acts centrally: $(c1_B)m=cm=m(c1_C)$ for $c\in\Bbbk$.  
-From the perspective of general module theory over general rings (algebras over non-field commutative rings), we should have said that our bimodules are $\Bbbk$-central bimodule.  Since we alawys work over a field, all bimodules we considered are always $\Bbbk$-central and we will not write such adjective everytime.
+From the perspective of general module theory over general rings (algebras over non-field commutative rings), we should have said that our bimodules are $\Bbbk$-central bimodule.  Since we alawys work over a field, all bimodules we considered are always $\Bbbk$-central and we will not write such adjective every time.
 
-\item  Instead of saying $(B,C)$-bimodule everytime, we usually just write ${}_BM_C$.
-It would be natural to write $B\Mod C$ for the category of these bimodules and maps preserving both actions, but since $\Bbbk$-centrality comes for free from the assumption of $\Bbbk$ being a field, we can use $\Mod C\otimes_\Bbbk B^\op$ instead.
+\item  Instead of saying $(B,C)$-bimodule, we usually just write ${}_BM_C$.
+It would be natural to write $B\Mod C$ for the category of $(B,C)$-bimodules, but since $\Bbbk$-centrality comes for free from the assumption of $\Bbbk$ being a field, we can use $\Mod C\otimes_\Bbbk B^\op$ instead.
 \end{itemize}
 \end{convention}
 
@@ -872,12 +876,12 @@ Let $A$ be a $\Bbbk$-algebra.
 D: (\mod A)^\op \xrightarrow{\sim}\mod (A^\op), \qquad D: (\mod (A^\op))^\op \xrightarrow{\sim}\mod A.
 \]
 
-\item Suppose that $A$ is graded.  For locally finite $M\in \grmod A$, evaluation is a natural graded module isomorphism
+\item Suppose that $A$ is graded.  For locally finite-dimensional $M\in \grmod A$, evaluation is a natural graded module isomorphism
 \begin{equation}\label{eq:linear-bidual-evaluation}
 \mathrm{ev}_M:M\xrightarrow{\sim}\bbD(\bbD(M)),\qquad
 m\longmapsto(f\mapsto f(m)).
 \end{equation}
-In particular, we have a duality between locally finite graded right and left $A$-modules:
+In particular, we have a duality between locally finite-dimensional graded right and left $A$-modules:
 \begin{equation}\label{eq:graded-linear-dual}
 \bbD:(\grmod A)^\op\xrightarrow{\sim}\grmod(A^\op),\qquad
 \bbD:(\grmod(A^\op))^\op\xrightarrow{\sim}\grmod A.
@@ -900,7 +904,7 @@ For (2), apply (1) degree-wise.
 \end{proof}
 
 \begin{advanced}
-For a locally finite graded vector space $V$, restriction gives
+For a locally finite-dimensional graded vector space $V$, restriction gives
 \[
 \bbD(V)=\bigoplus_{i\in\Z}D(V_{-i})\subset
 D(V)\cong\prod_{i\in\Z}D(V_i).
@@ -913,7 +917,7 @@ Graded linear duality need not preserve finite generation, even for a polynomial
 Let $A=\Bbbk[x]$ with $\deg x=1$ and let $\varepsilon_n(x^m)=\delta_{nm}$ for $n,m\geq0$.
 Then $\deg\varepsilon_n=-n$, $x\varepsilon_0=0$, and $x\varepsilon_n=\varepsilon_{n-1}$ for $n\geq1$.
 Any finite set of elements of $\bbD(A)$ lies in the span of $\varepsilon_0,\ldots,\varepsilon_N$ for some $N$, and multiplication by $x$ preserves that span.
-Thus $\bbD(A)$ is locally finite but not finitely generated.
+Thus $\bbD(A)$ is locally finite-dimensional but not finitely generated.
 \end{example}
 \end{advanced}
 
@@ -976,7 +980,7 @@ With the actions from Definition~\ref{def:S-duals}, we obtain functors
 {}^{\grstar}(-):(\Grmod(S^\op))^\op\longrightarrow\Grmod S.
 \end{equation}
 
-Each functor in \eqref{eq:graded-S-dual-functors} restricts to locally finite modules: replace $\Grmod$ by $\grmod$ in its source and target.
+Each functor in \eqref{eq:graded-S-dual-functors} restricts to locally finite-dimensional modules: replace $\Grmod$ by $\grmod$ in its source and target.
 Indeed, for $R=S$ or $S^\op$ and $M\in\grmod R$,
 \begin{equation}\label{eq:graded-S-dual-finiteness}
 \dim_\Bbbk\Hom_R(M_{-i},R)
@@ -1046,7 +1050,7 @@ D,\ (-)^*,\ {}^*(-)&:(\Mod S^\en)^\op\longrightarrow\Mod S^\en,\\
 \bbD,\ (-)^{\grstar},\ {}^{\grstar}(-)&:(\Grmod S^\en)^\op\longrightarrow\Grmod S^\en.
 \end{aligned}
 \end{equation}
-The restrictions to finite-dimensional modules, and to locally finite graded modules, are dualities by Lemmas~\ref{lem:linear-bidual} and~\ref{lem:S-bidual}.
+The restrictions to finite-dimensional modules, and to locally finite-dimensional graded modules, are dualities by Lemmas~\ref{lem:linear-bidual} and~\ref{lem:S-bidual}.
 \begin{supplementary}
 Evaluation preserves both actions: for $m\in M$, $f\in M^*$, and $s,t\in S$,
 \[
@@ -1091,7 +1095,7 @@ On a degree $0$ bimodule map $u:M\to N$, its degree $i$ component is
 \qquad F\longmapsto F\circ u|_{M_{-i}}
 \quad(i\in\Z).
 \]
-The functor restricts to locally finite bimodules by \eqref{eq:graded-S-dual-finiteness} with $R=S^\en$.
+The functor restricts to locally finite-dimensional bimodules by \eqref{eq:graded-S-dual-finiteness} with $R=S^\en$.
 
 The four duals above follow the distinction in Grant--Iyama \cite[\S2.1, pp.~2592--2593]{GI20}, with the following notation changes:
 \[
@@ -1247,7 +1251,7 @@ $\tau(a_1,\ldots,a_r)=\sum_{i=1}^r c_i a_i$ on $\Bbbk^{\oplus r}$.
 \begin{remark}\label{rem:transported-dual-action}
 Let $A$ be a graded algebra with $A_0=S$.
 The space $\Hom_S(M,S)$ do not have a natural left $A$-module on the spot, but can be after \emph{picking a symmetrising form $\tau$ of $S$}.
-Indeed, the comparison \eqref{eq:graded-dual-comparison} transports the canonical left $A$-action on $\bbD(M)$ to the graded $S$-dual of a locally finite module:
+Indeed, the comparison \eqref{eq:graded-dual-comparison} transports the canonical left $A$-action on $\bbD(M)$ to the graded $S$-dual of a locally finite-dimensional module:
 \[
 af=\alpha_M^{-1}(a\alpha_M(f))\quad\text{for right }M,
 \qquad ga=\beta_N^{-1}(\beta_N(g)a)\quad\text{for left }N,
@@ -1287,7 +1291,7 @@ Consequently, on finite-dimensional $S$-bimodules all four dual functors are nat
 (-)^{*_{\en}}\xrightarrow[\gamma]{\sim}(-)^*
 \xrightarrow[\alpha]{\sim}D\xleftarrow[\beta]{\sim}{}^*(-).
 \]
-Applying $\gamma$ in each degree gives the corresponding natural isomorphisms on locally finite graded $S$-bimodules:
+Applying $\gamma$ in each degree gives the corresponding natural isomorphisms on locally finite-dimensional graded $S$-bimodules:
 \[
 (-)^{\grstar[_{\en}]}\xrightarrow[\gamma]{\sim}(-)^{\grstar}
 \xrightarrow[\alpha]{\sim}\bbD\xleftarrow[\beta]{\sim}{}^{\grstar}(-).
