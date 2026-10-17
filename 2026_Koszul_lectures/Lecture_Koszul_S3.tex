@@ -217,7 +217,7 @@ Take $A=\Bbbk A_n$, $S=\bigoplus_{i=1}^n\Bbbk e_{ii}$, and $V=\bigoplus_{i=1}^{n
 There are no quadratic relations, so $A^!$ has the reversed generators $e_{i,i+1}^*\in e_{i+1,i+1}V^*e_{ii}$ and every composable product of two generators is zero.
 With $C$ as in Example~\ref{ex:hilbert-triangular}, this gives
 \[
-H_{A^!}(t)=I_n+tC^{\mathsf T}.
+h_{A^!}(t)=I_n+tC^{\mathsf T}.
 \]
 Here ${}^{\mathsf T}$ denotes transpose: $(C^{\mathsf T})_{ij}=C_{ji}$.
 For $n=3$,
@@ -232,9 +232,9 @@ These are graded isomorphisms fixing the diagonal idempotents.
 \begin{example}\label{ex:hilbert-dual-An}
 For $A=\Bbbk A_2$, Examples~\ref{ex:hilbert-triangular} and~\ref{ex:An-quadratic-dual} give
 \[
-H_A(t)=\begin{pmatrix}1&t\\0&1\end{pmatrix},\qquad
-H_{A^!}(-t)^{\mathsf T}=\begin{pmatrix}1&-t\\0&1\end{pmatrix},\qquad
-H_A(t)H_{A^!}(-t)^{\mathsf T}=I_2.
+h_A(t)=\begin{pmatrix}1&t\\0&1\end{pmatrix},\qquad
+h_{A^!}(-t)^{\mathsf T}=\begin{pmatrix}1&-t\\0&1\end{pmatrix},\qquad
+h_A(t)h_{A^!}(-t)^{\mathsf T}=I_2.
 \]
 The transpose aligns the indices because an $S$-dual reverses the two idempotents in \eqref{eq:dual-basis-idempotents}.
 \end{example}
@@ -252,8 +252,8 @@ A^!=S\oplus\Bbbk a^*\oplus\Bbbk b^*\oplus\Bbbk b^*a^*.
 The original relation $ab=0$ corresponds to the surviving word $b^*a^*$; the surviving word $ba$ corresponds to the dual relation $a^*b^*=0$.
 In the order $e_1,e_2$, their Hilbert series are
 \[
-H_A(t)=\begin{pmatrix}1&t\\t&1+t^2\end{pmatrix},\qquad
-H_{A^!}(t)=\begin{pmatrix}1+t^2&t\\t&1\end{pmatrix}.
+h_A(t)=\begin{pmatrix}1&t\\t&1+t^2\end{pmatrix},\qquad
+h_{A^!}(t)=\begin{pmatrix}1+t^2&t\\t&1\end{pmatrix}.
 \]
 The degree $2$ terms occur in different entries: $ba\in e_2Ae_2$, whereas $b^*a^*\in e_1A^!e_1$.
 \end{example}
@@ -293,7 +293,7 @@ Quadratic duality need not preserve Hilbert series: if $\dim_\Bbbk V>0$, Example
 \begin{advanced}
 The \emph{Koszul condition}, to be defined in Lecture~5, implies the identity
 \begin{equation}\label{eq:matrix-koszul-preview}
-H_A(t)H_{A^!}(-t)^{\mathsf T}=I_r
+h_A(t)h_{A^!}(-t)^{\mathsf T}=I_r
 \qquad\text{when }A_0=\bigoplus_{i=1}^r\Bbbk e_i.
 \end{equation}
 This is \cite[Lemma~2.11.1]{BGS96}; the proof will be given in Lecture~8.
@@ -301,48 +301,8 @@ Equation~\eqref{eq:matrix-koszul-preview} is not asserted for arbitrary quadrati
 For $\SymAlg(V)$ and its quadratic dual $\bigwedge D(V)$, with $n=\dim_\Bbbk V$, the case $S=\Bbbk$ gives $(1-t)^{-n}(1-t)^n=1$.
 \end{advanced}
 
-\subsection{Direct sums}
-
-\comm{don't do this for rings.  this should be direct products.  remove this subsection; it is too elementary. no added value to lecture, just waste time.}
-For graded algebras $A,B$, the finite direct sum $A\oplus B$ has componentwise multiplication, unit $(1_A,1_B)$, and $(A\oplus B)_i=A_i\oplus B_i$.
-In particular, its degree $0$ algebra is $A_0\oplus B_0$.
-
-\begin{proposition}\label{prop:dual-direct-sum}
-Let $A=T_S(V)/(R)$ and $B=T_T(W)/(Q)$ be quadratic algebras. Then $A\oplus B$ is quadratic over $S\oplus T$, and
-\[
-(A\oplus B)^!\cong A^!\oplus B^!.
-\]
-\end{proposition}
-
-\begin{proof}
-Let $(s,t)\in S\oplus T$ act on $V$ through $s$ and on $W$ through $t$, on both sides.
-The local unit $(1_S,0)$ is the identity on $V$ and acts as zero on $W$, so
-\[
-v\otimes_{S\oplus T}w
-=v(1_S,0)\otimes_{S\oplus T}w
-=v\otimes_{S\oplus T}(1_S,0)w=0
-\quad(v\in V,\ w\in W).
-\]
-Likewise $w\otimes_{S\oplus T}v=0$.
-Distributing tensor products over direct sums by Lemma~\ref{lem:tensor-properties}(4) gives
-\[
-\begin{aligned}
-T_{S\oplus T}(V\oplus W)&\cong T_S(V)\oplus T_T(W),\\
-(V\oplus W)\otimes_{S\oplus T}(V\oplus W)
-&\cong(V\otimes_S V)\oplus(W\otimes_T W).
-\end{aligned}
-\]
-The relation space is $R\oplus Q$.
-A right $(S\oplus T)$-linear map $V\oplus W\to S\oplus T$ maps $V$ into $S$ and $W$ into $T$, so the generator dual is $V^*\oplus W^*$.
-The annihilator of $R\oplus Q$ is therefore $R^\perp\oplus Q^\perp$, giving the assertion by Definition~\ref{def:quadratic-duals}.
-\end{proof}
-
-For example, $\bigl((\Bbbk A_2)^{\oplus2}\bigr)^!\cong\bigl((\Bbbk A_2)^\op\bigr)^{\oplus2}$ by Example~\ref{ex:An-quadratic-dual}.
-Both degree $0$ algebras are $\Bbbk^{\oplus4}$; there are no products connecting the two summands.
-
+\begin{advanced}[suppressfirstparskip=true,innertopmargin=0pt]
 \subsection{Tensor products and signs}
-
-\comm{this whole subsection should be advanced.  do we really use it in the future?  maybe leave until finished defining koszul algebra and all the fundamental theorem}
 
 \begin{definition}\label{def:algebra-tensor-products}
 For graded $\Bbbk$-algebras $A,B$, the \defn{ordinary tensor product} $A\otimes_\Bbbk B$ and the \defn{graded tensor product} $A\otimes_\Bbbk^{\mathrm{gr}}B$ have underlying vector space $A\otimes_\Bbbk B$ and the total grading of Definition~\ref{def:total-tensor-grading}, with products
@@ -369,10 +329,10 @@ Suppose $A_0=S$ and $B_0=T$ are finite-dimensional semisimple and $S\otimes_\Bbb
 The sign does not change the underlying graded $(S\otimes_\Bbbk T)$-bimodule, so the two tensor products have the same Hilbert series whenever $A,B$ are locally finite-dimensional.
 For $S=\Bbbk^{\oplus r}$ and $T=\Bbbk^{\oplus s}$, Lemma~\ref{lem:hilbert-field-tensor} gives its entries:
 \[
-H_{A\otimes_\Bbbk B}(t)_{(i,p),(j,q)}
-=H_A(t)_{ij}H_B(t)_{pq}.
+h_{A\otimes_\Bbbk B}(t)_{(i,p),(j,q)}
+=h_A(t)_{ij}h_B(t)_{pq}.
 \]
-In particular, when $S=T=\Bbbk$, this is $H_A(t)H_B(t)$.
+In particular, when $S=T=\Bbbk$, this is $h_A(t)h_B(t)$.
 
 \begin{proposition}\label{prop:dual-tensor-products}
 Let $A=T_S(V)/(R)$ and $B=T_T(W)/(Q)$ be quadratic algebras, and assume that $S\otimes_\Bbbk T$ is semisimple.
@@ -385,7 +345,6 @@ Then both tensor products are quadratic over $S\otimes_\Bbbk T$, and
 
 The mixed commuting relations become anticommuting relations under the reversed tensor pairing.
 
-\begin{advanced}
 The assumption on $S\otimes_\Bbbk T$ holds when $S,T$ are products of matrix algebras over $\Bbbk$, since $\Mat_a(\Bbbk)\otimes_\Bbbk\Mat_b(\Bbbk)\cong\Mat_{ab}(\Bbbk)$.
 It does not follow from semisimplicity alone: take $S=T$ to be the field in Example~\ref{ex:inseparable-envelope}.
 
@@ -429,7 +388,6 @@ Thus an annihilating pair of functionals must have equal components. As these si
 These are the mixed relations of $A^!\otimes_\Bbbk^{\mathrm{gr}}B^!$, proving the first isomorphism in \eqref{eq:dual-tensor-products}.
 For $A\otimes_\Bbbk^{\mathrm{gr}}B$, the minus sign in \eqref{eq:mixed-tensor-relations} is a plus sign. The mixed annihilator then has a minus sign, giving the ordinary tensor product on the dual side.
 \end{proof}
-\end{advanced}
 
 \begin{example}\label{ex:commuting-square-dual}
 We compute how Proposition~\ref{prop:dual-tensor-products} changes a commutation relation in a matrix example.
@@ -452,13 +410,13 @@ Order the degree $0$ idempotents as
 $e_{11}\otimes e_{11},e_{22}\otimes e_{11},e_{11}\otimes e_{22},e_{22}\otimes e_{22}$.
 The homogeneous bases give
 \[
-H_A(t)=\begin{pmatrix}
+h_A(t)=\begin{pmatrix}
 1&t&t&t^2\\
 0&1&0&t\\
 0&0&1&t\\
 0&0&0&1
 \end{pmatrix},\qquad
-H_{A^!}(t)=H_A(t)^{\mathsf T}.
+h_{A^!}(t)=h_A(t)^{\mathsf T}.
 \]
 The signs agree with Proposition~\ref{prop:dual-tensor-products}; in characteristic $2$, the same presentations remain valid with $-1=1$.
 Here replacing $d^*$ by $-d^*$ removes the minus sign. In this example the sign distinguishes the specified presentations, not the isomorphism classes of algebras.
@@ -477,6 +435,7 @@ Let $V=\Bbbk x_1\oplus\Bbbk x_2$ and let $y_1,y_2$ be the dual basis of $W=D(V)$
 If $\Char\Bbbk\neq2$, the ordinary tensor product of the two square-zero algebras is commutative, whereas the graded tensor product is not: $y_1y_2=-y_2y_1\neq0$.
 They are therefore not isomorphic. This sign cannot be removed by a change of generators.
 \end{example}
+\end{advanced}
 
 \subsection{Exercises}
 
@@ -497,9 +456,12 @@ Compute the quadratic dual of $T_S(V)/(ab,ba)$ and the Hilbert series of both al
 \]
 \end{exercise}
 
+\begin{advanced}
 \begin{exercise}
 For the four generators in Example~\ref{ex:commuting-square-dual}, replace the relation $ab-cd$ by $ab-\lambda cd$, where $\lambda\in\Bbbk$.
 Compute the quadratic dual relation for every $\lambda$, including $\lambda=0$, and recover the original relation by dualising again.
+
 \emph{Hint.} Evaluate $\mu b^*a^*+\nu d^*c^*$ on $ab-\lambda cd$. For $\lambda\neq0$, rescale $d$ to compare with Example~\ref{ex:commuting-square-dual}.
 \end{exercise}
+\end{advanced}
 

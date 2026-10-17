@@ -222,7 +222,10 @@ Every finite-dimensional left or right module over a finite-diemnsional semisimp
 \end{corollary}
 
 \begin{proof}
-A finite generating set gives a surjection $S^{\oplus n}\onto M$. By Theorem~\ref{thm:artin-wedderburn}, its kernel has a complement, which maps isomorphically onto $M$. \comm{what is this talking about?? we need kernel to be direct summand of $S^{\oplus n}$??}
+Choose a surjection $p:S^{\oplus n}\onto M$.
+By Theorem~\ref{thm:artin-wedderburn}, there is a submodule $L$ such that $S^{\oplus n}=\Ker p\oplus L$.
+The restriction $p|_L:L\to M$ has kernel $L\cap\Ker p=0$ and image $p(L)=p(S^{\oplus n})=M$.
+Hence $L\cong M$, so $S^{\oplus n}\cong\Ker p\oplus M$.
 \end{proof}
 
 \begin{example}\label{ex:semisimple-algebras}
@@ -708,11 +711,11 @@ Since the $v_i$ are linearly independent, $(v_i)_i$ is not in the image.
 
 
 \begin{definition}\label{def:bimodule}
-For $\Bbbk$-algebras $B,C$, we say that $M$ is a \defn{left $B$ right $C$ bimodule}, or simply \defn{$(B,C)$-bimodule}, if it is a vector space equipped with commuting left $B$-action and right $C$-action, i.e. $(bm)c=b(mc)$ for all $b\in B$, $c\in C$, and $m\in M$.
-When $B=C=A$, we simply call $M$ an \defn{$A$-bimodule}.
-\comm{check}
-A homomorphism of bimodule is a homorphism of both left $B$-module and right $C$-module.
-For graded $B,C$, a bimodule $M$ is \defn{graded} if $M=\bigoplus_{i\in \Z}M_i$ as vector space and $B_iM_jC_k\subset M_{i+j+k}$ for all $i,j,k\in\Z$.   Homomorphisms of graded bimodules are defined analogously.
+For $\Bbbk$-algebras $B,C$, a \defn{bimodule} $ {}_BM_C$ is a vector space with $\Bbbk$-bilinear left $B$- and right $C$-module actions satisfying $(bm)c=b(mc)$ for all $b\in B$, $c\in C$, and $m\in M$.
+The subscripts indicate the left and right acting algebras; when $B=C=A$, we call $M$ an \defn{$A$-bimodule}.
+A \defn{bimodule homomorphism} $f:{}_BM_C\to{}_BN_C$ is a linear map satisfying $f(bmc)=bf(m)c$ for all $b\in B$, $c\in C$, and $m\in M$.
+For graded $B,C$, a bimodule $M$ is \defn{graded} if $M=\bigoplus_{i\in\Z}M_i$ and $B_iM_jC_k\subset M_{i+j+k}$ for all $i,j,k\in\Z$.
+A \defn{graded bimodule homomorphism} is a bimodule homomorphism $f:M\to N$ satisfying $f(M_i)\subset N_i$ for all $i\in\Z$.
 \end{definition}
 
 \phantomsection\label{not:bimodule-notation}
@@ -764,7 +767,17 @@ u(bma)=bu(m)a\quad(a,b\in A,\ m\in M)
 \quad\Longleftrightarrow\quad
 u\in\Hom_{A^\en}(M,N).
 \]
-Thus $\Mod A^\en$ is also the category of $A$-bimodules and maps preserving both actions.
+Thus $A\Mod A$ is identified with $\Mod A^\en$.
+More generally, for $\Bbbk$-algebras $B,C$, the vector space $C\otimes_\Bbbk B^\op$ is an algebra with
+\[
+(c\otimes b^\op)(c'\otimes(b')^\op)=cc'\otimes(b'b)^\op,
+\qquad 1=1_C\otimes1_B^\op.
+\]
+The same construction identifies the categories
+\[
+B\Mod C\simeq\Mod(C\otimes_\Bbbk B^\op),
+\qquad m\cdot(c\otimes b^\op)=bmc.
+\]
 \end{supplementary}
 
 \begin{advanced}
@@ -921,7 +934,30 @@ Thus $\bbD(A)$ is locally finite-dimensional but not finitely generated.
 \end{example}
 \end{advanced}
 
-\comm{there should be contents related to the last 2 paragraphs of BGS subsec 2.7 here}
+For vector spaces $V,W$, a functional $f\in D(V)$ and a vector $w\in W$ define a linear map $V\to W$, $v\mapsto f(v)w$.
+Finite sums of these maps give the following description of Hom.
+
+\begin{proposition}\label{prop:linear-Hom-tensor}
+For vector spaces $V,W$, there is a natural linear map
+\begin{equation}\label{eq:linear-Hom-tensor}
+W\otimes_\Bbbk D(V)\longrightarrow\Hom_\Bbbk(V,W),
+\qquad w\otimes f\longmapsto\bigl(v\mapsto f(v)w\bigr).
+\end{equation}
+It is an isomorphism if either $V$ or $W$ is finite-dimensional.
+\end{proposition}
+
+\begin{supplementary}
+\begin{proof}
+If $V$ has a finite basis $\{v_i\mid 1\leq i\leq n\}$ with dual basis $\{v_i^*\mid 1\leq i\leq n\}$, the inverse of \eqref{eq:linear-Hom-tensor} is
+\[
+\Hom_\Bbbk(V,W)\longrightarrow W\otimes_\Bbbk D(V),
+\qquad F\longmapsto\sum_{i=1}^nF(v_i)\otimes v_i^*,
+\]
+since $v=\sum_{i=1}^n v_i^*(v)v_i$.
+If instead $W$ has a finite basis $\{w_j\mid 1\leq j\leq m\}$, write $F(v)=\sum_{j=1}^m f_j(v)w_j$; the uniquely determined coordinate functionals $f_j\in D(V)$ give the inverse $F\mapsto\sum_{j=1}^m w_j\otimes f_j$.
+The formulas commute with precomposition and postcomposition, so the comparison is natural.
+\end{proof}
+\end{supplementary}
 
 \subsection{\texorpdfstring{Left, right, and two-sided duals over $S$}{Left, right, and two-sided duals over S}}
 
@@ -1127,7 +1163,94 @@ In particular, their star denotes the linear dual; our star denotes the right $S
 \end{advanced}
 
 
-\comm{there should be contents related to the last 2 paragraphs of BGS subsec 2.7 here}
+\subsection{Hom spaces and evaluation}
+
+For the $S$-module version of \eqref{eq:linear-Hom-tensor}, we need tensor products over an algebra.
+Let $A$ be any $\Bbbk$-algebra, $M$ a right $A$-module, and $N$ a left $A$-module.
+
+\begin{definition}\label{def:module-tensor}
+The \defn{tensor product of $M$ and $N$ over $A$}, denoted $M\otimes_A N$, is the quotient of the vector space $M\otimes_\Bbbk N$ by
+\[
+\operatorname{span}_\Bbbk\{ma\otimes n-m\otimes an\mid m\in M,\ n\in N,\ a\in A\}.
+\]
+\end{definition}
+
+Write $m\otimes_A n$, or simply $m\otimes n$, for the image of $m\otimes n$ in this quotient.
+Thus $ma\otimes_A n=m\otimes_A an$ for all $m\in M$, $n\in N$, and $a\in A$.
+
+\begin{proposition}\label{prop:hom-from-S-duals}
+Let $S$ be finite-dimensional semisimple.
+For right $S$-modules $V,W$, and respectively left $S$-modules $V,W$, there are natural linear maps
+\begin{equation}\label{eq:hom-from-S-duals}
+\begin{aligned}
+W\otimes_S V^*&\longrightarrow\Hom_S(V,W),
+& w\otimes f&\longmapsto\bigl(v\mapsto wf(v)\bigr),\\
+{}^*V\otimes_S W&\longrightarrow\Hom_{S^\op}(V,W),
+& g\otimes w&\longmapsto\bigl(v\mapsto g(v)w\bigr).
+\end{aligned}
+\end{equation}
+Each map is an isomorphism if either $V$ or $W$ is finite-dimensional.
+For bimodules $ {}_SV_S$, $ {}_SW_S$, both maps preserve the outer actions on Hom, given for $s,t\in S$ and $v\in V$ by
+\[
+\begin{aligned}
+(sFt)(v)&=sF(tv)&&\text{for }F\in\Hom_S(V,W),\\
+(sFt)(v)&=F(vs)t&&\text{for }F\in\Hom_{S^\op}(V,W).
+\end{aligned}
+\]
+\end{proposition}
+
+\begin{supplementary}
+\begin{proof}
+For the first map in \eqref{eq:hom-from-S-duals}, the identities $(ws)f(v)=w(sf)(v)$ and $wf(vs)=wf(v)s$ give a well-defined map with right $S$-linear values.
+If $V=S$, evaluation at $1$ identifies the map with $W\otimes_S S\to W$, whose inverse is $w\mapsto w\otimes1$.
+If $W=S$, the map is $S\otimes_S V^*\to V^*$, whose inverse is $f\mapsto1\otimes f$.
+Distributing finite direct sums in the defining quotient and in Hom shows that the comparison is an isomorphism when either variable is a finite sum of copies of $S$.
+Restriction to a direct summand and Corollary~\ref{cor:semisimple-summands} give the assertion when either variable is finite-dimensional.
+Passing to $S^\op$ proves the assertion for the second map in \eqref{eq:hom-from-S-duals}.
+Precomposition and postcomposition commute with the formulas, proving naturality and compatibility with the outer actions.
+\end{proof}
+\end{supplementary}
+
+Evaluation applies a functional to an element.
+Coevaluation expresses the identity endomorphism as an element of a tensor product.
+
+\begin{proposition}\label{prop:S-evaluation-coevaluation}
+For a bimodule $ {}_SV_S$, where $S$ is finite-dimensional semisimple, evaluation gives bimodule maps
+\begin{equation}\label{eq:S-evaluation-pairings}
+\begin{aligned}
+V^*\otimes_S V&\longrightarrow S,& f\otimes v&\longmapsto f(v),\\
+V\otimes_S{}^*V&\longrightarrow S,& v\otimes g&\longmapsto g(v).
+\end{aligned}
+\end{equation}
+If $V$ is finite-dimensional, the \defn{coevaluation maps} are
+\begin{equation}\label{eq:S-coevaluation}
+\begin{aligned}
+S&\longrightarrow V\otimes_S V^*\xrightarrow{\sim}\End_S(V),
+& s&\longmapsto\bigl(v\mapsto sv\bigr),\\
+S&\longrightarrow{}^*V\otimes_S V\xrightarrow{\sim}\End_{S^\op}(V),
+& s&\longmapsto\bigl(v\mapsto vs\bigr).
+\end{aligned}
+\end{equation}
+The isomorphisms are those in \eqref{eq:hom-from-S-duals}, with $W=V$.
+Both coevaluation maps are bimodule maps, and each image of $1$ corresponds to $\id_V$.
+\end{proposition}
+
+\begin{supplementary}
+\begin{proof}
+The identities $(fs)(v)=f(sv)$ and $(sg)(v)=g(vs)$ from \eqref{eq:bimodule-dual-actions} make evaluation well-defined on the two tensor products; the other two actions give its bimodule linearity.
+For coevaluation, left multiplication is right $S$-linear and right multiplication is left $S$-linear because the two actions on $V$ commute.
+Under the Hom actions in Proposition~\ref{prop:hom-from-S-duals}, both multiplication assignments preserve the two $S$-actions.
+The isomorphisms in \eqref{eq:hom-from-S-duals} therefore give the stated bimodule maps.
+\end{proof}
+\end{supplementary}
+
+\begin{advanced}
+These are the constructions in the last two paragraphs of \cite[\S2.7, pp.~484--485]{BGS96}, translated to our notation.
+
+For a locally finite-dimensional graded bimodule $ {}_SV_S$, \eqref{eq:S-coevaluation} applies to each $V_d$; a coevaluation for the whole module need not exist.
+For example, take $S\neq0$ and $V=\bigoplus_{d\geq0}S(-d)$.
+Every element $\sum_{i=1}^n v_i\otimes f_i$ of $V\otimes_S V^{\grstar}$ defines an endomorphism with image contained in the finite-dimensional submodule $\sum_{i=1}^n v_iS$, so it cannot represent $\id_V$.
+\end{advanced}
 
 \subsection{Comparing the duals}
 

@@ -277,7 +277,7 @@ with left and right interchanged.
 The following parts are independent. Throughout this sheet, for an algebra
 $A=\bigoplus_{d\geq0}A_d$ with $A_0=\bigoplus_{i=1}^r\kk e_i$, use
 \[
-  H_A(t)_{ij}=\sum_{d\geq0}\dim_{\kk}(e_iA_de_j)t^d
+  h_A(t)_{ij}=\sum_{d\geq0}\dim_{\kk}(e_iA_de_j)t^d
   \qquad(1\leq i,j\leq r),
 \]
 with the idempotents in their listed order. Thus the coefficient of $t^d$
@@ -285,7 +285,7 @@ is the dimension vector of the $A_0$-bimodule $A_d$, recorded with two
 indices as in Lecture~2. When $A_0=\kk$, there is just one entry.
 \begin{parts}
 \part Let $A=\kk A_4/(e_{13},e_{24})$ with the quotient grading.
-Find a homogeneous basis, compute $H_A(t)$, and write
+Find a homogeneous basis, compute $h_A(t)$, and write
 $A=T_S(V)/(R)$ with explicit $S$, $V$, and $R\subset V\otimes_S V$.
 
 \part Let $S=\kk e_1\oplus\kk e_2$ with coordinate idempotents, and let
@@ -296,7 +296,7 @@ $V=\kk a\oplus\kk b$ satisfy
 with all other idempotent actions zero. Place $V$ in degree $1$.
 Find a basis of $T_S(V)_d$ for every $d\geq0$, and show that
 \[
-  H_{T_S(V)}(t)=\frac{1}{1-t^2}\begin{pmatrix}1&t\\t&1\end{pmatrix}.
+  h_{T_S(V)}(t)=\frac{1}{1-t^2}\begin{pmatrix}1&t\\t&1\end{pmatrix}.
 \]
 Find a homogeneous basis and the Hilbert series of $T_S(V)/(ab)$,
 and compare the two algebras.
@@ -373,14 +373,17 @@ For $q\in\kk$, let
 \]
 \begin{subparts}
 \subpart Find a homogeneous basis of $C_q$, compute every product of two
-basis elements, and determine $H_{C_q}(t)$. Treat $q=0$ as well as $q\neq0$, and justify
+basis elements, and determine $h_{C_q}(t)$. Treat $q=0$ as well as $q\neq0$, and justify
 that your proposed basis is linearly independent.
 \subpart For $u=\alpha x+\beta y\in(C_q)_1$, compute $u^2$.
 Determine, for each $q$, exactly which pairs $(\alpha,\beta)\in\kk^2$
 give $u^2=0$. For which $q$ does every element of $(C_q)_1$ square to zero?
 \subpart Compute a quadratic presentation of $C_q^!$ using the reversed
-pairing. Identify $C_1$ and $C_{-1}$ as the graded and ordinary tensor
-products, respectively, of two copies of $\kk[z]/(z^2)$ with $\deg z=1$.
+pairing.
+
+\emph{Advanced comparison.} Identify $C_1$ and $C_{-1}$ as the graded
+and ordinary tensor products, respectively, of two copies of
+$\kk[z]/(z^2)$ with $\deg z=1$.
 When the characteristic of $\kk$ is not $2$, are $C_1$ and $C_{-1}$
 isomorphic as algebras? Explain what changes in characteristic $2$.
 \end{subparts}
@@ -426,9 +429,9 @@ $a_d:=\dim_{\kk}B_d$ for $0\leq d\leq6$.
 \subpart For $d\geq2$, find an equation expressing $a_d$ in terms of
 $a_{d-1}$ and $a_{d-2}$ by sorting the basis words according to their
 first letter. Use the equation and the values of $a_0,a_1$ to find
-$H_B(t)$ as a rational function.
+$h_B(t)$ as a rational function.
 \subpart Write $X=x^*$ and $Y=y^*$. Compute $B^!$, find a homogeneous
-basis, and determine $H_{B^!}(t)$. Which of $B$ and $B^!$ are
+basis, and determine $h_{B^!}(t)$. Which of $B$ and $B^!$ are
 finite-dimensional?
 \end{subparts}
 \end{parts}

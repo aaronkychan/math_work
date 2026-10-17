@@ -9,18 +9,8 @@
 
 \subsection{Tensor products over an algebra}
 
-Let $A$ be any $\Bbbk$-algebra, $M$ a right $A$-module, and $N$ a left $A$-module.
-The tensor product over $A$ imposes the identities $ma\otimes n=m\otimes an$ for $m\in M$, $n\in N$, and $a\in A$.
-
-\begin{definition}\label{def:module-tensor}
-The \defn{tensor product of $M$ and $N$ over $A$}, denoted $M\otimes_A N$, is the quotient of the vector space $M\otimes_\Bbbk N$ by
-\[
-\operatorname{span}_\Bbbk\{ma\otimes n-m\otimes an\mid m\in M,\ n\in N,\ a\in A\}.
-\]
-\end{definition}
-
-
-By abuse of notation, we write $m\otimes n$ for the its own image in the $M\otimes_\Bbbk N \to M\otimes_AN$; if clarity is needed, then we will write $m\otimes_A n$.
+Recall the tensor product $M\otimes_A N$ from Definition~\ref{def:module-tensor}, for a right $A$-module $M$ and a left $A$-module $N$.
+Its defining identity is $ma\otimes_A n=m\otimes_A an$ for all $m\in M$, $n\in N$, and $a\in A$.
 
 %No semisimplicity or finiteness assumption on $S,M,N$ is needed for the following properties.
 
@@ -680,7 +670,7 @@ A graded algebra $A$ is \defn{quadratic} if there exist a finite-dimensional sem
 An isomorphism $A\cong T_S(V)/(R)$ as in Definition~\ref{def:quadratic} is called a \defn{quadratic presentation} of $A$.
 
 \begin{proposition}\label{prop:quadratic-basic}
-A quadratic algebra $A=T_S(V)/(R)$ has $A_0=S$, $A_1=V$, and $A_2=(V\otimes_S V)/R$, is locally finite-dimensional-dimensional, and is generated in degree $1$ over $S$.
+A quadratic algebra $A=T_S(V)/(R)$ has $A_0=S$, $A_1=V$, and $A_2=(V\otimes_S V)/R$, is locally finite-dimensional, and is generated in degree $1$ over $S$.
 \end{proposition}
 
 \begin{proof}
@@ -737,79 +727,66 @@ The symmetric and exterior algebras of Example~\ref{ex:polynomial-exterior} are 
 
 \subsection{Hilbert series}
 
-Fix a finite-dimensional semisimple $\Bbbk$-algebra $S$, concentrated in degree $0$.
-We record dimensions relative to all simple right $S$-modules.
-We define module series first, then collect them in an array for a graded algebra.
+Let $A$ be a locally finite-dimensional graded algebra with $S=A_0$ finite-dimensional semisimple.
+Each degree piece of a graded right $A$-module $M$ is naturally an $A$-module:
+\[
+M_d\cong M_{\geq d}/M_{\geq d+1},
+\qquad M_{\geq d}:=\bigoplus_{j\geq d}M_j.
+\]
+The action on $M_d$ factors through $A/A_+=S$, so $M_d$ is semisimple.
+The simple summands in a direct sum decomposition of $M_d$ are its \defn{composition factors}.
 
-\begin{definition}\label{def:dimension-vector}
-\comm{why do $S$-module.  It should be do-able for any $A$-module???  If needed, can just assume $A$ is lfd graded algebra.}
-Choose representatives $L_1,\ldots,L_r$ of the isomorphism classes of simple right $S$-modules.
-For a finite-dimensional right $S$-module $M$, write, with $m_j\in\Z_{\geq0}$,
+By Theorem~\ref{thm:artin-wedderburn}, choose primitive idempotents $e_1,\ldots,e_r\in S$ so that $L_j:=e_jS$ represents each isomorphism class of simple right $S$-modules once.
+Then $L_j\cong e_jA/e_jA_+$ is a graded simple $A$-module.
+\phantomsection\label{not:hilbert-simples-summands}
+
+\begin{definition}\label{def:dimension-vector}\label{def:hilbert-series}
+For a locally finite-dimensional graded right $A$-module $M$, write $[M_d:L_j]$ for the multiplicity of $L_j$ in $M_d$.
+Its degree $d$ \defn{dimension vector} is the row vector
 \[
-M\cong\bigoplus_{j=1}^r L_j^{\oplus m_j},
-\qquad \dimvec M:=(m_1,\ldots,m_r).
+\dimvec M_d:=\bigl([M_d:L_j]\bigr)_{1\leq j\leq r}.
 \]
-The row vector $\dimvec M$ is the \defn{dimension vector} of $M$.
-\comm{we don't use bimodule???}
-For a finite-dimensional bimodule ${}_SU_S$, arrange the vectors $\dimvec(L_i\otimes_S U)$ as rows:
+The module $M$ is \defn{bounded below} if $M_d=0$ for all sufficiently negative $d$.
+For such $M$, its \defn{Hilbert series} is
 \[
-\dimvec U=(u_{ij})_{1\leq i,j\leq r},
-\qquad (\dimvec U)_{ij}:=\bigl(\dimvec(L_i\otimes_S U)\bigr)_j.
+h_M(t):=\sum_{d\in\Z}(\dimvec M_d)t^d
+=\sum_{d\in\Z}\bigl([M_d:L_j]\bigr)_{1\leq j\leq r}t^d.
 \]
-Thus $L_i\otimes_S U\cong\bigoplus_{j=1}^rL_j^{\oplus u_{ij}}$.
+For $P_i:=e_iA$, the \defn{Hilbert series} of the algebra $A$ collects the right-module series $h_{P_i}(t)$ as rows:
+\[
+h_A(t)_{ij}:=\bigl(h_{P_i}(t)\bigr)_j
+=\sum_{d\geq0}[(P_i)_d:L_j]t^d
+\quad\text{for all }1\leq i,j\leq r.
+\]
 \end{definition}
 
-The decompositions exist by Theorem~\ref{thm:artin-wedderburn}.
-Their multiplicities are unique: a non-zero homomorphism between simple modules is an isomorphism, since its kernel and image are submodules.
-Consequently
-\[
-m_j=\frac{\dim_\Bbbk\Hom_S(L_j,M)}{\dim_\Bbbk\End_S(L_j)},
-\]
-and the same formula applies to each $L_i\otimes_S U$.
-In particular, the dimension data do not depend on choices of decompositions.
-For the $S$-bimodule $S$, we have $\dimvec S=I_r$, the $r\times r$ identity array.
+Thus the coefficients count composition factors, and the powers of $t$ record their degrees.
+The entries are formal Laurent series; for algebras they are formal power series.
+Finite support gives Laurent polynomials or polynomials, respectively.
+Since $(P_i)_0=L_i$, we have $h_A(0)=I_r$, the $r\times r$ identity array.
+For a finite-dimensional right $S$-module $N$, use the same multiplicity notation and write $\dimvec N=([N:L_j])_{1\leq j\leq r}$.
+
+The multiplicities can be computed using Hom spaces:
+\begin{equation}\label{eq:composition-Hom}
+[M_d:L_j]=\dim_{\End_A(L_j)}\Hom_A(P_j,M_d)
+\quad\text{for all }d\in\Z,\ 1\leq j\leq r.
+\end{equation}
+Indeed, $M_dA_+=0$, so every map $P_j\to M_d$ factors uniquely through $P_j/P_jA_+\cong L_j$.
+This identifies $\Hom_A(P_j,M_d)$ with $\Hom_A(L_j,M_d)$; precomposition gives its right vector-space structure over the division algebra $\End_A(L_j)$.
+A non-zero map between simple modules is an isomorphism, so each copy of $L_j$ contributes one copy of $\End_A(L_j)$, and the other simples contribute zero.
+This also shows that the multiplicities are independent of the chosen decomposition.
 
 \begin{example}\label{ex:dimension-vector-coordinate}
-If $S=\bigoplus_{i=1}^r\Bbbk e_i$ with coordinate idempotents, take $L_i=e_iS$.
-Then
+If $S=\bigoplus_{j=1}^r\Bbbk e_j$ with coordinate idempotents, then $\End_A(L_j)=\Bbbk$.
+The Yoneda lemma~\ref{lem:idempotent-hom} identifies $\Hom_A(P_j,M_d)$ with $M_de_j$, so
 \[
-\dimvec M=(\dim_\Bbbk Me_j)_{1\le j\le r},
-\qquad (\dimvec U)_{ij}=\dim_\Bbbk(e_iUe_j).
+[M_d:L_j]=\dim_\Bbbk(M_de_j),
+\qquad \dimvec M_d=(\dim_\Bbbk M_de_j)_{1\leq j\leq r}.
 \]
-Indeed, $L_i\otimes_S U\cong e_iU$ by multiplication, and the multiplicity of $e_jS$ in $e_iU$ is $\dim_\Bbbk(e_iUe_j)$.
-For $S=\Bbbk$, the dimension vector has one entry, the usual vector space dimension.
 \end{example}
 
-\begin{definition}\label{def:hilbert-series}
-\comm{why this definition is separated with graded $S$-modules first then graded $A$ modules.  It can be just with graded $A$-modules from the get go?? }
-Let $M=\bigoplus_{d\in\Z}M_d$ be a locally finite-dimensional graded right $S$-module, with $M_d=0$ for all sufficiently negative $d$.
-Its \defn{Hilbert series} is
-\[
-h_M(t):=\sum_{d\in\Z}(\dimvec M_d)t^d.
-\]
-For a locally finite-dimensional graded algebra $A$ with $A_0=S$, its \defn{Hilbert series} records the preceding module series row by row:
-\[
-h_A(t)_{ij}:=\bigl(h_{L_i\otimes_S A}(t)\bigr)_j
-\quad(1\leq i,j\leq r),
-\qquad
-h_A(t)=\sum_{d\geq0}(\dimvec A_d)t^d.
-\]
-Here each $L_i$ is placed in degree $0$, and $L_i\otimes_S A$ is regarded as a right $S$-module by restriction.
-In particular, $h_A(0)=I_r$.
-For $S=\bigoplus_{i=1}^r\Bbbk e_i$, this gives
-\[
-h_A(t)_{ij}=\sum_{d\geq0}\dim_\Bbbk(e_iA_de_j)t^d
-\quad(1\leq i,j\leq r).
-\]
-\end{definition}
-
-The entries are formal Laurent series with integer coefficients; for algebras they are formal power series.
-A finite-dimensional graded module or algebra gives a Laurent polynomial or polynomial, respectively.
-No numerical convergence is required: a coefficient is specified degree by degree.
-For an algebra, keeping both indices records where products can be formed.
-
 \begin{lemma}\label{lem:hilbert-operations}
-For locally finite-dimensional graded right $S$-modules bounded below:
+For locally finite-dimensional graded right $A$-modules bounded below:
 \begin{enumerate}
 \item A graded isomorphism $M\cong N$ implies $h_M(t)=h_N(t)$.
 \item A short exact sequence $0\to L\to M\to N\to0$ gives $h_M(t)=h_L(t)+h_N(t)$.
@@ -819,7 +796,7 @@ For locally finite-dimensional graded right $S$-modules bounded below:
 
 \begin{proof}
 A graded isomorphism preserves each degree and its simple-module multiplicities.
-A short exact sequence of right $S$-modules splits by semisimplicity, so multiplicities add.
+In each degree, a graded short exact sequence gives $0\to L_d\to M_d\to N_d\to0$, so $[M_d:L_j]=[L_d:L_j]+[N_d:L_j]$ for all $1\leq j\leq r$.
 Finally, $M(a)_d=M_{d+a}$ gives
 \[
 h_{M(a)}(t)=\sum_d(\dimvec M_{d+a})t^d
@@ -838,6 +815,9 @@ The same definition applies to bimodules, and to vector spaces by taking $S=\Bbb
 The decomposition follows by distributing tensor products over direct sums, as in Lemma~\ref{lem:tensor-properties}(4).
 When $M,N$ are locally finite-dimensional and bounded below, only finitely many pairs $(p,q)$ contribute in a fixed degree, so the tensor product is locally finite-dimensional and bounded below.
 
+For a finite-dimensional graded bimodule $ {}_SV_S$, use $V^{\grstar}$ and $ {}^{\grstar}V$ in Proposition~\ref{prop:S-evaluation-coevaluation}.
+With the total grading, evaluation and coevaluation preserve degree: evaluation pairs degrees $i$ and $-i$, and $\id_V$ has degree $0$.
+
 To multiply two arrays $C=(c_{ij})$ and $D=(d_{ij})$, or a row vector $m=(m_i)$ and an array $C$, use
 \[
 (CD)_{i\ell}=\sum_{j=1}^r c_{ij}d_{j\ell},
@@ -847,50 +827,51 @@ Thus multiplication sums over the matching middle index, rather than multiplying
 For series, use the same products on coefficients and collect terms with the same total power of $t$.
 
 \begin{lemma}\label{lem:dimension-tensor}\label{lem:hilbert-tensor}
-Let ${}_SU_S$, ${}_SW_S$ be finite-dimensional bimodules and $M$ a finite-dimensional right $S$-module. Then
+Let $N$ be a finite-dimensional right $S$-module and ${}_SU_S$ a finite-dimensional bimodule.
+Then
 \[
-\dimvec(U\otimes_S W)=(\dimvec U)(\dimvec W),
-\qquad \dimvec(M\otimes_S U)=(\dimvec M)(\dimvec U).
+[N\otimes_S U:L_j]
+=\sum_{i=1}^r[N:L_i][e_iU:L_j]
+\quad\text{for all }1\leq j\leq r.
 \]
-For a locally finite-dimensional graded right $S$-module $M$ bounded below and a locally finite-dimensional graded algebra $A$ with $A_0=S$, this gives
+For a locally finite-dimensional graded right $A$-module $M$ bounded below,
 \[
 h_{M\otimes_S A}(t)=h_M(t)h_A(t).
 \]
 \end{lemma}
 
 \begin{proof}
-Write $C=\dimvec U$ and $D=\dimvec W$.
-Associativity and distribution over direct sums give
+Decompose $N\cong\bigoplus_{i=1}^r(e_iS)^{\oplus[N:L_i]}$.
+Multiplication $e_iS\otimes_S U\to e_iU$, $e_is\otimes u\mapsto e_isu$, is an isomorphism with inverse $u\mapsto e_i\otimes u$.
+Distribution over direct sums therefore gives
 \[
-\begin{aligned}
-L_i\otimes_S(U\otimes_S W)
-&\cong (L_i\otimes_S U)\otimes_S W\\
-&\cong\bigoplus_j(L_j\otimes_S W)^{\oplus c_{ij}}
-\cong\bigoplus_\ell L_\ell^{\oplus\sum_j c_{ij}d_{j\ell}}.
-\end{aligned}
+N\otimes_S U\cong\bigoplus_{i=1}^r(e_iU)^{\oplus[N:L_i]}.
 \]
-This proves the first equality. Decomposing $M\cong\bigoplus_iL_i^{\oplus m_i}$ proves the second in the same way.
-Apply the second equality to each $M_p\otimes_S A_q$ and sum over $p+q=d$ to obtain the series identity.
+Counting copies of $L_j$ proves the first formula.
+Apply the first formula to $M_p\otimes_S A_q$ and sum over all $p,q\in\Z$ with $p+q=d$.
+Since $e_iA_q=(P_i)_q$, the resulting coefficient is the coefficient of $t^d$ in $h_M(t)h_A(t)$.
 \end{proof}
 
 \begin{example}[Hilbert series of a tensor algebra]\label{ex:hilbert-tensor-algebra}
-Let ${}_SV_S$ be a finite-dimensional bimodule, placed in degree $1$, and put $C=\dimvec V$.
-Since $T_S(V)_d=V^{\otimes_S d}$ and $V^{\otimes_S0}=S$, Lemma~\ref{lem:dimension-tensor} gives
+Let ${}_SV_S$ be a finite-dimensional bimodule, placed in degree $1$, and put $C=([e_iV:L_j])_{1\leq i,j\leq r}$.
+The rows of $C$ count composition factors of the right modules $e_iV$.
+Since $e_iT_S(V)_0=L_i$ and $e_iT_S(V)_{d+1}\cong(e_iT_S(V)_d)\otimes_S V$, Lemma~\ref{lem:dimension-tensor} gives, by induction,
 \[
-\dimvec T_S(V)_d=C^d\quad(d\geq0),\qquad C^0=I_r.
+[e_iT_S(V)_d:L_j]=(C^d)_{ij},
+\qquad C^0=I_r
+\quad\text{for all }d\geq0,\ 1\leq i,j\leq r.
 \]
 Consequently,
 \begin{equation}\label{eq:hilbert-tensor-algebra}
 \boxed{\displaystyle
-h_{T_S(V)}(t)=\sum_{d\geq0}t^dC^d
-=(I_r-tC)^{-1}=(I_r-t\,\dimvec V)^{-1}.}
+h_{T_S(V)}(t)=\sum_{d\geq0}t^dC^d=(I_r-tC)^{-1}.}
 \end{equation}
 Indeed, multiplying the series on either side by $I_r-tC$ gives constant coefficient $I_r$; the coefficient of $t^d$ for $d\geq1$ is $C^d-C^d=0$.
 The inverse is therefore an identity of formal power series with the coefficient multiplication defined above.
 
 For $S=\Bbbk$ and $\dim_\Bbbk V=m$, the formula is $h_{T_\Bbbk(V)}(t)=1/(1-mt)$.
-More generally, for $S=\operatorname{Mat}_n(\Bbbk)$ and $V=S^{\oplus m}$ as an $S$-bimodule, there is one simple right $S$-module $L=\Bbbk^{1\times n}$.
-Since $L\otimes_S V\cong L^{\oplus m}$, we again have $C=(m)$ and $h_{T_S(V)}(t)=1/(1-mt)$.
+More generally, for $S=\operatorname{Mat}_n(\Bbbk)$ and $V=S^{\oplus m}$ as an $S$-bimodule, choose $e_1=e_{11}$.
+Since $e_1V\cong(e_1S)^{\oplus m}$ as right $S$-modules, we again have $C=(m)$ and $h_{T_S(V)}(t)=1/(1-mt)$.
 Here the coefficient records simple-module multiplicities, not $\dim_\Bbbk V=mn^2$.
 \end{example}
 
@@ -906,15 +887,15 @@ For $n=3$, killing $e_{13}$ removes the degree $2$ contribution in entry $(1,3)$
 \[
 h_{\Bbbk A_3}(t)=\begin{pmatrix}1&t&t^2\\0&1&t\\0&0&1\end{pmatrix},
 \qquad
-H_{\Bbbk A_3/(e_{13})}(t)=\begin{pmatrix}1&t&0\\0&1&t\\0&0&1\end{pmatrix}.
+h_{\Bbbk A_3/(e_{13})}(t)=\begin{pmatrix}1&t&0\\0&1&t\\0&0&1\end{pmatrix}.
 \]
 The quotient removes $\Bbbk e_{13}$ from degree $2$, and hence removes $t^2$ from entry $(1,3)$.
 \end{example}
 
 \begin{example}[Two alternating generators]\label{ex:hilbert-alternating}
-For $S,V,a,b$ in Example~\ref{ex:two-vertex-relations}, use the order $e_1,e_2$. Then
+For $S,V,a,b$ in Example~\ref{ex:two-vertex-relations}, use the order $e_1,e_2$ and the array $C$ of Example~\ref{ex:hilbert-tensor-algebra}. Then
 \[
-C=\dimvec V=\begin{pmatrix}0&1\\1&0\end{pmatrix},
+C=\begin{pmatrix}0&1\\1&0\end{pmatrix},
 \qquad C^2=I_2,
 \qquad
 h_{T_S(V)}(t)=\frac{1}{1-t^2}\begin{pmatrix}1&t\\t&1\end{pmatrix}.
@@ -1141,14 +1122,14 @@ For $\theta_\ell$, the corresponding two routes give $f(p(v)g(q(w)))$.
 
 \begin{exercise}
 Let $A=\Bbbk A_4/(e_{13},e_{24})$ with the grading of Example~\ref{ex:triangular-grading}.
-Find a homogeneous basis, compute $H_A(t)$, and write $A=T_S(V)/(R)$ with explicit $S,V,R$.
+Find a homogeneous basis, compute $h_A(t)$, and write $A=T_S(V)/(R)$ with explicit $S,V,R$.
 \emph{Hint.} Use Lemma~\ref{lem:idempotent-tensors}; the ideal contains $e_{14}$ as well as $e_{13},e_{24}$.
 \end{exercise}
 
 \begin{exercise}
 For the bimodule $V$ in Example~\ref{ex:two-vertex-relations}, find a basis of each $T_S(V)_d$ and show that
 \[
-H_{T_S(V)}(t)=\frac{1}{1-t^2}\begin{pmatrix}1&t\\t&1\end{pmatrix}.
+h_{T_S(V)}(t)=\frac{1}{1-t^2}\begin{pmatrix}1&t\\t&1\end{pmatrix}.
 \]
 Compare with the quotient $T_S(V)/(ab)$.
 \emph{Hint.} Count alternating words separately in each degree, including degree $0$.
