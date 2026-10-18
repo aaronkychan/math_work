@@ -25,7 +25,7 @@
 \DeclareMathOperator{\Hom}{Hom}
 \DeclareMathOperator{\End}{End}
 \DeclareMathOperator{\rad}{rad}
-\DeclareMathOperator{\Sym}{Sym}
+\newcommand{\SymAlg}{\mathsf{S}}
 \newcommand{\op}{\mathrm{op}}
 \newcommand{\id}{\mathrm{id}}
 
@@ -43,92 +43,57 @@
 \setlength{\emergencystretch}{1em}
 \raggedbottom
 
-% Revision notes (v2), not printed:
-% * Every part of every question is meant to be accessible; no part is
-%   labelled "advanced".  Optional material is labelled "Bonus".
-% * Suggested selection rule: at least two full questions, at least one of
-%   which is Exercise 5 or 6 (Lecture 3).
-% * Hints are labelled and kept apart from the questions.
+\newcommand{\comm}[1]{}
+
 
 \begin{document}
 
 \textbf{Exercises from Lectures 1--3.}
 Throughout, $\kk$ is a field, and all modules are right modules unless a
-left action is specified. Write $\kk A_n$ for the algebra of upper triangular
-$n\times n$ matrices over $\kk$, with matrix units $e_{ij}$ ($1\leq i\leq j\leq n$),
-$e_{ij}e_{pq}=\delta_{jp}e_{iq}$, and grading $\deg e_{ij}=j-i$.
-For a graded module $M$, the shift convention is $M(r)_d=M_{d+r}$.
-Ideals in algebra presentations are two-sided ideals.
-For $\kk A_n$ put $P_i=e_{ii}\kk A_n$ (graded by the inherited grading), and
-write $\Hom^d_A(M,N)$ for the homogeneous $A$-linear maps $M\to N$ of degree $d$.
+left action is specified.
 
-\textbf{Hilbert series.}
-For a graded algebra $A=\bigoplus_{d\geq0}A_d$ with
-$A_0=\bigoplus_{i=1}^r\kk e_i$ (coordinate idempotents, in the listed order),
-\[
-  h_A(t)_{ij}=\sum_{d\geq0}\dim_{\kk}(e_iA_de_j)\,t^d\qquad(1\leq i,j\leq r),
-\]
-so the coefficient of $t^d$ is the dimension vector of the $A_0$-bimodule
-$A_d$, recorded with two indices. When $r=1$ there is a single entry.
-Arrays are multiplied as matrices: $(CD)_{i\ell}=\sum_jc_{ij}d_{j\ell}$, with
-the same rule for series.
 
-\textbf{Quadratic duals.}
-For $A=T_S(V)/(R)$ with $R\subset V\otimes_SV$, put $V^*=\Hom_S(V,S)$ (in
-degree $1$), and let
-\[
-  \theta_r(g\otimes f)(v\otimes w)=g(f(v)w)\qquad(f,g\in V^*).
-\]
-The \emph{orthogonal complement} of $R$ is
-$R^\perp=\{F\in V^*\otimes_SV^*\mid\theta_r(F)(r)=0\text{ for all }r\in R\}$,
-and $A^!=T_S(V^*)/(R^\perp)$.
-When $S=\bigoplus_i\kk e_i$ and $v\in e_iVe_j$ is a chosen basis vector,
-its dual $v^*:V\to S$ takes $v$ to $e_j$ and the other chosen basis vectors
-to zero; it satisfies $e_jv^*e_i=v^*$, and these $v^*$ form a basis of $V^*$.
-In particular $\dim_\kk e_jV^*e_i=\dim_\kk e_iVe_j$.
-
-\medskip
-\hrule
-
-\section*{Lecture 1: Graded algebras, modules, and duals}
 \begin{questions}
 
 \titledquestion{Projectives, endomorphisms, and duals over $\kk A_3$}
-Let $A=\kk A_3$. The parts are independent except where stated.
+\comm{exercise is too simple.... part 1 is reasonable as a "everyone can solve this part" (now I split to part 1 and part 2).  Original part 2 and 3 are too simple... part 4 I kept, then I suggest some new parts}
+
 \begin{parts}
-\part Verify that $A_d=\operatorname{span}_\kk\{e_{ij}\mid j-i=d\}$ is a
-grading of $\kk A_n$ for every $n\geq1$, and compute $\rad(\kk A_3)$ from its
+\part For $A=\Bbbk A_n$ with $n\ge 2$, verify that $A_d=\operatorname{span}_\kk\{e_{ij}\mid j-i=d\}$ defines a
+grading on $A$
+
+\part Compute $\rad(\kk A_n)$ from its
 definition as the intersection of all maximal right ideals.
 
-\emph{Hint.} Let $J$ be the strictly upper triangular matrices; then $J^3=0$.
-If $L$ is a simple right module, then $LJ\in\{0,L\}$, and $LJ=L$ would give
-$L=LJ^3=0$. Then identify the maximal right ideals of $A/J\cong\kk^{\oplus3}$.
+% too simple...
+%
+%\part For each of the nine ordered pairs $(i,j)$, find a basis of
+%$\Hom_A(P_i,P_j)$ and the degree of each basis map, in a $3\times3$ table
+%(rows: source $P_i$; columns: target $P_j$).
+%Then determine, for all $i,j$ and $r,s\in\mathbb Z$, when there is a non-zero
+%degree-preserving map $P_i(r)\to P_j(s)$.
+%
+%\emph{Hint.} An $A$-linear map $u:P_i\to P_j$ is determined by $u(e_{ii})$,
+%and $u(e_{ii})=u(e_{ii})e_{ii}$.
+%
 
-\part For each of the nine ordered pairs $(i,j)$, find a basis of
-$\Hom_A(P_i,P_j)$ and the degree of each basis map, in a $3\times3$ table
-(rows: source $P_i$; columns: target $P_j$).
-Then determine, for all $i,j$ and $r,s\in\mathbb Z$, when there is a non-zero
-degree-preserving map $P_i(r)\to P_j(s)$.
+% ...too simple...
+%\part Let $\lambda:A\to\End_A(A_A)$ send $a$ to $x\mapsto ax$.
+%\begin{subparts}
+%\subpart Show that $\lambda$ is a bijective algebra homomorphism.
+%
+%\subpart Prove that
+%\[
+%  h_A(t)_{ij}=\sum_{d\in\mathbb Z}\dim_\kk\Hom^\Z_A(P_j,P_i(d))\,t^d
+%  \qquad(1\leq i,j\leq3),
+%\]
+%and compare with the matrix $h_{\kk A_3}(t)$ from Lecture~2.
+%\end{subparts}
+%
+%\emph{Hint for (ii).} Evaluate a map at $e_{jj}$.
 
-\emph{Hint.} An $A$-linear map $u:P_i\to P_j$ is determined by $u(e_{ii})$,
-and $u(e_{ii})=u(e_{ii})e_{ii}$.
-
-\part Let $\lambda:A\to\End_A(A_A)$ send $a$ to $x\mapsto ax$.
-\begin{subparts}
-\subpart Show that $\lambda$ is a bijective algebra homomorphism, and that
-$\lambda(e_{ji})$ restricts to the basis map $P_i\to P_j$ of part (2).
-\subpart Prove that
-\[
-  h_A(t)_{ij}=\sum_{d\in\mathbb Z}\dim_\kk\Hom^d_A(P_j,P_i)\,t^d
-  \qquad(1\leq i,j\leq3),
-\]
-and compare with the matrix $h_{\kk A_3}(t)$ from Lecture~2.
-\end{subparts}
-
-\emph{Hint for (ii).} Evaluate a map at $e_{jj}$.
-
-\part Let $M=e_{22}A$ and
-$\bbD(M)_d=\Hom_\kk(M_{-d},\kk)$ with $(af)(m)=f(ma)$.
+\part Let $A=\Bbbk A_3$, $M=e_{22}A$, and
+consider $\bbD(M)_d=\Hom_\kk(M_{-d},\kk)$ with $(af)(m)=f(ma)$.
 \begin{subparts}
 \subpart Find a homogeneous basis of $\bbD(M)$, its degrees, and all non-zero
 actions of matrix units on it.
@@ -138,12 +103,13 @@ that $\bbD(M)\cong(Ae_{33}/\Bbbk e_{13})(1)$ as graded left $A$-modules.
 $(Ae_{jj})(r)$, $j\in\{1,2,3\}$, $r\in\mathbb Z$.
 \end{subparts}
 
-\emph{Hint for (iii).} Compare dimensions and the actions of $e_{11},e_{22},e_{33}$.
+
+\part \comm{make an example for Kronecker algebra (present as 2-by-2 matrix with upper-right entry $\Bbbk \alpha\oplus \Bbbk\beta$, and define the multiplication).  Take $\deg \alpha=1$ and $\deg \beta =0$.  Let $R_d(\lambda)$ be the module with $\alpha$ acts by $\lambda$ and $\beta$ acts by $0$ and ask student to show these are $A$-modules but not graded $A$-modules.  Then one more part to find a $B$-module that is not graded $B$-module for $B=\bigwedge \Bbbk^2$.}
 \end{parts}
 
 \newpage
 \titledquestion{Dependence on the symmetrising form}
-Let $A=\kk A_2$, $S=\kk e_{11}\oplus\kk e_{22}$, $V=\kk e_{12}$, and
+Let $A=\kk A_2$, $S=\kk e_{11}\oplus\kk e_{22}$, $V=\kk e_{12}$, and consider
 $M=e_{11}A$, with inherited gradings. For $c=(c_1,c_2)\in(\kk\setminus\{0\})^2$ define
 \[
   \tau_c:S\to\kk,\qquad ae_{11}+be_{22}\mapsto c_1a+c_2b.
@@ -155,21 +121,19 @@ $f\mapsto\tau_c\circ f$, and that
   a\cdot_cf=\alpha_c^{-1}\bigl(a\,\alpha_c(f)\bigr),\qquad
   (a\lambda)(m)=\lambda(ma).
 \]
-A form $\tau$ on $S$ is \emph{symmetrising} if $\tau(st)=\tau(ts)$ for all
-$s,t$ and the pairing $(s,t)\mapsto\tau(st)$ is non-degenerate.
 \begin{parts}
 \part Verify that $\tau_c$ is symmetrising. Let $\varepsilon:V\to\kk$ be
-$\varepsilon(ue_{12})=u$. Find the right $S$-linear map $f:V\to S$ and the left
+$\varepsilon(ue_{12})=u$. 
+Find the right $S$-linear map $f:V\to S$ and the left
 $S$-linear map $g:V\to S$ with $\tau_c\circ f=\varepsilon=\tau_c\circ g$, and
-determine whether $f$ is also left linear and $g$ also right linear.
+determine whether $f$ is also left linear and $g$ also right linear \comm{$\Bbbk$-linear?? $S$-linear???? always specify}.
 
 \part Let $\varphi_0(ae_{11}+be_{12})=ae_{11}$ and
 $\varphi_1(ae_{11}+be_{12})=be_{22}$. Show that $\varphi_0,\varphi_1$ form a
 homogeneous basis of $M^{\grstar}$ and find their degrees.
 
-\part Compute the actions $e_{11}\cdot_c$, $e_{22}\cdot_c$, $e_{12}\cdot_c$ on
-$\varphi_0,\varphi_1$ for general $c$. For $c,c'$, prove that
-$\cdot_c=\cdot_{c'}$ if and only if $(c_1',c_2')$ is a scalar multiple of $(c_1,c_2)$.
+\part Compute $e_{11}\cdot_c \varphi_i$, $e_{22}\cdot_c \varphi_i$, $e_{12}\cdot_c \varphi_i$  for general $c$ and $i\in\{0,1\}$. For $c,c'$, prove that
+$\cdot_c=\cdot_{c'}$ \comm{do not use such abbreviation, state what you want student to do explicitly} if and only if $(c_1',c_2')$ is a scalar multiple of $(c_1,c_2)$.
 
 \part \begin{subparts}
 \subpart Explain, without computing any action, why
@@ -177,23 +141,22 @@ $(M^{\grstar},\cdot_c)\cong(M^{\grstar},\cdot_{c'})$ as graded left
 $A$-modules for \emph{all} $c,c'$.
 \subpart Write the isomorphism $t=\alpha_{c'}^{-1}\alpha_c$ explicitly on
 $\varphi_0,\varphi_1$, and check directly that it commutes with
-$e_{11},e_{22},e_{12}$.
+$e_{11},e_{22},e_{12}$. \comm{phrasing too ambiguous, do you mean to check left or right $S$-linearity???}
+
 \subpart Take $c=(1,1)$ and $c'=(1,2)$, $\operatorname{char}\kk\neq2$:
-what is $t$?
+what is $t$?  \comm{is this just direct computation?? what is the point of this question?}  
 \end{subparts}
 \end{parts}
-
+\comm{I feel this question is still somewhat easy.... add a more challenging part and remove one of the above parts as a direct hint/answer, or modify (4) to a more challenging version}
 \end{questions}
 
-\clearpage
-\section*{Lecture 2: Tensor and quadratic algebras}
+
+
 \begin{questions}
 \setcounter{question}{2}
 
 \titledquestion{Tensor products and $S$-duals}
-Let $S$ be a finite-dimensional semisimple $\kk$-algebra. For a right
-$S$-module $U$ let $U^*=\Hom_S(U,S)$; it is a left $S$-module by
-$(sf)(u)=sf(u)$, and if $U$ is a bimodule then $(sft)(u)=sf(tu)$.
+Let $S$ be a finite-dimensional semisimple $\kk$-algebra. 
 Let $V$ be a finite-dimensional right $S$-module and $W$ a finite-dimensional
 $S$-bimodule, and define
 \[
@@ -217,15 +180,14 @@ $e_1ae_2=a$, and $W=\kk c$ with $e_2ce_3=c$. Compute
 $W^*\otimes_SV^*$, $V^*\otimes_SW^*$ and $(V\otimes_SW)^*$, and describe
 $\theta_r$. What happens if the two duals are tensored in the original order?
 
-\part (Semisimplicity is needed.) Let $S=\kk[x]/(x^2)$ and $V=W=S/(x)$,
+\part Suppose instead that $S=\kk[x]/(x^2)$ and $V=W=S/(x)$,
 with the same definitions of $U^*$ and $\theta_r$. Show that
 $W^*\otimes_SV^*$ and $(V\otimes_SW)^*$ are both $1$-dimensional but
 $\theta_r=0$. At which step of your proof of (2) does the argument fail?
 \end{parts}
 
-\emph{Hint for (2).} First take $V=S$. Then use that every finite-dimensional
-right $S$-module is a direct summand of $S^{\oplus n}$ for some $n$ (as a
-right module; this is why $V$ is only assumed to be a right module).
+% probably not needed for student
+%\emph{Hint for (2).} First take $V=S$. Then use that every finite-dimensional right $S$-module is a direct summand of $S^{\oplus n}$ for some $n$ (as a right module; this is why $V$ is only assumed to be a right module).
 
 \newpage
 \titledquestion{Quadratic presentations and Hilbert series}
@@ -241,27 +203,27 @@ is a basis of $A_Z$.
 \subpart For $n=4$ and $Z=\{1,2\}$, show $e_{14}\in(e_{13},e_{24})$, that
 $(A_Z)_2=0$, and that $A_Z=S\oplus V$ is radical-square-zero; compute $h_{A_Z}(t)$.
 \end{subparts}
-\emph{Hint.} $e_{ij}=e_{ik}e_{k,k+2}e_{k+2,j}$ whenever $i\leq k$ and $k+2\leq j$.
+%\emph{Hint.} $e_{ij}=e_{ik}e_{k,k+2}e_{k+2,j}$ whenever $i\leq k$ and $k+2\leq j$.
 
-\part Let $S=\kk e_1\oplus\kk e_2$ and $V=\kk a\oplus\kk b$ with
-$e_1ae_2=a$, $e_2be_1=b$ and all other idempotent actions zero, $V$ in degree~$1$.
+\part Let $S=\kk e_1\oplus\kk e_2$ and let $V=\kk a\oplus\kk b$ be an $S$-bimodule with
+$e_1ae_2=a$, $e_2be_1=b$ and all other idempotent actions zero.
 Find a basis of $T_S(V)_d$ for all $d\geq0$ and compute $h_{T_S(V)}(t)$.
 Then find a basis and $h$ for $T_S(V)/(ab)$. Which entries of the two
 matrices differ, and why is $T_S(V)/(ab)$ finite-dimensional?
 
 \emph{Hint.} Count alternating words in each degree, including degree $0$.
 
+
 \part Let $V,W$ have bases $x_1,\dots,x_n$ and $y_1,\dots,y_m$, generators in
-degree $1$, and
-$\Sym(V)=T_\kk(V)/(x_ix_j-x_jx_i\mid i<j)$,
-$\bigwedge W=T_\kk(W)/(w^2\mid w\in W)$.
+degree $1$, and consider $\SymAlg(V)$ and $\bigwedge(W)$
 \begin{subparts}
-\subpart Compute $\dim R$ for the two relation spaces
-(including linear independence) and deduce
-$\dim\Sym(V)_2=\tfrac{n(n+1)}2$, $\dim(\bigwedge W)_2=\tfrac{m(m-1)}2$.
-\subpart Using that ordered monomials form a basis of $\Sym(V)$ and strictly
+\subpart Show that
+\[
+\dim_\Bbbk\SymAlg(V)_2=\tfrac{n(n+1)}2,\qquad  \dim_\Bbbk(\bigwedge W)_2=\tfrac{m(m-1)}2.\]
+
+\subpart Using that ordered monomials form a basis of $\SymAlg(V)$ and strictly
 increasing products a basis of $\bigwedge W$, compute
-$\dim\Sym(V)_d$ and $\dim(\bigwedge W)_d$ for all $d$, and $h_{\Sym(V)}(t)$,
+$\dim\SymAlg(V)_d$ and $\dim(\bigwedge W)_d$ for all $d$, and $h_{\SymAlg(V)}(t)$,
 $h_{\bigwedge W}(t)$.
 \subpart Let $P=\kk\langle x,y\rangle/(xy)$. Show that
 $\{y^ax^b\mid a,b\geq0\}$ is a basis, and that $h_P(t)=h_{\kk[x,y]}(t)$.
@@ -270,8 +232,6 @@ Prove that $P$ and $\kk[x,y]$ are not isomorphic as algebras.
 \end{parts}
 \end{questions}
 
-\clearpage
-\section*{Lecture 3: The quadratic dual}
 
 \begin{questions}
 \setcounter{question}{4}
@@ -285,8 +245,8 @@ bases and the Hilbert series of $A$ and $A^!$. Verify
 \[
   h_A(t)\,h_{A^!}(-t)^{\mathsf T}=I_4,
 \]
-and check that dualising twice recovers $A$, identifying each twice-reversed
-generator with its original matrix unit.
+and check that dualising twice recovers $A$ \comm{you mean ${}^!(A^!)\cong A$?? use symbols more not words!}, identifying each twice-reversed
+generator with its original matrix unit. \comm{use symbols, not words!}
 
 \emph{Hint.} Among $e_{12}e_{23}$ and $e_{23}e_{34}$ only the first is a
 relation. Complement the composable pairs and reverse their order.
@@ -334,8 +294,8 @@ and $xy+qyx$, with $X=x^*$, $Y=y^*$.
 The parts are independent.
 \begin{parts}
 \part \textbf{A square with a parameter.}
-Let $S=\kk e_1\oplus\kk e_2\oplus\kk e_3\oplus\kk e_4$ and let $V$ have basis
-$a,b,c,d$ with
+Let $S=\kk e_1\oplus\kk e_2\oplus\kk e_3\oplus\kk e_4$ and let $V$ be an $S$-bimodule with basis
+$a,b,c,d$ and
 \[
   e_1ae_2=a,\quad e_2be_4=b,\quad e_1ce_3=c,\quad e_3de_4=d,
 \]
@@ -364,5 +324,7 @@ $h_{B^!}(t)$. Verify $h_B(t)h_{B^!}(-t)=1$.
 \end{subparts}
 \end{parts}
 \end{questions}
+
+\comm{I feel the length of answers to each exercise can vary greatly; write a perfect solution and verify.  5 lines of computation is equivalent to one line of logical argument.}
 
 \end{document}
