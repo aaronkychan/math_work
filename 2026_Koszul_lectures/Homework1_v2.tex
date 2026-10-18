@@ -1,5 +1,6 @@
 \documentclass[11pt,a4paper]{exam}
 \noprintanswers
+%\printanswers
 
 \usepackage[T1]{fontenc}
 \usepackage{lmodern}
@@ -8,16 +9,15 @@
 \usepackage{needspace}
 \usepackage[hidelinks]{hyperref}
 
-\newcommand{\CourseTitle}{Introduction to Koszul Duality}
+\newcommand{\CourseTitle}{Topics in Math. Sci. VII 2026}
 \newcommand{\AssignmentNumber}{1}
 \newcommand{\Deadline}{to be announced}
 
 \pagestyle{headandfoot}
-\header{\small\CourseTitle}
+\header{}{\small\CourseTitle}
        {\small Assignment \AssignmentNumber}
-       {\small Deadline: \Deadline}
 \headrule
-\footer{}{\small Submit via email}{\small\thepage}
+\footer{}{\small Submit via email.  Deadline: \Deadline}{\small\thepage}
 
 \newcommand{\kk}{\Bbbk}
 \newcommand{\bbD}{\mathbb D}
@@ -48,7 +48,6 @@
 
 \begin{document}
 
-\textbf{Exercises from Lectures 1--3.}
 Throughout, $\kk$ is a field, and all modules are right modules unless a
 left action is specified.
 
@@ -181,9 +180,7 @@ Since $m_2X=bm_2$ and $m_1X=am_1+(\lambda u+\mu v)m_2$, the condition $M_dA_e\su
 Let $A=\kk A_2$, $S=\kk e_{11}\oplus\kk e_{22}$ and $M=e_{11}A$ (inherited gradings).
 For $c=(c_1,c_2)\in(\kk\setminus\{0\})^2$, consider the symmetrising form $$\tau_c(ae_{11}+be_{22})=c_1a+c_2b.$$ 
 
-Recall that we have the natural isomorphism $\alpha_c:(-)^{(*)}\xrightarrow{\sim} \bbD$ associated to $\tau_c$ given by $f\mapsto\tau_c\circ f$, which induces a left $A$-action $\cdot_c$ on $M^{(*)}$ induced by $\alpha_c$ is given by
-\[
-  a\cdot_cf=\alpha_c^{-1}\bigl(a\,\alpha_c(f)\bigr),\qquad(a\lambda)(m)=\lambda(ma).
+Recall that we have the natural isomorphism $\alpha_c:(-)^{(*)}\xrightarrow{\sim} \bbD$ associated to $\tau_c$ given by $f\mapsto\tau_c\circ f$, which induces a left $A$-action $\cdot_c$ on $M^{(*)}$ induced by $\alpha_c$ is given by  \[a\cdot_cf=\alpha_c^{-1}\bigl(a\,\alpha_c(f)\bigr),\qquad\text{where }(a\lambda)(m)=\lambda(ma) \text{ for $\lambda\in \bbD M$}.
 \]
 Let
 $$\varphi_0(ae_{11}+be_{12})=ae_{11}, \qquad   \varphi_1(ae_{11}+be_{12})=be_{22}.$$ \begin{subparts}
@@ -220,7 +217,7 @@ For (i) take $z=\frac{c_1'}{c_1}e_{11}+\frac{c_2'}{c_2}e_{22}$: $\tau_{c'}=\tau_
 \end{parts}
 
 \newpage
-\titledquestion{Tensor products, $S$-duals and quadratic duals}
+\titledquestion{$S$-duals and quadratic duals}
 Let $S$ be a finite-dimensional semisimple $\kk$-algebra. 
 Let $V$ be a finite-dimensional right $S$-module and $W$ a finite-dimensional
 $S$-bimodule, and define
@@ -229,15 +226,7 @@ $S$-bimodule, and define
   \theta_r(g\otimes f)(v\otimes w)=g(f(v)w).
 \]
 \begin{parts}
-\part Prove that $\theta_r$ is well defined: check bilinearity in $(g,f)$
-and in $(v,w)$, invariance under
-\[
-  vs\otimes w\leftrightarrow v\otimes sw,\qquad gs\otimes f\leftrightarrow g\otimes sf,
-\]
-and right $S$-linearity of $\theta_r(g\otimes f)$. When $V$ is a bimodule, show
-\[
-  \theta_r(sg\otimes ft)=s\,\theta_r(g\otimes f)\,t.
-\]
+\part Prove that $\theta_r$ is well defined $S$-module homomorphism.
 \begin{solution}
 For fixed $g,f$, $\beta(v,w)=g(f(v)w)$ is bilinear, and
 $\beta(vs,w)=g(f(v)sw)=\beta(v,sw)$ because $f$ is right $S$-linear; so $\beta$ induces a linear map $V\otimes_SW\to S$.
@@ -298,7 +287,7 @@ So $\theta_r=0$, neither injective nor surjective. The argument fails in the las
 (it is not free), since $S$ is not semisimple.
 \end{solution}
 
-\part \textbf{A square with a parameter.} Let $S=\kk^{\oplus4}$ and let $V=\kk a\oplus\kk b\oplus\kk c\oplus\kk d$ be the $S$-bimodule with
+\part Let $S=\bigoplus_{i=1}^4\kk e_i$ be a semisimple algebra with coordinate idempotent $e_i$ for $1\le i\le 4$ and let $V=\kk a\oplus\kk b\oplus\kk c\oplus\kk d$ be the $S$-bimodule with
 \[
   a\in e_1Ve_2,\qquad b\in e_2Ve_4,\qquad c\in e_1Ve_3,\qquad d\in e_3Ve_4,
 \]
@@ -319,14 +308,11 @@ So
 \]
 giving $R^\perp=\kk(\lambda b^*a^*+d^*c^*)$ and $A_\lambda^!=T_S(V^*)/(\lambda b^*a^*+d^*c^*)$.
 \end{solution}
-\subpart Dualise once more: compute $(A_\lambda^!)^!$ and recover the relation $ab-\lambda cd$.
+\subpart Dualise once more: compute ${}^!(A_\lambda^!)$ and recover the relation $ab-\lambda cd$.
 \begin{solution}
 The element $\alpha\,ab+\beta\,cd$ annihilates $\lambda b^*a^*+d^*c^*$ under the pairing of (i) iff $\alpha\lambda+\beta=0$, so the orthogonal of $R^\perp$ is $\kk(ab-\lambda cd)$.
 \end{solution}
-\subpart Prove that
-\[
-  A_\lambda\cong A_\mu\ \text{ as graded algebras over }S\quad\Longleftrightarrow\quad(\lambda=0\iff\mu=0).
-\]
+\subpart Prove that $A_\lambda\cong A_\mu$ as graded algebras if and only if $\lambda,\mu$ are either both zero or both non-zero.
 
 \emph{Hint.} A graded isomorphism over $S$ sends each of $a,b,c,d$ to a scalar multiple of itself.
 \begin{solution}
@@ -399,27 +385,10 @@ and $\dim_\kk A=5$.
 \end{solution}
 \end{subparts}
 
-\part Let $V=\bigoplus_{i=1}^n\kk x_i$ and $W=\bigoplus_{j=1}^m\kk y_j$ in degree $1$, and
-\[
-  \SymAlg(V)=T(V)/\bigl(v\otimes v'-v'\otimes v\mid v,v'\in V\bigr),\qquad
-  \textstyle\bigwedge W=T(W)/\bigl(w\otimes w\mid w\in W\bigr).
-\]
-Show that
-\[
-  \dim_\kk\SymAlg(V)_2=\tfrac{n(n+1)}2,\qquad\dim_\kk\bigl(\textstyle\bigwedge W\bigr)_2=\tfrac{m(m-1)}2.
-\]
-\begin{solution}
-In degree $2$, $A_2=(V\otimes V)/R$ where $R$ is the degree-$2$ relation space.
-For $\SymAlg(V)$, $R=\operatorname{span}\{x_i\otimes x_j-x_j\otimes x_i\mid i<j\}$; these $\binom n2$ elements are linearly independent
-(each involves the basis tensor $x_i\otimes x_j$, $i<j$, in no other element), so $\dim A_2=n^2-\binom n2=\frac{n(n+1)}2$.
-For $\bigwedge W$, $R=\operatorname{span}\{w\otimes w\}$; writing $w=\sum a_iy_i$, $w\otimes w=\sum a_i^2y_i\otimes y_i+\sum_{i<j}a_ia_j(y_i\otimes y_j+y_j\otimes y_i)$, and
-$y_i\otimes y_j+y_j\otimes y_i=(y_i+y_j)^{\otimes2}-y_i^{\otimes2}-y_j^{\otimes2}$, so $R=\operatorname{span}\{y_i\otimes y_i,\ y_i\otimes y_j+y_j\otimes y_i\ (i<j)\}$ (any characteristic),
-of dimension $m+\binom m2$ by the same independence argument; so $\dim A_2=m^2-\frac{m(m+1)}2=\frac{m(m-1)}2$.
-\end{solution}
 
-\part \textbf{Counting words.} Let
+\part Let
 \[
-  B=T_\kk(\kk x\oplus\kk y)/(x^2),\qquad\deg x=\deg y=1,\qquad a_d=\dim_\kk B_d.
+  B=T_\kk(\kk x\oplus\kk y)/(x^2),\qquad\deg x=\deg y=1,\qquad a_d:=\dim_\kk B_d.
 \]
 \begin{subparts}
 \subpart Find a basis of $B_d$ and compute $a_0,\dots,a_6$.
@@ -455,7 +424,7 @@ Thus $h_{B^!}(t)=\frac1{1-t}+t$ and
 \end{parts}
 
 \newpage
-\titledquestion{Computing quadratic duals}
+\titledquestion{Computing quadratic duals and Hilbert series}
 \begin{parts}
 \part Let $S=\bigoplus_{i=1}^r\kk e_i$, let $V$ be a finite-dimensional $S$-bimodule in degree $1$, and put
 \[
