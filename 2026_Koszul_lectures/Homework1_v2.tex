@@ -156,11 +156,8 @@ For $(\lambda,\mu)\in\kk^2$ let $M(\lambda,\mu)=\kk^2$ (row vectors) with right 
 \[
   (x_1,x_2)\cdot X=\bigl(ax_1,\ (\lambda u+\mu v)x_1+bx_2\bigr).
 \]
-A \emph{grading} on a right $A$-module $M$ is a decomposition $M=\bigoplus_{d\in\mathbb Z}M_d$
-with $M_dA_e\subset M_{d+e}$ for all $d,e$.
 \begin{subparts}
-\subpart Verify that $A$ is a graded algebra (i.e.\ $A_dA_e\subset A_{d+e}$)
-and that $M(\lambda,\mu)$ is a right $A$-module for every $(\lambda,\mu)$.
+\subpart Verify that $A$ is a graded algebra and that $M(\lambda,\mu)$ is a right $A$-module for every $(\lambda,\mu)\in\Bbbk^2$.
 \begin{solution}
 In $ap'+pb'$ the degree of $p$ or $p'$ is unchanged by the scalars $a,b,a',b'$
 (all of degree $0$), so $A_dA_e\subset A_{d+e}$; $1\in A_0$.
@@ -178,24 +175,20 @@ $m_1\beta=\mu m_2\in M_{d_1}$. If $\lambda\neq0$ then $d_2=d_1+1$; if $\mu\neq0$
 ($\Leftarrow$) If $\mu=0$ take $d_1=0,d_2=1$; if $\mu\neq0$ (so $\lambda=0$) take $d_1=d_2=0$.
 Since $m_2X=bm_2$ and $m_1X=am_1+(\lambda u+\mu v)m_2$, the condition $M_dA_e\subset M_{d+e}$ holds.
 \end{solution}
-\subpart Let $B=\kk[z]$ with $\deg z=1$, and let $M=\kk$ with $z$ acting by $1$ (that is, $M=B/(z-1)$).
-Show that $M$ is a $B$-module admitting no grading.
-\begin{solution}
-Suppose $M=\bigoplus M_d$ is graded; being one-dimensional, $M=M_d$ for a single $d$. Then $m\cdot z=m\in M_{d+1}\cap M_d=0$ for $m\neq0$, a contradiction.
-\end{solution}
 \end{subparts}
 
 \part \textbf{Independence of the symmetrising form.}
 Let $A=\kk A_2$, $S=\kk e_{11}\oplus\kk e_{22}$ and $M=e_{11}A$ (inherited gradings).
-For $c=(c_1,c_2)\in(\kk\setminus\{0\})^2$ let $\tau_c(ae_{11}+be_{22})=c_1a+c_2b$; it is symmetrising
-($\tau(st)=\tau(ts)$ and $(s,t)\mapsto\tau(st)$ non-degenerate). Recall
-$M^{\grstar}=\bigoplus_d\Hom_S(M_{-d},S)$ (the summand in degree $d$), $\alpha_c:M^{\grstar}\to\bbD(M)$, $f\mapsto\tau_c\circ f$, which is bijective, and
+For $c=(c_1,c_2)\in(\kk\setminus\{0\})^2$, consider the symmetrising form $$\tau_c(ae_{11}+be_{22})=c_1a+c_2b.$$ 
+
+Recall that we have a the natural isomorphism $\alpha_c:(-)^{(*)}\xrightarrow{\sim} \bbD$ assocaited to $\tau_c$ given by $f\mapsto\tau_c\circ f$, which induces a left $A$-action $\cdot_c$ on $M^{(*)}$ induced by $\alpha_c$ is given by
 \[
   a\cdot_cf=\alpha_c^{-1}\bigl(a\,\alpha_c(f)\bigr),\qquad(a\lambda)(m)=\lambda(ma).
 \]
-Let $\varphi_0(ae_{11}+be_{12})=ae_{11}$ and $\varphi_1(ae_{11}+be_{12})=be_{22}$; they form a homogeneous basis of $M^{\grstar}$ (degrees $0,-1$).
-\begin{subparts}
-\subpart Compute $e_{11}\cdot_c\varphi_i$, $e_{22}\cdot_c\varphi_i$, $e_{12}\cdot_c\varphi_i$ for $i\in\{0,1\}$. Prove that
+Let
+$$\varphi_0(ae_{11}+be_{12})=ae_{11}, \qquad   \varphi_1(ae_{11}+be_{12})=be_{22}.$$ \begin{subparts}
+\subpart Check that $\varphi_0,\varphi_1$ forms a homogeneous basis of $M^{\grstar}$ (specify their degrees).
+Compute $e_{11}\cdot_c\varphi_i$, $e_{22}\cdot_c\varphi_i$, $e_{12}\cdot_c\varphi_i$ for $i\in\{0,1\}$. Prove that
 $e\cdot_c\varphi_i=e\cdot_{c'}\varphi_i$ for all $e\in\{e_{11},e_{22},e_{12}\}$ and $i\in\{0,1\}$ if and only if $(c_1',c_2')=\rho(c_1,c_2)$ for some $\rho\in\kk\setminus\{0\}$.
 \begin{solution}
 For $m=xe_{11}+ye_{12}$: $\alpha_c(\varphi_0)(m)=c_1x$, $\alpha_c(\varphi_1)(m)=c_2y$, and
@@ -206,12 +199,14 @@ $e_{12}\cdot_c\varphi_1=\tfrac{c_2}{c_1}\varphi_0$; all other products vanish
 (e.g.\ $\alpha_c(\varphi_0)(me_{22})=0$, $\alpha_c(\varphi_1)(me_{11})=0$, $\alpha_c(\varphi_0)(me_{12})=0$).
 Only the last depends on $c$, so the actions agree iff $c_2/c_1=c_2'/c_1'$, i.e.\ iff $c_1'/c_1=c_2'/c_2=:\rho$.
 \end{solution}
-\subpart Now let $A$ be any graded algebra with $A_0=S$ finite-dimensional semisimple, $M$ a locally finite-dimensional graded right $A$-module, and
-$\tau,\tau'$ symmetrising forms on $S$ (with $\alpha_\tau,\cdot_\tau$ defined as above). Prove that there is an invertible $z\in S$ with $\tau'(s)=\tau(zs)$ for all $s$, and that
-$\zeta:M^{\grstar}\to M^{\grstar}$, $(\zeta f)(m)=z\,f(m)$, is an isomorphism of graded left $A$-modules $(M^{\grstar},\cdot_{\tau'})\to(M^{\grstar},\cdot_\tau)$.
+\subpart More generally, let $A$ be a locally finite-dimensional graded algebra with semisimple $A_0=S$, and
+$\tau,\tau'$ be symmetrising forms on $S$ with assocaited natural isomorphisms $\alpha_\tau$ and left $A$-action $\cdot_\tau$.  
+Prove that there is an invertible $z\in S$ with $\tau'(s)=\tau(zs)$ for all $s$, and that
+$$\gamma:(M^{\grstar},\cdot_{\tau'})\to (M^{\grstar},\cdot_{\tau}), \quad  (\gamma f)(m)=z\,f(m),$$
+is an isomorphism of graded left $A$-modules.
 Deduce that in (1) the two modules $(M^{\grstar},\cdot_c)$ and $(M^{\grstar},\cdot_{c'})$ are isomorphic for all $c,c'$.
 
-\emph{Hint.} Do not compute any action of $A$; compare $\alpha_{\tau'}$ with $\alpha_\tau$.
+\emph{Hint.} Compare $\alpha_{\tau'}$ with $\alpha_\tau$.
 \begin{solution}
 $z\mapsto\tau(z\,\cdot)$ is injective by non-degeneracy of $\tau$, hence bijective $S\to D(S)$ by dimension count; this gives $z$.
 If $zs=0$ then $\tau'(st)=\tau(zst)=0$ for all $t$, so $s=0$ by non-degeneracy of $\tau'$.
