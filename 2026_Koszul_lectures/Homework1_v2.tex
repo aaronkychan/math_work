@@ -55,15 +55,30 @@ left action is specified.
 
 \begin{questions}
 
-\titledquestion{Projectives, endomorphisms, and duals over $\kk A_3$}
-\comm{exercise is too simple.... part 1 is reasonable as a "everyone can solve this part" (now I split to part 1 and part 2).  Original part 2 and 3 are too simple... part 4 I kept, then I suggest some new parts}
+\titledquestion{Graded algebras, duals, and non-graded modules}
 
 \begin{parts}
 \part For $A=\Bbbk A_n$ with $n\ge 2$, verify that $A_d=\operatorname{span}_\kk\{e_{ij}\mid j-i=d\}$ defines a
-grading on $A$
+grading on $A$.
+\begin{solution}
+The $e_{ij}$ ($i\leq j$) form a basis, so $A=\bigoplus_dA_d$, and $1=\sum_ie_{ii}\in A_0$.
+If $j-i=d$, $q-p=d'$ and $e_{ij}e_{pq}\neq0$, then $j=p$ and $e_{ij}e_{pq}=e_{iq}$ with
+$q-i=(q-p)+(j-i)=d+d'$; hence $A_dA_{d'}\subset A_{d+d'}$.
+\end{solution}
 
 \part Compute $\rad(\kk A_n)$ from its
 definition as the intersection of all maximal right ideals.
+\begin{solution}
+Let $J=\operatorname{span}\{e_{ij}\mid i<j\}$; it is a two-sided ideal and $J^n=0$,
+since a product of $n$ matrices in $J$ vanishes.
+\emph{$J\subset\rad A$.} Let $\mathfrak m$ be a maximal right ideal; $L=A/\mathfrak m$ is simple.
+Then $LJ$ is a submodule, so $LJ\in\{0,L\}$, and $LJ=L$ would give $L=LJ^n=0$. Hence $LJ=0$,
+i.e.\ $J=1\cdot J\subset\mathfrak m$.
+\emph{$\rad A\subset J$.} For each $i$, $X\mapsto X_{ii}$ is a surjective algebra homomorphism $A\to\kk$,
+so $\mathfrak m_i=\{X\mid X_{ii}=0\}$ is a right ideal with $A/\mathfrak m_i\cong\kk$ simple,
+i.e.\ a maximal right ideal. Then $\bigcap_i\mathfrak m_i=\{X\mid\text{all }X_{ii}=0\}=J$.
+Hence $\rad A=J$.
+\end{solution}
 
 % too simple...
 %
@@ -97,65 +112,120 @@ consider $\bbD(M)_d=\Hom_\kk(M_{-d},\kk)$ with $(af)(m)=f(ma)$.
 \begin{subparts}
 \subpart Find a homogeneous basis of $\bbD(M)$, its degrees, and all non-zero
 actions of matrix units on it.
+\begin{solution}
+$M=\kk e_{22}\oplus\kk e_{23}$ with degrees $0,1$. Let $\varepsilon_{22},\varepsilon_{23}$ be the dual basis;
+$\deg\varepsilon_{22}=0$, $\deg\varepsilon_{23}=-1$. Since $(af)(m)=f(ma)$ and
+$e_{ij}e_{pq}=\delta_{jp}e_{iq}$, the only non-zero actions are
+$e_{22}\varepsilon_{22}=\varepsilon_{22}$, $e_{33}\varepsilon_{23}=\varepsilon_{23}$,
+$e_{23}\varepsilon_{23}=\varepsilon_{22}$.
+(E.g.\ $(e_{23}\varepsilon_{23})(e_{22})=\varepsilon_{23}(e_{22}e_{23})=1$, while $e_{11},e_{12},e_{13}$
+act by $0$ because $e_{22}e_{1q}=e_{23}e_{1q}=0$.)
+\end{solution}
 \subpart Show that $\Bbbk e_{13}\subset Ae_{33}$ is a graded left submodule and
 that $\bbD(M)\cong(Ae_{33}/\Bbbk e_{13})(1)$ as graded left $A$-modules.
+\begin{solution}
+$Ae_{33}=\operatorname{span}\{e_{13},e_{23},e_{33}\}$ and $e_{ij}e_{13}=\delta_{j1}e_{i3}$, so
+$\Bbbk e_{13}$ is a (homogeneous) submodule. In $N=Ae_{33}/\Bbbk e_{13}$ the classes $\bar e_{33},\bar e_{23}$
+have degrees $0,1$ and the non-zero actions are $e_{33}\bar e_{33}=\bar e_{33}$,
+$e_{23}\bar e_{33}=\bar e_{23}$, $e_{22}\bar e_{23}=\bar e_{23}$. In $N(1)$ the degrees are $-1,0$.
+The linear map $\varepsilon_{23}\mapsto\bar e_{33}$, $\varepsilon_{22}\mapsto\bar e_{23}$ is bijective, preserves
+degrees, and matches the non-zero actions of part (1); as matrix units span $A$, it is $A$-linear.
+\end{solution}
 \subpart Deduce that $\bbD(M)$ is not isomorphic to any
 $(Ae_{jj})(r)$, $j\in\{1,2,3\}$, $r\in\mathbb Z$.
+\begin{solution}
+$\dim\bbD(M)=2$ and $\dim Ae_{jj}=j$, so only $j=2$ is possible. But $e_{33}$ acts by $0$ on $Ae_{22}=\operatorname{span}\{e_{12},e_{22}\}$
+while $e_{33}\varepsilon_{23}=\varepsilon_{23}\neq0$; an isomorphism commutes with $e_{33}$.
+\end{solution}
 \end{subparts}
 
 
-\part \comm{make an example for Kronecker algebra (present as 2-by-2 matrix with upper-right entry $\Bbbk \alpha\oplus \Bbbk\beta$, and define the multiplication).  Take $\deg \alpha=1$ and $\deg \beta =0$.  Let $R_d(\lambda)$ be the module with $\alpha$ acts by $\lambda$ and $\beta$ acts by $0$ and ask student to show these are $A$-modules but not graded $A$-modules.  Then one more part to find a $B$-module that is not graded $B$-module for $B=\bigwedge \Bbbk^2$.}
+\part \textbf{Modules that are not graded.}
+Let $A$ be the algebra of matrices
+\[
+  X=\begin{pmatrix}a&u\alpha+v\beta\\0&b\end{pmatrix}\qquad(a,b,u,v\in\kk),
+\]
+with the usual matrix product, where scalars act on the space $\kk\alpha\oplus\kk\beta$ in the obvious way:
+\[
+\begin{pmatrix}a&p\\0&b\end{pmatrix}\begin{pmatrix}a'&p'\\0&b'\end{pmatrix}
+=\begin{pmatrix}aa'&ap'+pb'\\0&bb'\end{pmatrix}
+\qquad(p,p'\in\kk\alpha\oplus\kk\beta).
+\]
+Grade $A$ by $\deg\alpha=1$, $\deg\beta=0$, with diagonal entries in degree $0$.
+For $(\lambda,\mu)\in\kk^2$ let $M(\lambda,\mu)=\kk^2$ (row vectors) with right action
+\[
+  (x_1,x_2)\cdot X=\bigl(ax_1,\ (\lambda u+\mu v)x_1+bx_2\bigr).
+\]
+A \emph{grading} on a right $A$-module $M$ is a decomposition $M=\bigoplus_{d\in\mathbb Z}M_d$
+with $M_dA_e\subset M_{d+e}$ for all $d,e$.
+\begin{subparts}
+\subpart Verify that $A$ is a graded algebra (i.e.\ $A_dA_e\subset A_{d+e}$)
+and that $M(\lambda,\mu)$ is a right $A$-module for every $(\lambda,\mu)$.
+\begin{solution}
+In $ap'+pb'$ the degree of $p$ or $p'$ is unchanged by the scalars $a,b,a',b'$
+(all of degree $0$), so $A_dA_e\subset A_{d+e}$; $1\in A_0$.
+Put $\phi(u\alpha+v\beta)=\lambda u+\mu v$ and $\rho(X)=\begin{pmatrix}a&\phi(p)\\0&b\end{pmatrix}$.
+Then $\phi(ap'+pb')=a\phi(p')+\phi(p)b'$ gives $\rho(XX')=\rho(X)\rho(X')$ and $\rho(1)=I$,
+and $x\cdot X=x\rho(X)$ (row vector times matrix); hence $(x\cdot X)\cdot X'=x\cdot(XX')$.
+\end{solution}
+\subpart Prove that $M(\lambda,\mu)$ admits a grading if and only if $\lambda\mu=0$.
+\begin{solution}
+Let $e_1=\mathrm{diag}(1,0)$, $e_2=\mathrm{diag}(0,1)\in A_0$, and $m_1=(1,0)$, $m_2=(0,1)$,
+so $Me_i=\kk m_i$.
+($\Rightarrow$) For a grading, $Me_i=\bigoplus_d(M_de_i)$ is a graded subspace; being one-dimensional it is
+spanned by a homogeneous vector, so $m_i\in M_{d_i}$. Now $m_1\alpha=\lambda m_2\in M_{d_1+1}$ and
+$m_1\beta=\mu m_2\in M_{d_1}$. If $\lambda\neq0$ then $d_2=d_1+1$; if $\mu\neq0$ then $d_2=d_1$; so $\lambda\mu\neq0$ is impossible.
+($\Leftarrow$) If $\mu=0$ take $d_1=0,d_2=1$; if $\mu\neq0$ (so $\lambda=0$) take $d_1=d_2=0$.
+Since $m_2X=bm_2$ and $m_1X=am_1+(\lambda u+\mu v)m_2$, the condition $M_dA_e\subset M_{d+e}$ holds.
+\end{solution}
+\subpart Let $B=\kk[z]$ with $\deg z=1$, and let $M=\kk$ with $z$ acting by $1$ (that is, $M=B/(z-1)$).
+Show that $M$ is a $B$-module admitting no grading.
+\begin{solution}
+Suppose $M=\bigoplus M_d$ is graded; being one-dimensional, $M=M_d$ for a single $d$. Then $m\cdot z=m\in M_{d+1}\cap M_d=0$ for $m\neq0$, a contradiction.
+\end{solution}
+\end{subparts}
+
+\part \textbf{Independence of the symmetrising form.}
+Let $A=\kk A_2$, $S=\kk e_{11}\oplus\kk e_{22}$ and $M=e_{11}A$ (inherited gradings).
+For $c=(c_1,c_2)\in(\kk\setminus\{0\})^2$ let $\tau_c(ae_{11}+be_{22})=c_1a+c_2b$; it is symmetrising
+($\tau(st)=\tau(ts)$ and $(s,t)\mapsto\tau(st)$ non-degenerate). Recall
+$M^{\grstar}=\bigoplus_d\Hom_S(M_{-d},S)$ (the summand in degree $d$), $\alpha_c:M^{\grstar}\to\bbD(M)$, $f\mapsto\tau_c\circ f$, which is bijective, and
+\[
+  a\cdot_cf=\alpha_c^{-1}\bigl(a\,\alpha_c(f)\bigr),\qquad(a\lambda)(m)=\lambda(ma).
+\]
+Let $\varphi_0(ae_{11}+be_{12})=ae_{11}$ and $\varphi_1(ae_{11}+be_{12})=be_{22}$; they form a homogeneous basis of $M^{\grstar}$ (degrees $0,-1$).
+\begin{subparts}
+\subpart Compute $e_{11}\cdot_c\varphi_i$, $e_{22}\cdot_c\varphi_i$, $e_{12}\cdot_c\varphi_i$ for $i\in\{0,1\}$. Prove that
+$e\cdot_c\varphi_i=e\cdot_{c'}\varphi_i$ for all $e\in\{e_{11},e_{22},e_{12}\}$ and $i\in\{0,1\}$ if and only if $(c_1',c_2')=\rho(c_1,c_2)$ for some $\rho\in\kk\setminus\{0\}$.
+\begin{solution}
+For $m=xe_{11}+ye_{12}$: $\alpha_c(\varphi_0)(m)=c_1x$, $\alpha_c(\varphi_1)(m)=c_2y$, and
+$me_{11}=xe_{11}$, $me_{22}=ye_{12}$, $me_{12}=xe_{12}$. Since $(a\lambda)(m)=\lambda(ma)$:
+$e_{11}\cdot\varphi_0=\varphi_0$, $e_{22}\cdot\varphi_1=\varphi_1$, and
+$\alpha_c(e_{12}\cdot\varphi_1)(m)=\alpha_c(\varphi_1)(xe_{12})=c_2x=\tfrac{c_2}{c_1}\alpha_c(\varphi_0)(m)$, i.e.\
+$e_{12}\cdot_c\varphi_1=\tfrac{c_2}{c_1}\varphi_0$; all other products vanish
+(e.g.\ $\alpha_c(\varphi_0)(me_{22})=0$, $\alpha_c(\varphi_1)(me_{11})=0$, $\alpha_c(\varphi_0)(me_{12})=0$).
+Only the last depends on $c$, so the actions agree iff $c_2/c_1=c_2'/c_1'$, i.e.\ iff $c_1'/c_1=c_2'/c_2=:\rho$.
+\end{solution}
+\subpart Now let $A$ be any graded algebra with $A_0=S$ finite-dimensional semisimple, $M$ a locally finite-dimensional graded right $A$-module, and
+$\tau,\tau'$ symmetrising forms on $S$ (with $\alpha_\tau,\cdot_\tau$ defined as above). Prove that there is an invertible $z\in S$ with $\tau'(s)=\tau(zs)$ for all $s$, and that
+$\zeta:M^{\grstar}\to M^{\grstar}$, $(\zeta f)(m)=z\,f(m)$, is an isomorphism of graded left $A$-modules $(M^{\grstar},\cdot_{\tau'})\to(M^{\grstar},\cdot_\tau)$.
+Deduce that in (1) the two modules $(M^{\grstar},\cdot_c)$ and $(M^{\grstar},\cdot_{c'})$ are isomorphic for all $c,c'$.
+
+\emph{Hint.} Do not compute any action of $A$; compare $\alpha_{\tau'}$ with $\alpha_\tau$.
+\begin{solution}
+$z\mapsto\tau(z\,\cdot)$ is injective by non-degeneracy of $\tau$, hence bijective $S\to D(S)$ by dimension count; this gives $z$.
+If $zs=0$ then $\tau'(st)=\tau(zst)=0$ for all $t$, so $s=0$ by non-degeneracy of $\tau'$.
+Thus $s\mapsto zs$ is injective, hence bijective; so $zs_0=1$ for some $s_0$, and in a finite-dimensional algebra a one-sided inverse is two-sided.
+Next, $\zeta f$ is right $S$-linear ($zf(ms)=zf(m)s$), $\zeta$ preserves degrees and is invertible (inverse $f\mapsto z^{-1}f$).
+Since $\alpha_{\tau'}(f)=\tau(zf(\cdot))=\alpha_\tau(\zeta f)$, we get $\alpha_{\tau'}=\alpha_\tau\circ\zeta$ and
+$a\cdot_{\tau'}f=\zeta^{-1}\alpha_\tau^{-1}(a\,\alpha_\tau(\zeta f))=\zeta^{-1}(a\cdot_\tau\zeta f)$, i.e.\ $\zeta(a\cdot_{\tau'}f)=a\cdot_\tau\zeta(f)$.
+For (1) take $z=\frac{c_1'}{c_1}e_{11}+\frac{c_2'}{c_2}e_{22}$: $\tau_{c'}=\tau_c(z\,\cdot)$, so $(M^{\grstar},\cdot_{c'})\cong(M^{\grstar},\cdot_c)$ although $\cdot_c\neq\cdot_{c'}$ unless $c'\propto c$.
+\end{solution}
+\end{subparts}
 \end{parts}
 
 \newpage
-\titledquestion{Dependence on the symmetrising form}
-Let $A=\kk A_2$, $S=\kk e_{11}\oplus\kk e_{22}$, $V=\kk e_{12}$, and consider
-$M=e_{11}A$, with inherited gradings. For $c=(c_1,c_2)\in(\kk\setminus\{0\})^2$ define
-\[
-  \tau_c:S\to\kk,\qquad ae_{11}+be_{22}\mapsto c_1a+c_2b.
-\]
-Recall that $M^{\grstar}=\bigoplus_{d}\Hom_S(M_{-d},S)$ with the displayed
-summand in degree $d$, that $\alpha_c:M^{\grstar}\to\bbD(M)$ is
-$f\mapsto\tau_c\circ f$, and that
-\[
-  a\cdot_cf=\alpha_c^{-1}\bigl(a\,\alpha_c(f)\bigr),\qquad
-  (a\lambda)(m)=\lambda(ma).
-\]
-\begin{parts}
-\part Verify that $\tau_c$ is symmetrising. Let $\varepsilon:V\to\kk$ be
-$\varepsilon(ue_{12})=u$. 
-Find the right $S$-linear map $f:V\to S$ and the left
-$S$-linear map $g:V\to S$ with $\tau_c\circ f=\varepsilon=\tau_c\circ g$, and
-determine whether $f$ is also left linear and $g$ also right linear \comm{$\Bbbk$-linear?? $S$-linear???? always specify}.
-
-\part Let $\varphi_0(ae_{11}+be_{12})=ae_{11}$ and
-$\varphi_1(ae_{11}+be_{12})=be_{22}$. Show that $\varphi_0,\varphi_1$ form a
-homogeneous basis of $M^{\grstar}$ and find their degrees.
-
-\part Compute $e_{11}\cdot_c \varphi_i$, $e_{22}\cdot_c \varphi_i$, $e_{12}\cdot_c \varphi_i$  for general $c$ and $i\in\{0,1\}$. For $c,c'$, prove that
-$\cdot_c=\cdot_{c'}$ \comm{do not use such abbreviation, state what you want student to do explicitly} if and only if $(c_1',c_2')$ is a scalar multiple of $(c_1,c_2)$.
-
-\part \begin{subparts}
-\subpart Explain, without computing any action, why
-$(M^{\grstar},\cdot_c)\cong(M^{\grstar},\cdot_{c'})$ as graded left
-$A$-modules for \emph{all} $c,c'$.
-\subpart Write the isomorphism $t=\alpha_{c'}^{-1}\alpha_c$ explicitly on
-$\varphi_0,\varphi_1$, and check directly that it commutes with
-$e_{11},e_{22},e_{12}$. \comm{phrasing too ambiguous, do you mean to check left or right $S$-linearity???}
-
-\subpart Take $c=(1,1)$ and $c'=(1,2)$, $\operatorname{char}\kk\neq2$:
-what is $t$?  \comm{is this just direct computation?? what is the point of this question?}  
-\end{subparts}
-\end{parts}
-\comm{I feel this question is still somewhat easy.... add a more challenging part and remove one of the above parts as a direct hint/answer, or modify (4) to a more challenging version}
-\end{questions}
-
-
-
-\begin{questions}
-\setcounter{question}{2}
-
-\titledquestion{Tensor products and $S$-duals}
+\titledquestion{Tensor products, $S$-duals and quadratic duals}
 Let $S$ be a finite-dimensional semisimple $\kk$-algebra. 
 Let $V$ be a finite-dimensional right $S$-module and $W$ a finite-dimensional
 $S$-bimodule, and define
@@ -169,26 +239,88 @@ and in $(v,w)$, invariance under $vs\otimes w\leftrightarrow v\otimes sw$ and
 $gs\otimes f\leftrightarrow g\otimes sf$, and right $S$-linearity of
 $\theta_r(g\otimes f)$. When $V$ is a bimodule, show
 $\theta_r(sg\otimes ft)=s\,\theta_r(g\otimes f)\,t$.
+\begin{solution}
+For fixed $g,f$, $\beta(v,w)=g(f(v)w)$ is bilinear, and
+$\beta(vs,w)=g(f(v)sw)=\beta(v,sw)$ because $f$ is right $S$-linear; so $\beta$ induces a linear map $V\otimes_SW\to S$.
+It is right $S$-linear: $\beta(v,ws)=g(f(v)ws)=g(f(v)w)s$ as $g$ is. The formula is bilinear in $(g,f)$, and
+$(gs)(f(v)w)=g(sf(v)w)=g((sf)(v)w)$ shows invariance under $gs\otimes f\leftrightarrow g\otimes sf$.
+For a bimodule $V$ and the actions $(sft)(v)=sf(tv)$,
+\[
+\theta_r(sg\otimes ft)(v\otimes w)=s\,g(f(tv)w)=\bigl(s\,\theta_r(g\otimes f)\,t\bigr)(v\otimes w).
+\]
+\end{solution}
 
 \part Prove that $\theta_r$ is bijective.
+\begin{solution}
+\emph{$V=S$:} $S^*\cong S$ via $f\mapsto f(1)$ (as $f(s)=f(1)s$), and $S\otimes_SW\cong W$. Under these identifications
+$\theta_r(g\otimes f)(s\otimes w)=g(f(1)sw)=(g\,f(1))(sw)$, so $\theta_r$ becomes $W^*\otimes_SS\to W^*$, $g\otimes s\mapsto gs$, an isomorphism.
+\emph{$V=S^{\oplus n}$:} both sides turn finite direct sums in $V$ into direct sums, and $\theta_r$ is compatible with the inclusions and projections
+by naturality (part (3), applied to right $S$-linear maps); so $\theta_r^{V_1\oplus V_2}=\theta_r^{V_1}\oplus\theta_r^{V_2}$.
+\emph{General $V$:} $V\oplus V'\cong S^{\oplus n}$ as right modules ($S$ semisimple), so $\theta_r^V\oplus\theta_r^{V'}$ is bijective, hence so is $\theta_r^V$.
+\end{solution}
 
 \part Let $p:V\to V'$ be right $S$-linear and $q:W\to W'$ a bimodule map.
 Prove $(p\otimes q)^*\circ\theta_r^{V',W'}=\theta_r^{V,W}\circ(q^*\otimes p^*)$.
+\begin{solution}
+For $g\in(W')^*$, $f\in(V')^*$:
+$\bigl((p\otimes q)^*\theta_r(g\otimes f)\bigr)(v\otimes w)=g(f(p(v))\,q(w))$, and
+$\theta_r(q^*g\otimes p^*f)(v\otimes w)=g\bigl(q(f(p(v))\,w)\bigr)=g(f(p(v))\,q(w))$ since $q$ is left $S$-linear.
+\end{solution}
 
 \part Let $S=\kk^{\oplus3}$ with idempotents $e_1,e_2,e_3$, $V=\kk a$ with
 $e_1ae_2=a$, and $W=\kk c$ with $e_2ce_3=c$. Compute
 $W^*\otimes_SV^*$, $V^*\otimes_SW^*$ and $(V\otimes_SW)^*$, and describe
 $\theta_r$. What happens if the two duals are tensored in the original order?
+\begin{solution}
+$V^*=\kk a^*$ with $a^*(a)=e_2$ (right linearity: $a=ae_2$), and $e_2a^*e_1=a^*$; $W^*=\kk c^*$ with $c^*(c)=e_3$, $e_3c^*e_2=c^*$.
+$V\otimes_SW=\kk\,a\otimes c\neq0$ (as $a=ae_2$, $c=e_2c$), so $(V\otimes_SW)^*$ is $1$-dimensional.
+$W^*\otimes_SV^*=\kk\,c^*\otimes a^*\neq0$ since $c^*=c^*e_2$, $a^*=e_2a^*$, and
+$\theta_r(c^*\otimes a^*)(a\otimes c)=c^*(a^*(a)c)=c^*(e_2c)=e_3\neq0$: $\theta_r$ is an isomorphism.
+In the other order, $a^*\otimes c^*=a^*e_1\otimes c^*=a^*\otimes e_1c^*=a^*\otimes e_1e_3c^*=0$, so $V^*\otimes_SW^*=0$.
+\end{solution}
 
 \part Suppose instead that $S=\kk[x]/(x^2)$ and $V=W=S/(x)$,
 with the same definitions of $U^*$ and $\theta_r$. Show that
 $W^*\otimes_SV^*$ and $(V\otimes_SW)^*$ are both $1$-dimensional but
 $\theta_r=0$. At which step of your proof of (2) does the argument fail?
+\begin{solution}
+Write $\kk=S/(x)$. $\kk^*=\Hom_S(\kk,S)$: $f(\bar1)=u$ requires $ux=0$, so $u\in\kk x$, and $\kk^*\cong\kk$ with $x$ acting by $0$ on both sides.
+So $W^*\otimes_SV^*\cong\kk\otimes_S\kk=\kk$, and $(V\otimes_SW)^*=\kk^*\cong\kk$. But $\theta_r(g\otimes f)(\bar1\otimes\bar1)=g(f(\bar1)\bar1)=g(cx\cdot\bar1)=g(0)=0$.
+So $\theta_r=0$, neither injective nor surjective. The argument fails in the last step of (2): $V=\kk$ is not a direct summand of any $S^{\oplus n}$
+(it is not free), since $S$ is not semisimple.
+\end{solution}
+
+\part \textbf{A square with a parameter.}
+Let $S=\kk e_1\oplus\kk e_2\oplus\kk e_3\oplus\kk e_4$ and let $V$ be an $S$-bimodule with basis
+$a,b,c,d$ and
+\[
+  e_1ae_2=a,\quad e_2be_4=b,\quad e_1ce_3=c,\quad e_3de_4=d,
+\]
+and all other idempotent actions zero. The only composable words of length $2$
+are $ab$ and $cd$. For $\lambda\in\kk$ set $A_\lambda=T_S(V)/(ab-\lambda cd)$.
+Using $\theta_r$, find the relation space $R^\perp$ and a presentation of $A_\lambda^!$ for every $\lambda$, including $0$.
+Then dualise once more to recover the relation $ab-\lambda cd$.
+
+\emph{Hint.} Evaluate $\mu b^*a^*+\nu d^*c^*$ on $ab-\lambda cd$.
+\begin{solution}
+$V^*$ has basis $a^*\in e_2V^*e_1$, $b^*\in e_4V^*e_2$, $c^*\in e_3V^*e_1$, $d^*\in e_4V^*e_3$, and the composable words of length $2$ are $b^*a^*$, $d^*c^*$.
+$\theta_r(b^*\otimes a^*)(a\otimes b)=b^*(e_2b)=e_4$ and it vanishes on $c\otimes d$; $\theta_r(d^*\otimes c^*)(c\otimes d)=e_4$ and it vanishes on $a\otimes b$.
+So $\theta_r(\mu b^*a^*+\nu d^*c^*)(ab-\lambda cd)=(\mu-\lambda\nu)e_4$, giving $R^\perp=\kk(\lambda b^*a^*+d^*c^*)$ and $A_\lambda^!=T_S(V^*)/(\lambda b^*a^*+d^*c^*)$.
+Dualising again: $\alpha\,ab+\beta\,cd$ (via $\mathrm{ev}$) annihilates $\lambda b^*a^*+d^*c^*$ iff $\alpha\lambda+\beta=0$, giving back $ab-\lambda cd$.
+\end{solution}
+
+\part \textbf{A monomial example.} Let $B=T_\kk(\kk x\oplus\kk y)/(x^2)$ with $\deg x=\deg y=1$, $S=\kk$.
+Compute $B^!$ (with $X=x^*$, $Y=y^*$) and find a homogeneous basis of $B^!$.
+\begin{solution}
+For $F=\alpha XX+\beta XY+\gamma YX+\delta YY$ one has $\theta_r(F)(x\otimes x)=\alpha$, so $R^\perp=\operatorname{span}\{XY,YX,YY\}$ and $B^!=\kk\langle X,Y\rangle/(XY,YX,Y^2)$.
+Any word of length $\geq2$ containing $Y$ contains one of $XY,YX,YY$; so $\{X^n\mid n\geq0\}\cup\{Y\}$ spans, and it is a basis because the ideal is spanned by words containing $XY$, $YX$ or $YY$, none of which occurs in $X^n$ or $Y$.
+\end{solution}
 \end{parts}
 
 % probably not needed for student
 %\emph{Hint for (2).} First take $V=S$. Then use that every finite-dimensional right $S$-module is a direct summand of $S^{\oplus n}$ for some $n$ (as a right module; this is why $V$ is only assumed to be a right module).
 
+\newpage
 \newpage
 \titledquestion{Quadratic presentations and Hilbert series}
 The parts are independent.
@@ -198,59 +330,79 @@ $A_Z=\kk A_n/(e_{k,k+2}\mid k\in Z)$ with the quotient grading.
 \begin{subparts}
 \subpart Show that $\{e_{ii}\}\cup\{e_{ij}\mid i<j,\ \text{no }k\in Z\text{ with }i\leq k\leq j-2\}$
 is a basis of $A_Z$.
+\begin{solution}
+Let $I=\operatorname{span}\{e_{ij}\mid\exists k\in Z:\ i\leq k,\ k+2\leq j\}$. Since $e_{ij}=e_{ik}e_{k,k+2}e_{k+2,j}$, $I$ lies in $(e_{k,k+2}:k\in Z)$;
+conversely $I$ is a two-sided ideal containing the $e_{k,k+2}$ (a product $e_{pq}e_{ij}e_{rs}\neq0$ has $p\leq i\leq k$ and $k+2\leq j\leq s$).
+So $I=(e_{k,k+2}:k\in Z)$ and the remaining matrix units form a basis of the quotient.
+\end{solution}
 \subpart Write $A_Z=T_S(V)/(R)$ with explicit $S$, $V$, and $R\subset V\otimes_SV$.
-\subpart For $n=5$ and $Z=\{1,3\}$ compute $h_{A_Z}(t)$.
-\subpart For $n=4$ and $Z=\{1,2\}$, show $e_{14}\in(e_{13},e_{24})$, that
-$(A_Z)_2=0$, and that $A_Z=S\oplus V$ is radical-square-zero; compute $h_{A_Z}(t)$.
+\begin{solution}
+$S=\bigoplus_{i=1}^n\kk e_{ii}$, $V=\bigoplus_{i<n}\kk e_{i,i+1}$, $R=\operatorname{span}\{e_{k,k+1}\otimes e_{k+1,k+2}\mid k\in Z\}$. Indeed $T_S(V)\cong\kk A_n$ (Lecture 2), and under this
+isomorphism $(R)$ goes to the ideal generated by the products $e_{k,k+1}e_{k+1,k+2}=e_{k,k+2}$.
+\end{solution}
 \end{subparts}
-%\emph{Hint.} $e_{ij}=e_{ik}e_{k,k+2}e_{k+2,j}$ whenever $i\leq k$ and $k+2\leq j$.
 
 \part Let $S=\kk e_1\oplus\kk e_2$ and let $V=\kk a\oplus\kk b$ be an $S$-bimodule with
 $e_1ae_2=a$, $e_2be_1=b$ and all other idempotent actions zero.
 Find a basis of $T_S(V)_d$ for all $d\geq0$ and compute $h_{T_S(V)}(t)$.
-Then find a basis and $h$ for $T_S(V)/(ab)$. Which entries of the two
-matrices differ, and why is $T_S(V)/(ab)$ finite-dimensional?
+Then find a basis of $T_S(V)/(ab)$ and explain why it is finite-dimensional.
 
 \emph{Hint.} Count alternating words in each degree, including degree $0$.
+\begin{solution}
+Positive-degree basis words of $T_S(V)$ are the composable (alternating) words. For each $d\geq1$ there are exactly two:
+$aba\cdots$ ($d$ letters, from $e_1$) and $bab\cdots$ (from $e_2$); for $d=0$ the basis is $e_1,e_2$.
+The word $aba\cdots$ lies in $e_1T_de_1$ if $d$ is even and in $e_1T_de_2$ if $d$ is odd; $bab\cdots$ lies in $e_2T_de_2$ ($d$ even), $e_2T_de_1$ ($d$ odd). So
+\[
+h_{T_S(V)}(t)=\frac1{1-t^2}\begin{pmatrix}1&t\\t&1\end{pmatrix}.
+\]
+In $T_S(V)/(ab)$ the ideal is spanned by words containing $ab$; every alternating word of length $\geq3$ contains $ab$ ($aba$, $bab$), so the basis is $e_1,e_2,a,b,ba$ ($ba\in e_2Ae_2$), and $A$ is finite-dimensional ($\dim=5$).
+\end{solution}
 
 
 \part Let $V,W$ have bases $x_1,\dots,x_n$ and $y_1,\dots,y_m$, generators in
-degree $1$, and consider $\SymAlg(V)$ and $\bigwedge(W)$
-\begin{subparts}
-\subpart Show that
+degree $1$, and consider $\SymAlg(V)$ and $\bigwedge(W)$. Show that
 \[
 \dim_\Bbbk\SymAlg(V)_2=\tfrac{n(n+1)}2,\qquad  \dim_\Bbbk(\bigwedge W)_2=\tfrac{m(m-1)}2.\]
+\begin{solution}
+In degree $2$, $A_2=(V\otimes V)/R$ where $R$ is the degree-$2$ relation space.
+For $\SymAlg(V)$, $R=\operatorname{span}\{x_i\otimes x_j-x_j\otimes x_i\mid i<j\}$; these $\binom n2$ elements are linearly independent
+(each involves the basis tensor $x_i\otimes x_j$, $i<j$, in no other element), so $\dim A_2=n^2-\binom n2=\frac{n(n+1)}2$.
+For $\bigwedge W$, $R=\operatorname{span}\{w\otimes w\}$; writing $w=\sum a_iy_i$, $w\otimes w=\sum a_i^2y_i\otimes y_i+\sum_{i<j}a_ia_j(y_i\otimes y_j+y_j\otimes y_i)$, and
+$y_i\otimes y_j+y_j\otimes y_i=(y_i+y_j)^{\otimes2}-y_i^{\otimes2}-y_j^{\otimes2}$, so $R=\operatorname{span}\{y_i\otimes y_i,\ y_i\otimes y_j+y_j\otimes y_i\ (i<j)\}$ (any characteristic),
+of dimension $m+\binom m2$ by the same independence argument; so $\dim A_2=m^2-\frac{m(m+1)}2=\frac{m(m-1)}2$.
+\end{solution}
 
-\subpart Using that ordered monomials form a basis of $\SymAlg(V)$ and strictly
-increasing products a basis of $\bigwedge W$, compute
-$\dim\SymAlg(V)_d$ and $\dim(\bigwedge W)_d$ for all $d$, and $h_{\SymAlg(V)}(t)$,
-$h_{\bigwedge W}(t)$.
-\subpart Let $P=\kk\langle x,y\rangle/(xy)$. Show that
-$\{y^ax^b\mid a,b\geq0\}$ is a basis, and that $h_P(t)=h_{\kk[x,y]}(t)$.
-Prove that $P$ and $\kk[x,y]$ are not isomorphic as algebras.
+\part \textbf{Counting words.} Let $B=T_\kk(\kk x\oplus\kk y)/(x^2)$ be the algebra of Exercise~2(7).
+\begin{subparts}
+\subpart Describe a basis of $B_d$, and compute $a_d=\dim B_d$ for $0\leq d\leq6$.
+\begin{solution}
+A basis of $B_d$ is the set of words in $x,y$ of length $d$ containing no $xx$ (the ideal $(x^2)$ is spanned by words containing $xx$). $a_0,\dots,a_6=1,2,3,5,8,13,21$.
+\end{solution}
+\subpart Express $a_d$ through $a_{d-1},a_{d-2}$ by sorting words by first
+letter, and find $h_B(t)$ as a rational function. Using the basis of $B^!$ from Exercise~2(7), compute $h_{B^!}(t)$ and verify $h_B(t)h_{B^!}(-t)=1$.
+\begin{solution}
+For $d\geq2$: words starting with $y$ are $y\cdot w$ with $w$ admissible of length $d-1$ ($a_{d-1}$ choices); words starting with $x$ must continue with $y$, and are $xy\cdot w$ with $w$ admissible of length $d-2$ ($a_{d-2}$).
+So $a_d=a_{d-1}+a_{d-2}$ and $(1-t-t^2)h_B=a_0+(a_1-a_0)t=1+t$, i.e.\ $h_B=\dfrac{1+t}{1-t-t^2}$.
+The basis $\{X^n\}\cup\{Y\}$ gives $h_{B^!}=\frac1{1-t}+t$, hence
+$h_B(t)h_{B^!}(-t)=\frac{1+t}{1-t-t^2}\Bigl(\frac1{1+t}-t\Bigr)=\frac{1+t}{1-t-t^2}\cdot\frac{1-t-t^2}{1+t}=1$.
+\end{solution}
 \end{subparts}
+
+\part Let $A_\lambda$ ($\lambda\in\kk$) be the algebra of Exercise~2(6). Prove that $A_\lambda\cong A_\mu$ as graded algebras over $S$
+if and only if $\lambda=\mu=0$ or both are non-zero.
+
+\emph{Hint.} A graded isomorphism over $S$ sends each of $a,b,c,d$ to a scalar multiple of itself.
+\begin{solution}
+A graded isomorphism $\varphi:A_\lambda\to A_\mu$ over $S$ fixes each $e_i$, so $\varphi_1$ preserves each $e_iVe_j$ (all one-dimensional): $\varphi(a)=\alpha a$, $\varphi(b)=\beta b$, $\varphi(c)=\gamma c$, $\varphi(d)=\delta d$ with all scalars non-zero.
+The induced map on $T_S(V)$ sends $ab-\lambda cd$ to $\alpha\beta\,ab-\lambda\gamma\delta\,cd$, which must vanish in $A_\mu$, i.e.\ lie in $\kk(ab-\mu cd)$: $\mu\alpha\beta=\lambda\gamma\delta$.
+Hence $\lambda=0\Leftrightarrow\mu=0$. Conversely if $\lambda,\mu\neq0$ take $\alpha=\beta=\gamma=1$, $\delta=\mu/\lambda$ (the inverse is of the same form); for $\lambda=\mu=0$ take the identity.
+\end{solution}
 \end{parts}
-\end{questions}
 
-
-\begin{questions}
-\setcounter{question}{4}
-
+\newpage
 \titledquestion{Computing quadratic duals}
 The parts are independent.
 \begin{parts}
-\part Let $A=\kk A_4/(e_{13})$.
-Write a presentation of $A^!$ using reversed generators, and find homogeneous
-bases and the Hilbert series of $A$ and $A^!$. Verify
-\[
-  h_A(t)\,h_{A^!}(-t)^{\mathsf T}=I_4,
-\]
-and check that dualising twice recovers $A$ \comm{you mean ${}^!(A^!)\cong A$?? use symbols more not words!}, identifying each twice-reversed
-generator with its original matrix unit. \comm{use symbols, not words!}
-
-\emph{Hint.} Among $e_{12}e_{23}$ and $e_{23}e_{34}$ only the first is a
-relation. Complement the composable pairs and reverse their order.
-
 \part Let $S=\bigoplus_{i=1}^r\kk e_i$, let $V$ be a finite-dimensional
 $S$-bimodule in degree $1$ with $C_{ij}=\dim_\kk e_iVe_j$, and let
 $A=T_S(V)/(V\otimes_SV)=S\oplus V$.
@@ -258,26 +410,48 @@ $A=T_S(V)/(V\otimes_SV)=S\oplus V$.
 \subpart Prove $A^!=T_S(V^*)$, $h_A(t)=I+tC$, and
 $h_{A^!}(t)=(I-tC^{\mathsf T})^{-1}$.
 \subpart Deduce $h_A(t)h_{A^!}(-t)^{\mathsf T}=I$.
-\subpart Specialise to $S=\kk e_1\oplus\kk e_2$, $V=\kk a\oplus\kk b$,
-$e_1ae_2=a$, $e_2be_1=b$, and write down both series.
 \end{subparts}
 
 \emph{Hint.} For (i) use $V\otimes_SV$ as the relation space and the formula
 $h_{T_S(V)}(t)=(I-tC)^{-1}$ of Lecture~2.
+\begin{solution}
+(i) The relation space is $R=V\otimes_SV$; since $\theta_r$ identifies $V^*\otimes_SV^*$ with $(V\otimes_SV)^*$, $R^\perp=0$ and $A^!=T_S(V^*)$.
+$e_iA_0=L_i$ and $e_iA_1=e_iV$ give $h_A=I+tC$. For $V^*$, $\dim e_iV^*e_j=\dim e_jVe_i$, so its matrix is $C^{\mathsf T}$ and $h_{A^!}=(I-tC^{\mathsf T})^{-1}$.
+(ii) $h_{A^!}(-t)^{\mathsf T}=\bigl((I+tC^{\mathsf T})^{-1}\bigr)^{\mathsf T}=(I+tC)^{-1}$, so $h_A(t)h_{A^!}(-t)^{\mathsf T}=I$.
+\end{solution}
 
 \part For $q\in\kk$ let
 $C_q=\kk\langle x,y\rangle/(x^2,y^2,xy+qyx)$, $\deg x=\deg y=1$.
 \begin{subparts}
 \subpart Find a homogeneous basis of $C_q$ and compute all products of
-two basis elements and $h_{C_q}(t)$, treating $q=0$ and $q\neq0$. Justify linear
+two basis elements, treating $q=0$ and $q\neq0$. Justify linear
 independence of your basis.
+\begin{solution}
+The degree-$2$ relation space $R=\operatorname{span}\{x\otimes x,\ y\otimes y,\ x\otimes y+qy\otimes x\}$ is $3$-dimensional (the three tensors involve different basis tensors), so $\dim(C_q)_2=4-3=1$.
+Modulo $R$: $xx\equiv yy\equiv0$ and $xy\equiv-q\,yx$, so $(C_q)_2$ is spanned by the class of $yx$, which is therefore non-zero. In degree $3$, a word contains $xx$ or $yy$ or equals $xyx$ or $yxy$; and
+$xyx\equiv-qyxx\equiv0$, $yxy\equiv-qyyx\equiv0$; hence $(C_q)_d=0$ for $d\geq3$. Thus $\{1,x,y,yx\}$ is a basis (dimensions $1,2,1$), and
+$h_{C_q}(t)=1+2t+t^2$ for every $q$. Products: $x\cdot x=y\cdot y=0$, $x\cdot y=-q\,yx$, $y\cdot x=yx$, and every product with $yx$ in positive degree is $0$ (degree $\geq3$).
+\end{solution}
 \subpart For $u=\alpha x+\beta y$ compute $u^2$. For each $q$, determine
 the $(\alpha,\beta)$ with $u^2=0$, and the $q$ for which every degree-$1$ element
 squares to zero.
+\begin{solution}
+$u^2=\alpha^2x^2+\alpha\beta(xy+yx)+\beta^2y^2=\alpha\beta(1-q)\,yx$, and $yx\neq0$. So $u^2=0$ iff $\alpha\beta(1-q)=0$: for $q\neq1$, iff $\alpha=0$ or $\beta=0$
+(the two lines $\kk x,\kk y$); for $q=1$, for all $(\alpha,\beta)$. Every element squares to zero iff $q=1$.
+\end{solution}
 \subpart Prove: $C_q\cong C_{q'}$ as graded algebras if and only if either
 $q=q'$ or $qq'=1$. Deduce that $C_1\not\cong C_{-1}$ when $\operatorname{char}\kk\neq2$
 (they differ already as ungraded algebras, since one is commutative),
 and say what changes in characteristic~$2$.
+\begin{solution}
+($\Leftarrow$) If $qq'=1$ then $q\neq0$ and $x\mapsto y$, $y\mapsto x$ sends $x^2,y^2$ to $y^2,x^2$ and $xy+qyx\mapsto yx+qxy=q(xy+q'yx)$, so it induces a graded isomorphism $C_q\to C_{q'}$ (inverse of the same form).
+($\Rightarrow$) Let $\varphi:C_q\to C_{q'}$ be a graded isomorphism; $\varphi$ is determined by the bijection $\varphi_1$ on degree $1$ and preserves $u^2=0$.
+If $q=1$, every $u$ squares to zero in $C_1$, hence in $C_{q'}$, so $q'=1$ by (2); symmetrically $q'=1\Rightarrow q=1$. If $q,q'\neq1$, then $\varphi_1$ permutes the two lines $\kk x,\kk y$:
+either $\varphi(x)=\lambda x$, $\varphi(y)=\mu y$, and $0=\varphi(xy+qyx)=\lambda\mu(q-q')yx$ gives $q=q'$; or $\varphi(x)=\lambda y$, $\varphi(y)=\mu x$, and
+$0=\lambda\mu(yx+qxy)=\lambda\mu(1-qq')yx$ gives $qq'=1$ (here $\lambda\mu\neq0$ and $yx\neq0$).
+Now if $\operatorname{char}\kk\neq2$, then $1\neq-1$ and $1\cdot(-1)\neq1$, so $C_1\not\cong C_{-1}$ as graded algebras; even ungraded, $C_{-1}$ is commutative ($xy=yx$) whereas $C_1$ is not ($xy=-yx\neq yx$ as $2yx\neq0$).
+In characteristic $2$, $1=-1$, so $C_1=C_{-1}$.
+\end{solution}
 \subpart Compute a quadratic presentation of $C_q^!$ using $\theta_r$, and
 its Hilbert series. Verify $h_{C_q}(t)h_{C_q^!}(-t)=1$. Compare $C_0^!$ with
 $C_1^!$.
@@ -287,44 +461,16 @@ $C_1^!$.
 degree-$1$ parts and preserves the set of lines $\kk u$ with $u^2=0$.
 For (4), evaluate a general combination of $X^2,XY,YX,Y^2$ on $x^2$, $y^2$,
 and $xy+qyx$, with $X=x^*$, $Y=y^*$.
+\begin{solution}
+For $S=\kk$, $\theta_r(g\otimes f)(v\otimes w)=f(v)g(w)$. For $F=\alpha X\otimes X+\beta X\otimes Y+\gamma Y\otimes X+\delta Y\otimes Y$,
+$\theta_r(F)(x\otimes x)=\alpha$, $\theta_r(F)(y\otimes y)=\delta$, $\theta_r(F)(x\otimes y+q\,y\otimes x)=\gamma+q\beta$.
+So $R^\perp=\kk(X\otimes Y-qY\otimes X)$ and $C_q^!=\kk\langle X,Y\rangle/(XY-qYX)$. Using $XY=qYX$, every word is a multiple of $Y^aX^b$, so these span; they are independent:
+for $q=0$ the relation is monomial and $\{Y^aX^b\}$ is the set of words avoiding $XY$; for $q\neq0$ let $X$ act on $\kk[s,t]$ by multiplication by $s$ and $Y$ by $(Yf)(s,t)=t\,f(q^{-1}s,t)$; then $XY=qYX$ and $Y^aX^b\cdot1=q^{-ab}s^bt^a$, which are independent.
+Hence $h_{C_q^!}=\sum_d(d+1)t^d=(1-t)^{-2}$ and $h_{C_q}(t)h_{C_q^!}(-t)=(1+t)^2(1+t)^{-2}=1$.
+$C_1^!=\kk[X,Y]$ is commutative while in $C_0^!=\kk\langle X,Y\rangle/(XY)$ one has $XY=0\neq YX$: same Hilbert series, non-isomorphic algebras.
+\end{solution}
 \end{parts}
 
-\newpage
-\titledquestion{Bases, Hilbert series, and quadratic duals}
-The parts are independent.
-\begin{parts}
-\part \textbf{A square with a parameter.}
-Let $S=\kk e_1\oplus\kk e_2\oplus\kk e_3\oplus\kk e_4$ and let $V$ be an $S$-bimodule with basis
-$a,b,c,d$ and
-\[
-  e_1ae_2=a,\quad e_2be_4=b,\quad e_1ce_3=c,\quad e_3de_4=d,
-\]
-and all other idempotent actions zero. The only composable words of length $2$
-are $ab$ and $cd$. For $\lambda\in\kk$ set $A_\lambda=T_S(V)/(ab-\lambda cd)$.
-\begin{subparts}
-\subpart For every $\lambda$, including $0$, find a presentation of
-$A_\lambda^!$, bases of $A_\lambda$ and $A_\lambda^!$, and both Hilbert
-series. Do they depend on $\lambda$? Dualise again to recover the relation.
-\subpart Prove that $A_\lambda\cong A_\mu$ as graded algebras over $S$
-if and only if $\lambda=\mu=0$ or both are non-zero.
-\subpart Show $A_1^!\cong(A_1)^{\op}$ as graded algebras over $S$.
-\end{subparts}
-\emph{Hint for (1).} Evaluate $\mu b^*a^*+\nu d^*c^*$ on $ab-\lambda cd$.
-For (2), a graded isomorphism over $S$ sends each of $a,b,c,d$ to a scalar multiple
-of itself (or swaps the two paths); for (3) rescale $d^*$.
-
-\part \textbf{Counting words.} Let $B=T_\kk(\kk x\oplus\kk y)/(x^2)$,
-$\deg x=\deg y=1$.
-\begin{subparts}
-\subpart Describe a basis of $B_d$, and compute $a_d=\dim B_d$ for $0\leq d\leq6$.
-\subpart Express $a_d$ through $a_{d-1},a_{d-2}$ by sorting words by first
-letter, and find $h_B(t)$ as a rational function.
-\subpart Compute $B^!$ (with $X=x^*$, $Y=y^*$), a homogeneous basis, and
-$h_{B^!}(t)$. Verify $h_B(t)h_{B^!}(-t)=1$.
-\end{subparts}
-\end{parts}
 \end{questions}
-
-\comm{I feel the length of answers to each exercise can vary greatly; write a perfect solution and verify.  5 lines of computation is equivalent to one line of logical argument.}
 
 \end{document}
