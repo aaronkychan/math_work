@@ -687,13 +687,11 @@ Quadraticity depends on the grading: for $n\geq2$, the grading $\deg e_{ij}=2(j-
 
 \begin{example}\label{ex:tensor-An}
 Let $S=\bigoplus_{i=1}^n\Bbbk e_{ii}$ and $V=\bigoplus_{i=1}^{n-1}\Bbbk e_{i,i+1}$ inside $\Bbbk A_n$.
-By Lemma~\ref{lem:idempotent-tensors}, the basis tensors of positive length are
-\[
+Then we have $T_S(V)\cong\Bbbk A_n$ given by\[
 e_{i,i+1}\otimes_S e_{i+1,i+2}\otimes_S\cdots\otimes_S e_{j-1,j}
 \longmapsto e_{ij}
 \quad(1\leq i<j\leq n).
 \]
-Thus multiplication gives $T_S(V)\cong\Bbbk A_n$, a quadratic algebra with $R=0$.
 \end{example}
 
 \begin{example}\label{ex:zero-composition}
@@ -703,17 +701,6 @@ T_S(V)/(ab)\cong\Bbbk A_3/(e_{13})
 \]
 is quadratic with $R=\Bbbk(a\otimes b)$.
 Its basis is $e_1,e_2,e_3,a,b$, in degrees $0,0,0,1,1$, as in Example~\ref{ex:quadratic-matrix-quotient}.
-\end{example}
-
-\begin{example}\label{ex:two-vertex-relations}
-Let $S=\Bbbk^{\oplus 2}$ with coordinate idempotents $e_1,e_2$, and let $V=\Bbbk a\oplus\Bbbk b$ satisfy $e_1ae_2=a$ and $e_2be_1=b$, with all other idempotent actions zero.
-By Lemma~\ref{lem:idempotent-tensors}, the alternating words in $a,b$ form the basis of positive degree tensors in $T_S(V)$.
-The quadratic algebra $A=T_S(V)/(ab)$ has
-\[
-A=S\oplus\Bbbk a\oplus\Bbbk b\oplus\Bbbk ba,
-\qquad \dim_\Bbbk A_0=2,\quad \dim_\Bbbk A_1=2,\quad \dim_\Bbbk A_2=1.
-\]
-Every alternating word of length at least $3$ contains $ab$, so all higher components vanish.
 \end{example}
 
 \begin{example}\label{ex:cubic-quotient}
@@ -730,21 +717,18 @@ The symmetric and exterior algebras of Example~\ref{ex:polynomial-exterior} are 
 \subsection{Hilbert series}
 
 Let $A$ be a locally finite-dimensional graded algebra with $S=A_0$ finite-dimensional semisimple.
-Each degree piece of a graded right $A$-module $M$ is naturally an $A$-module:
-\[
-M_d\cong M_{\geq d}/M_{\geq d+1},
-\qquad M_{\geq d}:=\bigoplus_{j\geq d}M_j.
-\]
-The action on $M_d$ factors through $A/A_+=S$, so $M_d$ is semisimple.
-The simple summands in a direct sum decomposition of $M_d$ are its \defn{composition factors}.
+Then each degree piece of a graded right $A$-module is semisimple as $A$-module.  We call the simple direct summands in a direct sum decomposition of $M_d$  \defn{composition factors}.
 
-By Theorem~\ref{thm:artin-wedderburn}, choose primitive idempotents $e_1,\ldots,e_r\in S$ so that $L_j:=e_jS$ represents each isomorphism class of simple right $S$-modules once.
-Then $L_j\cong e_jA/e_jA_+$ is a graded simple $A$-module.
+\begin{notation}
+By Theorem~\ref{thm:artin-wedderburn}, choose primitive idempotents $e_1,\ldots,e_r\in S$.  Then  
+\[L_j:=e_jS\cong e_j A/e_jA_+\]
+gives the full list of isomorphism class of (graded) simple right $S$-modules.
 \phantomsection\label{not:hilbert-simples-summands}
+\end{notation}
 
 \begin{definition}\label{def:dimension-vector}\label{def:hilbert-series}
-For a locally finite-dimensional graded right $A$-module $M$, write $[M_d:L_j]$ for the multiplicity of $L_j$ in $M_d$.
-Its degree $d$ \defn{dimension vector} is the row vector
+For a locally finite-dimensional graded right $A$-module $M$ with primitive idempotent $e_1, \ldots e_r$, write $[M_d:L_j]$ for the multiplicity of the composition factor $L_j$ in $M_d$.
+Its degree $d$ \defn{dimension vector} is the row vector\footnote{In most representation theory literature, it is common to regard dimension vector as a column vector.  But in the context of Hilbert series, we follow Beilinson--Ginzburg--Soergel convention to use row vector here.}
 \[
 \dimvec M_d:=\bigl([M_d:L_j]\bigr)_{1\leq j\leq r}.
 \]
@@ -754,33 +738,33 @@ For such $M$, its \defn{Hilbert series} is
 h_M(t):=\sum_{d\in\Z}(\dimvec M_d)t^d
 =\sum_{d\in\Z}\bigl([M_d:L_j]\bigr)_{1\leq j\leq r}t^d.
 \]
-For $P_i:=e_iA$, the \defn{Hilbert series} of the algebra $A$ collects the right-module series $h_{P_i}(t)$ as rows:
+The \defn{Hilbert series} of the algebra $A$ collects the right-module series $h_{e_iA}(t)$ as rows:
 \[
-h_A(t)_{ij}:=\bigl(h_{P_i}(t)\bigr)_j
-=\sum_{d\geq0}[(P_i)_d:L_j]t^d
+h_A(t)_{ij}:=\bigl(h_{e_iA}(t)\bigr)_j
+=\sum_{d\geq0}[e_iA_d:L_j]t^d
 \quad\text{for all }1\leq i,j\leq r.
 \]
 \end{definition}
 
-Thus the coefficients count composition factors, and the powers of $t$ record their degrees.
-The entries are formal Laurent series; for algebras they are formal power series.
+We think of the Hilbert series as ``graded dimension matrix" with one indecomposable per row. 
+The entries of the Hilbert series are formal Laurent series; for algebras they are formal power series.
 Finite support gives Laurent polynomials or polynomials, respectively.
-Since $(P_i)_0=L_i$, we have $h_A(0)=I_r$, the $r\times r$ identity array.
+Since $e_iA_0=L_i$, we have $h_A(0)=I_r$, the $r\times r$ identity array.
 For a finite-dimensional right $S$-module $N$, use the same multiplicity notation and write $\dimvec N=([N:L_j])_{1\leq j\leq r}$.
 
 The multiplicities can be computed using Hom spaces:
 \begin{equation}\label{eq:composition-Hom}
-[M_d:L_j]=\dim_{\End_A(L_j)}\Hom_A(P_j,M_d)
+[M_d:L_j]=\dim_{\End_A(L_j)}\Hom_A(e_jA,M_d)
 \quad\text{for all }d\in\Z,\ 1\leq j\leq r.
 \end{equation}
-Indeed, $M_dA_+=0$, so every map $P_j\to M_d$ factors uniquely through $P_j/P_jA_+\cong L_j$.
-This identifies $\Hom_A(P_j,M_d)$ with $\Hom_A(L_j,M_d)$; precomposition gives its right vector-space structure over the division algebra $\End_A(L_j)$.
-A non-zero map between simple modules is an isomorphism, so each copy of $L_j$ contributes one copy of $\End_A(L_j)$, and the other simples contribute zero.
+Indeed, $M_dA_+=0$, so every map $e_jA\to M_d$ factors uniquely through $e_jA/e_jA_+\cong L_j$.
+This identifies $\Hom_A(e_jA,M_d)$ with $\Hom_A(L_j,M_d)$; precomposition gives its right vector-space structure over the division algebra $\End_A(L_j)$.
+By the Schur's Lemma, A non-zero map between simple modules is an isomorphism, so each copy of $L_j$ contributes one copy of $\End_A(L_j)$, and the other simples contribute zero.
 This also shows that the multiplicities are independent of the chosen decomposition.
 
 \begin{example}\label{ex:dimension-vector-coordinate}
 If $S=\bigoplus_{j=1}^r\Bbbk e_j$ with coordinate idempotents, then $\End_A(L_j)=\Bbbk$.
-The Yoneda lemma~\ref{lem:idempotent-hom} identifies $\Hom_A(P_j,M_d)$ with $M_de_j$, so
+The Yoneda lemma~\ref{lem:idempotent-hom} says that 
 \[
 [M_d:L_j]=\dim_\Bbbk(M_de_j),
 \qquad \dimvec M_d=(\dim_\Bbbk M_de_j)_{1\leq j\leq r}.
@@ -805,6 +789,8 @@ h_{M(a)}(t)=\sum_d(\dimvec M_{d+a})t^d
 =t^{-a}\sum_j(\dimvec M_j)t^j.\qedhere
 \]
 \end{proof}
+
+\comm{From here}
 
 \begin{definition}\label{def:total-tensor-grading}
 For graded right and left $S$-modules $M,N$, their tensor product has \defn{total grading}
@@ -853,6 +839,7 @@ Counting copies of $L_j$ proves the first formula.
 Apply the first formula to $M_p\otimes_S A_q$ and sum over all $p,q\in\Z$ with $p+q=d$.
 Since $e_iA_q=(P_i)_q$, the resulting coefficient is the coefficient of $t^d$ in $h_M(t)h_A(t)$.
 \end{proof}
+\comm{up to here.  make as supplementary}
 
 \begin{example}[Hilbert series of a tensor algebra]\label{ex:hilbert-tensor-algebra}
 Let ${}_SV_S$ be a finite-dimensional bimodule, placed in degree $1$, and put $C=([e_iV:L_j])_{1\leq i,j\leq r}$.
