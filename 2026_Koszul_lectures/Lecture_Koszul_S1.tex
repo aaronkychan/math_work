@@ -210,9 +210,9 @@ B\text{ is semisimple}
 \quad\Longleftrightarrow\quad
 \rad B=0
 \quad\Longleftrightarrow\quad
-B\cong\prod_{i=1}^r\Mat_{n_i}(D_i),
+B\cong\prod_{i=1}^n\Mat_{n_i}(D_i),
 \]
-where $r,n_i\geq 1$ and each $D_i$ is a finite-dimensional division $\Bbbk$-algebra.
+where $n,n_i\geq 1$ and each $D_i$ is a finite-dimensional division $\Bbbk$-algebra.
 If $\Bbbk$ is algebraically closed, then $D_i=\Bbbk$ for every $i$.
 For semisimple $B$, every left or right $B$-module is semisimple, and every submodule has a complement. In particular, the definition is independent of the chosen side.
 \end{theorem}
@@ -229,7 +229,7 @@ Hence $L\cong M$, so $S^{\oplus n}\cong\Ker p\oplus M$.
 \end{proof}
 
 \begin{example}\label{ex:semisimple-algebras}
-The algebras $\Bbbk^{\oplus r}$ and $\Mat_n(\Bbbk)$ are semisimple by Theorem~\ref{thm:artin-wedderburn}.
+The algebras $\Bbbk^{\oplus n}$ and $\Mat_n(\Bbbk)$ are semisimple by Theorem~\ref{thm:artin-wedderburn}.
 Upper triangular matrices need not form a semisimple algebra: for $A=\Bbbk A_2$,
 \[
 \rad A=\Bbbk e_{12}\neq0,\qquad
@@ -797,8 +797,8 @@ S\text{ is separable over }\Bbbk.
 \]
 For a product of matrix algebras, every field extension $K/\Bbbk$ gives
 \[
-K\otimes_\Bbbk\prod_{j=1}^r\Mat_{n_j}(\Bbbk)
-\xrightarrow{\sim}\prod_{j=1}^r\Mat_{n_j}(K),
+K\otimes_\Bbbk\prod_{j=1}^n\Mat_{n_j}(\Bbbk)
+\xrightarrow{\sim}\prod_{j=1}^n\Mat_{n_j}(K),
 \qquad c\otimes(a_j)_j\longmapsto(ca_j)_j.
 \]
 The target is semisimple by Theorem~\ref{thm:artin-wedderburn}.
@@ -1163,7 +1163,7 @@ In particular, their star denotes the linear dual; our star denotes the right $S
 \end{advanced}
 
 
-\subsection{Hom spaces and evaluation}
+\subsection{Hom spaces and duals}
 
 For the $S$-module version of \eqref{eq:linear-Hom-tensor}, we need tensor products over an algebra.
 Let $A$ be any $\Bbbk$-algebra, $M$ a right $A$-module, and $N$ a left $A$-module.
@@ -1211,48 +1211,6 @@ Precomposition and postcomposition commute with the formulas, proving naturality
 \end{proof}
 \end{supplementary}
 
-Evaluation applies a functional to an element.
-Coevaluation expresses the identity endomorphism as an element of a tensor product.
-
-\begin{proposition}\label{prop:S-evaluation-coevaluation}
-\comm{not sure this is really important for the course, should it be left like this or just put as supplementary}
-For a bimodule $ {}_SV_S$, where $S$ is finite-dimensional semisimple, evaluation gives bimodule maps
-\begin{equation}\label{eq:S-evaluation-pairings}
-\begin{aligned}
-V^*\otimes_S V&\longrightarrow S,& f\otimes v&\longmapsto f(v),\\
-V\otimes_S{}^*V&\longrightarrow S,& v\otimes g&\longmapsto g(v).
-\end{aligned}
-\end{equation}
-If $V$ is finite-dimensional, the \defn{coevaluation maps} are
-\begin{equation}\label{eq:S-coevaluation}
-\begin{aligned}
-S&\longrightarrow V\otimes_S V^*\xrightarrow{\sim}\End_S(V),
-& s&\longmapsto\bigl(v\mapsto sv\bigr),\\
-S&\longrightarrow{}^*V\otimes_S V\xrightarrow{\sim}\End_{S^\op}(V),
-& s&\longmapsto\bigl(v\mapsto vs\bigr).
-\end{aligned}
-\end{equation}
-The isomorphisms are those in \eqref{eq:hom-from-S-duals}, with $W=V$.
-Both coevaluation maps are bimodule maps, and each image of $1$ corresponds to $\id_V$.
-\end{proposition}
-
-\begin{supplementary}
-\begin{proof}
-The identities $(fs)(v)=f(sv)$ and $(sg)(v)=g(vs)$ from \eqref{eq:bimodule-dual-actions} make evaluation well-defined on the two tensor products; the other two actions give its bimodule linearity.
-For coevaluation, left multiplication is right $S$-linear and right multiplication is left $S$-linear because the two actions on $V$ commute.
-Under the Hom actions in Proposition~\ref{prop:hom-from-S-duals}, both multiplication assignments preserve the two $S$-actions.
-The isomorphisms in \eqref{eq:hom-from-S-duals} therefore give the stated bimodule maps.
-\end{proof}
-\end{supplementary}
-
-\begin{advanced}
-These are the constructions in the last two paragraphs of \cite[\S2.7, pp.~484--485]{BGS96}, translated to our notation.
-
-For a locally finite-dimensional graded bimodule $ {}_SV_S$, \eqref{eq:S-coevaluation} applies to each $V_d$; a coevaluation for the whole module need not exist.
-For example, take $S\neq0$ and $V=\bigoplus_{d\geq0}S(-d)$.
-Every element $\sum_{i=1}^n v_i\otimes f_i$ of $V\otimes_S V^{\grstar}$ defines an endomorphism with image contained in the finite-dimensional submodule $\sum_{i=1}^n v_iS$, so it cannot represent $\id_V$.
-\end{advanced}
-
 \subsection{Comparing the duals}
 
 The one-sided $S$-duals and the $\Bbbk$-linear dual are naturally isomorphic after choosing a symmetrising form on $S$.
@@ -1278,12 +1236,12 @@ For products of matrix algebras over $\Bbbk$, the forms are explicit:
 The following maps are symmetrising forms:
 \[
 \begin{aligned}
-\tau:\Bbbk^{\oplus r}&\longrightarrow\Bbbk,
-& (a_1,\ldots,a_r)&\longmapsto\sum_{j=1}^r a_j,\\
+\tau:\Bbbk^{\oplus n}&\longrightarrow\Bbbk,
+& (a_1,\ldots,a_n)&\longmapsto\sum_{j=1}^n a_j,\\
 \tau:\Mat_n(\Bbbk)&\longrightarrow\Bbbk,
 & a&\longmapsto\Tr(a):=\sum_{i=1}^n a_{ii},\\
-\text{and more generally,}\quad \tau:\prod_{j=1}^r\Mat_{n_j}(\Bbbk)&\longrightarrow\Bbbk,
-& (a_1,\ldots,a_r)&\longmapsto\sum_{j=1}^r\Tr(a_j).
+\text{and more generally,}\quad \tau:\prod_{j=1}^n\Mat_{n_j}(\Bbbk)&\longrightarrow\Bbbk,
+& (a_1,\ldots,a_n)&\longmapsto\sum_{j=1}^n\Tr(a_j).
 \end{aligned}
 \]
 \end{example}
@@ -1291,11 +1249,11 @@ The following maps are symmetrising forms:
 \begin{advanced}
 Generally, any finite-dimensional semisimple algebra has a symmetrising form, by Eilenberg--Nakayama.\footnote{S.~Eilenberg and T.~Nakayama, \emph{On the dimension of modules and algebras, II. Frobenius algebras and quasi-Frobenius rings}, Nagoya Math. J. \textbf{9} (1955), 1--16, \S2, Propositions 3--5, pp.~4--5; \href{https://doi.org/10.1017/S0027763000023229}{doi:10.1017/S0027763000023229}.}
 For example, if $\lambda_j:\Delta_j\to \Bbbk$ is a symmetrising form for a finite-dimensional division $\Bbbk$-algebra $\Delta_j$ with $j=1,\ldots, n$. 
-Then the semisimple algebra $S=\prod_{j=1}^r\Mat_{n_j}(\Delta_j)$ has a symmetrising form given by
+Then the semisimple algebra $S=\prod_{j=1}^n\Mat_{n_j}(\Delta_j)$ has a symmetrising form given by
 \[
 \tau:S\longrightarrow\Bbbk,\qquad
-(a_1,\ldots,a_r)\longmapsto
-\sum_{j=1}^r\sum_{i=1}^{n_j}\lambda_j((a_j)_{ii}).
+(a_1,\ldots,a_n)\longmapsto
+\sum_{j=1}^n\sum_{i=1}^{n_j}\lambda_j((a_j)_{ii}).
 \]
 \end{advanced}
 
@@ -1373,8 +1331,8 @@ Same argument applies dually to $S^\op$ and $\beta$.
 
 \begin{remark}
 The natural isomorphisms in Theorem~\ref{prop:dual-comparison} depend on the chosen symmetrising form.
-For example, every choice $c_1,\ldots,c_r\in\Bbbk\setminus\{0\}$ gives a form
-$\tau(a_1,\ldots,a_r)=\sum_{i=1}^r c_i a_i$ on $\Bbbk^{\oplus r}$.
+For example, every choice $c_1,\ldots,c_n\in\Bbbk\setminus\{0\}$ gives a form
+$\tau(a_1,\ldots,a_n)=\sum_{i=1}^n c_i a_i$ on $\Bbbk^{\oplus n}$.
 \end{remark}
 
 \begin{remark}\label{rem:transported-dual-action}
