@@ -338,7 +338,7 @@ Thus both comparisons are natural.
 
 Let $S$ be finite-dimensional semisimple, and consider bimodules ${}_SV_S$, ${}_SW_S$ finitely generated on the right and left, respectively.
 Corollary~\ref{cor:semisimple-summands} gives $V_S\in\add S$ and ${}_SW\in\add_{\mod S^\op}(S)$.
-Thus the semisimple case of tensor duality, Proposition~\ref{prop:tensor-duals}, gives natural bimodule isomorphisms
+Thus the semisimple case of tensor duality, Proposition~\ref{prop:tensor-duals}, gives natural bimodule isomorphisms \comm{you always call this tensor-dual isomorphism, but this name is very ambiguous... it is more like anti-distributivity of $S$-dual over tensor-over-$S$.  you can use emphasise on this phrase to make it more easy to remember, if you need to use word, then say ``we refer to this as anti-distributivity of $S$-dual" from now on; then apply changes for any further use of this (whenever you say `tensor-dual isom', it should be clarified)}
 \begin{equation}\label{eq:tensor-duals}
 \theta_r:W^*\otimes_S V^*\xrightarrow{\sim}(V\otimes_S W)^*,
 \qquad
@@ -716,6 +716,8 @@ The symmetric and exterior algebras of Example~\ref{ex:polynomial-exterior} are 
 
 \subsection{Hilbert series}
 
+\comm{TODO: throughout, use $n$ instead of $r$ for number of simples?  Avoid using $P_i$, and just stick with $e_iA$.}
+
 Let $A$ be a locally finite-dimensional graded algebra with $S=A_0$ finite-dimensional semisimple.
 Then each degree piece of a graded right $A$-module is semisimple as $A$-module.  We call the simple direct summands in a direct sum decomposition of $M_d$  \defn{composition factors}.
 
@@ -842,11 +844,11 @@ Since $e_iA_q=(P_i)_q$, the resulting coefficient is the coefficient of $t^d$ in
 \comm{up to here.  make as supplementary}
 
 \begin{example}[Hilbert series of a tensor algebra]\label{ex:hilbert-tensor-algebra}
-Let ${}_SV_S$ be a finite-dimensional bimodule, placed in degree $1$, and put $C=([e_iV:L_j])_{1\leq i,j\leq r}$.
-The rows of $C$ count composition factors of the right modules $e_iV$.
-Since $e_iT_S(V)_0=L_i$ and $e_iT_S(V)_{d+1}\cong(e_iT_S(V)_d)\otimes_S V$, Lemma~\ref{lem:dimension-tensor} gives, by induction,
+Consider the tensor algebra $A=T_S(V)$ and put 
+\[C:=([e_iA_1:L_j])_{1\leq i,j\leq r}=([e_iV:L_j])_{1\leq i,j\leq r}.\]
+Since $e_iA_0=L_i$ and $e_iA_{d+1}\cong(e_iA_d)\otimes_S A_1$, Lemma~\ref{lem:dimension-tensor} gives, by induction,
 \[
-[e_iT_S(V)_d:L_j]=(C^d)_{ij},
+[e_iA_d:L_j]=(C^d)_{ij},
 \qquad C^0=I_r
 \quad\text{for all }d\geq0,\ 1\leq i,j\leq r.
 \]
@@ -858,10 +860,7 @@ h_{T_S(V)}(t)=\sum_{d\geq0}t^dC^d=(I_r-tC)^{-1}.}
 Indeed, multiplying the series on either side by $I_r-tC$ gives constant coefficient $I_r$; the coefficient of $t^d$ for $d\geq1$ is $C^d-C^d=0$.
 The inverse is therefore an identity of formal power series with the coefficient multiplication defined above.
 
-For $S=\Bbbk$ and $\dim_\Bbbk V=m$, the formula is $h_{T_\Bbbk(V)}(t)=1/(1-mt)$.
-More generally, for $S=\operatorname{Mat}_n(\Bbbk)$ and $V=S^{\oplus m}$ as an $S$-bimodule, choose $e_1=e_{11}$.
-Since $e_1V\cong(e_1S)^{\oplus m}$ as right $S$-modules, we again have $C=(m)$ and $h_{T_S(V)}(t)=1/(1-mt)$.
-Here the coefficient records simple-module multiplicities, not $\dim_\Bbbk V=mn^2$.
+When $S=\Mat_n(\Bbbk)$ and $\dim_\Bbbk V=m$, the formula specialises to $h_{T_\Bbbk(V)}(t)=1/(1-mt)$.
 \end{example}
 
 \begin{example}[Upper triangular algebras and a quotient]\label{ex:hilbert-triangular}
@@ -881,30 +880,16 @@ h_{\Bbbk A_3/(e_{13})}(t)=\begin{pmatrix}1&t&0\\0&1&t\\0&0&1\end{pmatrix}.
 The quotient removes $\Bbbk e_{13}$ from degree $2$, and hence removes $t^2$ from entry $(1,3)$.
 \end{example}
 
-\begin{example}[Two alternating generators]\label{ex:hilbert-alternating}
-For $S,V,a,b$ in Example~\ref{ex:two-vertex-relations}, use the order $e_1,e_2$ and the array $C$ of Example~\ref{ex:hilbert-tensor-algebra}. Then
-\[
-C=\begin{pmatrix}0&1\\1&0\end{pmatrix},
-\qquad C^2=I_2,
-\qquad
-h_{T_S(V)}(t)=\frac{1}{1-t^2}\begin{pmatrix}1&t\\t&1\end{pmatrix}.
-\]
-In $A=T_S(V)/(ab)$, the degree $2$ basis vector $ba$ belongs to $e_2Ae_2$, so
-\[
-h_A(t)=\begin{pmatrix}1&t\\t&1+t^2\end{pmatrix}.
-\]
-\end{example}
-
 \begin{example}\label{ex:hilbert-polynomial-exterior}
-For the algebras in Example~\ref{ex:polynomial-exterior}, $S=\Bbbk$ and there is one dimension entry.
-Each polynomial generator may occur any number of times, whereas each exterior generator occurs at most once. Thus
+For the symmetric algebra $\SymAlg(V)$ and exterior algebra $\bigwedge W$ in Example~\ref{ex:polynomial-exterior} with $n=\dim_\Bbbk V, m=\dim_\Bbbk W$. 
+Using the description of their basis we get
 \[
-h_{\SymAlg(V)}(t)=\frac{1}{(1-t)^n},\qquad
-h_{\bigwedge W}(t)=(1+t)^m
-\quad\text{where }n=\dim_\Bbbk V,\ m=\dim_\Bbbk W.
+h_{\SymAlg(V)}(t)=\sum_{d\ge 0}\binom{d+n-1}{n-1}t^d=\frac{1}{(1-t)^n},\footnote{differential $1/(1-t)=\sum_{d\ge 0} t^d$ on both side $n$ times to see this}\qquad
+h_{\bigwedge W}(t)=(1+t)^m.
 \]
 \end{example}
 
+\begin{supplementary}
 \begin{lemma}\label{lem:hilbert-field-tensor}
 For locally finite-dimensional graded vector spaces $U,W$ bounded below,
 \[
@@ -921,6 +906,7 @@ h_{A\otimes_\Bbbk B}(t)_{(i,p),(j,q)}
 \quad(1\leq i,j\leq r,\ 1\leq p,q\leq s).
 \]
 \end{lemma}
+\end{supplementary}
 
 \begin{proof}
 For vector spaces, take dimensions in each summand of the total grading.
@@ -993,7 +979,7 @@ Indeed, for $s,t\in S$ and $u\in U$, \eqref{eq:tensor-dual-actions} gives
 (sgt)(u)=g(us)t=0\quad(g\in{}^\perp U),
 \]
 since $tu,us\in U$.
-The orthogonal complements are defined without choosing a symmetrising form.
+The orthogonal complements are defined without choosing a symmetrising form, but it is possible to use realise (through the natural isomorphism associated to a chosen symmeterising form) the orthogonal complements as a sub-bimodule of $\bbD(M)$.
 
 \begin{advanced}
 If $S$ is equipped with a symmetrising form $\tau:S\to\Bbbk$, the comparison maps $\alpha_M,\beta_M$ of \eqref{eq:dual-comparison} satisfy
@@ -1013,7 +999,7 @@ Bijectivity of $\alpha_M,\beta_M$ in Theorem~\ref{prop:dual-comparison} proves \
 \end{advanced}
 
 \begin{example}\label{ex:symmetric-orthogonals}
-We compute the orthogonal complements of the symmetric and exterior relation spaces separately.
+We compute the orthogonal complements of the relation spaces of $\SymAlg(V)$ and $\bigwedge W$ for $\dim_{\Bbbk}V=2=\dim_{\Bbbk}W$.
 Take $V=\Bbbk x_1\oplus\Bbbk x_2$ and $W=\Bbbk y_1\oplus\Bbbk y_2$ in Example~\ref{ex:polynomial-exterior}.
 The relation spaces in $V\otimes_\Bbbk V$ and $W\otimes_\Bbbk W$, respectively, are
 \[

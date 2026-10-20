@@ -3,24 +3,25 @@
 
 \subsection{Generators and orthogonal relations}
 
-Fix a quadratic presentation $A=T_S(V)/(R)$ as in Definition~\ref{def:quadratic}: $S$ is finite-dimensional semisimple, $V$ is a finite-dimensional $S$-bimodule, and $R\subset V\otimes_S V$ is an $S$-sub-bimodule.
-We will replace the generators by an $S$-dual and the relations by the $S$-linear maps that vanish on $R$.
-Use $V^*=\Hom_S(V,S)$ and ${}^*V=\Hom_{S^\op}(V,S)$ from Definition~\ref{def:S-duals}, with the bimodule actions in \eqref{eq:tensor-dual-actions}.
-The tensor isomorphisms \eqref{eq:tensor-duals} have values
-\begin{equation}\label{eq:quadratic-pairings}
-\begin{aligned}
-\theta_r(g\otimes f)(v\otimes w)&=g(f(v)w),
-& f,g&\in V^*,\\
-\theta_\ell(g\otimes f)(v\otimes w)&=f(vg(w)),
-& f,g&\in{}^*V.
-\end{aligned}
-\end{equation}
-Here $v,w\in V$. Both isomorphisms reverse the order of the factors.
+Fix a quadratic presentation $A=T_S(V)/(R)$ as in Definition~\ref{def:quadratic}.
 
-\begin{convention}
-We identify $V^*\otimes_S V^*$ with $(V\otimes_S V)^*$ via $\theta_r$, and ${}^*V\otimes_S{}^*V$ with ${}^*(V\otimes_S V)$ via $\theta_\ell$.
-Thus $R^\perp$ and ${}^\perp R$ in tensor algebras mean the inverse images of the orthogonal complements in Definition~\ref{def:orthogonals} under these evaluations.
-\end{convention}
+%\begin{equation}\label{eq:quadratic-pairings}
+%\begin{aligned}
+%\theta_r(g\otimes f)(v\otimes w)&=g(f(v)w),
+%& f,g&\in V^*,\\
+%\theta_\ell(g\otimes f)(v\otimes w)&=f(vg(w)),
+%& f,g&\in{}^*V.
+%\end{aligned}
+%\end{equation}
+%Here $v,w\in V$. Both isomorphisms reverse the order of the factors.
+
+Recall from \eqref{eq:tensor-duals} that we have isomorphisms of bimodules $
+\theta_r:V^*\otimes_S V^*\xrightarrow{\sim}(V\otimes_S V)^*$ and $\theta_\ell:{}^*V\otimes_S{}^*V\xrightarrow{\sim}{}^*(V\otimes_S V)$.
+We will identify $V^*\otimes_S V^*$ with $(V\otimes_S V)^*$ via $\theta_r$, and ${}^*V\otimes_S{}^*V$ with ${}^*(V\otimes_S V)$ via $\theta_\ell$.
+In particular, we can regard the orthogonal complements of the relation spaces as sub-bimodules
+\[
+R^\perp \subset (V\otimes_SV)^*\cong V^*\otimes_SV^* \quad \text{and} \quad {}^\perp R \subset {}^*(V\otimes_SV)\cong {}^*V\otimes_S{}^*V. 
+\]
 
 \begin{definition}\label{def:quadratic-duals}
 The \defn{right quadratic dual} and \defn{left quadratic dual} of $A$ are
@@ -34,18 +35,18 @@ A^!&:=T_S(V^*)/(R^\perp),
 \end{equation}
 \end{definition}
 
-We use $A^!$ unless a side is specified.
-The ordinary $S$-duals $V^*$ and ${}^*V$ are placed in degree $1$ in \eqref{eq:quadratic-duals}.
-By contrast, when $V$ has degree $1$, its graded $S$-dual $V^{\grstar}$ has degree $-1$ by Definition~\ref{def:graded-S-duals}.
+Note that we only take the ordinary $S$-duals $V^*$ and ${}^*V$, and they are placed in degree $1$ in \eqref{eq:quadratic-duals}  -- in contrast to the graded $S$-dual $V^{\grstar}$ which is placed in degree $-1$.
 
-By Proposition~\ref{prop:quadratic-basic}, a quadratic presentation identifies $S$ with $A_0$, $V$ with $A_1$, and $R$ with $\Ker\mu_2$, where $\mu_2:A_1\otimes_{A_0}A_1\to A_2$ is \eqref{eq:multiplication-maps}.
-The natural tensor-dual isomorphisms \eqref{eq:tensor-duals} therefore make the dual algebras independent of the chosen presentation up to isomorphism.
-An isomorphism \defn{over $S$} means one restricting to $\id_S$ on degree $0$.
 
 \begin{advanced}
-The constructions are those of \cite[\S\S2.7--2.8]{BGS96}, with different star conventions: their $V^*$ uses left $S$-linear maps and their ${}^*V$ uses right $S$-linear maps.
+Our notations are different from \cite[\S\S2.7--2.8]{BGS96}: their $V^*$ uses left $S$-linear maps and their ${}^*V$ uses right $S$-linear maps.
 Thus our $A^!$ is their ${}^!A$, and our ${}^!A$ is their $A^!$.
 \end{advanced}
+
+By Proposition~\ref{prop:quadratic-basic}, a quadratic presentation identifies $S$ with $A_0$, $V$ with $A_1$, and $R$ with $\Ker\mu_2$, where $\mu_2:A_1\otimes_{A_0}A_1\to A_2$ is \eqref{eq:multiplication-maps}.
+The natural isomorphisms \eqref{eq:tensor-duals} therefore make the quadratic dual independent of the chosen presentation up to isomorphism.\comm{this is just saying quadratic dual is indept of presentation of $A$ because of universal property of tensor algebra, combine with $R\cong \Ker(\mu_2)$???}
+An isomorphism \defn{over $S$} means one restricting to $\id_S$ on degree $0$.\comm{use `$S$-preserving isomorphism' instead}
+
 
 \begin{proposition}\label{prop:dual-low-degrees}
 The algebra $A^!$ is quadratic and
@@ -64,21 +65,19 @@ Restriction to $R$ gives an exact sequence of $S$-bimodules
 Surjectivity follows from Theorem~\ref{thm:artin-wedderburn}: $R$ has a complement as a right $S$-module, so a right $S$-linear map $R\to S$ extends by zero on that complement.
 Taking the quotient in \eqref{eq:restriction-relations} gives $A^!_2\cong R^*$; Proposition~\ref{prop:quadratic-basic} gives the remaining assertions about $A^!$.
 
-\begin{advanced}[nobreak=true]
-For the dimension assertion, Theorem~\ref{thm:artin-wedderburn} reduces to simple right modules over matrix rings.
-For a finite-dimensional division algebra $\Delta$, the right $\Mat_n(\Delta)$-module $\Delta^{1\times n}$ has dual $\Delta^{n\times1}$: a column $c$ gives the homomorphism $x\mapsto cx$.
-The row and column spaces have the same $\Bbbk$-dimension, and dimensions add over simple summands.
-Hence $\dim_\Bbbk R^*=\dim_\Bbbk R$ without choosing a symmetrising form.\qedhere
-\end{advanced}
+For the dimension assertion, Theorem~\ref{thm:artin-wedderburn} reduces to simple right modules over matrix rings.\comm{where is $R^*$ actually calculated to get the claim????}
+For a finite-dimensional division algebra $\Delta$, the right $\Mat_n(\Delta)$-module $\Delta^{1\times n}$ given by a row space has dual that can be identified with the column space $\Delta^{n\times1}$: a column $c$ gives the homomorphism $x\mapsto cx$.
+The row and column spaces have the same $\Bbbk$-dimension, and dimensions add over simple summands.\comm{use symbol instead of words to explain}
+Hence $\dim_\Bbbk R^*=\dim_\Bbbk R$ without choosing a symmetrising form.
 \end{proof}
-
-Adding relations has the opposite effect after dualising. For $S$-sub-bimodules $R\subset R'\subset V\otimes_S V$,
-\[
-R\subset R'\quad\Longrightarrow\quad(R')^\perp\subset R^\perp
-\quad\Longrightarrow\quad
-\bigl(T_S(V)/(R')\bigr)^!\onto\bigl(T_S(V)/(R)\bigr)^!.
-\]
-The displayed surjection fixes $S$ and is induced by $\id_{V^*}$ on the generators.
+%
+%Adding relations has the opposite effect after dualising. For $S$-sub-bimodules $R\subset R'\subset V\otimes_S V$,
+%\[
+%R\subset R'\quad\Longrightarrow\quad(R')^\perp\subset R^\perp
+%\quad\Longrightarrow\quad
+%\bigl(T_S(V)/(R')\bigr)^!\onto\bigl(T_S(V)/(R)\bigr)^!.
+%\]
+%The displayed surjection fixes $S$ and is induced by $\id_{V^*}$ on the generators.
 
 \subsection{Recovering the original algebra}
 
@@ -87,7 +86,7 @@ The displayed surjection fixes $S$ and is induced by $\id_{V^*}$ on the generato
 % mathematical arguments are unchanged.
 
 \begin{lemma}\label{lem:double-orthogonal}
-Let $U\subset M$ be an $S$-sub-bimodule of a finite-dimensional $S$-bimodule. Under the evaluation isomorphisms of Lemma~\ref{lem:S-bidual},
+Let $U\subset M$ be an $S$-sub-bimodule of a finite-dimensional $S$-bimodule. Under the evaluation isomorphisms \comm{do not use `evaluation isomorphism', use `duality of (specific which one)'  (apply this rule throughout all lectures from now on)} of Lemma~\ref{lem:S-bidual},
 \[
 {}^\perp(U^\perp)=U,\qquad ({}^\perp U)^\perp=U.
 \]
@@ -99,7 +98,7 @@ If $m\notin U$, Corollary~\ref{cor:semisimple-summands} embeds $M/U$ in $S^{\opl
 A coordinate of the image of $m+U$ is non-zero.
 Composing $M\onto M/U\hookrightarrow S^{\oplus n}$ with that coordinate projection gives a right $S$-linear map $f:M\to S$ satisfying $f(U)=0$ and $f(m)\neq0$.
 Thus $f\in U^\perp$ and $m\notin{}^\perp(U^\perp)$.
-The proof of $({}^\perp U)^\perp=U$ uses left modules instead.
+The proof of $({}^\perp U)^\perp=U$ is similar.
 \end{proof}
 
 \begin{theorem}\label{thm:quadratic-bidual}
@@ -114,7 +113,7 @@ Left and right quadratic duality are canonically inverse:
 \emph{Generators.} The evaluation $\mathrm{ev}_V:V\xrightarrow{\sim}{}^*(V^*)$, $v\mapsto(f\mapsto f(v))$, of Lemma~\ref{lem:S-bidual} identifies the generators of $A$ and ${}^!(A^!)$.
 It preserves both $S$-actions by \eqref{eq:tensor-dual-actions}.
 
-\emph{Relations.} For $v,w\in V$ and $f,g\in V^*$, the same actions and \eqref{eq:quadratic-pairings} give
+\emph{Relations.} For $v,w\in V$ and $f,g\in V^*$, the same actions  \comm{what do you mean by action, what acts on what} and \eqref{eq:quadratic-pairings} \comm{this is just \eqref{eq:tensor-duals} with $W=V$} give
 \begin{equation}\label{eq:bidual-tensor-square}
 \begin{aligned}
 \theta_\ell(\mathrm{ev}_V(v)\otimes\mathrm{ev}_V(w))(g\otimes f)
@@ -122,12 +121,10 @@ It preserves both $S$-actions by \eqref{eq:tensor-dual-actions}.
 &=\mathrm{ev}_{V\otimes_S V}(v\otimes w)(\theta_r(g\otimes f)).
 \end{aligned}
 \end{equation}
-\begin{sloppypar}
 Thus $\mathrm{ev}_V\otimes\mathrm{ev}_V$ agrees with evaluation on $V\otimes_S V$ under the tensor-dual identifications \eqref{eq:tensor-duals}.
 Lemma~\ref{lem:double-orthogonal}, applied to $R\subset V\otimes_S V$, identifies the relations ${}^\perp(R^\perp)$ of ${}^!(A^!)$ with $R$.
-The presentations \eqref{eq:quadratic-duals} therefore give ${}^!(A^!)\cong A$ over $S$.
+The presentations \eqref{eq:quadratic-duals} therefore give an isomorphism ${}^!(A^!)\cong A$ over $S$.
 Interchanging left and right gives $({}^!A)^!\cong A$.
-\end{sloppypar}
 \end{proof}
 
 \begin{proposition}\label{prop:quadratic-dual-sides}
