@@ -228,11 +228,13 @@ $S$-bimodule, and define
 \begin{parts}
 \part Prove that $\theta_r$ is well defined $S$-module isomorphism.
 \begin{solution}
-For fixed $g,f$, $\beta(v,w)=g(f(v)w)$ is bilinear, and
+We check: (a) $\theta_r(g\otimes f)$ is a well-defined right $S$-linear functional on $V\otimes_SW$; (b) $\theta_r$ is well defined on $W^*\otimes_SV^*$; (c) $\theta_r$ commutes with the outer actions.
+(a) For fixed $g,f$, $\beta(v,w)=g(f(v)w)$ is bilinear, and
 $\beta(vs,w)=g(f(v)sw)=\beta(v,sw)$ because $f$ is right $S$-linear; so $\beta$ induces a linear map $V\otimes_SW\to S$.
-It is right $S$-linear: $\beta(v,ws)=g(f(v)ws)=g(f(v)w)s$ as $g$ is. The formula is bilinear in $(g,f)$, and
+It is right $S$-linear: $\beta(v,ws)=g(f(v)ws)=g(f(v)w)s$ as $g$ is.
+(b) The formula is bilinear in $(g,f)$, and
 $(gs)(f(v)w)=g(sf(v)w)=g((sf)(v)w)$ shows invariance under $gs\otimes f\leftrightarrow g\otimes sf$.
-For a bimodule $V$ and the actions $(sft)(v)=sf(tv)$,
+(c) For a bimodule $V$ and the actions $(sft)(v)=sf(tv)$,
 \[
 \theta_r(sg\otimes ft)(v\otimes w)=s\,g(f(tv)w)=\bigl(s\,\theta_r(g\otimes f)\,t\bigr)(v\otimes w).
 \]
@@ -309,7 +311,17 @@ giving $R^\perp=\kk(\lambda b^*a^*+d^*c^*)$ and $A_\lambda^!=T_S(V^*)/(\lambda b
 \end{solution}
 \subpart Dualise once more: compute ${}^!(A_\lambda^!)$ and recover the relation $ab-\lambda cd$.
 \begin{solution}
-The element $\alpha\,ab+\beta\,cd$ annihilates $\lambda b^*a^*+d^*c^*$ under the pairing of (i) iff $\alpha\lambda+\beta=0$, so the orthogonal of $R^\perp$ is $\kk(ab-\lambda cd)$.
+By Lecture~3, ${}^!(A_\lambda^!)=T_S({}^*(V^*))/({}^\perp(R^\perp))$, and $\mathrm{ev}_V:V\xrightarrow{\sim}{}^*(V^*)$ identifies the generators.
+Under $\mathrm{ev}_V$,
+\[
+  \theta_\ell\bigl(\mathrm{ev}_V(v)\otimes\mathrm{ev}_V(w)\bigr)(g\otimes f)=\theta_r(g\otimes f)(v\otimes w),
+\]
+so ${}^\perp(R^\perp)=\{u\in V\otimes_SV\mid\theta_r(F)(u)=0\ \ \forall F\in R^\perp\}$ (the order of the factors is \emph{not} reversed again).
+Now $V\otimes_SV$ has basis $ab,cd$, and by (i)
+\[
+  \theta_r(\lambda b^*a^*+d^*c^*)(\alpha\,ab+\beta\,cd)=(\lambda\alpha+\beta)\,e_4,
+\]
+so ${}^\perp(R^\perp)=\{\alpha\,ab+\beta\,cd\mid\lambda\alpha+\beta=0\}=\kk(ab-\lambda cd)$, i.e.\ ${}^!(A_\lambda^!)=T_S(V)/(ab-\lambda cd)=A_\lambda$.
 \end{solution}
 \subpart Prove that $A_\lambda\cong A_\mu$ as graded algebras if and only if $\lambda,\mu$ are either both zero or both non-zero.
 
@@ -438,7 +450,7 @@ Thus $h_{B^!}(t)=\frac1{1-t}+t$ and
 \emph{Hint.} Use $V\otimes_SV$ as the relation space and $h_{T_S(V)}(t)=(I-tC)^{-1}$ (Lecture~2).
 \begin{solution}
 The relation space is $R=V\otimes_SV$; since $\theta_r$ identifies $V^*\otimes_SV^*$ with $(V\otimes_SV)^*$, $R^\perp=0$ and $A^!=T_S(V^*)$.
-$e_iA_0=L_i$ and $e_iA_1=e_iV$ give $h_A=I+tC$. For $V^*$, $\dim e_iV^*e_j=\dim e_jVe_i$, so its matrix is $C^{\mathsf T}$ and $h_{A^!}=(I-tC^{\mathsf T})^{-1}$.
+$\dim e_iA_0e_j=\delta_{ij}$ and $\dim e_iA_1e_j=C_{ij}$ give $h_A=I+tC$. For $V^*$, $\dim e_iV^*e_j=\dim e_jVe_i$, so its matrix is $C^{\mathsf T}$ and $h_{A^!}=(I-tC^{\mathsf T})^{-1}$.
 \end{solution}
 \subpart Deduce that
 \[

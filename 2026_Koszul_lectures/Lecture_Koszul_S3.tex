@@ -477,22 +477,48 @@ Check the double dual using Proposition~\ref{prop:monomial-dual}.
 \end{exercise}
 
 \begin{exercise}
-Let $S=\Bbbk e_1\oplus\Bbbk e_2$ and let $V$ have basis $a,b$ with $e_1ae_2=a$ and $e_2be_1=b$.
-Compute the quadratic dual of $T_S(V)/(ab,ba)$ and the Hilbert series of both algebras.
-\emph{Check.} In the order $e_1,e_2$, the two series are
+Let $S=\bigoplus_{i=1}^n\Bbbk e_i$ with coordinate idempotents, and let ${}_SV_S$ be a finite-dimensional bimodule in degree $1$.
+Set $C_{ij}=[e_iV:e_jS]=\dim_\Bbbk(e_iVe_j)$ for $1\leq i,j\leq n$, and put
 \[
-\begin{pmatrix}1&t\\t&1\end{pmatrix}
-\qquad\text{and}\qquad
-\frac{1}{1-t^2}\begin{pmatrix}1&t\\t&1\end{pmatrix}.
+A=T_S(V)/(V\otimes_S V)=S\oplus V.
 \]
+\begin{enumerate}
+\item Prove that
+\[
+A^!=T_S(V^*),\qquad h_A(t)=I_n+tC,\qquad
+h_{A^!}(t)=(I_n-tC^{\mathsf T})^{-1}.
+\]
+\item Deduce that $h_A(t)h_{A^!}(-t)^{\mathsf T}=I_n$.
+\end{enumerate}
+\emph{Hint for (1).} Find $(V\otimes_S V)^\perp$ and compute the multiplicities $[e_iV^*:e_jS]$.
 \end{exercise}
 
 \begin{advanced}
 \begin{exercise}
-For the four generators in Example~\ref{ex:commuting-square-dual}, replace the relation $ab-cd$ by $ab-\lambda cd$, where $\lambda\in\Bbbk$.
-Compute the quadratic dual relation for every $\lambda$, including $\lambda=0$, and recover the original relation by dualising again.
+Let $S=\bigoplus_{i=1}^4\Bbbk e_i$ with coordinate idempotents, and let ${}_SV_S$ have basis $\{a,b,c,d\}$ with
+\[
+a\in e_1Ve_2,\qquad b\in e_2Ve_4,\qquad
+c\in e_1Ve_3,\qquad d\in e_3Ve_4,
+\]
+and $e_iVe_j=0$ for all other pairs.
+For $\lambda\in\Bbbk$, put $R_\lambda=\Bbbk(ab-\lambda cd)\subset V\otimes_S V$ and $A_\lambda=T_S(V)/(R_\lambda)$.
+\begin{enumerate}
+\item Using $\theta_r$, compute $R_\lambda^\perp$ and a presentation of $A_\lambda^!$ for every $\lambda$, including $\lambda=0$.
+\item Compute ${}^!(A_\lambda^!)$ and recover the relation $ab-\lambda cd$ under the canonical identification ${}^*(V^*)\cong V$.
+\item Prove that $A_\lambda\cong A_\mu$ as graded algebras if and only if $\lambda,\mu$ are both zero or both non-zero.
+\end{enumerate}
 
-\emph{Hint.} Evaluate $\mu b^*a^*+\nu d^*c^*$ on $ab-\lambda cd$. For $\lambda\neq0$, rescale $d$ to compare with Example~\ref{ex:commuting-square-dual}.
+\emph{Hint for (1).} Evaluate $\alpha b^*a^*+\beta d^*c^*$ on $ab-\lambda cd$ for $\alpha,\beta\in\Bbbk$.
+
+\emph{Hint for (3).} A graded isomorphism permutes the coordinate idempotents of $S$.
+The degree $1$ components force it to fix $e_1,e_4$ and either fix or interchange $e_2,e_3$.
+Compare which of the multiplication maps
+\[
+e_1(A_\lambda)_1e_i\otimes_\Bbbk e_i(A_\lambda)_1e_4
+\longrightarrow e_1(A_\lambda)_2e_4
+\quad\text{for }i\in\{2,3\}
+\]
+are zero. For non-zero $\lambda,\mu$, rescale $d$.
 \end{exercise}
 \end{advanced}
 

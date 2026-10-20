@@ -1406,15 +1406,26 @@ Each component is a bimodule isomorphism, and naturality follows in each degree 
 \subsection{Exercises}
 
 \begin{exercise}[Matrix calculations]
-Verify the grading on $\Bbbk A_n$ in Example~\ref{ex:triangular-grading} using $e_{ij}e_{pq}=\delta_{jp}e_{iq}$.
-Compute $\rad(\Bbbk A_3)$ from the definition.
-\emph{Hint.} The strictly upper triangular ideal $J$ satisfies $J^3=0$. Apply the argument of Example~\ref{ex:semisimple-algebras} to simple modules and to $A/J\cong\Bbbk^{\oplus3}$.
+Let $n\geq2$ and $A=\Bbbk A_n$.
+Verify the grading in Example~\ref{ex:triangular-grading} using $e_{ij}e_{pq}=\delta_{jp}e_{iq}$.
+Compute $\rad A$ from its definition as the intersection of all maximal right ideals.
+
+\emph{Hint.} The strictly upper triangular ideal $J$ satisfies $J^n=0$.
+Show that $LJ=0$ for every simple right $A$-module $L$, and use the diagonal maps $A\to\Bbbk$, $X\mapsto X_{ii}$, for $1\leq i\leq n$.
 \end{exercise}
 
 \begin{exercise}[Shifts and duals]
-For $A=\Bbbk A_3$, compute the degrees and all non-zero matrix-unit actions on $\bbD(e_{22}A)$.
-Show that it is not isomorphic to any left module $Ae_{jj}$, even after a shift.
-\emph{Hint.} Compare dimensions and the actions of $e_{11},e_{22},e_{33}$.
+Let $A=\Bbbk A_3$ and $M=e_{22}A$ with the inherited grading.
+\begin{enumerate}
+\item Find a homogeneous basis of $\bbD(M)$, its degrees, and all non-zero actions of matrix units on the basis vectors.
+\item Show that $\Bbbk e_{13}\subset Ae_{33}$ is a graded left submodule and that
+\[
+\bbD(M)\cong(Ae_{33}/\Bbbk e_{13})(1)
+\]
+as graded left $A$-modules.
+\item Deduce that $\bbD(M)\not\cong(Ae_{jj})(r)$ for every $j\in\{1,2,3\}$ and $r\in\Z$.
+\end{enumerate}
+\emph{Hint for (3).} Compare dimensions and the actions of $e_{11},e_{22},e_{33}$.
 \end{exercise}
 
 \begin{exercise}[Homogeneous maps]\label{ex:infinite-hom}
@@ -1470,82 +1481,95 @@ The original worked example is the case $c_1=c_2=1$.
 \end{hidden}
 
 \begin{exercise}[Dependence of the action on the form]\label{ex:transported-dual-action}
-Assume $\operatorname{char}\Bbbk\neq2$.
-This exercise compares the $A$-actions transported through two symmetrising forms as in Remark~\ref{rem:transported-dual-action}.
-Let $A=\Bbbk A_2$, $S=\Bbbk e_{11}\oplus\Bbbk e_{22}$, and $M=e_{11}A$.
-For $c_1,c_2\in\Bbbk\setminus\{0\}$, define
+The transported $A$-action can depend on the symmetrising form, but its graded isomorphism class does not.
+Let $A=\Bbbk A_2$, $S=\Bbbk e_{11}\oplus\Bbbk e_{22}$, and $M=e_{11}A$, with the inherited gradings.
+For $c=(c_1,c_2)\in(\Bbbk\setminus\{0\})^2$, define
 \begin{equation}\label{eq:transported-dual-form}
-\tau:S\longrightarrow\Bbbk,\qquad
+\tau_c:S\longrightarrow\Bbbk,\qquad
 a e_{11}+b e_{22}\longmapsto c_1a+c_2b
-\quad(a,b\in\Bbbk).
+\quad\text{for all }a,b\in\Bbbk.
 \end{equation}
+Write $\alpha_c:M^{\grstar}\to\bbD(M)$, $f\mapsto\tau_c\circ f$, and let $a\cdot_c f=\alpha_c^{-1}(a\alpha_c(f))$ be the transported action of Remark~\ref{rem:transported-dual-action}.
 Consider the right $S$-linear maps
 \begin{equation}\label{eq:transported-dual-functionals}
 \begin{aligned}
 \varphi_0:M&\longrightarrow S,& a e_{11}+b e_{12}&\longmapsto a e_{11},\\
 \varphi_1:M&\longrightarrow S,& a e_{11}+b e_{12}&\longmapsto b e_{22}
-\quad(a,b\in\Bbbk).
+\quad\text{for all }a,b\in\Bbbk.
 \end{aligned}
 \end{equation}
 \begin{enumerate}
-\item Verify that $\tau$ is symmetrising and that $\varphi_0,\varphi_1$ form a homogeneous basis of $M^{\grstar}$. Determine their degrees.
-\item Set $\tau_1(ae_{11}+be_{22})=a+b$ and $\tau_2(ae_{11}+be_{22})=a+2b$.
-Write $\cdot_1,\cdot_2$ for the respective left $A$-actions transported from $\bbD(M)$ using \eqref{eq:dual-comparison}.
-Calculate the actions of $e_{11},e_{22},e_{12}$ on $\varphi_0,\varphi_1$ for both forms.
-Are the two actions equal?
-\item Construct a graded $A$-module isomorphism
+\item Verify that $\tau_c$ is symmetrising and that $\varphi_0,\varphi_1$ form a homogeneous basis of $M^{\grstar}$. Determine their degrees.
+\item Calculate the actions of $e_{11},e_{22},e_{12}$ on $\varphi_0,\varphi_1$.
+For $c,c'\in(\Bbbk\setminus\{0\})^2$, prove that $\cdot_c=\cdot_{c'}$ if and only if $c'=\rho c$ for some $\rho\in\Bbbk\setminus\{0\}$.
+\item More generally, let $A$ be a locally finite-dimensional graded algebra with semisimple $S=A_0$, and let $M$ be a locally finite-dimensional graded right $A$-module.
+Let $\tau,\tau'$ be symmetrising forms on $S$, with comparison maps $\alpha_\tau,\alpha_{\tau'}:M^{\grstar}\to\bbD(M)$ given by composition with $\tau,\tau'$, respectively, and transported actions $\cdot_\tau,\cdot_{\tau'}$.
+Prove that there is an invertible $z\in S$ satisfying $\tau'(s)=\tau(zs)$ for every $s\in S$, and that
 \[
-t:(M^{\grstar},\cdot_1)\longrightarrow(M^{\grstar},\cdot_2)
+\gamma:(M^{\grstar},\cdot_{\tau'})\longrightarrow(M^{\grstar},\cdot_\tau),
+\qquad (\gamma f)(m)=z f(m)
 \]
-by giving $t(\varphi_0)$ and $t(\varphi_1)$.
+is an isomorphism of graded left $A$-modules.
+Deduce that the modules in (2) are isomorphic for every $c,c'$, and give the isomorphism on $\varphi_0,\varphi_1$.
 \end{enumerate}
+\emph{Hint for (3).} Compare $\alpha_{\tau'}$ with $\alpha_\tau$.
 \end{exercise}
 
 \begin{hidden}
 \begin{proof}[Solution]
 \emph{The form and the basis.}
-The algebra $S$ is commutative, so $\tau(st)=\tau(ts)$.
-If $s=ae_{11}+be_{22}$ satisfies $\tau(se_{11})=\tau(se_{22})=0$, then $c_1a=c_2b=0$, hence $s=0$.
-Thus $\tau$ is non-degenerate.
+The algebra $S$ is commutative, so $\tau_c(st)=\tau_c(ts)$.
+If $s=ae_{11}+be_{22}$ satisfies $\tau_c(se_{11})=\tau_c(se_{22})=0$, then $c_1a=c_2b=0$, hence $s=0$.
+Thus $\tau_c$ is non-degenerate.
 
 A right $S$-linear map $f:M\to S$ must satisfy $f(e_{11})\in Se_{11}=\Bbbk e_{11}$ and $f(e_{12})\in Se_{22}=\Bbbk e_{22}$.
 Conversely, any choices of these two values define such a map.
 Consequently, $\varphi_0,\varphi_1$ form a basis, with degrees $0,-1$, respectively.
 
 \emph{The actions.}
-For the general form \eqref{eq:transported-dual-form}, write $\alpha_M(f)=\tau\circ f$.
 For $m=ae_{11}+be_{12}$,
 \[
-\alpha_M(\varphi_0)(m)=c_1a,\qquad
-\alpha_M(\varphi_1)(m)=c_2b,\qquad
-\alpha_M(e_{12}\cdot\varphi_1)(m)
-=\alpha_M(\varphi_1)(me_{12})=c_2a.
+\alpha_c(\varphi_0)(m)=c_1a,\qquad
+\alpha_c(\varphi_1)(m)=c_2b,\qquad
+\alpha_c(e_{12}\cdot_c\varphi_1)(m)
+=\alpha_c(\varphi_1)(me_{12})=c_2a.
 \]
 Using also $me_{11}=ae_{11}$ and $me_{22}=be_{12}$ gives all non-zero actions:
 \[
-e_{11}\cdot\varphi_0=\varphi_0,\qquad
-e_{22}\cdot\varphi_1=\varphi_1,\qquad
-e_{12}\cdot\varphi_1=\frac{c_2}{c_1}\varphi_0.
+e_{11}\cdot_c\varphi_0=\varphi_0,\qquad
+e_{22}\cdot_c\varphi_1=\varphi_1,\qquad
+e_{12}\cdot_c\varphi_1=\frac{c_2}{c_1}\varphi_0.
 \]
 All other actions of the three matrix units on the two basis vectors are zero.
-Thus $e_{12}\cdot_1\varphi_1=\varphi_0$ whereas $e_{12}\cdot_2\varphi_1=2\varphi_0$, so the actions are not equal.
+Consequently, $\cdot_c=\cdot_{c'}$ if and only if $c_2/c_1=c'_2/c'_1$.
+This equality is equivalent to $c'=\rho c$ with $\rho=c'_1/c_1\neq0$.
 
-\emph{The isomorphism.}
-Define
+\emph{The general isomorphism.}
+Non-degeneracy of $\tau$ makes
 \[
-t:(M^{\grstar},\cdot_1)\longrightarrow(M^{\grstar},\cdot_2),
-\qquad
-t(\varphi_0)=\varphi_0,\quad t(\varphi_1)=\tfrac12\varphi_1.
+S\longrightarrow D(S),\qquad z\longmapsto\bigl(s\mapsto\tau(zs)\bigr)
 \]
-The map is invertible, preserves degrees, and commutes with the actions of $e_{11}$ and $e_{22}$.
-For the remaining matrix unit,
+injective, hence bijective since $S$ is finite-dimensional.
+Choose $z$ mapping to $\tau'$.
+If $zs=0$, then $\tau'(st)=\tau(zst)=0$ for every $t\in S$, so $s=0$ by non-degeneracy of $\tau'$.
+Thus multiplication by $z$ on the left is bijective.
+Choose $u\in S$ with $zu=1$; injectivity applied to $z(uz-1)=0$ gives $uz=1$.
+
+For $f\in M^{\grstar}$, $m\in M$, and $s\in S$, one has $zf(ms)=zf(m)s$, so $\gamma f$ is right $S$-linear.
+Multiplication by $z$ preserves degrees, and multiplication by $z^{-1}$ gives the inverse of $\gamma$.
+Moreover, $\alpha_\tau\gamma=\alpha_{\tau'}$, so for every $a\in A$ and $f\in M^{\grstar}$,
 \[
-t(e_{12}\cdot_1\varphi_1)=t(\varphi_0)=\varphi_0
-=e_{12}\cdot_2(\tfrac12\varphi_1)
-=e_{12}\cdot_2t(\varphi_1).
+\gamma(a\cdot_{\tau'}f)
+=\alpha_\tau^{-1}\bigl(a\alpha_{\tau'}(f)\bigr)
+=a\cdot_\tau\gamma(f).
 \]
-Both sides vanish on $\varphi_0$.
-Since the three matrix units span $A$, the map $t$ is $A$-linear.
+Hence $\gamma$ is a graded left $A$-module isomorphism.
+For the forms $\tau_c,\tau_{c'}$, take
+\[
+z=\frac{c'_1}{c_1}e_{11}+\frac{c'_2}{c_2}e_{22}.
+\]
+The resulting isomorphism $(M^{\grstar},\cdot_{c'})\to(M^{\grstar},\cdot_c)$ sends
+$\varphi_0\mapsto(c'_1/c_1)\varphi_0$ and $\varphi_1\mapsto(c'_2/c_2)\varphi_1$.
 \end{proof}
 \end{hidden}
 

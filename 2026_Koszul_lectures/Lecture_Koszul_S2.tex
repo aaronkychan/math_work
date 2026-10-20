@@ -1059,92 +1059,116 @@ The first space consists of the exterior relations on $D(V)$; the second consist
 \subsection{Exercises}
 
 \begin{exercise}[Anti-distributivity of the $S$-dual]\label{ex:tensor-duality-proof}
-Let $S$ be finite-dimensional semisimple, and consider finite-dimensional bimodules ${}_SV_S$, ${}_SW_S$.
-Prove anti-distributivity for the right $S$-dual \eqref{eq:tensor-duals}, the semisimple case of Proposition~\ref{prop:tensor-duals}.
+Let $S$ be a finite-dimensional semisimple algebra, $V$ a finite-dimensional right $S$-module, and ${}_SW_S$ a finite-dimensional bimodule.
+Consider the formula
+\[
+\theta_r^{V,W}:W^*\otimes_S V^*\longrightarrow(V\otimes_S W)^*,
+\qquad \theta_r^{V,W}(g\otimes f)(v\otimes w)=g(f(v)w).
+\]
+Write $\theta_r=\theta_r^{V,W}$ when $V,W$ are fixed.
 \begin{enumerate}
-\item Check that the formula for $\theta_r$ in \eqref{eq:tensor-evaluations} is bilinear in each pair of variables, is unchanged by
+\item Check that the formula is bilinear in $(g,f)$ and in $(v,w)$, is unchanged by
 \[
 vs\otimes w\longleftrightarrow v\otimes sw,
 \qquad gs\otimes f\longleftrightarrow g\otimes sf
-\quad(s\in S),
+\quad\text{for all }s\in S,
 \]
 and gives a right $S$-linear map $V\otimes_S W\to S$ for each $g\otimes f$.
-Verify $\theta_r(sg\otimes ft)=s\theta_r(g\otimes f)t$ for $s,t\in S$.
+Prove that $\theta_r$ is left $S$-linear.
+If $V$ is also an $S$-bimodule, verify $\theta_r(sg\otimes ft)=s\theta_r(g\otimes f)t$ for all $s,t\in S$.
 \item Prove that $\theta_r$ is bijective.
-\item For bimodule maps $p:V\to V'$ and $q:W\to W'$, prove
+\item Let $V'$ be a finite-dimensional right $S$-module and ${}_SW'_S$ a finite-dimensional bimodule.
+For a right $S$-linear map $p:V\to V'$ and a bimodule map $q:W\to W'$, prove
 \[
 (p\otimes q)^*\circ\theta_r^{V',W'}
 =\theta_r^{V,W}\circ(q^*\otimes p^*).
 \]
-Here the superscripts specify the pair of bimodules, and $p^*,q^*$, and $(p\otimes q)^*$ are given by precomposition with $p,q$, and $p\otimes q$, respectively.
+Here $p^*:(V')^*\to V^*$, $q^*:(W')^*\to W^*$, and $(p\otimes q)^*:(V'\otimes_S W')^*\to(V\otimes_S W)^*$ are given by precomposition with $p,q$, and $p\otimes q$, respectively.
 \end{enumerate}
 \emph{Hint for (2).} First take $V=S$, then use Corollary~\ref{cor:semisimple-summands}.
 
-\emph{Remark.} The analogous assertions hold for left $S$-duals, with left and right interchanged.
+\emph{Remark.} For a finite-dimensional bimodule ${}_SV_S$ and a finite-dimensional left $S$-module $W$, the corresponding natural isomorphism of right $S$-modules is
+\[
+\theta_\ell:{}^*W\otimes_S{}^*V\longrightarrow{}^*(V\otimes_S W),
+\qquad \theta_\ell(g\otimes f)(v\otimes w)=f(vg(w)).
+\]
 \end{exercise}
 
 \begin{hidden}
-\begin{proof}
+\begin{proof}[Solution]
 \emph{Well-definedness.}
-For the right duals, right $S$-linearity gives
+The formula for $\theta_r$ is bilinear in each pair of variables.
+For $s\in S$, right $S$-linearity gives
 \[
 g(f(vs)w)=g(f(v)sw),\qquad
 (gs)(f(v)w)=g(sf(v)w)=g((sf)(v)w).
 \]
 The first identity respects the relation in $V\otimes_S W$, and the second respects the relation in $W^*\otimes_S V^*$.
-The resulting functional is right $S$-linear because $g$ is.
-For the left duals, the corresponding identities are
+The resulting functional is right $S$-linear because
 \[
-f(vs\,g(w))=f(vg(sw)),\qquad
-f(v(gs)(w))=f(vg(w)s)=(sf)(vg(w)).
+g(f(v)ws)=g(f(v)w)s.
 \]
-Left $S$-linearity of $f$ makes the resulting functional left $S$-linear.
-The outer actions in \eqref{eq:tensor-dual-actions} give
+Also $\theta_r(sg\otimes f)(v\otimes w)=s\,g(f(v)w)$, proving left $S$-linearity.
+When $V$ is a bimodule, the outer actions in \eqref{eq:tensor-dual-actions} give
 \[
-\begin{aligned}
-\theta_r(sg\otimes ft)(v\otimes w)&=s\,g(f(tv)w),\\
-\theta_\ell(sg\otimes ft)(v\otimes w)&=f(vg(ws))t,
-\end{aligned}
+\theta_r(sg\otimes ft)(v\otimes w)
+=s\,g(f(tv)w)
+=\bigl(s\theta_r(g\otimes f)t\bigr)(v\otimes w).
 \]
-which are the required bimodule identities.
+
+\emph{Naturality, used to prove (2).}
+For $g\in(W')^*$, $f\in(V')^*$, $v\in V$, and $w\in W$, the two composites in (3) take the values
+\[
+g(f(p(v))q(w))\qquad\text{and}\qquad g(q(f(p(v))w)),
+\]
+which agree because $q$ is left $S$-linear.
 
 \emph{Bijectivity.}
-To check $\theta_r$, forget the left action on $V$.
-For $V=S$, identify $S^*\cong S$ by $f\mapsto f(1)$; then $\theta_r$ is $W^*\otimes_S S\to W^*$, $g\otimes s\mapsto gs$, an isomorphism by Lemma~\ref{lem:tensor-properties}(3).
-The formula commutes with maps of right $S$-modules in $V$, so it is an isomorphism for finite direct sums and direct summands of $S$.
-Corollary~\ref{cor:semisimple-summands} applies to $V$.
-For $\theta_\ell$, use $W=S$ as a left module, where the map is $S\otimes_S{}^*V\to{}^*V$, $s\otimes f\mapsto sf$, and apply the same argument to $W$.
+For $V=S$, identify $S^*\cong S$ by $f\mapsto f(1)$ and $S\otimes_S W\cong W$ by multiplication.
+Then $\theta_r$ becomes $W^*\otimes_S S\to W^*$, $g\otimes s\mapsto gs$, an isomorphism.
+Naturality with respect to inclusions and projections identifies $\theta_r^{V_1\oplus V_2,W}$ with $\theta_r^{V_1,W}\oplus\theta_r^{V_2,W}$.
+Corollary~\ref{cor:semisimple-summands} gives a right module $U$ and an integer $m\geq0$ with $V\oplus U\cong S^{\oplus m}$.
+Thus $\theta_r^{V,W}\oplus\theta_r^{U,W}$ is bijective, so $\theta_r^{V,W}$ is bijective.
 
-\emph{Naturality.}
-For bimodule maps $p:V\to V'$ and $q:W\to W'$, the square
+\emph{The left-dual version.}
+For a bimodule $V$ and a left module $W$, the identities
 \[
-\xymatrix@C=48pt@R=22pt{
-(W')^*\otimes_S(V')^* \ar[r]^{\theta_r} \ar[d]_{q^*\otimes p^*}
-& (V'\otimes_S W')^* \ar[d]^{(p\otimes q)^*}\\
-W^*\otimes_S V^* \ar[r]_{\theta_r}
-& (V\otimes_S W)^*
-}
+f(vs\,g(w))=f(vg(sw)),\qquad
+f(v(gs)(w))=f(vg(w)s)=(sf)(vg(w))
 \]
-commutes: both routes send $g\otimes f$, evaluated at $v\otimes w$, to $g(f(p(v))q(w))$.
-For $\theta_\ell$, the corresponding two routes give $f(p(v)g(q(w)))$.
+show that $\theta_\ell$ respects both tensor products.
+Left $S$-linearity of $f$ makes the resulting functional left $S$-linear, and
+$\theta_\ell(g\otimes ft)(v\otimes w)=f(vg(w))t$ proves right $S$-linearity of $\theta_\ell$.
+For a bimodule map $p:V\to V'$ and a left $S$-linear map $q:W\to W'$, the two naturality composites evaluate to $f(p(v)g(q(w)))$.
+For $W=S$, the map becomes $S\otimes_S{}^*V\to{}^*V$, $s\otimes f\mapsto sf$.
+Every finite-dimensional left $S$-module is a direct summand of a finite direct sum of copies of $S$, so the inclusions and projections give bijectivity for every $W$.
 \end{proof}
 
 \end{hidden}
 
 \begin{exercise}
-Let $A=\Bbbk A_4/(e_{13},e_{24})$ with the grading of Example~\ref{ex:triangular-grading}.
-Find a homogeneous basis, compute $h_A(t)$, and write $A=T_S(V)/(R)$ with explicit $S,V,R$.
-\emph{Hint.} Use Lemma~\ref{lem:idempotent-tensors}; the ideal contains $e_{14}$ as well as $e_{13},e_{24}$.
+For $n\geq3$ and $Z\subset\{1,\ldots,n-2\}$, let
+\[
+A_Z=\Bbbk A_n/(e_{k,k+2}\mid k\in Z)
+\]
+with the quotient grading, and write $\bar e_{ij}$ for the image of $e_{ij}$ in $A_Z$.
+\begin{enumerate}
+\item Show that a homogeneous basis consists of $\{\bar e_{ii}\mid 1\leq i\leq n\}$ together with all $\bar e_{ij}$ for which $1\leq i<j\leq n$ and no $k\in Z$ satisfies $i\leq k\leq j-2$.
+\item Compute $h_{A_Z}(t)$, and give an $S$-preserving isomorphism of graded algebras $A_Z\cong T_S(V)/(R)$ with explicit $S$, $V$, and $R\subset V\otimes_S V$.
+\end{enumerate}
+\emph{Hint.} For $i\leq k\leq j-2$, use $e_{ij}=e_{ik}e_{k,k+2}e_{k+2,j}$ to determine which matrix units belong to the ideal.
 \end{exercise}
 
 \begin{exercise}
-Let $S=\Bbbk e_1\oplus\Bbbk e_2$ with coordinate idempotents, and let the bimodule $V=\Bbbk a\oplus\Bbbk b$ satisfy $e_1ae_2=a$, $e_2be_1=b$, with all other idempotent actions zero.
-Find a basis of each $T_S(V)_d$ and show that
+Let $S=\Bbbk e_1\oplus\Bbbk e_2$ with coordinate idempotents, and let the bimodule $V=\Bbbk a\oplus\Bbbk b$ in degree $1$ satisfy $e_1ae_2=a$, $e_2be_1=b$, with all other idempotent actions zero.
+\begin{enumerate}
+\item Find a basis of $T_S(V)_d$ for every $d\geq0$ and show that
 \[
 h_{T_S(V)}(t)=\frac{1}{1-t^2}\begin{pmatrix}1&t\\t&1\end{pmatrix}.
 \]
-Compare with the quotient $T_S(V)/(ab)$.
-\emph{Hint.} Count alternating words separately in each degree, including degree $0$.
+\item Find a homogeneous basis and the Hilbert series of $A=T_S(V)/(ab)$, and prove that $A$ is finite-dimensional.
+\end{enumerate}
+\emph{Hint for (1).} Count alternating words separately in each degree, including degree $0$.
 \end{exercise}
 
 \begin{exercise}
