@@ -198,9 +198,14 @@ A module $L$ is \defn{simple} if $L\neq 0$ and its only submodules are $0$ and $
 A module is \defn{semisimple} if it is a direct sum of simple modules.
 An algebra $B$ is \defn{semisimple} if it is semisimple as a right module $B_B$ over itself.
 The \defn{Jacobson radical} $\rad B$ is the intersection of all maximal right ideals of $B$.
+For a right $B$-module $M$, the \defn{radical} $\rad M$ is the intersection of all maximal submodules of $M$, with $\rad M=M$ if there are none.
 \end{definition}
 
 We use the following standard ring-theoretic facts without proof.
+For a finite-dimensional $\Bbbk$-algebra $B$ and any right $B$-module $M$,
+\[
+\rad M=M\rad B.
+\]
 Recall that a \defn{division $\Bbbk$-algebra} is a non-zero $\Bbbk$-algebra whose non-zero elements are invertible.
 
 \begin{theorem}[Artin--Wedderburn]\label{thm:artin-wedderburn}
@@ -536,12 +541,7 @@ The inverse sends $(a,b)$ to $a+(b-a)\overline x$.
 The \defn{positive degree ideal} of a graded algebra $A$ is $A_+:=\bigoplus_{i>0}A_i$.\footnote{It is also called the augmentation ideal; we avoid that terminology.}
 \end{definition}
 
-The subspace $A_+$ is a homogeneous two-sided ideal. The quotient map
-\begin{equation}\label{eq:degree-zero-projection}
-\pi:A\longrightarrow A/A_+\cong A_0,\qquad
-\sum_{i\in\Z}a_i\mapsto a_0,
-\end{equation}
-makes ${}_A(A_0)_A$ a graded bimodule concentrated in degree $0$, with $a\cdot s\cdot b=\pi(a)s\pi(b)$ for $a,b\in A$ and $s\in A_0$.
+The subspace $A_+$ is a homogeneous two-sided ideal.
 
 \subsection{Tensor products of vector spaces}
 
@@ -1162,54 +1162,6 @@ Thus $M^\vee\to M^{*_{\en}}$, $F\mapsto\sigma\circ F$, translates their two-side
 In particular, their star denotes the linear dual; our star denotes the right $S$-dual.
 \end{advanced}
 
-
-\subsection{Hom spaces and duals}
-
-For the $S$-module version of \eqref{eq:linear-Hom-tensor}, we need tensor products over an algebra.
-Let $A$ be any $\Bbbk$-algebra, $M$ a right $A$-module, and $N$ a left $A$-module.
-
-\begin{definition}\label{def:module-tensor}
-The \defn{tensor product of $M$ and $N$ over $A$}, denoted $M\otimes_A N$, is the quotient of the vector space $M\otimes_\Bbbk N$ by
-\[
-\operatorname{span}_\Bbbk\{ma\otimes n-m\otimes an\mid m\in M,\ n\in N,\ a\in A\}.
-\]
-\end{definition}
-
-Write $m\otimes_A n$, or simply $m\otimes n$, for the image of $m\otimes n$ in this quotient.
-Thus $ma\otimes_A n=m\otimes_A an$ for all $m\in M$, $n\in N$, and $a\in A$.
-
-\begin{proposition}\label{prop:hom-from-S-duals}
-Let $S$ be finite-dimensional semisimple.
-For right $S$-modules $V,W$, and respectively left $S$-modules $V,W$, there are natural linear maps
-\begin{equation}\label{eq:hom-from-S-duals}
-\begin{aligned}
-W\otimes_S V^*&\longrightarrow\Hom_S(V,W),
-& w\otimes f&\longmapsto\bigl(v\mapsto wf(v)\bigr),\\
-{}^*V\otimes_S W&\longrightarrow\Hom_{S^\op}(V,W),
-& g\otimes w&\longmapsto\bigl(v\mapsto g(v)w\bigr).
-\end{aligned}
-\end{equation}
-Each map is an isomorphism if either $V$ or $W$ is finite-dimensional.
-For bimodules $ {}_SV_S$, $ {}_SW_S$, both maps preserve the outer actions on Hom, given for $s,t\in S$ and $v\in V$ by
-\[
-\begin{aligned}
-(sFt)(v)&=sF(tv)&&\text{for }F\in\Hom_S(V,W),\\
-(sFt)(v)&=F(vs)t&&\text{for }F\in\Hom_{S^\op}(V,W).
-\end{aligned}
-\]
-\end{proposition}
-
-\begin{supplementary}
-\begin{proof}
-For the first map in \eqref{eq:hom-from-S-duals}, the identities $(ws)f(v)=w(sf)(v)$ and $wf(vs)=wf(v)s$ give a well-defined map with right $S$-linear values.
-If $V=S$, evaluation at $1$ identifies the map with $W\otimes_S S\to W$, whose inverse is $w\mapsto w\otimes1$.
-If $W=S$, the map is $S\otimes_S V^*\to V^*$, whose inverse is $f\mapsto1\otimes f$.
-Distributing finite direct sums in the defining quotient and in Hom shows that the comparison is an isomorphism when either variable is a finite sum of copies of $S$.
-Restriction to a direct summand and Corollary~\ref{cor:semisimple-summands} give the assertion when either variable is finite-dimensional.
-Passing to $S^\op$ proves the assertion for the second map in \eqref{eq:hom-from-S-duals}.
-Precomposition and postcomposition commute with the formulas, proving naturality and compatibility with the outer actions.
-\end{proof}
-\end{supplementary}
 
 \subsection{Comparing the duals}
 

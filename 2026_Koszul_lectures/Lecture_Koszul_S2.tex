@@ -9,8 +9,17 @@
 
 \subsection{Tensor products over an algebra}
 
-Recall the tensor product $M\otimes_A N$ from Definition~\ref{def:module-tensor}, for a right $A$-module $M$ and a left $A$-module $N$.
-Its defining identity is $ma\otimes_A n=m\otimes_A an$ for all $m\in M$, $n\in N$, and $a\in A$.
+Let $A$ be any $\Bbbk$-algebra, $M$ a right $A$-module, and $N$ a left $A$-module.
+
+\begin{definition}\label{def:module-tensor}
+The \defn{tensor product of $M$ and $N$ over $A$}, denoted $M\otimes_A N$, is the quotient of the vector space $M\otimes_\Bbbk N$ by
+\[
+\operatorname{span}_\Bbbk\{ma\otimes n-m\otimes an\mid m\in M,\ n\in N,\ a\in A\}.
+\]
+\end{definition}
+
+Write $m\otimes_A n$, or simply $m\otimes n$, for the image of $m\otimes n$ in this quotient.
+Thus $ma\otimes_A n=m\otimes_A an$ for all $m\in M$, $n\in N$, and $a\in A$.
 
 %No semisimplicity or finiteness assumption on $S,M,N$ is needed for the following properties.
 
@@ -801,6 +810,52 @@ The same definition applies to bimodules, and to vector spaces by taking $S=\Bbb
 The decomposition follows by distributing tensor products over direct sums, as in Lemma~\ref{lem:tensor-properties}(4).
 When $M,N$ are locally finite-dimensional and bounded below, only finitely many pairs $(p,q)$ contribute in a fixed degree, so the tensor product is locally finite-dimensional and bounded below.
 
+\begin{lemma}\label{lem:endomorphism-duals}
+Let $S$ be finite-dimensional semisimple and ${}_SV_S$ a finite-dimensional bimodule.
+There are bimodule isomorphisms
+\begin{equation}\label{eq:hom-from-S-duals}
+\begin{aligned}
+V\otimes_S V^*&\xrightarrow{\sim}\End_S(V),
+& v\otimes f&\longmapsto\bigl(u\mapsto vf(u)\bigr),\\
+{}^*V\otimes_S V&\xrightarrow{\sim}\End_{S^\op}(V),
+& g\otimes v&\longmapsto\bigl(u\mapsto g(u)v\bigr).
+\end{aligned}
+\end{equation}
+The source actions are those of Lemma~\ref{lem:tensor-properties}(2).
+The target actions are defined, for $s,t\in S$ and $u\in V$, by
+\begin{equation}\label{eq:endomorphism-actions}
+\begin{aligned}
+(sFt)(u)&=sF(tu)&&\text{for }F\in\End_S(V),\\
+(sGt)(u)&=G(us)t&&\text{for }G\in\End_{S^\op}(V).
+\end{aligned}
+\end{equation}
+\end{lemma}
+
+\begin{proof}
+For the first comparison, $(vs)f(u)=v(sf)(u)$ and $vf(us)=vf(u)s$ give a well-defined map to $\End_S(V)$.
+By Corollary~\ref{cor:semisimple-summands}, identify $V_S$ with a direct summand of $S^{\oplus m}$ for some integer $m\geq0$, and let $p:S^{\oplus m}\to V$ be the right $S$-linear projection.
+For $1\leq j\leq m$, let $\varepsilon_j\in S^{\oplus m}$ be the vector with $1$ in coordinate $j$ and zero elsewhere, and let $q_j:S^{\oplus m}\to S$ be the coordinate projection.
+Put $v_j=p(\varepsilon_j)$ and $f_j=q_j|_V$.
+Then $u=\sum_{j=1}^m v_jf_j(u)$ for every $u\in V$.
+The inverse is
+\[
+\End_S(V)\longrightarrow V\otimes_S V^*,
+\qquad F\longmapsto\sum_{j=1}^m F(v_j)\otimes f_j.
+\]
+Indeed, one composite sends $F$ to $u\mapsto\sum_{j=1}^mF(v_j)f_j(u)=F(u)$, and the other sends
+\[
+v\otimes f\longmapsto\sum_{j=1}^m vf(v_j)\otimes f_j
+=v\otimes\sum_{j=1}^m f(v_j)f_j=v\otimes f.
+\]
+Applying this construction over $S^\op$ proves the second isomorphism, using
+$V\otimes_{S^\op}{}^*V\cong{}^*V\otimes_S V$, $v\otimes g\mapsto g\otimes v$.
+
+The commuting left and right actions on $V$ make \eqref{eq:endomorphism-actions} bimodule actions.
+For example, $(sFt)(ur)=sF(tur)=sF(tu)r$ for $r\in S$, so $sFt$ is right $S$-linear.
+The images of $sv\otimes ft$ and $sg\otimes vt$, evaluated at $u$, are $svf(tu)$ and $g(us)vt$, respectively.
+These are exactly the actions in \eqref{eq:endomorphism-actions}, proving bimodule linearity of both comparisons.
+\end{proof}
+
 Evaluation applies a functional to an element.
 Coevaluation expresses the identity endomorphism as an element of a tensor product.
 
@@ -821,14 +876,14 @@ S&\longrightarrow{}^*V\otimes_S V\xrightarrow{\sim}\End_{S^\op}(V),
 & s&\longmapsto\bigl(v\mapsto vs\bigr).
 \end{aligned}
 \end{equation}
-The isomorphisms are those in \eqref{eq:hom-from-S-duals}, with $W=V$.
+The isomorphisms are those in \eqref{eq:hom-from-S-duals}.
 Both coevaluation maps are bimodule maps, and each image of $1$ corresponds to $\id_V$.
 \end{proposition}
 
 \begin{proof}
 The identities $(fs)(v)=f(sv)$ and $(sg)(v)=g(vs)$ from \eqref{eq:bimodule-dual-actions} make evaluation well-defined on the two tensor products; the other two actions give its bimodule linearity.
 For coevaluation, left multiplication is right $S$-linear and right multiplication is left $S$-linear because the two actions on $V$ commute.
-Under the Hom actions in Proposition~\ref{prop:hom-from-S-duals}, both multiplication assignments preserve the two $S$-actions.
+Under the endomorphism actions in \eqref{eq:endomorphism-actions}, both multiplication assignments preserve the two $S$-actions.
 The isomorphisms in \eqref{eq:hom-from-S-duals} therefore give the stated bimodule maps.
 \end{proof}
 
