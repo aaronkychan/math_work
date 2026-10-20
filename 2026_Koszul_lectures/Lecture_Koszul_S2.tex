@@ -920,22 +920,19 @@ The quotient removes $\Bbbk e_{13}$ from degree $2$, and hence removes $t^2$ fro
 \begin{example}\label{ex:hilbert-polynomial-exterior}
 Let $n=\dim_\Bbbk V$ and $m=\dim_\Bbbk W$ in Example~\ref{ex:polynomial-exterior}.
 Choosing an exponent independently for each $x_i$, and choosing whether each $y_j$ occurs, gives
-\[
-h_{\SymAlg(V)}(t)=\Big(\sum_{d\geq0}t^d\Big)^n=\frac{1}{(1-t)^n},
-\qquad h_{\bigwedge W}(t)=(1+t)^m.
-\]
-For $n\geq1$, the coefficient of $t^d$ in $h_{\SymAlg(V)}(t)$ is $\binom{d+n-1}{n-1}$, the number of $n$-tuples of non-negative integers with sum $d$.
+\begin{align*}
+h_{\SymAlg(V)}(t)&=\sum_{a_1,a_2,\cdots a_n\ge 0} t^{a_1+a_2+\cdots a_n}  =\prod_{i=1}^n\sum_{a_i\geq0}t^{a_i}=\frac{1}{(1-t)^n}=\sum_{d\ge 0}\binom{d+n-1}{n-1}t^d,\\
+h_{\bigwedge W}(t)&=(1+t)^m.
+\end{align*}
 \end{example}
 
-\begin{supplementary}
+
 \begin{lemma}\label{lem:hilbert-field-tensor}
-For locally finite-dimensional graded vector spaces $U,W$ bounded below,
-\[
-h_{U\otimes_\Bbbk W}(t)=h_U(t)h_W(t).
-\]
-Let $A,B$ be locally finite-dimensional graded algebras with $A_0=\Bbbk^{\oplus n}$ and $B_0=\Bbbk^{\oplus m}$.
-Write $e_1,\ldots,e_n$ and $f_1,\ldots,f_m$ for the coordinate idempotents.
-Give $A\otimes_\Bbbk B$ the total grading and multiplication
+\begin{enumerate}
+\item For locally finite-dimensional graded vector spaces $U,W$, we have 
+\end{enumerate}
+Let $A,B$ be locally finite-dimensional graded algebras with $A_0=\bigoplus_{i=1}^n\Bbbk e_i$ and $B_0=\bigoplus_{j=1}^m\Bbbk f_j$ where $e_i, f_j$'s are the coordinate idempotents.
+Give $A\otimes_\Bbbk B$ the total grading $(A\otimes_\Bbbk B)_d=\bigoplus_{i+j=d}A_i\otimes_\Bbbk B_j$ and multiplication
 $(a\otimes b)(a'\otimes b')=aa'\otimes bb'$.
 Then
 \[
@@ -953,7 +950,9 @@ For algebras,
 \]
 Take vector space dimensions and sum over $a+b=d$ to obtain the coefficient of $t^d$.
 \end{proof}
-\end{supplementary}
+
+
+
 
 \begin{advanced}[suppressfirstparskip=true,innertopmargin=0pt]
 \subsection{The degree 2 relations of a quotient}
@@ -1016,15 +1015,15 @@ Indeed, for $s,t\in S$ and $u\in U$, \eqref{eq:tensor-dual-actions} gives
 (sgt)(u)=g(us)t=0\quad(g\in{}^\perp U),
 \]
 since $tu,us\in U$.
-The orthogonal complements are defined without choosing a symmetrising form, but it is possible to use realise (through the natural isomorphism associated to a chosen symmeterising form) the orthogonal complements as a sub-bimodule of $\bbD(M)$.
+The orthogonal complements are defined without choosing a symmetrising form, but it is possible to realise, through the natural isomorphism associated to a chosen symmeterising form, the orthogonal complements as a sub-bimodule of $\bbD(M)$.
 
 \begin{advanced}
 If $S$ is equipped with a symmetrising form $\tau:S\to\Bbbk$, the comparison maps $\alpha_M,\beta_M$ of \eqref{eq:dual-comparison} satisfy
 \begin{equation}\label{eq:orthogonal-comparison}
-\alpha_M(U^\perp)=\beta_M({}^\perp U)
-=\{\lambda\in D(M)\mid\lambda(u)=0\text{ for all }u\in U\}.
+\alpha_M(U^\perp)=\{\lambda\in D(M)\mid\lambda(u)=0\text{ for all }u\in U\}=\beta_M({}^\perp U)
+.
 \end{equation}
-The forward inclusions follow by composing with $\tau$.
+The middle space sits inside the two outer space, since $\tau\circ\lambda$ satisfies the definition of orthogonal complement.
 Conversely, $\alpha_M(f)(U)=0$ gives
 \[
 \tau(f(u)s)=\tau(f(us))=0

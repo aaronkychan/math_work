@@ -53,7 +53,7 @@ R^\perp&\cong(\Ker\mu_2)^\perp\subset A_1^*\otimes_{A_0}A_1^*,\\
 {}^\perp R&\cong{}^\perp(\Ker\mu_2)\subset{}^*(A_1)\otimes_{A_0}{}^*(A_1).
 \end{aligned}
 \]
-Proposition~\ref{prop:tensor-universal} extends $V^*\cong A_1^*$ and $ {}^*V\cong{}^*(A_1)$ to tensor-algebra isomorphisms, which descend to the quotients by $(R^\perp)$ and $({}^\perp R)$, respectively.
+By the universal property of tensor algebra (Proposition~\ref{prop:tensor-universal}), we can extend $V^*\cong A_1^*$ and $ {}^*V\cong{}^*(A_1)$ to tensor algebra isomorphisms, which descend to the quotients by $(R^\perp)$ and $({}^\perp R)$, respectively.
 Thus both quadratic duals are independent of the chosen presentation up to $A_0$-preserving isomorphisms of graded algebras.
 
 
@@ -81,14 +81,14 @@ S\cong\prod_{j=1}^n\Mat_{d_j}(\Delta_j),
 R_S\cong\bigoplus_{j=1}^n
 (\Delta_j^{1\times d_j})^{\oplus m_j},
 \]
-where each $\Delta_j$ is a finite-dimensional division $\Bbbk$-algebra and $m_j$ is the multiplicity of the corresponding simple right module.
+where each $\Delta_j$ is a finite-dimensional division $\Bbbk$-algebra and $m_j$ is the multiplicity of the corresponding simple right module $\Delta_j^{1\times d_j})$ (the row space).
 For each $j$, there is a left $\Mat_{d_j}(\Delta_j)$-module isomorphism
 \[
 \Delta_j^{d_j\times1}\xrightarrow{\sim}
 \Hom_{\Mat_{d_j}(\Delta_j)}(\Delta_j^{1\times d_j},\Mat_{d_j}(\Delta_j)),
-\qquad c\longmapsto(x\mapsto cx).
+\qquad c\longmapsto(x\mapsto cx),
 \]
-Indeed, a homomorphism is determined by its value on the first coordinate row, and that value has only its first column non-zero.
+where $\Delta_j^{d_j\times1}$ is the left simple module given by the column space.
 Thus, as left $S$-modules,
 \[
 {}_S R^*\cong\bigoplus_{j=1}^n
@@ -122,10 +122,11 @@ Under $M\cong{}^*(M^*)$ and $M\cong({}^*M)^*$ from the right and left $S$-dualit
 \end{lemma}
 
 \begin{proof}
-For $u\in U$ and $f\in U^\perp$, evaluation gives $\mathrm{ev}_M(u)(f)=f(u)=0$, so $U\subset{}^\perp(U^\perp)$ under Lemma~\ref{lem:S-bidual}.
-If $m\notin U$, Corollary~\ref{cor:semisimple-summands} embeds $M/U$ in $S^{\oplus n}$ as a right module for some $n$.
-A coordinate of the image of $m+U$ is non-zero.
-Composing $M\onto M/U\hookrightarrow S^{\oplus n}$ with that coordinate projection gives a right $S$-linear map $f:M\to S$ satisfying $f(U)=0$ and $f(m)\neq0$.
+For $u\in U$ and $f\in U^\perp$, evaluation \comm{state what map this is, from where to where} gives $\mathrm{ev}_M(u)(f)=f(u)=0$, so $U\subset{}^\perp(U^\perp)$ under Lemma~\ref{lem:S-bidual}.
+
+Conversely, suppose that there is some $m\notin U$, semisimplicity of $S$ implies (by Corollary~\ref{cor:semisimple-summands}) that $M/U\hookrightarrow S^{\oplus n}$ as a right $S$-module for some $n$.
+Consider the composition $M\onto M/U\hookrightarrow S^{\oplus n}\twoheadrightarrow S$ which sends $m$ to a non-zero element in a direct summand of $S^{\oplus n}$.
+Then this is a right $S$-linear map in $\Hom_S(M,S)=M^*$ satisfying $f(U)=0$ and $f(m)\neq0$.
 Thus $f\in U^\perp$ and $m\notin{}^\perp(U^\perp)$.
 The proof of $({}^\perp U)^\perp=U$ is similar.
 \end{proof}
@@ -187,7 +188,7 @@ Theorem~\ref{thm:quadratic-bidual} needs no choice of form. Proposition~\ref{pro
 
 \begin{example}\label{ex:tensor-square-zero-dual}
 Quadratic duality exchanges having no relations with setting every product of two generators equal to zero.
-Taking $R=0$ or $R=V\otimes_S V$ in \eqref{eq:quadratic-duals} gives
+That is, taking $R=0$ or $R=V\otimes_S V$ in \eqref{eq:quadratic-duals} gives
 \[
 \begin{aligned}
 \bigl(T_S(V)\bigr)^!
@@ -195,17 +196,17 @@ Taking $R=0$ or $R=V\otimes_S V$ in \eqref{eq:quadratic-duals} gives
 \bigl(T_S(V)/(V\otimes_S V)\bigr)^!&=T_S(V^*).
 \end{aligned}
 \]
-In $S\oplus V^*$, $(V^*)^2=0$ and $(s,f)(t,g)=(st,sg+ft)$.
+In $S\oplus V^*$, $(V^*)^2=0$ and $(s,f)(t,g)=(st,sg+ft)$; this construction is also known as \emph{trivial extension of $S$ by $V^*$}.
 \end{example}
 
-For the rest of this subsection, take $S=\bigoplus_{i=1}^n\Bbbk e_i$, with $e_ie_j=\delta_{ij}e_i$ and $\sum_i e_i=1$.
+For the rest of this subsection, take semisimple $S=\bigoplus_{i=1}^n\Bbbk e_i$ with coordinate idempotents $e_i$.
 Choose a basis $\mathcal B_{ij}$ of each $e_iVe_j$ and let $\mathcal B=\bigcup_{i,j}\mathcal B_{ij}$.
 A non-empty word $b_1\cdots b_d$ is \defn{composable} if $b_t\in\mathcal B_{i_{t-1},i_t}$ for $1\leq t\leq d$ and some $i_0,\ldots,i_d\in\{1,\ldots,n\}$.
-Thus adjacent factors have matching local units.
+(Thus adjacent factors have matching local units.)
 By Lemma~\ref{lem:idempotent-tensors}, the composable words form a basis of the positive degree part of $T_S(V)$.
 
 \begin{definition}
-The presentation $A=T_S(V)/(R)$ is \defn{monomial quadratic} with respect to $\mathcal B$ if $R$ is spanned by a subset $\mathcal R$ of the composable words of length $2$ in $\mathcal B$.
+The presentation $A=T_S(V)/(R)$ is \defn{monomial} with respect to $\mathcal B$ if $R$ is spanned by a subset $\mathcal R$ of the composable words in $\mathcal B$.
 \end{definition}
 
 For $b\in\mathcal B_{ij}$, define the right $S$-linear map $b^*:V\to S$ by its values on $\mathcal B$:
@@ -266,9 +267,8 @@ h_A(t)h_{A^!}(-t)^{\mathsf T}=I_2.
 \]
 The transpose aligns the indices because an $S$-dual reverses the two idempotents in \eqref{eq:dual-basis-idempotents}.
 \end{example}
-
-
-
+                   
+\begin{supplementary}
 \begin{example}\label{ex:alternating-quadratic-dual}
 Proposition~\ref{prop:monomial-dual} exchanges the forbidden and surviving composable pairs.
 Let $S=\Bbbk e_1\oplus\Bbbk e_2$ with coordinate idempotents, and let the bimodule $V=\Bbbk a\oplus\Bbbk b$ satisfy $e_1ae_2=a$, $e_2be_1=b$, with all other idempotent actions zero.
@@ -286,6 +286,8 @@ h_{A^!}(t)=\begin{pmatrix}1+t^2&t\\t&1\end{pmatrix}.
 \]
 The degree $2$ terms occur in different entries: $ba\in e_2Ae_2$, whereas $b^*a^*\in e_1A^!e_1$.
 \end{example}
+\end{supplementary}
+
 
 \subsection{Symmetric and exterior algebras}
 
