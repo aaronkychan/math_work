@@ -28,11 +28,11 @@ d_i:K_i&\longrightarrow K_{i-1},\\
 \end{aligned}
 \end{equation}
 The formula is multilinear and alternating in $v_1,\ldots,v_i$, so it defines a map on $\bigwedge^iV$.
-The augmented chain complex $K_\bullet\to\Bbbk$ consists of these maps and $\pi:K_0=A\to\Bbbk$.
+The sequence $K_\bullet\to\Bbbk$ consists of these maps followed by $\pi:K_0=A\to\Bbbk$.
 \end{definition}
 
 \begin{proposition}\label{prop:koszul-complex-resolution}
-The augmented complex
+The sequence
 \[
 0\longrightarrow K_n\xrightarrow{d_n}\cdots\xrightarrow{d_2}K_1
 \xrightarrow{d_1}K_0\xrightarrow{\pi}\Bbbk\longrightarrow0
@@ -82,7 +82,7 @@ For $q\in J$, the term of $d_i(b_J)$ deleting $q$ is the only term on which $h_{
 Thus $d_{i+1}h_{\alpha,i}+h_{\alpha,i-1}d_i=\id_{K_{i,\alpha}}$ for every $i\geq1$ in positive multidegree; the case $i=0$ was checked separately.
 All positive multidegrees are therefore exact.
 In multidegree $0$, only $K_0\cong\Bbbk$ is nonzero and $\pi$ is the identity onto $\Bbbk$.
-This proves exactness of the augmented complex.
+This proves exactness of the displayed sequence.
 
 Finally, each $K_i$ is a finite direct sum of copies of $A(-i)$, and \eqref{eq:koszul-differential} has image in $K_{i-1}A_+$.
 Exactness gives $\Ker d_i=\Im d_{i+1}\subseteq K_iA_+$ for $i<n$, and $\Ker d_n=0$.
@@ -106,7 +106,6 @@ The algebra $A$ is \defn{Koszul} if the degree zero quotient module $S=A/A_+$ ha
 
 The generators in homological degree $i$ must then all have grading degree $i$.
 Since $S$ can have several simple modules, the definition requires a linear resolution of their direct sum, not just of one chosen simple module.
-For a minimal resolution, Definition~\ref{def:linear-resolution} is equivalently the vanishing $\beta_{i,d,j}(S)=0$ whenever $d\neq i$.
 
 \begin{proposition}\label{prop:polynomial-koszul}
 For every finite-dimensional vector space $V$, the symmetric algebra $\SymAlg(V)$ is Koszul.
