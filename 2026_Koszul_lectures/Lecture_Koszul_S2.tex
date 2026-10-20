@@ -9,12 +9,11 @@
 
 \subsection{Tensor products over an algebra}
 
-Let $A$ be any $\Bbbk$-algebra, $M$ a right $A$-module, and $N$ a left $A$-module.
-
 \begin{definition}\label{def:module-tensor}
-The \defn{tensor product of $M$ and $N$ over $A$}, denoted $M\otimes_A N$, is the quotient of the vector space $M\otimes_\Bbbk N$ by
+Let $A$ be any $\Bbbk$-algebra, $M$ a right $A$-module, and $N$ a left $A$-module.
+The \defn{tensor product of $M$ and $N$ over $A$} is the vector space
 \[
-\operatorname{span}_\Bbbk\{ma\otimes n-m\otimes an\mid m\in M,\ n\in N,\ a\in A\}.
+M\otimes_A N := M\otimes_\Bbbk N/\operatorname{span}_\Bbbk\{ma\otimes n-m\otimes an\mid m\in M,\ n\in N,\ a\in A\}.
 \]
 \end{definition}
 
@@ -26,7 +25,7 @@ Thus $ma\otimes_A n=m\otimes_A an$ for all $m\in M$, $n\in N$, and $a\in A$.
 \begin{lemma}[Basic properties of tensor products]\label{lem:tensor-properties}
 Let $A$ be any $\Bbbk$-algebra, $M$ a right $A$-module, and $N$ a left $A$-module.
 \begin{enumerate}
-\item For a vector space $W$ and a bilinear map $b:M\times N\to W$ satisfying $b(ma,n)=b(m,an)$ for all $m\in M$, $a\in A$, and $n\in N$, there is a unique linear factorisation (commutative diagram)
+\item (Universal property) For a vector space $W$ and a bilinear map $b:M\times N\to W$ satisfying $b(ma,n)=b(m,an)$ for all $m\in M$, $a\in A$, and $n\in N$, there is a unique linear factorisation (commutative diagram)
 \[
 \xymatrix@C=75pt@R=22pt{
 M\times N \ar[r]^{(m,n)\mapsto m\otimes_A n} \ar[dr]_{\forall \text{ bilinear }b \text{ s.t. } b(-\cdot a,-)=b(-,a\cdot-)\phantom{aaaaaaaaaa}}
@@ -358,13 +357,7 @@ Proposition~\ref{prop:tensor-duals} therefore gives natural bimodule isomorphism
 \qquad
 \theta_\ell(g\otimes f)(v\otimes w)=f(vg(w)).
 \end{equation}
-We refer to \eqref{eq:tensor-duals} as \emph{anti-distributivity of the $S$-dual over $\otimes_S$}: dualising reverses the order of the factors.
-For $M\in\{V,W\}$, the actions from \eqref{eq:bimodule-dual-actions} are
-\begin{equation}\label{eq:tensor-dual-actions}
-(sft)(m)=sf(tm),\qquad (sgt)(m)=g(ms)t
-\quad\text{for all }s,t\in S,\ f\in M^*,\ g\in{}^*M,\ m\in M.
-\end{equation}
-
+We refer to \eqref{eq:tensor-duals} as \emph{anti-distributivity of the $S$-dual over $\otimes_S$}\footnote{this is not an common phrase in the literature, I only use it as a shorthand for clarifications here-and-there.}: dualising reverses the order of the factors.
 \begin{hidden}
 \begin{convention}[Anti-distributivity of the $S$-dual]
 For $S,V,W$ as in \eqref{eq:tensor-duals}, identify the dual of a tensor product with the tensor product of the corresponding duals in reverse order, using the maps in \eqref{eq:tensor-evaluations}.
@@ -1064,7 +1057,7 @@ U^\perp&:=\{f\in M^*\mid f(u)=0\text{ for all }u\in U\},\\
 \end{definition}
 
 Both orthogonal complements are $S$-sub-bimodules.
-Indeed, for $s,t\in S$ and $u\in U$, \eqref{eq:tensor-dual-actions} gives
+Indeed, for $s,t\in S$ and $u\in U$, the action on $S$-dual \eqref{eq:bimodule-dual-actions} reads
 \[
 (sft)(u)=sf(tu)=0\quad(f\in U^\perp),\qquad
 (sgt)(u)=g(us)t=0\quad(g\in{}^\perp U),
@@ -1164,7 +1157,7 @@ The resulting functional is right $S$-linear because
 g(f(v)ws)=g(f(v)w)s.
 \]
 Also $\theta_r(sg\otimes f)(v\otimes w)=s\,g(f(v)w)$, proving left $S$-linearity.
-When $V$ is a bimodule, the outer actions in \eqref{eq:tensor-dual-actions} give
+When $V$ is a bimodule, the actions  \eqref{eq:bimodule-dual-actions} on the dual reads
 \[
 \theta_r(sg\otimes ft)(v\otimes w)
 =s\,g(f(tv)w)

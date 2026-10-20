@@ -15,12 +15,11 @@
 \subsection{Projective covers and the graded Nakayama lemma}
 
 Let $A=\bigoplus_{d\geq0}A_d$ be a locally finite-dimensional graded algebra with $S=A_0$ finite-dimensional semisimple.
-Write
-\[
-A_+:=\bigoplus_{d>0}A_d.
-\]
-The grading makes $A_+$ a two-sided ideal, and projection onto degree $0$ identifies $A/A_+$ with $S$.
-We regard $S$ as a graded right $A$-module concentrated in degree $0$, with action $s\cdot a=sa_0$ for $s\in S$ and $a=\sum_{d\geq0}a_d\in A$.
+Recall that the two-sided ideal
+$A_+:=\bigoplus_{d>0}A_d$ is homogeneous with graded quotient $A/A_+\cong A_0=S$.
+From now on, we may regard $S$ as a graded right $A$-module concentrated in degree $0$ induced by this isomorphism; i.e. the action is $s\cdot a=sa_0$ for $s\in S$ and $a=\sum_{d\geq0}a_d\in A$.
+
+\comm{introduce what is a chain complex first.  use more symbols, less words: draw the complex out, not just use words.  do not use `augmented' as it means a variety of things - too ambiguous, always avoid.  do not use $\overline{M}$, use $\top M$.  Do homological algebra properly on ordinary modules first, and then add remark on what happens on graded setting.  do not just do graded setting.}
 
 \phantomsection\label{not:chain-differentials}
 All complexes below are chain complexes of graded right $A$-modules: their terms $P_i$ are indexed by homological degrees $i\geq0$, and their differentials are degree preserving maps $d_i:P_i\to P_{i-1}$ satisfying $d_{i-1}d_i=0$ for $i\geq2$.
@@ -120,6 +119,8 @@ For uniqueness, Proposition~\ref{prop:graded-projective-covers} identifies the c
 The resulting isomorphism identifies their kernels; applying the same proposition to those kernels identifies the next projective covers.
 Induction gives an isomorphism in every homological degree, compatible with the differentials and the maps to $M$.
 \end{proof}
+
+\comm{i dont like to use Betti numbers, there are just too many indices involved; everything can be done by avoiding using it, make all of these advanced.  in the future lectures, make sure it does not use Betti numbers (using them implicitly is OK), we can add the term Betti number as remark.}
 
 Choose representatives $L_1,\ldots,L_r$ of the simple right $S$-modules, as in Definition~\ref{def:dimension-vector}.
 \phantomsection\label{not:graded-betti}
