@@ -57,14 +57,6 @@ left action is specified.
 \titledquestion{Graded algebras, duals, and non-graded modules}
 
 \begin{parts}
-\part For $A=\Bbbk A_n$ with $n\ge 2$, verify that $A_d=\operatorname{span}_\kk\{e_{ij}\mid j-i=d\}$ defines a
-grading on $A$.
-\begin{solution}
-The $e_{ij}$ ($i\leq j$) form a basis, so $A=\bigoplus_dA_d$, and $1=\sum_ie_{ii}\in A_0$.
-If $j-i=d$, $q-p=d'$ and $e_{ij}e_{pq}\neq0$, then $j=p$ and $e_{ij}e_{pq}=e_{iq}$ with
-$q-i=(q-p)+(j-i)=d+d'$; hence $A_dA_{d'}\subset A_{d+d'}$.
-\end{solution}
-
 \part Compute $\rad(\kk A_n)$ from its
 definition as the intersection of all maximal right ideals.
 \begin{solution}
@@ -226,7 +218,7 @@ $S$-bimodule, and define
   \theta_r(g\otimes f)(v\otimes w)=g(f(v)w).
 \]
 \begin{parts}
-\part Prove that $\theta_r$ is well defined $S$-module isomorphism.
+\part Prove that $\theta_r$ is well-defined bimodule isomorphism.
 \begin{solution}
 We check: (a) $\theta_r(g\otimes f)$ is a well-defined right $S$-linear functional on $V\otimes_SW$; (b) $\theta_r$ is well defined on $W^*\otimes_SV^*$; (c) $\theta_r$ commutes with the outer actions.
 (a) For fixed $g,f$, $\beta(v,w)=g(f(v)w)$ is bilinear, and
@@ -244,7 +236,7 @@ $(gs)(f(v)w)=g(sf(v)w)=g((sf)(v)w)$ shows invariance under $gs\otimes f\leftrigh
 \emph{$V=S$:} $S^*\cong S$ via $f\mapsto f(1)$ (as $f(s)=f(1)s$), and $S\otimes_SW\cong W$. Under these identifications
 $\theta_r(g\otimes f)(s\otimes w)=g(f(1)sw)=(g\,f(1))(sw)$, so $\theta_r$ becomes $W^*\otimes_SS\to W^*$, $g\otimes s\mapsto gs$, an isomorphism.
 \emph{$V=S^{\oplus n}$:} both sides turn finite direct sums in $V$ into direct sums, and $\theta_r$ is compatible with the inclusions and projections
-by naturality (part (3), applied to right $S$-linear maps); so $\theta_r^{V_1\oplus V_2}=\theta_r^{V_1}\oplus\theta_r^{V_2}$.
+by naturality (part (2), applied to right $S$-linear maps); so $\theta_r^{V_1\oplus V_2}=\theta_r^{V_1}\oplus\theta_r^{V_2}$.
 \emph{General $V$:} $V\oplus V'\cong S^{\oplus n}$ as right modules ($S$ semisimple), so $\theta_r^V\oplus\theta_r^{V'}$ is bijective, hence so is $\theta_r^V$.
 \end{solution}
 
@@ -280,7 +272,7 @@ Show that
 \[
   \dim_\kk\bigl(W^*\otimes_SV^*\bigr)=\dim_\kk(V\otimes_SW)^*=1,\qquad\theta_r=0.
 \]
-At which step of your proof of (2) does the argument fail?
+At which step of your proof of (1) does the argument fail?
 \begin{solution}
 Write $\kk=S/(x)$. $\kk^*=\Hom_S(\kk,S)$: $f(\bar1)=u$ requires $ux=0$, so $u\in\kk x$, and $\kk^*\cong\kk$ with $x$ acting by $0$ on both sides.
 So $W^*\otimes_SV^*\cong\kk\otimes_S\kk=\kk$, and $(V\otimes_SW)^*=\kk^*\cong\kk$. But $\theta_r(g\otimes f)(\bar1\otimes\bar1)=g(f(\bar1)\bar1)=g(cx\cdot\bar1)=g(0)=0$.
@@ -338,6 +330,42 @@ The induced map on $T_S(V)$ sends $ab-\lambda cd$ to $\alpha\beta\,ab-\lambda\ga
 Hence $\lambda=0\Leftrightarrow\mu=0$. Conversely if $\lambda,\mu\neq0$ take $\alpha=\beta=\gamma=1$, $\delta=\mu/\lambda$ (the inverse is of the same form); for $\lambda=\mu=0$ take the identity.
 \end{solution}
 \end{subparts}
+\part Let
+\[
+  B=T_\kk(\kk x\oplus\kk y)/(x^2),\qquad\deg x=\deg y=1,\qquad a_d:=\dim_\kk B_d.
+\]
+\begin{subparts}
+\subpart Find a basis of $B_d$ and compute $a_0,\dots,a_6$.
+\begin{solution}
+A basis of $B_d$ is the set of words in $x,y$ of length $d$ containing no $xx$ (the ideal $(x^2)$ is spanned by words containing $xx$).
+\[
+  (a_0,\dots,a_6)=(1,2,3,5,8,13,21).
+\]
+\end{solution}
+\subpart Prove that
+\[
+  a_d=a_{d-1}+a_{d-2}\quad(d\geq2),\qquad h_B(t)=\frac{1+t}{1-t-t^2}.
+\]
+
+\emph{Hint.} Sort the words by their first letter.
+\begin{solution}
+For $d\geq2$: words starting with $y$ are $y\cdot w$ with $w$ admissible of length $d-1$ ($a_{d-1}$ choices); words starting with $x$ must continue with $y$, and are $xy\cdot w$ with $w$ admissible of length $d-2$ ($a_{d-2}$).
+So $(1-t-t^2)h_B=a_0+(a_1-a_0)t=1+t$.
+\end{solution}
+\subpart Compute $B^!$ using $\theta_r$ (with $X=x^*$, $Y=y^*$), find a homogeneous basis of $B^!$ and $h_{B^!}(t)$, and verify
+\[
+  h_B(t)\,h_{B^!}(-t)=1.
+\]
+\begin{solution}
+For $F=\alpha XX+\beta XY+\gamma YX+\delta YY$ one has $\theta_r(F)(x\otimes x)=\alpha$, so $R^\perp=\operatorname{span}\{XY,YX,YY\}$ and $B^!=\kk\langle X,Y\rangle/(XY,YX,Y^2)$.
+Any word of length $\geq2$ containing $Y$ contains one of $XY,YX,YY$; so $\{X^n\mid n\geq0\}\cup\{Y\}$ spans, and it is a basis because the ideal is spanned by words containing $XY$, $YX$ or $YY$, none of which occurs in $X^n$ or $Y$.
+Thus $h_{B^!}(t)=\frac1{1-t}+t$ and
+\[
+  h_B(t)h_{B^!}(-t)=\frac{1+t}{1-t-t^2}\Bigl(\frac1{1+t}-t\Bigr)=\frac{1+t}{1-t-t^2}\cdot\frac{1-t-t^2}{1+t}=1.
+\]
+\end{solution}
+\end{subparts}
+
 \end{parts}
 
 \newpage
@@ -397,72 +425,6 @@ and $\dim_\kk A=5$.
 \end{subparts}
 
 
-\part Let
-\[
-  B=T_\kk(\kk x\oplus\kk y)/(x^2),\qquad\deg x=\deg y=1,\qquad a_d:=\dim_\kk B_d.
-\]
-\begin{subparts}
-\subpart Find a basis of $B_d$ and compute $a_0,\dots,a_6$.
-\begin{solution}
-A basis of $B_d$ is the set of words in $x,y$ of length $d$ containing no $xx$ (the ideal $(x^2)$ is spanned by words containing $xx$).
-\[
-  (a_0,\dots,a_6)=(1,2,3,5,8,13,21).
-\]
-\end{solution}
-\subpart Prove that
-\[
-  a_d=a_{d-1}+a_{d-2}\quad(d\geq2),\qquad h_B(t)=\frac{1+t}{1-t-t^2}.
-\]
-
-\emph{Hint.} Sort the words by their first letter.
-\begin{solution}
-For $d\geq2$: words starting with $y$ are $y\cdot w$ with $w$ admissible of length $d-1$ ($a_{d-1}$ choices); words starting with $x$ must continue with $y$, and are $xy\cdot w$ with $w$ admissible of length $d-2$ ($a_{d-2}$).
-So $(1-t-t^2)h_B=a_0+(a_1-a_0)t=1+t$.
-\end{solution}
-\subpart Compute $B^!$ using $\theta_r$ (with $X=x^*$, $Y=y^*$), find a homogeneous basis of $B^!$ and $h_{B^!}(t)$, and verify
-\[
-  h_B(t)\,h_{B^!}(-t)=1.
-\]
-\begin{solution}
-For $F=\alpha XX+\beta XY+\gamma YX+\delta YY$ one has $\theta_r(F)(x\otimes x)=\alpha$, so $R^\perp=\operatorname{span}\{XY,YX,YY\}$ and $B^!=\kk\langle X,Y\rangle/(XY,YX,Y^2)$.
-Any word of length $\geq2$ containing $Y$ contains one of $XY,YX,YY$; so $\{X^n\mid n\geq0\}\cup\{Y\}$ spans, and it is a basis because the ideal is spanned by words containing $XY$, $YX$ or $YY$, none of which occurs in $X^n$ or $Y$.
-Thus $h_{B^!}(t)=\frac1{1-t}+t$ and
-\[
-  h_B(t)h_{B^!}(-t)=\frac{1+t}{1-t-t^2}\Bigl(\frac1{1+t}-t\Bigr)=\frac{1+t}{1-t-t^2}\cdot\frac{1-t-t^2}{1+t}=1.
-\]
-\end{solution}
-\end{subparts}
-\end{parts}
-
-\newpage
-\titledquestion{}
-
-\begin{parts}
-\part Let $S=\bigoplus_{i=1}^r\kk e_i$, let $V$ be a finite-dimensional $S$-bimodule in degree $1$, and put
-\[
-  C_{ij}=\dim_\kk e_iVe_j,\qquad A=T_S(V)/(V\otimes_SV)=S\oplus V.
-\]
-\begin{subparts}
-\subpart Prove that
-\[
-  A^!=T_S(V^*),\qquad h_A(t)=I+tC,\qquad h_{A^!}(t)=(I-tC^{\mathsf T})^{-1}.
-\]
-
-\emph{Hint.} Use $V\otimes_SV$ as the relation space and $h_{T_S(V)}(t)=(I-tC)^{-1}$ (Lecture~2).
-\begin{solution}
-The relation space is $R=V\otimes_SV$; since $\theta_r$ identifies $V^*\otimes_SV^*$ with $(V\otimes_SV)^*$, $R^\perp=0$ and $A^!=T_S(V^*)$.
-$\dim e_iA_0e_j=\delta_{ij}$ and $\dim e_iA_1e_j=C_{ij}$ give $h_A=I+tC$. For $V^*$, $\dim e_iV^*e_j=\dim e_jVe_i$, so its matrix is $C^{\mathsf T}$ and $h_{A^!}=(I-tC^{\mathsf T})^{-1}$.
-\end{solution}
-\subpart Deduce that
-\[
-  h_A(t)\,h_{A^!}(-t)^{\mathsf T}=I.
-\]
-\begin{solution}
-$h_{A^!}(-t)^{\mathsf T}=\bigl((I+tC^{\mathsf T})^{-1}\bigr)^{\mathsf T}=(I+tC)^{-1}$, so $h_A(t)h_{A^!}(-t)^{\mathsf T}=I$.
-\end{solution}
-\end{subparts}
-
-
 \part Let $A$ be a locally finite-dimensional graded algebra generated in degree $1$ over the finite-dimensional semisimple algebra $S=A_0$.
 \begin{subparts}
 \subpart 
@@ -506,6 +468,37 @@ h_B(t)=\sum_{q\geq0}(t^{2q}+t^{2q+1})
 Here $B_1=\kk x$, but $z$ does not belong to the subalgebra generated by $x$.
 Also $x\neq0$ and $x^2=0$, whereas non-zero polynomials in $T_\kk(B_1)\cong\kk[t]$ have non-zero squares.
 \end{solution}
+
+\end{parts}
+
+\newpage
+\titledquestion{}
+
+\begin{parts}
+\part Let $S=\bigoplus_{i=1}^r\kk e_i$, let $V$ be a finite-dimensional $S$-bimodule in degree $1$, and put
+\[
+  C_{ij}=\dim_\kk e_iVe_j,\qquad A=T_S(V)/(V\otimes_SV)=S\oplus V.
+\]
+\begin{subparts}
+\subpart Prove that
+\[
+  A^!=T_S(V^*),\qquad h_A(t)=I+tC,\qquad h_{A^!}(t)=(I-tC^{\mathsf T})^{-1}.
+\]
+
+\emph{Hint.} Use $V\otimes_SV$ as the relation space and $h_{T_S(V)}(t)=(I-tC)^{-1}$ (Lecture~2).
+\begin{solution}
+The relation space is $R=V\otimes_SV$; since $\theta_r$ identifies $V^*\otimes_SV^*$ with $(V\otimes_SV)^*$, $R^\perp=0$ and $A^!=T_S(V^*)$.
+$\dim e_iA_0e_j=\delta_{ij}$ and $\dim e_iA_1e_j=C_{ij}$ give $h_A=I+tC$. For $V^*$, $\dim e_iV^*e_j=\dim e_jVe_i$, so its matrix is $C^{\mathsf T}$ and $h_{A^!}=(I-tC^{\mathsf T})^{-1}$.
+\end{solution}
+\subpart Deduce that
+\[
+  h_A(t)\,h_{A^!}(-t)^{\mathsf T}=I.
+\]
+\begin{solution}
+$h_{A^!}(-t)^{\mathsf T}=\bigl((I+tC^{\mathsf T})^{-1}\bigr)^{\mathsf T}=(I+tC)^{-1}$, so $h_A(t)h_{A^!}(-t)^{\mathsf T}=I$.
+\end{solution}
+\end{subparts}
+
 
 \part For $q\in\kk$ let
 \[
