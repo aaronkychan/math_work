@@ -141,34 +141,33 @@ If $A$ is finite-dimensional semisimple, every surjection splits by Theorem~\ref
 
 \subsection{Tops and Nakayama's lemma}
 
-\comm{throughout, use $\rad A$, not $J$, do not abbreviate unless it gets typographically complicated}
-Put $J=\rad A$.
-The ideal $J$ is two-sided: it consists precisely of the elements that act by zero on every simple right $A$-module.
+The ideal $\rad A$ is two-sided: it consists precisely of the elements that act by zero on every simple right $A$-module.
 
 \begin{supplementary}
 For a simple module $L$ and $0\neq l\in L$, the map $A\to L$, $a\mapsto la$, is surjective with maximal right ideal as kernel.
-Thus $lJ=0$.
-Conversely, if $a\in A$ acts by zero on every simple module, apply this to $A/U$ for each maximal right ideal $U$ to obtain $a\in U$, hence $a\in J$.
-The identities $l(ba)=(lb)a=0$ and $l(ab)=(la)b=0$ for $a\in J$, $b\in A$, and $l\in L$ show that $ba,ab\in J$.
+Thus $l\rad A=0$.
+Conversely, if $a\in A$ acts by zero on every simple module, apply this to $A/U$ for each maximal right ideal $U$ to obtain $a\in U$, hence $a\in \rad A$.
+The identities $l(ba)=(lb)a=0$ and $l(ab)=(la)b=0$ for $a\in \rad A$, $b\in A$, and $l\in L$ show that $ba,ab\in \rad A$.
 \end{supplementary}
 
-For a finitely generated module $M$, it turns out that the generators must like in the quotient $M/\rad M$; the core of this lies in the following famous lemma.
+For a finitely generated right $A$-module $M$, a set of elements generates $M$ if its images generate $M/M\rad A$.
+This is the content of Nakayama's lemma.
 
 \begin{lemma}[Nakayama's lemma]\label{lem:nakayama}
 Let $M$ be a finitely generated right $A$-module.
-If $M=MJ$, then $M=0$.
-More generally, if $N\subseteq M$ is a submodule and $N+MJ=M$, then $N=M$.
+If $M=M\rad A$, then $M=0$.
+More generally, if $N\subseteq M$ is a submodule and $N+M\rad A=M$, then $N=M$.
 \end{lemma}
 
 \begin{supplementary}
 \begin{proof}
-For $a\in J$, the right ideal $(1-a)A$ equals $A$.
+For $a\in \rad A$, the right ideal $(1-a)A$ equals $A$.
 Otherwise it is contained in a maximal right ideal $U$; then $a,1-a\in U$ gives $1\in U$, a contradiction.
 Thus $(1-a)b=1$ for some $b\in A$.
 
-Suppose $M=MJ\neq0$ and choose generators $m_1,\ldots,m_r$ with $r$ minimal.
-Since $J$ is a two-sided ideal, $MJ=\sum_{j=1}^r m_jJ$.
-Write $m_r=\sum_{j=1}^r m_j a_j$ with $a_j\in J$ and choose $b\in A$ with $(1-a_r)b=1$.
+Suppose $M=M\rad A\neq0$ and choose generators $m_1,\ldots,m_r$ with $r$ minimal.
+Since $\rad A$ is a two-sided ideal, $M\rad A=\sum_{j=1}^r m_j\rad A$.
+Write $m_r=\sum_{j=1}^r m_j a_j$ with $a_j\in \rad A$ and choose $b\in A$ with $(1-a_r)b=1$.
 Then
 \[
 m_r(1-a_r)=\sum_{j=1}^{r-1}m_j a_j,
@@ -176,45 +175,47 @@ m_r(1-a_r)=\sum_{j=1}^{r-1}m_j a_j,
 m_r=\sum_{j=1}^{r-1}m_j a_j b,
 \]
 contradicting the minimality of $r$.
-For the last assertion, apply the first to the finitely generated quotient $M/N$, which satisfies $(M/N)J=M/N$.
+For the last assertion, apply the first to the finitely generated quotient $M/N$, which satisfies $(M/N)\rad A=M/N$.
 \end{proof}
 \end{supplementary}
 
+\begin{remark}\label{rem:nakayama-finite-dimensional}
+If $A$ is finite-dimensional, then $\rad A$ is \defn{nilpotent}: $(\rad A)^r=0$ for some integer $r\geq1$.
+Indeed, the powers stabilise at $(\rad A)^r=(\rad A)^{r+1}$, and Lemma~\ref{lem:nakayama} applied to the finite-dimensional module $(\rad A)^r$ gives $(\rad A)^r=0$.
+Thus finite generation is unnecessary in Nakayama's lemma: $M=\rad M$ implies $M=M(\rad A)^r=0$.
+Applying this to $M/N$ also gives $N+\rad M=M\Longrightarrow N=M$ for every submodule $N\subseteq M$.
+\end{remark}
+
 For the rest of this subsection, assume that $A$ is finite-dimensional.
-Every maximal right ideal of $A$ contains $J$, so $\rad(A/J)=0$; hence $A/J$ is semisimple by Theorem~\ref{thm:artin-wedderburn}.
+Every maximal right ideal of $A$ contains $\rad A$, so $\rad(A/\rad A)=0$; hence $A/\rad A$ is semisimple by Theorem~\ref{thm:artin-wedderburn}.
 
 \begin{definition}\label{def:module-top}
 Let $A$ be a finite-dimensional algebra.
 The \defn{top} of a right $A$-module $M$ is
 \[
-\top M:=M/\rad M=M/MJ.
+\top M:=M/\rad M.
 \]
 \end{definition}
 
-The module $\top M$ is semisimple because $J$ acts by zero and $A/J$ is semisimple.
-Moreover, every map from $M$ to a semisimple module $T$ vanishes on $MJ$, since $TJ=0$, and therefore factors uniquely through $M\to\top M$.
-Thus $\top M$ is the maximal semisimple quotients of $M$.
+The module $\top M$ is semisimple because $\rad A$ acts by zero and $A/\rad A$ is semisimple.
+Moreover, every map from $M$ to a semisimple module $T$ vanishes on $\rad M$, since $\rad T=0$, and therefore factors uniquely through $M\to\top M$.
+Thus $\top M$ is the maximal semisimple quotient of $M$.
 
-For an $A$-linear map $f:M\to N$, the inclusion $f(MJ)\subseteq NJ$ gives
+For an $A$-linear map $f:M\to N$, the inclusion $f(\rad M)\subseteq \rad N$ gives
 \[
-\top f:\top M\longrightarrow\top N,\qquad m+MJ\longmapsto f(m)+NJ.
+\top f:\top M\longrightarrow\top N,\qquad m+\rad M\longmapsto f(m)+\rad N.
 \]
 If $M$ is finitely generated, Nakayama's lemma says that lifts to $M$ of generators of $\top M$ generate $M$.
-In particular, if $f:X\to M$ induces a surjection on tops, then $f(X)+MJ=M$, so $f$ is surjective.
+In particular, if $f:X\to M$ induces a surjection on tops, then $f(X)+\rad M=M$, so $f$ is surjective.
 
 \begin{example}
-For $A=\Bbbk A_2$, we have $J=\Bbbk e_{12}$ and
+For $A=\Bbbk A_2$, we have $\rad A=\Bbbk e_{12}$ and
 \[
 \top(e_{11}A)=e_{11}A/\Bbbk e_{12}=L_1,
 \qquad \top(e_{22}A)=e_{22}A=L_2.
 \]
 \end{example}
 
-\begin{supplementary}
-The ideal $J$ is \defn{nilpotent} when $A$ is finite-dimensional: $J^r=0$ for some integer $r\geq1$.
-Indeed, the descending sequence $J\supseteq J^2\supseteq\cdots$ stabilises, say at $J^r=J^{r+1}$.
-The finite-dimensional right module $J^r$ is finitely generated, so Lemma~\ref{lem:nakayama} gives $J^r=0$.
-\end{supplementary}
 
 \subsection{Projective covers}\label{subsec:ordinary-covers}
 
@@ -230,11 +231,11 @@ U\subseteq P\text{ a submodule and }p(U)=M
 \end{definition}
 
 \begin{proposition}\label{prop:cover-top}
-Suppose that $P$ is finite-dimensional\comm{where require finite-dimensional?} and projective, and $p:P\to M$ is surjective.
+Let $A$ be finite-dimensional, let $P$ be a projective right $A$-module, and let $p:P\to M$ be surjective.
 The following are equivalent.
 \begin{enumerate}
 \item $p$ is a projective cover.
-\item $\Ker p\subseteq PJ$.
+\item $\Ker p\subseteq \rad P$.
 \item $\top p:\top P\to\top M$ is an isomorphism.
 \end{enumerate}
 \end{proposition}
@@ -243,23 +244,24 @@ The following are equivalent.
 We prove $(1)\Rightarrow(2)\Rightarrow(1)$ and $(2)\Leftrightarrow(3)$.
 
 \underline{$(1)\Rightarrow(2)$.}
-If $\Ker p\not\subseteq\rad P=PJ$, there is a maximal submodule $U\subset P$ not containing $\Ker p$.
+If $\Ker p\not\subseteq\rad P$, there is a maximal submodule $U\subset P$ not containing $\Ker p$.
 Then $U+\Ker p=P$, so $p(U)=M$, contradicting (1).
 
 \underline{$(2)\Rightarrow(1)$.}
 If $p(U)=M$, then $U+\Ker p=P$.
-Condition (2) gives $U+PJ=P$, and Nakayama's lemma gives $U=P$.
+Condition (2) gives $U+\rad P=P$, hence $\rad(P/U)=P/U$.
+Remark~\ref{rem:nakayama-finite-dimensional} gives $P/U=0$, so $U=P$.
 
 \underline{$(2)\Leftrightarrow(3)$.}
-The equality $p(PJ)=MJ$ makes $\top p$ surjective, with kernel
-$(\Ker p+PJ)/PJ$.
+The equality $p(\rad P)=\rad M$ makes $\top p$ surjective, with kernel
+$(\Ker p+\rad P)/\rad P$.
 \end{proof}
 
 \begin{theorem}\label{thm:ordinary-projective-covers}
-Every finite-dimensional right module over a finite-dimensional algebra has a finite-dimensional projective cover.
-For any two projective covers $p:P\to M$ and $q:Q\to M$, there is an isomorphism $f:P\to Q$ with $qf=p$.
+Let $A$ be a finite-dimensional algebra.
+Every right $A$-module $M$ has a projective cover; if $M$ is finite-dimensional, then so is its cover.
+Over any algebra, for any two projective covers $p:P\to M$ and $q:Q\to M$, there is an isomorphism $f:P\to Q$ with $qf=p$.
 \end{theorem}
-\comm{clarify in remark or something where f.d. of $A$ and of $M$ is used.}
 \begin{proof}
 \underline{Uniqueness:}
 Projectivity of $P$ gives $f:P\to Q$ with $qf=p$.
@@ -269,7 +271,7 @@ The equality $p(s(Q))=q(Q)=M$ and the cover property of $p$ give $s(Q)=P$.
 Thus $f$ and $s$ are inverse isomorphisms.
 
 \begin{supplementary}
-\underline{Existence:}
+\underline{Existence for finite-dimensional $M$:}
 Choose a surjection $p:P\to M$ from a finite-dimensional projective module with $\dim_\Bbbk P$ as small as possible.
 Such a surjection exists because $M$ is a quotient of some $A^{\oplus m}$.
 Suppose $U\subsetneq P$ and $p(U)=M$.
@@ -285,18 +287,45 @@ Indeed, if $u^r(x)\in\Ker u^r$, then $x\in\Ker u^{2r}=\Ker u^r$, so $u^r(x)=0$; 
 Thus $\Im u^r$ is projective, and $pu^r=p$ shows that $p(\Im u^r)=M$.
 But $\Im u^r\subseteq U\subsetneq P$ contradicts the minimal choice of $\dim_\Bbbk P$.
 Therefore $p$ is a projective cover.
+
+\underline{Existence for arbitrary $M$:}
+By Theorem~\ref{thm:artin-wedderburn}, choose a decomposition
+$\top M\cong\bigoplus_{\lambda\in I}L_\lambda$ into simple right $A/\rad A$-modules, indexed by a set $I$.
+Each $L_\lambda$ is finite-dimensional, so the preceding argument gives a finite-dimensional projective cover $q_\lambda:Q_\lambda\to L_\lambda$.
+Projectivity lifts each composite $Q_\lambda\to L_\lambda\hookrightarrow\top M$ through the quotient $M\to\top M$ to a map $f_\lambda:Q_\lambda\to M$.
+Set
+\[
+P:=\bigoplus_{\lambda\in I}Q_\lambda,\qquad
+p:P\longrightarrow M,\qquad
+(x_\lambda)_{\lambda\in I}\longmapsto\sum_{\lambda\in I}f_\lambda(x_\lambda).
+\]
+The sum defining $p$ is finite for each element of $P$.
+Corollary~\ref{cor:projective-sums} makes $P$ projective.
+The equality $\rad P=\bigoplus_{\lambda\in I}\rad Q_\lambda$ gives $\top P\cong\bigoplus_{\lambda\in I}\top Q_\lambda$.
+Thus the isomorphisms $\top q_\lambda$ identify $\top p$ with
+$\bigoplus_{\lambda\in I}L_\lambda\xrightarrow{\sim}\top M$.
+Thus $M=p(P)+\rad M$, and Remark~\ref{rem:nakayama-finite-dimensional} applied to $M/p(P)$ shows that $p$ is surjective.
+Proposition~\ref{prop:cover-top} now makes $p$ a projective cover.
 \end{supplementary}
 \end{proof}
 
+\begin{remark}
+For finite-dimensional $M$, finite generation gives a surjection $A^{\oplus m}\to M$, and finite-dimensionality of $A$ makes its domain finite-dimensional.
+Finite-dimensionality of $P$ ensures that the kernels and images of powers of $u$ stabilise.
+For arbitrary $M$, the argument instead uses semisimplicity of $A/\rad A$ and nilpotence of $\rad A$.
+Uniqueness of projective covers requires no finiteness assumption.
+\end{remark}
+
 \begin{example}\label{ex:ordinary-A2-covers}
-For $A=\Bbbk A_2$, the maps $e_{11}A\to L_1$ and $\id:e_{22}A\to L_2$ are projective covers: their kernels are respectively $(e_{11}A)J$ and $0$.
+For $A=\Bbbk A_2$, the maps $e_{11}A\to L_1$ and $\id:e_{22}A\to L_2$ are projective covers: their kernels are respectively $\rad(e_{11}A)$ and $0$.
 In contrast, the surjection $A=e_{11}A\oplus e_{22}A\to L_1$ obtained by killing $e_{22}A$ is not a cover, since its restriction to $e_{11}A$ is already surjective.
 \end{example}
 
 \subsection{Complexes and resolutions}
 
-If we consider the kernel of a projective cover, or more generally surjective map from a projective, then (say, when $A$ is finite-dimensional) we can take again projective cover, and repeat this construction; this yields a sequence of (exact) projective modules.
-A resolution is such a sequence; let us set this up more properly for general $\Bbbk$-algebra $A$.
+Starting with a surjection from a projective module onto $M$, one can repeat the construction for each successive kernel.
+Composing each surjection with the inclusion of its target kernel gives an exact sequence.
+We now define such resolutions over an arbitrary $\Bbbk$-algebra $A$.
 
 \begin{definition}\label{def:chain-complex}\label{not:chain-differentials}
 A \defn{chain complex} $C_\bullet$ of right $A$-modules is a sequence
@@ -337,33 +366,48 @@ Every right $A$-module has a free resolution, hence a projective resolution.
 \end{proposition}
 
 \begin{proof}
-\comm{proof can be much shorter?  every $M$ has a surjection from $A^{
-\oplus M}$, where $\oplus M$ means direct sum with one copy of $A$ for each element of $M$.  Then iterate this for kernel of the surjection.}
-Choose a free surjection $p_0:P_0\to M$, set $K_1=\Ker p_0$, and choose a free surjection $p_1:P_1\to K_1$.
-Continue with $K_{i+1}=\Ker p_i$ and free surjections $p_{i+1}:P_{i+1}\to K_{i+1}$ for $i\geq1$.
-For the inclusions $\iota_i:K_i\hookrightarrow P_{i-1}$, set
+For every right $A$-module $N$, the free module $A^{\oplus N}:=\bigoplus_{n\in N}A$, indexed by the underlying set of $N$, surjects onto $N$ by
 \[
-d_i:=\iota_i p_i:P_i\longrightarrow P_{i-1}\quad\text{for all }i\geq1.
+A^{\oplus N}\longrightarrow N,\qquad
+(a_n)_{n\in N}\longmapsto\sum_{n\in N}na_n.
 \]
-Then $\Im d_1=K_1=\Ker p_0$ and
-$\Im d_{i+1}=K_{i+1}=\Ker p_i=\Ker d_i$ for every $i\geq1$.
+Start with $N=M$ and repeat for each successive kernel.
+Compose each new surjection with the inclusion of that kernel into the preceding free module; its image is exactly that kernel, so the resulting sequence is exact.
 \end{proof}
 
 \begin{definition}\label{def:ordinary-minimal-resolution}
-A projective resolution \eqref{eq:projective-resolution} is \defn{minimal} if $p_0:P_0\to M$, $d_1:P_1\to\Ker p_0$, and $d_i:P_i\to\Ker d_{i-1}$ for every $i\geq2$ are projective covers, with the codomains restricted as indicated\comm{do not use vague language... as indicated -- what? where? use precise language}.
-\comm{draw a picture of the resolution, syzygies factoring through each differential, then label the arrow going into the syzygies are `proj. cover'}
+A projective resolution \eqref{eq:projective-resolution} is \defn{minimal} if $p_0:P_0\to M$ and the surjections
+\[
+\begin{aligned}
+p_1:P_1&\longrightarrow\Ker p_0,& x&\longmapsto d_1(x),\\
+p_i:P_i&\longrightarrow\Ker d_{i-1},& x&\longmapsto d_i(x)
+\quad\text{for all }i\geq2
+\end{aligned}
+\]
+are projective covers.
 \end{definition}
 
-When $A$, $M$, and all $P_i$ are finite-dimensional, Proposition~\ref{prop:cover-top} gives the criterion
+For the diagram, put $K_1:=\Ker p_0$ and $K_i:=\Ker d_{i-1}$ for all $i\geq2$.
+In a minimal resolution, each differential factors as a projective cover onto its image followed by inclusion:
+\[
+\xymatrix@C=60pt@R=42pt{
+\cdots\ar[r] & P_2\ar[r]^{d_2}\ar[dr]^{\substack{p_2\\\text{proj.\ cover}}}
+& P_1\ar[r]^{d_1}\ar[dr]^{\substack{p_1\\\text{proj.\ cover}}}
+& P_0\ar[r]^{p_0}_{\text{proj.\ cover}} & M\ar[r] & 0\\
+& & K_2\ar@{^{(}->}[u] & K_1\ar@{^{(}->}[u]
+}
+\]
+
+When $A$ is finite-dimensional, Proposition~\ref{prop:cover-top} gives the criterion
 \begin{equation}\label{eq:ordinary-minimal-criterion}
-\Im d_i\subseteq P_{i-1}J\quad\text{for all }i\geq1.
+\Im d_i\subseteq \rad P_{i-1}\quad\text{for all }i\geq1.
 \end{equation}
 Indeed, exactness gives $\Ker p_0=\Im d_1$ and $\Ker d_i=\Im d_{i+1}$ for all $i\geq1$.
 
 \begin{theorem}\label{thm:ordinary-minimal-resolutions}
-\comm{relax some of the f.d.-ness as much as possible; proof can be use f.d., then remark where things get complicated for general setting}
-Every finite-dimensional right module over a finite-dimensional algebra has a minimal projective resolution with finite-dimensional terms.
-Any two minimal resolutions $P_\bullet\to M$ and $P'_\bullet\to M$ are \defn{isomorphic}: there are isomorphisms $f_i:P_i\to P'_i$ satisfying
+Every right module over a finite-dimensional algebra has a minimal projective resolution.
+If the module is finite-dimensional, every term of its minimal resolution is finite-dimensional.
+Over any algebra, any two minimal resolutions $P_\bullet\to M$ and $P'_\bullet\to M$ are \defn{isomorphic}: there are isomorphisms $f_i:P_i\to P'_i$ satisfying
 \[
 p'_0f_0=p_0,\qquad
 d'_i f_i=f_{i-1}d_i\quad\text{for all }i\geq1.
@@ -382,11 +426,22 @@ More generally, maps $f_i$ satisfying these identities are called a \defn{map of
 
 \begin{proof}
 Use projective covers in place of free surjections in Proposition~\ref{prop:resolutions-exist}.
-Each successive kernel is finite-dimensional, so Theorem~\ref{thm:ordinary-projective-covers} applies at every step.
-For uniqueness, choose an isomorphism $f_0$ between the covers of $M$.
-It restricts to an isomorphism of their kernels; uniqueness of the projective covers of these kernels gives $f_1$.
-Repeating gives $f_i$ with $d'_i f_i=f_{i-1}d_i$ at every step.
+For finite-dimensional $A$, Theorem~\ref{thm:ordinary-projective-covers} applies to every successive kernel.
+If $M$ is finite-dimensional, choose a finite-dimensional cover at each step; its kernel is again finite-dimensional.
+For uniqueness, choose an isomorphism $f_0:P_0\to P'_0$ between the covers of $M$.
+It restricts to an isomorphism $\Ker p_0\to\Ker p'_0$; uniqueness of covers of these kernels gives $f_1:P_1\to P'_1$.
+Repeating gives $f_i$ with $d'_i f_i=f_{i-1}d_i$ at every step, without finiteness assumptions.
 \end{proof}
+
+\begin{remark}
+For a minimal projective resolution of $M$, the kernels $\Ker p_0$ and $\Ker d_i$ for $i\geq1$ are called the successive \defn{syzygies} of $M$.
+Their isomorphism classes are independent of the chosen minimal resolution by Theorem~\ref{thm:ordinary-minimal-resolutions}.
+\end{remark}
+
+\begin{remark}
+Over an arbitrary algebra, Proposition~\ref{prop:resolutions-exist} still gives a free resolution, but projective covers of the successive kernels need not exist.
+The obstruction is to existence, not to uniqueness of a minimal resolution.
+\end{remark}
 
 \begin{example}\label{ex:ordinary-A2-resolution}
 The covers in Example~\ref{ex:ordinary-A2-covers} give a minimal resolution of $L_1$:
@@ -427,36 +482,72 @@ The generator $1$ of $A(-d)$ has degree $d$.
 For a graded surjection $q:X\to Y$, an element of $Y_d$ has a preimage in $X_d$.
 Thus the basis-lifting proof works for graded free modules.
 Every graded module is a quotient of a graded free module, by taking homogeneous generators.
-The proof of Proposition~\ref{prop:projective-characterisations} therefore gives
-\comm{write as corollary}
-\[
-\begin{aligned}
-P\text{ graded projective}
-&\Longleftrightarrow \Hom_A^\Z(P,-)\text{ is exact}\\
-&\Longleftrightarrow \text{every graded surjection onto }P\text{ splits}\\
-&\Longleftrightarrow P\text{ is a graded direct summand of a graded free module}.
-\end{aligned}
-\]
-Direct sums and graded direct summands of graded projectives are graded projective by the proof of Corollary~\ref{cor:projective-sums}.
-In particular, if $Q$ is a finite-dimensional right $S$-module, then $Q\otimes_S A(-d)$ is graded projective: Corollary~\ref{cor:semisimple-summands} expresses $Q$ as a summand of a finite direct sum of copies of $S$.
+\begin{corollary}\label{cor:graded-projective-characterisations}
+For a graded right $A$-module $P$, the following are equivalent.
+\begin{enumerate}
+\item $P$ is graded projective.
+\item The functor $\Hom_A^\Z(P,-)$ is exact on graded modules.
+\item Every degree-preserving surjection onto $P$ has a degree-preserving section.
+\item $P$ is a graded direct summand of a graded free module.
+\end{enumerate}
+Arbitrary direct sums and graded direct summands of graded projective modules are graded projective.
+In particular, $Q\otimes_S A(-d)$ is graded projective for every finite-dimensional right $S$-module $Q$ and every $d\in\Z$.
+\end{corollary}
 
-\phantomsection\label{not:graded-top}
-In the graded setting, write\comm{use other symbol(make a macro) to not confused with ungraded one}
+\begin{proof}
+We follow $(1)\Leftrightarrow(2)$ and $(1)\Rightarrow(3)\Rightarrow(4)\Rightarrow(1)$ from Proposition~\ref{prop:projective-characterisations}, using degree-preserving maps.
+\underline{$(1)\Leftrightarrow(2)$.} The proof of Lemma~\ref{lem:Hom-left-exact} applies to graded Hom; surjectivity on Hom is the graded lifting property.
+\underline{$(1)\Rightarrow(3)$.} Lift $\id_P$.
+\underline{$(3)\Rightarrow(4)$.} Split a graded free surjection onto $P$.
+\underline{$(4)\Rightarrow(1)$.} Restrict lifts from the graded free module to its summand $P$.
+The proof of Corollary~\ref{cor:projective-sums} also applies with degree-preserving maps.
+For the last assertion, Corollary~\ref{cor:semisimple-summands} makes $Q$ a direct summand of $S^{\oplus m}$ for some $m$, so $Q\otimes_S A(-d)$ is a graded direct summand of $A(-d)^{\oplus m}$.
+\end{proof}
+
+\begin{definition}\label{not:graded-top}
+The \defn{graded top} of a graded right $A$-module $M$ is the graded right $S$-module
 \[
-\top M:=M/MA_+
+\grtop M:=M/MA_+.
 \]
-and call this quotient the \defn{graded top}.
-It is a graded right $S$-module.
-For finite-dimensional $A$, we have $A_+=\rad A$\comm{write lemma for this claim??}, so it agrees with Definition~\ref{def:module-top}.
-For infinite-dimensional $A$, the two ideals need not agree \comm{example? put in advanced}; $\top M$ in the graded discussion always denotes $M/MA_+$.
+\end{definition}
+
+For a degree-preserving map $f:M\to N$, write
+$\grtop f:\grtop M\to\grtop N$, $m+MA_+\mapsto f(m)+NA_+$.
+
+\begin{lemma}\label{lem:graded-radical}
+If $A$ is finite-dimensional, then $A_+=\rad A$.
+Consequently, $\grtop M=\top M$ for every graded right $A$-module $M$, with $\top M$ carrying the quotient grading.
+\end{lemma}
 
 \begin{supplementary}
-If $A$ is finite-dimensional, then $A_d=0$ for all sufficiently large $d$, so $(A_+)^r=0$ for some $r$.
+\begin{proof}
+If $A$ is finite-dimensional, then $A_d=0$ for all sufficiently large $d$, so $(A_+)^r=0$ for some integer $r\geq1$.
 For any simple right module $L$, the submodule $LA_+$ is either $0$ or $L$.
 The latter gives $L=L(A_+)^r=0$, a contradiction.
 Thus $A_+$ annihilates every simple module and is contained in $\rad A$.
-Since $A/A_+\cong S$ is semisimple, the reverse inclusion follows, giving $A_+=\rad A$.
+Since $A/A_+\cong S$ is semisimple, every non-zero element of $S$ acts non-trivially on some simple right $S$-module.
+Regarding these as simple $A$-modules shows that $\rad A\subseteq A_+$.
+\end{proof}
 \end{supplementary}
+
+\begin{advanced}
+\begin{example}\label{ex:graded-radical-infinite}
+The equality $A_+=\rad A$ can fail when $A$ is infinite-dimensional.
+Take $A=\Bbbk[x]$ with $\deg x=1$.
+Then $A_+=(x)$, whereas $\rad A=0$.
+Indeed, if $0\neq f\in\rad A$, then $xf\in\rad A$, and the first paragraph of the proof of Lemma~\ref{lem:nakayama} gives a right inverse to $1-xf$.
+This is impossible because $1-xf$ has positive degree.
+In particular, $A/\rad A=A$, whereas $\grtop A=\Bbbk$.
+
+Over this algebra, even the ordinary module $\Bbbk=A/(x)$ has no projective cover.
+Suppose $p:P\to\Bbbk$ were one, and choose $u\in P$ with $p(u)=1$.
+Then $p(uA)=\Bbbk$, so $P=uA$.
+The surjection $A\to P$, $a\mapsto ua$, splits because $P$ is projective.
+The resulting projection $A\to A$ is multiplication by an idempotent $e\neq0$, and $P\cong eA$.
+Since $\Bbbk[x]$ has no idempotents other than $0$ and $1$, we have $P\cong A$.
+But every surjection $A\to\Bbbk$ maps the proper submodule $(x-1)A$ onto $\Bbbk$, contradicting the cover property.
+\end{example}
+\end{advanced}
 
 A graded module $M$ is \defn{bounded below} if there is an integer $b$ such that $M_d=0$ for all $d<b$.
 Every finitely generated graded module is bounded below: replace a finite generating set by its homogeneous components and take the least of their degrees.
@@ -464,7 +555,7 @@ Every finitely generated graded module is bounded below: replace a finite genera
 \begin{lemma}[Graded Nakayama lemma]\label{lem:graded-nakayama}
 For a bounded below graded right module $M$,
 \[
-\top M=0\quad\Longrightarrow\quad M=0.
+\grtop M=0\quad\Longrightarrow\quad M=0.
 \]
 If $N\subseteq M$ is a graded submodule and $N+MA_+=M$, then $N=M$.
 \end{lemma}
@@ -476,49 +567,49 @@ The second assertion follows by applying the first to $M/N$.
 \end{proof}
 
 This version uses boundedness below, not finite generation.
-In particular, homogeneous lifts of generators of $\top M$ generate $M$.
+In particular, homogeneous lifts of generators of $\grtop M$ generate $M$.
 
 \begin{definition}\label{def:graded-projective-cover}
 A \defn{graded projective cover} of a bounded below locally finite-dimensional graded module $M$ is a surjection $p:P\to M$, with $P$ bounded below, locally finite-dimensional, and graded projective, such that
 \[
-\top p:\top P\xrightarrow{\sim}\top M.
+\grtop p:\grtop P\xrightarrow{\sim}\grtop M.
 \]
 \end{definition}
 
 As in Proposition~\ref{prop:cover-top}, this condition is equivalent to $\Ker p\subseteq PA_+$, and to no proper graded submodule of $P$ mapping onto $M$.
 
 \begin{supplementary}
-The identity $p(PA_+)=MA_+$ gives $\Ker(\top p)=(\Ker p+PA_+)/PA_+$.
+The identity $p(PA_+)=MA_+$ gives $\Ker(\grtop p)=(\Ker p+PA_+)/PA_+$.
 If $\Ker p\subseteq PA_+$ and $p(U)=M$ for a graded submodule $U\subseteq P$, then $U+PA_+=P$; graded Nakayama gives $U=P$.
-Conversely, if $\Ker(\top p)\neq0$, choose a graded $S$-module complement $W$ to this kernel in $\top P$.
-The inverse image $U$ of $W$ under $P\to\top P$ is a proper graded submodule of $P$.
-Since $\top p(W)=\top M$, we have $p(U)+MA_+=M$; graded Nakayama gives $p(U)=M$.
+Conversely, if $\Ker(\grtop p)\neq0$, choose a graded $S$-module complement $W$ to this kernel in $\grtop P$.
+The inverse image $U$ of $W$ under $P\to\grtop P$ is a proper graded submodule of $P$.
+Since $\grtop p(W)=\grtop M$, we have $p(U)+MA_+=M$; graded Nakayama gives $p(U)=M$.
 \end{supplementary}
 
 \begin{proposition}\label{prop:graded-projective-covers}
 Every bounded below locally finite-dimensional graded right $A$-module $M$ has a graded projective cover, unique up to a graded isomorphism commuting with the maps to $M$.
 Its domain is isomorphic to
 \begin{equation}\label{eq:graded-cover-terms}
-P=\bigoplus_{d\in\Z}\bigl((\top M)_d\otimes_S A\bigr)(-d),
+P=\bigoplus_{d\in\Z}\bigl((\grtop M)_d\otimes_S A\bigr)(-d),
 \end{equation}
-where $(\top M)_d$ is placed in degree $0$ before shifting.
+where $(\grtop M)_d$ is placed in degree $0$ before shifting.
 \end{proposition}
 
 \begin{proof}
-Since $S$ is semisimple, choose right $S$-linear sections $s_d:(\top M)_d\to M_d$ of the quotient maps for every $d\in\Z$.
+Since $S$ is semisimple, choose right $S$-linear sections $s_d:(\grtop M)_d\to M_d$ of the quotient maps for every $d\in\Z$.
 Define on each summand of \eqref{eq:graded-cover-terms}
 \[
-p:\bigl((\top M)_d\otimes_S A\bigr)(-d)\longrightarrow M,
+p:\bigl((\grtop M)_d\otimes_S A\bigr)(-d)\longrightarrow M,
 \qquad v\otimes a\longmapsto s_d(v)a.
 \]
 The map is well-defined by $S$-linearity of $s_d$, and it preserves degree.
 Each summand of $P$ is graded projective.
-Its graded top is $(\top M)_d$ placed in degree $d$, since multiplication by $A_+$ generates precisely its components above degree $d$.
-Thus $\top p$ identifies $\top P$ with $\top M$.
+Its graded top is $(\grtop M)_d$ placed in degree $d$, since multiplication by $A_+$ generates precisely its components above degree $d$.
+Thus $\grtop p$ identifies $\grtop P$ with $\grtop M$.
 Graded Nakayama, applied to $M/p(P)$, makes $p$ surjective.
 If $M_d=0$ for $d<b$, then $P_d=0$ for $d<b$, and
 \[
-P_q=\bigoplus_{b\leq d\leq q}(\top M)_d\otimes_S A_{q-d}
+P_q=\bigoplus_{b\leq d\leq q}(\grtop M)_d\otimes_S A_{q-d}
 \]
 is finite-dimensional for every $q\in\Z$.
 Thus $p$ is a graded projective cover.
@@ -527,7 +618,7 @@ The uniqueness proof of Theorem~\ref{thm:ordinary-projective-covers} applies wit
 
 \begin{definition}\label{def:minimal-resolution}
 A \defn{graded projective resolution} is a projective resolution \eqref{eq:projective-resolution} in which the modules are graded, the maps preserve degree, and the $P_i$ are graded projective.
-It is \defn{minimal} if each surjection onto the preceding kernel, including $p_0:P_0\to M$, is a graded projective cover.
+It is \defn{minimal} if $p_0:P_0\to M$ and the maps $p_i:P_i\to K_i$, $x\mapsto d_i(x)$, with $K_1=\Ker p_0$ and $K_i=\Ker d_{i-1}$ for $i\geq2$, are graded projective covers for all $i\geq1$.
 \end{definition}
 
 The homological degree $i$ and the grading degree $d$ are distinct:
@@ -552,9 +643,9 @@ Every kernel remains bounded below and locally finite-dimensional, so the constr
 
 For each term, \eqref{eq:graded-cover-terms} gives
 \[
-P_i\cong\bigoplus_{d\in\Z}\bigl((\top P_i)_d\otimes_S A\bigr)(-d).
+P_i\cong\bigoplus_{d\in\Z}\bigl((\grtop P_i)_d\otimes_S A\bigr)(-d).
 \]
-Thus the graded $S$-module $\top P_i$ records both the types and the degrees of the generators needed in homological degree $i$.
+Thus the graded $S$-module $\grtop P_i$ records both the types and the degrees of the generators needed in homological degree $i$.
 
 
 \begin{example}\label{ex:minimal-A2}
@@ -587,7 +678,6 @@ The two projective terms therefore have one generator each, in degrees $0$ and $
 Forgetting the grading need not preserve projective covers.
 In Example~\ref{ex:minimal-polynomial}, the proper ungraded submodule $(x-1)A\subset A$ still maps onto $\Bbbk$ under $\pi$, since $\pi(x-1)=-1$.
 Thus $\pi$ is a graded projective cover but not an ordinary projective cover.
-Also, $\rad\Bbbk[x]=0$, whereas $A_+=(x)$.
 \end{supplementary}
 
 \begin{example}\label{ex:minimal-exterior}
@@ -609,20 +699,39 @@ The term in homological degree $i$ has one generator, in degree $i$.
 The multiplicities in the graded tops are sometimes called \defn{graded Betti numbers}.
 For representatives $L_1,\ldots,L_n$ of the simple right $S$-modules, one can write
 \[
-(\top P_i)_d\cong\bigoplus_{j=1}^nL_j^{\oplus\beta_{i,d,j}(M)},
+(\grtop P_i)_d\cong\bigoplus_{j=1}^nL_j^{\oplus\beta_{i,d,j}(M)},
 \qquad
 \beta_{i,d}(M):=(\beta_{i,d,j}(M))_{1\leq j\leq n}.
 \]
 Here $i\geq0$ is the homological degree and $d\in\Z$ is the grading degree.
 These multiplicities are independent of the chosen minimal resolution by Theorem~\ref{thm:minimal-resolution}.
-We will use the modules $\top P_i$ directly, without this additional indexing.
+We will use the modules $\grtop P_i$ directly, without this additional indexing.
 \end{remark}
 \end{advanced}
 
-\comm{put right/left noetherian in definition environment.  this paragraph is important and explains why noetherian is important when it comes to considering Koszul algebras.}
-If $M$ is finitely generated, then $\top M$ is finite-dimensional, so its first graded projective cover is finitely generated by \eqref{eq:graded-cover-terms}.
-But the kernel need not be finitely generated.
-One sufficient condition is that $A$ be \defn{right noetherian}, meaning that every submodule of a finitely generated \emph{right} $A$-module is finitely generated.
-Without this assumption, boundedness below and local finite-dimensionality still suffice for the minimal resolution above.
+\begin{definition}\label{def:noetherian-algebra}
+An algebra $A$ is \defn{right noetherian} if every submodule of every finitely generated right $A$-module is finitely generated.
+It is \defn{left noetherian} if the same condition holds for left $A$-modules.
+It is \defn{noetherian} if it is both right and left noetherian.
+\end{definition}
+
+If a graded module $M$ is finitely generated, then $\grtop M$ is finite-dimensional: the images of a finite homogeneous generating set generate $\grtop M$ over the finite-dimensional algebra $S$.
+Its graded projective cover is therefore finitely generated by \eqref{eq:graded-cover-terms}.
+The kernel need not be finitely generated unless we impose an additional condition.
+
+\begin{corollary}\label{cor:noetherian-minimal-resolution}
+Assume that $A$ is right noetherian.
+Every finitely generated graded right $A$-module has a minimal graded projective resolution whose terms and successive kernels are finitely generated.
+In particular, this applies to $S=A/A_+$.
+\end{corollary}
+
+\begin{proof}
+A finitely generated graded module is bounded below and locally finite-dimensional, since it is a quotient of a finite direct sum of shifts of $A$.
+Its graded projective cover is finitely generated by the preceding paragraph.
+Right noetherianity makes the kernel finitely generated, so the same argument applies successively to every kernel.
+\end{proof}
+
+Right noetherianity ensures finite generation at every step.
+Without that assumption, boundedness below and local finite-dimensionality still suffice for existence of a minimal graded resolution by Theorem~\ref{thm:minimal-resolution}.
 
 
