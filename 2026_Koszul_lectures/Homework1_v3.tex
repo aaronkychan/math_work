@@ -62,9 +62,7 @@ left action is specified.
 \part Let $A=\bigoplus_{d\geq0}A_d$ be a graded algebra with $S=A_0$ finite-dimensional semisimple.
 \begin{subparts}
 \subpart Prove that
-\[
-  A/A_+\cong S,\qquad\rad A\subset A_+.
-\]
+$A/A_+\cong S$ and $\rad A\subset A_+$.
 \begin{solution}
 The projection $A\to A_0$ onto degree $0$ is an algebra homomorphism with kernel $A_+$, so $A/A_+\cong S$.
 For a maximal right ideal $\mathfrak m\subset S$, its preimage $\mathfrak m+A_+$ is a right ideal with $A/(\mathfrak m+A_+)\cong S/\mathfrak m$ simple, hence maximal. Therefore
@@ -73,20 +71,14 @@ For a maximal right ideal $\mathfrak m\subset S$, its preimage $\mathfrak m+A_+$
 \]
 since $\rad S=0$ for semisimple $S$.
 \end{solution}
-\subpart Prove that if $A_+^N=0$ for some $N\geq1$ (for example if $\dim_\kk A<\infty$), then
-\[
-  \rad A=A_+.
-\]
+\subpart Prove that if $A_+^N=0$ for some $N\geq1$ (for example if $\dim_\kk A<\infty$), then $\rad A=A_+$.
 
 \emph{Hint.} Argue as for the strictly upper triangular ideal $J\subset\kk A_n$ in the lecture.
 \begin{solution}
 Let $L$ be a simple right $A$-module. Then $LA_+$ is a submodule, so $LA_+\in\{0,L\}$, and $LA_+=L$ would give $L=LA_+^N=0$. Hence $LA_+=0$.
 Applying this to $L=A/\mathfrak m$ for a maximal right ideal $\mathfrak m$ gives $A_+=1\cdot A_+\subset\mathfrak m$. So $A_+\subset\rad A$, and equality follows from (i).
 \end{solution}
-\subpart Show that for $A=\kk[x]$, $\deg x=1$, one has
-\[
-  \rad A=0\neq A_+.
-\]
+\subpart Show that for $A=\kk[x]$, $\deg x=1$, one has $\rad A=0\neq A_+$.
 \begin{solution}
 The maximal ideals of $\kk[x]$ are $(p)$ with $p$ irreducible, and there are infinitely many irreducible polynomials (if $p_1,\dots,p_m$ were all of them, any irreducible factor of $p_1\cdots p_m+1$ would be a new one).
 A non-zero polynomial has finitely many irreducible factors, so $\bigcap_p(p)=0$, while $A_+=(x)\neq0$.
@@ -134,23 +126,15 @@ while $e_{33}\varepsilon_{23}=\varepsilon_{23}\neq0$; an isomorphism commutes wi
 \end{subparts}
 
 
-\part \textbf{Radical filtration of $P_i$.} Let $A=\kk A_n$, $P_i=e_{ii}A$ with the inherited grading, and
-\[
-  L_j=e_{jj}A/e_{jj}A_+\qquad(\text{concentrated in degree }0).
-\]
+\part Let $A=\kk A_n$, $P_i:=e_{ii}A$ with the inherited grading, and
+  $L_j:=e_{jj}A/e_{jj}A_+$ as graded module concentrated in degree 0.
 \begin{subparts}
-\subpart Prove that for $k\geq0$,
-\[
-  \rad^kP_i=\operatorname{span}_\kk\{e_{im}\mid m\geq i+k\}.
-\]
+\subpart Prove that for $k\geq0$, $\rad^kP_i=\operatorname{span}_\kk\{e_{im}\mid m\geq i+k\}$.
 \begin{solution}
 By $\rad M=M\rad A$ and (1)(iv), $\rad^kP_i=P_i(\rad A)^k=P_iA_{\geq k}$. Now $e_{ip}e_{pq}=e_{iq}$ with $p\geq i$ and $q-p\geq k$ ranges over all $e_{iq}$ with $q\geq i+k$ (take $p=i$ for $q\geq i+k$), and every product $e_{ip}A_{\geq k}$ lies in this span.
 \end{solution}
 \subpart Prove that for $0\leq k\leq n-i$,
-\[
-  \rad^kP_i/\rad^{k+1}P_i\ \cong\ L_{i+k}(-k)\qquad\text{as graded right }A\text{-modules},
-\]
-and deduce that
+$\rad^kP_i/\rad^{k+1}P_i\ \cong\ L_{i+k}(-k)$ as graded right $A$-modules, and deduce that
 \[
   P_i\cong P_j(d)\ \text{ as graded modules}\quad\Longleftrightarrow\quad(i,d)=(j,0).
 \]
@@ -393,9 +377,7 @@ For $d\geq2$: words starting with $y$ are $y\cdot w$ with $w$ admissible of leng
 So $(1-t-t^2)h_B=a_0+(a_1-a_0)t=1+t$.
 \end{solution}
 \subpart Compute $B^!$ (with $X=x^*$, $Y=y^*\in D(V)$), find a homogeneous basis of $B^!$ and $h_{B^!}(t)$, and verify
-\[
-  h_B(t)\,h_{B^!}(-t)=1.
-\]
+$h_B(t)\,h_{B^!}(-t)=1$.
 \begin{solution}
 For $F=\alpha XX+\beta XY+\gamma YX+\delta YY$ one has $F(x\otimes x)=\alpha$, so $R^\perp=\operatorname{span}\{XY,YX,YY\}$ and $B^!=\kk\langle X,Y\rangle/(XY,YX,Y^2)$.
 Any word of length $\geq2$ containing $Y$ contains one of $XY,YX,YY$; so $\{X^n\mid n\geq0\}\cup\{Y\}$ spans, and it is a basis because the ideal is spanned by words containing $XY$, $YX$ or $YY$, none of which occurs in $X^n$ or $Y$.
@@ -425,10 +407,7 @@ Thus $h_{B^!}(t)=\frac1{1-t}+t$ and
 The relation space is $R=V\otimes_SV$; since $D(V)\otimes_SD(V)\cong D(V\otimes_SV)$ (Lecture~3), the annihilator of $R=V\otimes_SV$ is $R^\perp=0$ and $A^!=T_S(D(V))$.
 $\dim e_iA_0e_j=\delta_{ij}$ and $\dim e_iA_1e_j=C_{ij}$ give $h_A=I+tC$. For $D(V)$, $\dim e_iD(V)e_j=\dim e_jVe_i$, so its matrix is $C^{\mathsf T}$ and $h_{A^!}=(I-tC^{\mathsf T})^{-1}$.
 \end{solution}
-\subpart Deduce that
-\[
-  h_A(t)\,h_{A^!}(-t)^{\mathsf T}=I.
-\]
+\subpart Deduce that $h_A(t)\,h_{A^!}(-t)^{\mathsf T}=I$.
 \begin{solution}
 $h_{A^!}(-t)^{\mathsf T}=\bigl((I+tC^{\mathsf T})^{-1}\bigr)^{\mathsf T}=(I+tC)^{-1}$, so $h_A(t)h_{A^!}(-t)^{\mathsf T}=I$.
 \end{solution}
@@ -473,9 +452,7 @@ Now if $\operatorname{char}\kk\neq2$, then $1\neq-1$ and $1\cdot(-1)\neq1$, so $
 In characteristic $2$, $1=-1$, so $C_1=C_{-1}$.
 \end{solution}
 \subpart Compute a quadratic presentation of $C_q^!$ (with $X=x^*$, $Y=y^*\in D(V)$), and $h_{C_q^!}(t)$. Verify
-\[
-  h_{C_q}(t)\,h_{C_q^!}(-t)=1,
-\]
+ that $h_{C_q}(t)\,h_{C_q^!}(-t)=1$,
 and compare $C_0^!$ with $C_1^!$.
 \begin{solution}
 For $S=\kk$, $(\lambda\otimes\mu)(v\otimes w)=\mu(v)\lambda(w)$. For $F=\alpha X\otimes X+\beta X\otimes Y+\gamma Y\otimes X+\delta Y\otimes Y$,
