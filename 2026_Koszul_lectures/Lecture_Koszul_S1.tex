@@ -277,7 +277,7 @@ A \ar[rr]^{a\mapsto ea} \ar[dr]_{\text{projection }a\mapsto ea\qquad} && A\\
 }
 \]
 So multiplying $e$ means we work inside the direct summand $eA$.
-The \defn{corner subalgebra} $eAe=\{eae\mid a\in A\}$ has identity $e$ (note that this is not a unital subalgera; but rather a `subcategory').
+The \defn{corner subalgebra} $eAe=\{eae\mid a\in A\}$ has identity $e$.\footnote{note that this is not a unital subalgebra since the identity element changes; a more proper way to think about this is as a subcategory $\add_{\mod A}(eA)\simeq \add_{\mod eAe}(eAe)$.}
 For $A=\prod_{i=1}^r A_i$, the \defn{coordinate idempotents} $e_i=(0,\ldots,1_{A_i},\ldots,0)$ are a complete orthogonal family and are the identities of the individual factors.
 In $A=\Bbbk A_n$, the diagonal matrix units $e_{11},\ldots,e_{nn}$ are primitive, since $e_{ii}Ae_{ii}=\Bbbk e_{ii}$.
 For $n\geq2$, the sum $e=e_{11}+\cdots+e_{n-1,n-1}$ gives the corner
@@ -951,14 +951,8 @@ The formulas commute with precomposition and postcomposition, so the comparison 
 \end{proof}
 \end{supplementary}
 
-\subsection{\texorpdfstring{Linear duals of $S$-bimodules}{Linear duals of S-bimodules}}
-
-\phantomsection\label{not:semisimple-base}
-Fix a finite-dimensional semisimple $\Bbbk$-algebra $S$, which is regarded as concentrated in degree $0$ when treated as a graded algebra.
-For a graded algebra $A$ with $A_0=S$, each degree component is a bimodule ${}_S(A_i)_S$.
-
 \begin{assumption}\label{ass:basic-semisimple}
-For simplicity, from now on and unless stated otherwise,
+For simplicity, from now on and unless stated otherwise, we assume the degree $0$ part $A_0$ of a graded algebra to be semisimple of the form
 \[
 S=\bigoplus_{i=1}^n\Bbbk e_i
 \]
@@ -995,11 +989,15 @@ e_jD(M)e_i=\{\lambda\in D(M)\mid\lambda(e_kMe_\ell)=0\text{ unless }(k,\ell)=(i,
 \end{equation}
 since $(e_j\lambda e_i)(m)=\lambda(e_ime_j)$ by \eqref{eq:linear-bimodule-dual-action}.
 
-\begin{advanced}
-\emph{One-sided $S$-duals.}
+
+\begin{advanced}[suppressfirstparskip=true,innertopmargin=0pt]
+\subsection{$S$-dual}
+
 Under Assumption~\ref{ass:basic-semisimple}, the $\Bbbk$-linear dual is all we need.
 For an arbitrary finite-dimensional semisimple $S$, the choice-free substitutes are the one-sided $S$-duals below; they are the duals used in \cite[\S2.7]{BGS96}.
 Under Assumption~\ref{ass:basic-semisimple} they are canonically isomorphic to $D$; see Remark~\ref{rem:standard-form}.
+
+\emph{One-sided $S$-duals.}
 
 \begin{definition}\label{def:S-duals}
 For a right $S$-module $M$ and a left $S$-module $N$, define their \defn{$S$-duals} by
@@ -1189,10 +1187,7 @@ Since $\sigma(xy)=\sigma(y)\sigma(x)$ for $x,y\in S^\en$, the map $\sigma\circ F
 and belongs to our $M^{*_{\en}}$.
 Thus $M^\vee\to M^{*_{\en}}$, $F\mapsto\sigma\circ F$, translates their two-sided dual into our convention.
 In particular, their star denotes the linear dual; our star denotes the right $S$-dual.
-\end{advanced}
 
-
-\begin{advanced}[suppressfirstparskip=true,innertopmargin=0pt]
 \subsection{Comparing the duals}
 
 The one-sided $S$-duals and the $\Bbbk$-linear dual are naturally isomorphic after choosing a symmetrising form on $S$.

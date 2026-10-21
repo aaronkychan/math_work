@@ -833,15 +833,13 @@ For a graded right $A$-module $M$, regard $M_d$ as an $A$-module via $A\to A/A_+
 The simple direct summands of the semisimple module $M_d$ are its \defn{composition factors}.
 
 \begin{notation}
-Under Assumption~\ref{ass:basic-semisimple}, the coordinate idempotents $e_1,\ldots,e_n$ of $S$ are primitive, and $e_1S,\ldots,e_nS$ represent each isomorphism class of simple right $S$-modules exactly once.
-Then $L_j:=e_jS\cong e_jA/e_jA_+$ is a graded simple $A$-module concentrated in degree $0$ for every $1\leq j\leq n$.
+Choose a complete set of pairwise orthogonal primitive idempotents $e_1,\ldots,e_n$.
+Then $e_1S,\ldots,e_nS$ represent each isomorphism class of simple right $S$-modules exactly once, and $L_j:=e_jS\cong e_jA/e_jA_+$ is a graded simple $A$-module concentrated in degree $0$ for every $1\leq j\leq n$.
 \phantomsection\label{not:hilbert-simples-summands}
 \end{notation}
 
-\begin{remark}[General $S$]
-For an arbitrary finite-dimensional semisimple $S$, choose primitive idempotents $e_1,\ldots,e_n$, one for each isomorphism class of simple right $S$-modules; they need not sum to $1$.
-For instance, for $S=\Mat_r(\Bbbk)$ take only $e_1=e_{11}$.
-The rest of this subsection then applies verbatim, with multiplicities computed by \eqref{eq:composition-Hom} over the division algebras $\End_A(L_j)$.
+\begin{remark}
+Under Assumption~\ref{ass:basic-semisimple}, the coordinate idempotents $e_1,\ldots,e_n$ of is the full set of primitive idempotents we need.
 \end{remark}
 
 \begin{definition}\label{def:dimension-vector}\label{def:hilbert-series}
@@ -923,7 +921,7 @@ Then
 =\sum_{i=1}^n[N:L_i][e_iU:L_j]
 \quad\text{for all }1\leq j\leq n.
 \]
-For a locally finite-dimensional graded right $A$-module $M$ bounded below,
+For a locally finite-dimensional graded right $A$-module $M$,
 \[
 h_{M\otimes_S A}(t)=h_M(t)h_A(t).
 \]
@@ -959,10 +957,9 @@ h_{T_S(V)}(t)=\sum_{d\geq0}t^dC^d=(I_n-tC)^{-1}.}
 \end{equation}
 Indeed, multiplying the series on either side by $I_n-tC$ gives constant coefficient $I_n$; the coefficient of $t^d$ for $d\geq1$ is $C^d-C^d=0$.
 The inverse is therefore an identity of formal power series with the coefficient multiplication defined above.
-
-\emph{General $S$.} Outside Assumption~\ref{ass:basic-semisimple}, take for instance $S=\Mat_r(\Bbbk)$, the bimodule $V=S^{\oplus m}$, and $e=e_{11}$.
-There is one simple right $S$-module $eS$, and $[eV:eS]=m$, whereas $\dim_\Bbbk V=mr^2$.
-Hence $h_{T_S(V)}(t)=1/(1-mt)$: the coefficients record simple-module multiplicities, not dimensions.
+%\emph{General $S$.} Outside Assumption~\ref{ass:basic-semisimple}, take for instance $S=\Mat_r(\Bbbk)$, the bimodule $V=S^{\oplus m}$, and $e=e_{11}$.
+%There is one simple right $S$-module $eS$, and $[eV:eS]=m$, whereas $\dim_\Bbbk V=mr^2$.
+%Hence $h_{T_S(V)}(t)=1/(1-mt)$: the coefficients record simple-module multiplicities, not dimensions.
 \end{example}
 
 \begin{example}[Upper triangular algebras and a quotient]\label{ex:hilbert-triangular}
@@ -1086,12 +1083,13 @@ D(e_jWe_\ell)\otimes_\Bbbk D(e_iVe_j)\longrightarrow D(e_iVe_j\otimes_\Bbbk e_jW
 This map sends tensor products of dual-basis vectors to the dual basis of the tensor-product basis, so it is an isomorphism.
 \end{proof}
 \end{supplementary}
-
+\begin{advanced}
 \begin{remark}[General $S$]
 For an arbitrary finite-dimensional semisimple $S$, there are no coordinate idempotents to sum over.
 After choosing a symmetrising form $\tau$ and bases $(x_k)$, $(y_k)$ of $S$ with $\tau(x_ky_l)=\delta_{kl}$, the sum $\sum_k\mu(vx_k)\lambda(y_kw)$ replaces \eqref{eq:D-tensor-duals}.
 Alternatively, the one-sided $S$-duals give the choice-free isomorphisms $\theta_r,\theta_\ell$ in \eqref{eq:tensor-duals} (advanced).
 \end{remark}
+\end{advanced}
 
 \begin{definition}\label{def:D-orthogonal}
 For a sub-bimodule $U$ of a finite-dimensional bimodule ${}_SM_S$, its \defn{orthogonal complement} is
