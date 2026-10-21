@@ -270,8 +270,8 @@ Additional cautions:
 
 ### Homework
 
-- The explicitly designated active assignment is [Homework1_v2.tex](/Users/aaronchan/Documents/GitHub/math_work/2026_Koszul_lectures/Homework1_v2.tex). `Homework1.tex` is old and must not be updated unless requested.
-- **Version caution:** `Homework1_v3.tex` is now also present. Confirm the intended active version before the next homework edit or comparison; do not infer authority from its filename or modification time alone.
+- The active assignment is [Homework1_v3.tex](/Users/aaronchan/Documents/GitHub/math_work/2026_Koszul_lectures/Homework1_v3.tex), confirmed by the author on 21 October 2026. `Homework1.tex` and `Homework1_v2.tex` are older versions and must not be updated unless requested.
+- Use v3 for homework edits and comparisons with the lecture notes. Confirm any future version change with the author rather than inferring authority from filenames or modification times.
 - Lecture exercises and homework overlap, but neither collection contains the other. Match mathematical questions, not merely exercise numbers, before synchronising.
 - Do not add question titles, reminders of definitions or lecture locations, or unnecessary notices such as “The following parts are independent”.
 - Separate the question from its hint and label the hint clearly.
