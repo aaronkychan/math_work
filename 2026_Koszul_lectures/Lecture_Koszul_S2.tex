@@ -353,9 +353,9 @@ For $f\in\Hom_B(M',B)$ and $g\in\Hom_C(N',X)$, applying $\theta_r$ before or aft
 For $f\in\Hom_{A^\op}(M',Y)$ and $g\in\Hom_{B^\op}(N',B)$, the two orders give $f(p(m)g(q(n)))$ for $\theta_\ell$.
 Thus both comparisons are natural.
 \end{proof}
-\end{advanced}
 
-Let $S$ be finite-dimensional semisimple, and consider bimodules ${}_SV_S$, ${}_SW_S$ finitely generated on the right and left, respectively.
+For an arbitrary finite-dimensional semisimple $S$, the one-sided $S$-duals satisfy an analogue of Proposition~\ref{prop:D-tensor-duals} without any choice.
+Consider bimodules ${}_SV_S$, ${}_SW_S$ finitely generated on the right and left, respectively.
 Exercise~\ref{ex:tensor-duality-proof} shows, using only Corollary~\ref{cor:semisimple-summands}, that there are natural bimodule isomorphisms
 \begin{equation}\label{eq:tensor-duals}
 \theta_r:W^*\otimes_S V^*\xrightarrow{\sim}(V\otimes_S W)^*,
@@ -376,7 +376,6 @@ Comparisons of $M^*$, $ {}^*M$, and $D(M)$ instead use a chosen symmetrising for
 \end{convention}
 \end{hidden}
 
-\begin{advanced}
 \begin{example}\label{ex:tensor-dual-finite-generation}
 Finite generation alone does not suffice in Proposition~\ref{prop:tensor-duals} over a general algebra.
 Take $A=C=\Bbbk$, $B=\Bbbk[x]$, and $X=Y=\Bbbk$.
@@ -449,6 +448,9 @@ The same definition applies to bimodules, and to vector spaces by taking $S=\Bbb
 The decomposition follows by distributing tensor products over direct sums, as in Lemma~\ref{lem:tensor-properties}(4).
 When $M,N$ are locally finite-dimensional and bounded below, only finitely many pairs $(p,q)$ contribute in a fixed degree, so the tensor product is locally finite-dimensional and bounded below.
 
+\begin{advanced}
+For an arbitrary finite-dimensional semisimple $S$, the one-sided $S$-duals also describe Hom spaces and give evaluation and coevaluation maps \cite[\S2.7]{BGS96}.
+
 \begin{lemma}\label{lem:endomorphism-duals}
 Let $S$ be finite-dimensional semisimple and ${}_SV_S$ a finite-dimensional bimodule.
 There are bimodule isomorphisms
@@ -470,7 +472,6 @@ The target actions are defined, for $s,t\in S$ and $u\in V$, by
 \end{equation}
 \end{lemma}
 
-\begin{supplementary}
 \begin{proof}
 For the first comparison, $(vs)f(u)=v(sf)(u)$ and $vf(us)=vf(u)s$ give a well-defined map to $\End_S(V)$.
 By Corollary~\ref{cor:semisimple-summands}, identify $V_S$ with a direct summand of $S^{\oplus m}$ for some integer $m\geq0$, and let $p:S^{\oplus m}\to V$ be the right $S$-linear projection.
@@ -495,7 +496,6 @@ For example, $(sFt)(ur)=sF(tur)=sF(tu)r$ for $r\in S$, so $sFt$ is right $S$-lin
 The images of $sv\otimes ft$ and $sg\otimes vt$, evaluated at $u$, are $svf(tu)$ and $g(us)vt$, respectively.
 These are exactly the actions in \eqref{eq:endomorphism-actions}, proving bimodule linearity of both comparisons.
 \end{proof}
-\end{supplementary}
 
 Evaluation applies a functional to an element.
 Coevaluation expresses the identity endomorphism as an element of a tensor product.
@@ -521,19 +521,16 @@ The isomorphisms are those in \eqref{eq:hom-from-S-duals}.
 Both coevaluation maps are bimodule maps, and each image of $1$ corresponds to $\id_V$.
 \end{proposition}
 
-\begin{supplementary}
 \begin{proof}
 The identities $(fs)(v)=f(sv)$ and $(sg)(v)=g(vs)$ from \eqref{eq:bimodule-dual-actions} make evaluation well-defined on the two tensor products; the other two actions give its bimodule linearity.
 For coevaluation, left multiplication is right $S$-linear and right multiplication is left $S$-linear because the two actions on $V$ commute.
 Under the endomorphism actions in \eqref{eq:endomorphism-actions}, both multiplication assignments preserve the two $S$-actions.
 The isomorphisms in \eqref{eq:hom-from-S-duals} therefore give the stated bimodule maps.
 \end{proof}
-\end{supplementary}
 
 For a finite-dimensional graded bimodule $ {}_SV_S$, use $V^{\grstar}$ and $ {}^{\grstar}V$ in Proposition~\ref{prop:S-evaluation-coevaluation}.
 With the total grading, evaluation and coevaluation preserve degree: evaluation pairs degrees $i$ and $-i$, and $\id_V$ has degree $0$.
 
-\begin{advanced}
 The evaluation and coevaluation maps in Proposition~\ref{prop:S-evaluation-coevaluation} are the constructions in the last two paragraphs of \cite[\S2.7, pp.~484--485]{BGS96}, translated to our notation.
 
 For a locally finite-dimensional graded bimodule $ {}_SV_S$, \eqref{eq:S-coevaluation} applies to each $V_d$; a coevaluation for the whole module need not exist.
@@ -1064,7 +1061,49 @@ Thus $qA$ does not impose the cubic relation $e_{12}e_{23}e_{34}=0$.
 
 \subsection{Orthogonal complements and quadratic duality}
 
-Let $S$ be finite-dimensional semisimple.
+Recall Assumption~\ref{ass:basic-semisimple}: $S=\bigoplus_{i=1}^n\Bbbk e_i$.
+
+\begin{proposition}[Duals of tensor products]\label{prop:D-tensor-duals}
+For finite-dimensional bimodules ${}_SV_S$ and ${}_SW_S$, there is a natural bimodule isomorphism
+\begin{equation}\label{eq:D-tensor-duals}
+\theta:D(W)\otimes_S D(V)\xrightarrow{\sim}D(V\otimes_S W),\qquad
+\theta(\lambda\otimes\mu)(v\otimes w)=\sum_{i=1}^n\mu(ve_i)\,\lambda(e_iw).
+\end{equation}
+In words: dualising reverses the order of the tensor factors.
+\end{proposition}
+
+\begin{supplementary}
+\begin{proof}
+By \eqref{eq:linear-bimodule-dual-action}, $(\lambda e_k)(w)=\lambda(e_kw)$ and $(e_k\mu)(v)=\mu(ve_k)$.
+Hence, for every $k$, replacing $v\otimes e_kw$ by $ve_k\otimes w$, or $\lambda\otimes e_k\mu$ by $\lambda e_k\otimes\mu$, leaves the right-hand side equal to $\mu(ve_k)\lambda(e_kw)$.
+By linearity the formula respects both tensor relations, so $\theta$ is well defined.
+For $s,t\in S$, the same rule gives $\theta(s\lambda\otimes\mu t)(v\otimes w)=\theta(\lambda\otimes\mu)(tv\otimes ws)$, so $\theta$ is a bimodule map; it commutes with precomposition by bimodule maps, so it is natural.
+For bijectivity, Lemma~\ref{lem:idempotent-tensors} and \eqref{eq:dual-blocks} decompose both sides into summands indexed by $(i,j,\ell)$, on which $\theta$ is
+\[
+D(e_jWe_\ell)\otimes_\Bbbk D(e_iVe_j)\longrightarrow D(e_iVe_j\otimes_\Bbbk e_jWe_\ell),\qquad
+\lambda\otimes\mu\longmapsto\bigl(v\otimes w\mapsto\mu(v)\lambda(w)\bigr).
+\]
+This map sends tensor products of dual-basis vectors to the dual basis of the tensor-product basis, so it is an isomorphism.
+\end{proof}
+\end{supplementary}
+
+\begin{remark}[General $S$]
+For an arbitrary finite-dimensional semisimple $S$, there are no coordinate idempotents to sum over.
+After choosing a symmetrising form $\tau$ and bases $(x_k)$, $(y_k)$ of $S$ with $\tau(x_ky_l)=\delta_{kl}$, the sum $\sum_k\mu(vx_k)\lambda(y_kw)$ replaces \eqref{eq:D-tensor-duals}.
+Alternatively, the one-sided $S$-duals give the choice-free isomorphisms $\theta_r,\theta_\ell$ in \eqref{eq:tensor-duals} (advanced).
+\end{remark}
+
+\begin{definition}\label{def:D-orthogonal}
+For a sub-bimodule $U$ of a finite-dimensional bimodule ${}_SM_S$, its \defn{orthogonal complement} is
+\[
+U^\perp:=\{\lambda\in D(M)\mid\lambda(u)=0\text{ for all }u\in U\}.
+\]
+\end{definition}
+
+It is a sub-bimodule of $D(M)$: for $s,t\in S$ and $u\in U$, we have $(s\lambda t)(u)=\lambda(tus)=0$ since $tus\in U$.
+
+\begin{advanced}
+For an arbitrary finite-dimensional semisimple $S$, the one-sided $S$-duals give the following choice-free orthogonal complements.
 
 \begin{definition}\label{def:orthogonals}
 For an $S$-sub-bimodule $U$ of a finite-dimensional $S$-bimodule $M$, its \defn{right orthogonal complement} and \defn{left orthogonal complement} are
@@ -1085,13 +1124,12 @@ Indeed, for $s,t\in S$ and $u\in U$, the action on $S$-dual \eqref{eq:bimodule-d
 since $tu,us\in U$.
 The orthogonal complements are defined without choosing a symmetrising form, but it is possible to realise, through the natural isomorphism associated to a chosen symmetrising form, the orthogonal complements as a sub-bimodule of $D(M)$.
 
-\begin{advanced}
 If $S$ is equipped with a symmetrising form $\tau:S\to\Bbbk$, the comparison maps $\alpha_M,\beta_M$ of \eqref{eq:dual-comparison} satisfy
 \begin{equation}\label{eq:orthogonal-comparison}
 \alpha_M(U^\perp)=\{\lambda\in D(M)\mid\lambda(u)=0\text{ for all }u\in U\}=\beta_M({}^\perp U)
 .
 \end{equation}
-The middle space contains $\alpha_M(U^\perp)$ and $\beta_M({}^\perp U)$: if $f\in U^\perp$ and $g\in{}^\perp U$, then $\tau\circ f$ and $\tau\circ g$ vanish on $U$.
+The middle space is the orthogonal complement of Definition~\ref{def:D-orthogonal}; it contains $\alpha_M(U^\perp)$ and $\beta_M({}^\perp U)$: if $f\in U^\perp$ and $g\in{}^\perp U$, then $\tau\circ f$ and $\tau\circ g$ vanish on $U$.
 Conversely, $\alpha_M(f)(U)=0$ gives
 \[
 \tau(f(u)s)=\tau(f(us))=0
@@ -1113,7 +1151,7 @@ R_{\bigwedge W}&=\Bbbk(y_1\otimes y_1)\oplus\Bbbk(y_2\otimes y_2)\oplus\Bbbk(y_1
 \end{aligned}
 \]
 Let $x_1^*,x_2^*$ and $y_1^*,y_2^*$ be the dual bases of $D(V)$ and $D(W)$, respectively.
-By anti-distributivity of the $S$-dual \eqref{eq:tensor-duals}, with $S=\Bbbk$ and the formulas in \eqref{eq:tensor-evaluations},
+By Proposition~\ref{prop:D-tensor-duals} with $S=\Bbbk$, where $\theta(\lambda\otimes\mu)(v\otimes w)=\mu(v)\lambda(w)$,
 \[
 \begin{aligned}
 R_{\SymAlg(V)}^\perp&=\operatorname{span}_\Bbbk\{x_1^*\otimes x_1^*,\,x_2^*\otimes x_2^*,\,x_1^*\otimes x_2^*+x_2^*\otimes x_1^*\},\\
@@ -1126,6 +1164,7 @@ The first space consists of the exterior relations on $D(V)$; the second consist
 \Needspace{12\baselineskip}
 \subsection{Exercises}
 
+\begin{advanced}
 \begin{exercise}[Anti-distributivity of the $S$-dual]\label{ex:tensor-duality-proof}
 Let $S$ be a finite-dimensional semisimple algebra, $V$ a finite-dimensional right $S$-module, and ${}_SW_S$ a finite-dimensional bimodule.
 Consider the formula
@@ -1213,6 +1252,7 @@ Every finite-dimensional left $S$-module is a direct summand of a finite direct 
 \end{proof}
 
 \end{hidden}
+\end{advanced}
 
 \begin{exercise}
 For $n\geq3$ and $Z\subset\{1,\ldots,n-2\}$, let

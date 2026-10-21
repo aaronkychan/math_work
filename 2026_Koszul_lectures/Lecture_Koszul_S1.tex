@@ -277,7 +277,7 @@ A \ar[rr]^{a\mapsto ea} \ar[dr]_{\text{projection }a\mapsto ea\qquad} && A\\
 }
 \]
 So multiplying $e$ means we work inside the direct summand $eA$.
-The \defn{corner subalgebra} $eAe=\{eae\mid a\in A\}$ has identity $e$\footnote{note that this is not a unital subalgebra since the identity element changes; a more proper way to think about this is as a subcategory $\add_{\mod A}(eA)\simeq \add_{\mod eAe}(eAe)$.}.
+The \defn{corner subalgebra} $eAe=\{eae\mid a\in A\}$ has identity $e$ (note that this is not a unital subalgera; but rather a `subcategory').
 For $A=\prod_{i=1}^r A_i$, the \defn{coordinate idempotents} $e_i=(0,\ldots,1_{A_i},\ldots,0)$ are a complete orthogonal family and are the identities of the individual factors.
 In $A=\Bbbk A_n$, the diagonal matrix units $e_{11},\ldots,e_{nn}$ are primitive, since $e_{ii}Ae_{ii}=\Bbbk e_{ii}$.
 For $n\geq2$, the sum $e=e_{11}+\cdots+e_{n-1,n-1}$ gives the corner
@@ -951,7 +951,7 @@ The formulas commute with precomposition and postcomposition, so the comparison 
 \end{proof}
 \end{supplementary}
 
-\subsection{\texorpdfstring{Left, right, and two-sided duals over $S$}{Left, right, and two-sided duals over S}}
+\subsection{\texorpdfstring{Linear duals of $S$-bimodules}{Linear duals of S-bimodules}}
 
 \phantomsection\label{not:semisimple-base}
 Fix a finite-dimensional semisimple $\Bbbk$-algebra $S$, which is regarded as concentrated in degree $0$ when treated as a graded algebra.
@@ -963,14 +963,43 @@ For simplicity, from now on and unless stated otherwise,
 S=\bigoplus_{i=1}^n\Bbbk e_i
 \]
 with coordinate idempotents $e_1,\ldots,e_n$.
-We write $\tau_S:S\to\Bbbk$, $\sum_{i=1}^na_ie_i\mapsto\sum_{i=1}^na_i$, for its \defn{standard symmetrising form}; see Definition~\ref{def:symmetrising-form} and Example~\ref{ex:symmetrising-form}.
 \end{assumption}
 
-The coordinate idempotents are the primitive idempotents of $S$, so $\tau_S$ involves no choice.
+The coordinate idempotents are the primitive idempotents of $S$, so they involve no choice.
 Statements already proved for an arbitrary finite-dimensional semisimple $S$ keep their generality.
-A remark headed \emph{General $S$} marks each place where an arbitrary finite-dimensional semisimple $S$ needs extra care, usually the choice of a symmetrising form.
+A remark headed \emph{General $S$} marks each place where an arbitrary finite-dimensional semisimple $S$ needs extra care; usually this means replacing the $\Bbbk$-linear dual by the one-sided $S$-duals of the advanced material below, or choosing a symmetrising form.
 %To dualise these components while retaining both actions, we distinguish maps to $S$ that are right or left $S$-linear.
 %For duality of arbitrary $A$-modules we already have the canonical functors in \eqref{eq:linear-dual-functors}.
+
+For a bimodule ${}_SM_S$, the $\Bbbk$-linear dual retains both actions:
+\begin{equation}\label{eq:linear-bimodule-dual-action}
+(s\lambda t)(m)=\lambda(tms)\qquad(s,t\in S,\ \lambda\in D(M),\ m\in M).
+\end{equation}
+With precomposition on morphisms, we obtain functors
+\[
+D:(\Mod S^\en)^\op\longrightarrow\Mod S^\en,\qquad
+\bbD:(\Grmod S^\en)^\op\longrightarrow\Grmod S^\en,
+\]
+whose restrictions to finite-dimensional bimodules, and to locally finite-dimensional graded bimodules, are dualities by Lemma~\ref{lem:linear-bidual}.
+\begin{supplementary}
+Evaluation preserves both actions: for $m\in M$, $\lambda\in D(M)$, and $s,t\in S$,
+\[
+(s\,\mathrm{ev}_M(m)\,t)(\lambda)=\mathrm{ev}_M(m)(t\lambda s)=(t\lambda s)(m)=\lambda(smt)=\mathrm{ev}_M(smt)(\lambda).
+\]
+Applying this in each degree gives the graded statement.
+\end{supplementary}
+
+Dualising reverses the two idempotents: for $1\leq i,j\leq n$,
+\begin{equation}\label{eq:dual-blocks}
+e_jD(M)e_i=\{\lambda\in D(M)\mid\lambda(e_kMe_\ell)=0\text{ unless }(k,\ell)=(i,j)\}\cong D(e_iMe_j),
+\end{equation}
+since $(e_j\lambda e_i)(m)=\lambda(e_ime_j)$ by \eqref{eq:linear-bimodule-dual-action}.
+
+\begin{advanced}
+\emph{One-sided $S$-duals.}
+Under Assumption~\ref{ass:basic-semisimple}, the $\Bbbk$-linear dual is all we need.
+For an arbitrary finite-dimensional semisimple $S$, the choice-free substitutes are the one-sided $S$-duals below; they are the duals used in \cite[\S2.7]{BGS96}.
+Under Assumption~\ref{ass:basic-semisimple} they are canonically isomorphic to $D$; see Remark~\ref{rem:standard-form}.
 
 \begin{definition}\label{def:S-duals}
 For a right $S$-module $M$ and a left $S$-module $N$, define their \defn{$S$-duals} by
@@ -1042,7 +1071,6 @@ We have dualities
 \]
 \end{lemma}
 
-\begin{supplementary}
 \begin{proof}
 We show that evaluation gives natural isomorphisms of functors
 \[
@@ -1076,7 +1104,6 @@ Replacing $S$ by $S^\op$ proves the left module statement.
 
 For the graded cases, apply the ungraded case degree-wise.  Note that since $S$ is finite-dimensional, finitely generated $S$-module is the same as finite-dimensional $S$-modules.
 \end{proof}
-\end{supplementary}
 
 For a bimodule ${}_SM_S$, the linear and one-sided duals retain both actions:
 \begin{equation}\label{eq:bimodule-dual-actions}
@@ -1094,16 +1121,13 @@ D,\ (-)^*,\ {}^*(-)&:(\Mod S^\en)^\op\longrightarrow\Mod S^\en,\\
 \end{aligned}
 \end{equation}
 The restrictions to finite-dimensional modules, and to locally finite-dimensional graded modules, are dualities by Lemmas~\ref{lem:linear-bidual} and~\ref{lem:S-bidual}.
-\begin{supplementary}
 Evaluation preserves both actions: for $m\in M$, $f\in M^*$, and $s,t\in S$,
 \[
 (s\,\mathrm{ev}_M(m)\,t)(f)
 =f(sm)t=f(smt)=\mathrm{ev}_M(smt)(f).
 \]
 The corresponding checks for $D$ and the left dual use the same evaluation formula; applying them in each degree gives the graded statements.
-\end{supplementary}
 
-\begin{advanced}
 Recall from Definition~\ref{def:enveloping-algebra} and \eqref{eq:enveloping-action} that
 $S^\en=S\otimes_\Bbbk S^\op$ and $S$-bimodules are the same thing as $S^\en$-modules via $m\cdot(s\otimes t^\op)=tms$.
 
@@ -1168,6 +1192,7 @@ In particular, their star denotes the linear dual; our star denotes the right $S
 \end{advanced}
 
 
+\begin{advanced}[suppressfirstparskip=true,innertopmargin=0pt]
 \subsection{Comparing the duals}
 
 The one-sided $S$-duals and the $\Bbbk$-linear dual are naturally isomorphic after choosing a symmetrising form on $S$.
@@ -1203,7 +1228,6 @@ The following maps are symmetrising forms:
 \]
 \end{example}
 
-\begin{advanced}
 Generally, any finite-dimensional semisimple algebra has a symmetrising form, by Eilenberg--Nakayama.\footnote{S.~Eilenberg and T.~Nakayama, \emph{On the dimension of modules and algebras, II. Frobenius algebras and quasi-Frobenius rings}, Nagoya Math. J. \textbf{9} (1955), 1--16, \S2, Propositions 3--5, pp.~4--5; \href{https://doi.org/10.1017/S0027763000023229}{doi:10.1017/S0027763000023229}.}
 For the graded analogue, see \cite{DNN17}.
 For example, let $\lambda_j:\Delta_j\to\Bbbk$ be a symmetrising form on a finite-dimensional division $\Bbbk$-algebra $\Delta_j$ for $j=1,\ldots,n$.
@@ -1213,7 +1237,6 @@ Then the semisimple algebra $S=\prod_{j=1}^n\Mat_{n_j}(\Delta_j)$ has a symmetri
 (a_1,\ldots,a_n)\longmapsto
 \sum_{j=1}^n\sum_{i=1}^{n_j}\lambda_j((a_j)_{ii}).
 \]
-\end{advanced}
 
 \begin{theorem}[Comparison of duals]\label{prop:dual-comparison}\label{cor:graded-dual-comparison}
 Choose a symmetrising form $\tau:S\to\Bbbk$.
@@ -1227,7 +1250,6 @@ natural in $M$ and $N$.
 Applied in each degree, the same maps give natural isomorphisms $M^{\grstar}\cong\bbD(M)$ and ${}^{\grstar}N\cong\bbD(N)$ for $M\in\grmod S$ and $N\in\grmod(S^\op)$; we again write $\alpha_M$ and $\beta_N$.
 \end{theorem}
 
-\begin{supplementary}
 We can spell this out more precisely:
 
 
@@ -1286,13 +1308,12 @@ For the graded comparisons, apply the ungraded natural isomorphism degree-wise.
 
 Same argument applies dually to $S^\op$ and $\beta$.
 \end{proof}
-\end{supplementary}
 
-\begin{remark}
+\begin{remark}\label{rem:standard-form}
 The natural isomorphisms in Theorem~\ref{prop:dual-comparison} depend on the chosen symmetrising form.
 For example, every choice $c_1,\ldots,c_n\in\Bbbk\setminus\{0\}$ gives a form
 $\tau(a_1,\ldots,a_n)=\sum_{i=1}^n c_i a_i$ on $\Bbbk^{\oplus n}$.
-Under Assumption~\ref{ass:basic-semisimple} we always use $\tau=\tau_S$, so $\alpha_M$ and $\beta_N$ involve no choice.
+Under Assumption~\ref{ass:basic-semisimple} we always use the \defn{standard symmetrising form} $\tau_S(\sum_{i=1}^na_ie_i)=\sum_{i=1}^na_i$, which involves no choice; then $\alpha_M$ and $\beta_N$ are canonical isomorphisms.
 \end{remark}
 
 \begin{remark}[General $S$]\label{rem:general-S-comparison}
@@ -1316,7 +1337,6 @@ Similarly for right action on left dual.
 \end{remark}
 
 
-\begin{advanced}
 The comparison theorem has a bimodule version:
 
 \begin{theorem}
@@ -1418,6 +1438,7 @@ Hence $f$ is not a finite sum of homogeneous maps.
 \end{proof}
 \end{hidden}
 
+\begin{advanced}
 \begin{exercise}[Dependence on the form]\label{ex:dual-blocks}
 Let $S=(\Bbbk A_2)_0=\Bbbk e_{11}\oplus\Bbbk e_{22}$, $V=(\Bbbk A_2)_1=\Bbbk e_{12}$, and $c_1,c_2\in\Bbbk\setminus\{0\}$.
 Set $\tau(ae_{11}+be_{22})=c_1a+c_2b$ and let $\varepsilon:V\to\Bbbk$ satisfy $\varepsilon(e_{12})=1$.
@@ -1533,6 +1554,7 @@ The resulting isomorphism $(M^{\grstar},\cdot_{c'})\to(M^{\grstar},\cdot_c)$ sen
 $\varphi_0\mapsto(c'_1/c_1)\varphi_0$ and $\varphi_1\mapsto(c'_2/c_2)\varphi_1$.
 \end{proof}
 \end{hidden}
+\end{advanced}
 
 \pagebreak
 

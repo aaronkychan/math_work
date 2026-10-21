@@ -248,38 +248,43 @@ Throughout the course, $\Bbbk$ is a field.
 All rings are unital and associative.
 All modules are right modules unless otherwise specified.
 When we discuss dimensions, we mean dimensions as $\Bbbk$-vector spaces.
-From Assumption~\ref{ass:basic-semisimple} onwards, the semisimple algebra $S$ is $\bigoplus_i\Bbbk e_i$ unless stated otherwise; remarks headed \emph{General $S$} explain what changes for an arbitrary finite-dimensional semisimple $S$.
+From Assumption~\ref{ass:basic-semisimple} onwards, the semisimple algebra $S$ is $\bigoplus_i\Bbbk e_i$ unless stated otherwise, and the main text uses only the $\Bbbk$-linear duals $D$ and $\bbD$; one-sided $S$-duals appear only in advanced material.
+Remarks headed \emph{General $S$} explain what changes for an arbitrary finite-dimensional semisimple $S$.
 % ---------------------------------------------------------------------------
-% DRAFTING NOTE (standing assumption; Change Proposal 14).
-% The lectures assume S = A_0 = \bigoplus_i \Bbbk e_i (ass:basic-semisimple),
-% with the standard symmetrising form \tau_S(e_i)=1. When drafting later lectures:
+% DRAFTING NOTE (standing assumption; Change Proposals 14 and 15).
+% The lectures assume S = A_0 = \bigoplus_i \Bbbk e_i (ass:basic-semisimple).
+% The MAIN TEXT uses only the k-linear duals D and \bbD, with
+%   \theta(\lambda\otimes\mu)(v\otimes w) = \sum_i \mu(v e_i)\lambda(e_i w)
+% (prop:D-tensor-duals) and A^! = T_S(D(V))/(R^\perp) (def:quadratic-duals).
+% One-sided S-duals (V^*, {}^*V, \theta_r, \theta_\ell, left/right quadratic
+% duals, symmetrising forms, \tau_S) live ONLY in advanced blocks.
+% When drafting later lectures:
 %  * Keep statements that are already proved for general f.d. semisimple S general.
-%  * Add a remark \begin{remark}[General $S$] ... \end{remark} wherever an argument
-%    uses \tau_S, identifies an S-dual with a k-linear dual (D or \bbD), counts
-%    multiplicities or Hilbert series via coordinate idempotents, or otherwise
-%    uses S = \bigoplus_i \Bbbk e_i.
+%  * Add a remark \begin{remark}[General $S$] ... \end{remark} wherever the main
+%    text uses the coordinate idempotents (e.g. the formula for \theta, dual bases
+%    b^*, Hilbert series and dimension vectors), or where general S would need
+%    one-sided S-duals or a chosen symmetrising form.
 %  * In particular, the identification of the Yoneda algebra
 %    E(A) = Ext^\bullet_A(A_0,A_0) with the quadratic dual (or its opposite):
-%    with right S-duals, Ext^1_A(A_0,A_0) \cong Hom_S(A_1,S) = A_1^* canonically
-%    for A generated in degree 1 and any f.d. semisimple S (cf. BGS Thm 2.10.1);
-%    any step through D(A_1) or \bbD needs a chosen \tau for general S.
+%    Ext^1_A(A_0,A_0) \cong Hom_S(A_1,S) = A_1^* canonically for A generated in
+%    degree 1 and any f.d. semisimple S (cf. BGS Thm 2.10.1). Under the standing
+%    assumption, \tau_S identifies A_1^* with D(A_1) canonically; for general S,
+%    matching this with A^! needs one-sided S-duals or a chosen \tau.
 %  * Likewise: the numerical identity h_A(t)h_{A^!}(-t)^T = I (BGS Lemma 2.11.1
-%    assumes A_0 = \bigoplus F1_x), Koszul complexes written with D instead of
-%    S-duals, and the Koszul duality functor.
+%    assumes A_0 = \bigoplus F1_x), the Koszul complex, and the Koszul duality functor.
 % ---------------------------------------------------------------------------
 
 
 There are a lot of contents not covered in lecture:
 \begin{supplementary}
 This is supplementary material: proofs and routine verifications of statements made in the main text, often `unnecessarily long pedantic check of definitions' -- things that are only there for rigour.
+The main text never relies on a definition or statement that appears only in a supplementary block.
 \end{supplementary}
-The main text should not relies on a definition or statement that appears only in a supplementary block; if there is any, please notify me.
-
 \begin{advanced}
 This is advanced material; things that I personally would like to add, from personal experience in the theory, but definitely not necessary for lecture purpose.
 \end{advanced}
-Supplementary and advanced material is mostly produced by AI and has not been rigorously checked, so the reader should read it with extra care.
-All other contents are drafted by AI and QA'ed (heavily edited) by myself.
+Advanced material is mostly produced by AI and has not been rigorously checked, so the reader should read it with extra care.
+All other contents, including the supplementary proofs, are drafted by AI and QA'ed (heavily edited) by myself.
 
 
 \input{Lecture_Koszul_S1.tex}
@@ -352,20 +357,21 @@ $D(V)$ & Ungraded $\Bbbk$-linear dual $\Hom_\Bbbk(V,\Bbbk)$. & \hyperref[ex:line
 $D(u)$ & Dual map, given by precomposition with $u$. & \hyperref[ex:linear-duality]{\pageref*{ex:linear-duality}}\\[3pt]
 $\mathrm{ev}_V$ & Evaluation $V\to D(D(V))$, sending $v$ to $\lambda\mapsto\lambda(v)$. & \hyperref[eq:vector-bidual-evaluation]{\pageref*{eq:vector-bidual-evaluation}}\\[3pt]
 $\bbD(V)$ & Graded $\Bbbk$-linear dual, with $\bbD(V)_i=D(V_{-i})$. & \hyperref[def:linear-duals]{\pageref*{def:linear-duals}}\\[3pt]
-$M^*,\ {}^*N$ & Ungraded right and left $S$-linear duals: $\Hom_S(M,S)$ and $\Hom_{S^\op}(N,S)$. & \hyperref[def:S-duals]{\pageref*{def:S-duals}}\\[3pt]
-$M^{\grstar},\ {}^{\grstar}N$ & Graded right and left $S$-duals. & \hyperref[def:graded-S-duals]{\pageref*{def:graded-S-duals}}\\[3pt]
+$M^*,\ {}^*N$ & Ungraded right and left $S$-linear duals: $\Hom_S(M,S)$ and $\Hom_{S^\op}(N,S)$; advanced. & \hyperref[def:S-duals]{\pageref*{def:S-duals}}\\[3pt]
+$M^{\grstar},\ {}^{\grstar}N$ & Graded right and left $S$-duals; advanced. & \hyperref[def:graded-S-duals]{\pageref*{def:graded-S-duals}}\\[3pt]
 $M^{*_{\en}}$ & Two-sided dual $\Hom_{S^\en}(M,S^\en)$; advanced. & \hyperref[def:en-dual]{\pageref*{def:en-dual}}\\[3pt]
 $M^{\grstar[_{\en}]}$ & Graded two-sided dual, with degrees reversed; advanced. & \hyperref[not:graded-en-dual]{\pageref*{not:graded-en-dual}}\\[3pt]
-$\tau:S\to\Bbbk$ & Symmetrising form on $S$. & \hyperref[def:symmetrising-form]{\pageref*{def:symmetrising-form}}\\[3pt]
-$\tau_S$ & Standard symmetrising form $\sum_ia_ie_i\mapsto\sum_ia_i$ on $S=\bigoplus_i\Bbbk e_i$ (standing assumption). & \hyperref[ass:basic-semisimple]{\pageref*{ass:basic-semisimple}}\\[3pt]
-$\alpha_M,\ \beta_N$ & Natural transformation from $S$-duals to linear duals, by composition with $\tau$. & \hyperref[eq:dual-comparison]{\pageref*{eq:dual-comparison}}\\[3pt]
+$\tau:S\to\Bbbk$ & Symmetrising form on $S$; advanced. & \hyperref[def:symmetrising-form]{\pageref*{def:symmetrising-form}}\\[3pt]
+$\tau_S$ & Standard symmetrising form $\sum_ia_ie_i\mapsto\sum_ia_i$ on $S=\bigoplus_i\Bbbk e_i$ (standing assumption); advanced. & \hyperref[rem:standard-form]{\pageref*{rem:standard-form}}\\[3pt]
+$\alpha_M,\ \beta_N$ & Natural transformation from $S$-duals to linear duals, by composition with $\tau$; advanced. & \hyperref[eq:dual-comparison]{\pageref*{eq:dual-comparison}}\\[3pt]
 $\omega_M$ & Comparison from the two-sided dual to the right $S$-dual. & \hyperref[eq:en-dual-comparison]{\pageref*{eq:en-dual-comparison}}\\[3pt]
 
 \multicolumn{3}{@{}l}{\textbf{Tensor products, presentations, and Hilbert series}}\\*[4pt]
 $U\otimes_\Bbbk V$ & Tensor product of vector spaces. & \hyperref[def:vector-tensor]{\pageref*{def:vector-tensor}}\\[3pt]
 $M\otimes_A N$ & Tensor product over $A$, with $ma\otimes n=m\otimes an$. & \hyperref[def:module-tensor]{\pageref*{def:module-tensor}}\\[3pt]
 $V^{\otimes_A i}$ & $i$th tensor power over $A$; $V^{\otimes_A0}=A$. & \hyperref[not:tensor-powers]{\pageref*{not:tensor-powers}}\\[3pt]
-$\theta_r,\ \theta_\ell$ & Tensor-Hom comparison maps; anti-distributivity of the $S$-dual in the semisimple case. & \hyperref[eq:general-tensor-duals]{\pageref*{eq:general-tensor-duals}}\\[3pt]
+$\theta$ & Duals of tensor products: $D(W)\otimes_S D(V)\cong D(V\otimes_S W)$ for $S=\bigoplus_i\Bbbk e_i$. & \hyperref[prop:D-tensor-duals]{\pageref*{prop:D-tensor-duals}}\\[3pt]
+$\theta_r,\ \theta_\ell$ & Tensor-Hom comparison maps; anti-distributivity of the one-sided $S$-duals; advanced. & \hyperref[eq:general-tensor-duals]{\pageref*{eq:general-tensor-duals}}\\[3pt]
 $\mu_i:A_1^{\otimes_S i}\to A_i$ & Multiplication of $i$ elements of degree $1$. & \hyperref[eq:multiplication-maps]{\pageref*{eq:multiplication-maps}}\\[3pt]
 $T_S(V)$ & Tensor algebra generated by the bimodule ${}_SV_S$. & \hyperref[def:tensor-algebra]{\pageref*{def:tensor-algebra}}\\[3pt]
 $\SymAlg(V)$ & Symmetric algebra of $V$. & \hyperref[eq:polynomial-exterior]{\pageref*{eq:polynomial-exterior}}\\[3pt]
@@ -378,10 +384,12 @@ $\dimvec M_d$ & Row vector $([M_d:L_j])_{1\leq j\leq n}$. & \hyperref[def:dimens
 $h_M(t)$ & Module Hilbert series $\sum_{d\in\Z}(\dimvec M_d)t^d$. & \hyperref[def:hilbert-series]{\pageref*{def:hilbert-series}}\\[3pt]
 $h_A(t)$ & Algebra Hilbert series, with entries recording both simple-module indices. & \hyperref[def:hilbert-series]{\pageref*{def:hilbert-series}}\\[3pt]
 $qA$ & Quadratic part $T_S(V)/(I_2)$ of $A=T_S(V)/I$; advanced. & \hyperref[def:quadratic-part]{\pageref*{def:quadratic-part}}\\[3pt]
-$U^\perp,\ {}^\perp U$ & Right and left $S$-linear functionals vanishing on $U$. & \hyperref[def:orthogonals]{\pageref*{def:orthogonals}}\\[3pt]
+$U^\perp$ & Functionals in $D(M)$ vanishing on $U$. & \hyperref[def:D-orthogonal]{\pageref*{def:D-orthogonal}}\\[3pt]
+$U^\perp,\ {}^\perp U$ (one-sided) & Right and left $S$-linear functionals vanishing on $U$; advanced. & \hyperref[def:orthogonals]{\pageref*{def:orthogonals}}\\[3pt]
 
 \multicolumn{3}{@{}l}{\textbf{Quadratic duality and resolutions}}\\*[4pt]
-$A^!,\ {}^!A$ & Right and left quadratic dual algebras. & \hyperref[def:quadratic-duals]{\pageref*{def:quadratic-duals}}\\[3pt]
+$A^!$ & Quadratic dual algebra $T_S(D(V))/(R^\perp)$. & \hyperref[def:quadratic-duals]{\pageref*{def:quadratic-duals}}\\[3pt]
+$A^!,\ {}^!A$ (one-sided) & Right and left quadratic duals via one-sided $S$-duals; advanced. & \hyperref[def:S-quadratic-duals]{\pageref*{def:S-quadratic-duals}}\\[3pt]
 $A\otimes_\Bbbk B$ & Ordinary algebra tensor product, without signs in multiplication. & \hyperref[def:algebra-tensor-products]{\pageref*{def:algebra-tensor-products}}\\[3pt]
 $A\otimes_\Bbbk^{\mathrm{gr}}B$ & Graded algebra tensor product, with the sign in \eqref{eq:signed-tensor-product}. & \hyperref[def:algebra-tensor-products]{\pageref*{def:algebra-tensor-products}}\\[3pt]
 $\top M=M/\rad M$ & Top of an ordinary module over a finite-dimensional algebra. & \hyperref[def:module-top]{\pageref*{def:module-top}}\\[3pt]
