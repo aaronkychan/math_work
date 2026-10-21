@@ -41,9 +41,9 @@ Thus $(l,y)\mapsto i(l)+s(y)$ is an isomorphism $L\oplus Y\to X$ compatible with
 A module $P$ is \defn{projective} if, for every surjective $A$-linear map $q:X\to Y$ and every $A$-linear map $f:P\to Y$, there is an $A$-linear map $\widetilde f:P\to X$ with $q\widetilde f=f$ (diagram commutes):
 \[
 \xymatrix@C=32pt@R=20pt{
-& P\ar[d]^f\ar@{-->}[dl]_{\exists \widetilde f}\\
-X\ar[r]_{
-\forall q} & Y\ar[r] & 0 & \text{exact}.
+& & P\ar[d]^f\ar@{-->}[dl]_{\exists \widetilde f}\\
+\text{(exact row:)} & X\ar[r]_{
+\forall q} & Y\ar[r] & 0 & .
 }
 \]
 \end{definition}
@@ -182,7 +182,7 @@ For the last assertion, apply the first to the finitely generated quotient $M/N$
 \begin{remark}\label{rem:nakayama-finite-dimensional}
 If $A$ is finite-dimensional, then $\rad A$ is \defn{nilpotent}: $(\rad A)^r=0$ for some integer $r\geq1$.
 Indeed, the powers stabilise at $(\rad A)^r=(\rad A)^{r+1}$, and Lemma~\ref{lem:nakayama} applied to the finite-dimensional module $(\rad A)^r$ gives $(\rad A)^r=0$.
-Thus finite generation is unnecessary in Nakayama's lemma: $M=\rad M$ implies $M=M(\rad A)^r=0$.
+Thus Nakayama's lemma applies even for infinitely generated modules: $M=\rad M$ implies $M=M(\rad A)^r=0$.
 Applying this to $M/N$ also gives $N+\rad M=M\Longrightarrow N=M$ for every submodule $N\subseteq M$.
 \end{remark}
 
