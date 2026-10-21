@@ -65,8 +65,6 @@ left action is specified.
 \[
   A/A_+\cong S,\qquad\rad A\subset A_+.
 \]
-
-\emph{Hint.} Pull back the maximal right ideals of $S$ along $A\to A/A_+$.
 \begin{solution}
 The projection $A\to A_0$ onto degree $0$ is an algebra homomorphism with kernel $A_+$, so $A/A_+\cong S$.
 For a maximal right ideal $\mathfrak m\subset S$, its preimage $\mathfrak m+A_+$ is a right ideal with $A/(\mathfrak m+A_+)\cong S/\mathfrak m$ simple, hence maximal. Therefore
@@ -145,8 +143,6 @@ while $e_{33}\varepsilon_{23}=\varepsilon_{23}\neq0$; an isomorphism commutes wi
 \[
   \rad^kP_i=\operatorname{span}_\kk\{e_{im}\mid m\geq i+k\}.
 \]
-
-\emph{Hint.} Use $\rad M=M\rad A$ and part~(1).
 \begin{solution}
 By $\rad M=M\rad A$ and (1)(iv), $\rad^kP_i=P_i(\rad A)^k=P_iA_{\geq k}$. Now $e_{ip}e_{pq}=e_{iq}$ with $p\geq i$ and $q-p\geq k$ ranges over all $e_{iq}$ with $q\geq i+k$ (take $p=i$ for $q\geq i+k$), and every product $e_{ip}A_{\geq k}$ lies in this span.
 \end{solution}
@@ -179,28 +175,26 @@ and $e_iVe_j=0$ for all other $(i,j)$. For $\lambda\in\kk$ put
 \]
 \begin{subparts}
 \subpart Find $R^\perp$ and a presentation of $A_\lambda^!$, for every $\lambda\in\kk$.
-
-\emph{Hint.} Evaluate $\mu\,b^*a^*+\nu\,d^*c^*$ on $ab-\lambda cd$.
 \begin{solution}
-$V^*$ has basis $a^*\in e_2V^*e_1$, $b^*\in e_4V^*e_2$, $c^*\in e_3V^*e_1$, $d^*\in e_4V^*e_3$, and the composable words of length $2$ are $b^*a^*$, $d^*c^*$.
-Evaluating by $(g\otimes f)(v\otimes w)=g(f(v)w)$: $(b^*\otimes a^*)(a\otimes b)=b^*(a^*(a)b)=b^*(e_2b)=e_4$ and it vanishes on $c\otimes d$; $(d^*\otimes c^*)(c\otimes d)=e_4$ and it vanishes on $a\otimes b$.
+$D(V)$ has the dual basis $a^*\in e_2D(V)e_1$, $b^*\in e_4D(V)e_2$, $c^*\in e_3D(V)e_1$, $d^*\in e_4D(V)e_3$, and the composable words of length $2$ are $b^*a^*$, $d^*c^*$.
+Evaluating by $(\lambda\otimes\mu)(v\otimes w)=\sum_i\mu(ve_i)\,\lambda(e_iw)$: $(b^*\otimes a^*)(a\otimes b)=a^*(a)\,b^*(b)=1$ and it vanishes on $c\otimes d$; $(d^*\otimes c^*)(c\otimes d)=1$ and it vanishes on $a\otimes b$.
 So
 \[
-  (\mu b^*a^*+\nu d^*c^*)(ab-\lambda cd)=(\mu-\lambda\nu)e_4,
+  (\mu b^*a^*+\nu d^*c^*)(ab-\lambda cd)=\mu-\lambda\nu,
 \]
-giving $R^\perp=\kk(\lambda b^*a^*+d^*c^*)$ and $A_\lambda^!=T_S(V^*)/(\lambda b^*a^*+d^*c^*)$.
+giving $R^\perp=\kk(\lambda b^*a^*+d^*c^*)$ and $A_\lambda^!=T_S(D(V))/(\lambda b^*a^*+d^*c^*)$.
 \end{solution}
-\subpart Dualise once more: compute ${}^!(A_\lambda^!)$ and recover the relation $ab-\lambda cd$.
+\subpart Dualise once more: compute $(A_\lambda^!)^!$ and recover the relation $ab-\lambda cd$.
 \begin{solution}
-By Lecture~3, ${}^!(A_\lambda^!)=T_S({}^*(V^*))/({}^\perp(R^\perp))$, and $\mathrm{ev}_V:V\xrightarrow{\sim}{}^*(V^*)$ identifies the generators with $V$; under this identification
+By Lecture~3, $(A_\lambda^!)^!=T_S(D(D(V)))/\bigl((R^\perp)^\perp\bigr)$, and $\mathrm{ev}_V:V\xrightarrow{\sim}D(D(V))$ identifies the generators with $V$; under this identification
 \[
-  {}^\perp(R^\perp)=\{u\in V\otimes_SV\mid F(u)=0\ \ \forall F\in R^\perp\},
+  (R^\perp)^\perp=\{u\in V\otimes_SV\mid F(u)=0\ \ \forall F\in R^\perp\}.
 \]
-with the order of the factors \emph{not} reversed again. Now $V\otimes_SV$ has basis $ab,cd$, and by (i)
+Now $V\otimes_SV$ has basis $ab,cd$, and by (i)
 \[
-  (\lambda b^*a^*+d^*c^*)(\alpha\,ab+\beta\,cd)=(\lambda\alpha+\beta)\,e_4,
+  (\lambda b^*a^*+d^*c^*)(\alpha\,ab+\beta\,cd)=\lambda\alpha+\beta,
 \]
-so ${}^\perp(R^\perp)=\{\alpha\,ab+\beta\,cd\mid\lambda\alpha+\beta=0\}=\kk(ab-\lambda cd)$, i.e.\ ${}^!(A_\lambda^!)=T_S(V)/(ab-\lambda cd)=A_\lambda$.
+so $(R^\perp)^\perp=\{\alpha\,ab+\beta\,cd\mid\lambda\alpha+\beta=0\}=\kk(ab-\lambda cd)$, i.e.\ $(A_\lambda^!)^!=T_S(V)/(ab-\lambda cd)=A_\lambda$.
 \end{solution}
 \subpart Prove that $A_\lambda\cong A_\mu$ as graded algebras if and only if $\lambda,\mu$ are either both zero or both non-zero.
 
@@ -246,8 +240,6 @@ The natural surjection $Q\to A$ is an isomorphism in degrees $\leq2$, but $\dim 
 \part Let $A=\kk A_4/(e_{13})$ with the quotient grading, and put $a=e_{12}$, $b=e_{23}$, $c=e_{34}$.
 \begin{subparts}
 \subpart Find $S$, $V$ and $R\subset V\otimes_SV$ with $A\cong T_S(V)/(R)$, a basis of $A$, and $h_A(t)$.
-
-\emph{Hint.} Among $a\otimes b$ and $b\otimes c$, only $a\otimes b$ maps to an element of the ideal $(e_{13})$.
 \begin{solution}
 \[
   S=\bigoplus_{i=1}^4\kk e_{ii},\qquad V=\kk a\oplus\kk b\oplus\kk c,\qquad R=\kk\,(a\otimes b).
@@ -261,16 +253,14 @@ Indeed $T_S(V)\cong\kk A_4$ (Lecture~2) with $a\otimes b\mapsto e_{13}$ and $b\o
 \[
   h_A(t)\,h_{A^!}(-t)^{\mathsf T}=I_4,
 \]
-and check that ${}^!(A^!)\cong A$.
-
-\emph{Hint.} Complement the forbidden pair among the composable words of $V^*\otimes_SV^*$, and reverse the order.
+and check that $(A^!)^!\cong A$.
 \begin{solution}
-$V^*$ has basis $a^*\in e_{22}V^*e_{11}$, $b^*\in e_{33}V^*e_{22}$, $c^*\in e_{44}V^*e_{33}$; the composable words of length $2$ are $b^*a^*$ and $c^*b^*$.
-With $(g\otimes f)(v\otimes w)=g(f(v)w)$,
+$D(V)$ has the dual basis $a^*\in e_{22}D(V)e_{11}$, $b^*\in e_{33}D(V)e_{22}$, $c^*\in e_{44}D(V)e_{33}$; the composable words of length $2$ are $b^*a^*$ and $c^*b^*$.
+With $(\lambda\otimes\mu)(v\otimes w)=\sum_i\mu(ve_i)\,\lambda(e_iw)$,
 \[
-  (b^*\otimes a^*)(a\otimes b)=e_{33},\qquad(c^*\otimes b^*)(a\otimes b)=0,
+  (b^*\otimes a^*)(a\otimes b)=1,\qquad(c^*\otimes b^*)(a\otimes b)=0,
 \]
-so $R^\perp=\kk\,c^*b^*$ and $A^!=T_S(V^*)/(c^*b^*)$.
+so $R^\perp=\kk\,c^*b^*$ and $A^!=T_S(D(V))/(c^*b^*)$.
 A word of length $3$ would be $c^*b^*a^*$, which contains $c^*b^*$; hence a basis of $A^!$ is $e_{ii},\ a^*,\ b^*,\ c^*,\ b^*a^*$, and
 \[
   h_{A^!}(t)=I+t(E_{21}+E_{32}+E_{43})+t^2E_{31}.
@@ -279,7 +269,7 @@ With $N=E_{12}+E_{23}+E_{34}$ we have $N^2=E_{13}+E_{24}$ and $NE_{13}=E_{24}N=E
 \[
   h_A(t)h_{A^!}(-t)^{\mathsf T}=(I+tN+t^2E_{24})(I-tN+t^2E_{13})=I+t^2\bigl(E_{13}-N^2+E_{24}\bigr)=I.
 \]
-Finally, ${}^\perp(R^\perp)=\{u\in V\otimes_SV\mid(c^*\otimes b^*)(u)=0\}$ and $(c^*\otimes b^*)(\alpha\,a\otimes b+\beta\,b\otimes c)=\beta\,e_{44}$, so ${}^\perp(R^\perp)=\kk\,(a\otimes b)=R$.
+Finally, $(R^\perp)^\perp=\{u\in V\otimes_SV\mid(c^*\otimes b^*)(u)=0\}$ and $(c^*\otimes b^*)(\alpha\,a\otimes b+\beta\,b\otimes c)=\beta$, so $(R^\perp)^\perp=\kk\,(a\otimes b)=R$.
 \end{solution}
 \end{subparts}
 \end{parts}
@@ -319,8 +309,6 @@ isomorphism $(R)$ goes to the ideal generated by the products $e_{k,k+1}e_{k+1,k
 and $e_iVe_j=0$ otherwise.
 \begin{subparts}
 \subpart Find a basis of $T_S(V)_d$ for all $d\geq0$, and compute $h_{T_S(V)}(t)$.
-
-\emph{Hint.} Count alternating words in each degree, including degree $0$.
 \begin{solution}
 Positive-degree basis words of $T_S(V)$ are the composable (alternating) words. For each $d\geq1$ there are exactly two:
 $aba\cdots$ ($d$ letters, from $e_1$) and $bab\cdots$ (from $e_2$); for $d=0$ the basis is $e_1,e_2$.
@@ -400,13 +388,11 @@ A basis of $B_d$ is the set of words in $x,y$ of length $d$ containing no $xx$ (
 \[
   a_d=a_{d-1}+a_{d-2}\quad(d\geq2),\qquad h_B(t)=\frac{1+t}{1-t-t^2}.
 \]
-
-\emph{Hint.} Sort the words by their first letter.
 \begin{solution}
 For $d\geq2$: words starting with $y$ are $y\cdot w$ with $w$ admissible of length $d-1$ ($a_{d-1}$ choices); words starting with $x$ must continue with $y$, and are $xy\cdot w$ with $w$ admissible of length $d-2$ ($a_{d-2}$).
 So $(1-t-t^2)h_B=a_0+(a_1-a_0)t=1+t$.
 \end{solution}
-\subpart Compute $B^!$ (with $X=x^*$, $Y=y^*$), find a homogeneous basis of $B^!$ and $h_{B^!}(t)$, and verify
+\subpart Compute $B^!$ (with $X=x^*$, $Y=y^*\in D(V)$), find a homogeneous basis of $B^!$ and $h_{B^!}(t)$, and verify
 \[
   h_B(t)\,h_{B^!}(-t)=1.
 \]
@@ -433,13 +419,11 @@ Thus $h_{B^!}(t)=\frac1{1-t}+t$ and
 \begin{subparts}
 \subpart Prove that
 \[
-  A^!=T_S(V^*),\qquad h_A(t)=I+tC,\qquad h_{A^!}(t)=(I-tC^{\mathsf T})^{-1}.
+  A^!=T_S(D(V)),\qquad h_A(t)=I+tC,\qquad h_{A^!}(t)=(I-tC^{\mathsf T})^{-1}.
 \]
-
-\emph{Hint.} Use $V\otimes_SV$ as the relation space and $h_{T_S(V)}(t)=(I-tC)^{-1}$ (Lecture~2).
 \begin{solution}
-The relation space is $R=V\otimes_SV$; since $V^*\otimes_SV^*$ is identified with $(V\otimes_SV)^*$ (Lecture~3), the annihilator of $R=V\otimes_SV$ is $R^\perp=0$ and $A^!=T_S(V^*)$.
-$\dim e_iA_0e_j=\delta_{ij}$ and $\dim e_iA_1e_j=C_{ij}$ give $h_A=I+tC$. For $V^*$, $\dim e_iV^*e_j=\dim e_jVe_i$, so its matrix is $C^{\mathsf T}$ and $h_{A^!}=(I-tC^{\mathsf T})^{-1}$.
+The relation space is $R=V\otimes_SV$; since $D(V)\otimes_SD(V)\cong D(V\otimes_SV)$ (Lecture~3), the annihilator of $R=V\otimes_SV$ is $R^\perp=0$ and $A^!=T_S(D(V))$.
+$\dim e_iA_0e_j=\delta_{ij}$ and $\dim e_iA_1e_j=C_{ij}$ give $h_A=I+tC$. For $D(V)$, $\dim e_iD(V)e_j=\dim e_jVe_i$, so its matrix is $C^{\mathsf T}$ and $h_{A^!}=(I-tC^{\mathsf T})^{-1}$.
 \end{solution}
 \subpart Deduce that
 \[
@@ -488,15 +472,13 @@ $0=\lambda\mu(yx+qxy)=\lambda\mu(1-qq')yx$ gives $qq'=1$ (here $\lambda\mu\neq0$
 Now if $\operatorname{char}\kk\neq2$, then $1\neq-1$ and $1\cdot(-1)\neq1$, so $C_1\not\cong C_{-1}$ as graded algebras; even ungraded, $C_{-1}$ is commutative ($xy=yx$) whereas $C_1$ is not ($xy=-yx\neq yx$ as $2yx\neq0$).
 In characteristic $2$, $1=-1$, so $C_1=C_{-1}$.
 \end{solution}
-\subpart Compute a quadratic presentation of $C_q^!$ (with $X=x^*$, $Y=y^*$), and $h_{C_q^!}(t)$. Verify
+\subpart Compute a quadratic presentation of $C_q^!$ (with $X=x^*$, $Y=y^*\in D(V)$), and $h_{C_q^!}(t)$. Verify
 \[
   h_{C_q}(t)\,h_{C_q^!}(-t)=1,
 \]
 and compare $C_0^!$ with $C_1^!$.
-
-\emph{Hint.} Evaluate a general combination of $X^2,XY,YX,Y^2$ on $x^2$, $y^2$, and $xy+qyx$.
 \begin{solution}
-For $S=\kk$, $(g\otimes f)(v\otimes w)=f(v)g(w)$. For $F=\alpha X\otimes X+\beta X\otimes Y+\gamma Y\otimes X+\delta Y\otimes Y$,
+For $S=\kk$, $(\lambda\otimes\mu)(v\otimes w)=\mu(v)\lambda(w)$. For $F=\alpha X\otimes X+\beta X\otimes Y+\gamma Y\otimes X+\delta Y\otimes Y$,
 \[
   F(x\otimes x)=\alpha,\qquad F(y\otimes y)=\delta,\qquad F(x\otimes y+q\,y\otimes x)=\gamma+q\beta.
 \]
