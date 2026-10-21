@@ -1,0 +1,513 @@
+\documentclass[11pt,a4paper]{exam}
+\noprintanswers
+%\printanswers
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2cm,includeheadfoot,headheight=15pt,headsep=18pt]{geometry}
+\usepackage{needspace}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\CourseTitle}{Topics in Math. Sci. VII 2026}
+\newcommand{\AssignmentNumber}{1}
+\newcommand{\Deadline}{to be announced}
+
+\pagestyle{headandfoot}
+\header{}{\small\CourseTitle}
+       {\small Assignment \AssignmentNumber}
+\headrule
+\footer{}{\small Submit via email.  Deadline: \Deadline}{\small\thepage}
+
+\newcommand{\kk}{\Bbbk}
+\newcommand{\bbD}{\mathbb D}
+\newcommand{\grstar}{(*)}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\rad}{rad}
+\newcommand{\SymAlg}{\mathsf{S}}
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\id}{\mathrm{id}}
+
+\qformat{\textbf{Exercise \thequestion.\ \thequestiontitle}\hfill}
+\renewcommand{\questionshook}{%
+  \setlength{\leftmargin}{0pt}%
+  \setlength{\labelwidth}{-\labelsep}%
+  \setlength{\itemsep}{13pt}%
+}
+\renewcommand{\thepartno}{\arabic{partno}}
+\renewcommand{\partlabel}{(\thepartno)}
+\renewcommand{\partshook}{\setlength{\itemsep}{4pt}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlength{\emergencystretch}{1em}
+\raggedbottom
+
+\newcommand{\comm}[1]{}
+
+
+\begin{document}
+
+Complete at least 2 exercises.
+
+Throughout, $\kk$ is a field, and all modules are right modules unless a
+left action is specified.
+
+
+\begin{questions}
+
+\titledquestion{}
+
+\begin{parts}
+\part Let $A=\bigoplus_{d\geq0}A_d$ be a graded algebra with $S=A_0$ finite-dimensional semisimple.
+\begin{subparts}
+\subpart Prove that
+\[
+  A/A_+\cong S,\qquad\rad A\subset A_+.
+\]
+
+\emph{Hint.} Pull back the maximal right ideals of $S$ along $A\to A/A_+$.
+\begin{solution}
+The projection $A\to A_0$ onto degree $0$ is an algebra homomorphism with kernel $A_+$, so $A/A_+\cong S$.
+For a maximal right ideal $\mathfrak m\subset S$, its preimage $\mathfrak m+A_+$ is a right ideal with $A/(\mathfrak m+A_+)\cong S/\mathfrak m$ simple, hence maximal. Therefore
+\[
+  \rad A\ \subset\bigcap_{\mathfrak m}(\mathfrak m+A_+)=\Bigl(\bigcap_{\mathfrak m}\mathfrak m\Bigr)+A_+=\rad S+A_+=A_+,
+\]
+since $\rad S=0$ for semisimple $S$.
+\end{solution}
+\subpart Prove that if $A_+^N=0$ for some $N\geq1$ (for example if $\dim_\kk A<\infty$), then
+\[
+  \rad A=A_+.
+\]
+
+\emph{Hint.} Argue as for the strictly upper triangular ideal $J\subset\kk A_n$ in the lecture.
+\begin{solution}
+Let $L$ be a simple right $A$-module. Then $LA_+$ is a submodule, so $LA_+\in\{0,L\}$, and $LA_+=L$ would give $L=LA_+^N=0$. Hence $LA_+=0$.
+Applying this to $L=A/\mathfrak m$ for a maximal right ideal $\mathfrak m$ gives $A_+=1\cdot A_+\subset\mathfrak m$. So $A_+\subset\rad A$, and equality follows from (i).
+\end{solution}
+\subpart Show that for $A=\kk[x]$, $\deg x=1$, one has
+\[
+  \rad A=0\neq A_+.
+\]
+\begin{solution}
+The maximal ideals of $\kk[x]$ are $(p)$ with $p$ irreducible, and there are infinitely many irreducible polynomials (if $p_1,\dots,p_m$ were all of them, any irreducible factor of $p_1\cdots p_m+1$ would be a new one).
+A non-zero polynomial has finitely many irreducible factors, so $\bigcap_p(p)=0$, while $A_+=(x)\neq0$.
+\end{solution}
+\subpart Suppose that $\dim_\kk A<\infty$ and that $A$ is generated in degree $1$ over $S$. Prove that
+\[
+  \rad^kA=\bigoplus_{d\geq k}A_d,\qquad\rad^kA/\rad^{k+1}A\cong A_k\qquad(k\geq0).
+\]
+\begin{solution}
+By (ii), $\rad A=A_+$, so $\rad^kA=A_+^k$. Clearly $A_+^k\subset\bigoplus_{d\geq k}A_d$. Conversely, generation in degree $1$ gives $A_d=A_1^d\subset A_+^d\subset A_+^k$ for $d\geq k$.
+Hence $\rad^kA/\rad^{k+1}A=\bigoplus_{d\geq k}A_d\big/\bigoplus_{d\geq k+1}A_d\cong A_k$.
+\end{solution}
+\end{subparts}
+
+\part Let $A=\Bbbk A_3$, $M=e_{22}A$, and
+consider $\bbD(M)_d=\Hom_\kk(M_{-d},\kk)$ with $(af)(m)=f(ma)$.
+\begin{subparts}
+\subpart Find a homogeneous basis of $\bbD(M)$, its degrees, and all non-zero
+actions of matrix units on it.
+\begin{solution}
+$M=\kk e_{22}\oplus\kk e_{23}$ with degrees $0,1$. Let $\varepsilon_{22},\varepsilon_{23}$ be the dual basis;
+$\deg\varepsilon_{22}=0$, $\deg\varepsilon_{23}=-1$. Since $(af)(m)=f(ma)$ and
+$e_{ij}e_{pq}=\delta_{jp}e_{iq}$, the only non-zero actions are
+$e_{22}\varepsilon_{22}=\varepsilon_{22}$, $e_{33}\varepsilon_{23}=\varepsilon_{23}$,
+$e_{23}\varepsilon_{23}=\varepsilon_{22}$.
+(E.g.\ $(e_{23}\varepsilon_{23})(e_{22})=\varepsilon_{23}(e_{22}e_{23})=1$, while $e_{11},e_{12},e_{13}$
+act by $0$ because $e_{22}e_{1q}=e_{23}e_{1q}=0$.)
+\end{solution}
+\subpart Show that $\Bbbk e_{13}\subset Ae_{33}$ is a graded left submodule and
+that $\bbD(M)\cong(Ae_{33}/\Bbbk e_{13})(1)$ as graded left $A$-modules.
+\begin{solution}
+$Ae_{33}=\operatorname{span}\{e_{13},e_{23},e_{33}\}$ and $e_{ij}e_{13}=\delta_{j1}e_{i3}$, so
+$\Bbbk e_{13}$ is a (homogeneous) submodule. In $N=Ae_{33}/\Bbbk e_{13}$ the classes $\bar e_{33},\bar e_{23}$
+have degrees $0,1$ and the non-zero actions are $e_{33}\bar e_{33}=\bar e_{33}$,
+$e_{23}\bar e_{33}=\bar e_{23}$, $e_{22}\bar e_{23}=\bar e_{23}$. In $N(1)$ the degrees are $-1,0$.
+The linear map $\varepsilon_{23}\mapsto\bar e_{33}$, $\varepsilon_{22}\mapsto\bar e_{23}$ is bijective, preserves
+degrees, and matches the non-zero actions of part (i); as matrix units span $A$, it is $A$-linear.
+\end{solution}
+\subpart Deduce that $\bbD(M)$ is not isomorphic to any
+$(Ae_{jj})(r)$, $j\in\{1,2,3\}$, $r\in\mathbb Z$.
+\begin{solution}
+$\dim\bbD(M)=2$ and $\dim Ae_{jj}=j$, so only $j=2$ is possible. But $e_{33}$ acts by $0$ on $Ae_{22}=\operatorname{span}\{e_{12},e_{22}\}$
+while $e_{33}\varepsilon_{23}=\varepsilon_{23}\neq0$; an isomorphism commutes with $e_{33}$.
+\end{solution}
+\end{subparts}
+
+
+\part \textbf{Radical filtration of $P_i$.} Let $A=\kk A_n$, $P_i=e_{ii}A$ with the inherited grading, and
+\[
+  L_j=e_{jj}A/e_{jj}A_+\qquad(\text{concentrated in degree }0).
+\]
+\begin{subparts}
+\subpart Prove that for $k\geq0$,
+\[
+  \rad^kP_i=\operatorname{span}_\kk\{e_{im}\mid m\geq i+k\}.
+\]
+
+\emph{Hint.} Use $\rad M=M\rad A$ and part~(1).
+\begin{solution}
+By $\rad M=M\rad A$ and (1)(iv), $\rad^kP_i=P_i(\rad A)^k=P_iA_{\geq k}$. Now $e_{ip}e_{pq}=e_{iq}$ with $p\geq i$ and $q-p\geq k$ ranges over all $e_{iq}$ with $q\geq i+k$ (take $p=i$ for $q\geq i+k$), and every product $e_{ip}A_{\geq k}$ lies in this span.
+\end{solution}
+\subpart Prove that for $0\leq k\leq n-i$,
+\[
+  \rad^kP_i/\rad^{k+1}P_i\ \cong\ L_{i+k}(-k)\qquad\text{as graded right }A\text{-modules},
+\]
+and deduce that
+\[
+  P_i\cong P_j(d)\ \text{ as graded modules}\quad\Longleftrightarrow\quad(i,d)=(j,0).
+\]
+\begin{solution}
+By (i) the quotient has basis the class $\bar e$ of $e_{i,i+k}$, of degree $k$. For a matrix unit $e_{pq}$ we have $\bar e\,e_{pq}=\delta_{i+k,p}\,\overline{e_{iq}}$, which vanishes in the quotient unless $q=i+k$. So $e_{i+k,i+k}$ acts as the identity and all other matrix units act by $0$:
+the module is $L_{i+k}$ with its generator placed in degree $k$, i.e.\ $L_{i+k}(-k)$.
+A graded isomorphism $P_i\cong P_j(d)$ induces an isomorphism of tops $L_i=P_i/\rad P_i\cong(P_j/\rad P_j)(d)=L_j(d)$. The left side is concentrated in degree $0$ and the right side in degree $-d$, so $d=0$; and $e_{ii}$ acts non-trivially on the left, so $i=j$. The converse is clear.
+\end{solution}
+\end{subparts}
+\end{parts}
+
+\newpage
+\titledquestion{}
+\begin{parts}
+\part Let $S=\bigoplus_{i=1}^4\kk e_i$ be a semisimple algebra with coordinate idempotent $e_i$ for $1\le i\le 4$ and let $V=\kk a\oplus\kk b\oplus\kk c\oplus\kk d$ be the $S$-bimodule with
+\[
+  a\in e_1Ve_2,\qquad b\in e_2Ve_4,\qquad c\in e_1Ve_3,\qquad d\in e_3Ve_4,
+\]
+and $e_iVe_j=0$ for all other $(i,j)$. For $\lambda\in\kk$ put
+\[
+  A_\lambda=T_S(V)/(ab-\lambda cd).
+\]
+\begin{subparts}
+\subpart Find $R^\perp$ and a presentation of $A_\lambda^!$, for every $\lambda\in\kk$.
+
+\emph{Hint.} Evaluate $\mu\,b^*a^*+\nu\,d^*c^*$ on $ab-\lambda cd$.
+\begin{solution}
+$V^*$ has basis $a^*\in e_2V^*e_1$, $b^*\in e_4V^*e_2$, $c^*\in e_3V^*e_1$, $d^*\in e_4V^*e_3$, and the composable words of length $2$ are $b^*a^*$, $d^*c^*$.
+Evaluating by $(g\otimes f)(v\otimes w)=g(f(v)w)$: $(b^*\otimes a^*)(a\otimes b)=b^*(a^*(a)b)=b^*(e_2b)=e_4$ and it vanishes on $c\otimes d$; $(d^*\otimes c^*)(c\otimes d)=e_4$ and it vanishes on $a\otimes b$.
+So
+\[
+  (\mu b^*a^*+\nu d^*c^*)(ab-\lambda cd)=(\mu-\lambda\nu)e_4,
+\]
+giving $R^\perp=\kk(\lambda b^*a^*+d^*c^*)$ and $A_\lambda^!=T_S(V^*)/(\lambda b^*a^*+d^*c^*)$.
+\end{solution}
+\subpart Dualise once more: compute ${}^!(A_\lambda^!)$ and recover the relation $ab-\lambda cd$.
+\begin{solution}
+By Lecture~3, ${}^!(A_\lambda^!)=T_S({}^*(V^*))/({}^\perp(R^\perp))$, and $\mathrm{ev}_V:V\xrightarrow{\sim}{}^*(V^*)$ identifies the generators with $V$; under this identification
+\[
+  {}^\perp(R^\perp)=\{u\in V\otimes_SV\mid F(u)=0\ \ \forall F\in R^\perp\},
+\]
+with the order of the factors \emph{not} reversed again. Now $V\otimes_SV$ has basis $ab,cd$, and by (i)
+\[
+  (\lambda b^*a^*+d^*c^*)(\alpha\,ab+\beta\,cd)=(\lambda\alpha+\beta)\,e_4,
+\]
+so ${}^\perp(R^\perp)=\{\alpha\,ab+\beta\,cd\mid\lambda\alpha+\beta=0\}=\kk(ab-\lambda cd)$, i.e.\ ${}^!(A_\lambda^!)=T_S(V)/(ab-\lambda cd)=A_\lambda$.
+\end{solution}
+\subpart Prove that $A_\lambda\cong A_\mu$ as graded algebras if and only if $\lambda,\mu$ are either both zero or both non-zero.
+
+\emph{Hint.} A graded isomorphism over $S$ sends each of $a,b,c,d$ to a scalar multiple of itself.
+\begin{solution}
+A graded isomorphism $\varphi:A_\lambda\to A_\mu$ over $S$ fixes each $e_i$, so $\varphi_1$ preserves each $e_iVe_j$ (all at most one-dimensional):
+\[
+  \varphi(a)=\alpha a,\quad\varphi(b)=\beta b,\quad\varphi(c)=\gamma c,\quad\varphi(d)=\delta d,\qquad\alpha,\beta,\gamma,\delta\in\kk^\times.
+\]
+The induced map on $T_S(V)$ sends $ab-\lambda cd$ to $\alpha\beta\,ab-\lambda\gamma\delta\,cd$, which must lie in $\kk(ab-\mu cd)$:
+\[
+  \mu\,\alpha\beta=\lambda\,\gamma\delta.
+\]
+Hence $\lambda=0\Leftrightarrow\mu=0$. Conversely if $\lambda,\mu\neq0$ take $\alpha=\beta=\gamma=1$, $\delta=\mu/\lambda$ (the inverse is of the same form); for $\lambda=\mu=0$ take the identity.
+\end{solution}
+\end{subparts}
+
+\part Let $A=\kk[x,y]/(x^2,y^3)$ with $\deg x=\deg y=1$, and let $V=A_1$.
+\begin{subparts}
+\subpart Compute $h_A(t)$.
+\begin{solution}
+$A\cong\kk[x]/(x^2)\otimes_\kk\kk[y]/(y^3)$ has basis $x^ay^b$ with $a<2$, $b<3$, so
+\[
+  h_A(t)=(1+t)(1+t+t^2)=1+2t+2t^2+t^3.
+\]
+\end{solution}
+\subpart Let $R=\ker\bigl(V\otimes_\kk V\to A_2\bigr)$ and $Q=T_\kk(V)/(R)$. Show that
+\[
+  Q\cong\kk[x,y]/(x^2),\qquad h_Q(t)=\frac{1+t}{1-t}.
+\]
+\begin{solution}
+$A_2$ has basis $xy,y^2$, so $\dim R=4-2=2$ and $R=\operatorname{span}\{x\otimes x,\ x\otimes y-y\otimes x\}$.
+Thus $Q=\kk\langle x,y\rangle/(x^2,xy-yx)=\kk[x,y]/(x^2)$, with basis $x^ay^b$, $a\in\{0,1\}$, $b\geq0$; this has $\dim Q_d=2$ for $d\geq1$, so $h_Q=1+\sum_{d\geq1}2t^d=\frac{1+t}{1-t}$.
+\end{solution}
+\subpart Prove that $A$ is not quadratic, and find the smallest degree in which $A$ and $Q$ differ.
+\begin{solution}
+$A$ is generated in degree $1$, and any quadratic presentation $A\cong T_\kk(V)/(R')$ has $V=A_1$ and $R'=R$ (Lecture~2), hence would give $A\cong Q$.
+The natural surjection $Q\to A$ is an isomorphism in degrees $\leq2$, but $\dim Q_3=2>1=\dim A_3$, with $y^3\neq0$ in $Q$. So $A\not\cong Q$ and $A$ is not quadratic; the smallest degree of difference is $3$.
+\end{solution}
+\end{subparts}
+
+
+\part Let $A=\kk A_4/(e_{13})$ with the quotient grading, and put $a=e_{12}$, $b=e_{23}$, $c=e_{34}$.
+\begin{subparts}
+\subpart Find $S$, $V$ and $R\subset V\otimes_SV$ with $A\cong T_S(V)/(R)$, a basis of $A$, and $h_A(t)$.
+
+\emph{Hint.} Among $a\otimes b$ and $b\otimes c$, only $a\otimes b$ maps to an element of the ideal $(e_{13})$.
+\begin{solution}
+\[
+  S=\bigoplus_{i=1}^4\kk e_{ii},\qquad V=\kk a\oplus\kk b\oplus\kk c,\qquad R=\kk\,(a\otimes b).
+\]
+Indeed $T_S(V)\cong\kk A_4$ (Lecture~2) with $a\otimes b\mapsto e_{13}$ and $b\otimes c\mapsto e_{24}$. The ideal $(e_{13})$ is spanned by $e_{13},e_{14}$ ($e_{14}=e_{13}e_{34}$), so a basis of $A$ is
+\[
+  e_{11},\ e_{22},\ e_{33},\ e_{44},\ a,\ b,\ c,\ bc\ (=e_{24}),\qquad h_A(t)=I+t(E_{12}+E_{23}+E_{34})+t^2E_{24}.
+\]
+\end{solution}
+\subpart Compute $R^\perp$, a presentation and a basis of $A^!$, and $h_{A^!}(t)$. Verify
+\[
+  h_A(t)\,h_{A^!}(-t)^{\mathsf T}=I_4,
+\]
+and check that ${}^!(A^!)\cong A$.
+
+\emph{Hint.} Complement the forbidden pair among the composable words of $V^*\otimes_SV^*$, and reverse the order.
+\begin{solution}
+$V^*$ has basis $a^*\in e_{22}V^*e_{11}$, $b^*\in e_{33}V^*e_{22}$, $c^*\in e_{44}V^*e_{33}$; the composable words of length $2$ are $b^*a^*$ and $c^*b^*$.
+With $(g\otimes f)(v\otimes w)=g(f(v)w)$,
+\[
+  (b^*\otimes a^*)(a\otimes b)=e_{33},\qquad(c^*\otimes b^*)(a\otimes b)=0,
+\]
+so $R^\perp=\kk\,c^*b^*$ and $A^!=T_S(V^*)/(c^*b^*)$.
+A word of length $3$ would be $c^*b^*a^*$, which contains $c^*b^*$; hence a basis of $A^!$ is $e_{ii},\ a^*,\ b^*,\ c^*,\ b^*a^*$, and
+\[
+  h_{A^!}(t)=I+t(E_{21}+E_{32}+E_{43})+t^2E_{31}.
+\]
+With $N=E_{12}+E_{23}+E_{34}$ we have $N^2=E_{13}+E_{24}$ and $NE_{13}=E_{24}N=E_{24}E_{13}=0$, so
+\[
+  h_A(t)h_{A^!}(-t)^{\mathsf T}=(I+tN+t^2E_{24})(I-tN+t^2E_{13})=I+t^2\bigl(E_{13}-N^2+E_{24}\bigr)=I.
+\]
+Finally, ${}^\perp(R^\perp)=\{u\in V\otimes_SV\mid(c^*\otimes b^*)(u)=0\}$ and $(c^*\otimes b^*)(\alpha\,a\otimes b+\beta\,b\otimes c)=\beta\,e_{44}$, so ${}^\perp(R^\perp)=\kk\,(a\otimes b)=R$.
+\end{solution}
+\end{subparts}
+\end{parts}
+
+\titledquestion{}
+\begin{parts}
+\part For $n\geq3$ and $Z\subset\{1,\dots,n-2\}$ let
+\[
+  A_Z=\kk A_n/(e_{k,k+2}\mid k\in Z)
+\]
+with the quotient grading.
+\begin{subparts}
+\subpart Show that
+\[
+  \{e_{ii}\}_{i}\ \cup\ \{e_{ij}\mid i<j,\ \nexists\,k\in Z:\ i\leq k\leq j-2\}
+\]
+is a basis of $A_Z$.
+\begin{solution}
+Let $I=\operatorname{span}\{e_{ij}\mid\exists k\in Z:\ i\leq k,\ k+2\leq j\}$. Since $e_{ij}=e_{ik}e_{k,k+2}e_{k+2,j}$, $I$ lies in $(e_{k,k+2}:k\in Z)$;
+conversely $I$ is a two-sided ideal containing the $e_{k,k+2}$ (a product $e_{pq}e_{ij}e_{rs}\neq0$ has $p\leq i\leq k$ and $k+2\leq j\leq s$).
+So $I=(e_{k,k+2}:k\in Z)$ and the remaining matrix units form a basis of the quotient.
+\end{solution}
+\subpart Write $A_Z=T_S(V)/(R)$ with explicit $S$, $V$, and $R\subset V\otimes_SV$.
+\begin{solution}
+\[
+  S=\bigoplus_{i=1}^n\kk e_{ii},\qquad V=\bigoplus_{i<n}\kk e_{i,i+1},\qquad R=\operatorname{span}\{e_{k,k+1}\otimes e_{k+1,k+2}\mid k\in Z\}.
+\]
+Indeed $T_S(V)\cong\kk A_n$ (Lecture 2), and under this
+isomorphism $(R)$ goes to the ideal generated by the products $e_{k,k+1}e_{k+1,k+2}=e_{k,k+2}$.
+\end{solution}
+\end{subparts}
+
+\part Let $S=\kk e_1\oplus\kk e_2$ and $V=\kk a\oplus\kk b$ with
+\[
+  a\in e_1Ve_2,\qquad b\in e_2Ve_1,
+\]
+and $e_iVe_j=0$ otherwise.
+\begin{subparts}
+\subpart Find a basis of $T_S(V)_d$ for all $d\geq0$, and compute $h_{T_S(V)}(t)$.
+
+\emph{Hint.} Count alternating words in each degree, including degree $0$.
+\begin{solution}
+Positive-degree basis words of $T_S(V)$ are the composable (alternating) words. For each $d\geq1$ there are exactly two:
+$aba\cdots$ ($d$ letters, from $e_1$) and $bab\cdots$ (from $e_2$); for $d=0$ the basis is $e_1,e_2$.
+The word $aba\cdots$ lies in $e_1T_de_1$ if $d$ is even and in $e_1T_de_2$ if $d$ is odd; $bab\cdots$ lies in $e_2T_de_2$ ($d$ even), $e_2T_de_1$ ($d$ odd). So
+\[
+h_{T_S(V)}(t)=\frac1{1-t^2}\begin{pmatrix}1&t\\t&1\end{pmatrix}.
+\]
+\end{solution}
+\subpart Find a basis of $A=T_S(V)/(ab)$ and show that $\dim_\kk A<\infty$.
+\begin{solution}
+The ideal $(ab)$ is spanned by words containing $ab$; every alternating word of length $\geq3$ contains $ab$ ($aba$, $bab$), so a basis is
+\[
+  e_1,\ e_2,\ a,\ b,\ ba\qquad(ba\in e_2Ae_2),
+\]
+and $\dim_\kk A=5$.
+\end{solution}
+\end{subparts}
+
+
+\part Let $A$ be a locally finite-dimensional graded algebra generated in degree $1$ over the finite-dimensional semisimple algebra $S=A_0$.
+\begin{subparts}
+\subpart 
+Fix a bimodule $ {}_SV_S$ and an $S$-bimodule isomorphism $\varphi:V\xrightarrow{\sim}A_1$.
+Prove that
+\[
+h_A(t)=h_{T_S(V)}(t)
+\quad\Longrightarrow\quad
+T_S(V)\xrightarrow{\sim}A, 
+\]
+where the isomorphism of graded algebras on the right-hand side is induced by $\id_S$ and $\varphi$.
+
+\subpart Consider $\kk[x,z]/(x^2)$ with $\deg x=1$ and $\deg z=2$.  Show that
+\[
+h_B(t)=h_{T_\kk(B_1)}(t)
+\qquad\text{but}\qquad B\not\cong T_\kk(B_1)
+\]
+as graded algebras.
+\end{subparts}
+
+\begin{solution}
+For (a), the universal property gives a surjective graded algebra map
+$\mu:T_S(V)\to A$ with $\mu|_S=\id_S$ and $\mu|_V=\varphi$.
+Put $K=\ker\mu$, and choose primitive idempotents $e_1,\ldots,e_n\in S$ so that the $e_iS$ represent the simple right $S$-modules once each.
+For every $d\geq0$ and $1\leq i\leq n$,
+\[
+0\longrightarrow e_iK_d\longrightarrow e_iT_S(V)_d
+\longrightarrow e_iA_d\longrightarrow0
+\]
+is exact as a sequence of right $S$-modules.
+Equality of Hilbert series gives $[e_iK_d:e_jS]=0$ for every $1\leq j\leq n$, hence $e_iK_d=0$.
+Since the $e_i$ include a primitive idempotent in each matrix factor of $S$, Artin--Wedderburn gives $S(\sum_{i=1}^n e_i)S=S$.
+Therefore $K_d=0$ for every $d$, and $\mu$ is an isomorphism.
+
+For (b), let $B=\kk[x,z]/(x^2)$ with the stated degrees, writing $x,z$ also for their residue classes.
+The elements $\{z^q,xz^q\mid q\geq0\}$ form a basis, so
+\[
+h_B(t)=\sum_{q\geq0}(t^{2q}+t^{2q+1})
+=\frac{1}{1-t}=h_{T_\kk(B_1)}(t).
+\]
+Here $B_1=\kk x$, but $z$ does not belong to the subalgebra generated by $x$.
+Also $x\neq0$ and $x^2=0$, whereas non-zero polynomials in $T_\kk(B_1)\cong\kk[t]$ have non-zero squares.
+\end{solution}
+
+\part Let
+\[
+  B=T_\kk(\kk x\oplus\kk y)/(x^2),\qquad\deg x=\deg y=1,\qquad a_d:=\dim_\kk B_d.
+\]
+\begin{subparts}
+\subpart Find a basis of $B_d$ and compute $a_0,\dots,a_6$.
+\begin{solution}
+A basis of $B_d$ is the set of words in $x,y$ of length $d$ containing no $xx$ (the ideal $(x^2)$ is spanned by words containing $xx$).
+\[
+  (a_0,\dots,a_6)=(1,2,3,5,8,13,21).
+\]
+\end{solution}
+\subpart Prove that
+\[
+  a_d=a_{d-1}+a_{d-2}\quad(d\geq2),\qquad h_B(t)=\frac{1+t}{1-t-t^2}.
+\]
+
+\emph{Hint.} Sort the words by their first letter.
+\begin{solution}
+For $d\geq2$: words starting with $y$ are $y\cdot w$ with $w$ admissible of length $d-1$ ($a_{d-1}$ choices); words starting with $x$ must continue with $y$, and are $xy\cdot w$ with $w$ admissible of length $d-2$ ($a_{d-2}$).
+So $(1-t-t^2)h_B=a_0+(a_1-a_0)t=1+t$.
+\end{solution}
+\subpart Compute $B^!$ (with $X=x^*$, $Y=y^*$), find a homogeneous basis of $B^!$ and $h_{B^!}(t)$, and verify
+\[
+  h_B(t)\,h_{B^!}(-t)=1.
+\]
+\begin{solution}
+For $F=\alpha XX+\beta XY+\gamma YX+\delta YY$ one has $F(x\otimes x)=\alpha$, so $R^\perp=\operatorname{span}\{XY,YX,YY\}$ and $B^!=\kk\langle X,Y\rangle/(XY,YX,Y^2)$.
+Any word of length $\geq2$ containing $Y$ contains one of $XY,YX,YY$; so $\{X^n\mid n\geq0\}\cup\{Y\}$ spans, and it is a basis because the ideal is spanned by words containing $XY$, $YX$ or $YY$, none of which occurs in $X^n$ or $Y$.
+Thus $h_{B^!}(t)=\frac1{1-t}+t$ and
+\[
+  h_B(t)h_{B^!}(-t)=\frac{1+t}{1-t-t^2}\Bigl(\frac1{1+t}-t\Bigr)=\frac{1+t}{1-t-t^2}\cdot\frac{1-t-t^2}{1+t}=1.
+\]
+\end{solution}
+\end{subparts}
+
+\end{parts}
+
+\newpage
+\titledquestion{}
+
+\begin{parts}
+\part Let $S=\bigoplus_{i=1}^r\kk e_i$, let $V$ be a finite-dimensional $S$-bimodule in degree $1$, and put
+\[
+  C_{ij}=\dim_\kk e_iVe_j,\qquad A=T_S(V)/(V\otimes_SV)=S\oplus V.
+\]
+\begin{subparts}
+\subpart Prove that
+\[
+  A^!=T_S(V^*),\qquad h_A(t)=I+tC,\qquad h_{A^!}(t)=(I-tC^{\mathsf T})^{-1}.
+\]
+
+\emph{Hint.} Use $V\otimes_SV$ as the relation space and $h_{T_S(V)}(t)=(I-tC)^{-1}$ (Lecture~2).
+\begin{solution}
+The relation space is $R=V\otimes_SV$; since $V^*\otimes_SV^*$ is identified with $(V\otimes_SV)^*$ (Lecture~3), the annihilator of $R=V\otimes_SV$ is $R^\perp=0$ and $A^!=T_S(V^*)$.
+$\dim e_iA_0e_j=\delta_{ij}$ and $\dim e_iA_1e_j=C_{ij}$ give $h_A=I+tC$. For $V^*$, $\dim e_iV^*e_j=\dim e_jVe_i$, so its matrix is $C^{\mathsf T}$ and $h_{A^!}=(I-tC^{\mathsf T})^{-1}$.
+\end{solution}
+\subpart Deduce that
+\[
+  h_A(t)\,h_{A^!}(-t)^{\mathsf T}=I.
+\]
+\begin{solution}
+$h_{A^!}(-t)^{\mathsf T}=\bigl((I+tC^{\mathsf T})^{-1}\bigr)^{\mathsf T}=(I+tC)^{-1}$, so $h_A(t)h_{A^!}(-t)^{\mathsf T}=I$.
+\end{solution}
+\end{subparts}
+
+
+\part For $q\in\kk$ let
+\[
+  C_q=\kk\langle x,y\rangle/(x^2,\ y^2,\ xy+qyx),\qquad\deg x=\deg y=1.
+\]
+\begin{subparts}
+\subpart Find a homogeneous basis of $C_q$ and compute all products of two basis elements, treating $q=0$ and $q\neq0$. Justify linear independence of your basis.
+\begin{solution}
+The degree-$2$ relation space $R=\operatorname{span}\{x\otimes x,\ y\otimes y,\ x\otimes y+qy\otimes x\}$ is $3$-dimensional (the three tensors involve different basis tensors), so $\dim(C_q)_2=4-3=1$.
+Modulo $R$: $xx\equiv yy\equiv0$ and $xy\equiv-q\,yx$, so $(C_q)_2$ is spanned by the class of $yx$, which is therefore non-zero. In degree $3$, a word contains $xx$ or $yy$ or equals $xyx$ or $yxy$; and
+$xyx\equiv-qyxx\equiv0$, $yxy\equiv-qyyx\equiv0$; hence $(C_q)_d=0$ for $d\geq3$. Thus $\{1,x,y,yx\}$ is a basis (dimensions $1,2,1$), and
+$h_{C_q}(t)=1+2t+t^2$ for every $q$. Products: $x\cdot x=y\cdot y=0$, $x\cdot y=-q\,yx$, $y\cdot x=yx$, and every product with $yx$ in positive degree is $0$ (degree $\geq3$).
+\end{solution}
+\subpart For $u=\alpha x+\beta y$ compute $u^2$, and determine
+\[
+  \{(\alpha,\beta)\in\kk^2\mid u^2=0\}\qquad\text{for each }q,
+\]
+and the $q$ for which every $u\in(C_q)_1$ satisfies $u^2=0$.
+\begin{solution}
+$u^2=\alpha^2x^2+\alpha\beta(xy+yx)+\beta^2y^2=\alpha\beta(1-q)\,yx$, and $yx\neq0$. So $u^2=0$ iff $\alpha\beta(1-q)=0$: for $q\neq1$, iff $\alpha=0$ or $\beta=0$
+(the two lines $\kk x,\kk y$); for $q=1$, for all $(\alpha,\beta)$. Every element squares to zero iff $q=1$.
+\end{solution}
+\subpart Prove that
+\[
+  C_q\cong C_{q'}\ \text{ as graded algebras}\quad\Longleftrightarrow\quad q=q'\ \text{ or }\ qq'=1.
+\]
+Deduce that $C_1\not\cong C_{-1}$ if $\operatorname{char}\kk\neq2$ (even ungraded), and say what changes if $\operatorname{char}\kk=2$.
+
+\emph{Hint.} A graded isomorphism is determined by a linear bijection of the degree-$1$ parts, and preserves $\{\kk u\mid u^2=0\}$.
+\begin{solution}
+($\Leftarrow$) If $qq'=1$ then $q\neq0$ and $x\mapsto y$, $y\mapsto x$ sends $x^2,y^2$ to $y^2,x^2$ and $xy+qyx\mapsto yx+qxy=q(xy+q'yx)$, so it induces a graded isomorphism $C_q\to C_{q'}$ (inverse of the same form).
+($\Rightarrow$) Let $\varphi:C_q\to C_{q'}$ be a graded isomorphism; $\varphi$ is determined by the bijection $\varphi_1$ on degree $1$ and preserves $u^2=0$.
+If $q=1$, every $u$ squares to zero in $C_1$, hence in $C_{q'}$, so $q'=1$ by (ii); symmetrically $q'=1\Rightarrow q=1$. If $q,q'\neq1$, then $\varphi_1$ permutes the two lines $\kk x,\kk y$:
+either $\varphi(x)=\lambda x$, $\varphi(y)=\mu y$, and $0=\varphi(xy+qyx)=\lambda\mu(q-q')yx$ gives $q=q'$; or $\varphi(x)=\lambda y$, $\varphi(y)=\mu x$, and
+$0=\lambda\mu(yx+qxy)=\lambda\mu(1-qq')yx$ gives $qq'=1$ (here $\lambda\mu\neq0$ and $yx\neq0$).
+Now if $\operatorname{char}\kk\neq2$, then $1\neq-1$ and $1\cdot(-1)\neq1$, so $C_1\not\cong C_{-1}$ as graded algebras; even ungraded, $C_{-1}$ is commutative ($xy=yx$) whereas $C_1$ is not ($xy=-yx\neq yx$ as $2yx\neq0$).
+In characteristic $2$, $1=-1$, so $C_1=C_{-1}$.
+\end{solution}
+\subpart Compute a quadratic presentation of $C_q^!$ (with $X=x^*$, $Y=y^*$), and $h_{C_q^!}(t)$. Verify
+\[
+  h_{C_q}(t)\,h_{C_q^!}(-t)=1,
+\]
+and compare $C_0^!$ with $C_1^!$.
+
+\emph{Hint.} Evaluate a general combination of $X^2,XY,YX,Y^2$ on $x^2$, $y^2$, and $xy+qyx$.
+\begin{solution}
+For $S=\kk$, $(g\otimes f)(v\otimes w)=f(v)g(w)$. For $F=\alpha X\otimes X+\beta X\otimes Y+\gamma Y\otimes X+\delta Y\otimes Y$,
+\[
+  F(x\otimes x)=\alpha,\qquad F(y\otimes y)=\delta,\qquad F(x\otimes y+q\,y\otimes x)=\gamma+q\beta.
+\]
+So $R^\perp=\kk(X\otimes Y-qY\otimes X)$ and $C_q^!=\kk\langle X,Y\rangle/(XY-qYX)$. Using $XY=qYX$, every word is a multiple of $Y^aX^b$, so these span; they are independent:
+for $q=0$ the relation is monomial and $\{Y^aX^b\}$ is the set of words avoiding $XY$; for $q\neq0$ let $X$ act on $\kk[s,t]$ by multiplication by $s$ and $Y$ by $(Yf)(s,t)=t\,f(q^{-1}s,t)$; then $XY=qYX$ and $Y^aX^b\cdot1=q^{-ab}s^bt^a$, which are independent.
+Hence $h_{C_q^!}=\sum_d(d+1)t^d=(1-t)^{-2}$ and $h_{C_q}(t)h_{C_q^!}(-t)=(1+t)^2(1+t)^{-2}=1$.
+$C_1^!=\kk[X,Y]$ is commutative while in $C_0^!=\kk\langle X,Y\rangle/(XY)$ one has $XY=0\neq YX$: same Hilbert series, non-isomorphic algebras.
+\end{solution}
+\end{subparts}
+\end{parts}
+
+\end{questions}
+
+\end{document}
