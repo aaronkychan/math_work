@@ -80,16 +80,6 @@ M\otimes_A\Bigl(\bigoplus_{j\in J}N_j\Bigr)
 & m\otimes(n_j)_{j\in J}&\longmapsto(m\otimes n_j)_{j\in J}.
 \end{aligned}
 \]
-
-\item For finite sets $I,J$ and right $A$-modules $M_j,N_i$, there is a natural isomorphism
-\begin{equation}\label{eq:hom-finite-sums}
-\begin{aligned}
-\Hom_A\Bigl(\bigoplus_{j\in J}M_j,\bigoplus_{i\in I}N_i\Bigr)
-&\xrightarrow{\sim}\bigoplus_{\substack{i\in I\\j\in J}}\Hom_A(M_j,N_i),\\
-f&\longmapsto(\pi_i f\iota_j)_{i\in I,\ j\in J},
-\end{aligned}
-\end{equation}
-where $\iota_j:M_j\to\bigoplus_{j'\in J}M_{j'}$ and $\pi_i:\bigoplus_{i'\in I}N_{i'}\to N_i$ are the inclusions and projections.
 \end{enumerate}
 \end{lemma}
 
@@ -129,6 +119,27 @@ For each $i\in I$, let $\iota_i:M_i\to\bigoplus_{j\in I}M_j$ be the inclusion.
 The inverse sends $m\otimes n$ in the $i$th summand to $\iota_i(m)\otimes n$ and extends over the direct sum.
 Both composites fix every element $m\otimes n$ from a summand.
 The other variable is handled in the same way.
+\end{proof}
+\end{supplementary}
+
+\begin{lemma}[Hom and finite direct sums]\label{lem:hom-finite-sums}
+For finite sets $I,J$ and right $A$-modules $M_j,N_i$, there is a natural isomorphism
+\begin{equation}\label{eq:hom-finite-sums}
+\begin{aligned}
+\Hom_A\Bigl(\bigoplus_{j\in J}M_j,\bigoplus_{i\in I}N_i\Bigr)
+&\xrightarrow{\sim}\bigoplus_{\substack{i\in I\\j\in J}}\Hom_A(M_j,N_i),\\
+f&\longmapsto(\pi_i f\iota_j)_{i\in I,\ j\in J},
+\end{aligned}
+\end{equation}
+where $\iota_j:M_j\to\bigoplus_{j'\in J}M_{j'}$ and $\pi_i:\bigoplus_{i'\in I}N_{i'}\to N_i$ are the inclusions and projections.
+\end{lemma}
+
+\begin{supplementary}
+\begin{proof}
+Write $\pi'_j:\bigoplus_{j'\in J}M_{j'}\to M_j$ and $\iota'_i:N_i\to\bigoplus_{i'\in I}N_{i'}$ for the remaining projections and inclusions.
+The inverse sends $(f_{ij})_{i\in I,\ j\in J}$ to $\sum_{i\in I}\sum_{j\in J}\iota'_if_{ij}\pi'_j$.
+Both composites are identities because $\sum_{j\in J}\iota_j\pi'_j$ and $\sum_{i\in I}\iota'_i\pi_i$ are identity maps, while $\pi'_j\iota_{j'}=\delta_{jj'}\id_{M_j}$ and $\pi_i\iota'_{i'}=\delta_{ii'}\id_{N_i}$.
+The same formulas commute with pre- and postcomposition, proving naturality.
 \end{proof}
 \end{supplementary}
 
@@ -345,8 +356,7 @@ Thus both comparisons are natural.
 \end{advanced}
 
 Let $S$ be finite-dimensional semisimple, and consider bimodules ${}_SV_S$, ${}_SW_S$ finitely generated on the right and left, respectively.
-Corollary~\ref{cor:semisimple-summands} gives $V_S\in\add S$ and ${}_SW\in\add_{\mod S^\op}(S)$.
-Proposition~\ref{prop:tensor-duals} therefore gives natural bimodule isomorphisms
+Exercise~\ref{ex:tensor-duality-proof} shows, using only Corollary~\ref{cor:semisimple-summands}, that there are natural bimodule isomorphisms
 \begin{equation}\label{eq:tensor-duals}
 \theta_r:W^*\otimes_S V^*\xrightarrow{\sim}(V\otimes_S W)^*,
 \qquad
@@ -410,10 +420,10 @@ These give, respectively, compatibility with $vs\otimes w=v\otimes sw$ and with 
 Compatibility with $(gs)\otimes F=g\otimes(sF)$ follows from $(gs)(a_jw)=g(sa_jw)$.
 The other actions follow from right $S$-linearity of $g$ and $F(tv)=F(v)(1\otimes t^\op)$.
 
-The comparison maps $\gamma_M$ in \eqref{eq:en-dual-comparison} give
+The comparison maps $\omega_M$ in \eqref{eq:en-dual-comparison} give
 \[
-\gamma_{V\otimes_S W}\circ\theta_{\en}
-=\theta_r\circ(\id_{W^*}\otimes\gamma_V),
+\omega_{V\otimes_S W}\circ\theta_{\en}
+=\theta_r\circ(\id_{W^*}\otimes\omega_V),
 \]
 since both sides send $g\otimes F$, evaluated at $v\otimes w$, to $\sum_j g(a_jw)\tau(b_j)$.
 Thus $\theta_{\en}$ is an isomorphism by Theorem~\ref{prop:dual-comparison}.
@@ -426,6 +436,109 @@ For the maps $\alpha_M(f)=\tau\circ f$ in \eqref{eq:dual-comparison},
 =\theta_D\circ(\alpha_W\otimes\id_{V^*}),
 \]
 because both sides send $g\otimes f$ to the functional $v\otimes w\mapsto\tau(g(f(v)w))$.
+\end{advanced}
+
+\begin{definition}\label{def:total-tensor-grading}
+For graded right and left $S$-modules $M,N$, their tensor product has \defn{total grading}
+\[
+(M\otimes_S N)_d=\bigoplus_{p+q=d}M_p\otimes_S N_q.
+\]
+The same definition applies to bimodules, and to vector spaces by taking $S=\Bbbk$.
+\end{definition}
+
+The decomposition follows by distributing tensor products over direct sums, as in Lemma~\ref{lem:tensor-properties}(4).
+When $M,N$ are locally finite-dimensional and bounded below, only finitely many pairs $(p,q)$ contribute in a fixed degree, so the tensor product is locally finite-dimensional and bounded below.
+
+\begin{lemma}\label{lem:endomorphism-duals}
+Let $S$ be finite-dimensional semisimple and ${}_SV_S$ a finite-dimensional bimodule.
+There are bimodule isomorphisms
+\begin{equation}\label{eq:hom-from-S-duals}
+\begin{aligned}
+V\otimes_S V^*&\xrightarrow{\sim}\End_S(V),
+& v\otimes f&\longmapsto\bigl(u\mapsto vf(u)\bigr),\\
+{}^*V\otimes_S V&\xrightarrow{\sim}\End_{S^\op}(V),
+& g\otimes v&\longmapsto\bigl(u\mapsto g(u)v\bigr).
+\end{aligned}
+\end{equation}
+The source actions are those of Lemma~\ref{lem:tensor-properties}(2).
+The target actions are defined, for $s,t\in S$ and $u\in V$, by
+\begin{equation}\label{eq:endomorphism-actions}
+\begin{aligned}
+(sFt)(u)&=sF(tu)&&\text{for }F\in\End_S(V),\\
+(sGt)(u)&=G(us)t&&\text{for }G\in\End_{S^\op}(V).
+\end{aligned}
+\end{equation}
+\end{lemma}
+
+\begin{supplementary}
+\begin{proof}
+For the first comparison, $(vs)f(u)=v(sf)(u)$ and $vf(us)=vf(u)s$ give a well-defined map to $\End_S(V)$.
+By Corollary~\ref{cor:semisimple-summands}, identify $V_S$ with a direct summand of $S^{\oplus m}$ for some integer $m\geq0$, and let $p:S^{\oplus m}\to V$ be the right $S$-linear projection.
+For $1\leq j\leq m$, let $\varepsilon_j\in S^{\oplus m}$ be the vector with $1$ in coordinate $j$ and zero elsewhere, and let $q_j:S^{\oplus m}\to S$ be the coordinate projection.
+Put $v_j=p(\varepsilon_j)$ and $f_j=q_j|_V$.
+Then $u=\sum_{j=1}^m v_jf_j(u)$ for every $u\in V$.
+The inverse is
+\[
+\End_S(V)\longrightarrow V\otimes_S V^*,
+\qquad F\longmapsto\sum_{j=1}^m F(v_j)\otimes f_j.
+\]
+Indeed, one composite sends $F$ to $u\mapsto\sum_{j=1}^mF(v_j)f_j(u)=F(u)$, and the other sends
+\[
+v\otimes f\longmapsto\sum_{j=1}^m vf(v_j)\otimes f_j
+=v\otimes\sum_{j=1}^m f(v_j)f_j=v\otimes f.
+\]
+Applying this construction over $S^\op$ proves the second isomorphism, using
+$V\otimes_{S^\op}{}^*V\cong{}^*V\otimes_S V$, $v\otimes g\mapsto g\otimes v$.
+
+The commuting left and right actions on $V$ make \eqref{eq:endomorphism-actions} bimodule actions.
+For example, $(sFt)(ur)=sF(tur)=sF(tu)r$ for $r\in S$, so $sFt$ is right $S$-linear.
+The images of $sv\otimes ft$ and $sg\otimes vt$, evaluated at $u$, are $svf(tu)$ and $g(us)vt$, respectively.
+These are exactly the actions in \eqref{eq:endomorphism-actions}, proving bimodule linearity of both comparisons.
+\end{proof}
+\end{supplementary}
+
+Evaluation applies a functional to an element.
+Coevaluation expresses the identity endomorphism as an element of a tensor product.
+
+\begin{proposition}\label{prop:S-evaluation-coevaluation}
+For a bimodule $ {}_SV_S$, where $S$ is finite-dimensional semisimple, evaluation gives bimodule maps
+\begin{equation}\label{eq:S-evaluation-pairings}
+\begin{aligned}
+V^*\otimes_S V&\longrightarrow S,& f\otimes v&\longmapsto f(v),\\
+V\otimes_S{}^*V&\longrightarrow S,& v\otimes g&\longmapsto g(v).
+\end{aligned}
+\end{equation}
+If $V$ is finite-dimensional, the \defn{coevaluation maps} are
+\begin{equation}\label{eq:S-coevaluation}
+\begin{aligned}
+S&\longrightarrow V\otimes_S V^*\xrightarrow{\sim}\End_S(V),
+& s&\longmapsto\bigl(v\mapsto sv\bigr),\\
+S&\longrightarrow{}^*V\otimes_S V\xrightarrow{\sim}\End_{S^\op}(V),
+& s&\longmapsto\bigl(v\mapsto vs\bigr).
+\end{aligned}
+\end{equation}
+The isomorphisms are those in \eqref{eq:hom-from-S-duals}.
+Both coevaluation maps are bimodule maps, and each image of $1$ corresponds to $\id_V$.
+\end{proposition}
+
+\begin{supplementary}
+\begin{proof}
+The identities $(fs)(v)=f(sv)$ and $(sg)(v)=g(vs)$ from \eqref{eq:bimodule-dual-actions} make evaluation well-defined on the two tensor products; the other two actions give its bimodule linearity.
+For coevaluation, left multiplication is right $S$-linear and right multiplication is left $S$-linear because the two actions on $V$ commute.
+Under the endomorphism actions in \eqref{eq:endomorphism-actions}, both multiplication assignments preserve the two $S$-actions.
+The isomorphisms in \eqref{eq:hom-from-S-duals} therefore give the stated bimodule maps.
+\end{proof}
+\end{supplementary}
+
+For a finite-dimensional graded bimodule $ {}_SV_S$, use $V^{\grstar}$ and $ {}^{\grstar}V$ in Proposition~\ref{prop:S-evaluation-coevaluation}.
+With the total grading, evaluation and coevaluation preserve degree: evaluation pairs degrees $i$ and $-i$, and $\id_V$ has degree $0$.
+
+\begin{advanced}
+The evaluation and coevaluation maps in Proposition~\ref{prop:S-evaluation-coevaluation} are the constructions in the last two paragraphs of \cite[\S2.7, pp.~484--485]{BGS96}, translated to our notation.
+
+For a locally finite-dimensional graded bimodule $ {}_SV_S$, \eqref{eq:S-coevaluation} applies to each $V_d$; a coevaluation for the whole module need not exist.
+For example, take $S\neq0$ and $V=\bigoplus_{d\geq0}S(-d)$.
+Every element $\sum_{i=1}^n v_i\otimes f_i$ of $V\otimes_S V^{\grstar}$ defines an endomorphism with image contained in the finite-dimensional submodule $\sum_{i=1}^n v_iS$, so it cannot represent $\id_V$.
 \end{advanced}
 
 
@@ -723,10 +836,16 @@ For a graded right $A$-module $M$, regard $M_d$ as an $A$-module via $A\to A/A_+
 The simple direct summands of the semisimple module $M_d$ are its \defn{composition factors}.
 
 \begin{notation}
-By Theorem~\ref{thm:artin-wedderburn}, choose a complete set of primitive orthogonal idempotents $e_1,\ldots,e_n\in S$, i.e. $e_1S,\ldots,e_nS$ represent the full set of simple right $S$-modules up to isomorphism.
+Under Assumption~\ref{ass:basic-semisimple}, the coordinate idempotents $e_1,\ldots,e_n$ of $S$ are primitive, and $e_1S,\ldots,e_nS$ represent each isomorphism class of simple right $S$-modules exactly once.
 Then $L_j:=e_jS\cong e_jA/e_jA_+$ is a graded simple $A$-module concentrated in degree $0$ for every $1\leq j\leq n$.
 \phantomsection\label{not:hilbert-simples-summands}
 \end{notation}
+
+\begin{remark}[General $S$]
+For an arbitrary finite-dimensional semisimple $S$, choose primitive idempotents $e_1,\ldots,e_n$, one for each isomorphism class of simple right $S$-modules; they need not sum to $1$.
+For instance, for $S=\Mat_r(\Bbbk)$ take only $e_1=e_{11}$.
+The rest of this subsection then applies verbatim, with multiplicities computed by \eqref{eq:composition-Hom} over the division algebras $\End_A(L_j)$.
+\end{remark}
 
 \begin{definition}\label{def:dimension-vector}\label{def:hilbert-series}
 For a locally finite-dimensional graded right $A$-module $M$, write $[M_d:L_j]$ for the multiplicity of the composition factor $L_j$ in $M_d$.
@@ -760,7 +879,7 @@ The multiplicities can be computed using Hom spaces:
 \end{equation}
 Indeed, $M_dA_+=0$, so every map $e_jA\to M_d$ factors uniquely through $e_jA/e_jA_+\cong L_j$.
 This identifies $\Hom_A(e_jA,M_d)$ with $\Hom_A(L_j,M_d)$; precomposition gives its right vector-space structure over the division algebra $\End_A(L_j)$.
-By the Schur's Lemma, A non-zero map between simple modules is an isomorphism, so each copy of $L_j$ contributes one copy of $\End_A(L_j)$, and the other simples contribute zero.
+By Schur's lemma, a non-zero map between simple modules is an isomorphism, so each copy of $L_j$ contributes one copy of $\End_A(L_j)$, and the other simples contribute zero.
 This also shows that the multiplicities are independent of the chosen decomposition.
 
 \begin{example}\label{ex:dimension-vector-coordinate}
@@ -791,98 +910,6 @@ h_{M(a)}(t)=\sum_d(\dimvec M_{d+a})t^d
 \]
 \end{proof}
 
-\begin{supplementary}
-\begin{definition}\label{def:total-tensor-grading}
-For graded right and left $S$-modules $M,N$, their tensor product has \defn{total grading}
-\[
-(M\otimes_S N)_d=\bigoplus_{p+q=d}M_p\otimes_S N_q.
-\]
-The same definition applies to bimodules, and to vector spaces by taking $S=\Bbbk$.
-\end{definition}
-
-The decomposition follows by distributing tensor products over direct sums, as in Lemma~\ref{lem:tensor-properties}(4).
-When $M,N$ are locally finite-dimensional and bounded below, only finitely many pairs $(p,q)$ contribute in a fixed degree, so the tensor product is locally finite-dimensional and bounded below.
-
-\begin{lemma}\label{lem:endomorphism-duals}
-Let $S$ be finite-dimensional semisimple and ${}_SV_S$ a finite-dimensional bimodule.
-There are bimodule isomorphisms
-\begin{equation}\label{eq:hom-from-S-duals}
-\begin{aligned}
-V\otimes_S V^*&\xrightarrow{\sim}\End_S(V),
-& v\otimes f&\longmapsto\bigl(u\mapsto vf(u)\bigr),\\
-{}^*V\otimes_S V&\xrightarrow{\sim}\End_{S^\op}(V),
-& g\otimes v&\longmapsto\bigl(u\mapsto g(u)v\bigr).
-\end{aligned}
-\end{equation}
-The source actions are those of Lemma~\ref{lem:tensor-properties}(2).
-The target actions are defined, for $s,t\in S$ and $u\in V$, by
-\begin{equation}\label{eq:endomorphism-actions}
-\begin{aligned}
-(sFt)(u)&=sF(tu)&&\text{for }F\in\End_S(V),\\
-(sGt)(u)&=G(us)t&&\text{for }G\in\End_{S^\op}(V).
-\end{aligned}
-\end{equation}
-\end{lemma}
-
-\begin{proof}
-For the first comparison, $(vs)f(u)=v(sf)(u)$ and $vf(us)=vf(u)s$ give a well-defined map to $\End_S(V)$.
-By Corollary~\ref{cor:semisimple-summands}, identify $V_S$ with a direct summand of $S^{\oplus m}$ for some integer $m\geq0$, and let $p:S^{\oplus m}\to V$ be the right $S$-linear projection.
-For $1\leq j\leq m$, let $\varepsilon_j\in S^{\oplus m}$ be the vector with $1$ in coordinate $j$ and zero elsewhere, and let $q_j:S^{\oplus m}\to S$ be the coordinate projection.
-Put $v_j=p(\varepsilon_j)$ and $f_j=q_j|_V$.
-Then $u=\sum_{j=1}^m v_jf_j(u)$ for every $u\in V$.
-The inverse is
-\[
-\End_S(V)\longrightarrow V\otimes_S V^*,
-\qquad F\longmapsto\sum_{j=1}^m F(v_j)\otimes f_j.
-\]
-Indeed, one composite sends $F$ to $u\mapsto\sum_{j=1}^mF(v_j)f_j(u)=F(u)$, and the other sends
-\[
-v\otimes f\longmapsto\sum_{j=1}^m vf(v_j)\otimes f_j
-=v\otimes\sum_{j=1}^m f(v_j)f_j=v\otimes f.
-\]
-Applying this construction over $S^\op$ proves the second isomorphism, using
-$V\otimes_{S^\op}{}^*V\cong{}^*V\otimes_S V$, $v\otimes g\mapsto g\otimes v$.
-
-The commuting left and right actions on $V$ make \eqref{eq:endomorphism-actions} bimodule actions.
-For example, $(sFt)(ur)=sF(tur)=sF(tu)r$ for $r\in S$, so $sFt$ is right $S$-linear.
-The images of $sv\otimes ft$ and $sg\otimes vt$, evaluated at $u$, are $svf(tu)$ and $g(us)vt$, respectively.
-These are exactly the actions in \eqref{eq:endomorphism-actions}, proving bimodule linearity of both comparisons.
-\end{proof}
-
-Evaluation applies a functional to an element.
-Coevaluation expresses the identity endomorphism as an element of a tensor product.
-
-\begin{proposition}\label{prop:S-evaluation-coevaluation}
-For a bimodule $ {}_SV_S$, where $S$ is finite-dimensional semisimple, evaluation gives bimodule maps
-\begin{equation}\label{eq:S-evaluation-pairings}
-\begin{aligned}
-V^*\otimes_S V&\longrightarrow S,& f\otimes v&\longmapsto f(v),\\
-V\otimes_S{}^*V&\longrightarrow S,& v\otimes g&\longmapsto g(v).
-\end{aligned}
-\end{equation}
-If $V$ is finite-dimensional, the \defn{coevaluation maps} are
-\begin{equation}\label{eq:S-coevaluation}
-\begin{aligned}
-S&\longrightarrow V\otimes_S V^*\xrightarrow{\sim}\End_S(V),
-& s&\longmapsto\bigl(v\mapsto sv\bigr),\\
-S&\longrightarrow{}^*V\otimes_S V\xrightarrow{\sim}\End_{S^\op}(V),
-& s&\longmapsto\bigl(v\mapsto vs\bigr).
-\end{aligned}
-\end{equation}
-The isomorphisms are those in \eqref{eq:hom-from-S-duals}.
-Both coevaluation maps are bimodule maps, and each image of $1$ corresponds to $\id_V$.
-\end{proposition}
-
-\begin{proof}
-The identities $(fs)(v)=f(sv)$ and $(sg)(v)=g(vs)$ from \eqref{eq:bimodule-dual-actions} make evaluation well-defined on the two tensor products; the other two actions give its bimodule linearity.
-For coevaluation, left multiplication is right $S$-linear and right multiplication is left $S$-linear because the two actions on $V$ commute.
-Under the endomorphism actions in \eqref{eq:endomorphism-actions}, both multiplication assignments preserve the two $S$-actions.
-The isomorphisms in \eqref{eq:hom-from-S-duals} therefore give the stated bimodule maps.
-\end{proof}
-
-For a finite-dimensional graded bimodule $ {}_SV_S$, use $V^{\grstar}$ and $ {}^{\grstar}V$ in Proposition~\ref{prop:S-evaluation-coevaluation}.
-With the total grading, evaluation and coevaluation preserve degree: evaluation pairs degrees $i$ and $-i$, and $\id_V$ has degree $0$.
-
 To multiply two arrays $C=(c_{ij})$ and $D=(d_{ij})$, or a row vector $m=(m_i)$ and an array $C$, use
 \[
 (CD)_{i\ell}=\sum_{j=1}^n c_{ij}d_{j\ell},
@@ -905,6 +932,7 @@ h_{M\otimes_S A}(t)=h_M(t)h_A(t).
 \]
 \end{lemma}
 
+\begin{supplementary}
 \begin{proof}
 Decompose $N\cong\bigoplus_{i=1}^n(e_iS)^{\oplus[N:L_i]}$.
 Multiplication $e_iS\otimes_S U\to e_iU$, $e_is\otimes u\mapsto e_isu$, is an isomorphism with inverse $u\mapsto e_i\otimes u$.
@@ -917,14 +945,6 @@ Apply the first formula to $M_p\otimes_S A_q$ and sum over all $p,q\in\Z$ with $
 By the definition of $h_A(t)$, the resulting sum is the coefficient of $t^d$ in $h_M(t)h_A(t)$.
 \end{proof}
 \end{supplementary}
-
-\begin{advanced}
-The evaluation and coevaluation maps in Proposition~\ref{prop:S-evaluation-coevaluation} are the constructions in the last two paragraphs of \cite[\S2.7, pp.~484--485]{BGS96}, translated to our notation.
-
-For a locally finite-dimensional graded bimodule $ {}_SV_S$, \eqref{eq:S-coevaluation} applies to each $V_d$; a coevaluation for the whole module need not exist.
-For example, take $S\neq0$ and $V=\bigoplus_{d\geq0}S(-d)$.
-Every element $\sum_{i=1}^n v_i\otimes f_i$ of $V\otimes_S V^{\grstar}$ defines an endomorphism with image contained in the finite-dimensional submodule $\sum_{i=1}^n v_iS$, so it cannot represent $\id_V$.
-\end{advanced}
 
 \begin{example}[Hilbert series of a tensor algebra]\label{ex:hilbert-tensor-algebra}
 Consider the tensor algebra $A=T_S(V)$ and put 
@@ -943,9 +963,9 @@ h_{T_S(V)}(t)=\sum_{d\geq0}t^dC^d=(I_n-tC)^{-1}.}
 Indeed, multiplying the series on either side by $I_n-tC$ gives constant coefficient $I_n$; the coefficient of $t^d$ for $d\geq1$ is $C^d-C^d=0$.
 The inverse is therefore an identity of formal power series with the coefficient multiplication defined above.
 
-For $S=\Mat_d(\Bbbk)$, take the bimodule $V=S^{\oplus m}$ and $e=e_{11}$.
-There is one simple right $S$-module $eS$, and $[eV:eS]=m$, whereas $\dim_\Bbbk V=md^2$.
-Hence $h_{T_S(V)}(t)=1/(1-mt)$.
+\emph{General $S$.} Outside Assumption~\ref{ass:basic-semisimple}, take for instance $S=\Mat_r(\Bbbk)$, the bimodule $V=S^{\oplus m}$, and $e=e_{11}$.
+There is one simple right $S$-module $eS$, and $[eV:eS]=m$, whereas $\dim_\Bbbk V=mr^2$.
+Hence $h_{T_S(V)}(t)=1/(1-mt)$: the coefficients record simple-module multiplicities, not dimensions.
 \end{example}
 
 \begin{example}[Upper triangular algebras and a quotient]\label{ex:hilbert-triangular}
@@ -1063,7 +1083,7 @@ Indeed, for $s,t\in S$ and $u\in U$, the action on $S$-dual \eqref{eq:bimodule-d
 (sgt)(u)=g(us)t=0\quad(g\in{}^\perp U),
 \]
 since $tu,us\in U$.
-The orthogonal complements are defined without choosing a symmetrising form, but it is possible to realise, through the natural isomorphism associated to a chosen symmeterising form, the orthogonal complements as a sub-bimodule of $\bbD(M)$.
+The orthogonal complements are defined without choosing a symmetrising form, but it is possible to realise, through the natural isomorphism associated to a chosen symmetrising form, the orthogonal complements as a sub-bimodule of $D(M)$.
 
 \begin{advanced}
 If $S$ is equipped with a symmetrising form $\tau:S\to\Bbbk$, the comparison maps $\alpha_M,\beta_M$ of \eqref{eq:dual-comparison} satisfy
@@ -1071,7 +1091,7 @@ If $S$ is equipped with a symmetrising form $\tau:S\to\Bbbk$, the comparison map
 \alpha_M(U^\perp)=\{\lambda\in D(M)\mid\lambda(u)=0\text{ for all }u\in U\}=\beta_M({}^\perp U)
 .
 \end{equation}
-The middle space sits inside the two outer space, since $\tau\circ\lambda$ satisfies the definition of orthogonal complement.
+The middle space contains $\alpha_M(U^\perp)$ and $\beta_M({}^\perp U)$: if $f\in U^\perp$ and $g\in{}^\perp U$, then $\tau\circ f$ and $\tau\circ g$ vanish on $U$.
 Conversely, $\alpha_M(f)(U)=0$ gives
 \[
 \tau(f(u)s)=\tau(f(us))=0

@@ -222,6 +222,10 @@ If $\Bbbk$ is algebraically closed, then $D_i=\Bbbk$ for every $i$.
 For semisimple $B$, every left or right $B$-module is semisimple, and every submodule has a complement. In particular, the definition is independent of the chosen side.
 \end{theorem}
 
+\begin{advanced}
+For proofs of $\rad M=M\rad B$ and of Theorem~\ref{thm:artin-wedderburn}, see for example \cite{DK94}; \cite{Bez23} gives a short account of semisimple modules and Wedderburn's theorem.
+\end{advanced}
+
 \begin{corollary}\label{cor:semisimple-summands}
 Every finite-dimensional left or right module over a finite-diemnsional semisimple algebra $S$ is a direct summand of $S^{\oplus n}$ for some $n$, i.e. $M\in \add(S)$ for all $M\in \mod S$.
 \end{corollary}
@@ -462,7 +466,7 @@ Indeed, $i$ and $p$ preserve the direct sum decompositions, so their kernels and
 
 \begin{example}\label{ex:short-exact-row}
 Let $A=\Bbbk A_2$. 
-Consider $P_1:=e_{11}A$ which has $\rad P_1 = \Bbbk e_{12}$ and $S_1:=P_1/\rad P_1$.
+Consider $P_1:=e_{11}A$ which has $\rad P_1 = \Bbbk e_{12}$ and $L_1:=P_1/\rad P_1$.
 Then we have a short exact sequence in $\Grmod A$:
 \[
 0\longrightarrow \rad P_1\xrightarrow{i} P_1
@@ -470,9 +474,9 @@ Then we have a short exact sequence in $\Grmod A$:
 \qquad
 i(c e_{12})=c e_{12},\quad p(m)=\overline m.
 \]
-Note that $\deg \rad P_1 = 1$ and $\deg S_1=0$.  Let $S_2:=\Bbbk e_{22} = e_{22} A$, which we treat as a graded $A$-module concentrated in degree $0$.  Note that $S_2 \cong \rad P_1$ as ungraded modules but we only have $S_2\cong (\rad P_1) (1)$, which yields the following short exact sequence in $\Grmod A$:
+Note that $\deg \rad P_1 = 1$ and $\deg L_1=0$.  Let $L_2:=\Bbbk e_{22} = e_{22} A$, which we treat as a graded $A$-module concentrated in degree $0$.  Note that $L_2 \cong \rad P_1$ as ungraded modules but we only have $L_2\cong (\rad P_1) (1)$, which yields the following short exact sequence in $\Grmod A$:
 \[
-0\longrightarrow S_2(-1)\xrightarrow{} P_1
+0\longrightarrow L_2(-1)\xrightarrow{} P_1
 \xrightarrow{}P_1/\rad P_1\longrightarrow0,
 \]
 \end{example}
@@ -599,18 +603,6 @@ We use the canonical identifications
 \]
 and set $U^{\otimes_\Bbbk 0}:=\Bbbk$.
 
-
-
-\begin{advanced}
-More generally, when $I,J$ are infinite, the tensor product can be defined as a pair.
-The map $(u,v)\mapsto u\otimes v$ can be defined as the linear extension of
-\[
-\Bigl(\sum_{i\in I}a_i u_i,\sum_{j\in J}b_j v_j\Bigr)
-\longmapsto\sum_{(i,j)\in I\times J}a_i b_j(u_i\otimes v_j)
-\quad\text{for finitely supported families }(a_i)_{i\in I},(b_j)_{j\in J}.
-\]
-Then universal property still holds for the $U\otimes_\Bbbk V$.
-\end{advanced}
 
 \subsection{Direct sums and direct products}\label{subsec:sums-products}
 
@@ -964,6 +956,19 @@ The formulas commute with precomposition and postcomposition, so the comparison 
 \phantomsection\label{not:semisimple-base}
 Fix a finite-dimensional semisimple $\Bbbk$-algebra $S$, which is regarded as concentrated in degree $0$ when treated as a graded algebra.
 For a graded algebra $A$ with $A_0=S$, each degree component is a bimodule ${}_S(A_i)_S$.
+
+\begin{assumption}\label{ass:basic-semisimple}
+For simplicity, from now on and unless stated otherwise,
+\[
+S=\bigoplus_{i=1}^n\Bbbk e_i
+\]
+with coordinate idempotents $e_1,\ldots,e_n$.
+We write $\tau_S:S\to\Bbbk$, $\sum_{i=1}^na_ie_i\mapsto\sum_{i=1}^na_i$, for its \defn{standard symmetrising form}; see Definition~\ref{def:symmetrising-form} and Example~\ref{ex:symmetrising-form}.
+\end{assumption}
+
+The coordinate idempotents are the primitive idempotents of $S$, so $\tau_S$ involves no choice.
+Statements already proved for an arbitrary finite-dimensional semisimple $S$ keep their generality.
+A remark headed \emph{General $S$} marks each place where an arbitrary finite-dimensional semisimple $S$ needs extra care, usually the choice of a symmetrising form.
 %To dualise these components while retaining both actions, we distinguish maps to $S$ that are right or left $S$-linear.
 %For duality of arbitrary $A$-modules we already have the canonical functors in \eqref{eq:linear-dual-functors}.
 
@@ -1200,7 +1205,8 @@ The following maps are symmetrising forms:
 
 \begin{advanced}
 Generally, any finite-dimensional semisimple algebra has a symmetrising form, by Eilenberg--Nakayama.\footnote{S.~Eilenberg and T.~Nakayama, \emph{On the dimension of modules and algebras, II. Frobenius algebras and quasi-Frobenius rings}, Nagoya Math. J. \textbf{9} (1955), 1--16, \S2, Propositions 3--5, pp.~4--5; \href{https://doi.org/10.1017/S0027763000023229}{doi:10.1017/S0027763000023229}.}
-For example, if $\lambda_j:\Delta_j\to \Bbbk$ is a symmetrising form for a finite-dimensional division $\Bbbk$-algebra $\Delta_j$ with $j=1,\ldots, n$. 
+For the graded analogue, see \cite{DNN17}.
+For example, let $\lambda_j:\Delta_j\to\Bbbk$ be a symmetrising form on a finite-dimensional division $\Bbbk$-algebra $\Delta_j$ for $j=1,\ldots,n$.
 Then the semisimple algebra $S=\prod_{j=1}^n\Mat_{n_j}(\Delta_j)$ has a symmetrising form given by
 \[
 \tau:S\longrightarrow\Bbbk,\qquad
@@ -1211,7 +1217,14 @@ Then the semisimple algebra $S=\prod_{j=1}^n\Mat_{n_j}(\Delta_j)$ has a symmetri
 
 \begin{theorem}[Comparison of duals]\label{prop:dual-comparison}\label{cor:graded-dual-comparison}
 Choose a symmetrising form $\tau:S\to\Bbbk$.
-Postcomposition with $\tau$ defines natural isomorphisms from the $S$-dual (on either side) to $D$, and also from the graded $S$-dual (on either side) to $\bbD$.
+For $M\in\mod S$ and $N\in\mod(S^\op)$, postcomposition with $\tau$ gives $S$-module isomorphisms
+\begin{equation}\label{eq:dual-comparison}
+\alpha_M:M^*\longrightarrow D(M),\quad f\longmapsto\tau\circ f,
+\qquad
+\beta_N:{}^*N\longrightarrow D(N),\quad g\longmapsto\tau\circ g,
+\end{equation}
+natural in $M$ and $N$.
+Applied in each degree, the same maps give natural isomorphisms $M^{\grstar}\cong\bbD(M)$ and ${}^{\grstar}N\cong\bbD(N)$ for $M\in\grmod S$ and $N\in\grmod(S^\op)$; we again write $\alpha_M$ and $\beta_N$.
 \end{theorem}
 
 \begin{supplementary}
@@ -1219,13 +1232,7 @@ We can spell this out more precisely:
 
 
 \underline{\emph{Ungraded duals.}}
-For $M\in\mod S$ and $N\in\mod(S^\op)$, the maps
-\begin{equation}\label{eq:dual-comparison}
-\alpha_M:M^*\longrightarrow D(M),\quad f\longmapsto\tau\circ f,
-\qquad
-\beta_N:{}^*N\longrightarrow D(N),\quad g\longmapsto\tau\circ g
-\end{equation}
-are $S$-module isomorphisms and give natural isomorphisms
+The isomorphisms \eqref{eq:dual-comparison} give natural isomorphisms
 \begin{equation}\label{eq:dual-comparison-functors}
 \begin{aligned}
 \alpha:(-)^*&\xrightarrow{\sim}D
@@ -1285,12 +1292,18 @@ Same argument applies dually to $S^\op$ and $\beta$.
 The natural isomorphisms in Theorem~\ref{prop:dual-comparison} depend on the chosen symmetrising form.
 For example, every choice $c_1,\ldots,c_n\in\Bbbk\setminus\{0\}$ gives a form
 $\tau(a_1,\ldots,a_n)=\sum_{i=1}^n c_i a_i$ on $\Bbbk^{\oplus n}$.
+Under Assumption~\ref{ass:basic-semisimple} we always use $\tau=\tau_S$, so $\alpha_M$ and $\beta_N$ involve no choice.
+\end{remark}
+
+\begin{remark}[General $S$]\label{rem:general-S-comparison}
+For an arbitrary finite-dimensional semisimple $S$, identifying an $S$-dual with a $\Bbbk$-linear dual requires choosing a symmetrising form.
+If $\tau'$ is another one, then $\tau'(s)=\tau(zs)$ for a central unit $z\in S$, and the two identifications differ by multiplication by $z$; see Exercise~\ref{ex:transported-dual-action}(3).
 \end{remark}
 
 \begin{remark}\label{rem:transported-dual-action}
 Let $A$ be a graded algebra with $A_0=S$.
-The space $\Hom_S(M,S)$ do not have a natural left $A$-module on the spot, but can be after \emph{picking a symmetrising form $\tau$ of $S$}.
-Indeed, the comparison \eqref{eq:graded-dual-comparison} transports the canonical left $A$-action on $\bbD(M)$ to the graded $S$-dual of a locally finite-dimensional module:
+The space $\Hom_S(M,S)$ has no natural left $A$-module structure on its own, but acquires one after \emph{picking a symmetrising form $\tau$ of $S$}; under Assumption~\ref{ass:basic-semisimple} we pick $\tau=\tau_S$.
+Indeed, the graded comparison $\alpha_M$ of Theorem~\ref{prop:dual-comparison} transports the canonical left $A$-action on $\bbD(M)$ to the graded $S$-dual of a locally finite-dimensional module:
 \[
 af=\alpha_M^{-1}(a\alpha_M(f))\quad\text{for right }M,
 \qquad ga=\beta_N^{-1}(\beta_N(g)a)\quad\text{for left }N,
@@ -1317,9 +1330,9 @@ With the actions in \eqref{eq:bimodule-dual-actions}, we obtain natural isomorph
 \end{aligned}
 \end{equation}
 
-There is also a natural isomorphism $\gamma:(-)^{*_\en}\xrightarrow{\sim}(-)^*$ given by
+There is also a natural isomorphism $\omega:(-)^{*_\en}\xrightarrow{\sim}(-)^*$ given by
 \begin{equation}\label{eq:en-dual-comparison}
-\gamma_M:M^{*_{\en}}\to M^*, \qquad F\mapsto \big(m\mapsto \sum_j a_j\tau(b_j)\big)
+\omega_M:M^{*_{\en}}\to M^*, \qquad F\mapsto \big(m\mapsto \sum_j a_j\tau(b_j)\big)
 \quad\text{for}\quad
 F(m)=\sum_j a_j\otimes b_j^\op,
 \end{equation}
@@ -1327,9 +1340,9 @@ which also depends on $\tau$, but does not require $S^\en$ to be semisimple.
 
 Consequently, on finite-dimensional $S$-bimodules and lfd graded $S$-bimodules we have natural isomorphisms:
 \begin{align*}
-\text{Ungraded:}\quad &(-)^{*_{\en}}\xrightarrow[\gamma]{\sim}(-)^*
+\text{Ungraded:}\quad &(-)^{*_{\en}}\xrightarrow[\omega]{\sim}(-)^*
 \xrightarrow[\alpha]{\sim}D\xleftarrow[\beta]{\sim}{}^*(-) \text{ as functors } (\mod S^\en)^\op\to\mod S^\en, \\
-\text{Graded:}\quad  &(-)^{\grstar[_{\en}]}\xrightarrow[\gamma]{\sim}(-)^{\grstar}
+\text{Graded:}\quad  &(-)^{\grstar[_{\en}]}\xrightarrow[\omega]{\sim}(-)^{\grstar}
 \xrightarrow[\alpha]{\sim}\bbD\xleftarrow[\beta]{\sim}{}^{\grstar}(-) \text{ as functors } (\grmod S^\en)^\op\to\grmod S^\en.
 \end{align*}
 \end{theorem}
@@ -1338,14 +1351,14 @@ The form $\tau_{\en}(a\otimes b^\op)=\tau(a)\tau(b)$ is symmetrising on $S^{\en}
 Indeed, $\tau_{\en}((a\otimes b^\op)(c\otimes d^\op))=\tau(ac)\tau(db)=\tau(ca)\tau(bd)$, and its pairing is the tensor product of two non-degenerate pairings.
 The formula \eqref{eq:en-dual-comparison} satisfies
 \[
-\gamma_M(F)(ms)=\gamma_M(F)(m)s,\qquad
-\gamma_M(sFt)=s\gamma_M(F)t,\qquad
-\alpha_M(\gamma_M(F))=\tau_{\en}\circ F.
+\omega_M(F)(ms)=\omega_M(F)(m)s,\qquad
+\omega_M(sFt)=s\omega_M(F)t,\qquad
+\alpha_M(\omega_M(F))=\tau_{\en}\circ F.
 \]
 The argument \eqref{eq:dual-inverses}, applied to $S^{\en}$ and $\tau_{\en}$, makes $F\mapsto\tau_{\en}\circ F$ an isomorphism.
-Thus $\gamma_M$ is an isomorphism.
-For a bimodule map $u:M\to N$ and $F\in N^{*_{\en}}$, the formula \eqref{eq:en-dual-comparison} gives $\gamma_M(F\circ u)=\gamma_N(F)\circ u$, proving naturality.
-Taking the direct sum of $\gamma_{M_{-i}}$ over $i\in\Z$ gives the graded two-sided comparison.
+Thus $\omega_M$ is an isomorphism.
+For a bimodule map $u:M\to N$ and $F\in N^{*_{\en}}$, the formula \eqref{eq:en-dual-comparison} gives $\omega_M(F\circ u)=\omega_N(F)\circ u$, proving naturality.
+Taking the direct sum of $\omega_{M_{-i}}$ over $i\in\Z$ gives the graded two-sided comparison.
 Each component is a bimodule isomorphism, and naturality follows in each degree from the ungraded comparison.
 \end{proof}
 \end{advanced}
