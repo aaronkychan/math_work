@@ -953,16 +953,14 @@ The formulas commute with precomposition and postcomposition, so the comparison 
 \end{supplementary}
 
 \begin{assumption}\label{ass:basic-semisimple}
-For simplicity, from now on and unless stated otherwise, we assume the degree $0$ part $A_0$ of a graded algebra to be semisimple of the form
+For simplicity, from now on and unless stated otherwise, we assume that all graded algebras are $\Z$-graded with $A_{<0}=0$, and 
 \[
-S=\bigoplus_{i=1}^n\Bbbk e_i
+A_0=S=\bigoplus_{i=1}^n\Bbbk e_i
 \]
-with coordinate idempotents $e_1,\ldots,e_n$.
+is semisimple with coordinate idempotents $e_1,\ldots,e_n$.
 \end{assumption}
 
-The coordinate idempotents are the primitive idempotents of $S$, so they involve no choice.
-Statements already proved for an arbitrary finite-dimensional semisimple $S$ keep their generality.
-A remark headed \emph{General $S$} marks each place where an arbitrary finite-dimensional semisimple $S$ needs extra care; usually this means replacing the $\Bbbk$-linear dual by the one-sided $S$-duals of the advanced material below, or choosing a symmetrising form.
+This simplifies many cumbersome check when dealing with dual modules -- the general setting requires using $S$-dual, which is naturally isomorphic to $\Bbbk$-dual via a choice of `symmetrising form'; we will try to deal with this general setting in the advanced sections.
 %To dualise these components while retaining both actions, we distinguish maps to $S$ that are right or left $S$-linear.
 %For duality of arbitrary $A$-modules we already have the canonical functors in \eqref{eq:linear-dual-functors}.
 
@@ -984,7 +982,7 @@ Evaluation preserves both actions: for $m\in M$, $\lambda\in D(M)$, and $s,t\in 
 Applying this in each degree gives the graded statement.
 \end{supplementary}
 
-Dualising reverses the two idempotents: for $1\leq i,j\leq n$,
+In particular, dualising reverses the two idempotents: for $1\leq i,j\leq n$,
 \begin{equation}\label{eq:dual-blocks}
 e_jD(M)e_i=\{\lambda\in D(M)\mid\lambda(e_kMe_\ell)=0\text{ unless }(k,\ell)=(i,j)\}\cong D(e_iMe_j),
 \end{equation}
