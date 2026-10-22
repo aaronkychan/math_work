@@ -99,6 +99,20 @@
 \definecolor{darkblue}{rgb}{0,0,0.7}
 \newcommand{\defn}[1]{\textsl{\color{darkblue} #1}}
 
+% Draft aid: \LectureEnd (at top level, not inside an environment) prints a
+% horizontal rule with coloured text and ends the document there, so nothing
+% after it (later lectures, symbol list, bibliography) is printed.
+% Change \lectureendtrue to \lectureendfalse to disable it.
+\newif\iflectureend
+\lectureendtrue
+\newcommand{\LectureEnd}[1][Last lecture ends here]{%
+  \iflectureend
+    \par\vspace{2\baselineskip}\noindent
+    {\color{red!70!black}\leaders\hrule height 0.8pt\hfill\ \textbf{#1}\ \leaders\hrule height 0.8pt\hfill\par}%
+    \vspace{2\baselineskip}%
+    \end{document}%
+  \fi}
+
 \definecolor{supplementarygreen}{rgb}{0,0.35,0.20}
 \definecolor{supplementarybackground}{HTML}{E8F5E9}
 \definecolor{advancedbackground}{HTML}{EDE8D0}

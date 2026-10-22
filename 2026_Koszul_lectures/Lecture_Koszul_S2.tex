@@ -438,17 +438,6 @@ For the maps $\alpha_M(f)=\tau\circ f$ in \eqref{eq:dual-comparison},
 because both sides send $g\otimes f$ to the functional $v\otimes w\mapsto\tau(g(f(v)w))$.
 \end{advanced}
 
-\begin{definition}\label{def:total-tensor-grading}
-For graded right and left $S$-modules $M,N$, their tensor product has \defn{total grading}
-\[
-(M\otimes_S N)_d=\bigoplus_{p+q=d}M_p\otimes_S N_q.
-\]
-The same definition applies to bimodules, and to vector spaces by taking $S=\Bbbk$.
-\end{definition}
-
-The decomposition follows by distributing tensor products over direct sums, as in Lemma~\ref{lem:tensor-properties}(4).
-When $M,N$ are locally finite-dimensional and bounded below, only finitely many pairs $(p,q)$ contribute in a fixed degree, so the tensor product is locally finite-dimensional and bounded below.
-
 \begin{advanced}
 For an arbitrary finite-dimensional semisimple $S$, the one-sided $S$-duals also describe Hom spaces and give evaluation and coevaluation maps \cite[\S2.7]{BGS96}.
 
@@ -530,7 +519,7 @@ The isomorphisms in \eqref{eq:hom-from-S-duals} therefore give the stated bimodu
 \end{proof}
 
 For a finite-dimensional graded bimodule $ {}_SV_S$, use $V^{\grstar}$ and $ {}^{\grstar}V$ in Proposition~\ref{prop:S-evaluation-coevaluation}.
-With the total grading, evaluation and coevaluation preserve degree: evaluation pairs degrees $i$ and $-i$, and $\id_V$ has degree $0$.
+With the total grading of Definition~\ref{def:total-tensor-grading}, evaluation and coevaluation preserve degree: evaluation pairs degrees $i$ and $-i$, and $\id_V$ has degree $0$.
 
 The evaluation and coevaluation maps in Proposition~\ref{prop:S-evaluation-coevaluation} are the constructions in the last two paragraphs of \cite[\S2.7, pp.~484--485]{BGS96}, translated to our notation.
 
@@ -990,12 +979,23 @@ h_{\bigwedge W}(t)&=(1+t)^m.
 \end{example}
 
 
+\begin{definition}\label{def:total-tensor-grading}
+For graded right and left $S$-modules $M,N$, their tensor product has \defn{total grading}
+\[
+(M\otimes_S N)_d=\bigoplus_{p+q=d}M_p\otimes_S N_q.
+\]
+The same definition applies to bimodules, and to vector spaces by taking $S=\Bbbk$.
+\end{definition}
+
+The decomposition follows by distributing tensor products over direct sums, as in Lemma~\ref{lem:tensor-properties}(4).
+When $M,N$ are locally finite-dimensional and bounded below, only finitely many pairs $(p,q)$ contribute in a fixed degree, so the tensor product is locally finite-dimensional and bounded below.
+
 \begin{lemma}\label{lem:hilbert-field-tensor}
 \begin{enumerate}
 \item For locally finite-dimensional graded vector spaces $U,W$, we have 
 \end{enumerate}
 Let $A,B$ be locally finite-dimensional graded algebras with $A_0=\bigoplus_{i=1}^n\Bbbk e_i$ and $B_0=\bigoplus_{j=1}^m\Bbbk f_j$ where $e_i, f_j$'s are the coordinate idempotents.
-Give $A\otimes_\Bbbk B$ the total grading $(A\otimes_\Bbbk B)_d=\bigoplus_{i+j=d}A_i\otimes_\Bbbk B_j$ and multiplication
+Give $A\otimes_\Bbbk B$ the total grading of Definition~\ref{def:total-tensor-grading}, so that $(A\otimes_\Bbbk B)_d=\bigoplus_{i+j=d}A_i\otimes_\Bbbk B_j$ and multiplication
 $(a\otimes b)(a'\otimes b')=aa'\otimes bb'$.
 Then
 \[
