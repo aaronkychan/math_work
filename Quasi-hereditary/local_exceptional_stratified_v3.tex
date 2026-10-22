@@ -1,0 +1,1894 @@
+\documentclass[11pt,reqno]{amsart}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage[margin=1.15in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=green!40!black,urlcolor=blue!50!black]{hyperref}
+\usepackage[capitalise,nameinlink,noabbrev]{cleveref}
+
+\setlist[enumerate]{label=\textup{(\arabic*)}}
+\setlength{\emergencystretch}{3em}
+
+% ---------------------------------------------------------------
+% Theorem environments
+% ---------------------------------------------------------------
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{question}[theorem]{Question}
+\newtheorem{maintheoreminner}{Theorem}
+\newenvironment{maintheorem}[1]{\renewcommand{\themaintheoreminner}{#1}\begin{maintheoreminner}}{\end{maintheoreminner}}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{setting}[theorem]{Setting}
+\newtheorem{notation}[theorem]{Notation}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem*{intuition}{Intuition}
+
+\crefname{maintheoreminner}{Theorem}{Theorems}
+\crefname{setting}{Setting}{Settings}
+\crefname{notation}{Notation}{Notations}
+\crefname{question}{Question}{Questions}
+\crefname{conjecture}{Conjecture}{Conjectures}
+
+% ---------------------------------------------------------------
+% Macros
+% ---------------------------------------------------------------
+\newcommand{\kk}{\Bbbk}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Ext}{Ext}
+\DeclareMathOperator{\Filt}{Filt}
+\DeclareMathOperator{\add}{add}
+\DeclareMathOperator{\real}{real}
+\DeclareMathOperator{\gldim}{gl.dim}
+\DeclareMathOperator{\pd}{pd}
+\DeclareMathOperator{\soc}{soc}
+\DeclareMathOperator{\rad}{rad}
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator{\im}{Im}
+\DeclareMathOperator{\cone}{cone}
+\DeclareMathOperator{\RHom}{\mathbf{R}Hom}
+\newcommand{\modd}{\operatorname{mod}}
+\newcommand{\proj}{\operatorname{proj}}
+\newcommand{\Db}{\mathcal{D}^b}
+\newcommand{\Kb}{K^b}
+\newcommand{\thick}[2][\cD]{\operatorname{thick}_{#1}(#2)}
+\newcommand{\Pn}[2]{\mathbb{P}^{#1}[#2]}
+\newcommand{\nablabar}{\overline{\nabla}}
+\newcommand{\Deltabar}{\overline{\Delta}}
+\newcommand{\cD}{\mathcal{D}}
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\cC}{\mathcal{C}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cN}{\mathcal{N}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cQ}{\mathcal{Q}}
+\newcommand{\cU}{\mathcal{U}}
+\newcommand{\cV}{\mathcal{V}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\pH}{{}^{p}\!H}
+
+\title[Local-exceptional sequences and stratified algebras]{A stratified Bodzenta--Bondal criterion: local-exceptional sequences, tilting objects and stratified algebras}
+\date{October 2026}
+
+\begin{document}
+
+\begin{abstract}
+Bodzenta and Bondal characterised highest weight categories in terms of a full exceptional sequence and its dual sequence of costandard objects. We prove a stratified analogue, formulated entirely in terms of objects of a triangulated category $\cD$:
+\begin{itemize}
+\item the exceptional sequence is replaced by a sequence of \emph{local-exceptional} objects $E_s$, which have no self-extensions in non-zero degrees but may have arbitrary local endomorphism algebras;
+\item the dual exceptional sequence is replaced by a \emph{Hom-dual} sequence of ``simple-like'' objects $N_s$, which generates $\cD$, together with its left Hom-orthogonal dual, a sequence of ``proper standard'' objects.
+\end{itemize}
+We show the following. Suppose neither sequence has negative extensions. Then the iterated universal extension $G$ of the $E_s$ is a tilting object of the subcategory they generate, its endomorphism algebra $\Lambda$ is standardly stratified, and $\cD\simeq\Db(\modd\Lambda)$; under this equivalence the $E_s$ and $N_s$ become the standard and proper costandard modules. The proof is an induction on the number of strata, modelled on heredity chains. t-structures appear only inside the proof, as the t-structure determined by the given objects.
+
+A version with Hom-duality only in low degrees describes hearts that are standardly stratified although $\cD$ is not their derived category. Conversely, the standard modules of a standardly stratified algebra form a local-exceptional sequence whose Hom-dual partners are not perfect unless the algebra is quasi-hereditary. As an application we discuss sequences of $\Pn nk$-like objects.
+\end{abstract}
+
+\maketitle
+
+\setcounter{tocdepth}{1}
+\tableofcontents
+
+% ===============================================================
+\section{Introduction}
+% ===============================================================
+
+\subsection{Background}
+Highest weight categories, introduced by Cline, Parshall and Scott \cite{CPS88}, are precisely the module categories of quasi-hereditary algebras. Their bounded derived categories carry two distinguished full exceptional sequences:
+\begin{itemize}
+\item the standard objects $(\Delta(\lambda_1),\dots,\Delta(\lambda_n))$;
+\item the costandard objects $(\nabla(\lambda_1),\dots,\nabla(\lambda_n))$, which form the right Hom-orthogonal dual of the standard objects (\cref{def:orth-dual}); Bondal calls this the left dual.
+\end{itemize}
+Bodzenta and Bondal \cite{BB26} proved that this characterises highest weight categories. The heart of the t-structure glued along a full exceptional sequence is highest weight, with the given sequence and its right Hom-orthogonal dual as standard and costandard objects, if and only if neither sequence has negative extensions (\cref{thm:BB-3.1}). Moreover, highest weight structures on an abelian category $\cA$ correspond bijectively to pairs of dual full exceptional sequences in $\Db(\cA)$ consisting of objects of $\cA$ (\cref{thm:BB-3.8}).
+
+\begin{intuition}
+A full exceptional sequence is the same as an admissible filtration of $\cD$ whose subquotients (the \emph{strata}) are all equivalent to $\Db(\kk)$. In $\Db(\kk)$ the object $\kk$ is simultaneously the simple object and the projective object of the heart. The standard object $E_s$ is its extension by zero $j_{s!}(\kk)$, and the costandard object $F_s$ is its extension $j_{s*}(\kk)$.
+\end{intuition}
+
+\subsection{The question}
+\emph{Standardly stratified} and \emph{properly stratified} algebras \cite{CPS96,Dla96,AHLU00} generalise quasi-hereditary algebras. The endomorphism algebras $B_i=\End(\Delta(i))$ of the standard modules are allowed to be arbitrary local algebras instead of $\kk$. We address the following question.
+
+\begin{question}\label{q:main}
+Is there a generalisation of dual pairs of exceptional sequences which recovers standardly stratified algebras in the same way as dual pairs of exceptional sequences recover quasi-hereditary algebras?
+\end{question}
+
+The question arose from a more specific one, concerning $\Pn nk$-like objects \cite{HT06,Kru18,HK19}. These are objects $P$ with $\End^\bullet(P)\cong\kk[t]/(t^{n+1})$, $\deg t=k$, which generalise exceptional objects (the case $n=0$) in a different direction. They are treated as an application in \cref{sec:P-objects}.
+
+The natural candidates for standard objects are \emph{local-exceptional} objects (\cref{def:local-exc}). These are objects $E$ with $\Hom(E,E[l])=0$ for $l\ne0$ and $\End(E)$ local. Two observations show that passing from exceptional to local-exceptional sequences is not formal.
+\begin{itemize}
+\item The category generated by a local-exceptional object $E$ is $\thick{E}\simeq\Kb(\proj B)$, where $B=\End(E)$. It contains no object playing the role of the simple $B$-module (\cref{prop:local-exc}). In important cases it has no non-trivial t-structure at all \cite{HJY13,Bonf26}.
+\item The right Hom-orthogonal dual of a local-exceptional sequence pairs with it via $\Hom^\bullet(E_s,F_s)\cong B_s$ rather than $\kk$. The correct partners satisfy $\Hom^\bullet(E_s,N_s)\cong\kk$. For stratified algebras these are the proper costandard modules, which lie outside the subcategory generated by the $E_s$ unless $B_s=\kk$ (\cref{mthm:C}).
+\end{itemize}
+Consequently the dual sequence must be part of the data, and the ambient category must be generated by it.
+
+\subsection{Main results}
+All hypotheses below concern objects of a triangulated category $\cD$ and morphisms between them; no t-structure on $\cD$ is assumed. Subcategories are always formed in a named ambient category; for instance $\thick{S}$ denotes the thick subcategory of $\cD$ generated by $S$ (\cref{sec:conventions}).
+
+Let $(E_1,\dots,E_m)$ be a local-exceptional sequence, i.e.\ each $E_s$ is local-exceptional and $\Hom^\bullet(E_t,E_s)=0$ for $t>s$. A \emph{Hom-dual triple} $(E_\bullet,\Deltabar_\bullet,N_\bullet)$ (\cref{def:hom-dual}) consists of this sequence and objects $N_1,\dots,N_m$ and $\Deltabar_1,\dots,\Deltabar_m$, satisfying the following four conditions.
+\begin{itemize}
+\item[\textup{(HD1)}] $\Hom^\bullet(E_s,N_t)\cong\delta_{st}\kk$, concentrated in degree $0$.
+\item[\textup{(HD2)}] $\Hom^\bullet(N_s,N_t)=0$ for $s<t$. Moreover $\End(N_s)=\kk$, and $\Hom(N_s,N_s[l])=0$ for $l<0$.
+\item[\textup{(HD3)}] $\cD=\thick{N_1,\dots,N_m}$.
+\item[\textup{(HD4)}] $\Hom^\bullet(\Deltabar_s,N_t)=0$ for $t<s$, and there is a morphism $\delta_s\colon\Deltabar_s\to N_s$ whose cone lies in $\thick{N_1,\dots,N_{s-1}}$.
+\end{itemize}
+Condition (HD4) says that $\delta_\bullet\colon\Deltabar_\bullet\to N_\bullet$ is the left Hom-orthogonal dual of $N_\bullet$ (\cref{def:orth-dual}); in Bondal's terminology, $\Deltabar_\bullet$ is the right dual of $N_\bullet$. The morphisms $\delta_s$ are not part of the data: $\Hom(\Deltabar_s,N_s)\cong\kk$, so $\delta_s$ is unique up to a non-zero scalar, and rescaling does not change its cone (\cref{rem:delta-not-data}). Moreover $\Deltabar_\bullet$ is determined by $N_\bullet$ up to unique isomorphism. Equivalently, each $\thick{N_1,\dots,N_{s-1}}$ is left admissible in $\thick{N_1,\dots,N_s}$ (\cref{rem:HD4}). The objects $\Deltabar_s$ play the role of proper standard objects.
+
+\begin{maintheorem}{B}[\cref{thm:B}]\label{mthm:B}
+Let $\cD$ be an algebraic triangulated category, and let $(E_\bullet,\Deltabar_\bullet,N_\bullet)$ be a Hom-dual triple in $\cD$. Let $G$ be the iterated universal extension of $(E_1,\dots,E_m)$ in $\cD$, and put $\Lambda=\End_\cD(G)$. The following are equivalent:
+\begin{enumerate}
+\item $\Hom(E_s,E_t[l])=0$ and $\Hom(N_s,N_t[l])=0$ for all $s,t$ and all $l<0$;
+\item $G$ is a tilting object of $\thick{E_1,\dots,E_m}$, the algebra $\Lambda$ is standardly stratified, and there is a triangle equivalence $\cD\simeq\Db(\modd\Lambda)$ sending $G$ to $\Lambda$, $E_s$ to the standard module $\Delta(s)$, and $N_s$ to the proper costandard module $\nablabar(s)$.
+\end{enumerate}
+In this case:
+\begin{itemize}
+\item $\End(\Delta(s))\cong\End(E_s)$;
+\item $\Lambda$ is quasi-hereditary if and only if all $E_s$ are exceptional;
+\item $\thick{E_1,\dots,E_m}\simeq\Kb(\proj\Lambda)$, and this is a proper subcategory of $\cD$ unless $\Lambda$ is quasi-hereditary.
+\end{itemize}
+\end{maintheorem}
+
+For a full exceptional sequence $E_\bullet$, its right Hom-orthogonal dual $F_\bullet$ is a Hom-dual sequence, and the left Hom-orthogonal dual of $F_\bullet$ is $E_\bullet$ itself (\cref{prop:exc-dual}). In that case $\cD=\thick{E_1,\dots,E_n}$, and \cref{mthm:B} becomes \cref{thm:BB-3.1}.
+
+A t-structure appears only in the proof. It is the t-structure on $\cD$ cut out by the objects $E_s$ and $N_s$ (\cref{prop:triple-t}), which a posteriori is the $G$-tilting t-structure (\cref{rem:G-tilting}).
+
+\Cref{mthm:B} is a special case of a statement about \emph{stratifying triples} (\cref{def:triple}). In a stratifying triple:
+\begin{itemize}
+\item the Hom-duality (HD1) is only required in degrees $\le1$;
+\item the objects $\Delta_s$ playing the role of the $E_s$ need not be local-exceptional;
+\item the conclusion concerns the heart of the t-structure cut out by the objects, rather than $\cD$ itself.
+\end{itemize}
+
+\begin{maintheorem}{A}[\cref{thm:A}]\label{mthm:A}
+Let $(\Delta_\bullet,\Deltabar_\bullet,N_\bullet)$ be a stratifying triple in $\cD$ with Hom-duality up to degree $2$, i.e.\ $\Hom(\Delta_s,N_s[l])=0$ for $l\in\{1,2\}$. Suppose that $\Hom(\Delta_s,\Delta_t[l])=0=\Hom(N_s,N_t[l])$ for all $s,t$ and $l<0$. Consider the t-structure
+\[\cD^{\le0}=\{X:\Hom(X,N_s[l])=0\ \forall s,\ l<0\},\qquad\cD^{\ge0}=\{X:\Hom(\Delta_s,X[l])=0\ \forall s,\ l<0\},\]
+with heart $\cA$. Then:
+\begin{enumerate}
+\item The iterated universal extension $G$ of $(\Delta_1,\dots,\Delta_m)$ is a projective generator of $\cA$.
+\item $\cA\simeq\modd\End(G)$ is standardly stratified, with standard objects $\Delta_s$ and proper costandard objects $N_s$.
+\item If $\cD$ is algebraic, then $\cD\simeq\Db(\cA)$ via realisation if and only if Hom-duality holds in all degrees.
+\end{enumerate}
+\end{maintheorem}
+
+\begin{maintheorem}{C}[\cref{thm:C}]\label{mthm:C}
+Let $\Lambda$ be a standardly stratified algebra, and put $B_i=\End(\Delta(i))$.
+\begin{enumerate}
+\item The standard modules form a full local-exceptional sequence in $\Kb(\proj\Lambda)$ with endomorphism algebras $B_i$.
+\item $\Hom^\bullet(\Delta(i),\nablabar(i))\cong\kk$, and $\Hom^\bullet(\Delta(j),\nablabar(i))=0$ for $j>i$.
+\item If $B_i\neq\kk$, then $\nablabar(i)\notin\Kb(\proj\Lambda)$.
+\item $\gldim\Lambda<\infty$ if and only if $\Lambda$ is quasi-hereditary.
+\end{enumerate}
+\end{maintheorem}
+
+\Cref{cor:BB38} is the analogue of \cref{thm:BB-3.8}. It is a bijection between:
+\begin{itemize}
+\item \emph{dualisable} standardly stratified structures, i.e.\ those whose standard and proper costandard objects extend to a Hom-dual triple; and
+\item pairs of sequences of objects of $\cA$ that extend to Hom-dual triples.
+\end{itemize}
+Quasi-hereditary structures are dualisable. A standardly stratified structure is dualisable, with the proper standard modules as the left Hom-orthogonal dual of the proper costandard modules, as soon as two conditions hold: injective modules have $\nablabar$-filtrations, and $\Ext^\bullet(\Deltabar(s),\nablabar(t))=0$ for $t<s$ (\cref{prop:dualisable}). Whether every standardly stratified structure is dualisable is open (\cref{q:HD4}).
+
+\subsection{Method: induction on strata}
+As in the theory of quasi-hereditary algebras, all proofs are by induction, peeling off one stratum at a time.
+\begin{itemize}
+\item \emph{Abelian side.} \Cref{lem:strat-induction} characterises standardly stratified categories inductively. Let $P(m)$ be the projective cover of the maximal simple object. The trace of $P(m)$ in every projective object must be a direct sum of copies of $P(m)$ (a ``standardly stratifying'' ideal), and the quotient category must again be standardly stratified. For quasi-hereditary algebras this is the characterisation by heredity chains (\cref{rem:heredity}).
+\item \emph{Peeling off a stratum.} By \cref{lem:peel}, restricting a stratifying triple to the thick subcategory of $\cD$ generated by $N_1,\dots,N_{m-1}$ gives a stratifying triple. The last stratum is described by a \emph{local pair} $(\Pi,S)$ (\cref{def:local-pair}): a simple-minded object $S$ together with an object $\Pi$, which turns out to be its projective cover.
+\item \emph{Induction step} (\cref{prop:step}). The universal extensions by $\Delta_m$ of the previous projective generator form a projective generator. The trace condition of \cref{lem:strat-induction} then follows formally from the universal-extension triangles. The only non-formal input is Ext-projectivity in degree $2$, which is where Hom-duality in degree $2$ enters.
+\item \emph{One gluing lemma.} \Cref{prop:triple-t} constructs the t-structure determined by the objects; this is the only place where BBD gluing is used. One application of the realisation functor then gives $\cD\simeq\Db(\modd\Lambda)$.
+\end{itemize}
+
+\subsection{Application: \texorpdfstring{$\mathbb{P}^n[k]$}{Pn[k]}-like objects}
+In \cref{sec:P-objects} we specialise to $\Pn nk$-like objects, using Bonfert's formality and classification results \cite{Bonf26}.
+\begin{itemize}
+\item \emph{$k=0$.} $\Pn n0$-like objects are exactly the local-exceptional objects with endomorphism algebra $\kk[t]/(t^{n+1})$, so \cref{mthm:B,mthm:C} apply.
+\item \emph{$k\ge1$.} Let $(P_1,\dots,P_m)$ be a semi-orthogonal sequence of $\Pn{n_s}{k_s}$-like objects with a right Hom-orthogonal dual $F_\bullet$. It gives a stratifying triple $(\Delta_\bullet,P_\bullet,F_\bullet)$, in which the $P_s$ play the role of proper standard objects (\cref{lem:P-triple}). \Cref{mthm:A} then yields:
+\begin{itemize}
+\item highest weight hearts when all $k_s\ge3$;
+\item standardly stratified hearts with dual-number endomorphism algebras when $k_s=1$ and $n_s\ge3$;
+\item hearts that are not module categories when $k_s=n_s=1$.
+\end{itemize}
+In all cases with $n_s\ge1$, the ambient category is not the derived category of the heart (\cref{thm:Pseq}). The case $k=2$, which contains the Huybrechts--Thomas $\mathbb{P}^n$-objects, is not decided.
+\end{itemize}
+
+\subsection*{Sources and status of the statements}
+Every statement attributed to the literature is quoted with its statement, in our notation. All statements without a citation are proved here, except those labelled \emph{Question}. From Bonfert's preprint \cite{Bonf26} we use the formality and classification results quoted in \cref{sec:P-objects}. Our computation of the hearts of the categories generated by $\Pn nk$-like objects (\cref{prop:heart-P}) overlaps with \cite[Lemmas~3.11 and~4.15]{Bonf26}, and the argument of \cref{lem:recognise-proj} is that of \cite[Lemma~3.12]{Bonf26}. We include proofs in the form needed here.
+
+\subsection*{Organisation}
+\begin{itemize}
+\item \Cref{sec:prelim} collects definitions and the results we use.
+\item \Cref{sec:local} introduces local-exceptional objects and local pairs.
+\item \Cref{sec:triples} introduces stratifying triples, and constructs the associated filtration and t-structure.
+\item \Cref{sec:gluing} contains the induction step and \cref{mthm:A}.
+\item \Cref{sec:criterion} proves the stratified Bodzenta--Bondal criterion (\cref{mthm:B}).
+\item \Cref{sec:stratified} treats standardly stratified algebras (\cref{mthm:C}) and the converse.
+\item \Cref{sec:examples} collects examples, and examples showing what fails when hypotheses are dropped.
+\item \Cref{sec:P-objects} contains the application to $\Pn nk$-like objects.
+\item \Cref{sec:questions} lists open questions.
+\end{itemize}
+
+% ===============================================================
+\section{Preliminaries}\label{sec:prelim}
+% ===============================================================
+
+\subsection{Conventions}\label{sec:conventions}
+Throughout, $\kk$ is an algebraically closed field. Triangulated categories are $\kk$-linear, \emph{Hom-finite} (all $\Hom(X,Y)$ are finite-dimensional) and idempotent complete; in particular they are Krull--Schmidt. A triangulated category is \emph{algebraic} if it is equivalent to the homotopy category $H^0$ of a pretriangulated dg category (equivalently, to the stable category of a Frobenius exact category). For objects $X,Y$ we write $\Hom^l(X,Y):=\Hom(X,Y[l])$ and $\Hom^\bullet(X,Y):=\bigoplus_{l\in\mathbb{Z}}\Hom^l(X,Y)$, so that $\End^\bullet(X)$ is a graded algebra.
+
+\emph{Subcategories and ambient categories.} Every subcategory is formed inside an ambient triangulated category, which is always named. For a class $\mathcal S$ of objects of $\cD$:
+\begin{itemize}
+\item $\thick[\cD]{\mathcal S}$ is the smallest thick subcategory (triangulated and closed under direct summands) of $\cD$ containing $\mathcal S$. We write $\thick{\mathcal S}$ when $\cD$ is the ambient category of the statement at hand.
+\item $\Filt_\cD(\mathcal S)$ is the smallest full subcategory of $\cD$ containing $0$ and $\mathcal S$ and closed under extensions in $\cD$. We often omit the subscript.
+\item $\mathcal S^\perp=\{Y\in\cD:\Hom^\bullet(S,Y)=0\ \forall S\in\mathcal S\}$, and ${}^\perp\mathcal S$ is defined dually; both are taken in the ambient category $\cD$.
+\end{itemize}
+If $\cD'\subset\cD$ is a thick subcategory containing $\mathcal S$, then $\thick[\cD']{\mathcal S}=\thick[\cD]{\mathcal S}$ and $\Filt_{\cD'}(\mathcal S)=\Filt_\cD(\mathcal S)$. For instance, for $\mathcal S\subset\Kb(\proj\Lambda)$ the thick closure is the same in $\Kb(\proj\Lambda)$ and in $\Db(\modd\Lambda)$. We write $\simeq$ for equivalences of abstract triangulated categories, as in $\thick[\cD]{E}\simeq\Kb(\proj B)$; such a statement does not identify the two sides as subcategories of a common category.
+
+Modules are finite-dimensional right modules; $\modd\Lambda$ denotes their category, and $\Kb(\proj\Lambda)\subset\Db(\modd\Lambda)$ the subcategory of perfect complexes. In an abelian length category, $[X:L]$ denotes the composition multiplicity of a simple object $L$ in $X$. For a set $\Theta$ of objects, $\cF(\Theta)$ is the full subcategory of objects admitting a finite filtration with subquotients isomorphic to objects of $\Theta$.
+
+\subsection{t-structures and hearts}
+
+\begin{definition}[{\cite[D\'ef.~1.3.1]{BBD82}}]
+A \emph{t-structure} on $\cD$ is a pair $(\cD^{\le0},\cD^{\ge0})$ of strictly full subcategories such that, with $\cD^{\le n}=\cD^{\le0}[-n]$ and $\cD^{\ge n}=\cD^{\ge0}[-n]$:
+\begin{enumerate}
+\item $\cD^{\le0}[1]\subset\cD^{\le0}$ and $\cD^{\ge0}[-1]\subset\cD^{\ge0}$;
+\item $\Hom(X,Y)=0$ for $X\in\cD^{\le0}$ and $Y\in\cD^{\ge1}$;
+\item every $X$ fits into a triangle $X'\to X\to X''\to X'[1]$ with $X'\in\cD^{\le0}$ and $X''\in\cD^{\ge1}$.
+\end{enumerate}
+The \emph{heart} $\cA=\cD^{\le0}\cap\cD^{\ge0}$ is an abelian category, with cohomology functors $H^l\colon\cD\to\cA$. The t-structure is \emph{bounded} if every object lies in $\cD^{\le a}\cap\cD^{\ge b}$ for some $a,b$. It has \emph{length heart} if $\cA$ is a finite length category with finitely many isomorphism classes of simple objects.
+\end{definition}
+
+Short exact sequences in $\cA$ are exactly the triangles in $\cD$ all of whose vertices lie in $\cA$. Consequently $\cA$ is closed under extensions in $\cD$.
+
+\begin{proposition}[{\cite[Rem.~3.1.17]{BBD82}}]\label{prop:ext-comparison}
+Let $\cA$ be the heart of a t-structure on $\cD$, and let $X,Y\in\cA$. The natural maps $\Ext^l_\cA(X,Y)\to\Hom_\cD(X,Y[l])$, which send a Yoneda extension to the composite of the corresponding connecting morphisms, are bijective for $l\le1$ and injective for $l=2$. They are compatible with Yoneda product and composition.
+\end{proposition}
+
+\begin{theorem}[{Realisation; \cite[\S3.1]{BBD82}, \cite{Bei87}, \cite{Let24}}]\label{thm:realisation}
+Let $\cD$ be algebraic (more generally, the base of a filtered triangulated category), and let $\cA$ be the heart of a bounded t-structure on $\cD$.
+\begin{enumerate}
+\item There is an exact functor $\real\colon\Db(\cA)\to\cD$ which restricts to the inclusion on $\cA$ and induces the maps of \cref{prop:ext-comparison} on extension groups.
+\item $\real$ is fully faithful if and only if the following \emph{effaceability} condition holds: for all $X,Y\in\cA$, all $n\ge2$ and all $f\in\Hom_\cD(X,Y[n])$, there is an epimorphism $X'\twoheadrightarrow X$ in $\cA$ such that the composite $X'\to X\xrightarrow{f}Y[n]$ vanishes.
+\item In this case $\real$ is an equivalence, since $\cD$ is generated by $\cA$ under extensions and shifts.
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+In \cite[Prop.~3.1.16]{BBD82} the effaceability condition is formulated with monomorphisms $Y\hookrightarrow Y'$. The version with epimorphisms follows by applying the statement to $\cD^{\mathrm{op}}$. The existence of $\real$ for algebraic triangulated categories is established, for instance, in \cite{Let24}.
+\end{remark}
+
+\subsection{Simple-minded collections, silting objects and co-t-structures}
+
+\begin{definition}\label{def:smc}
+A finite set $\{S_1,\dots,S_r\}$ of objects of $\cD$ is a \emph{simple-minded collection} if
+\begin{enumerate}
+\item[(SM1)] $\Hom(S_i,S_j[l])=0$ for all $i,j$ and all $l<0$;
+\item[(SM2)] $\Hom(S_i,S_j)=\delta_{ij}\kk$;
+\item[(SM3)] $\thick{S_1,\dots,S_r}=\cD$.
+\end{enumerate}
+An object $T$ is \emph{silting} if $\Hom(T,T[l])=0$ for all $l>0$ and $\thick{T}=\cD$. It is \emph{tilting} if moreover $\Hom(T,T[l])=0$ for all $l<0$.
+\end{definition}
+
+\begin{intuition}
+Simple-minded collections behave like the simple modules of a finite-dimensional algebra, and silting objects behave like its projective modules. The former determine t-structures, the latter co-t-structures (weight structures). For $\Db(\modd\Lambda)$ the two notions correspond to each other under the bijections of Koenig and Yang (\cref{thm:KY}). This ``simple versus projective'' dichotomy is the mechanism behind \cref{thm:HJY} and behind all results below.
+\end{intuition}
+
+\begin{theorem}[{\cite{AN09}; see also \cite[\S5]{KY14}}]\label{thm:smc}
+Let $\{S_1,\dots,S_r\}$ be a simple-minded collection in a Hom-finite Krull--Schmidt triangulated category $\cD$. Put
+\[\cD^{\le0}:=\Filt\{S_i[l]: 1\le i\le r,\ l\ge0\},\qquad \cD^{\ge0}:=\Filt\{S_i[l]:1\le i\le r,\ l\le0\}.\]
+Then $(\cD^{\le0},\cD^{\ge0})$ is a bounded t-structure on $\cD$. Its heart is $\Filt\{S_1,\dots,S_r\}$, a length category whose simple objects are exactly $S_1,\dots,S_r$.
+\end{theorem}
+
+\begin{definition}[{\cite{Bon10,Pau08}}]
+A \emph{co-t-structure} (or \emph{weight structure}) on $\cD$ is a pair $(\cU,\cV)$ of full subcategories with the following properties: both are closed under direct summands; $\cU[-1]\subset\cU$ and $\cV[1]\subset\cV$; $\Hom(\cU,\cV)=0$; and every object $X$ fits into a triangle $U\to X\to V\to U[1]$ with $U\in\cU$ and $V\in\cV$. Its \emph{co-heart} is $\cU\cap\cV[-1]$. It is \emph{bounded} if $\bigcup_l\cU[l]=\cD=\bigcup_l\cV[l]$.
+\end{definition}
+
+\begin{theorem}[{\cite{Bon10,AI12}}]\label{thm:silting-cot}
+Let $T$ be a silting object of $\cD$. Let $\cU$ (resp.\ $\cV$) be the smallest full subcategory closed under extensions and direct summands containing all $T[l]$ with $l\le0$ (resp.\ $l\ge1$). Then $(\cU,\cV)$ is a bounded co-t-structure with co-heart $\add T$.
+\end{theorem}
+
+\begin{theorem}[{Koenig--Yang \cite[Thm.~6.1]{KY14}}]\label{thm:KY}
+For a finite-dimensional algebra $\Lambda$ there are bijections between:
+\begin{enumerate}
+\item equivalence classes of silting objects in $\Kb(\proj\Lambda)$;
+\item equivalence classes of simple-minded collections in $\Db(\modd\Lambda)$;
+\item bounded t-structures on $\Db(\modd\Lambda)$ with length heart;
+\item bounded co-t-structures on $\Kb(\proj\Lambda)$.
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[{Keller \cite{Kel94}}]\label{thm:keller}
+Let $\cD$ be an algebraic idempotent complete triangulated category, and let $T\in\cD$ be a tilting object. Then there is a triangle equivalence $\cD\simeq\Kb(\proj\End(T))$ sending $T$ to the free module of rank one.
+\end{theorem}
+
+\subsection{Recollements and gluing}
+
+\begin{definition}\label{def:recollement}
+A full triangulated subcategory $\cN\subset\cM$ is \emph{admissible} if the inclusion $i_*\colon\cN\to\cM$ has a left adjoint $i^*$ and a right adjoint $i^!$. Put $\cQ=\cM/\cN$ (Verdier quotient), and let $j^*\colon\cM\to\cQ$ be the quotient functor. It has a left adjoint $j_!$ and a right adjoint $j_*$, both fully faithful, which identify $\cQ$ with ${}^\perp\cN$ and with $\cN^\perp$ respectively. We obtain a \emph{recollement}
+\[
+\begin{tikzcd}[column sep=large]
+\cN \arrow[r,"i_*" description] & \cM \arrow[l,bend right=40,"i^*"'] \arrow[l,bend left=40,"i^!"] \arrow[r,"j^*" description] & \cQ \arrow[l,bend right=40,"j_!"'] \arrow[l,bend left=40,"j_*"]
+\end{tikzcd}
+\]
+with $i^*j_!=0$, $i^!j_*=0$, $j^*i_*=0$, $j^*j_!\cong\mathrm{id}\cong j^*j_*$, and functorial triangles
+\[ j_!j^*X\to X\to i_*i^*X\to,\qquad i_*i^!X\to X\to j_*j^*X\to.\]
+Applying $i^!$ to the first triangle for $X=j_*Y$ gives $i^!j_!Y\cong i^*j_*Y[-1]$.
+\end{definition}
+
+\begin{theorem}[{Gluing \cite[Thm.~1.4.10 and \S1.4]{BBD82}}]\label{thm:gluing}
+In a recollement as above, let $\cN$ and $\cQ$ carry t-structures. Then
+\begin{align*}
+\cM^{\le0}&=\{X: j^*X\in\cQ^{\le0},\ i^*X\in\cN^{\le0}\},\\
+\cM^{\ge0}&=\{X: j^*X\in\cQ^{\ge0},\ i^!X\in\cN^{\ge0}\}
+\end{align*}
+is a t-structure on $\cM$, the \emph{glued t-structure}. With respect to it, $i_*$ and $j^*$ are t-exact, $j_!$ and $i^*$ are right t-exact, and $j_*$ and $i^!$ are left t-exact. If the given t-structures are bounded, so is the glued one.
+\end{theorem}
+
+Let $\cA_\cN$, $\cA$ and $\cA_\cQ$ be the three hearts. Write $\pH^0$ for the cohomology functors of the glued t-structure, and set ${}^p\!j_!:=\pH^0\circ j_!$ and ${}^p\!j_*:=\pH^0\circ j_*$ on $\cA_\cQ$. For $Y\in\cA_\cQ$ define the \emph{intermediate extension}
+\[ j_{!*}Y:=\im\big({}^p\!j_!Y\to{}^p\!j_*Y\big). \]
+
+\begin{proposition}[{\cite[\S1.4]{BBD82}}]\label{prop:glued-heart}
+In the situation of \cref{thm:gluing}:
+\begin{enumerate}
+\item $i_*$ identifies $\cA_\cN$ with the Serre subcategory $\{X\in\cA:j^*X=0\}$ of $\cA$; this subcategory is closed under subobjects, quotients and extensions.
+\item For $Y\in\cA_\cQ$ we have $j^*{}^p\!j_!Y\cong Y\cong j^*{}^p\!j_*Y\cong j^*j_{!*}Y$. The object ${}^p\!j_!Y$ has no non-zero quotient in $i_*\cA_\cN$, and ${}^p\!j_*Y$ has no non-zero subobject in $i_*\cA_\cN$. Hence $j_{!*}Y$ has neither. The kernel of ${}^p\!j_!Y\twoheadrightarrow j_{!*}Y$ and the cokernel of $j_{!*}Y\hookrightarrow {}^p\!j_*Y$ lie in $i_*\cA_\cN$.
+\item The simple objects of $\cA$ are the $i_*S$ with $S$ simple in $\cA_\cN$, and the $j_{!*}S$ with $S$ simple in $\cA_\cQ$.
+\item If $\cA_\cN$ and $\cA_\cQ$ are length categories, so is $\cA$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}[Comments on the proof]
+(1) and (3) are proved in \cite[\S1.4]{BBD82} (see in particular 1.4.22--1.4.26 there, where $j_{!*}$ is introduced and the simple objects of $\cA$ are determined).
+
+For (2): $j^*$ is t-exact, so $j^*{}^p\!j_!Y=H^0(j^*j_!Y)=Y$, and similarly for $j_*$. Moreover $\Hom_\cA({}^p\!j_!Y,i_*Z)=\Hom(j_!Y,i_*Z)=\Hom(Y,j^*i_*Z)=0$, and dually for ${}^p\!j_*Y$. The map ${}^p\!j_!Y\to{}^p\!j_*Y$ becomes an isomorphism after applying the exact functor $j^*|_\cA$, so its kernel and cokernel lie in $i_*\cA_\cN$ by~(1).
+
+For (4): every $X\in\cA$ sits in an exact sequence
+\[0\to i_*H^{-1}(i^*X)\to{}^p\!j_!j^*X\to X\to i_*H^0(i^*X)\to0,\]
+obtained from the long exact cohomology sequence of $j_!j^*X\to X\to i_*i^*X$. The functor ${}^p\!j_!$ is right exact. By~(2), ${}^p\!j_!$ of a simple object has finite length, hence so does ${}^p\!j_!$ of any object of finite length. Thus $X$ has finite length.
+\end{proof}
+
+\begin{definition}\label{def:adm-filtration}
+An \emph{admissible filtration} of $\cD$ is a chain $0=\cD_0\subset\cD_1\subset\dots\subset\cD_m=\cD$ of thick subcategories such that $\cD_{s-1}$ is admissible in $\cD_s$ for $1\le s\le m$.
+\begin{itemize}
+\item Its \emph{strata} are $\cT_s:=\cD_s/\cD_{s-1}$. We write $i_s,j_s$ for the functors of the recollement $(\cD_{s-1},\cD_s,\cT_s)$.
+\item By abuse of notation we regard $j_{s!}$ and $j_{s*}$ as functors $\cT_s\to\cD$, by composing with the inclusion $\cD_s\subset\cD$.
+\item Given t-structures on all $\cT_s$, the \emph{glued t-structure} on $\cD$ is defined inductively: the glued t-structure on $\cD_s$ is obtained from that on $\cD_{s-1}$ and the one on $\cT_s$ by \cref{thm:gluing}. (For $s=1$ we have $\cD_1=\cT_1$.)
+\end{itemize}
+By \cref{thm:gluing}, the inclusions $\cD_{s}\subset\cD$ are t-exact. Hence $\cA_s:=\cA\cap\cD_s$ is the heart of $\cD_s$, and it is a Serre subcategory of $\cA$.
+\end{definition}
+
+\subsection{Semi-orthogonal decompositions}
+The following standard lemma is used throughout.
+
+\begin{lemma}\label{lem:sod}
+Let $\cC=\thick{\cU\cup\cV}$ for thick subcategories $\cU,\cV\subset\cC$ with $\Hom^\bullet(\cV,\cU)=0$.
+\begin{enumerate}
+\item Every $X\in\cC$ fits into a triangle $V_X\to X\to U_X\to V_X[1]$ with $V_X\in\cV$ and $U_X\in\cU$.
+\item $X\mapsto V_X$ is right adjoint to the inclusion $\cV\subset\cC$, and $X\mapsto U_X$ is left adjoint to the inclusion $\cU\subset\cC$. Moreover $\cV^\perp\cap\cC=\cU$ and ${}^\perp\cU\cap\cC=\cV$.
+\item If $\Hom^\bullet(\cV,X)=0$ then $X\in\cU$, and if $\Hom^\bullet(X,\cU)=0$ then $X\in\cV$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+Let $\cC'\subset\cC$ be the full subcategory of objects admitting a triangle as in (1).
+
+For $X\in\cC'$ and $V\in\cV$, the vanishing of $\Hom^\bullet(V,U_X)$ gives $\Hom(V,V_X)\cong\Hom(V,X)$. Dually, $\Hom(U_X,U)\cong\Hom(X,U)$ for $U\in\cU$. Hence the triangle is unique up to unique isomorphism, and it is functorial in $X\in\cC'$.
+
+The subcategory $\cC'$ contains $\cU$ and $\cV$ and is closed under shifts. It is closed under cones by the $3\times3$ lemma \cite[Prop.~1.1.11]{BBD82}, applied to the morphism of triangles induced by a morphism in $\cC'$. It is closed under direct summands, because idempotents act on the functorial triangle and split in the thick subcategories $\cU$ and $\cV$. Hence $\cC'=\cC$, which proves (1); the adjunctions in (2) were shown above.
+
+For (3): if $\Hom^\bullet(\cV,X)=0$, then $V_X\to X$ vanishes, so $U_X\cong X\oplus V_X[1]$. Then $V_X[1]$ lies in $\cU\cap\cV$, which is $0$ because $\Hom(\cV,\cU)=0$. Hence $X\cong U_X\in\cU$. The second statement is dual.
+
+The orthogonality statements in (2) follow from (3).
+\end{proof}
+
+\subsection{Exceptional sequences}
+
+\begin{definition}[{\cite{Bon89}}]\label{def:exc}
+An object $E$ is \emph{exceptional} if $\End^\bullet(E)=\kk$. A sequence $(E_1,\dots,E_n)$ of exceptional objects is an \emph{exceptional sequence} if $\Hom^\bullet(E_j,E_i)=0$ for $j>i$. It is \emph{full} if $\thick{E_1,\dots,E_n}=\cD$.
+\end{definition}
+
+\begin{definition}[Hom-orthogonal duals]\label{def:orth-dual}
+Let $A_\bullet=(A_1,\dots,A_m)$ be objects of $\cD$, and put $\cA_s:=\thick{A_1,\dots,A_s}$.
+\begin{itemize}
+\item A \emph{right Hom-orthogonal dual} of $A_\bullet$ is a family of morphisms $\alpha_s\colon A_s\to A^r_s$ such that $A^r_s\in\cA_{s-1}^\perp$ and $\cone(\alpha_s)\in\cA_{s-1}$, for all $s$.
+\item A \emph{left Hom-orthogonal dual} of $A_\bullet$ is a family of morphisms $\beta_s\colon A^l_s\to A_s$ such that $A^l_s\in{}^\perp\cA_{s-1}$ and $\cone(\beta_s)\in\cA_{s-1}$, for all $s$.
+\end{itemize}
+\end{definition}
+
+Thus $A^r_s$ is the projection of $A_s$ onto $\cA_{s-1}^\perp$, i.e.\ the left mutation of $A_s$ through $\cA_{s-1}$. Similarly, $A^l_s$ is the projection onto ${}^\perp\cA_{s-1}$, i.e.\ the right mutation. Both are unique up to unique isomorphism when they exist, by the argument of \cref{lem:right-dual}(3). The right (resp.\ left) Hom-orthogonal dual exists if and only if each $\cA_{s-1}$ is right (resp.\ left) admissible in $\cA_s$; one direction is \cref{lem:sod}.
+
+For a full exceptional sequence $E_\bullet$ both duals exist. Its right Hom-orthogonal dual $F_\bullet=(F_1,\dots,F_n)$ is what Bondal and Bodzenta--Bondal call the \emph{left dual}, and they write it as $(F_n,\dots,F_1)$. Explicitly, $F_1=E_1$ and $F_i=L_{E_1}\cdots L_{E_{i-1}}E_i$, where $L_EF$ is defined by the triangle $\Hom^\bullet(E,F)\otimes E\to F\to L_EF$. Conversely, $E_\bullet$ is the left Hom-orthogonal dual of $F_\bullet$, which is Bondal's \emph{right dual}. Since the left dual lies in the right orthogonal, we use the Hom-orthogonal terminology throughout, and keep ``left dual'' only when quoting \cite{BB26}.
+
+A full exceptional sequence gives the admissible filtration $\cD_s=\thick{E_1,\dots,E_s}$, with all strata equivalent to $\Db(\kk)$. In the notation of \cref{def:adm-filtration} one has $E_s=j_{s!}\kk$ and $F_s=j_{s*}\kk$ \cite[\S2.4]{BB26}. If the sequence is full, its right Hom-orthogonal dual $F_\bullet$ is characterised by the \emph{Hom-duality}
+\begin{equation}\label{eq:hom-duality-exc}
+\Hom^\bullet(E_i,F_j)\cong\delta_{ij}\kk\quad\text{(concentrated in degree $0$)}.
+\end{equation}
+The \emph{t-structure glued along $(E_1,\dots,E_n)$} is the one obtained by gluing the standard t-structures on $\Db(\kk)$.
+
+\begin{theorem}[{\cite[Lemma~2.4]{BB26}}]\label{thm:BB-2.4}
+Let $(E_1,\dots,E_n)$ be a full exceptional sequence, and let $(F_1,\dots,F_n)$ be its right Hom-orthogonal dual (its ``left dual'' in \cite{BB26}). The t-structure glued along it is
+\[\cD^{\le0}=\{X:\Hom(X,F_s[l])=0\ \forall s,\ \forall l<0\},\qquad \cD^{\ge0}=\{X:\Hom(E_s,X[l])=0\ \forall s,\ \forall l<0\}.\]
+\end{theorem}
+
+\subsection{Highest weight categories and the Bodzenta--Bondal theorems}
+
+\begin{definition}[{\cite{CPS88}; cf.\ \cite[\S2.1]{BB26}}]\label{def:hw}
+A $\kk$-linear abelian category is \emph{Deligne finite} if it is a Hom-finite length category with finitely many simple objects and a projective generator; equivalently, it is equivalent to $\modd\Lambda$ for a finite-dimensional algebra $\Lambda$.
+
+Let $\cA$ be Deligne finite, with simple objects $L(1),\dots,L(m)$ indexed by the totally ordered set $\{1<\dots<m\}$, projective covers $P(i)$ and injective hulls $I(i)$. Then $\cA$ is \emph{highest weight} if there are objects $\Delta(i)$ such that:
+\begin{itemize}
+\item[(st1)] there is an epimorphism $\Delta(i)\twoheadrightarrow L(i)$ whose kernel has composition factors $L(j)$ with $j<i$ only;
+\item[(st2)] there is an epimorphism $P(i)\twoheadrightarrow\Delta(i)$ whose kernel lies in $\cF(\Delta(j):j>i)$.
+\end{itemize}
+The \emph{costandard objects} $\nabla(i)$ are defined dually, using injective hulls.
+\end{definition}
+
+By \cite{CPS88}, highest weight categories are exactly the module categories of quasi-hereditary algebras. \cite{BB26} also allows partial orders. Since every refinement of the partial order gives an equivalent highest weight structure \cite[Rem.~2.3]{BB26}, we restrict to total orders throughout.
+
+\begin{definition}[{\cite{DR92}; \cite[\S2.2]{BB26}}]\label{def:univ-ext}
+Let $Q,T$ be objects of an abelian category with $V:=\Ext^1(Q,T)$ finite-dimensional. The \emph{universal extension} of $Q$ by $T$ is the extension
+\[0\to T\otimes V^\vee\to R\to Q\to0\]
+classified by the canonical element of $\Ext^1(Q,T\otimes V^\vee)\cong V\otimes V^\vee\cong\End(V)$.
+
+The \emph{iterated universal extension} $G=\bigoplus_{s=1}^mG_s$ of a sequence $(T_1,\dots,T_m)$ is defined recursively. For $m=1$ put $G_1=T_1$. For $m>1$, let $G'=\bigoplus_{s<m}G'_s$ be the iterated universal extension of $(T_1,\dots,T_{m-1})$. Then $G_s$ is the universal extension of $G'_s$ by $T_m$ for $s<m$, and $G_m:=T_m$.
+
+A sequence $(E_1,\dots,E_m)$ of objects of $\cA$ is \emph{standardizable} if all $\Hom(E_i,E_j)$ and $\Ext^1(E_i,E_j)$ are finite-dimensional, and $\rad(E_i,E_j)=0=\Ext^1(E_i,E_j)$ for $i\ge j$.
+\end{definition}
+
+\begin{definition}[Universal extensions in a triangulated category]\label{def:univ-ext-tri}
+Let $Q,T\in\cD$ with $V:=\Hom(Q,T[1])$ finite-dimensional. The \emph{universal extension} of $Q$ by $T$ is the object $R$ in a triangle
+\[T\otimes V^\vee\to R\to Q\xrightarrow{\ \varepsilon\ }T\otimes V^\vee[1],\]
+where $\varepsilon\in\Hom(Q,T\otimes V^\vee[1])\cong V\otimes V^\vee\cong\End(V)$ is the identity. It is unique up to isomorphism.
+
+The \emph{iterated universal extension} $G=\bigoplus_sG_s$ of a sequence $(T_1,\dots,T_m)$ of objects of $\cD$ is defined recursively as in \cref{def:univ-ext}.
+
+If $Q$ and $T$ lie in the heart of a t-structure, then so does $R$, and $R$ is the universal extension of $Q$ by $T$ in the heart.
+\end{definition}
+
+\begin{theorem}[{Dlab--Ringel \cite[Thm.~2]{DR92}; \cite[Thm.~2.1]{BB26}}]\label{thm:DR}
+Let $(E_1,\dots,E_m)$ be a standardizable sequence in a $\kk$-linear abelian category $\cA$, with iterated universal extension $G$. Then $\widetilde\cA=\modd\End_\cA(G)$, with the order $1<\dots<m$, is a highest weight category with standard objects $\Hom_\cA(G,E_i)$. Moreover $\cF(E_1,\dots,E_m)\subset\cA$ and $\cF(\Delta(1),\dots,\Delta(m))\subset\widetilde\cA$ are equivalent.
+\end{theorem}
+
+\begin{theorem}[{\cite[Thm.~3.1]{BB26}}]\label{thm:BB-3.1}
+Let $(E_1,\dots,E_n)$ be a full exceptional sequence in $\cD$, let $(F_1,\dots,F_n)$ be its right Hom-orthogonal dual (its ``left dual'' in \cite{BB26}), and let $\cA$ be the heart of the t-structure glued along $(E_1,\dots,E_n)$.
+\begin{enumerate}
+\item $\cA$ is highest weight with standard objects $\{E_i\}$, costandard objects $\{F_i\}$ and the order induced by the sequence if and only if
+\[\Hom(\textstyle\bigoplus_iE_i,\bigoplus_iE_i[l])=0\quad\text{and}\quad\Hom(\bigoplus_iF_i,\bigoplus_iF_i[l])=0\qquad\text{for all }l<0.\]
+\item If $\cD$ is idempotent complete and dg enhanced and the conditions of \textup{(1)} hold, then $\cD\simeq\Db(\cA)$.
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[{\cite[Thm.~3.4]{BB26}}]\label{thm:BB-3.4}
+Let $\cD$ carry a t-structure with heart $\cA$, and let $(E_1,\dots,E_n)$ be an exceptional sequence in $\cD$, with right Hom-orthogonal dual $(F_1,\dots,F_n)$ (its ``left dual'' in \cite{BB26}).
+\begin{enumerate}
+\item If $E_i\in\cD^{\le0}$ and $F_i\in\cD^{\ge0}$ for all $i$, then the t-structure of $\cD$ restricts to the t-structure on $\cC:=\thick{E_1,\dots,E_n}$ glued along $(E_1,\dots,E_n)$. Its heart is $\cA\cap\cC$.
+\item If $E_i,F_i\in\cA$ for all $i$, then $\cA\cap\cC$ is highest weight with standard objects $\{E_i\}$ and costandard objects $\{F_i\}$.
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[{\cite[Thm.~3.8]{BB26}}]\label{thm:BB-3.8}
+Let $\cA$ be an abelian category. Equivalence classes of highest weight structures on $\cA$ are in bijection with equivalence classes of full exceptional sequences in $\Db(\cA)$ such that both the sequence and its right Hom-orthogonal dual (its ``left dual'') consist of objects of $\cA$.
+\end{theorem}
+
+\begin{example}[{\cite[Ex.~5.11]{BB26}}]\label{ex:BB-5.11}
+Let $f\colon X\to Y$ be the minimal resolution of an $A_1$ surface singularity, with exceptional curve $E$. Let $\cC_f=\{F\in\Db(X):Rf_*F=0\}$, and let $\mathcal{A}_f=\cC_f\cap\mathrm{Coh}(X)$.
+\begin{itemize}
+\item $\mathcal{A}_f$ is equivalent to $\modd\kk$, with additive generator $\cO_E(-1)$.
+\item $\cO_E(-1)$ is $2$-spherical. In particular $\Ext^2(\cO_E(-1),\cO_E(-1))\cong\kk$, so $\Db(\mathcal{A}_f)\not\simeq\cC_f$.
+\end{itemize}
+In the terminology of \cref{sec:P-objects}, $\cO_E(-1)$ is a $\Pn12$-object generating $\cC_f$. This example already exhibits the phenomenon of \cref{prop:heart-P}(1).
+\end{example}
+
+\begin{remark}
+Kalck's algebra \cite[Prop.~5.6]{Kal17} has a full exceptional sequence of modules but is not quasi-hereditary. Bodzenta and Bondal show that its standard t-structure is nevertheless glued along this sequence, and that the dual sequence does not consist of modules \cite[\S4.1]{BB26}. The condition on the dual sequence in \cref{thm:BB-3.1,thm:BB-3.8} is therefore essential.
+\end{remark}
+
+\subsection{Stratified algebras}
+
+\begin{definition}[{\cite{CPS96,Dla96,AHLU00}}]\label{def:strat}
+Let $\cA$ be Deligne finite, with simple objects $L(1),\dots,L(m)$ indexed by $\{1<\dots<m\}$, projective covers $P(i)$ and injective hulls $I(i)$. Define the following objects.
+\begin{itemize}
+\item The \emph{standard object} $\Delta(i)=P(i)/U_i$, where $U_i=\sum_{j>i}\tr_{P(j)}P(i)$. It is the largest quotient of $P(i)$ all of whose composition factors are $L(j)$ with $j\le i$.
+\item The \emph{proper standard object} $\Deltabar(i)$: the largest quotient of $P(i)$ such that $[\Deltabar(i):L(i)]=1$ and all other composition factors are $L(j)$ with $j<i$.
+\item The \emph{costandard object} $\nabla(i)$: the largest subobject of $I(i)$ all of whose composition factors are $L(j)$ with $j\le i$.
+\item The \emph{proper costandard object} $\nablabar(i)$: the largest subobject of $I(i)$ such that $[\nablabar(i):L(i)]=1$ and all other composition factors are $L(j)$ with $j<i$.
+\end{itemize}
+We put $B_i:=\End_\cA(\Delta(i))$. The category $\cA$ (or an algebra $\Lambda$ with $\cA\simeq\modd\Lambda$) is
+\begin{itemize}
+\item \emph{standardly stratified} if $U_i\in\cF(\Delta(j):j>i)$ for every $i$, i.e.\ $P(i)$ has a $\Delta$-filtration with top factor $\Delta(i)$ and remaining factors $\Delta(j)$, $j>i$;
+\item \emph{properly stratified} if moreover every $P(i)$ lies in $\cF(\Deltabar)$;
+\item \emph{quasi-hereditary} if it is standardly stratified and $\Delta(i)=\Deltabar(i)$ for all $i$.
+\end{itemize}
+\end{definition}
+
+\begin{remark}
+Several inequivalent notions of ``stratified'' are in use: some allow partial preorders, and the notion of \cite{CPS96} is homological. For total orders, the definition above is equivalent to $\Lambda_\Lambda\in\cF(\Delta)$ \cite{Dla96,AHLU00}; Mazorchuk \cite{Maz04} calls this \emph{strongly standardly stratified}. Quasi-hereditary in the above sense is the same as highest weight in the sense of \cref{def:hw}.
+\end{remark}
+
+\begin{intuition}
+The local algebra $B_i$ is the ``stratum algebra'' at $i$. Quasi-heredity means $B_i=\kk$ for all $i$. In the derived picture, $\Delta(i)$ plays the role of a projective generator of the $i$-th stratum, and $\nablabar(i)$ the role of its simple object (\cref{lem:strat-basic}). For $B_i\ne\kk$ these are genuinely different objects.
+\end{intuition}
+
+\begin{lemma}\label{lem:strat-basic}
+Let $\cA$ be standardly stratified.
+\begin{enumerate}
+\item Let $X\in\cF(\Delta(j):j>i)$, and let $Y\in\cA$ have all composition factors in $\{L(j):j\le i\}$. Then $\Ext^l_\cA(X,Y)=0$ for all $l\ge0$.
+\item $\Ext^l(\Delta(j),\Delta(i))=0$ for $j>i$ and all $l\ge0$, and $\Ext^l(\Delta(i),\Delta(i))=0$ for $l\ge1$. The algebra $B_i$ is local, and $\dim B_i=[\Delta(i):L(i)]$. In particular $\cA$ is quasi-hereditary if and only if $B_i\cong\kk$ for all $i$.
+\item $\Ext^l(\Delta(j),\nablabar(i))=0$ for $j>i$ and all $l\ge0$. Furthermore $\Hom(\Delta(i),\nablabar(i))\cong\kk$ and $\Ext^l(\Delta(i),\nablabar(i))=0$ for $l\ge1$, while $\Hom(\Delta(j),\nablabar(i))=0$ for $j<i$.
+\item Every $\Delta(i)$ has finite projective dimension, and
+\[\Kb(\proj\cA)=\thick[\Db(\cA)]{\Delta(1),\dots,\Delta(m)}.\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) It suffices to treat $X=\Delta(j)$ with $j>i$; we use descending induction on $j$.
+\begin{itemize}
+\item Since $\Delta(j)$ has top $L(j)$ and $Y$ has no composition factor $L(j)$, we get $\Hom(\Delta(j),Y)=0$.
+\item The exact sequence $0\to U_j\to P(j)\to\Delta(j)\to0$, together with $\Hom(P(j),Y)=0$, gives $\Ext^1(\Delta(j),Y)\cong\Hom(U_j,Y)$ and $\Ext^{l+1}(\Delta(j),Y)\cong\Ext^l(U_j,Y)$ for $l\ge1$.
+\item Since $U_j\in\cF(\Delta(t):t>j)$, the induction hypothesis gives $\Ext^\bullet(U_j,Y)=0$. For $j=m$ we have $U_m=0$.
+\end{itemize}
+
+(2) The first two vanishing statements follow from~(1) applied to $Y=\Delta(i)$, using the sequence $0\to U_i\to P(i)\to\Delta(i)\to0$ as in~(1). Since $\Delta(i)$ has simple top, it is indecomposable, so $B_i$ is local. Every map $P(i)\to\Delta(i)$ vanishes on $U_i$, because $\Hom(U_i,\Delta(i))=0$ by~(1). Hence $B_i=\Hom(P(i),\Delta(i))$, whose dimension is $[\Delta(i):L(i)]$. The last statement follows, since $\Delta(i)=\Deltabar(i)$ if and only if $[\Delta(i):L(i)]=1$.
+
+(3) The first statement is~(1) with $Y=\nablabar(i)$.
+\begin{itemize}
+\item The image of a non-zero map $\Delta(j)\to\nablabar(i)$ is a quotient of $\Delta(j)$ and contains $\soc\nablabar(i)=L(i)$. This is impossible for $j<i$, and forces $\dim\Hom(\Delta(i),\nablabar(i))\le\dim\Hom(P(i),\nablabar(i))=[\nablabar(i):L(i)]=1$ for $j=i$.
+\item The composite $\Delta(i)\twoheadrightarrow L(i)\hookrightarrow\nablabar(i)$ is non-zero, so $\Hom(\Delta(i),\nablabar(i))\cong\kk$.
+\item The vanishing of $\Ext^{l}(\Delta(i),\nablabar(i))$ for $l\ge1$ follows from $\Ext^\bullet(U_i,\nablabar(i))=0$, which holds by~(1).
+\end{itemize}
+
+(4) We use descending induction: $\Delta(m)=P(m)$, and $0\to U_i\to P(i)\to\Delta(i)\to0$ with $U_i\in\cF(\Delta(j):j>i)$. This shows that $\pd\Delta(i)<\infty$ and that $P(i)\in\thick[\Db(\cA)]{\Delta(i),\dots,\Delta(m)}$.
+\end{proof}
+
+\begin{lemma}[Inductive characterisation]\label{lem:strat-induction}
+Let $\cA$ be Deligne finite, with simple objects $L(1),\dots,L(m)$ and projective covers $P(1),\dots,P(m)$. Let $\cA'\subset\cA$ be the Serre subcategory of objects without composition factor $L(m)$. For $s<m$ put
+\[U_s:=\tr_{P(m)}P(s)\qquad\text{and}\qquad P'(s):=P(s)/U_s,\]
+so that $P'(s)$ is a projective cover of $L(s)$ in $\cA'$. Then $\cA$ is standardly stratified (for $1<\dots<m$) if and only if both of the following hold:
+\begin{enumerate}
+\item[(a)] for every $s<m$, the object $U_s$ is projective, i.e.\ $U_s\cong P(m)^{\oplus q_s}$ for some $q_s\ge0$;
+\item[(b)] $\cA'$ is standardly stratified (for $1<\dots<m-1$).
+\end{enumerate}
+In this case $\Delta(m)=P(m)$. For $s<m$, the objects $\Delta(s)$, $\Deltabar(s)$ and $\nablabar(s)$ of $\cA$ coincide with those of $\cA'$.
+\end{lemma}
+
+\begin{proof}
+\emph{Comparison of $\cA$ and $\cA'$.} Let $s<m$. The objects $\Delta(s)$ and $\Deltabar(s)$ are quotients of $P(s)$ with composition factors $L(t)$, $t\le s<m$. They therefore lie in $\cA'$, are quotients of $P'(s)$, and agree with the corresponding objects of $\cA'$. Similarly, $\nablabar(s)$ lies in the largest subobject of $I(s)$ belonging to $\cA'$, which is an injective hull of $L(s)$ in $\cA'$. Finally $\Delta(m)=P(m)$, since all composition factors are $\le m$.
+
+\emph{(a) and (b) imply standard stratification.} Let $s<m$. By (b), the kernel of $P'(s)\twoheadrightarrow\Delta(s)$ lies in $\cF(\Delta(t):s<t<m)$. The kernel of the composite $P(s)\twoheadrightarrow P'(s)\twoheadrightarrow\Delta(s)$ is an extension of this kernel by $U_s\cong\Delta(m)^{\oplus q_s}$. Hence it lies in $\cF(\Delta(t):t>s)$. For $s=m$ there is nothing to show.
+
+\emph{Standard stratification implies (a) and (b).} We first show the following claim: every $X\in\cF(\Delta)$ has a subobject $M\in\add P(m)$ with $X/M\in\cF(\Delta(t):t<m)$. We use induction on the length of a $\Delta$-filtration. Take an exact sequence $0\to X_1\to X\to\Delta(t)\to0$, and choose $M_1\subset X_1$ for $X_1$ by induction.
+\begin{itemize}
+\item If $t<m$, take $M=M_1$.
+\item If $t=m$, the extension $0\to X_1/M_1\to X/M_1\to\Delta(m)\to0$ splits, because $\Delta(m)=P(m)$ is projective. Let $M$ be the preimage in $X$ of the summand $\Delta(m)$. Then $0\to M_1\to M\to P(m)\to0$ also splits, so $M\in\add P(m)$, and $X/M\cong X_1/M_1$.
+\end{itemize}
+Now let $s<m$, and let $K_s$ be the kernel of $P(s)\twoheadrightarrow\Delta(s)$, so $K_s\in\cF(\Delta(t):t>s)$. The claim gives $M\subset K_s$ with $M\in\add P(m)$ and $K_s/M\in\cF(\Delta(t):s<t<m)$.
+\begin{itemize}
+\item $P(s)/M$ is an extension of $\Delta(s)$ by $K_s/M$, so it lies in $\cA'$. Hence $M\supset U_s$.
+\item $M$ is generated by $P(m)$, so $M\subset U_s$.
+\end{itemize}
+Thus $U_s=M$, which proves (a). Moreover the kernel of $P'(s)\twoheadrightarrow\Delta(s)$ is $K_s/M\in\cF(\Delta(t):s<t<m)$, which proves (b).
+\end{proof}
+
+\begin{remark}[Heredity chains]\label{rem:heredity}
+Let $\cA=\modd\Lambda$, and let $e$ be a primitive idempotent with $e\Lambda=P(m)$. Then $\bigoplus_sU_s$ corresponds to the trace ideal $J=\Lambda e\Lambda$, and $\cA'\simeq\modd\Lambda/J$. Condition (a) says that $J$ is projective as a right $\Lambda$-module. If in addition $e\Lambda e=\End(P(m))=\kk$, this is the definition of a heredity ideal, and \cref{lem:strat-induction} becomes the characterisation of quasi-hereditary algebras by heredity chains \cite{CPS88,DR92}.
+
+So standardly stratified algebras are those admitting a chain of idempotent ideals, each projective as a right module over the corresponding quotient; the local algebras $e\Lambda e$ play the role of the stratum algebras (cf.\ \cite{Dla96,CPS96}). All inductive arguments below follow this pattern: they peel off the maximal simple object, or equivalently the last stratum.
+\end{remark}
+
+
+
+% ===============================================================
+\section{Local-exceptional objects and local pairs}\label{sec:local}
+% ===============================================================
+
+\subsection{Local-exceptional objects}
+
+\begin{definition}\label{def:local-exc}
+An object $E$ of $\cD$ is \emph{local-exceptional} if $\Hom(E,E[l])=0$ for all $l\ne0$ and $\End(E)$ is a local algebra. A \emph{local-exceptional sequence} is a sequence $(E_1,\dots,E_m)$ of local-exceptional objects with $\Hom^\bullet(E_t,E_s)=0$ for $t>s$. It is \emph{full} if $\thick{E_1,\dots,E_m}=\cD$.
+\end{definition}
+
+\begin{example}\label{ex:local-exc}
+\leavevmode
+\begin{enumerate}
+\item Exceptional objects are exactly the local-exceptional objects with $\End(E)=\kk$.
+\item If $B$ is a finite-dimensional local algebra, then $B$ is a local-exceptional object of $\Db(\modd B)$ and of $\Kb(\proj B)$. More generally, a module $M$ over a finite-dimensional algebra $\Lambda$ is local-exceptional in $\Db(\modd\Lambda)$ if $\End(M)$ is local and $\Ext^l(M,M)=0$ for all $l\ge1$.
+\item The standard modules of a standardly stratified algebra form a full local-exceptional sequence in $\Kb(\proj\Lambda)$ (\cref{thm:C}).
+\item $\Pn n0$-like objects (\cref{def:Pnk}) are exactly the local-exceptional objects with endomorphism algebra $\kk[t]/(t^{n+1})$ (\cref{sec:P-zero}).
+\end{enumerate}
+\end{example}
+
+\begin{intuition}
+For an exceptional object $E$ we have $\thick E\simeq\Db(\kk)$, and $E$ is simultaneously the projective object and the simple object of the heart $\modd\kk$. For a local-exceptional object these two roles separate.
+\begin{itemize}
+\item $E$ behaves like the free module over $B=\End(E)$ (\cref{prop:local-exc}).
+\item The ``simple'' object that $E$ should be paired with is not contained in $\thick E$.
+\end{itemize}
+Accordingly, the strata of the filtrations considered in \cref{sec:gluing,sec:criterion} are not generated by the objects $E_s$. Each of them contains both a projective-like and a simple-like object.
+\end{intuition}
+
+\begin{lemma}\label{lem:euler}
+Let $B$ be a finite-dimensional local algebra, and let $Y\in\Kb(\proj B)$. Then $\chi(Y):=\sum_l(-1)^l\dim H^l(Y)$ is divisible by $\dim B$.
+\end{lemma}
+
+\begin{proof}
+Finitely generated projective modules over a local algebra are free. So $Y$ is isomorphic to a bounded complex with terms $B^{r_l}$, and $\chi(Y)=\sum_l(-1)^lr_l\dim B$.
+\end{proof}
+
+\begin{proposition}\label{prop:local-exc}
+Let $\cD$ be algebraic, let $E\in\cD$ be local-exceptional, and put $B=\End(E)$.
+\begin{enumerate}
+\item $\thick E\simeq\Kb(\proj B)$, with $E$ corresponding to $B$.
+\item $\thick E$ carries the bounded co-t-structure with co-heart $\add E$.
+\item If $B\ne\kk$, there is no $X\in\thick E$ with $\dim\Hom^\bullet(E,X)=1$. In particular, the standard t-structure of $\Db(\modd B)$ does not restrict to $\Kb(\proj B)$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1) The object $E$ is a tilting object of $\thick E$, so this is \cref{thm:keller}. (2) follows from \cref{thm:silting-cot}.
+
+(3) Under the equivalence of (1), $\Hom^l(E,X)\cong H^l(Y)$, where $Y$ is the perfect complex corresponding to $X$. If $\dim\Hom^\bullet(E,X)=1$, then $\chi(Y)=\pm1$. This is impossible by \cref{lem:euler}, since $\dim B\ge2$.
+
+For the last assertion, let $P_1\to P_0\to\kk\to0$ be a minimal projective presentation of the simple $B$-module, and let $Y=(P_1\to P_0)$ in degrees $-1,0$. If the standard t-structure restricted to $\Kb(\proj B)$, then $H^0(Y)\cong\kk$ would be perfect. But $\Hom^\bullet(B,\kk)\cong\kk$, contradicting what we just proved.
+\end{proof}
+
+\begin{remark}\label{rem:local-exc-no-t}
+For $B=\kk[t]/(t^{n+1})$ with $n\ge1$, the category $\thick E$ has no non-trivial t-structure at all. This is due to Bonfert \cite[Cor.~3.10]{Bonf26} (\cref{thm:Bonfert}(3)), and for $n=1$ to Holm, J\o rgensen and Yang (\cref{thm:HJY}). Part~(3) above is a weak form of this, valid for every local algebra $B$. It is the form needed in \cref{thm:C}.
+\end{remark}
+
+
+\subsection{Local pairs}
+We now describe, in terms of two objects, the categories that will occur as strata of our filtrations. Throughout this subsection $\cT$ is a triangulated category (Hom-finite and idempotent complete, as always).
+
+The following lemma describes the aisles of a bounded t-structure with a local heart in terms of two ``test objects''. It is the local ingredient in the description of the t-structure of a stratifying triple (\cref{prop:triple-t}).
+
+\begin{lemma}\label{lem:aisles}
+Let $\cT$ carry a bounded t-structure whose heart $\cH$ is a length category with a unique simple object $S$ (up to isomorphism). Let $Q\in\cH$ satisfy $\Hom(Q,M)\ne0$ for every non-zero $M\in\cH$. Then
+\[\cT^{\le0}=\{X:\Hom(X,S[l])=0\ \forall l<0\},\qquad\cT^{\ge0}=\{X:\Hom(Q,X[l])=0\ \forall l<0\}.\]
+Moreover $\cT^{\le0}=\Filt\{S[l]:l\ge0\}$ and $\cT^{\ge0}=\Filt\{S[l]:l\le0\}$. The hypothesis on $Q$ holds for $Q=S$, and for a projective cover of $S$ if one exists.
+\end{lemma}
+
+\begin{proof}
+\textbf{Description of $\cT^{\ge0}$.} If $X\in\cT^{\ge0}$ and $l<0$, then $X[l]\in\cT^{\ge1}$, so $\Hom(Q,X[l])=0$. Conversely, suppose $X\notin\cT^{\ge0}$. By boundedness there is a minimal $d<0$ with $H^d(X)\ne0$, and we have a triangle $H^d(X)[-d]\to X\to\tau^{\ge d+1}X\to$. Shifting by $d$ and applying $\Hom(Q,-)$ gives an exact sequence
+\[\Hom(Q,(\tau^{\ge d+1}X)[d-1])\to\Hom(Q,H^d(X))\to\Hom(Q,X[d]).\]
+The first term vanishes because $(\tau^{\ge d+1}X)[d-1]\in\cT^{\ge2}$. The middle term is non-zero by hypothesis. Hence $\Hom(Q,X[d])\ne0$ with $d<0$.
+
+\textbf{Description of $\cT^{\le0}$.} If $X\in\cT^{\le0}$ and $l<0$, then $S[l]\in\cT^{\ge1}$, so $\Hom(X,S[l])=0$. Conversely, suppose $X\notin\cT^{\le0}$, and let $d>0$ be maximal with $H^d(X)\ne0$. Since $X\in\cT^{\le d}$, for every $M\in\cH$ we have
+\[\Hom(X,M[-d])\cong\Hom(\tau^{\ge d}X,M[-d])\cong\Hom(H^d(X),M).\]
+Taking $M=S$ and using an epimorphism $H^d(X)\twoheadrightarrow S$, we obtain $\Hom(X,S[-d])\ne0$ with $-d<0$.
+
+\textbf{The remaining statements.} The descriptions via $\Filt$ hold because $\cH=\Filt(S)$ and the t-structure is bounded. Every non-zero $M\in\cH$ has a simple subobject (isomorphic to $S$) and a simple quotient; the projection from a projective cover of $S$ onto the simple quotient lifts to $M$. This gives the last assertion.
+\end{proof}
+
+\begin{lemma}\label{lem:recognise-proj}
+Let $\cT$ carry a bounded t-structure whose heart $\cH$ is a length category with a unique simple object $S$. Let $E\in\cT$ satisfy:
+\begin{itemize}
+\item $\Hom(E,E[l])=0$ for all $l<0$;
+\item $\Hom(E,S)\cong\kk$;
+\item $\Hom(E,S[l])=0$ for $l<0$ and for $l=1$.
+\end{itemize}
+Then $E$ lies in $\cH$ and is a projective cover of $S$.
+\end{lemma}
+
+\begin{proof}
+By \cref{lem:aisles} (with $Q=S$), $E\in\cT^{\le0}$. Since $\Hom(E,S)\cong\Hom(H^0(E),S)\neq0$, we have $H^0(E)\ne0$.
+
+Suppose $E\notin\cT^{\ge0}$, and let $a<0$ be minimal with $H^a(E)\ne0$. We use the argument of \cite[Lemma~3.12]{Bonf26}. Shifting the truncation triangle of $E$ gives a triangle $(\tau^{\ge a+1}E)[a-1]\to H^a(E)\to E[a]\to$, and hence an exact sequence
+\[\Hom(E,(\tau^{\ge a+1}E)[a-1])\to\Hom(E,H^a(E))\to\Hom(E,E[a]).\]
+The first term vanishes, because $(\tau^{\ge a+1}E)[a-1]\in\cT^{\ge2}$ and $E\in\cT^{\le0}$. Since $E\in\cT^{\le0}$, the middle term is
+\[\Hom(E,H^a(E))\cong\Hom(H^0(E),H^a(E)).\]
+This is non-zero: $H^0(E)$ and $H^a(E)$ are non-zero objects of a length category with unique simple object $S$, so there is a non-zero composite $H^0(E)\twoheadrightarrow S\hookrightarrow H^a(E)$. Hence $\Hom(E,E[a])\ne0$ with $a<0$, a contradiction.
+
+So $E$ lies in $\cH$. Since $\Ext^1(E,S)=\Hom(E,S[1])=0$ and $S$ is the only simple object, $E$ is projective. Since $\Hom(E,S)\cong\kk$, its top is $S$.
+\end{proof}
+
+\begin{definition}[Local pairs]\label{def:local-pair}
+A \emph{local pair} in $\cT$ is a pair $(\Pi,S)$ of objects of $\cT$ such that:
+\begin{itemize}
+\item[\textup{(LP1)}] $\{S\}$ is a simple-minded collection in $\cT$ (\cref{def:smc}), that is: $\Hom(S,S[l])=0$ for $l<0$, $\End(S)=\kk$, and $\thick[\cT]{S}=\cT$;
+\item[\textup{(LP2)}] $\Hom(\Pi,\Pi[l])=0$ for $l<0$; $\Hom(\Pi,S)\cong\kk$; and $\Hom(\Pi,S[l])=0$ for $l<0$ and for $l=1$.
+\end{itemize}
+We put $B:=\End(\Pi)$. The pair has \emph{Hom-duality up to degree $r$} ($1\le r\le\infty$) if $\Hom(\Pi,S[l])=0$ for $1\le l\le r$. It has \emph{full Hom-duality} if $r=\infty$, i.e.\ $\Hom^\bullet(\Pi,S)\cong\kk$, concentrated in degree $0$.
+\end{definition}
+
+\begin{remark}[$\Pi$ is only half-dual to $S$]\label{rem:half-dual}
+The Koenig--Yang correspondence (\cref{thm:KY}) pairs a simple-minded collection with a silting object characterised by \emph{full} Hom-duality, $\Hom^\bullet(T,S)\cong\kk$ in degree $0$. Condition (LP2) asks for this only in degrees $\le1$, together with $\Hom(\Pi,\Pi[l])=0$ for $l<0$; in this sense $\Pi$ is only ``half-dual'' to $S$. Full Hom-duality is the case of \cref{prop:local-pair}(4). The vanishing of negative self-extensions is what makes $\Pi$ tilting rather than merely silting in $\thick[\cT]{\Pi}$; compare \cref{ex:NH-fails}.
+\end{remark}
+
+\begin{proposition}\label{prop:local-pair}
+Let $(\Pi,S)$ be a local pair in $\cT$.
+\begin{enumerate}
+\item There is a unique bounded t-structure $t_S$ on $\cT$ whose heart is $\cH:=\Filt_\cT(S)$. This heart is a length category with unique simple object $S$, and
+\[\cT^{\le0}=\{X:\Hom(X,S[l])=0\ \forall l<0\},\qquad \cT^{\ge0}=\{X:\Hom(Q,X[l])=0\ \forall l<0\}\]
+for $Q=S$ and for $Q=\Pi$.
+\item $\Pi$ lies in $\cH$ and is a projective cover of $S$. The algebra $B=\End(\Pi)$ is local, and $\Hom(\Pi,-)$ induces an equivalence $\cH\simeq\modd B$ under which $S$ corresponds to the simple $B$-module.
+\item If the pair has Hom-duality up to degree $r$, then $\Hom(\Pi,Y[l])=0$ for all $Y\in\cH$ and $1\le l\le r$.
+\item Suppose the pair has full Hom-duality. Then:
+\begin{itemize}
+\item $\Pi$ is local-exceptional;
+\item if $\cT$ is algebraic, $\real\colon\Db(\modd B)\simeq\Db(\cH)\to\cT$ is an equivalence sending $B$ to $\Pi$ and $\kk$ to $S$.
+\end{itemize}
+Conversely, if $\cT$ is algebraic and $\real$ is an equivalence, then the pair has full Hom-duality.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1) By \cref{thm:smc}, $\{S\}$ determines a bounded t-structure with heart $\Filt_\cT(S)$, which is a length category with unique simple object $S$. A bounded t-structure is determined by its heart, since its aisle consists of iterated extensions of non-negative shifts of objects of the heart; this gives uniqueness. The descriptions of the aisles follow from \cref{lem:aisles}. Note that $Q=\Pi$ is an admissible test object by~(2).
+
+(2) This is \cref{lem:recognise-proj}. A length category with a projective generator $\Pi$ is equivalent to $\modd\End(\Pi)$ via $\Hom(\Pi,-)$.
+
+(3) This follows by d\'evissage, since every $Y\in\cH$ is an iterated extension of copies of $S$.
+
+(4) By~(3) with $r=\infty$, $\Hom(\Pi,\Pi[l])=0$ for $l\ge1$. Together with (LP2) and~(2), this shows that $\Pi$ is local-exceptional.
+
+Every $X\in\cH$ is a quotient of some $\Pi^{\oplus k}$. By~(3), every morphism $X\to Y[n]$ with $X,Y\in\cH$ and $n\ge1$ is effaced by such an epimorphism. So $\real$ is an equivalence by \cref{thm:realisation}.
+
+Conversely, if $\real$ is an equivalence, then $\Hom(\Pi,S[l])\cong\Ext^l_B(B,\kk)=0$ for $l\ge1$.
+\end{proof}
+
+\begin{example}\label{ex:local-pairs}
+\leavevmode
+\begin{enumerate}
+\item For a finite-dimensional local algebra $B$, the pair $(B,\kk)$ in $\Db(\modd B)$ is a local pair with full Hom-duality. The case $B=\kk$ is the pair $(\kk,\kk)$ in $\Db(\kk)$, i.e.\ the stratum of an exceptional object.
+\item Let $P$ be $\Pn nk$-like with $k\ge1$ and $n\ge1$, and let $\cT=\thick{P}$ (\cref{sec:P-positive}).
+\begin{itemize}
+\item If $k\ge2$, then $(P,P)$ is a local pair with Hom-duality up to degree $k-1$, but not up to degree $k$.
+\item If $k=1$ and $n\ge2$, then $(Q,P)$ is a local pair with Hom-duality up to degree $n-1$, but not up to degree $n$; here $Q$ is the universal self-extension of $P$.
+\item If $k=n=1$, no local pair $(\Pi,P)$ exists, since the heart $\Filt(P)$ has no non-zero projective objects.
+\end{itemize}
+\end{enumerate}
+\end{example}
+
+\begin{intuition}
+In a local pair, the two roles played by $\kk$ in $\Db(\kk)$ are taken by two different objects: $\Pi$ is projective-like and $S$ is simple-like.
+\begin{itemize}
+\item The degrees $l\le1$ of $\Hom^\bullet(\Pi,S)$ are fixed by (LP2).
+\item The degrees $l\ge2$ measure how far $\cT$ is from $\Db(\modd B)$ (\cref{prop:local-pair}(4)).
+\end{itemize}
+The pair is purely object-level data: the t-structure $t_S$ is determined by $S$ alone.
+\end{intuition}
+
+% ===============================================================
+\section{Stratifying triples}\label{sec:triples}
+% ===============================================================
+
+In this section we introduce the object-level data underlying all our results. We show that it determines an admissible filtration, local pairs on the strata of this filtration, and a t-structure on $\cD$.
+
+\subsection{Definition}
+
+\begin{definition}[Stratifying triples]\label{def:triple}
+Let $\cD$ be a triangulated category and $m\ge1$. A \emph{stratifying triple} $(\Delta_\bullet,\Deltabar_\bullet,N_\bullet)$ in $\cD$ consists of objects $\Delta_1,\dots,\Delta_m$, $\Deltabar_1,\dots,\Deltabar_m$ and $N_1,\dots,N_m$ of $\cD$. Put
+\[\cD_s:=\thick{N_1,\dots,N_s}\qquad(0\le s\le m).\]
+We require that the following hold for all $s,t$.
+\begin{itemize}
+\item[\textup{(ST1)}] \emph{Hom-duality in low degrees:} $\Hom^\bullet(\Delta_s,N_t)=0$ for $s\ne t$; $\Hom(\Delta_s,N_s)\cong\kk$; and $\Hom(\Delta_s,N_s[l])=0$ for $l<0$ and for $l=1$.
+\item[\textup{(ST2)}] \emph{The simple-like sequence:} $\Hom^\bullet(N_s,N_t)=0$ for $s<t$; $\End(N_s)=\kk$; and $\Hom(N_s,N_s[l])=0$ for $l<0$.
+\item[\textup{(ST3)}] \emph{Generation:} $\cD_m=\cD$.
+\item[\textup{(ST4)}] \emph{Left Hom-orthogonal dual:} $\Hom^\bullet(\Deltabar_s,N_t)=0$ for $t<s$, and there is a morphism $\delta_s\colon\Deltabar_s\to N_s$ with $\cone(\delta_s)\in\cD_{s-1}$. That is, $\Deltabar_\bullet$, together with the morphisms $\delta_s$, is the left Hom-orthogonal dual of $N_\bullet$ (\cref{def:orth-dual}).
+\item[\textup{(ST5)}] $\Hom(\Delta_s,\Delta_s[l])=0$ for $l<0$.
+\end{itemize}
+Further terminology:
+\begin{itemize}
+\item The triple has \emph{Hom-duality up to degree $r$} ($1\le r\le\infty$) if $\Hom(\Delta_s,N_s[l])=0$ for all $s$ and $1\le l\le r$. By (ST1) this always holds for $r=1$.
+\item It has \emph{full Hom-duality} if $r=\infty$, i.e.\ $\Hom^\bullet(\Delta_s,N_t)\cong\delta_{st}\kk$, concentrated in degree $0$.
+\item It satisfies \emph{(NH)} (no negative extensions) if
+\[\Hom(\Delta_s,\Delta_t[l])=0\quad\text{and}\quad\Hom(N_s,N_t[l])=0\qquad\text{for all $s,t$ and all $l<0$.}\]
+\end{itemize}
+\end{definition}
+
+\begin{remark}[The morphisms $\delta_s$ are not data]\label{rem:delta-not-data}
+In (ST4) the morphisms $\delta_s$ are only required to exist, and they are essentially unique.
+\begin{itemize}
+\item By \cref{lem:right-dual}(2), composition with $\delta_s$ gives $\Hom(\Deltabar_s,N_s)\cong\End(N_s)=\kk$. So $\delta_s$ is non-zero, and every non-zero morphism $\Deltabar_s\to N_s$ is a non-zero scalar multiple of it, with the same cone. Hence (ST4) does not depend on the choice of $\delta_s$.
+\item By \cref{lem:right-dual}(3), the object $\Deltabar_s$ itself is determined by $N_1,\dots,N_s$ up to unique isomorphism: it is the projection of $N_s$ onto ${}^\perp\cD_{s-1}$.
+\end{itemize}
+Thus a stratifying triple is determined by the pair $(\Delta_\bullet,N_\bullet)$, and (ST4) is a condition on $N_\bullet$ alone: it says that $N_\bullet$ admits a left Hom-orthogonal dual. We keep $\Deltabar_\bullet$ in the notation because it plays the role of the proper standard objects. Whenever we write $\delta_s$, we mean any non-zero morphism $\Deltabar_s\to N_s$.
+\end{remark}
+
+\begin{remark}[(ST2) and exceptional sequences]\label{rem:ST2}
+Condition (ST2) says that $(N_m,\dots,N_1)$ is an exceptional sequence, except that $\Hom(N_s,N_s[l])=0$ is required only for $l<0$: positive self-extensions of $N_s$ are allowed. They are exactly what distinguishes the stratum $\cT_s$ from $\Db(\kk)$. Under full Hom-duality, $N_s$ is exceptional if and only if $\End(\Delta_s)=\kk$.
+\end{remark}
+
+\begin{intuition}
+By \cref{prop:triple-filtration}, the filtration $\cD_1\subset\dots\subset\cD_m$ has strata $\cT_s$ carrying local pairs $(\Pi_s,S_s)$. The three sequences are then
+\[\Delta_s=j_{s!}\Pi_s,\qquad\Deltabar_s=j_{s!}S_s,\qquad N_s=j_{s*}S_s.\]
+That is, $\Delta_s$ is the projective extended by zero, $\Deltabar_s$ is the simple extended by zero, and $N_s$ is the simple extended by $j_{s*}$.
+
+Two dualities relate the three sequences:
+\begin{itemize}
+\item $N_\bullet$ and $\Deltabar_\bullet$ are related by mutation;
+\item $\Delta_\bullet$ and $N_\bullet$ are related by the Hom-duality (ST1), which pairs a projective object with a simple one.
+\end{itemize}
+Every condition in the definition only involves objects of $\cD$ and morphisms between them.
+\end{intuition}
+
+\begin{example}\label{ex:triples}
+\leavevmode
+\begin{enumerate}
+\item A full exceptional sequence $E_\bullet$ with right Hom-orthogonal dual $F_\bullet$ gives the stratifying triple $(E_\bullet,E_\bullet,F_\bullet)$, which has full Hom-duality (\cref{prop:exc-dual}).
+\item An admissible filtration with a local pair in each stratum gives a stratifying triple, and conversely (\cref{prop:triple-filtration}).
+\item Under suitable conditions, the standard, proper standard and proper costandard modules of a standardly stratified algebra form a stratifying triple with full Hom-duality (\cref{prop:dualisable}).
+\item A semi-orthogonal sequence of $\mathbb{P}$-like objects with a right Hom-orthogonal dual gives a stratifying triple (\cref{lem:P-triple}).
+\item Further examples, and non-examples, are collected in \cref{sec:examples}.
+\end{enumerate}
+\end{example}
+
+\subsection{Left Hom-orthogonal duals and peeling off the last stratum}
+
+\begin{lemma}\label{lem:right-dual}
+Let $N_1,\dots,N_m$ satisfy (ST2) and (ST3), and let $\delta_s\colon\Deltabar_s\to N_s$ satisfy (ST4). For every $s$:
+\begin{enumerate}
+\item $\Deltabar_s\in\cD_s$, $\Hom^\bullet(\Deltabar_s,\cD_{s-1})=0$, and $\cD_s=\thick{\cD_{s-1}\cup\{\Deltabar_s\}}$;
+\item $\Hom^\bullet(\Deltabar_s,N_t)=0$ for $t\ne s$, and composition with $\delta_s$ induces an isomorphism $\Hom^\bullet(\Deltabar_s,N_s)\cong\End^\bullet(N_s)$; in particular $\Hom(\Deltabar_s,N_s)=\kk\delta_s$;
+\item the pair $(\Deltabar_s,\delta_s)$ is unique up to unique isomorphism.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) Both $\cone(\delta_s)$ and $N_s$ lie in $\cD_s$, hence so does $\Deltabar_s$. Conversely $N_s\in\thick{\cD_{s-1}\cup\{\Deltabar_s\}}$, so $\cD_s=\thick{\cD_{s-1}\cup\{\Deltabar_s\}}$. The vanishing $\Hom^\bullet(\Deltabar_s,\cD_{s-1})=0$ follows from (ST4), since $\cD_{s-1}=\thick{N_1,\dots,N_{s-1}}$.
+
+(2) For $t>s$ the vanishing holds because $\Deltabar_s\in\cD_s$ and $\Hom^\bullet(\cD_s,N_t)=0$ by (ST2). For $t=s$, apply $\Hom^\bullet(-,N_s)$ to the triangle $\Deltabar_s\to N_s\to\cone(\delta_s)\to$, and use $\Hom^\bullet(\cD_{s-1},N_s)=0$.
+
+(3) Let $(\Deltabar'_s,\delta'_s)$ be a second choice. By (1), $\Hom^\bullet(\Deltabar_s,\cone(\delta'_s))=0$, so composition with $\delta'_s$ gives $\Hom(\Deltabar_s,\Deltabar'_s)\cong\Hom(\Deltabar_s,N_s)$. Hence $\delta_s=\delta'_s\varphi$ for a unique $\varphi$. Symmetrically $\delta'_s=\delta_s\psi$ for a unique $\psi$. By uniqueness, $\varphi\psi$ and $\psi\varphi$ are identities.
+\end{proof}
+
+\begin{lemma}[Peeling off the last stratum]\label{lem:peel}
+Let $(\Delta_\bullet,\Deltabar_\bullet,N_\bullet)$ be a stratifying triple in $\cD$, and put $\cD'=\cD_{m-1}$.
+\begin{enumerate}
+\item $\cD'$ is admissible in $\cD$, with
+\[{}^\perp\cD'=\thick{\Deltabar_m}\qquad\text{and}\qquad\cD'^\perp=\thick{N_m}.\]
+More precisely, \cref{lem:sod} applied to $(\cV,\cU)=(\thick{\Deltabar_m},\cD')$ gives the left adjoint of the inclusion, and applied to $(\cV,\cU)=(\cD',\thick{N_m})$ it gives the right adjoint.
+\item For $s<m$ we have $\Delta_s,\Deltabar_s\in\cD'$, and $(\Delta_{<m},\Deltabar_{<m},N_{<m})$ is a stratifying triple in $\cD'$. Moreover $\Delta_m\in{}^\perp\cD'$.
+\item Let $j\colon\cD\to\cT:=\cD/\cD'$ be the quotient functor. Then $(\Pi,S):=(j^*\Delta_m,j^*N_m)$ is a local pair in $\cT$, and
+\[j_!\Pi\cong\Delta_m,\qquad j_!S\cong\Deltabar_m,\qquad j_*S\cong N_m.\]
+Moreover $\Hom^l_\cT(\Pi,S)\cong\Hom^l(\Delta_m,N_m)$ and $\End^\bullet_\cT(\Pi)\cong\End^\bullet(\Delta_m)$ for all $l$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) We have $\cD=\thick{\cD'\cup\{\Deltabar_m\}}$ with $\Hom^\bullet(\Deltabar_m,\cD')=0$, by \cref{lem:right-dual}(1). We also have $\cD=\thick{\cD'\cup\{N_m\}}$ with $\Hom^\bullet(\cD',N_m)=0$, by (ST2) and (ST3). Now apply \cref{lem:sod}(2) twice.
+
+(2) Let $s<m$. By (ST1), $\Hom^\bullet(\Delta_s,N_m)=0$, so $\Delta_s\in{}^\perp\thick{N_m}=\cD'$ by \cref{lem:sod}(2). Moreover $\Deltabar_s\in\cD_s\subset\cD'$ by \cref{lem:right-dual}(1). Conditions (ST1), (ST2), (ST4) and (ST5) for indices $<m$ are inherited, and (ST3) holds for $\cD'$ by definition. Finally, $\Hom^\bullet(\Delta_m,N_t)=0$ for $t<m$ by (ST1), hence $\Delta_m\in{}^\perp\cD'$.
+
+(3) We first identify the three objects.
+\begin{itemize}
+\item Since ${}^\perp\cD'$ is the essential image of $j_!$, (2) gives $\Delta_m\cong j_!\Pi$.
+\item Similarly $\Deltabar_m\cong j_!j^*\Deltabar_m$, and $j^*\Deltabar_m\cong j^*N_m=S$ because $\cone(\delta_m)\in\cD'$.
+\item $N_m\in\cD'^\perp$, which is the essential image of $j_*$, so $N_m\cong j_*S$.
+\end{itemize}
+By adjunction, $\Hom^l(\Delta_m,N_m)\cong\Hom^l(j_!\Pi,N_m)\cong\Hom^l_\cT(\Pi,j^*N_m)=\Hom^l_\cT(\Pi,S)$. Since $j_!$ and $j_*$ are fully faithful, $\End^\bullet(\Pi)\cong\End^\bullet(\Delta_m)$ and $\End^\bullet(S)\cong\End^\bullet(N_m)$.
+
+Finally we check that $(\Pi,S)$ is a local pair. Since $\cD=\thick{\cD'\cup\{N_m\}}$, the object $S$ generates $\cT$. So (LP1) follows from (ST2), and (LP2) follows from (ST1) and (ST5).
+\end{proof}
+
+\begin{proposition}[Triples and filtrations]\label{prop:triple-filtration}
+\leavevmode
+\begin{enumerate}
+\item Let $(\Delta_\bullet,\Deltabar_\bullet,N_\bullet)$ be a stratifying triple in $\cD$. Then $0=\cD_0\subset\cD_1\subset\dots\subset\cD_m=\cD$ is an admissible filtration (\cref{def:adm-filtration}). For each $s$, the objects $\Pi_s:=j_s^*\Delta_s$ and $S_s:=j_s^*N_s$ form a local pair in the stratum $\cT_s=\cD_s/\cD_{s-1}$, and
+\[\Delta_s\cong j_{s!}\Pi_s,\qquad\Deltabar_s\cong j_{s!}S_s,\qquad N_s\cong j_{s*}S_s,\qquad\Hom^l(\Delta_s,N_s)\cong\Hom^l_{\cT_s}(\Pi_s,S_s)\quad\text{for all $l$}.\]
+In particular the triple has Hom-duality up to degree $r$ if and only if all the local pairs $(\Pi_s,S_s)$ do.
+\item Conversely, let $0=\cD_0\subset\dots\subset\cD_m=\cD$ be an admissible filtration with a local pair $(\Pi_s,S_s)$ in each stratum. Put $\Delta_s:=j_{s!}\Pi_s$, $\Deltabar_s:=j_{s!}S_s$ and $N_s:=j_{s*}S_s$, and let $\delta_s\colon j_{s!}S_s\to j_{s*}S_s$ be the canonical morphism. Then these form a stratifying triple, whose filtration is the given one.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1) Apply \cref{lem:peel} to the truncated triples $(\Delta_{\le s},\Deltabar_{\le s},N_{\le s})$ in $\cD_s$. These are stratifying triples by repeated application of \cref{lem:peel}(2).
+
+(2) We check the five conditions.
+\begin{itemize}
+\item \emph{(ST1).} By adjunction, $\Hom^\bullet(j_{s!}\Pi_s,j_{t*}S_t)=0$ for $s\ne t$: for $s<t$, the object $j_{s!}\Pi_s$ lies in $\cD_{t-1}$ while $j_{t*}S_t\in\cD_{t-1}^\perp$; for $s>t$, the object $j_{t*}S_t$ lies in $\cD_{s-1}$ while $j_{s!}\Pi_s\in{}^\perp\cD_{s-1}$. For $s=t$ we get $\Hom^\bullet(j_{s!}\Pi_s,j_{s*}S_s)\cong\Hom^\bullet(\Pi_s,S_s)$. Now use (LP2).
+\item \emph{(ST2) and (ST5)} follow from (LP1), (LP2) and full faithfulness of $j_{s*}$ and $j_{s!}$.
+\item \emph{(ST3).} We show $\cD_s=\thick{\cD_{s-1}\cup\{j_{s*}S_s\}}$ by induction. Every $X\in\cD_s$ sits in a triangle $i_*i^!X\to X\to j_{s*}j_s^*X\to$, and $j_{s*}j_s^*X\in j_{s*}\thick[\cT_s]{S_s}=\thick{j_{s*}S_s}$.
+\item \emph{(ST4).} The canonical morphism becomes an isomorphism after applying $j_s^*$. So its cone lies in $\ker j_s^*=\cD_{s-1}$. Moreover $j_{s!}S_s\in{}^\perp\cD_{s-1}$. \qedhere
+\end{itemize}
+\end{proof}
+
+\begin{remark}[Consequences for the $\Delta_s$]\label{rem:Delta-semiorth}
+In a stratifying triple, $\Hom^\bullet(\Delta_t,\Delta_s)=0$ for $t>s$. Indeed, $\Delta_t\in{}^\perp\cD_{t-1}$ and $\Delta_s\in\cD_s\subset\cD_{t-1}$. If the triple has full Hom-duality, then each $\Delta_s\cong j_{s!}\Pi_s$ is local-exceptional, by \cref{prop:local-pair}(4) and full faithfulness of $j_{s!}$. So in that case $(\Delta_1,\dots,\Delta_m)$ is automatically a local-exceptional sequence.
+\end{remark}
+
+\begin{remark}[Admissible subcategories and mutations]\label{rem:HD4}
+Let objects $N_1,\dots,N_m$ satisfy (ST2) and (ST3). Then there exist $\Deltabar_s$ and $\delta_s$ satisfying (ST4) if and only if $\cD_{s-1}$ is left admissible in $\cD_s$ for every $s$.
+\begin{itemize}
+\item One direction is \cref{lem:peel}(1), applied in $\cD_s$.
+\item Conversely, if $\cD_{s-1}$ is left admissible, the triangle $X'\to N_s\to i^*N_s\to$ with $X'\in{}^\perp\cD_{s-1}$ provides $\Deltabar_s:=X'$ and $\delta_s$.
+\end{itemize}
+In this language $\delta_s$ is the projection of $N_s$ onto ${}^\perp\cD_{s-1}$, i.e.\ the right mutation of $N_s$ through $\cD_{s-1}$. In Bondal's terminology, $\Deltabar_\bullet$ is the right dual of $N_\bullet$. Right admissibility, i.e.\ the existence of $j_{s*}$, is automatic by (ST2) and \cref{lem:sod}. So (ST4) is the only condition of admissibility type.
+\end{remark}
+
+\begin{proposition}\label{prop:exc-dual}
+Let $E_\bullet$ be a full exceptional sequence in $\cD$ with right Hom-orthogonal dual $F_\bullet$. Then $(E_\bullet,E_\bullet,F_\bullet)$ is a stratifying triple with full Hom-duality. It satisfies (NH) if and only if the conditions of \cref{thm:BB-3.1}(1) hold.
+\end{proposition}
+
+\begin{proof}
+We check the conditions in turn.
+\begin{itemize}
+\item \emph{(ST1)} with full Hom-duality is \eqref{eq:hom-duality-exc}.
+\item \emph{(ST2).} $(F_n,\dots,F_1)$ is an exceptional sequence \cite{Bon89}, i.e.\ $\Hom^\bullet(F_s,F_t)=0$ for $s<t$.
+\item \emph{(ST5).} The $E_s$ are exceptional.
+\item \emph{(ST3).} $F_s$ is obtained from $E_s$ by mutation through $\thick{E_1,\dots,E_{s-1}}$, via a triangle $i_*i^!E_s\to E_s\to F_s\to$. By induction on $s$ this gives $\thick{F_1,\dots,F_s}=\thick{E_1,\dots,E_s}$.
+\item \emph{(ST4).} The same triangle gives $\delta_s\colon E_s\to F_s$ with cone $i_*i^!E_s[1]\in\cD_{s-1}$, and $\Hom^\bullet(E_s,F_t)=0$ for $t<s$ by \eqref{eq:hom-duality-exc}.
+\end{itemize}
+Finally, (NH) is the condition of \cref{thm:BB-3.1}(1).
+\end{proof}
+
+\subsection{The t-structure of a triple}
+The following proposition is the only place where t-structures are glued. Everything else in the paper uses the resulting t-structure only through its description in terms of the objects of the triple.
+
+\begin{proposition}[The t-structure of a triple]\label{prop:triple-t}
+Let $(\Delta_\bullet,\Deltabar_\bullet,N_\bullet)$ be a stratifying triple in $\cD$.
+\begin{enumerate}
+\item The subcategories
+\[\cD^{\le0}=\{X:\Hom(X,N_s[l])=0\ \forall s,\ \forall l<0\},\qquad\cD^{\ge0}=\{X:\Hom(\Delta_s,X[l])=0\ \forall s,\ \forall l<0\}\]
+form a bounded t-structure on $\cD$, which we call the \emph{t-structure of the triple}. It is the t-structure glued along $(\cD_s)$ from the t-structures $t_{S_s}$ of the local pairs of \cref{prop:triple-filtration}. Moreover $\cD^{\ge0}=\{X:\Hom(\Deltabar_s,X[l])=0\ \forall s,\ \forall l<0\}$.
+\item Its heart $\cA$ is a length category whose simple objects are $L_s:=j_{s!*}S_s$, for $1\le s\le m$. For each $s$, the t-structure restricts to $\cD_s$; the restriction is the t-structure of the truncated triple; and $\cA_s:=\cA\cap\cD_s$ is a Serre subcategory of $\cA$.
+\item $\Delta_s,N_s\in\cA$ for all $s$ if and only if (NH) holds. Similarly, $\Deltabar_s\in\cA$ for all $s$ if and only if $\Hom(\Deltabar_s,\Deltabar_t[l])=0$ for all $s,t$ and $l<0$.
+\item Suppose $\cD$ carries a t-structure $(\cD_\natural^{\le0},\cD_\natural^{\ge0})$ with $\Delta_s\in\cD_\natural^{\le0}$ and $N_s\in\cD_\natural^{\ge0}$ for all $s$. Then it is the t-structure of the triple.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(1) By \cref{prop:triple-filtration}(1) and \cref{thm:gluing}, the glued t-structure $\tau$ exists, and it is bounded. We show by induction on $m$ that its aisles are as stated.
+
+For $m=1$ we have $\cD=\cT_1$, and the claim is \cref{prop:local-pair}(1).
+
+For $m\ge2$, write $i,j$ for the functors of the recollement $(\cD_{m-1},\cD,\cT_m)$. By \cref{thm:gluing}, $X\in\tau^{\le0}$ if and only if $i^*X\in\cD_{m-1}^{\le0}$ and $j^*X\in\cT_m^{\le0}$.
+\begin{itemize}
+\item By \cref{lem:peel}(2) and induction, $i^*X\in\cD_{m-1}^{\le0}$ means that $\Hom(i^*X,N_s[l])\cong\Hom(X,N_s[l])$ vanishes for $s<m$ and $l<0$.
+\item By \cref{prop:local-pair}(1), $j^*X\in\cT_m^{\le0}$ means that $\Hom(j^*X,S_m[l])\cong\Hom(X,j_*S_m[l])=\Hom(X,N_m[l])$ vanishes for $l<0$.
+\end{itemize}
+Similarly, $X\in\tau^{\ge0}$ if and only if $i^!X\in\cD_{m-1}^{\ge0}$ and $j^*X\in\cT_m^{\ge0}$. By induction and \cref{prop:local-pair}(1), these say that $\Hom(\Delta_s,X[l])\cong\Hom(\Delta_s,i^!X[l])$ vanishes for $s<m$ and $l<0$, and that $\Hom(\Pi_m,j^*X[l])\cong\Hom(\Delta_m,X[l])$ vanishes for $l<0$. Using the test object $S_m$ instead of $\Pi_m$ gives the description with $\Deltabar_m=j_!S_m$.
+
+(2) This follows from \cref{prop:glued-heart} by induction, since $i_*$ is t-exact and every stratum heart is a length category with unique simple object $S_s$.
+
+(3) By (1), $\Delta_s\in\cD^{\ge0}$ is the first condition in (NH). Moreover $\Delta_s\in\cD^{\le0}$ holds automatically, because $\Hom^\bullet(\Delta_s,N_t)$ vanishes in negative degrees by (ST1). Dually, $N_s\in\cD^{\le0}$ is the second condition in (NH), and $N_s\in\cD^{\ge0}$ holds automatically by (ST1). For $\Deltabar_s$, use the second description of $\cD^{\ge0}$, together with \cref{lem:right-dual}(2) and the fact that $\End^\bullet(N_s)$ vanishes in negative degrees.
+
+(4) Let $X\in\cD_\natural^{\le0}$ and $l<0$. Then $N_s[l]\in\cD_\natural^{\ge1}$, so $\Hom(X,N_s[l])=0$. Hence $\cD_\natural^{\le0}\subset\cD^{\le0}$. Dually, $\cD_\natural^{\ge0}\subset\cD^{\ge0}$. Two t-structures with both inclusions coincide: the second inclusion gives $\cD^{\le0}={}^\perp(\cD^{\ge1})\subset{}^\perp(\cD_\natural^{\ge1})=\cD_\natural^{\le0}$.
+\end{proof}
+
+% ===============================================================
+\section{The induction step and Theorem A}\label{sec:gluing}
+% ===============================================================
+
+\subsection{Setup}
+Throughout this section we fix the following data.
+\begin{itemize}
+\item $(\Delta_\bullet,\Deltabar_\bullet,N_\bullet)$ is a stratifying triple in $\cD$ satisfying (NH), and $\cA$ is the heart of its t-structure. Thus $\Delta_s,N_s\in\cA$ by \cref{prop:triple-t}(3).
+\item $B_s=\End(\Delta_s)$, and $(\Pi_s,S_s)$ are the local pairs of \cref{prop:triple-filtration}.
+\item $G^{(s)}=\bigoplus_{t\le s}G^{(s)}_t$ is the iterated universal extension of $(\Delta_1,\dots,\Delta_s)$ in $\cD$ (\cref{def:univ-ext-tri}). Since $\cA$ is closed under extensions, $G^{(s)}\in\cA$, and it coincides with the iterated universal extension computed in the abelian category $\cA$.
+\item $r\in\{2,\infty\}$, and the triple has Hom-duality up to degree $r$.
+\end{itemize}
+
+\subsection{The induction step}
+
+\begin{proposition}[Induction step]\label{prop:step}
+Let $m\ge2$. Put $\cD'=\cD_{m-1}$ and $\cA'=\cA\cap\cD'$, and write $G'=G^{(m-1)}=\bigoplus_{s<m}G'_s$. For $s<m$ let $G_s$ be the universal extension of $G'_s$ by $\Delta_m$, so that $G^{(m)}=\bigoplus_{s<m}G_s\oplus\Delta_m$. Assume that $G'$ is a projective generator of $\cA'$ with $\Hom(G',Y[l])=0$ for all $Y\in\cA'$ and $1\le l\le r$. Then:
+\begin{enumerate}
+\item $\Delta_m$ is a projective cover of $L_m$ in $\cA$, and $\Hom(\Delta_m,Y[l])=0$ for all $Y\in\cA$ and $1\le l\le r$.
+\item $G^{(m)}$ is a projective generator of $\cA$, and $\Hom(G^{(m)},Y[l])=0$ for all $Y\in\cA$ and $1\le l\le r$.
+\item For $s<m$, the sequence $0\to\Delta_m\otimes V_s^\vee\to G_s\to G'_s\to0$ is exact in $\cA$, and $\tr_{\Delta_m}(G_s)=\Delta_m\otimes V_s^\vee$. Consequently, for every projective object $P$ of $\cA$, the trace $\tr_{\Delta_m}(P)$ is isomorphic to $\Delta_m^{\oplus q}$ for some $q$, and $P/\tr_{\Delta_m}(P)\in\add G'$ is a projective object of $\cA'$.
+\item $N_m$ has simple socle $L_m$ and $[N_m:L_m]=1$. All other composition factors of $N_m$ lie in $\cA'$, and $\Ext^1_\cA(Y,N_m)=0$ for all $Y\in\cA'$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Write $\Delta=\Delta_m$, $N=N_m$, $L=L_m$, and let $(\Pi,S)$ be the local pair of the top stratum $\cT=\cD/\cD'$ (\cref{lem:peel}(3)). Recall that $\Ext^1_\cA=\Hom_\cD(-,-[1])$ on $\cA$, and that $\Ext^2_\cA$ embeds into $\Hom_\cD(-,-[2])$ (\cref{prop:ext-comparison}).
+
+\textbf{Preliminaries.} We collect the facts used below.
+\begin{itemize}
+\item \emph{Orthogonality.} By \cref{lem:peel}(2), (ST2) and \cref{lem:peel}(3),
+\begin{equation}\label{eq:step-orth}
+\Hom^\bullet(\Delta,\cD')=0,\qquad\Hom^\bullet(\cD',N)=0,\qquad\Hom^l(\Delta,N)\cong\Hom^l_\cT(\Pi,S).
+\end{equation}
+The last group vanishes for $l<0$ and for $1\le l\le r$, and $\Hom(\Delta,N)\cong\kk$.
+\item \emph{Simple objects.} By \cref{prop:triple-t}(2) and \cref{prop:glued-heart}, $\cA'$ is the Serre subcategory $\{X\in\cA:j^*X=0\}$. The simple objects of $\cA$ are $L$ and the simple objects of $\cA'$.
+\item \emph{Two exact sequences.} Since $N=j_*S\in\cA$, we have ${}^p\!j_*S=N$, and \cref{prop:glued-heart}(2) gives an exact sequence
+\begin{equation}\label{eq:nabla-seq}
+0\to L\to N\to C\to0\qquad\text{with }C\in\cA'.
+\end{equation}
+Since $\Hom_\cA(\Delta,L)\cong\Hom(\Pi,j^*L)=\Hom(\Pi,S)\cong\kk$ and $L$ is simple, there is an exact sequence
+\begin{equation}\label{eq:delta-seq}
+0\to K\to\Delta\to L\to0\qquad\text{with }K\in\cA.
+\end{equation}
+\end{itemize}
+
+\textbf{(1)} Let $1\le l\le r$. By \eqref{eq:nabla-seq} there is an exact sequence $\Hom(\Delta,C[l-1])\to\Hom(\Delta,L[l])\to\Hom(\Delta,N[l])$. Its outer terms vanish by \eqref{eq:step-orth}. Since also $\Hom(\Delta,Y[l])=0$ for $Y\in\cA'$, d\'evissage gives $\Hom(\Delta,Y[l])=0$ for all $Y\in\cA$. In particular $\Delta$ is projective in $\cA$. By \eqref{eq:step-orth} and $\Hom(\Delta,L)\cong\kk$, its top is $L$.
+
+\textbf{(2)} For $s<m$ put $V_s:=\Hom(G'_s,\Delta[1])=\Ext^1_\cA(G'_s,\Delta)$. The universal extension is given by a triangle
+\begin{equation}\label{eq:univ-tri}
+\Delta\otimes V_s^\vee\to G_s\to G'_s\xrightarrow{\ \varepsilon\ }\Delta\otimes V_s^\vee[1],
+\end{equation}
+where $\varepsilon$ is the canonical element. We prove the vanishing for $G_s$ in five steps; the case of $\Delta$ is (1).
+\begin{enumerate}[label=(\alph*)]
+\item \emph{Objects of $\cD'$.} Since $\Hom^\bullet(\Delta,\cD')=0$, the triangle \eqref{eq:univ-tri} gives $\Hom(G_s,Y[l])\cong\Hom(G'_s,Y[l])$ for all $Y\in\cD'$ and all $l$. For $Y\in\cA'$ and $1\le l\le r$ this vanishes by hypothesis.
+\item \emph{$\Hom(G_s,\Delta[1])=0$.} Apply $\Hom(-,\Delta[1])$ to \eqref{eq:univ-tri}. The map $\varepsilon^*\colon\Hom(\Delta\otimes V_s^\vee,\Delta)\to\Hom(G'_s,\Delta[1])=V_s$ is surjective: on $\kk\cdot\mathrm{id}\otimes V_s$ it is the identity. Moreover $\Hom(\Delta\otimes V_s^\vee,\Delta[1])=0$ by~(1).
+\item \emph{Morphisms to $N$.} Since $\Hom^\bullet(G'_s,N)=0$ by \eqref{eq:step-orth}, the triangle \eqref{eq:univ-tri} gives $\Hom^\bullet(G_s,N)\cong V_s\otimes\Hom^\bullet(\Delta,N)$. This vanishes in degrees $1\le l\le r$.
+\item \emph{Degrees $2\le l\le r$.} By \eqref{eq:nabla-seq} there is an exact sequence $\Hom(G_s,C[l-1])\to\Hom(G_s,L[l])\to\Hom(G_s,N[l])$. Its outer terms vanish by (a) and (c). Together with (a) and d\'evissage, $\Hom(G_s,Y[l])=0$ for all $Y\in\cA$ and $2\le l\le r$.
+\item \emph{Degree $1$.} By \eqref{eq:delta-seq} there is an exact sequence $\Hom(G_s,\Delta[1])\to\Hom(G_s,L[1])\to\Hom(G_s,K[2])$. Its outer terms vanish by (b) and (d). Together with (a), $\Hom(G_s,Y[1])=0$ for all $Y\in\cA$.
+\end{enumerate}
+So $G^{(m)}$ is projective. It is a generator: by (a), $\Hom(G_s,L')\cong\Hom(G'_s,L')$ for $L'$ simple in $\cA'$, which is non-zero for some $s$ because $G'$ is a generator of $\cA'$; and $\Hom(\Delta,L)\ne0$. Since $\cA$ is a length category, $G^{(m)}$ is a projective generator.
+
+\textbf{(3)} All three terms of \eqref{eq:univ-tri} lie in $\cA$, so it is a short exact sequence in $\cA$.
+\begin{itemize}
+\item \emph{The trace of $G_s$.} Since $\Hom(\Delta,G'_s)=0$ by \eqref{eq:step-orth}, every morphism $\Delta\to G_s$ factors through the subobject $\Delta\otimes V_s^\vee$. Hence $\tr_\Delta(G_s)\subset\Delta\otimes V_s^\vee$. Conversely, $\Delta\otimes V_s^\vee\cong\Delta^{\oplus\dim V_s}$ is generated by $\Delta$. So $\tr_\Delta(G_s)=\Delta\otimes V_s^\vee$ and $G_s/\tr_\Delta(G_s)=G'_s$.
+\item \emph{An arbitrary projective $P$.} Clearly $\tr_\Delta(\Delta)=\Delta$. Since $G^{(m)}$ is a projective generator, $P\in\add G^{(m)}$. Traces are additive, and $\cA$ is Krull--Schmidt with $\Delta$ indecomposable. Hence $\tr_\Delta(P)$ is a direct summand of some $\Delta^{\oplus N}$, i.e.\ isomorphic to $\Delta^{\oplus q}$. Similarly $P/\tr_\Delta(P)\in\add G'$, which is projective in $\cA'$ by hypothesis (the case $l=1$).
+\end{itemize}
+
+\textbf{(4)} The functor $j^*$ is exact on $\cA$, kills $\cA'$ and sends $L$ to $S$. So $[N:L]$ is the length of $j^*N=S$, which is $1$. By \eqref{eq:step-orth}, $\Hom(Y,N)=0$ and $\Ext^1(Y,N)=\Hom(Y,N[1])=0$ for $Y\in\cA'$. So the socle of $N$ contains no simple object of $\cA'$, hence equals $L$.
+\end{proof}
+
+\begin{remark}[Formal versus non-formal parts]\label{rem:step-formal}
+Parts (3) and (4) of \cref{prop:step} are formal consequences of the orthogonality relations \eqref{eq:step-orth} and of the universal-extension triangles. The trace condition~(3) needs no Ext-vanishing beyond the projectivity of $G'$ in $\cA'$.
+
+The non-formal input is Ext-projectivity in~(2), and specifically degree $2$. There, Hom-duality in degree $2$ enters through step~(c), and the inductive hypothesis in degree $2$ enters through step~(d), which is needed for degree $1$ in step~(e). In terms of objects, (2) says that $G^{(m)}$ is ``tilting up to degree $r$'': $\Hom(G^{(m)},G^{(m)}[l])=0$ for $l<0$ and for $1\le l\le r$.
+\end{remark}
+
+\subsection{Theorem A}
+
+\begin{theorem}[Theorem A]\label{thm:A}
+Let $(\Delta_\bullet,\Deltabar_\bullet,N_\bullet)$ be a stratifying triple in a triangulated category $\cD$, with Hom-duality up to degree $2$. Let $\cA$ be the heart of its t-structure, let $G$ be the iterated universal extension of $(\Delta_1,\dots,\Delta_m)$ in $\cD$, and put $B_s=\End(\Delta_s)$.
+\begin{enumerate}
+\item $\Delta_s,N_s\in\cA$ for all $s$ if and only if (NH) holds.
+\item Assume (NH). Then:
+\begin{itemize}
+\item $G\in\cA$ is a projective generator, with $\Hom(G,Y[l])=0$ for all $Y\in\cA$ and $l\in\{1,2\}$;
+\item hence $\Hom(G,-)$ is an equivalence $\cA\simeq\modd\Lambda$, where $\Lambda:=\End_\cD(G)$;
+\item $\cA$ is standardly stratified with respect to $1<\dots<m$, with standard objects $\Delta(s)=\Delta_s$, proper costandard objects $\nablabar(s)=N_s$, and $\End(\Delta(s))\cong B_s$;
+\item $\cA$ is quasi-hereditary if and only if $B_s\cong\kk$ for all $s$.
+\end{itemize}
+\item Assume (NH), and that $\cD$ is algebraic. Then $\real\colon\Db(\cA)\to\cD$ is an equivalence if and only if the triple has full Hom-duality. In this case:
+\begin{itemize}
+\item $G$ is a tilting object of $\thick{\Delta_1,\dots,\Delta_m}$;
+\item there is a triangle equivalence $\cD\simeq\Db(\modd\Lambda)$ sending $G\mapsto\Lambda$, $\Delta_s\mapsto\Delta(s)$ and $N_s\mapsto\nablabar(s)$, which restricts to $\thick{\Delta_1,\dots,\Delta_m}\simeq\Kb(\proj\Lambda)$;
+\item $\thick{\Delta_1,\dots,\Delta_m}=\cD$ if and only if $\Lambda$ is quasi-hereditary.
+\end{itemize}
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Part (1) is \cref{prop:triple-t}(3). Assume (NH). Put $r=2$, and $r=\infty$ when proving sufficiency in (3). We prove by induction on $m$ the following statement.
+\begin{quote}
+$(\mathrm I_m)$: $\cA$ is standardly stratified with respect to $1<\dots<m$, with $\Delta(s)\cong\Delta_s$, $\nablabar(s)\cong N_s$ and $\End(\Delta(s))\cong B_s$. Moreover, $G=G^{(m)}$ is a projective generator of $\cA$ with $\Hom(G,Y[l])=0$ for all $Y\in\cA$ and $1\le l\le r$.
+\end{quote}
+
+\emph{Base case $m=1$.} Here $\cD=\cT_1$, $(\Delta_1,N_1)$ is a local pair, and the t-structure is $t_{N_1}$ (\cref{prop:triple-t}(1)). By \cref{prop:local-pair}(2), $\cA\simeq\modd B_1$ with projective generator $G=\Delta_1$. By \cref{prop:local-pair}(3), $\Hom(\Delta_1,Y[l])=0$ for $1\le l\le r$. A category with a single simple object is standardly stratified, with $\Delta(1)=\Delta_1$ and $\nablabar(1)=\soc I(1)=N_1$.
+
+\emph{Inductive step $m\ge2$.} By \cref{lem:peel}(2), the truncated triple in $\cD'=\cD_{m-1}$ is a stratifying triple. It satisfies (NH) and has Hom-duality up to degree $r$. By \cref{prop:triple-t}(2), its t-structure is the restriction, with heart $\cA'=\cA\cap\cD'$. So $(\mathrm I_{m-1})$ holds for it, and \cref{prop:step} applies with $G'=G^{(m-1)}$.
+\begin{itemize}
+\item By \cref{prop:step}(2), $G^{(m)}$ is a projective generator with the required vanishing. In particular $\cA$ is Deligne finite, and $\Hom(G,-)\colon\cA\to\modd\Lambda$ is an equivalence.
+\item By \cref{prop:step}(1), $P(m)=\Delta_m$ is the projective cover of $L_m$. By \cref{prop:step}(3), condition (a) of \cref{lem:strat-induction} holds. Condition (b) is $(\mathrm I_{m-1})$. Hence $\cA$ is standardly stratified, with $\Delta(m)=\Delta_m$. For $s<m$, the objects $\Delta(s)$ and $\nablabar(s)$ are those of $\cA'$, namely $\Delta_s$ and $N_s$.
+\item By \cref{prop:step}(4), $N_m$ embeds into $I(m)$. A subobject of $I(m)$ properly containing $N_m$, whose composition factors are $L(t)$ with $t<m$ together with a single $L(m)$, would contain a non-split extension of some $L(t)$, $t<m$, by $N_m$; this is excluded by \cref{prop:step}(4). So $\nablabar(m)=N_m$.
+\end{itemize}
+This proves $(\mathrm I_m)$, hence (2). The last assertion of (2) is \cref{lem:strat-basic}(2).
+
+\emph{Sufficiency in (3).} Assume full Hom-duality. The induction with $r=\infty$ gives $\Hom(G,Y[l])=0$ for all $Y\in\cA$ and $l\ge1$. Let $X,Y\in\cA$, $n\ge2$ and $f\in\Hom(X,Y[n])$. Choose an epimorphism $G^{\oplus k}\twoheadrightarrow X$; its composite with $f$ vanishes. By \cref{thm:realisation}, $\real$ is fully faithful, hence an equivalence. Moreover:
+\begin{itemize}
+\item $\Hom(G,G[l])=0$ for $l\ne0$, and by induction (using \eqref{eq:univ-tri}) $\thick G=\thick{\Delta_1,\dots,\Delta_m}$. So $G$ is tilting in this subcategory.
+\item The equivalence $\cD\simeq\Db(\cA)\simeq\Db(\modd\Lambda)$ is the composite of $\real^{-1}$ with the equivalence induced by $\Hom(G,-)\colon\cA\simeq\modd\Lambda$. It sends $G$ to $\Lambda$, and $\thick G$ to $\Kb(\proj\Lambda)$.
+\item $\Kb(\proj\Lambda)=\Db(\modd\Lambda)$ if and only if $\gldim\Lambda<\infty$, i.e., by \cref{thm:C}(4), if and only if $\Lambda$ is quasi-hereditary.
+\end{itemize}
+
+\emph{Necessity in (3).} If $\real$ is an equivalence then, by \cref{lem:peel}(3), (2) and \cref{lem:strat-basic}(3), for every $s$
+\[\Hom^l(\Delta_s,N_s)\cong\Ext^l_\cA(\Delta(s),\nablabar(s))=0\qquad\text{for }l\ge1.\]
+Together with (ST1), this is full Hom-duality.
+\end{proof}
+
+\begin{remark}[The induction in terms of algebras]
+Unwinding the induction, the chain $\cD_1\subset\dots\subset\cD_m$ gives a chain of Serre subcategories $\cA_1\subset\dots\subset\cA_m=\cA$. Under $\cA\simeq\modd\Lambda$ this corresponds to a chain of idempotent ideals of $\Lambda$. By \cref{prop:step}(3), each of these ideals is projective as a right module over the corresponding quotient algebra, i.e.\ it is a ``standardly stratifying'' ideal in the sense of \cref{rem:heredity}. The stratum algebras are the $B_s=\End(\Delta_s)$. For $B_s=\kk$ this is exactly a heredity chain.
+\end{remark}
+
+\begin{remark}[On Hom-duality in degree $2$]\label{rem:star}
+In \cref{prop:step}, Hom-duality in degree $2$ for the top stratum enters only through step~(c), via $V_s\otimes\Hom(\Delta_m,N_m[2])$. It can therefore be dropped if $V_s=\Ext^1_\cA(G'_s,\Delta_m)=0$ for all $s$. For the earlier strata, it enters through the inductive hypothesis in step~(d), and hence in step~(e). \Cref{ex:k2} shows that the conclusion of \cref{thm:A}(2) may hold although Hom-duality fails in degree $2$.
+\end{remark}
+
+\begin{remark}[Filtration version]\label{rem:A-filtration}
+By \cref{prop:triple-filtration}, \cref{thm:A} can equivalently be stated for an admissible filtration of $\cD$ together with local pairs $(\Pi_s,S_s)$ on its strata. The objects are then $\Delta_s=j_{s!}\Pi_s$ and $N_s=j_{s*}S_s$. In this form it contains \cref{thm:BB-3.1}: take all strata equal to $\Db(\kk)$, with the local pair $(\kk,\kk)$.
+\end{remark}
+
+\begin{remark}[Comparison with Bodzenta--Bondal]\label{rem:compare-BB}
+For an exceptional sequence and the triple $(E_\bullet,E_\bullet,F_\bullet)$ of \cref{prop:exc-dual}, \cref{thm:A} becomes \cref{thm:BB-3.1}, with ``dg enhanced'' replaced by ``algebraic''. Indeed, standardly stratified with $B_s=\kk$ means quasi-hereditary, and for quasi-hereditary algebras $\nablabar=\nabla$.
+
+The proof is different from that of \cite{BB26}. Bodzenta and Bondal first show that $G$ is a tilting generator of $\cD$ and then compare t-structures. When $B_s\neq\kk$, the object $G$ generates only $\thick{\Delta_1,\dots,\Delta_m}\subsetneq\cD$ (\cref{thm:C}), so this route is unavailable. Instead we proceed by induction on the number of strata, as for heredity chains.
+\end{remark}
+
+% ===============================================================
+\section{The stratified Bodzenta--Bondal criterion}\label{sec:criterion}
+% ===============================================================
+
+\begin{definition}[Hom-dual triples]\label{def:hom-dual}
+Let $(E_1,\dots,E_m)$ be a local-exceptional sequence in $\cD$.
+\begin{itemize}
+\item A \emph{Hom-dual sequence} for it is a sequence $N_\bullet=(N_1,\dots,N_m)$ of objects such that:
+\begin{itemize}
+\item[\textup{(HD1)}] $\Hom^\bullet(E_s,N_t)\cong\delta_{st}\kk$, concentrated in degree $0$, for all $s,t$;
+\item[\textup{(HD2)}] $\Hom^\bullet(N_s,N_t)=0$ for $s<t$; and for all $s$, $\End(N_s)=\kk$ and $\Hom(N_s,N_s[l])=0$ for $l<0$.
+\end{itemize}
+\item A \emph{Hom-dual triple} $(E_\bullet,\Deltabar_\bullet,N_\bullet)$ consists of $(E_1,\dots,E_m)$, a Hom-dual sequence $N_\bullet$, and objects $\Deltabar_1,\dots,\Deltabar_m$, such that:
+\begin{itemize}
+\item[\textup{(HD3)}] $\cD=\thick{N_1,\dots,N_m}$;
+\item[\textup{(HD4)}] $\Hom^\bullet(\Deltabar_s,N_t)=0$ for $t<s$, and there is a morphism $\delta_s\colon\Deltabar_s\to N_s$ whose cone lies in $\thick{N_1,\dots,N_{s-1}}$.
+\end{itemize}
+\end{itemize}
+\end{definition}
+
+In words: $N_\bullet$ is Hom-dual to $E_\bullet$ by (HD1), and by (HD4) $\Deltabar_\bullet$ is the left Hom-orthogonal dual of $N_\bullet$. As in \cref{rem:delta-not-data}, the morphisms $\delta_s$ are unique up to non-zero scalars, and $\Deltabar_\bullet$ is determined by $N_\bullet$; so a Hom-dual triple is determined by the pair $(E_\bullet,N_\bullet)$. In the exceptional case $N_\bullet$ is the right Hom-orthogonal dual of $E_\bullet$, and $\Deltabar_\bullet=E_\bullet$ (\cref{prop:exc-dual}). In general $N_\bullet$ is \emph{not} the right Hom-orthogonal dual of $E_\bullet$: the latter consists of the objects $j_{s*}\Pi_s$, which pair with $E_s$ via $\End(E_s)$.
+
+A Hom-dual triple is the same as a stratifying triple $(\Delta_\bullet,\Deltabar_\bullet,N_\bullet)$ with full Hom-duality and $\Delta_\bullet=E_\bullet$: conditions (HD1)--(HD4) are (ST1)--(ST4) with full Hom-duality, and (ST5) holds since the $E_s$ are local-exceptional. Conversely, by \cref{rem:Delta-semiorth}, in a stratifying triple with full Hom-duality the $\Delta_s$ automatically form a local-exceptional sequence. In particular, the semi-orthogonality of the $E_s$ and their local-exceptionality need not be assumed separately.
+
+\begin{theorem}[Theorem B]\label{thm:B}
+Let $\cD$ be an algebraic triangulated category, and let $(E_\bullet,\Deltabar_\bullet,N_\bullet)$ be a Hom-dual triple in $\cD$. Let $G$ be the iterated universal extension of $(E_1,\dots,E_m)$ in $\cD$, and put $\Lambda=\End_\cD(G)$. The following are equivalent:
+\begin{enumerate}
+\item $\Hom(E_s,E_t[l])=0$ and $\Hom(N_s,N_t[l])=0$ for all $s,t$ and all $l<0$;
+\item $G$ is a tilting object of $\thick{E_1,\dots,E_m}$, the algebra $\Lambda$ is standardly stratified with respect to $1<\dots<m$, and there is a triangle equivalence $\Phi\colon\cD\simeq\Db(\modd\Lambda)$ with
+\[\Phi(G)\cong\Lambda,\qquad\Phi(E_s)\cong\Delta(s),\qquad\Phi(N_s)\cong\nablabar(s).\]
+\end{enumerate}
+In this case:
+\begin{itemize}
+\item $\End(\Delta(s))\cong\End(E_s)$, and $\Lambda$ is quasi-hereditary if and only if all $E_s$ are exceptional;
+\item $\Phi$ restricts to $\thick{E_1,\dots,E_m}\simeq\Kb(\proj\Lambda)$, which is a proper subcategory unless $\Lambda$ is quasi-hereditary;
+\item $\Phi(\Deltabar_s)$ is the object $j_{s!}\kk$ of $\Db(\modd\Lambda)$, a ``derived proper standard object''.
+\end{itemize}
+\end{theorem}
+
+\begin{proof}
+\emph{(1)$\Rightarrow$(2).} Apply \cref{thm:A}(2),(3) to the stratifying triple $(E_\bullet,\Deltabar_\bullet,N_\bullet)$, which has full Hom-duality. The description of $\Phi(\Deltabar_s)$ follows from \cref{prop:triple-filtration}(1).
+
+\emph{(2)$\Rightarrow$(1).} The objects $\Phi(E_s)$ and $\Phi(N_s)$ are modules, so they have no negative extensions.
+
+The remaining assertions are \cref{thm:A}(2),(3).
+\end{proof}
+
+\begin{remark}[The t-structure in Theorem B]\label{rem:G-tilting}
+The statement of \cref{thm:B} does not mention t-structures. In its proof, the t-structure of the triple (\cref{prop:triple-t}) corresponds under $\Phi$ to the standard t-structure of $\Db(\modd\Lambda)$. Since $\Phi(G)=\Lambda$, it is the \emph{$G$-tilting t-structure}:
+\[\cD^{\le0}=\{X:\Hom(G,X[l])=0\ \forall l>0\},\qquad\cD^{\ge0}=\{X:\Hom(G,X[l])=0\ \forall l<0\}.\]
+Its heart is $\{X:\Hom(G,X[l])=0\ \forall l\ne0\}\simeq\modd\Lambda$.
+\end{remark}
+
+\begin{remark}[Silting viewpoint]\label{rem:silting-view}
+The object $G$ is built from the stratum projectives $\Pi_s$ by universal extensions, i.e.\ it is a silting object glued along the filtration of $\thick{E_1,\dots,E_m}$ by the $\thick{E_{\le s}}$. On this perfect part the natural adjoints are $i^*$ and $j_!$, given by the $E_s$. This is the setting of gluing silting objects \cite{LVY14}. \Cref{thm:B} can be read as follows: under (1), the glued silting object is tilting, and its Koenig--Yang dual structure on $\cD$ (\cref{thm:KY}) is described by the simple-like objects $N_s$. We have not tried to derive the theorem from silting gluing directly; see \cref{q:silting}.
+\end{remark}
+
+\begin{remark}[Comparison with Bodzenta--Bondal]\label{rem:B-vs-BB}
+For a full exceptional sequence and the triple $(E_\bullet,E_\bullet,F_\bullet)$ of \cref{prop:exc-dual}, \cref{thm:B} becomes \cref{thm:BB-3.1}. The new features in the general case are the following.
+\begin{enumerate}
+\item The Hom-dual sequence is extra data: the right Hom-orthogonal dual of $E_\bullet$ pairs with $E_s$ via $\End(E_s)$ rather than $\kk$.
+\item The ambient category is generated by the Hom-dual sequence; the $E_s$ generate only $\Kb(\proj\Lambda)$ (\cref{thm:C}).
+\item The left Hom-orthogonal dual of $N_\bullet$ is a third sequence $\Deltabar_\bullet$, of ``proper standard'' objects, instead of $E_\bullet$ itself.
+\end{enumerate}
+\end{remark}
+
+% ===============================================================
+\section{Standardly stratified algebras}\label{sec:stratified}
+% ===============================================================
+
+\subsection{Standard modules form local-exceptional sequences}
+
+\begin{theorem}\label{thm:C}
+Let $\Lambda$ be a standardly stratified algebra with respect to $1<\dots<m$, and let $B_i=\End(\Delta(i))$.
+\begin{enumerate}
+\item $(\Delta(1),\dots,\Delta(m))$ is a full local-exceptional sequence in $\Kb(\proj\Lambda)$ with $\End(\Delta(i))=B_i$.
+\item In $\Db(\modd\Lambda)$ we have $\Hom^\bullet(\Delta(i),\nablabar(i))\cong\kk$ (in degree $0$), and $\Hom^\bullet(\Delta(j),\nablabar(i))=0$ for $j>i$.
+\item If $B_i\ne\kk$, then $\nablabar(i)\notin\Kb(\proj\Lambda)$, i.e.\ $\pd\nablabar(i)=\infty$.
+\item $\gldim\Lambda<\infty$ if and only if $\Lambda$ is quasi-hereditary, if and only if $B_i\cong\kk$ for all $i$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1) and (2) are \cref{lem:strat-basic}.
+
+(3) Suppose $X:=\nablabar(i)\in\Kb(\proj\Lambda)=\thick[\Kb(\proj\Lambda)]{\Delta(1),\dots,\Delta(m)}$.
+\begin{itemize}
+\item Apply \cref{lem:sod}(3) in $\Kb(\proj\Lambda)$ with
+\[\cU=\thick[\Kb(\proj\Lambda)]{\Delta(1),\dots,\Delta(i)},\qquad\cV=\thick[\Kb(\proj\Lambda)]{\Delta(i+1),\dots,\Delta(m)}.\]
+Since $\Hom^\bullet(\cV,X)=0$ by~(2), we get $X\in\cU$.
+\item Apply \cref{lem:sod}(1) to $\cU$, with $\cU'=\thick[\Kb(\proj\Lambda)]{\Delta(1),\dots,\Delta(i-1)}$ and $\cV'=\thick[\Kb(\proj\Lambda)]{\Delta(i)}$. This gives a triangle $V\to X\to U\to V[1]$ with $V\in\thick[\Kb(\proj\Lambda)]{\Delta(i)}$ and $U\in\cU'$.
+\item Since $\Hom^\bullet(\Delta(i),\cU')=0$, we get $\Hom^\bullet(\Delta(i),V)\cong\Hom^\bullet(\Delta(i),X)\cong\kk$.
+\end{itemize}
+This contradicts \cref{prop:local-exc}(3) applied to $E=\Delta(i)$ in the algebraic category $\Db(\modd\Lambda)$.
+
+(4) If $\gldim\Lambda<\infty$, every module is perfect, so $B_i=\kk$ for all $i$ by~(3). Then $\Lambda$ is quasi-hereditary by \cref{lem:strat-basic}(2). Conversely, quasi-hereditary algebras have finite global dimension \cite{CPS88,DR92}.
+\end{proof}
+
+\begin{remark}
+Statement~(4) is presumably well known to experts (cf.\ \cite{AHLU00,Dla96}). We include the short argument because it isolates exactly the obstruction discussed in the introduction. In a genuinely stratified situation, the standard objects generate only $\Kb(\proj\Lambda)$, while their Hom-dual partners $\nablabar(i)$ lie outside it.
+\end{remark}
+
+\subsection{The converse}
+We now ask which standardly stratified algebras arise from \cref{thm:B}.
+
+Let $\cA_s\subset\modd\Lambda$ be the Serre subcategory of modules whose composition factors lie in $\{L(1),\dots,L(s)\}$. We say that $\Lambda$ satisfies the \emph{$\nablabar$-condition} if, for every $i$, there is an exact sequence
+\[0\to\nablabar(i)\to I(i)\to C_i\to0\qquad\text{with } C_i\in\cF(\nablabar(t):t\ge i).\]
+
+\begin{lemma}\label{lem:nablabar}
+Let $\Lambda$ be standardly stratified.
+\begin{enumerate}
+\item $\End(\nablabar(i))=\kk$.
+\item $\thick[\Db(\modd\Lambda)]{\nablabar(1),\dots,\nablabar(s)}=\Db_{\cA_s}(\modd\Lambda)$, the subcategory of complexes with cohomology in $\cA_s$. In particular $\Db(\modd\Lambda)=\thick[\Db(\modd\Lambda)]{\nablabar(1),\dots,\nablabar(m)}$.
+\item If $\Lambda$ satisfies the $\nablabar$-condition, then $(\nablabar(m),\dots,\nablabar(1))$ is a Hom-dual sequence for $(\Delta(1),\dots,\Delta(m))$ in $\Db(\modd\Lambda)$ satisfying (HD3); i.e.\ (HD1)--(HD3) hold.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) Let $f$ be a non-zero endomorphism of $\nablabar(i)$. If $\ker f$ contained $\soc\nablabar(i)=L(i)$, then $\im f\ne0$ would have no composition factor $L(i)$, since $[\nablabar(i):L(i)]=1$. But $\im f$ contains the socle $L(i)$, a contradiction. Hence $\ker f=0$ (the socle is essential), so $f$ is an automorphism. Thus $\End(\nablabar(i))$ is a division algebra, hence equal to $\kk$.
+
+(2) The subcategory $\Db_{\cA_s}(\modd\Lambda)$ is $\thick[\Db(\modd\Lambda)]{L(1),\dots,L(s)}$. Moreover $\nablabar(t)$ has composition factors $L(t)$ (once) and $L(u)$ with $u<t$. By induction on $s$,
+\[\thick[\Db(\modd\Lambda)]{\nablabar(1),\dots,\nablabar(s)}=\thick[\Db(\modd\Lambda)]{L(1),\dots,L(s)}.\]
+
+(3) We first prove the following dual of \cref{lem:strat-basic}(1). If $Y$ has composition factors in $\{L(v):v<u\}$ and $X\in\cF(\nablabar(t):t\ge u)$, then $\Ext^\bullet(Y,X)=0$.
+
+By d\'evissage it suffices to show $\Ext^l(Y,\nablabar(t))=0$ for all $t\ge u$, and we use induction on $l$.
+\begin{itemize}
+\item For $l=0$: the socle $L(t)$ of $\nablabar(t)$ is not a composition factor of $Y$.
+\item For $l\ge0$: since $\Hom(Y,I(t))=0$, the sequence $0\to\nablabar(t)\to I(t)\to C_t\to0$ shows that $\Ext^{l+1}(Y,\nablabar(t))$ is a quotient of $\Ext^l(Y,C_t)$. The latter vanishes by induction, because $C_t\in\cF(\nablabar(t'):t'\ge t\ge u)$.
+\end{itemize}
+Now we check the conditions.
+\begin{itemize}
+\item (HD1) for $j\ge i$ is \cref{lem:strat-basic}(3). For $j<i$, apply the dual statement with $Y=\Delta(j)$, whose composition factors are $L(v)$ with $v\le j<i$, and $X=\nablabar(i)$, with $u=i$.
+\item (HD2): for $s<t$, take $Y=\nablabar(s)$ and $X=\nablabar(t)$, with $u=t$, in the dual statement. The remaining parts of (HD2) are (1) and the fact that modules have no negative extensions.
+\item (HD3) is (2). \qedhere
+\end{itemize}
+\end{proof}
+
+\begin{remark}
+The $\nablabar$-condition is the injective counterpart of standard stratification. Note that $C_i$ may contain further copies of $\nablabar(i)$. By BGG reciprocity one expects $(I(i):\nablabar(t))=[\Delta(t):L(i)]$; this is non-zero only for $t\ge i$, and equals $\dim B_i$ for $t=i$ (see \cref{ex:two-strata}). Presumably every standardly stratified algebra satisfies the condition (cf.\ \cite{AHLU00,Dla96}); we have not checked this and do not use it. For quasi-hereditary algebras it is the classical fact that injective modules have $\nabla$-filtrations \cite{CPS88,DR92}.
+\end{remark}
+
+\begin{proposition}\label{prop:dualisable}
+Let $\Lambda$ be standardly stratified and satisfy the $\nablabar$-condition, and suppose that
+\[\Ext^l_\Lambda(\Deltabar(s),\nablabar(t))=0\qquad\text{for all }t<s\text{ and all }l.\]
+Then $\big((\Delta(s))_s,(\Deltabar(s))_s,(\nablabar(s))_s\big)$ is a Hom-dual triple in $\Db(\modd\Lambda)$; in (HD4) one can take $\delta_s$ to be the composite $\Deltabar(s)\twoheadrightarrow L(s)\hookrightarrow\nablabar(s)$.
+\end{proposition}
+
+\begin{proof}
+By \cref{lem:nablabar}(3), conditions (HD1)--(HD3) hold. For (HD4), recall that $[\Deltabar(s):L(s)]=1=[\nablabar(s):L(s)]$, and that all other composition factors of $\Deltabar(s)$ and $\nablabar(s)$ are $L(t)$ with $t<s$. So the kernel $\rad\Deltabar(s)$ and the cokernel $\nablabar(s)/L(s)$ of $\delta_s$ lie in $\cA_{s-1}$. Hence $\cone(\delta_s)$, whose cohomology consists of these two modules, lies in $\Db_{\cA_{s-1}}(\modd\Lambda)=\cD_{s-1}$, by \cref{lem:nablabar}(2). The Hom condition in (HD4) is the hypothesis.
+\end{proof}
+
+\begin{definition}
+Let $\cA$ be a $\kk$-linear abelian category such that $\Db(\cA)$ is Hom-finite.
+\begin{itemize}
+\item A \emph{standardly stratified structure} on $\cA$ is a total order $L_1<\dots<L_m$ on the isomorphism classes of simple objects for which $\cA$ is Deligne finite and standardly stratified.
+\item It is \emph{dualisable} if there are objects $\Deltabar_s\in\Db(\cA)$ making $\big((\Delta(s))_s,(\Deltabar_s)_s,(\nablabar(s))_s\big)$ a Hom-dual triple in $\Db(\cA)$. By \cref{lem:right-dual}(3), the $\Deltabar_s$ are then unique.
+\end{itemize}
+\end{definition}
+
+\begin{corollary}[Analogue of {\cref{thm:BB-3.8}}]\label{cor:BB38}
+Let $\cA$ be a $\kk$-linear abelian category such that $\Db(\cA)$ is Hom-finite. The assignment
+\[(L_1<\dots<L_m)\longmapsto\big((\Delta(1),\dots,\Delta(m)),\,(\nablabar(m),\dots,\nablabar(1))\big)\]
+is a bijection between:
+\begin{enumerate}
+\item dualisable standardly stratified structures on $\cA$; and
+\item isomorphism classes of pairs $(E_\bullet,N_\bullet)$ of objects of $\cA$ that extend to a Hom-dual triple $(E_\bullet,\Deltabar_\bullet,N_\bullet)$ in $\Db(\cA)$.
+\end{enumerate}
+In particular every dualisable standardly stratified structure is recovered by gluing. For exceptional sequences this is \cref{thm:BB-3.8}.
+\end{corollary}
+
+\begin{proof}
+By \cref{thm:C}(1) and the definition, the assignment maps (1) to (2). It is injective, since the order is recovered from the sequence: $L_s$ is the top of $\Delta(s)$.
+
+For surjectivity, let $(E_\bullet,\Deltabar_\bullet,N_\bullet)$ be a Hom-dual triple in $\Db(\cA)$ with $E_s,N_s\in\cA$.
+\begin{itemize}
+\item Since $E_s\in\Db(\cA)^{\le0}$ and $N_s\in\Db(\cA)^{\ge0}$ for the standard t-structure, \cref{prop:triple-t}(4) shows that the standard t-structure is the t-structure of the triple. In particular its heart is $\cA$.
+\item Objects of $\cA$ have no negative extensions, so (NH) holds. Hence \cref{thm:A}(2) shows that $\cA$ is standardly stratified for the order $L_1<\dots<L_m$, where $L_s$ is the top of $E_s$, with $\Delta(s)=E_s$ and $\nablabar(s)=N_s$.
+\end{itemize}
+This structure is dualisable via $\Deltabar_\bullet$, and it maps to $(E_\bullet,N_\bullet)$.
+
+For a quasi-hereditary structure, the standard objects form a full exceptional sequence in $\Db(\cA)$ whose right Hom-orthogonal dual consists of the costandard objects $\nabla(s)=\nablabar(s)$ \cite[\S3]{BB26}. So the structure is dualisable with $\Deltabar_\bullet=\Delta_\bullet$, by \cref{prop:exc-dual}, and we recover \cref{thm:BB-3.8}.
+\end{proof}
+
+\begin{question}\label{q:HD4}
+Is every standardly stratified structure dualisable? More concretely:
+\begin{enumerate}
+\item[(a)] Does every standardly stratified algebra satisfy the $\nablabar$-condition?
+\item[(b)] Is $\Ext^\bullet_\Lambda(\Deltabar(s),\nablabar(t))=0$ for all $t<s$?
+\end{enumerate}
+By \cref{prop:dualisable}, positive answers to (a) and (b) imply dualisability, with the proper standard modules as left Hom-orthogonal dual of $N_\bullet$.
+\end{question}
+
+Some evidence and remarks:
+\begin{itemize}
+\item For quasi-hereditary algebras, $\Deltabar=\Delta$, $\nablabar=\nabla$, and both (a) and (b) are classical. Both also hold in \cref{ex:two-strata}.
+\item For properly stratified algebras we expect (b) to hold. On the top stratum, $\Deltabar(m)$ should be $j_{m!}$ of the simple $B_m$-module, and then $\Ext^\bullet(\Deltabar(m),i_*Y)=0$ by adjunction; one would then proceed by induction, peeling off the top stratum.
+\item If (b) fails, the structure may still be dualisable, with $\Deltabar_s$ a complex rather than a module.
+\end{itemize}
+
+% ===============================================================
+\section{Examples}\label{sec:examples}
+% ===============================================================
+
+We collect examples that illustrate the definitions and results, together with examples showing what goes wrong when hypotheses fail.
+
+Throughout this section $\Lambda=\kk Q/I$ is given by a quiver with relations. Paths are composed from left to right. Right $\Lambda$-modules are identified with representations of $Q$: an arrow $a\colon i\to j$ acts by a linear map $Me_i\to Me_j$. We describe modules by their radical layers. For example, $[1;2;2]$ denotes a uniserial module with top $L(1)$ followed by two copies of $L(2)$.
+
+For failures in the exceptional case we refer to Kalck's example (\cref{sec:prelim}, after \cref{thm:BB-3.8}): there a full exceptional sequence consists of modules, but its right Hom-orthogonal dual does not.
+
+\subsection{Local algebras}
+
+\begin{example}[One stratum]\label{ex:local-alg}
+Let $B$ be a finite-dimensional local algebra, with simple module $\kk$.
+\begin{enumerate}
+\item \emph{The basic Hom-dual triple.} In $\cD=\Db(\modd B)$, the data $(E,\Deltabar,N)=(B,\kk,\kk)$ with $\delta=\mathrm{id}$ form a Hom-dual triple with $m=1$:
+\begin{itemize}
+\item (HD1) is $\Hom^\bullet(B,\kk)\cong\kk$;
+\item (HD2) holds since $\End(\kk)=\kk$ and there are no negative self-extensions;
+\item (HD3) holds since $\kk$ generates $\Db(\modd B)$;
+\item (HD4) is vacuous.
+\end{itemize}
+\Cref{thm:B} returns $\modd B$, with $G=B$. Here $N=\kk$ has $\End^\bullet(\kk)=\Ext^\bullet_B(\kk,\kk)$, which is non-zero in infinitely many degrees unless $B=\kk$: indeed $\pd\kk=\infty$ by the argument of \cref{lem:euler}. This illustrates \cref{rem:ST2}.
+\item \emph{Truncated polynomial algebras.} For $B=\kk[t]/(t^{n+1})$, the object $E=B$ is $\Pn n0$-like (\cref{sec:P-zero}).
+\item \emph{No Gorenstein information.} Let $B=\kk[x,y]/(x,y)^2$. Then \cref{thm:B} applies, but $B$ is not Iwanaga--Gorenstein. Indeed, $B$ is a commutative artinian local ring whose socle $(x,y)$ is $2$-dimensional, so $B$ is not self-injective. Hence \cref{thm:B} carries no Gorenstein information (\cref{q:gorenstein}).
+\item \emph{Non-example: the perfect category alone.} If $B\ne\kk$, then in $\cD=\Kb(\proj B)$ the local-exceptional object $E=B$ has no Hom-dual object. Indeed, an object $N$ with $\Hom^\bullet(B,N)\cong\kk$ would contradict \cref{prop:local-exc}(3). So (HD1) and (HD3) force the ambient category to be of ``$\Db$-type''.
+\end{enumerate}
+\end{example}
+
+\subsection{A standardly stratified algebra with a non-trivial stratum}
+
+\begin{example}\label{ex:two-strata}
+Let $Q$ have vertices $1,2$, an arrow $\alpha\colon1\to2$ and a loop $x$ at $2$, and put $\Lambda=\kk Q/(x^2)$. Then $\dim\Lambda=5$, and:
+\begin{itemize}
+\item $P(1)=e_1\Lambda=\langle e_1,\alpha,\alpha x\rangle=[1;2;2]$ and $P(2)=e_2\Lambda=\langle e_2,x\rangle=[2;2]$;
+\item $I(1)=L(1)$;
+\item $I(2)=D(\Lambda e_2)$ is $4$-dimensional, with simple socle $L(2)$ and composition factors $L(1)^2$ and $L(2)^2$.
+\end{itemize}
+
+\emph{The order $1<2$.}
+\begin{enumerate}
+\item \emph{Standard stratification.} We have $\Delta(2)=P(2)$ and $B_2=e_2\Lambda e_2=\kk[x]/(x^2)$. The trace $\tr_{P(2)}P(1)=\alpha\Lambda\cong P(2)$ is projective. So $\Lambda$ is standardly stratified by \cref{lem:strat-induction}, with $\Delta(1)=L(1)$ and $B_1=\kk$. It is not quasi-hereditary, and indeed $\gldim\Lambda=\infty$: the simple module $L(2)$ has the periodic resolution $\cdots\xrightarrow{x}P(2)\xrightarrow{x}P(2)\to L(2)$.
+\item \emph{The other families.} We have $\Deltabar(1)=L(1)$, $\Deltabar(2)=L(2)$, $\nablabar(1)=L(1)$, and $\nablabar(2)=[1;2]$, the submodule of $I(2)$ generated by a vector at vertex $1$ mapping onto the socle. There is an exact sequence $0\to\nablabar(2)\to I(2)\to\nablabar(2)\to0$. So the $\nablabar$-condition holds, with $\dim B_2=2$ copies of $\nablabar(2)$ in $I(2)$.
+\item \emph{The Hom-dual triple.} The data
+\[(E_\bullet,\Deltabar_\bullet,N_\bullet)=\big((L(1),P(2)),\,(L(1),L(2)),\,(L(1),[1;2])\big),\]
+with $\delta_2\colon L(2)\hookrightarrow[1;2]$, form a Hom-dual triple; the cone of $\delta_2$ is $L(1)$. The conditions follow from these computations:
+\begin{itemize}
+\item $\pd L(1)=1$, via $0\to P(2)\to P(1)\to L(1)\to0$;
+\item $\Ext^\bullet(L(1),L(1))=\kk$ and $\Ext^\bullet(L(1),[1;2])=0$;
+\item $\Ext^\bullet(L(2),L(1))=0$, since $L(2)$ is resolved by copies of $P(2)$.
+\end{itemize}
+In particular the hypotheses of \cref{prop:dualisable} hold.
+\item \emph{The universal extension need not be basic.} We have $V=\Ext^1(L(1),P(2))\cong B_2$, which is $2$-dimensional. The universal extension of $L(1)$ by $P(2)$ is $G_1\cong P(1)\oplus P(2)$. Indeed, the second extension class is $x$ times the first, and an automorphism of $P(2)^{\oplus2}$ removes it. Hence $G=P(1)\oplus P(2)^{\oplus2}$, which is Morita equivalent to $\Lambda$.
+\item \emph{$\nablabar(2)$ is not perfect.} The kernel of the projective cover $P(1)\twoheadrightarrow[1;2]$ is $L(2)$, which has infinite projective dimension. So $\pd\nablabar(2)=\infty$, as predicted by \cref{thm:C}(3).
+\end{enumerate}
+
+\emph{The order $2<1$.} Since $\Hom(P(1),P(2))=0$, we have $\Delta(1)=P(1)$ and $\Delta(2)=P(2)$, and $\Lambda$ is again standardly stratified. The other families are
+\[\nablabar(1)=L(1),\quad\nablabar(2)=L(2),\quad\Deltabar(2)=L(2),\quad\Deltabar(1)=P(1),\]
+the last because $[P(1):L(1)]=1$. Indexing by the order $2<1$, the Hom-dual triple is
+\[E_\bullet=(P(2),P(1)),\qquad\Deltabar_\bullet=(L(2),P(1)),\qquad N_\bullet=(L(2),L(1)).\]
+Here $\delta_2\colon P(1)\to L(1)$ is the projection onto the top; its kernel $\rad P(1)=P(2)$ lies in $\thick{L(2)}$. Moreover $G=\Lambda$. In this order the proper standard object $\Deltabar(1)$ is not simple.
+\end{example}
+
+\subsection{Failures}
+
+\begin{example}[Negative extensions: silting but not tilting]\label{ex:NH-fails}
+In \cref{ex:two-strata} with the order $1<2$, replace $E_1$, $\Deltabar_1$ and $N_1$ by $L(1)[-2]$. Conditions (HD1)--(HD4) still hold, but (NH) fails:
+\[\Hom(E_1,E_2[-1])=\Ext^1(L(1),P(2))\cong B_2\ne0.\]
+The iterated universal extension is $G=L(1)[-2]\oplus P(2)$, since $\Ext^3(L(1),P(2))=0$. It is silting in $\thick{E_1,E_2}=\Kb(\proj\Lambda)$ but not tilting, because $\Hom(G,G[-1])\ne0$. Correspondingly, $E_2=P(2)$ does not lie in the heart of the t-structure of the triple. This illustrates \cref{rem:half-dual}: (NH) is what upgrades silting to tilting.
+\end{example}
+
+\begin{example}[Failure of Hom-duality in degree $2$]\label{ex:nakayama}
+Let $Q$ be the cyclic quiver $1\xrightarrow{\alpha}2\xrightarrow{\beta}1$, and let $\Lambda=\kk Q/(\alpha\beta,\beta\alpha)$. This is the self-injective Nakayama algebra of Loewy length $2$, with
+\[P(1)=I(2)=[1;2]\qquad\text{and}\qquad P(2)=I(1)=[2;1].\]
+Take the order $1<2$.
+\begin{enumerate}
+\item \emph{Not standardly stratified.} $\tr_{P(2)}P(1)=L(2)$ is not projective, so $\Lambda$ is not standardly stratified (\cref{lem:strat-induction}). By symmetry the same holds for the order $2<1$.
+\item \emph{The standard object is not local-exceptional.} $\Delta(1)=L(1)$ satisfies $\Ext^2(L(1),L(1))\cong\kk$, since the minimal projective resolution of $L(1)$ is $2$-periodic. So \cref{thm:C}(1) fails without standard stratification.
+\item \emph{A stratifying triple anyway.} Consider
+\[(\Delta_\bullet,\Deltabar_\bullet,N_\bullet)=\big((L(1),P(2)),\,(L(1),P(2)),\,(L(1),P(1))\big),\]
+with $\delta_1=\mathrm{id}$ and $\delta_2\colon P(2)\to P(1)$ the morphism with image $\soc P(1)$. Its kernel and cokernel are both $L(1)$. This is a stratifying triple in $\Db(\modd\Lambda)$ satisfying (NH). It has Hom-duality up to degree $1$, but not up to degree $2$, since $\Hom(\Delta_1,N_1[2])=\Ext^2(L(1),L(1))\ne0$. Its t-structure is the standard one (\cref{prop:triple-t}(4)), so its heart is $\modd\Lambda$, which is not standardly stratified. Hence the hypothesis of Hom-duality up to degree $2$ in \cref{thm:A} cannot be dropped.
+\item \emph{The obstruction of \cref{rem:obstruction}, realised.} We have $V=\Ext^1(L(1),P(2))=0$, so $G=L(1)\oplus P(2)$. But $L(1)$ is not projective, since $\Ext^1(L(1),L(2))\cong\kk$. In the notation of \cref{prop:step}, $K=\ker(P(2)\to L(2))=L(1)$. The connecting map $\Ext^1(L(1),L(2))\to\Ext^2(L(1),L(1))$ is an isomorphism, because $P(2)$ is injective. So the failure happens exactly at step~(e).
+\item \emph{The first stratum.} The first stratum is $\thick{L(1)}$, where $\Ext^\bullet(L(1),L(1))$ is $\kk$ in every even degree and $0$ in odd degrees. So $L(1)$ behaves like a ``$\Pn\infty2$-like'' object, which is relevant for \cref{q:k2}.
+\end{enumerate}
+\end{example}
+
+\begin{example}[Hom-duality in low degrees only]\label{ex:deg2}
+These examples use the models of \cref{thm:formality}, with $m=1$.
+\begin{enumerate}
+\item \emph{Degree $2$ but not $3$.} Let $\cD=\operatorname{perf}(\kk[t]/(t^2))$ with $\deg t=3$, and $P=\kk[t]/(t^2)$; this is a $3$-spherical object. Then $(P,P,P)$ is a stratifying triple with Hom-duality up to degree $2$ but not $3$. Its heart is $\Filt(P)\simeq\modd\kk$ (\cref{prop:heart-P}(1)), and $\cD\not\simeq\Db(\modd\kk)$, in accordance with \cref{thm:A}(3).
+\item \emph{The case $k=1$.} For $\deg t=1$ and $\kk[t]/(t^{n+1})$ with $n\ge3$, the triple $(Q,P,P)$ has Hom-duality up to degree $n-1$. Its heart $\modd\kk[x]/(x^2)$ is standardly stratified with a single stratum, while $\cD$ is not its derived category.
+\item \emph{Degree $1$ only.} Bodzenta and Bondal's \cref{ex:BB-5.11} is the $2$-spherical case, with Hom-duality only up to degree $1$.
+\end{enumerate}
+\end{example}
+
+% ===============================================================
+\section{Application: \texorpdfstring{$\mathbb{P}^n[k]$}{Pn[k]}-like objects}\label{sec:P-objects}
+% ===============================================================
+
+$\Pn nk$-like objects generalise exceptional objects by allowing self-extensions in the degrees $k,2k,\dots,nk$. In this section we explain how they fit into the general framework.
+\begin{itemize}
+\item For $k=0$ they are local-exceptional objects (\cref{sec:P-zero}), so \cref{thm:B,thm:C} apply.
+\item For $k\ge1$ they are simple-minded, and they are the second member of local pairs (\cref{sec:P-positive}). Semi-orthogonal sequences of them give stratifying triples, to which \cref{thm:A} applies (\cref{sec:P-sequences}).
+\end{itemize}
+\Cref{tab:summary} summarises the outcome.
+
+\begin{table}[ht]
+\centering
+\renewcommand{\arraystretch}{1.25}
+\small
+\begin{tabular}{@{}llll@{}}
+\toprule
+stratum, local pair & heart of the stratum & glued heart $\cA$ & $\Db(\cA)\simeq\cD$? \\
+\midrule
+$\Db(\kk)$, $(\kk,\kk)$ & $\modd\kk$ & highest weight \cite{BB26} & yes \\
+$\Db(\modd B)$, $(B,\kk)$ & $\modd B$ & std.\ stratified (Thm.~\ref{thm:A}, \ref{thm:B}) & yes \\
+$\Pn nk$, $k\ge 3$; $(P,P)$ & $\modd\kk$ & highest weight (Thm.~\ref{thm:Pseq}) & no \\
+$\Pn nk$, $k=2$; $(P,P)$ & $\modd\kk$ & open (Question~\ref{q:k2}) & no$^{\ast}$ \\
+$\Pn n1$, $n\ge 3$; $(Q,P)$ & $\modd\kk[x]/(x^2)$ & std.\ stratified (Thm.~\ref{thm:Pseq}) & no \\
+$\Pn 21$; $(Q,P)$ & $\modd\kk[x]/(x^2)$ & open (Question~\ref{q:k2}) & no$^{\ast}$ \\
+$\Pn 11$; no local pair & nilpotent $\kk[x]$-modules & not Deligne finite (Prop.~\ref{prop:P11}) & --- \\
+$\Pn n0$ & no t-structure \cite{Bonf26} & --- (use Thm.~\ref{thm:B} instead) & --- \\
+\bottomrule
+\end{tabular}
+\caption{Strata and the resulting glued heart. In the rows with $\Pn nk$ we assume $n\ge1$, and the stratum is $\thick{P}$. ``Std.\ stratified'' means standardly stratified, and ``no t-structure'' means no non-trivial t-structure. A $\Pn n0$-like object enters \cref{thm:B} as a local-exceptional object $E_s$; its stratum is generated by the Hom-dual object $N_s$ and is equivalent to $\Db(\modd\kk[t]/(t^{n+1}))$. The asterisk means ``no, whenever $\cA$ is a module category of the expected type''.}\label{tab:summary}
+\end{table}
+
+
+\subsection{Definitions and examples}
+
+\begin{definition}[{\cite{Kru18}, \cite[Def.~2.1]{HK19}, \cite[Def.~2.1]{Bonf26}}]\label{def:Pnk}
+Let $n\ge0$ and $k\in\mathbb{Z}$. An object $P$ of $\cD$ is \emph{$\Pn nk$-like} if there is an isomorphism of graded algebras
+\[\End^\bullet(P)\cong\kk[t]/(t^{n+1}),\qquad\deg t=k.\]
+It is a \emph{$\Pn nk$-object} if moreover $\Hom^\bullet(P,X)$ is finite-dimensional for all $X$ and $P$ is $nk$-Calabi--Yau, i.e.\ there are isomorphisms $\Hom(P,X)\cong\Hom(X,P[nk])^\vee$, functorial in $X\in\cD$.
+\end{definition}
+
+As in \cite{Bonf26} we allow arbitrary $k\in\mathbb{Z}$. For $k=0$ the condition says that $\End(P)\cong\kk[t]/(t^{n+1})$ and $\Hom(P,P[l])=0$ for $l\ne0$.
+
+\begin{example}\label{ex:Pnk}
+\leavevmode
+\begin{enumerate}
+\item The $\Pn0k$-like objects are exactly the exceptional objects.
+\item $\Pn1k$-like objects are the \emph{$k$-spherelike} objects. $\Pn1k$-objects are the $k$-spherical objects of Seidel and Thomas \cite{ST01}; in the terminology of \cite{HJY13} they are \emph{$w$-spherical} with $w=k$.
+\item $\Pn n2$-objects are the $\mathbb{P}^n$-objects of Huybrechts and Thomas \cite{HT06}. For example, the structure sheaf of a compact hyperk\"ahler manifold of dimension $2n$ is one.
+\item Krug \cite{Kru18} introduced the notation $\Pn nk$ and gave examples of varieties whose structure sheaves are $\Pn nk$-objects; see also \cite{HK19}.
+\item ($k=0$) If $B=\kk[t]/(t^{n+1})$, then $B$ is a $\Pn n0$-like object of $\Db(\modd B)$. More generally, a module $M$ with $\End(M)\cong\kk[t]/(t^{n+1})$ and $\Ext^{>0}(M,M)=0$ is $\Pn n0$-like. Standard modules of stratified algebras provide examples (\cref{thm:C}).
+\end{enumerate}
+\end{example}
+
+\begin{remark}[{\cite[Rem.~2.2]{HK19}, \cite[Lemma~2.5]{Bonf26}}]
+A $\Pn nk$-like object $P$ is already a $\Pn nk$-object of the subcategory $\thick P$; in fact, for $\cD$ algebraic, $\thick P$ is $nk$-Calabi--Yau. Hence for questions concerning $\thick P$ alone, the Calabi--Yau condition is irrelevant. In sequences of such objects the Calabi--Yau condition refers to the ambient category and is not preserved by mutations, so we work with ``$\Pn nk$-like'' throughout.
+\end{remark}
+
+\begin{intuition}
+For an exceptional object $E$ one has $\thick E\simeq\Db(\kk)$, and $E$ is at the same time the simple object, the projective object and the injective object of the heart $\modd\kk$. A $\Pn nk$-like object is a ``thickening'' with self-extensions in degrees $k,2k,\dots,nk$, and these three roles separate:
+\begin{itemize}
+\item For $k\ge1$, $P$ has no negative self-extensions and $\End(P)=\kk$. It is \emph{simple-minded} and determines a t-structure.
+\item For $k\le0$, $P$ has no positive self-extensions, so it is \emph{silting} and determines a co-t-structure. For $k=0$ it behaves like the free module over the local algebra $\kk[t]/(t^{n+1})$.
+\end{itemize}
+This is the dichotomy of \cref{thm:HJY,thm:Bonfert}; the standard t-structure and the standard weight structure on $\thick P$ are obtained in exactly this way in \cite[\S3.2]{Bonf26}.
+\end{intuition}
+
+\subsection{Known classification results}
+
+\begin{theorem}[{Holm--J\o rgensen--Yang \cite{HJY13}}]\label{thm:HJY}
+Let $w\in\mathbb{Z}$, and let $\cT$ be the $\kk$-linear algebraic triangulated category generated by a $w$-spherical object.
+\begin{itemize}
+\item For $w\le0$, $\cT$ has no non-trivial t-structures, but it has one family of non-trivial co-t-structures.
+\item For $w\ge1$, $\cT$ has no non-trivial co-t-structures, but it has one family of non-trivial t-structures.
+\end{itemize}
+For $w=0$, $\cT$ is the compact derived category of the dual numbers.
+\end{theorem}
+
+Here ``non-trivial'' excludes $(\cT,0)$ and $(0,\cT)$, and a ``family'' consists of the shifts of a single structure.
+
+\begin{theorem}[{Hochenegger--Krug \cite[Lemma~2.8]{HK19}; Bonfert \cite[Props.~2.3 and~2.4]{Bonf26}}]\label{thm:formality}
+For all $n\ge0$ and $k\in\mathbb{Z}$, the graded algebra $A_{n,k}:=\kk[x]/(x^{n+1})$ with $\deg x=k$ is intrinsically formal. Consequently, let $\cD$ be an idempotent complete algebraic triangulated category and $P\in\cD$ a $\Pn nk$-like object. Then $\thick P\simeq\operatorname{perf}(A_{n,k})$, where $A_{n,k}$ is regarded as a dg algebra with zero differential, and $P$ corresponds to $A_{n,k}$.
+\end{theorem}
+
+\begin{theorem}[{Bonfert \cite[Thm.~3.3]{Bonf26}}]\label{thm:Bonfert}
+Let $\cT$ be the triangulated category generated by a $\Pn nk$-object $P$.
+\begin{enumerate}
+\item If $n=0$, every non-trivial t-structure on $\cT$ is a shift of the standard t-structure, and every non-trivial weight structure on $\cT$ is a shift of the standard weight structure.
+\item If $n>0$ and $k>0$, every non-trivial t-structure on $\cT$ is a shift of the standard t-structure, whose heart is $\Filt(P)$. There is no non-trivial weight structure on $\cT$.
+\item If $n>0$ and $k\le0$, every non-trivial weight structure on $\cT$ is a shift of the standard weight structure, whose co-heart is $\add P$. There is no non-trivial t-structure on $\cT$.
+\end{enumerate}
+\end{theorem}
+
+For $n=1$ this recovers \cref{thm:HJY}. By \cref{thm:formality} and the preceding remark, \cref{thm:Bonfert} applies to $\thick P$ for every $\Pn nk$-like object $P$ of an idempotent complete algebraic triangulated category.
+
+\begin{remark}[{Koszul dual models \cite[\S4]{Bonf26}}]\label{rem:Bonfert-Koszul}
+Bonfert also computes the dg Koszul dual $A_{n,k}^{!,\mathrm{dg}}=\RHom_{A_{n,k}}(\kk,\kk)$ \cite[Thm.~4.9, Props.~4.11 and~4.12]{Bonf26}:
+\begin{itemize}
+\item for $n=1$ and $k\ne1$ it is $\kk[s]$ with $\deg s=1-k$;
+\item for $n=k=1$ it is $\kk[[s]]$ with $\deg s=0$;
+\item for $n>1$ it is a non-formal dg algebra with cohomology $\kk[s,t]/(s^2)$, where $\deg s=1-k$ and $\deg t=2-(n+1)k$.
+\end{itemize}
+For $k=0$ this is the Ext-algebra $\Ext^\bullet_B(\kk,\kk)$ of the simple module over $B=\kk[t]/(t^{n+1})$. It is the graded endomorphism algebra of the ``simple-like'' objects $\nablabar$ that will be paired with $\Pn n0$-like objects in \cref{sec:gluing,sec:stratified}.
+\end{remark}
+
+\subsection{The case \texorpdfstring{$k=0$}{k=0}: \texorpdfstring{$\mathbb{P}^n[0]$}{Pn[0]}-like objects are local-exceptional}\label{sec:P-zero}
+
+A $\Pn n0$-like object is the same as a local-exceptional object $E$ with $\End(E)\cong\kk[t]/(t^{n+1})$. In this case the general results specialise as follows.
+\begin{itemize}
+\item By \cref{thm:formality} and \cref{thm:Bonfert}(3), $\thick{E}\simeq\operatorname{perf}(\kk[t]/(t^{n+1}))$ carries, up to shift, a unique non-trivial weight structure, with co-heart $\add E$, and no non-trivial t-structure. This sharpens \cref{prop:local-exc} for this particular local algebra.
+\item Let $(E_1,\dots,E_m)$ be a semi-orthogonal sequence of $\Pn{n_s}0$-like objects which is part of a Hom-dual triple. By \cref{thm:B}, it gives a standardly stratified algebra with $B_s\cong\kk[t]/(t^{n_s+1})$ if and only if neither sequence has negative extensions.
+\item Conversely, by \cref{thm:C}, a standard module $\Delta(i)$ of a standardly stratified algebra with $B_i\cong\kk[t]/(t^{n+1})$ is $\Pn n0$-like.
+\end{itemize}
+
+The Hom-dual partners are of a different nature. Within its stratum, $N_s$ corresponds to the simple module over $B_s=\kk[t]/(t^{n_s+1})$. Its graded endomorphism algebra is $\Ext^\bullet_{B_s}(\kk,\kk)$, which by \cref{rem:Bonfert-Koszul} (with $k=0$) is as follows:
+\begin{itemize}
+\item for $n_s=1$, it is $\kk[s]$ with $\deg s=1$, so $N_s$ is ``$\Pn\infty1$-like'';
+\item for $n_s\ge2$, its cohomology is $\kk[s,t]/(s^2)$ with $\deg s=1$ and $\deg t=2$, so $N_s$ is not $\mathbb{P}$-like.
+\end{itemize}
+The simplest example is $m=1$: then $E=B$ and $\Deltabar=N=\kk$ in $\Db(\modd B)$, and \cref{thm:B} recovers $\modd B$.
+
+
+\subsection{The case \texorpdfstring{$k\ge1$}{k>=1}: local pairs from \texorpdfstring{$\mathbb{P}$}{P}-like objects}\label{sec:P-positive}
+
+For $k\ge1$, a $\Pn nk$-like object has no negative self-extensions and satisfies $\End(P)=\kk$. It is therefore simple-minded in $\thick{P}$. We determine the heart of the associated t-structure, and the local pairs $(\Pi,P)$ in $\thick{P}$.
+
+
+\begin{proposition}[{cf.\ \cite[\S3.2]{Bonf26}}]\label{prop:tP}
+Let $P$ be $\Pn nk$-like with $k\ge1$. Then $\{P\}$ is a simple-minded collection in $\thick P$. Consequently $\thick P$ carries a bounded t-structure $t_P$ with heart $\cH_P:=\Filt(P)$, a length category with unique simple object $P$. The aisles of $t_P$ are described by \cref{lem:aisles} with $Q=S=P$.
+\end{proposition}
+
+\begin{proof}
+Condition (SM1) holds because $\End^\bullet(P)$ is concentrated in degrees $0,k,\dots,nk\ge0$. Condition (SM2) holds because $\End(P)=\kk$ (as $k\ne0$), and (SM3) is clear. Now apply \cref{thm:smc}, and \cref{lem:aisles} with $Q=S=P$.
+\end{proof}
+
+\begin{remark}\label{rem:tP-unique}
+The t-structure $t_P$ is the standard t-structure of the proper positive dg algebra $A_{n,k}$ \cite[Thm.~7.1]{KN13}, \cite[\S3.2]{Bonf26}. By \cref{thm:Bonfert}(2), every non-trivial t-structure on $\thick P$ is a shift of $t_P$. Hence, for strata generated by $\Pn nk$-like objects with $k\ge1$, the gluing data used in \cref{sec:gluing,sec:P-sequences} are determined up to shifts.
+\end{remark}
+
+\begin{proposition}[{cf.\ \cite[Lemmas~3.11 and~4.15, Cor.~4.16]{Bonf26}}]\label{prop:heart-P}
+Let $P$ be $\Pn nk$-like with $k\ge1$ and $n\ge1$, and let $\cH_P$ be as in \cref{prop:tP}.
+\begin{enumerate}
+\item If $k\ge2$, then $\cH_P=\add P\simeq\modd\kk$.
+\item If $k=n=1$, then $\cH_P$ is hereditary and has no non-zero projective objects. If $\thick P$ is algebraic, then $\real\colon\Db(\cH_P)\to\thick P$ is an equivalence.
+\item Let $k=1$ and $n\ge2$. Let $t$ span $\Hom(P,P[1])$, and define $Q$ by the triangle
+\[P\xrightarrow{a}Q\xrightarrow{b}P\xrightarrow{t}P[1].\]
+Then:
+\begin{itemize}
+\item $Q\in\cH_P$ is a projective cover of $P$ in $\cH_P$, $\End(Q)\cong\kk[x]/(x^2)$, and $\cH_P\simeq\modd\kk[x]/(x^2)$;
+\item $\Hom(Q,P)\cong\kk$, and for $l\ne0$ we have $\Hom(Q,P[l])\cong\kk$ if $l=n$ and $\Hom(Q,P[l])=0$ otherwise;
+\item $\Hom(Q,Q[1])=0$.
+\end{itemize}
+\item In cases \textup{(1)} and \textup{(3)}, the comparison maps $\Ext^\bullet_{\cH_P}(P,P)\to\End^\bullet(P)$ are not bijective. In particular, no realisation functor $\Db(\cH_P)\to\thick P$ is an equivalence.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Recall that $\Ext^1_{\cH_P}(X,Y)=\Hom(X,Y[1])$ for $X,Y\in\cH_P$ (\cref{prop:ext-comparison}).
+
+(1) We have $\Ext^1_{\cH_P}(P,P)=\End^1(P)=0$ since $k\ge2$. Hence every object of $\Filt(P)$ is isomorphic to some $P^{\oplus r}$, and $\Hom(P,-)$ gives $\cH_P\simeq\modd\kk$.
+
+(2) We have $\Ext^1_{\cH_P}(P,P)\cong\kk$. By \cref{prop:ext-comparison}, $\Ext^2_{\cH_P}(P,P)$ embeds into $\End^2(P)$, which is $0$ for $(k,n)=(1,1)$.
+\begin{itemize}
+\item By d\'evissage (long exact sequences in both variables), $\Ext^2_{\cH_P}$ vanishes identically. Since Yoneda extensions of length $\ge2$ factor through Yoneda products with $\Ext^2$, all $\Ext^{\ge2}_{\cH_P}$ vanish, so $\cH_P$ is hereditary.
+\item Consequently $\chi(X,Y):=\dim\Hom(X,Y)-\dim\Ext^1(X,Y)$ is additive in both variables. It is therefore given by $\chi(X,Y)=\ell(X)\ell(Y)\chi(P,P)=0$, where $\ell$ denotes length.
+\item If $R$ is projective, then $\dim\End(R)=\chi(R,R)=0$, so $R=0$.
+\item The comparison maps $\Ext^l_{\cH_P}(P,P)\to\End^l(P)$ are bijective for $l\le1$ by \cref{prop:ext-comparison}, and both sides vanish for $l\ge2$. By d\'evissage and the five lemma, $\Ext^l_{\cH_P}(X,Y)\to\Hom(X,Y[l])$ is bijective for all $X,Y\in\cH_P$ and all $l$. Thus $\real$ is fully faithful, and it is an equivalence by \cref{thm:realisation}.
+\end{itemize}
+
+(3) Since $\cH_P$ is closed under extensions, $Q\in\cH_P$, and $0\to P\to Q\to P\to0$ is a non-split exact sequence in $\cH_P$. Let $W\in\thick P$. Applying $\Hom(-,W)$ to the triangle gives an exact sequence
+\[\Hom(P[1],W)\xrightarrow{t^*}\Hom(P,W)\xrightarrow{b^*}\Hom(Q,W)\xrightarrow{a^*}\Hom(P,W)\xrightarrow{t[-1]^*}\Hom(P[-1],W).\]
+For $W=P[l]$, the outer maps are, up to sign, multiplication by $t$, namely $\End^{l-1}(P)\to\End^l(P)$ and $\End^l(P)\to\End^{l+1}(P)$. Hence there is a short exact sequence
+\[0\to\operatorname{coker}\big(\End^{l-1}(P)\xrightarrow{t}\End^l(P)\big)\to\Hom(Q,P[l])\to\ker\big(\End^l(P)\xrightarrow{t}\End^{l+1}(P)\big)\to0.\]
+Since $\deg t=1$ and $t^n\ne0=t^{n+1}$:
+\begin{itemize}
+\item the cokernel is $\kk$ for $l=0$ and $0$ otherwise;
+\item the kernel is $\kk$ (spanned by $t^n$) for $l=n$ and $0$ otherwise.
+\end{itemize}
+This proves the second item of (3); note that $0\neq n$.
+
+Since $n\ge2$, we have $\Hom(Q,P[1])=0$, i.e.\ $\Ext^1_{\cH_P}(Q,P)=0$. As $P$ is the only simple object, d\'evissage gives $\Ext^1_{\cH_P}(Q,-)=0$, so $Q$ is projective. Since $\Hom(Q,P)\cong\kk$, the top of $Q$ is $P$, and $Q$ is a projective cover of $P$.
+
+Applying $\Hom(Q,-)$ to the triangle gives an exact sequence
+\[\Hom(Q,P[-1])\to\Hom(Q,P)\to\End(Q)\to\Hom(Q,P)\to\Hom(Q,P[1]).\]
+Its outer terms vanish, so $\dim\End(Q)=2$. The algebra $\End(Q)$ is local because $Q$ has simple top; hence $\End(Q)\cong\kk[x]/(x^2)$. A Hom-finite length category with a projective generator $Q$ is equivalent to $\modd\End(Q)$ via $\Hom(Q,-)$, so $\cH_P\simeq\modd\kk[x]/(x^2)$. Finally, $\Hom(Q,Q[1])=\Ext^1_{\cH_P}(Q,Q)=0$.
+
+(4) In case (1), $\Ext^{nk}_{\cH_P}(P,P)=0$ while $\End^{nk}(P)\ne0$. In case (3), $\Ext^{n+1}_{\kk[x]/(x^2)}(\kk,\kk)\cong\kk$, because the minimal projective resolution of $\kk$ is periodic, while $\End^{n+1}(P)=0$. A realisation functor induces the comparison maps on extension groups, so it cannot be fully faithful.
+\end{proof}
+
+\begin{remark}
+Parts (1)--(3) overlap with \cite[Lemma~3.11]{Bonf26}, where the indecomposable objects of $\cH_P$ are listed and the spaces $\Hom(X_2,P[i])$ are computed; our $Q$ is Bonfert's $X_2$. They also overlap with \cite[Lemma~4.15]{Bonf26}, which shows that $\cH_P$ has an injective cogenerator unless $n=k=1$. The realisation statement in (2) corresponds to Bonfert's Koszul-dual model \cite[Cor.~4.16(2)]{Bonf26}, which identifies $\thick P$ with the thick subcategory of $\mathcal{D}(\kk[[t]])$ generated by the simple module. What is new in \cref{prop:heart-P} is only the explicit identification $\cH_P\simeq\modd\kk[x]/(x^2)$ in (3) and the reformulation of these facts in terms of local pairs and their Hom-duality (\cref{cor:P-local-pairs}), which is what the gluing results use. We have given the proofs in the form needed below.
+\end{remark}
+
+\begin{remark}\label{rem:koszul}
+\leavevmode
+\begin{enumerate}
+\item For $n=1$, parts (1) and (2) are consistent with \cref{thm:HJY}. For $w=1$, $\thick P$ is the derived category of finite-dimensional nilpotent $\kk[x]$-modules; cf.\ \cite[Lemma~3.11(3), Cor.~4.16(2)]{Bonf26}. For $w=2$, part~(1) is exactly the phenomenon of \cref{ex:BB-5.11}.
+\item The simple module $\kk$ generates $\Db(\modd\kk[x]/(x^2))$, and $\End^\bullet(\kk)\cong\kk[s]$ with $\deg s=1$. So $\kk$ is a ``$\Pn\infty1$-like'' object (\cref{rem:Bonfert-Koszul} with $n=1$, $k=0$). A $\Pn n1$-like object with $n\ge2$ has the same heart, but its endomorphism algebra is truncated at $t^{n+1}=0$. Meanwhile, the regular module $\kk[x]/(x^2)$ is $\Pn10$-like. Thus the cases $k=0$ and $k=1$ are Koszul dual to each other, which is the mechanism behind \cref{thm:HJY}.
+\item The non-vanishing $\Hom(Q,P[n])\ne0$ in (3) and $\End^{k}(P)\ne0$ in (1) are exactly the obstructions to full Hom-duality of the corresponding local pairs (\cref{def:local-pair}). The vanishing of $\Hom(Q,P[2])$ (i.e.\ $n\ne2$) and of $\End^2(P)$ (i.e.\ $k\ne2$) is Hom-duality up to degree $2$, which is the hypothesis of \cref{thm:A}.
+\end{enumerate}
+\end{remark}
+
+
+
+\begin{corollary}\label{cor:P-local-pairs}
+Let $P$ be $\Pn nk$-like with $k\ge1$ and $n\ge1$.
+\begin{enumerate}
+\item If $k\ge2$, then $(P,P)$ is a local pair in $\thick{P}$ with Hom-duality up to degree $k-1$, but not up to degree $k$.
+\item If $k=1$ and $n\ge2$, then $(Q,P)$ is a local pair in $\thick{P}$ with Hom-duality up to degree $n-1$, but not up to degree $n$.
+\item If $k=n=1$, there is no local pair of the form $(\Pi,P)$ in $\thick{P}$.
+\end{enumerate}
+\end{corollary}
+
+\begin{proof}
+(LP1) is \cref{prop:tP}. For (1), $\End^\bullet(P)$ is concentrated in the degrees $0,k,\dots,nk$. For (2), use \cref{prop:heart-P}(3), and note that $Q\in\cH_P$ has no negative self-extensions. For (3), if $(\Pi,P)$ were a local pair, then $\Pi$ would be a non-zero projective object of $\cH_P$ by \cref{prop:local-pair}(2), contradicting \cref{prop:heart-P}(2).
+\end{proof}
+
+
+\subsection{Semi-orthogonal sequences of \texorpdfstring{$\mathbb{P}$}{P}-like objects}\label{sec:P-sequences}
+
+\begin{definition}\label{def:P-sequence}
+A \emph{$\mathbb{P}$-sequence} in $\cD$ is a sequence $(P_1,\dots,P_m)$ with the following properties:
+\begin{itemize}
+\item each $P_s$ is $\Pn{n_s}{k_s}$-like for some $n_s\ge0$ and $k_s\ge1$ (for $n_s=0$ the value of $k_s$ is irrelevant);
+\item $\Hom^\bullet(P_t,P_s)=0$ for $t>s$.
+\end{itemize}
+It is \emph{full} if $\thick{P_1,\dots,P_m}=\cD$. Put $\cC_s:=\thick{P_1,\dots,P_s}$. A \emph{right Hom-orthogonal dual} of $P_\bullet$ (\cref{def:orth-dual}) is a family of morphisms $\varphi_s\colon P_s\to F_s$ such that, for every $s$, the cone of $\varphi_s$ lies in $\cC_{s-1}$ and $F_s\in\cC_{s-1}^\perp$.
+\end{definition}
+
+By the discussion after \cref{def:orth-dual}, the right Hom-orthogonal dual is unique up to unique isomorphism, exists if and only if each $\cC_{s-1}$ is right admissible in $\cC_s$, and is given by left mutations. For an exceptional sequence it is Bondal's left dual, and it always exists.
+
+\begin{lemma}\label{lem:P-triple}
+Let $(P_1,\dots,P_m)$ be a full $\mathbb{P}$-sequence with a right Hom-orthogonal dual $F_\bullet$.
+\begin{enumerate}
+\item $\cC_s=\thick{F_1,\dots,F_s}$ for all $s$, and $\End^\bullet(F_s)\cong\End^\bullet(P_s)$. The filtration $(\cC_s)$ is admissible.
+\item Define $\Delta_s$ as follows. If $n_s=0$ or $k_s\ge2$, put $\Delta_s:=P_s$. If $k_s=1$ and $n_s\ge2$, let $\Delta_s:=Q_s$ be the cocone of a non-zero morphism $P_s\to P_s[1]$, computed in $\cD$. Assume that no $(k_s,n_s)$ equals $(1,1)$. Then $(\Delta_\bullet,P_\bullet,F_\bullet)$, with $\delta_s=\varphi_s$, is a stratifying triple in $\cD$. Its local pairs correspond to $(\Delta_s,P_s)$ under $\cT_s\simeq\thick{P_s}$. It has Hom-duality up to degree $\min_s d_s$, where
+\[d_s=\infty\ \text{ if } n_s=0,\qquad d_s=k_s-1\ \text{ if } k_s\ge2,\qquad d_s=n_s-1\ \text{ if } k_s=1.\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) Since $\cone(\varphi_s)\in\cC_{s-1}$, we have $F_s\in\cC_s$ and $\cC_s=\thick{\cC_{s-1}\cup\{F_s\}}$. Induction gives $\cC_s=\thick{F_1,\dots,F_s}$.
+
+Semi-orthogonality of the $P$'s gives $\Hom^\bullet(P_s,\cC_{s-1})=0$. So, applying $\Hom(P_s,-)$ and $\Hom(-,F_s)$ to the triangle relating $P_s$ and $F_s$ gives
+\[\End^\bullet(F_s)\cong\Hom^\bullet(P_s,F_s)\cong\End^\bullet(P_s).\]
+Finally, \cref{lem:sod}(2) gives both adjoints of $\cC_{s-1}\subset\cC_s$:
+\begin{itemize}
+\item the pair $(\thick{P_s},\cC_{s-1})$ with $\Hom^\bullet(P_s,\cC_{s-1})=0$ gives the left adjoint;
+\item the pair $(\cC_{s-1},\thick{F_s})$ with $\Hom^\bullet(\cC_{s-1},F_s)=0$ gives the right adjoint.
+\end{itemize}
+
+(2) In both cases $\Delta_s\in\thick{P_s}\subset{}^\perp\cC_{s-1}\cap\cC_s$. We check the conditions of \cref{def:triple}.
+\begin{itemize}
+\item \emph{(ST2) and (ST3)} follow from (1), the semi-orthogonality of the $F$'s (as $F_s\in\cC_s\subset\cC_{t-1}$ for $s<t$) and $\End^\bullet(P_s)\cong\kk[t]/(t^{n_s+1})$ with $k_s\ge1$.
+\item \emph{(ST4)} holds with $\Deltabar_s=P_s$: indeed $\cone(\varphi_s)\in\cC_{s-1}$, and $\Hom^\bullet(P_s,F_t)=0$ for $t<s$ because $F_t\in\cC_{s-1}$.
+\item \emph{(ST1).} For $t<s$, $\Hom^\bullet(\Delta_s,F_t)=0$ because $F_t\in\cC_{s-1}$. For $t>s$, it vanishes because $\Delta_s\in\cC_{t-1}$. For $t=s$, applying $\Hom(\Delta_s,-)$ to the triangle relating $P_s$ and $F_s$ gives $\Hom^\bullet(\Delta_s,F_s)\cong\Hom^\bullet(\Delta_s,P_s)$, which is computed in $\thick{P_s}$. By \cref{cor:P-local-pairs}, $(\Delta_s,P_s)$ is a local pair in $\thick{P_s}$ with Hom-duality up to degree $d_s$; for $n_s=0$ it is the pair $(\kk,\kk)$.
+\item \emph{(ST5)} holds for the same reason.
+\end{itemize}
+Finally, by \cref{lem:peel}(1) the stratum $\cT_s$ is identified with ${}^\perp\cC_{s-1}\cap\cC_s=\thick{P_s}$, and under this identification $j_{s!}$ is the inclusion.
+\end{proof}
+
+\begin{theorem}\label{thm:Pseq}
+Let $(P_1,\dots,P_m)$ be a full $\mathbb{P}$-sequence with a right Hom-orthogonal dual $F_\bullet$, and suppose that for every $s$ one of the following holds:
+\[n_s=0;\qquad k_s\ge3;\qquad k_s=1\text{ and }n_s\ge3.\]
+Suppose moreover that $\Hom(P_s,P_t[l])=0$ and $\Hom(F_s,F_t[l])=0$ for all $s,t$ and all $l<0$. Let $\Delta_s$ be as in \cref{lem:P-triple}, let $G$ be the iterated universal extension of $(\Delta_1,\dots,\Delta_m)$, and let $\cA$ be the heart of the t-structure of the triple $(\Delta_\bullet,P_\bullet,F_\bullet)$.
+\begin{enumerate}
+\item $\cA\simeq\modd\End(G)$ is standardly stratified with respect to $1<\dots<m$. Its standard objects are $\Delta_s$, its proper standard objects are $P_s$, and its proper costandard objects are $F_s$. We have $B_s\cong\kk$ if $n_s=0$ or $k_s\ge3$, and $B_s\cong\kk[x]/(x^2)$ if $k_s=1$. If $k_s=1$, there is an exact sequence $0\to P_s\to\Delta_s\to P_s\to0$ in $\cA$.
+\item If $n_s=0$ or $k_s\ge3$ for all $s$, then $\cA$ is a highest weight category with standard objects $P_s$ and costandard objects $F_s$.
+\item If $\cD$ is algebraic, then $\real\colon\Db(\cA)\to\cD$ is an equivalence if and only if $n_s=0$ for all $s$.
+\end{enumerate}
+The t-structure of the triple is the t-structure glued from the t-structures $t_{P_s}$ on the strata $\thick{P_s}$. By \cref{rem:tP-unique}, every t-structure glued from non-trivial t-structures on the strata is obtained from it by shifting the strata, i.e.\ by replacing $P_s$ by $P_s[p(s)]$ for some $p(s)\in\mathbb{Z}$.
+\end{theorem}
+
+\begin{proof}
+By \cref{lem:P-triple}, $(\Delta_\bullet,P_\bullet,F_\bullet)$ is a stratifying triple with Hom-duality up to degree $\min_sd_s\ge2$. Since $\Delta_s\in\Filt(P_s)$ (for $k_s=1$ this uses the defining triangle of $Q_s$), the vanishing of negative extensions among the $P_s$ implies it among the $\Delta_s$. So (NH) holds, and \cref{thm:A} applies. This gives (1), except for the statements about $P_s$, and also (3): full Hom-duality holds if and only if all $d_s=\infty$, i.e.\ all $n_s=0$.
+
+\emph{The proper standard objects.} By \cref{prop:triple-t}(3), $P_s\in\cA$. If $k_s=1$, the triangle $P_s\to\Delta_s\to P_s\to P_s[1]$ has all its vertices in $\cA$, so it gives the exact sequence in~(1). We have $[\Delta_s:L_s]=2$, since $j_s^*\Delta_s=Q_s$ has length two in $\cH_{P_s}$, and $[P_s:L_s]=1$.
+
+Let $N_0$ be the kernel of $\Delta_s\twoheadrightarrow\Deltabar(s)$. Recall that $\Deltabar(s)$ is the largest quotient of $\Delta_s$ with a single composition factor $L_s$; its other composition factors lie in $\cA_{s-1}$.
+\begin{itemize}
+\item The quotient $\Delta_s/P_s\cong P_s$ has this property, so $N_0\subset P_s$.
+\item Since $[\Delta_s:L_s]=2$ and $[\Deltabar(s):L_s]=1$, we have $[N_0:L_s]=1=[P_s:L_s]$. So $P_s/N_0$ has no composition factor $L_s$, i.e.\ $P_s/N_0\in\cA_{s-1}$.
+\item But $P_s={}^p\!j_{s!}S_s$ has no non-zero quotient in $\cA_{s-1}$ (\cref{prop:glued-heart}(2)).
+\end{itemize}
+Hence $N_0=P_s$, and $\Deltabar(s)\cong\Delta_s/P_s\cong P_s$. If $n_s=0$ or $k_s\ge3$, then $\Delta_s=P_s$ and $[P_s:L_s]=1$, so $\Deltabar(s)=\Delta(s)=P_s$.
+
+(2) follows from (1), since standardly stratified with all $B_s=\kk$ means quasi-hereditary, and then $\nabla=\nablabar$.
+
+The last statement follows from \cref{prop:triple-t}(1) and \cref{rem:tP-unique}.
+\end{proof}
+
+\begin{proposition}\label{prop:P11}
+Let $(P_1,\dots,P_m)$ be a full $\mathbb{P}$-sequence with a right Hom-orthogonal dual, and suppose $(k_s,n_s)=(1,1)$ for some $s$. Glue the t-structures $t_{P_t}$ along the admissible filtration $(\cC_t)$ of \cref{lem:P-triple}(1). If $F_s$ lies in the glued heart $\cA$, then the simple object $L_s=j_{s!*}P_s$ has no projective cover in $\cA$. In particular $\cA$ is not equivalent to $\modd\Lambda$ for any finite-dimensional algebra $\Lambda$.
+\end{proposition}
+
+\begin{proof}
+Suppose $R$ is a projective cover of $L_s$ in $\cA$, and let $\bar R$ be its largest quotient lying in $\cA_s$; then $\bar R$ is a projective cover of $L_s$ in $\cA_s$.
+\begin{itemize}
+\item For $M\in\cH_{P_s}$ we have $j_{s*}M\in\Filt(F_s)\subset\cA_s$. Hence
+\[\Ext^1_{\cH_{P_s}}(j_s^*\bar R,M)=\Hom(\bar R,j_{s*}M[1])=\Ext^1_{\cA_s}(\bar R,j_{s*}M)=0,\]
+so $j_s^*\bar R$ is projective.
+\item $j_s^*\bar R\ne0$: otherwise $\bar R\in\cA_{s-1}$, and then $\Hom(\bar R,L_s)=0$ because $L_s$ has no non-zero subobject in $\cA_{s-1}$.
+\end{itemize}
+This contradicts \cref{prop:heart-P}(2).
+\end{proof}
+
+\begin{example}[A case with $k=2$]\label{ex:k2}
+Let $\Gamma$ be the graded $\kk$-linear category (a dg category with zero differential) with two objects $1,2$ and the following morphism spaces:
+\begin{itemize}
+\item $\Gamma(1,1)=\kk$ and $\Gamma(2,2)=\kk[t]/(t^2)$ with $\deg t=2$;
+\item $\Gamma(1,2)=\kk f$ with $\deg f=0$, and $\Gamma(2,1)=0$;
+\item $t\circ f=0$.
+\end{itemize}
+Let $\cD=\operatorname{perf}(\Gamma)$, and let $P_1,P_2$ be the representable objects, so that $\Hom^\bullet(P_i,P_j)=\Gamma(i,j)$. Then $(P_1,P_2)$ is a full $\mathbb{P}$-sequence with $n_1=0$ and $P_2$ a $\Pn12$-like object.
+
+Its right Hom-orthogonal dual is $F_1=P_1$, and $F_2=\cone(P_1\xrightarrow{f}P_2)$ with $\varphi_2$ the canonical morphism. Here $\Hom^\bullet(P_1,F_2)=0$ because $\Hom^\bullet(P_1,P_2)=\kk f$. The triple $(P_\bullet,P_\bullet,F_\bullet)$ has Hom-duality only up to degree $1$, so \cref{thm:Pseq} does not apply.
+
+Nevertheless the conclusion of \cref{thm:Pseq}(2) holds. Negative extensions vanish:
+\begin{itemize}
+\item $\Hom^\bullet(P_1,P_2)=\kk f$ is concentrated in degree $0$;
+\item $\Hom^\bullet(F_1,F_2)=0$;
+\item $\Hom^l(F_2,F_1)\cong\End^{l-1}(P_1)$ is concentrated in degree $1$;
+\item $\End^\bullet(F_2)\cong\End^\bullet(P_2)$.
+\end{itemize}
+So $P_s,F_s\in\cA$ by \cref{prop:triple-t}(3). The triangle $P_1\to P_2\to F_2\to P_1[1]$ gives an exact sequence $0\to P_1\to P_2\to F_2\to0$ in $\cA$. Hence the simple objects are $L_1=P_1$ and $L_2=F_2$. Their extensions are:
+\begin{itemize}
+\item $\Ext^1_\cA(L_2,L_1)=\Hom(F_2,P_1[1])\cong\kk$;
+\item $\Ext^1_\cA(L_1,L_2)=\Hom(P_1,F_2[1])=0$;
+\item $\Ext^1_\cA(L_1,L_1)=\Ext^1_\cA(L_2,L_2)=0$.
+\end{itemize}
+Moreover $\Ext^1_\cA(P_1,-)$ and $\Ext^1_\cA(P_2,-)$ vanish on both simple objects, so $P_1,P_2$ are the indecomposable projective objects. Thus $\cA\simeq\modd\kk\vec A_2$ is highest weight, with standard objects $P_1,P_2$ and costandard objects $F_1,F_2$.
+
+This is consistent with \cref{rem:star}: here $V_1=\Ext^1_\cA(P_1,P_2)=0$, so Hom-duality in degree $2$ is not needed for the top stratum. The realisation functor is not an equivalence, since $\Hom(P_2,P_2[2])\ne0$ while $\Ext^2_{\kk\vec A_2}=0$.
+\end{example}
+
+\begin{remark}[The obstruction for $k=2$]\label{rem:obstruction}
+Suppose all strata have semisimple hearts, i.e.\ $k_s\ge2$ or $n_s=0$. In the induction step (\cref{prop:step}(2)), the only point where Hom-duality in degree $2$ is needed for an earlier stratum $t<m$ is the case $l=1$ (step (e)). There the kernel $K$ of $\Delta_m\twoheadrightarrow L_m$ lies in $\cA_{m-1}$, and one needs $\Hom(G_s,K[2])=0$.
+
+If some $k_t=2$ with $t<m$, this group can be non-zero. Whether $\Ext^1_\cA(G_s,L_m)$ vanishes then depends on the connecting map $\Hom(G_s,L_m[1])\to\Hom(G_s,K[2])$. This map is determined by higher (Massey-type) composition data, and not by the graded endomorphism algebras alone; compare the non-formality of the Koszul duals in \cref{rem:Bonfert-Koszul}.
+\end{remark}
+
+\begin{question}\label{q:k2}
+Let $(P_1,\dots,P_m)$ be a full $\mathbb{P}$-sequence with a right Hom-orthogonal dual, without negative extensions among the $P$'s and among the $F$'s, and suppose that some $k_s=2$ or some $(k_s,n_s)=(1,2)$. Is the heart of the t-structure glued from the $t_{P_s}$ Deligne finite? If so, is it standardly stratified with standard objects $\Delta_s$, as in \cref{thm:Pseq}?
+\end{question}
+
+Natural test cases come from geometry:
+\begin{itemize}
+\item the structure sheaves of hyperk\"ahler manifolds are $\Pn n2$-objects;
+\item by \cite[Thm.~B]{BC25}, as quoted in \cite{Bonf26}, all indecomposable perverse sheaves on $\mathbb{P}^n$ are $\mathbb{P}[2]$-like, and most of them are not Calabi--Yau.
+\end{itemize}
+It would be interesting to know whether such objects can be arranged into $\mathbb{P}$-sequences with right Hom-orthogonal duals satisfying the hypotheses above.
+
+% ===============================================================
+\section{Further questions}\label{sec:questions}
+% ===============================================================
+
+\begin{question}[Silting gluing]\label{q:silting}
+Can \cref{thm:B} be derived from the theory of gluing silting objects \cite{LVY14}?
+
+On the perfect part $\thick{E_1,\dots,E_m}$, only the adjoints $i^*$ and $j_!$ are available in general, and they are given by the $E_s$. On $\cD$, the adjoints $i^!$ and $j_*$ are automatic (\cref{rem:HD4}), and they are given by the $N_s$. One would like to glue silting objects on the perfect side along these ``half recollements'', glue the simple-minded objects $N_s$ on the other side, and use the Hom-duality (HD1) as the compatibility condition, in the spirit of Koenig--Yang (\cref{thm:KY}).
+\end{question}
+
+\begin{question}[Without the left Hom-orthogonal dual]
+Is there a version of \cref{thm:A,thm:B} assuming only (ST1)--(ST3) and (ST5), i.e.\ only the existence of the functors $j_{s*}$, which is automatic by \cref{lem:sod}? This would require a one-sided gluing of t-structures along semi-orthogonal decompositions (cf.\ \cite{CP10}). It would remove the only hypothesis of \cref{thm:B} that is not automatic, and might answer \cref{q:HD4}.
+\end{question}
+
+\begin{question}[Classification of glued t-structures]\label{q:classification}
+For a full $\mathbb{P}$-sequence with right Hom-orthogonal dual and all $k_s\ge1$, \cref{thm:Bonfert} implies that the t-structures on $\cD$ glued from non-trivial t-structures on the strata are parametrised by perversity functions $p\colon\{1,\dots,m\}\to\mathbb{Z}$. Which t-structures on $\cD$ are glued in this sense? For which perversities do the objects $P_s[p(s)]$ and $F_s[p(s)]$ lie in the heart, as for the middle perversity in \cite[\S5.1]{BB26}?
+\end{question}
+
+\begin{question}[Ringel duality]
+By \cite[Thm.~3.2]{BB26}, the Ringel dual of a highest weight category glued along an exceptional sequence is glued along its right Hom-orthogonal dual (Bondal's left dual). Characteristic tilting modules and Ringel duality are available for standardly and properly stratified algebras (see e.g.\ \cite{AHLU00}). Is there a ``dual'' stratifying triple, built from $(E_\bullet,\Deltabar_\bullet,N_\bullet)$ in \cref{thm:B}, whose associated heart is the Ringel dual?
+\end{question}
+
+\begin{question}[Gorenstein property]\label{q:gorenstein}
+By \cref{ex:local-alg}(3), \cref{thm:B} carries no Gorenstein information. An object-level formulation might involve a fourth sequence: the costandard objects $\nabla_s:=j_{s*}(DB_s)$, i.e.\ the injective hulls of the stratum simples, extended by $j_{s*}$. For an algebra, $\Kb(\proj\Lambda)=\thick{E_1,\dots,E_m}$, and one expects $\Kb(\operatorname{inj}\Lambda)=\thick{\nabla_1,\dots,\nabla_m}$, at least for properly stratified algebras. So Iwanaga--Gorensteinness should read
+\[\thick{E_1,\dots,E_m}=\thick{\nabla_1,\dots,\nabla_m}\qquad\text{inside }\cD.\]
+What are the conditions on the triple, and on the stratum algebras $B_s$ (presumably self-injectivity), ensuring this? How does this relate to characteristic tilting and cotilting modules?
+\end{question}
+
+% ===============================================================
+\begin{thebibliography}{BBD82}
+% ===============================================================
+
+\bibitem[AHLU00]{AHLU00}
+I.~\'Agoston, D.~Happel, E.~Luk\'acs, L.~Unger, \emph{Standardly stratified algebras and tilting}, J.~Algebra \textbf{226} (2000), 144--160.
+
+\bibitem[AI12]{AI12}
+T.~Aihara, O.~Iyama, \emph{Silting mutation in triangulated categories}, J.~Lond. Math. Soc. (2) \textbf{85} (2012), 633--668.
+
+\bibitem[AN09]{AN09}
+S.~Al-Nofayee, \emph{Simple objects in the heart of a t-structure}, J.~Pure Appl. Algebra \textbf{213} (2009), 54--59.
+
+\bibitem[BB26]{BB26}
+A.~Bodzenta, A.~Bondal, \emph{Highest weight categories via pairs of dual exceptional sequences}, arXiv:2601.22004 (2026).
+
+\bibitem[BBD82]{BBD82}
+A.~A.~Beilinson, J.~Bernstein, P.~Deligne, \emph{Faisceaux pervers}, Ast\'erisque \textbf{100} (1982).
+
+\bibitem[BC25]{BC25}
+L.~Bonfert, A.~Cipriani, \emph{Serre functor and $\mathbb{P}$-objects for perverse sheaves on $\mathbb{P}^n$}, arXiv:2506.06051 (2025).
+
+\bibitem[Bei87]{Bei87}
+A.~A.~Beilinson, \emph{On the derived category of perverse sheaves}, in: K-theory, arithmetic and geometry (Moscow, 1984--1986), Lecture Notes in Math. \textbf{1289}, Springer, 1987, 27--41.
+
+\bibitem[BK89]{BK89}
+A.~I.~Bondal, M.~M.~Kapranov, \emph{Representable functors, Serre functors, and reconstructions}, Izv. Akad. Nauk SSSR Ser. Mat. \textbf{53} (1989), 1183--1205.
+
+\bibitem[Bon89]{Bon89}
+A.~I.~Bondal, \emph{Representations of associative algebras and coherent sheaves}, Izv. Akad. Nauk SSSR Ser. Mat. \textbf{53} (1989), 25--44.
+
+\bibitem[Bon10]{Bon10}
+M.~V.~Bondarko, \emph{Weight structures vs.\ t-structures; weight filtrations, spectral sequences, and complexes (for motives and in general)}, J.~K-Theory \textbf{6} (2010), 387--504.
+
+\bibitem[Bonf26]{Bonf26}
+L.~Bonfert, \emph{Weight structures and t-structures on the triangulated category generated by a $\mathbb{P}$-object}, arXiv:2610.21859 (2026).
+
+\bibitem[CP10]{CP10}
+J.~Collins, A.~Polishchuk, \emph{Gluing stability conditions}, Adv. Theor. Math. Phys. \textbf{14} (2010), 563--607.
+
+\bibitem[CPS88]{CPS88}
+E.~Cline, B.~Parshall, L.~Scott, \emph{Finite-dimensional algebras and highest weight categories}, J.~Reine Angew. Math. \textbf{391} (1988), 85--99.
+
+\bibitem[CPS96]{CPS96}
+E.~Cline, B.~Parshall, L.~Scott, \emph{Stratifying endomorphism algebras}, Mem. Amer. Math. Soc. \textbf{124} (1996), no.~591.
+
+\bibitem[Dla96]{Dla96}
+V.~Dlab, \emph{Quasi-hereditary algebras revisited}, An. \c{S}tiin\c{t}. Univ. Ovidius Constan\c{t}a Ser. Mat. \textbf{4} (1996), 43--54.
+
+\bibitem[DR92]{DR92}
+V.~Dlab, C.~M.~Ringel, \emph{The module theoretical approach to quasi-hereditary algebras}, in: Representations of algebras and related topics (Kyoto, 1990), London Math. Soc. Lecture Note Ser. \textbf{168}, Cambridge Univ. Press, 1992, 200--224.
+
+\bibitem[ES03]{ES03}
+K.~Erdmann, C.~S\'aenz, \emph{On standardly stratified algebras}, Comm. Algebra \textbf{31} (2003), 3429--3446.
+
+\bibitem[HJY13]{HJY13}
+T.~Holm, P.~J\o rgensen, D.~Yang, \emph{Sparseness of t-structures and negative Calabi--Yau dimension in triangulated categories generated by a spherical object}, Bull. Lond. Math. Soc. \textbf{45} (2013), 120--130.
+
+\bibitem[HK19]{HK19}
+A.~Hochenegger, A.~Krug, \emph{Formality of $\mathbb{P}$-objects}, Compos. Math. \textbf{155} (2019), no.~5.
+
+\bibitem[HT06]{HT06}
+D.~Huybrechts, R.~Thomas, \emph{$\mathbb{P}$-objects and autoequivalences of derived categories}, Math. Res. Lett. \textbf{13} (2006), 87--98.
+
+\bibitem[Kal17]{Kal17}
+M.~Kalck, \emph{Derived categories of quasi-hereditary algebras and their derived composition series}, in: Representation theory---current trends and perspectives, EMS Ser. Congr. Rep., Eur. Math. Soc., 2017, 269--308.
+
+\bibitem[Kel94]{Kel94}
+B.~Keller, \emph{Deriving DG categories}, Ann. Sci. \'Ec. Norm. Sup\'er. (4) \textbf{27} (1994), 63--102.
+
+\bibitem[KN13]{KN13}
+B.~Keller, P.~Nicol\'as, \emph{Weight structures and simple dg modules for positive dg algebras}, Int. Math. Res. Not. IMRN \textbf{2013}, no.~5.
+
+\bibitem[Kru18]{Kru18}
+A.~Krug, \emph{Varieties with $\mathbb{P}$-units}, Trans. Amer. Math. Soc. \textbf{370} (2018), no.~11.
+
+\bibitem[KY14]{KY14}
+S.~Koenig, D.~Yang, \emph{Silting objects, simple-minded collections, t-structures and co-t-structures for finite-dimensional algebras}, Doc. Math. \textbf{19} (2014), 403--438.
+
+\bibitem[Let24]{Let24}
+J.~C.~Letz, \emph{Realization functors in algebraic triangulated categories}, arXiv:2412.07455 (2024).
+
+\bibitem[LVY14]{LVY14}
+Q.~Liu, J.~Vit\'oria, D.~Yang, \emph{Gluing silting objects}, Nagoya Math. J. \textbf{216} (2014), 117--151.
+
+\bibitem[Maz04]{Maz04}
+V.~Mazorchuk, \emph{On finitistic dimension of stratified algebras}, Algebra Discrete Math. (2004), no.~3, 77--88.
+
+\bibitem[MMS04]{MMS04}
+E.~N.~Marcos, O.~Mendoza, C.~S\'aenz, \emph{Stratifying systems via relative simple modules}, J.~Algebra \textbf{280} (2004), 472--487.
+
+\bibitem[Pau08]{Pau08}
+D.~Pauksztello, \emph{Compact corigid objects in triangulated categories and co-t-structures}, Cent. Eur. J. Math. \textbf{6} (2008), 25--42.
+
+\bibitem[ST01]{ST01}
+P.~Seidel, R.~Thomas, \emph{Braid group actions on derived categories of coherent sheaves}, Duke Math. J. \textbf{108} (2001), 37--108.
+
+\end{thebibliography}
+
+\end{document}

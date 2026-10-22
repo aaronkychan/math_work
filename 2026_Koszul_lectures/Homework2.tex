@@ -1,0 +1,258 @@
+\documentclass[11pt,a4paper]{exam}
+\noprintanswers
+%\printanswers
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=2cm,includeheadfoot,headheight=15pt,headsep=18pt]{geometry}
+\usepackage{needspace}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\CourseTitle}{Topics in Math. Sci. VII 2026}
+\newcommand{\AssignmentNumber}{2}
+\newcommand{\Deadline}{to be announced}
+
+\pagestyle{headandfoot}
+\header{}{\small\CourseTitle}
+       {\small Assignment \AssignmentNumber}
+\headrule
+\footer{}{\small Submit via email.  Deadline: \Deadline}{\small\thepage}
+
+\newcommand{\kk}{\Bbbk}
+\newcommand{\bbD}{\mathbb D}
+\newcommand{\grstar}{(*)}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\rad}{rad}
+\newcommand{\SymAlg}{\mathsf{S}}
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\id}{\mathrm{id}}
+
+\qformat{\textbf{Exercise \thequestion.\ \thequestiontitle}\hfill}
+\renewcommand{\questionshook}{%
+  \setlength{\leftmargin}{0pt}%
+  \setlength{\labelwidth}{-\labelsep}%
+  \setlength{\itemsep}{13pt}%
+}
+\renewcommand{\thepartno}{\arabic{partno}}
+\renewcommand{\partlabel}{(\thepartno)}
+\renewcommand{\partshook}{\setlength{\itemsep}{4pt}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlength{\emergencystretch}{1em}
+\raggedbottom
+
+\newcommand{\comm}[1]{}
+
+
+\begin{document}
+
+Complete at least 2 exercises.
+
+Throughout, $\kk$ is a field, and all modules are right modules unless a
+left action is specified.
+
+
+\begin{questions}
+
+\titledquestion{}
+\begin{parts}
+\part Let $S=\bigoplus_{i=1}^4\kk e_i$ be a semisimple algebra with coordinate idempotent $e_i$ for $1\le i\le 4$ and let $V=\kk a\oplus\kk b\oplus\kk c\oplus\kk d$ be the $S$-bimodule with
+\[
+  a\in e_1Ve_2,\qquad b\in e_2Ve_4,\qquad c\in e_1Ve_3,\qquad d\in e_3Ve_4,
+\]
+and $e_iVe_j=0$ for all other $(i,j)$. For $\lambda\in\kk$ put
+\[
+  A_\lambda=T_S(V)/(ab-\lambda cd).
+\]
+\begin{subparts}
+\subpart Find $R^\perp$ and a presentation of $A_\lambda^!$, for every $\lambda\in\kk$.
+\begin{solution}
+$D(V)$ has the dual basis $a^*\in e_2D(V)e_1$, $b^*\in e_4D(V)e_2$, $c^*\in e_3D(V)e_1$, $d^*\in e_4D(V)e_3$, and the composable words of length $2$ are $b^*a^*$, $d^*c^*$.
+Evaluating by $(\lambda\otimes\mu)(v\otimes w)=\sum_i\mu(ve_i)\,\lambda(e_iw)$: $(b^*\otimes a^*)(a\otimes b)=a^*(a)\,b^*(b)=1$ and it vanishes on $c\otimes d$; $(d^*\otimes c^*)(c\otimes d)=1$ and it vanishes on $a\otimes b$.
+So
+\[
+  (\mu b^*a^*+\nu d^*c^*)(ab-\lambda cd)=\mu-\lambda\nu,
+\]
+giving $R^\perp=\kk(\lambda b^*a^*+d^*c^*)$ and $A_\lambda^!=T_S(D(V))/(\lambda b^*a^*+d^*c^*)$.
+\end{solution}
+\subpart Dualise once more: compute $(A_\lambda^!)^!$ and recover the relation $ab-\lambda cd$.
+\begin{solution}
+By Lecture~3, $(A_\lambda^!)^!=T_S(D(D(V)))/\bigl((R^\perp)^\perp\bigr)$, and $\mathrm{ev}_V:V\xrightarrow{\sim}D(D(V))$ identifies the generators with $V$; under this identification
+\[
+  (R^\perp)^\perp=\{u\in V\otimes_SV\mid F(u)=0\ \ \forall F\in R^\perp\}.
+\]
+Now $V\otimes_SV$ has basis $ab,cd$, and by (i)
+\[
+  (\lambda b^*a^*+d^*c^*)(\alpha\,ab+\beta\,cd)=\lambda\alpha+\beta,
+\]
+so $(R^\perp)^\perp=\{\alpha\,ab+\beta\,cd\mid\lambda\alpha+\beta=0\}=\kk(ab-\lambda cd)$, i.e.\ $(A_\lambda^!)^!=T_S(V)/(ab-\lambda cd)=A_\lambda$.
+\end{solution}
+\subpart Prove that $A_\lambda\cong A_\mu$ as graded algebras if and only if $\lambda,\mu$ are either both zero or both non-zero.
+
+\emph{Hint.} A graded isomorphism over $S$ sends each of $a,b,c,d$ to a scalar multiple of itself.
+\begin{solution}
+A graded isomorphism $\varphi:A_\lambda\to A_\mu$ over $S$ fixes each $e_i$, so $\varphi_1$ preserves each $e_iVe_j$ (all at most one-dimensional):
+\[
+  \varphi(a)=\alpha a,\quad\varphi(b)=\beta b,\quad\varphi(c)=\gamma c,\quad\varphi(d)=\delta d,\qquad\alpha,\beta,\gamma,\delta\in\kk^\times.
+\]
+The induced map on $T_S(V)$ sends $ab-\lambda cd$ to $\alpha\beta\,ab-\lambda\gamma\delta\,cd$, which must lie in $\kk(ab-\mu cd)$:
+\[
+  \mu\,\alpha\beta=\lambda\,\gamma\delta.
+\]
+Hence $\lambda=0\Leftrightarrow\mu=0$. Conversely if $\lambda,\mu\neq0$ take $\alpha=\beta=\gamma=1$, $\delta=\mu/\lambda$ (the inverse is of the same form); for $\lambda=\mu=0$ take the identity.
+\end{solution}
+\end{subparts}
+
+\part Let $S=\bigoplus_{i=1}^r\kk e_i$, let $V$ be a finite-dimensional $S$-bimodule in degree $1$, and put
+\[
+  C_{ij}=\dim_\kk e_iVe_j,\qquad A=T_S(V)/(V\otimes_SV)=S\oplus V.
+\]
+\begin{subparts}
+\subpart Prove that
+\[
+  A^!=T_S(D(V)),\qquad h_A(t)=I+tC,\qquad h_{A^!}(t)=(I-tC^{\mathsf T})^{-1}.
+\]
+\begin{solution}
+The relation space is $R=V\otimes_SV$; since $D(V)\otimes_SD(V)\cong D(V\otimes_SV)$ (Lecture~3), the annihilator of $R=V\otimes_SV$ is $R^\perp=0$ and $A^!=T_S(D(V))$.
+$\dim e_iA_0e_j=\delta_{ij}$ and $\dim e_iA_1e_j=C_{ij}$ give $h_A=I+tC$. For $D(V)$, $\dim e_iD(V)e_j=\dim e_jVe_i$, so its matrix is $C^{\mathsf T}$ and $h_{A^!}=(I-tC^{\mathsf T})^{-1}$.
+\end{solution}
+\subpart Deduce that $h_A(t)\,h_{A^!}(-t)^{\mathsf T}=I$.
+\begin{solution}
+$h_{A^!}(-t)^{\mathsf T}=\bigl((I+tC^{\mathsf T})^{-1}\bigr)^{\mathsf T}=(I+tC)^{-1}$, so $h_A(t)h_{A^!}(-t)^{\mathsf T}=I$.
+\end{solution}
+\end{subparts}
+\end{parts}
+
+\newpage
+\titledquestion{}
+\begin{parts}
+\part Let $A=\kk A_4/(e_{13})$ with the quotient grading, and put $a=e_{12}$, $b=e_{23}$, $c=e_{34}$.
+\begin{subparts}
+\subpart Find $S$, $V$ and $R\subset V\otimes_SV$ with $A\cong T_S(V)/(R)$, a basis of $A$, and $h_A(t)$.
+\begin{solution}
+\[
+  S=\bigoplus_{i=1}^4\kk e_{ii},\qquad V=\kk a\oplus\kk b\oplus\kk c,\qquad R=\kk\,(a\otimes b).
+\]
+Indeed $T_S(V)\cong\kk A_4$ (Lecture~2) with $a\otimes b\mapsto e_{13}$ and $b\otimes c\mapsto e_{24}$. The ideal $(e_{13})$ is spanned by $e_{13},e_{14}$ ($e_{14}=e_{13}e_{34}$), so a basis of $A$ is
+\[
+  e_{11},\ e_{22},\ e_{33},\ e_{44},\ a,\ b,\ c,\ bc\ (=e_{24}),\qquad h_A(t)=I+t(E_{12}+E_{23}+E_{34})+t^2E_{24}.
+\]
+\end{solution}
+\subpart Compute $R^\perp$, a presentation and a basis of $A^!$, and $h_{A^!}(t)$. Verify
+\[
+  h_A(t)\,h_{A^!}(-t)^{\mathsf T}=I_4,
+\]
+and check that $(A^!)^!\cong A$.
+\begin{solution}
+$D(V)$ has the dual basis $a^*\in e_{22}D(V)e_{11}$, $b^*\in e_{33}D(V)e_{22}$, $c^*\in e_{44}D(V)e_{33}$; the composable words of length $2$ are $b^*a^*$ and $c^*b^*$.
+With $(\lambda\otimes\mu)(v\otimes w)=\sum_i\mu(ve_i)\,\lambda(e_iw)$,
+\[
+  (b^*\otimes a^*)(a\otimes b)=1,\qquad(c^*\otimes b^*)(a\otimes b)=0,
+\]
+so $R^\perp=\kk\,c^*b^*$ and $A^!=T_S(D(V))/(c^*b^*)$.
+A word of length $3$ would be $c^*b^*a^*$, which contains $c^*b^*$; hence a basis of $A^!$ is $e_{ii},\ a^*,\ b^*,\ c^*,\ b^*a^*$, and
+\[
+  h_{A^!}(t)=I+t(E_{21}+E_{32}+E_{43})+t^2E_{31}.
+\]
+With $N=E_{12}+E_{23}+E_{34}$ we have $N^2=E_{13}+E_{24}$ and $NE_{13}=E_{24}N=E_{24}E_{13}=0$, so
+\[
+  h_A(t)h_{A^!}(-t)^{\mathsf T}=(I+tN+t^2E_{24})(I-tN+t^2E_{13})=I+t^2\bigl(E_{13}-N^2+E_{24}\bigr)=I.
+\]
+Finally, $(R^\perp)^\perp=\{u\in V\otimes_SV\mid(c^*\otimes b^*)(u)=0\}$ and $(c^*\otimes b^*)(\alpha\,a\otimes b+\beta\,b\otimes c)=\beta$, so $(R^\perp)^\perp=\kk\,(a\otimes b)=R$.
+\end{solution}
+\end{subparts}
+
+\part Let
+\[
+  B=T_\kk(\kk x\oplus\kk y)/(x^2),\qquad\deg x=\deg y=1,\qquad a_d:=\dim_\kk B_d.
+\]
+\begin{subparts}
+\subpart Find a basis of $B_d$ and compute $a_0,\dots,a_6$.
+\begin{solution}
+A basis of $B_d$ is the set of words in $x,y$ of length $d$ containing no $xx$ (the ideal $(x^2)$ is spanned by words containing $xx$).
+\[
+  (a_0,\dots,a_6)=(1,2,3,5,8,13,21).
+\]
+\end{solution}
+\subpart Prove that
+\[
+  a_d=a_{d-1}+a_{d-2}\quad(d\geq2),\qquad h_B(t)=\frac{1+t}{1-t-t^2}.
+\]
+\begin{solution}
+For $d\geq2$: words starting with $y$ are $y\cdot w$ with $w$ admissible of length $d-1$ ($a_{d-1}$ choices); words starting with $x$ must continue with $y$, and are $xy\cdot w$ with $w$ admissible of length $d-2$ ($a_{d-2}$).
+So $(1-t-t^2)h_B=a_0+(a_1-a_0)t=1+t$.
+\end{solution}
+\subpart Compute $B^!$ (with $X=x^*$, $Y=y^*\in D(V)$), find a homogeneous basis of $B^!$ and $h_{B^!}(t)$, and verify
+$h_B(t)\,h_{B^!}(-t)=1$.
+\begin{solution}
+For $F=\alpha XX+\beta XY+\gamma YX+\delta YY$ one has $F(x\otimes x)=\alpha$, so $R^\perp=\operatorname{span}\{XY,YX,YY\}$ and $B^!=\kk\langle X,Y\rangle/(XY,YX,Y^2)$.
+Any word of length $\geq2$ containing $Y$ contains one of $XY,YX,YY$; so $\{X^n\mid n\geq0\}\cup\{Y\}$ spans, and it is a basis because the ideal is spanned by words containing $XY$, $YX$ or $YY$, none of which occurs in $X^n$ or $Y$.
+Thus $h_{B^!}(t)=\frac1{1-t}+t$ and
+\[
+  h_B(t)h_{B^!}(-t)=\frac{1+t}{1-t-t^2}\Bigl(\frac1{1+t}-t\Bigr)=\frac{1+t}{1-t-t^2}\cdot\frac{1-t-t^2}{1+t}=1.
+\]
+\end{solution}
+\end{subparts}
+\end{parts}
+
+\newpage
+\titledquestion{}
+\begin{parts}
+\part For $q\in\kk$ let
+\[
+  C_q=\kk\langle x,y\rangle/(x^2,\ y^2,\ xy+qyx),\qquad\deg x=\deg y=1.
+\]
+\begin{subparts}
+\subpart Find a homogeneous basis of $C_q$ and compute all products of two basis elements, treating $q=0$ and $q\neq0$. Justify linear independence of your basis.
+\begin{solution}
+The degree-$2$ relation space $R=\operatorname{span}\{x\otimes x,\ y\otimes y,\ x\otimes y+qy\otimes x\}$ is $3$-dimensional (the three tensors involve different basis tensors), so $\dim(C_q)_2=4-3=1$.
+Modulo $R$: $xx\equiv yy\equiv0$ and $xy\equiv-q\,yx$, so $(C_q)_2$ is spanned by the class of $yx$, which is therefore non-zero. In degree $3$, a word contains $xx$ or $yy$ or equals $xyx$ or $yxy$; and
+$xyx\equiv-qyxx\equiv0$, $yxy\equiv-qyyx\equiv0$; hence $(C_q)_d=0$ for $d\geq3$. Thus $\{1,x,y,yx\}$ is a basis (dimensions $1,2,1$), and
+$h_{C_q}(t)=1+2t+t^2$ for every $q$. Products: $x\cdot x=y\cdot y=0$, $x\cdot y=-q\,yx$, $y\cdot x=yx$, and every product with $yx$ in positive degree is $0$ (degree $\geq3$).
+\end{solution}
+\subpart For $u=\alpha x+\beta y$ compute $u^2$, and determine
+\[
+  \{(\alpha,\beta)\in\kk^2\mid u^2=0\}\qquad\text{for each }q,
+\]
+and the $q$ for which every $u\in(C_q)_1$ satisfies $u^2=0$.
+\begin{solution}
+$u^2=\alpha^2x^2+\alpha\beta(xy+yx)+\beta^2y^2=\alpha\beta(1-q)\,yx$, and $yx\neq0$. So $u^2=0$ iff $\alpha\beta(1-q)=0$: for $q\neq1$, iff $\alpha=0$ or $\beta=0$
+(the two lines $\kk x,\kk y$); for $q=1$, for all $(\alpha,\beta)$. Every element squares to zero iff $q=1$.
+\end{solution}
+\subpart Prove that
+\[
+  C_q\cong C_{q'}\ \text{ as graded algebras}\quad\Longleftrightarrow\quad q=q'\ \text{ or }\ qq'=1.
+\]
+Deduce that $C_1\not\cong C_{-1}$ if $\operatorname{char}\kk\neq2$ (even ungraded), and say what changes if $\operatorname{char}\kk=2$.
+
+\emph{Hint.} A graded isomorphism is determined by a linear bijection of the degree-$1$ parts, and preserves $\{\kk u\mid u^2=0\}$.
+\begin{solution}
+($\Leftarrow$) If $qq'=1$ then $q\neq0$ and $x\mapsto y$, $y\mapsto x$ sends $x^2,y^2$ to $y^2,x^2$ and $xy+qyx\mapsto yx+qxy=q(xy+q'yx)$, so it induces a graded isomorphism $C_q\to C_{q'}$ (inverse of the same form).
+($\Rightarrow$) Let $\varphi:C_q\to C_{q'}$ be a graded isomorphism; $\varphi$ is determined by the bijection $\varphi_1$ on degree $1$ and preserves $u^2=0$.
+If $q=1$, every $u$ squares to zero in $C_1$, hence in $C_{q'}$, so $q'=1$ by (ii); symmetrically $q'=1\Rightarrow q=1$. If $q,q'\neq1$, then $\varphi_1$ permutes the two lines $\kk x,\kk y$:
+either $\varphi(x)=\lambda x$, $\varphi(y)=\mu y$, and $0=\varphi(xy+qyx)=\lambda\mu(q-q')yx$ gives $q=q'$; or $\varphi(x)=\lambda y$, $\varphi(y)=\mu x$, and
+$0=\lambda\mu(yx+qxy)=\lambda\mu(1-qq')yx$ gives $qq'=1$ (here $\lambda\mu\neq0$ and $yx\neq0$).
+Now if $\operatorname{char}\kk\neq2$, then $1\neq-1$ and $1\cdot(-1)\neq1$, so $C_1\not\cong C_{-1}$ as graded algebras; even ungraded, $C_{-1}$ is commutative ($xy=yx$) whereas $C_1$ is not ($xy=-yx\neq yx$ as $2yx\neq0$).
+In characteristic $2$, $1=-1$, so $C_1=C_{-1}$.
+\end{solution}
+\subpart Compute a quadratic presentation of $C_q^!$ (with $X=x^*$, $Y=y^*\in D(V)$), and $h_{C_q^!}(t)$. Verify
+ that $h_{C_q}(t)\,h_{C_q^!}(-t)=1$,
+and compare $C_0^!$ with $C_1^!$.
+\begin{solution}
+For $S=\kk$, $(\lambda\otimes\mu)(v\otimes w)=\mu(v)\lambda(w)$. For $F=\alpha X\otimes X+\beta X\otimes Y+\gamma Y\otimes X+\delta Y\otimes Y$,
+\[
+  F(x\otimes x)=\alpha,\qquad F(y\otimes y)=\delta,\qquad F(x\otimes y+q\,y\otimes x)=\gamma+q\beta.
+\]
+So $R^\perp=\kk(X\otimes Y-qY\otimes X)$ and $C_q^!=\kk\langle X,Y\rangle/(XY-qYX)$. Using $XY=qYX$, every word is a multiple of $Y^aX^b$, so these span; they are independent:
+for $q=0$ the relation is monomial and $\{Y^aX^b\}$ is the set of words avoiding $XY$; for $q\neq0$ let $X$ act on $\kk[s,t]$ by multiplication by $s$ and $Y$ by $(Yf)(s,t)=t\,f(q^{-1}s,t)$; then $XY=qYX$ and $Y^aX^b\cdot1=q^{-ab}s^bt^a$, which are independent.
+Hence $h_{C_q^!}=\sum_d(d+1)t^d=(1-t)^{-2}$ and $h_{C_q}(t)h_{C_q^!}(-t)=(1+t)^2(1+t)^{-2}=1$.
+$C_1^!=\kk[X,Y]$ is commutative while in $C_0^!=\kk\langle X,Y\rangle/(XY)$ one has $XY=0\neq YX$: same Hilbert series, non-isomorphic algebras.
+\end{solution}
+\end{subparts}
+\end{parts}
+
+\end{questions}
+
+\end{document}
