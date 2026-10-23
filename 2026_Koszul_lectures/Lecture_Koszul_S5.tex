@@ -1,129 +1,349 @@
 % !TEX root = Lecture_Koszul.tex
 \clearpage
-\section{Koszul complex and Koszul algebras}\label{sec:koszul-complex}
+\section{Ext and Tor}\label{sec:ext-tor}
 
-\subsection{The Koszul complex of a polynomial algebra}
+The functor $\Hom_A(-,N)$ is left exact but in general not exact (Lemma~\ref{lem:Hom-left-exact} and Proposition~\ref{prop:projective-characterisations}).
+The groups $\Ext_A^h(M,N)$ measure this failure, one homological degree $h$ at a time.
+They are computed by applying $\Hom_A(-,N)$ to a projective resolution of $M$, so the resolutions of Section~\ref{sec:minimal-resolutions} are the input.
+We treat $\Ext$ in detail; $\Tor$ is obtained in the same way from $-\otimes_AN$, and we only record what we need.
 
-Let $V$ be an $n$-dimensional $\Bbbk$-vector space, choose a basis $x_1,\ldots,x_n$, and let $A=\SymAlg(V)=\Bbbk[x_1,\ldots,x_n]$, with each $x_j$ in degree $1$.
-Let $\pi:A\to\Bbbk$ be projection onto degree $0$, so $\Bbbk=A/A_+$.
-\phantomsection\label{not:koszul-terms}
-For $0\leq i\leq n$, put
+\subsection{Ext via projective resolutions}
+
+All modules in this subsection are right $A$-modules over an arbitrary algebra $A$, except where a left module is specified.
+
+\begin{definition}\label{def:cochain-complex}
+A \defn{cochain complex} $C^\bullet$ of vector spaces is a sequence
 \[
-K_i:=\bigwedge^i V\otimes_\Bbbk A(-i),
-\qquad K_0=A.
+\cdots\longrightarrow C^{h-1}\xrightarrow{\delta^{h-1}}C^h
+\xrightarrow{\delta^h}C^{h+1}\longrightarrow\cdots,
+\qquad\delta^h\delta^{h-1}=0\quad\text{for all }h\in\Z.
 \]
-The right $A$-action is on the second factor.
-The factor $\bigwedge^iV$ is placed in grading degree $0$, so the generators of $K_i$ have grading degree $i$.
+Its \defn{cohomology} in degree $h$ is $H^h(C^\bullet):=\Ker\delta^h/\Im\delta^{h-1}$.
+\end{definition}
 
-\begin{definition}\label{def:koszul-complex}
-For $1\leq i\leq n$, define the \defn{Koszul differential}
-\begin{equation}\label{eq:koszul-differential}
-\begin{aligned}
-d_i:K_i&\longrightarrow K_{i-1},\\
-(v_1\wedge\cdots\wedge v_i)\otimes a
-&\longmapsto
-\sum_{r=1}^i(-1)^{r-1}
-(v_1\wedge\cdots\wedge\widehat{v_r}\wedge\cdots\wedge v_i)
-\otimes v_ra .
-\end{aligned}
+Let $p_0:P_0\to M$ and $d_h:P_h\to P_{h-1}$ be a projective resolution $P_\bullet\to M$ (Definition~\ref{def:projective-resolution}), and let $N$ be a right $A$-module.
+Postcomposition with the differentials gives the cochain complex $\Hom_A(P_\bullet,N)$, concentrated in degrees $h\geq0$:
+\begin{equation}\label{eq:hom-complex}
+\Hom_A(P_0,N)\xrightarrow{\delta^0}\Hom_A(P_1,N)\xrightarrow{\delta^1}\Hom_A(P_2,N)\longrightarrow\cdots,
+\qquad\delta^h(\varphi)=\varphi\circ d_{h+1}.
 \end{equation}
-The formula is multilinear and alternating in $v_1,\ldots,v_i$, so it defines a map on $\bigwedge^iV$.
-The sequence $K_\bullet\to\Bbbk$ consists of these maps followed by $\pi:K_0=A\to\Bbbk$.
+Indeed $\delta^{h+1}\delta^h(\varphi)=\varphi\, d_{h+1}d_{h+2}=0$.
+The module $M$ does not appear in this complex.
+
+\begin{definition}\label{def:ext}
+For right $A$-modules $M,N$ and a projective resolution $P_\bullet\to M$, put
+\[
+\Ext_A^h(M,N):=H^h\bigl(\Hom_A(P_\bullet,N)\bigr)\qquad\text{for all }h\geq0.
+\]
 \end{definition}
 
-\begin{proposition}\label{prop:koszul-complex-resolution}
-The sequence
+This depends only on $M$ and $N$, as the next lemma shows.
+It compares a projective resolution of $M$ with an arbitrary resolution of $M'$, which is more than we need now but costs nothing.
+
+\begin{lemma}[Comparison]\label{lem:comparison}
+Let $P_\bullet\to M$ be a projective resolution with differentials $d_h$ and augmentation $p_0$.
+Let $\cdots\to Q_1\xrightarrow{d'_1}Q_0\xrightarrow{q_0}M'\to0$ be an exact sequence of $A$-modules, and let $f:M\to M'$ be $A$-linear.
+\begin{enumerate}
+\item There are $A$-linear maps $f_h:P_h\to Q_h$ for $h\geq0$ with
 \[
-0\longrightarrow K_n\xrightarrow{d_n}\cdots\xrightarrow{d_2}K_1
-\xrightarrow{d_1}K_0\xrightarrow{\pi}\Bbbk\longrightarrow0
+q_0f_0=fp_0,\qquad d'_hf_h=f_{h-1}d_h\quad\text{for all }h\geq1.
 \]
-is an exact minimal graded free resolution of $\Bbbk$ over $A$.
+\item If $(f'_h)_{h\geq0}$ is another such family, there are $A$-linear maps $s_h:P_h\to Q_{h+1}$ for $h\geq0$ with
+\[
+f_0-f'_0=d'_1s_0,\qquad f_h-f'_h=d'_{h+1}s_h+s_{h-1}d_h\quad\text{for all }h\geq1.
+\]
+\end{enumerate}
+\end{lemma}
+
+We say that $(f_h)_{h\geq0}$ \defn{lifts} $f$, and that two lifts are \defn{homotopic} when maps $s_h$ as in (2) exist.
+For $M=M'$, $Q_\bullet=P_\bullet$ and $f=\id_M$ this recovers the map of resolutions in Theorem~\ref{thm:ordinary-minimal-resolutions}.
+
+\begin{supplementary}
+\begin{proof}
+(1) Since $P_0$ is projective and $q_0$ is surjective, there is $f_0$ with $q_0f_0=fp_0$.
+Suppose $f_0,\ldots,f_{h-1}$ are constructed, $h\geq1$, and consider $f_{h-1}d_h:P_h\to Q_{h-1}$.
+For $h=1$, we have $q_0f_0d_1=fp_0d_1=0$, so $f_0d_1$ has image in $\Ker q_0=\Im d'_1$.
+For $h\geq2$, $d'_{h-1}f_{h-1}d_h=f_{h-2}d_{h-1}d_h=0$, so $f_{h-1}d_h$ has image in $\Ker d'_{h-1}=\Im d'_h$.
+Since $P_h$ is projective and $d'_h:Q_h\to\Im d'_h$ is surjective, there is $f_h:P_h\to Q_h$ with $d'_hf_h=f_{h-1}d_h$.
+
+(2) Put $g_h=f_h-f'_h$, so $q_0g_0=0$ and $d'_hg_h=g_{h-1}d_h$ for $h\geq1$.
+The image of $g_0$ lies in $\Ker q_0=\Im d'_1$, so projectivity of $P_0$ gives $s_0$ with $d'_1s_0=g_0$.
+Let $h\geq1$ and suppose $s_0,\ldots,s_{h-1}$ are constructed.
+Then
+\[
+d'_h(g_h-s_{h-1}d_h)=g_{h-1}d_h-(g_{h-1}-s_{h-2}d_{h-1})d_h=0,
+\]
+where $s_{-1}:=0$ and $d_{h-1}d_h=0$.
+Thus $g_h-s_{h-1}d_h$ has image in $\Ker d'_h=\Im d'_{h+1}$, and projectivity of $P_h$ gives $s_h$ with $d'_{h+1}s_h=g_h-s_{h-1}d_h$.
+\end{proof}
+\end{supplementary}
+
+\begin{proposition}\label{prop:ext-well-defined}
+Let $P_\bullet\to M$ and $Q_\bullet\to M'$ be projective resolutions, $f:M\to M'$ be $A$-linear, $(f_h)$ a lift of $f$, and $N$ a module.
+\begin{enumerate}
+\item The map $[\varphi]\mapsto[\varphi f_h]$ is a well-defined linear map $f^*:H^h(\Hom_A(Q_\bullet,N))\to H^h(\Hom_A(P_\bullet,N))$ that does not depend on the choice of lift.
+\item If $g:M'\to M''$ is $A$-linear and $R_\bullet\to M''$ is a projective resolution, then $(gf)^*=f^*g^*$; also $(\id_M)^*=\id$.
+\end{enumerate}
+In particular, up to canonical isomorphism $\Ext_A^h(M,N)$ does not depend on the projective resolution of $M$.
+It is contravariant in $M$ through $f^*$.
+It is covariant in $N$: an $A$-linear map $\psi:N\to N'$ gives $\psi_*[\varphi]=[\psi\varphi]$.
 \end{proposition}
 
 \begin{proof}
-Each $d_i$ preserves degree and is right $A$-linear.
-For $i\geq2$, compute $d_{i-1}d_i$ on a basis wedge.
-Every term is indexed by two distinct positions $r<s$ deleted from that wedge.
-Deleting position $r$ and then $s$ gives coefficient $(-1)^{r+s-3}x_{j_s}x_{j_r}$; deleting $s$ and then $r$ gives coefficient $(-1)^{r+s-2}x_{j_r}x_{j_s}$.
-Since $x_{j_s}x_{j_r}=x_{j_r}x_{j_s}$, these two terms sum to zero. Hence $d_{i-1}d_i=0$; also $\pi d_1=0$ because every term of $d_1$ is divisible by a variable.
-
-To prove exactness, give $A$ and $\bigwedge V$ the multigrading with $\deg x_j$ equal to the $j$th standard basis vector.
-For $\alpha\in\mathbb Z_{\geq0}^n$, let $\operatorname{supp}(\alpha)=\{j\mid\alpha_j>0\}$.
-The degree $\alpha$ part of $K_i$ has basis
+(1) Let $\varphi:Q_h\to N$ be a cocycle, so $\varphi d'_{h+1}=0$.
+Then $\varphi f_hd_{h+1}=\varphi d'_{h+1}f_{h+1}=0$, so $\varphi f_h$ is a cocycle.
+If $\varphi=\psi d'_h$ is a coboundary, then $\varphi f_h=\psi f_{h-1}d_h$ is a coboundary.
+For another lift $(f'_h)$ with homotopy $(s_h)$ as in Lemma~\ref{lem:comparison}(2),
 \[
-b_J:=(x_{j_1}\wedge\cdots\wedge x_{j_i})\otimes x^{\alpha-\mathbf1_J},
-\qquad
-J=\{j_1<\cdots<j_i\}\subseteq\operatorname{supp}(\alpha),
+\varphi(f_h-f'_h)=\varphi d'_{h+1}s_h+\varphi s_{h-1}d_h=(\varphi s_{h-1})d_h,
 \]
-where $\mathbf1_J$ has entry $1$ at indices in $J$ and $0$ elsewhere.
-The differential is $d_i(b_J)=\sum_{r=1}^i(-1)^{r-1}b_{J\setminus\{j_r\}}$.
-
-If $\alpha\neq0$, let $q$ be the least index in $\operatorname{supp}(\alpha)$.
-For each $i\geq0$, define $h_{\alpha,i}:K_{i,\alpha}\to K_{i+1,\alpha}$ on basis vectors by
-\[
-h_{\alpha,i}(b_J)=
-\begin{cases}
-b_{\{q\}\cup J},&q\notin J,\\
-0,&q\in J,
-\end{cases}
-\]
-inserting $q$ first in the ordered wedge.
-For $q\notin J$ and $i\geq1$, direct substitution gives
-\[
-\begin{aligned}
-d_{i+1}h_{\alpha,i}(b_J)
-&=b_J-\sum_{r=1}^i(-1)^{r-1}b_{\{q\}\cup(J\setminus\{j_r\})},\\
-h_{\alpha,i-1}d_i(b_J)
-&=\sum_{r=1}^i(-1)^{r-1}b_{\{q\}\cup(J\setminus\{j_r\})}.
-\end{aligned}
-\]
-For $i=0$, $J=\varnothing$ and $d_1h_{\alpha,0}(b_\varnothing)=b_\varnothing$.
-For $q\in J$, the term of $d_i(b_J)$ deleting $q$ is the only term on which $h_{\alpha,i-1}$ is nonzero, and it gives $h_{\alpha,i-1}d_i(b_J)=b_J$ while $d_{i+1}h_{\alpha,i}(b_J)=0$.
-Thus $d_{i+1}h_{\alpha,i}+h_{\alpha,i-1}d_i=\id_{K_{i,\alpha}}$ for every $i\geq1$ in positive multidegree; the case $i=0$ was checked separately.
-All positive multidegrees are therefore exact.
-In multidegree $0$, only $K_0\cong\Bbbk$ is nonzero and $\pi$ is the identity onto $\Bbbk$.
-This proves exactness of the displayed sequence.
-
-Finally, each $K_i$ is a finite direct sum of copies of $A(-i)$, and \eqref{eq:koszul-differential} has image in $K_{i-1}A_+$.
-Exactness gives $\Ker d_i=\Im d_{i+1}\subseteq K_iA_+$ for $i<n$, and $\Ker d_n=0$.
-Also, $\Ker\pi=AA_+$.
-Thus each map from $K_i$ onto the preceding kernel has kernel contained in $K_iA_+$, so it is a projective cover by Definition~\ref{def:graded-projective-cover}.
-The resolution is therefore minimal.
+a coboundary; for $h=0$ the same computation gives $\varphi d'_1s_0=0$.
+(2) If $(f_h)$ lifts $f$ and $(g_h)$ lifts $g$, then $(g_hf_h)$ lifts $gf$, and $(\id_{P_h})$ lifts $\id_M$; use (1).
+For two resolutions $P_\bullet,P'_\bullet$ of $M$, the lifts of $\id_M$ in each direction give maps $\id^*$ that are inverse to each other by (2).
+Finally $\psi\varphi$ is a cocycle (coboundary) if $\varphi$ is, and $\psi_*$ is compatible with $f^*$.
 \end{proof}
 
-\subsection{Koszul algebras}
-
-\begin{definition}\label{def:linear-resolution}
-A minimal graded projective resolution $P_\bullet\to M$ is \defn{linear} if $P_i/P_iA_+$ is concentrated in degree $i$ for every $i\geq0$.
-This is equivalent to $P_i$ being generated in degree $i$: generation in degree $i$ implies the stated concentration because $A_+$ raises degree.
-Conversely, if the top is concentrated in degree $i$, boundedness below and Lemma~\ref{lem:graded-nakayama} show that $P_i$ has no components below degree $i$; the quotient $P_i/(P_i)_iA$ then has zero graded top, so Lemma~\ref{lem:graded-nakayama} makes that quotient zero.
-\end{definition}
-
-\begin{definition}\label{def:koszul-algebra}
-Let $A=T_S(V)/(R)$ be a quadratic algebra with $S=A_0$ finite-dimensional semisimple.
-The algebra $A$ is \defn{Koszul} if the degree zero quotient module $S=A/A_+$ has a linear minimal graded projective resolution as a right $A$-module.
-\end{definition}
-
-The generators in homological degree $i$ must then all have grading degree $i$.
-Since $S$ can have several simple modules, the definition requires a linear resolution of their direct sum, not just of one chosen simple module.
-
-\begin{proposition}\label{prop:polynomial-koszul}
-For every finite-dimensional vector space $V$, the symmetric algebra $\SymAlg(V)$ is Koszul.
+\begin{proposition}\label{prop:ext-basic}
+For all modules $M,N$:
+\begin{enumerate}
+\item $\Ext_A^0(M,N)\cong\Hom_A(M,N)$.
+\item If $M$ is projective, then $\Ext_A^h(M,N)=0$ for all $h\geq1$.
+\end{enumerate}
 \end{proposition}
 
 \begin{proof}
-Proposition~\ref{prop:koszul-complex-resolution} gives a minimal resolution with $K_i=\bigwedge^iV\otimes_\Bbbk A(-i)$.
-Thus $K_i$ is generated in degree $i$ for every $i$.
+(1) The map $p_0^*:\Hom_A(M,N)\to\Hom_A(P_0,N)$ is injective as $p_0$ is surjective, and its image consists of the $\varphi$ with $\varphi d_1=0$, because $M=P_0/\Im d_1$.
+These $\varphi$ are the cocycles in degree $0$.
+(2) Use the resolution with $P_0=M$ and $P_h=0$ for $h\geq1$.
 \end{proof}
 
-\begin{example}\label{ex:koszul-nonconnected}
-The definition also applies when $S$ has several simple modules.
-For $A=\Bbbk A_2$, the resolution in Example~\ref{ex:minimal-A2} is linear for $L_1$, and $L_2=e_{22}A$ is projective in degree $0$.
-Taking their direct sum gives a linear resolution of $S=L_1\oplus L_2$; hence $\Bbbk A_2$ is Koszul.
+Thus $\Ext$ extends $\Hom$ to higher degrees, and it vanishes for projective $M$ as one expects from Proposition~\ref{prop:projective-characterisations}.
+
+\subsection{Graded Ext and minimal resolutions}\label{subsec:graded-ext}
+
+From now on $A$ is as in Subsection~\ref{subsec:graded-resolutions}: locally finite-dimensional non-negatively graded with $S=A_0$ finite-dimensional semisimple, and $S=A/A_+$ is regarded as a graded module in degree $0$.
+Write $S=\bigoplus_{y=1}^n\Bbbk e_y$ and $L_y=e_yS$ for the simple modules, denoted $L_j$ in Notation~\ref{not:hilbert-simples-summands}.
+Let $M$ be a bounded below locally finite-dimensional graded right module and $N$ a graded right module.
+Let $P_\bullet\to M$ be a graded projective resolution, for instance a minimal one by Theorem~\ref{thm:minimal-resolution}.
+
+\begin{definition}\label{def:graded-ext}
+For $h\geq0$ and $j\in\Z$, put
+\[
+\Ext_A^h(M,N)_j:=H^h\bigl(\Hom_A^{\Z}(P_\bullet,N(j))\bigr).
+\]
+\end{definition}
+
+Here $\Hom_A^\Z(P_h,N(j))$ is the space of homogeneous maps of degree $j$ (Notation~\ref{not:graded-hom}), and $\delta^h(\varphi)=\varphi\circ d_{h+1}$ as in \eqref{eq:hom-complex}.
+The proofs of Lemma~\ref{lem:comparison} and Proposition~\ref{prop:ext-well-defined} apply verbatim with degree-preserving maps, using that graded projective modules lift along degree-preserving surjections and that kernels of graded maps are graded.
+Hence $\Ext_A^h(M,N)_j$ is independent of $P_\bullet$ up to canonical isomorphism.
+The index $j$ is the \defn{internal degree}; the index $h$ is the homological degree.
+
+\begin{remark}\label{rem:graded-ext-ungraded}
+A graded projective module is projective as an ungraded module, because it is a graded direct summand of a graded free module (Corollary~\ref{cor:graded-projective-characterisations}).
+So $P_\bullet\to M$ is also an ordinary projective resolution.
+Each $\Hom_A^\Z(P_h,N(j))$ is contained in $\Hom_A(P_h,N)$, and if $P_h$ is finitely generated, then
+\[
+\Hom_A(P_h,N)=\bigoplus_{j\in\Z}\Hom_A^\Z\bigl(P_h,N(j)\bigr).
+\]
+Hence, if $P_h$ is finitely generated for all $h$ (for instance if $A$ is right noetherian and $M$ is finitely generated, by Corollary~\ref{cor:noetherian-minimal-resolution}), then the ordinary $\Ext_A^h(M,N)=\bigoplus_{j\in\Z}\Ext_A^h(M,N)_j$.
+\end{remark}
+
+\begin{theorem}\label{thm:ext-minimal}
+Let $P_\bullet\to M$ be a minimal graded projective resolution and $N$ a graded right $A$-module with $NA_+=0$.
+Then every differential of $\Hom_A^\Z(P_\bullet,N(j))$ is zero, and for all $h\geq0$ and $j\in\Z$,
+\[
+\Ext_A^h(M,N)_j\cong\Hom_A^{\Z}(P_h,N(j))\cong\Hom_S^\Z\bigl(\grtop P_h,N(j)\bigr).
+\]
+In particular, if $N$ is a right $S$-module placed in degree $0$, then $\Ext_A^h(M,N)_j\cong\Hom_S\bigl((\grtop P_h)_{-j},N\bigr)$.
+\end{theorem}
+
+\begin{proof}
+Let $\varphi:P_h\to N(j)$ be $A$-linear and degree-preserving.
+Then $\varphi(P_hA_+)=\varphi(P_h)A_+\subseteq NA_+=0$, so $\varphi$ factors uniquely through $P_h\to P_h/P_hA_+=\grtop P_h$, and every degree-preserving $S$-linear map $\grtop P_h\to N(j)$ arises this way.
+This gives the second isomorphism.
+By \eqref{eq:graded-minimal-criterion}, $\Im d_{h+1}\subseteq P_hA_+$, so $\varphi d_{h+1}=0$.
+Hence all $\delta^h$ vanish and the cohomology equals the cochain groups.
+If $N$ lies in degree $0$, then $N(j)$ lies in degree $-j$, so a degree-preserving map from $\grtop P_h$ only involves $(\grtop P_h)_{-j}$.
+\end{proof}
+
+Thus the graded top of $P_h$ is computed by $\Ext$ with values in $S$-modules.
+For the simple modules the answer is a multiplicity.
+
+\begin{corollary}\label{cor:ext-simple}
+In the setting of Theorem~\ref{thm:ext-minimal}, for $1\leq y\leq n$,
+\[
+\dim_\Bbbk\Ext_A^h(M,L_y)_j=\bigl[(\grtop P_h)_{-j}:L_y\bigr].
+\]
+\end{corollary}
+
+\begin{proof}
+For a right $S$-module $T$ we have $T\cong\bigoplus_x L_x^{\oplus[T:L_x]}$, and $\Hom_S(L_x,L_y)$ is $\Bbbk$ for $x=y$ and $0$ otherwise.
+\end{proof}
+
+\begin{remark}[General $S$]\label{rem:ext-general-S}
+Corollary~\ref{cor:ext-simple} used $S=\bigoplus_y\Bbbk e_y$.
+For an arbitrary finite-dimensional semisimple $S$, the space $\Hom_S(L_x,L_y)$ is $0$ for $x\neq y$ and the division algebra $\End_S(L_y)$ for $x=y$, so the formula holds with $\dim_\Bbbk$ replaced by the dimension over $\End_S(L_y)$.
+\end{remark}
+
+The multiplicities $[(\grtop P_h)_i:L_y]$ are the graded Betti numbers $\beta_{h,i,y}(M)$ of Remark~\ref{not:graded-betti}.
+Since $S$ is semisimple, $\Hom_S(-,N)$ is exact, so the groups $\Ext_A^h(M,N)_j$ with $h\geq1$ record the resolution over $A$, not any further structure of $S$.
+
+\begin{example}\label{ex:ext-A2}
+Let $A=\Bbbk A_2$.
+By Example~\ref{ex:minimal-A2}, the minimal resolution of $L_1$ is $0\to e_{22}A(-1)\to e_{11}A\to L_1\to0$, so $\grtop P_0=L_1$ in degree $0$ and $\grtop P_1=L_2$ in degree $1$.
+By Corollary~\ref{cor:ext-simple}, the only non-zero groups $\Ext_A^h(L_1,L_y)_j$ are
+\[
+\Ext_A^0(L_1,L_1)_0\cong\Bbbk,\qquad\Ext_A^1(L_1,L_2)_{-1}\cong\Bbbk.
+\]
+The class in $\Ext_A^1(L_1,L_2)_{-1}$ reflects the exact sequence $0\to L_2\to e_{11}A\to L_1\to0$, which does not split since $e_{11}A$ is not semisimple.
+In general, $\Ext_A^1(M,N)$ classifies such extensions of $M$ by $N$; we do not use this.
 \end{example}
 
-\begin{example}
-The exterior algebra $E=\Bbbk[\epsilon]/(\epsilon^2)$ is quadratic, and Example~\ref{ex:minimal-exterior} gives a minimal resolution of its degree zero quotient with $P_i=E(-i)$.
-Thus $E$ is Koszul, although its minimal resolution is infinite.
+\begin{example}\label{ex:ext-polynomial-exterior}
+For $A=\Bbbk[x]$ with $\deg x=1$, Example~\ref{ex:minimal-polynomial} gives $\grtop P_0=\Bbbk$ in degree $0$ and $\grtop P_1=\Bbbk$ in degree $1$, so
+\[
+\Ext_A^0(\Bbbk,\Bbbk)_0\cong\Bbbk,\qquad\Ext_A^1(\Bbbk,\Bbbk)_{-1}\cong\Bbbk,
+\]
+and all other groups vanish.
+For $E=\Bbbk[\epsilon]/(\epsilon^2)$ with $\deg\epsilon=1$, Example~\ref{ex:minimal-exterior} gives $\grtop P_h=\Bbbk$ in degree $h$ for all $h\geq0$, so $\Ext_E^h(\Bbbk,\Bbbk)_j\cong\Bbbk$ if $j=-h$ and $0$ otherwise.
 \end{example}
 
+In all three examples the non-zero groups $\Ext_A^h(S,S)_j$ lie on the line $j=-h$, because the generators of $P_h$ have degree $h$; we return to this in Section~\ref{sec:koszul-complex}.
+
+\subsection{Tor}
+
+Let $M$ be a right $A$-module with a projective resolution $P_\bullet\to M$, and $N$ a left $A$-module.
+The maps $d_h\otimes\id_N$ make $P_\bullet\otimes_AN$ a chain complex of vector spaces (Definition~\ref{def:chain-complex}).
+
+\begin{definition}\label{def:tor}
+$\Tor_h^A(M,N):=H_h(P_\bullet\otimes_AN)$ for all $h\geq0$.
+\end{definition}
+
+The proofs of Lemma~\ref{lem:comparison} and Proposition~\ref{prop:ext-well-defined} apply with $\Hom_A(-,N)$ replaced by $-\otimes_AN$, which sends lifts and homotopies to lifts and homotopies.
+So $\Tor_h^A(M,N)$ is independent of $P_\bullet$ up to canonical isomorphism and is functorial in $M$ and $N$, and $\Tor_0^A(M,N)=M\otimes_AN$ by right exactness of $-\otimes_AN$.
+For graded $M,N$ and a graded projective resolution, $\Tor_h^A(M,N)$ is graded, with $\Tor_h^A(M,N)_i=H_h((P_\bullet\otimes_AN)_i)$ for the total grading of Definition~\ref{def:total-tensor-grading}.
+
+Both statements below apply to the graded left $A$-module $S=A/A_+$ in degree $0$.
+
+\begin{proposition}\label{prop:tor-top}
+Let $P_\bullet\to M$ be a minimal graded projective resolution.
+Then $\Tor_h^A(M,S)\cong\grtop P_h$ as graded right $S$-modules, for all $h\geq0$.
+\end{proposition}
+
+\begin{proof}
+We have $P_h\otimes_AS=P_h/P_hA_+=\grtop P_h$, and the differential of $P_\bullet\otimes_AS$ is induced by $d_h$.
+It is zero because $\Im d_h\subseteq P_{h-1}A_+$.
+\end{proof}
+
+The next statement relates $\Tor$ to $\Ext$.
+For a left $A$-module $N$, the graded linear dual $\bbD(N)$ is a right $A$-module via $(fa)(n)=f(an)$, and $\bbD(N)_i=D(N_{-i})$.
+
+\begin{proposition}\label{prop:ext-tor-duality}
+For graded $M,N$ as above, with $N$ a graded left $A$-module, and all $h\geq0$ and $j\in\Z$,
+\[
+\Ext_A^h\bigl(M,\bbD(N)\bigr)_j\cong D\bigl(\Tor_h^A(M,N)_{-j}\bigr).
+\]
+\end{proposition}
+
+\begin{proof}
+A degree-preserving $A$-linear map $\varphi:P\to\bbD(N)(j)$ is the same as a bilinear form $b(p,n)=\varphi(p)(n)$ on $P\times N$ with $b(pa,n)=b(p,an)$ that vanishes on $P_i\times N_k$ unless $i+k=-j$.
+This is a linear form on $(P\otimes_AN)_{-j}$, so $\Hom_A^\Z(P,\bbD(N)(j))\cong D((P\otimes_AN)_{-j})$, naturally in $P$.
+Applying this to $P_\bullet$ identifies the cochain complex $\Hom_A^\Z(P_\bullet,\bbD(N)(j))$ with $D((P_\bullet\otimes_AN)_{-j})$.
+Since $D$ is exact, it commutes with taking (co)homology.
+\end{proof}
+
+For $N=S$ we have $\bbD(S)\cong S$ as graded right $A$-modules.
+Indeed, the dual basis $(e_x^*)_{1\leq x\leq n}$ of $\bbD(S)=D(S)$ satisfies $e_x^*e_y=\delta_{xy}e_x^*$, so $e_x^*\mapsto e_x$ is $S$-linear, and both modules are killed by $A_+$.
+Combining Propositions~\ref{prop:tor-top} and~\ref{prop:ext-tor-duality} gives, for every bounded below locally finite-dimensional $M$,
+\[
+\Ext_A^h(M,S)_j\cong D\bigl((\grtop P_h)_{-j}\bigr),
+\]
+which agrees with Theorem~\ref{thm:ext-minimal} since $\dim_\Bbbk\Hom_S(T,S)=\dim_\Bbbk T$ for every finite-dimensional right $S$-module $T$.
+So $\Ext_A^\bullet(M,S)$ and $\Tor_\bullet^A(M,S)$ carry the same information, and we work with $\Ext$.
+
+\begin{remark}[General $S$]\label{rem:tor-general-S}
+The identification $\bbD(S)\cong S$ above uses $S=\bigoplus_x\Bbbk e_x$.
+For arbitrary semisimple $S$, the module $\bbD(S)$ is isomorphic to $S$ only after choosing a symmetrising form; without it one can use $\Ext_A^h(M,\bbD(S))$ in place of $\Ext_A^h(M,S)$ throughout.
+\end{remark}
+
+\subsection{The beginning of the resolution of $S$}
+
+We determine the first terms of the minimal resolution of $S$ for algebras generated in degree 1 and for quadratic algebras.
+Here $A$ is as in Subsection~\ref{subsec:graded-ext}, and generation in degree $1$ over $S$ is as in \eqref{eq:multiplication-maps}.
+
+\begin{proposition}\label{prop:resolution-first-terms}
+Let $P_\bullet\to S$ be the minimal graded projective resolution of $S=A/A_+$.
+\begin{enumerate}
+\item $P_0=A$, with $p_0:A\to S$ the projection.
+\item $\grtop P_1\cong A_+/A_+^2$.
+If $A$ is generated in degree $1$, then $\grtop P_1\cong A_1$, concentrated in degree $1$, and $P_1\cong(A_1\otimes_SA)(-1)$ with $d_1(v\otimes a)=va$.
+\item If $A=T_S(V)/(R)$ is quadratic with $V=A_1$ and $R\subseteq V\otimes_SV$, then $\grtop P_2\cong R$, concentrated in degree $2$, and $P_2\cong(R\otimes_SA)(-2)$.
+\end{enumerate}
+In particular $\Tor_h^A(S,S)\cong S,\ A_1,\ R$ for $h=0,1,2$, concentrated in degrees $h$, in the quadratic case.
+\end{proposition}
+
+\begin{supplementary}
+\begin{proof}
+(1) The module $A$ is projective and $\Ker p_0=A_+=AA_+$, so $p_0$ is a graded projective cover.
+
+(2) Put $K_1=\Ker p_0=A_+$.
+The graded top of a projective cover equals that of its target, so $\grtop P_1\cong\grtop K_1=A_+/A_+^2$.
+If $A$ is generated in degree $1$, then $A_+^2=\bigoplus_{i\geq2}A_i$, so $\grtop K_1=A_1$ in degree $1$.
+By \eqref{eq:graded-cover-terms}, $P_1\cong(A_1\otimes_SA)(-1)$, and the cover is $v\otimes a\mapsto va$.
+
+(3) Put $T=T_S(V)$ and $I=(R)$, so $A_i=T_i/I_i$.
+Since every $S$-module is projective, $V\otimes_S-$ is exact, so
+\[
+(P_1)_i=V\otimes_SA_{i-1}=T_i/(V\otimes_SI_{i-1}),
+\]
+and $d_1:(P_1)_i\to A_i=T_i/I_i$ is induced by the identity on $T_i$.
+Hence $(\Ker d_1)_i=I_i/(V\otimes_SI_{i-1})$.
+Now $I_i=\sum_{p+q=i-2}T_pRT_q$, and the summands with $p\geq1$ lie in $V\otimes_SI_{i-1}$.
+Thus $(\Ker d_1)_i$ is the image of $R\otimes_ST_{i-2}$.
+This says $\Ker d_1=RA$, where $R$ sits in $(P_1)_2=V\otimes_SV$, and $(\Ker d_1)_i=0$ for $i<2$ since $I_1=0$.
+In degree $2$ we get $(\Ker d_1)_2=I_2=R$.
+Therefore $\grtop\Ker d_1=R$ in degree $2$, and \eqref{eq:graded-cover-terms} gives $P_2\cong(R\otimes_SA)(-2)$.
+The last sentence follows from Proposition~\ref{prop:tor-top}.
+\end{proof}
+\end{supplementary}
+
+Dually, by Theorem~\ref{thm:ext-minimal} the space $\Ext_A^h(S,S)_{-h}$ has dimension $\dim_\Bbbk\grtop P_h$, which is $n$, $\dim_\Bbbk A_1$, $\dim_\Bbbk R$ for $h=0,1,2$ when $A$ is quadratic.
+These are the dimensions of $A^!_0=S$, $A^!_1=D(A_1)$ and $A^!_2\cong D(R)$ from Section~\ref{sec:quadratic-dual}, so $\Ext_A^\bullet(S,S)$ and $A^!$ already agree in dimension up to degree $2$; making this precise requires a product on $\Ext$.
+
+\subsection{Exercises}
+
+\begin{exercise}
+\begin{enumerate}
+\item Prove that $\Ext_A^h(P,N)=0$ for $h\geq1$ and all $N$ if $P$ is projective.
+\item Conversely, let $p_0:P_0\to M$ be a surjection from a projective module with $K=\Ker p_0$, and suppose $\Ext_A^1(M,K)=0$.
+Prove that $M$ is projective.
+\end{enumerate}
+\emph{Hint for (2).} Take $P_1\to K$ onto $K$ and consider it as a cocycle in $\Hom_A(P_1,K)$.
+\end{exercise}
+
+\begin{exercise}
+Let $P_\bullet\to M$ be a projective resolution and $K_1=\Ker p_0$.
+Prove that
+\[
+\Ext_A^1(M,N)\cong\operatorname{coker}\bigl(\Hom_A(P_0,N)\to\Hom_A(K_1,N)\bigr),
+\]
+where the map is restriction, and that $\Ext_A^h(M,N)\cong\Ext_A^{h-1}(K_1,N)$ for $h\geq2$.
+\end{exercise}
+
+\begin{exercise}
+Let $A=\Bbbk A_3/(e_{13})$ with the grading by path length.
+Find the minimal graded projective resolution of $L_1$, and compute $\dim_\Bbbk\Ext_A^h(L_1,L_y)_j$ for all $h,y,j$.
+\end{exercise}
+
+\begin{exercise}
+Let $A=\Bbbk[x]$ with $\deg x=1$ and $M=A/(x^m)$ for some $m\geq1$.
+Find a minimal graded resolution of $M$, and compute $\Tor_h^A(M,\Bbbk)$ and $\Ext_A^h(M,\Bbbk)_j$ for all $h,j$.
+\end{exercise}
+
+\begin{exercise}
+Let $A$ be as in Subsection~\ref{subsec:graded-ext}.
+\begin{enumerate}
+\item Prove that $\Tor_1^A(S,S)\cong A_+/A_+^2$ as graded right $S$-modules.
+\item Prove that $A$ is generated in degree $1$ over $S$ if and only if $\Tor_1^A(S,S)$ is concentrated in degree $1$.
+\end{enumerate}
+\end{exercise}

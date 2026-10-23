@@ -309,6 +309,7 @@ The main content of the notes are drafted by AI and QA'ed (heavily edited) by my
 \input{Lecture_Koszul_S3.tex}
 \input{Lecture_Koszul_S4.tex}
 \input{Lecture_Koszul_S5.tex}
+\input{Lecture_Koszul_S6.tex}
 
 \clearpage
 \section*{List of Symbols}
@@ -403,15 +404,19 @@ $R^\perp$ & Relation annihilator, viewed in $D(V)\otimes_S D(V)$ using $\theta$.
 $A^!$ & Quadratic dual $T_S(D(V))/(R^\perp)$, with $D(V)$ placed in degree 1. & \hyperref[def:quadratic-duals]{\pageref*{def:quadratic-duals}}\\[3pt]
 $A\otimes_\Bbbk B$ & Ordinary algebra tensor product, with multiplication $(a\otimes b)(a'\otimes b')=aa'\otimes bb'$. & \hyperref[lem:hilbert-field-tensor]{\pageref*{lem:hilbert-field-tensor}}\\[3pt]
 
-\multicolumn{3}{@{}l}{\textbf{Tops, resolutions, and the Koszul complex}}\\*[4pt]
+\multicolumn{3}{@{}l}{\textbf{Tops, resolutions, Ext, Tor, and the Koszul complex}}\\*[4pt]
 $\top M$ & Ordinary top $M/\rad M$, for finite-dimensional $A$. & \hyperref[def:module-top]{\pageref*{def:module-top}}\\[3pt]
 $p:P\to M$ & Projective cover: no proper submodule of $P$ maps onto $M$. & \hyperref[def:projective-cover]{\pageref*{def:projective-cover}}\\[3pt]
-$C_\bullet,\ d_i$ & Chain complex with differentials $d_i:C_i\to C_{i-1}$ and $d_id_{i+1}=0$. & \hyperref[def:chain-complex]{\pageref*{def:chain-complex}}\\[3pt]
-$H_i(C_\bullet)$ & Homology $\Ker d_i/\Im d_{i+1}$. & \hyperref[def:chain-complex]{\pageref*{def:chain-complex}}\\[3pt]
+$C_\bullet,\ d_h$ & Chain complex with differentials $d_h:C_h\to C_{h-1}$ and $d_hd_{h+1}=0$. & \hyperref[def:chain-complex]{\pageref*{def:chain-complex}}\\[3pt]
+$H_h(C_\bullet)$ & Homology $\Ker d_h/\Im d_{h+1}$. & \hyperref[def:chain-complex]{\pageref*{def:chain-complex}}\\[3pt]
 $P_\bullet\to M$ & Projective resolution; $P_\bullet$ ends in $P_0\to0$, with a specified map $p_0:P_0\to M$. & \hyperref[def:projective-resolution]{\pageref*{def:projective-resolution}}\\[3pt]
 $\grtop M$ & Graded top $M/MA_+$. & \hyperref[not:graded-top]{\pageref*{not:graded-top}}\\[3pt]
-$K_i$ & Koszul term $\bigwedge^iV\otimes_\Bbbk A(-i)$ for $A=\SymAlg(V)$; the exterior factor is placed in degree zero. & \hyperref[not:koszul-terms]{\pageref*{not:koszul-terms}}\\[3pt]
-$K_\bullet$ & Koszul complex, with degree-preserving differentials $d_i:K_i\to K_{i-1}$. & \hyperref[def:koszul-complex]{\pageref*{def:koszul-complex}}\\[3pt]
+$C^\bullet,\ \delta^h,\ H^h(C^\bullet)$ & Cochain complex with $\delta^h\delta^{h-1}=0$; cohomology $\Ker\delta^h/\Im\delta^{h-1}$. & \hyperref[def:cochain-complex]{\pageref*{def:cochain-complex}}\\[3pt]
+$\Ext_A^h(M,N)$ & Cohomology of $\Hom_A(P_\bullet,N)$ for a projective resolution $P_\bullet\to M$. & \hyperref[def:ext]{\pageref*{def:ext}}\\[3pt]
+$\Ext_A^h(M,N)_j$ & Graded Ext: cohomology of $\Hom_A^\Z(P_\bullet,N(j))$ for a graded projective resolution; $j$ is the internal degree. & \hyperref[def:graded-ext]{\pageref*{def:graded-ext}}\\[3pt]
+$\Tor_h^A(M,N)$ & Homology of $P_\bullet\otimes_AN$ for a projective resolution $P_\bullet\to M$. & \hyperref[def:tor]{\pageref*{def:tor}}\\[3pt]
+$K_h$ & Koszul term $\bigwedge^hV\otimes_\Bbbk A(-h)$ for $A=\SymAlg(V)$; the exterior factor is placed in degree zero. & \hyperref[not:koszul-terms]{\pageref*{not:koszul-terms}}\\[3pt]
+$K_\bullet$ & Koszul complex, with degree-preserving differentials $d_h:K_h\to K_{h-1}$. & \hyperref[def:koszul-complex]{\pageref*{def:koszul-complex}}\\[3pt]
 
 \multicolumn{3}{@{}l}{\textbf{Advanced notation}}\\*[4pt]
 $\add_{\mod A^\op}(M)$ & Additive closure in the category of left $A$-modules. & \hyperref[prop:tensor-duals]{\pageref*{prop:tensor-duals}}\\[3pt]
@@ -430,8 +435,8 @@ $qA$ & Quadratic part $T_S(V)/(I_2)$ of $A=T_S(V)/I$. & \hyperref[def:quadratic-
 $U^\perp,\ {}^\perp U$ & Annihilators in the right and left $S$-duals, respectively. & \hyperref[def:orthogonals]{\pageref*{def:orthogonals}}\\[3pt]
 $A^!,\ {}^!A$ & Right and left quadratic duals formed using the one-sided $S$-duals. & \hyperref[def:S-quadratic-duals]{\pageref*{def:S-quadratic-duals}}\\[3pt]
 $A\otimes_\Bbbk^{\mathrm{gr}}B$ & Graded algebra tensor product; multiplication includes the sign $(-1)^{\deg b\,\deg a'}$. & \hyperref[def:algebra-tensor-products]{\pageref*{def:algebra-tensor-products}}\\[3pt]
-$\beta_{i,d,j}(M)$ & Multiplicity of $L_j$ in $(\grtop P_i)_d$ for a minimal resolution of $M$. & \hyperref[not:graded-betti]{\pageref*{not:graded-betti}}\\[3pt]
-$\beta_{i,d}(M)$ & Row vector $(\beta_{i,d,j}(M))_{1\leq j\leq n}$. & \hyperref[not:graded-betti]{\pageref*{not:graded-betti}}\\[3pt]
+$\beta_{h,i,y}(M)$ & Multiplicity of $L_y$ in $(\grtop P_h)_i$ for a minimal resolution of $M$. & \hyperref[not:graded-betti]{\pageref*{not:graded-betti}}\\[3pt]
+$\beta_{h,i}(M)$ & Row vector $(\beta_{h,i,y}(M))_{1\leq y\leq n}$. & \hyperref[not:graded-betti]{\pageref*{not:graded-betti}}\\[3pt]
 \end{longtable}
 \endgroup
 

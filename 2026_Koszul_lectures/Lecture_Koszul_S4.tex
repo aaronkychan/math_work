@@ -317,19 +317,19 @@ We now define such resolutions over an arbitrary $\Bbbk$-algebra $A$.
 \begin{definition}\label{def:chain-complex}\label{not:chain-differentials}
 A \defn{chain complex} $C_\bullet$ of right $A$-modules is a sequence
 \[
-\cdots\longrightarrow C_{i+1}\xrightarrow{d_{i+1}}C_i
-\xrightarrow{d_i}C_{i-1}\longrightarrow\cdots,
-\qquad d_i d_{i+1}=0\quad\text{for all }i\in\Z.
+\cdots\longrightarrow C_{h+1}\xrightarrow{d_{h+1}}C_h
+\xrightarrow{d_h}C_{h-1}\longrightarrow\cdots,
+\qquad d_h d_{h+1}=0\quad\text{for all }h\in\Z.
 \]
-The maps $d_i$ are $A$-linear and are called \defn{differentials}; the index $i$ is the \defn{homological degree}.
-Its \defn{homology} in degree $i$ is
+The maps $d_h$ are $A$-linear and are called \defn{differentials}; the index $h$ is the \defn{homological degree}.
+Its \defn{homology} in degree $h$ is
 \[
-H_i(C_\bullet):=\Ker d_i/\Im d_{i+1}.
+H_h(C_\bullet):=\Ker d_h/\Im d_{h+1}.
 \]
 \end{definition}
 
-The identity $d_i d_{i+1}=0$ ensures that $\Im d_{i+1}\subseteq\Ker d_i$, so the quotient is defined.
-Exactness at $C_i$ means $H_i(C_\bullet)=0$.
+The identity $d_h d_{h+1}=0$ ensures that $\Im d_{h+1}\subseteq\Ker d_h$, so the quotient is defined.
+Exactness at $C_h$ means $H_h(C_\bullet)=0$.
 A complex concentrated in non-negative homological degrees has the form
 $\cdots\to C_2\to C_1\to C_0\to0$; in particular, $H_0(C_\bullet)=C_0/\Im d_1$.
 
@@ -339,13 +339,13 @@ A \defn{projective resolution} of $M$ is an exact sequence
 \cdots\longrightarrow P_2\xrightarrow{d_2}P_1
 \xrightarrow{d_1}P_0\xrightarrow{p_0}M\longrightarrow0
 \end{equation}
-with every $P_i$ projective.
+with every $P_h$ projective.
 We write $P_\bullet\to M$ for this data; the complex $P_\bullet$ itself ends in $P_0\to0$.
-A resolution is \defn{free} if every $P_i$ is free.
+A resolution is \defn{free} if every $P_h$ is free.
 \end{definition}
 
-Thus $p_0$ is surjective, $\Ker p_0=\Im d_1$, and $\Ker d_i=\Im d_{i+1}$ for all $i\geq1$.
-Equivalently, $p_0$ induces $H_0(P_\bullet)\cong M$, and $H_i(P_\bullet)=0$ for all $i\geq1$.
+Thus $p_0$ is surjective, $\Ker p_0=\Im d_1$, and $\Ker d_h=\Im d_{h+1}$ for all $h\geq1$.
+Equivalently, $p_0$ induces $H_0(P_\bullet)\cong M$, and $H_h(P_\bullet)=0$ for all $h\geq1$.
 The module $M$ is not an additional term of $P_\bullet$.
 
 \begin{proposition}\label{prop:resolutions-exist}
@@ -367,14 +367,14 @@ A projective resolution \eqref{eq:projective-resolution} is \defn{minimal} if $p
 \[
 \begin{aligned}
 p_1:P_1&\longrightarrow\Ker p_0,& x&\longmapsto d_1(x),\\
-p_i:P_i&\longrightarrow\Ker d_{i-1},& x&\longmapsto d_i(x)
-\quad\text{for all }i\geq2
+p_h:P_h&\longrightarrow\Ker d_{h-1},& x&\longmapsto d_h(x)
+\quad\text{for all }h\geq2
 \end{aligned}
 \]
 are projective covers.
 \end{definition}
 
-For the diagram, put $K_1:=\Ker p_0$ and $K_i:=\Ker d_{i-1}$ for all $i\geq2$.
+For the diagram, put $K_1:=\Ker p_0$ and $K_h:=\Ker d_{h-1}$ for all $h\geq2$.
 In a minimal resolution, each differential factors as a projective cover onto its image followed by inclusion:
 \[
 \xymatrix@C=30pt@R=30pt{
@@ -387,21 +387,21 @@ In a minimal resolution, each differential factors as a projective cover onto it
 
 When $A$ is finite-dimensional, Proposition~\ref{prop:cover-top} gives the criterion
 \begin{equation}\label{eq:ordinary-minimal-criterion}
-\Im d_i\subseteq \rad P_{i-1}\quad\text{for all }i\geq1.
+\Im d_h\subseteq \rad P_{h-1}\quad\text{for all }h\geq1.
 \end{equation}
-Indeed, exactness gives $\Ker p_0=\Im d_1$ and $\Ker d_i=\Im d_{i+1}$ for all $i\geq1$.
+Indeed, exactness gives $\Ker p_0=\Im d_1$ and $\Ker d_h=\Im d_{h+1}$ for all $h\geq1$.
 
 \begin{theorem}\label{thm:ordinary-minimal-resolutions}
 Every right module over a finite-dimensional algebra has a minimal projective resolution.
 If the module is finite-dimensional, every term of its minimal resolution is finite-dimensional.
-Over any algebra, any two minimal resolutions $P_\bullet\to M$ and $P'_\bullet\to M$ are \defn{isomorphic}: there are isomorphisms $f_i:P_i\to P'_i$ satisfying
+Over any algebra, any two minimal resolutions $P_\bullet\to M$ and $P'_\bullet\to M$ are \defn{isomorphic}: there are isomorphisms $f_h:P_h\to P'_h$ satisfying
 \[
 p'_0f_0=p_0,\qquad
-d'_i f_i=f_{i-1}d_i\quad\text{for all }i\geq1.
+d'_h f_h=f_{h-1}d_h\quad\text{for all }h\geq1.
 \]
 \end{theorem}
 
-More generally, maps $f_i$ satisfying these identities are called a \defn{map of resolutions}; the identities express the commutativity of the diagram:
+More generally, maps $f_h$ satisfying these identities are called a \defn{map of resolutions}; the identities express the commutativity of the diagram:
 \[
 \xymatrix@C=24pt@R=22pt{
 \cdots\ar[r] & P_1\ar[r]^{d_1}\ar[d]^{f_1}
@@ -417,11 +417,11 @@ For finite-dimensional $A$, Theorem~\ref{thm:ordinary-projective-covers} applies
 If $M$ is finite-dimensional, choose a finite-dimensional cover at each step; its kernel is again finite-dimensional.
 For uniqueness, choose an isomorphism $f_0:P_0\to P'_0$ between the covers of $M$.
 It restricts to an isomorphism $\Ker p_0\to\Ker p'_0$; uniqueness of covers of these kernels gives $f_1:P_1\to P'_1$.
-Repeating gives $f_i$ with $d'_i f_i=f_{i-1}d_i$ at every step, without finiteness assumptions.
+Repeating gives $f_h$ with $d'_h f_h=f_{h-1}d_h$ at every step, without finiteness assumptions.
 \end{proof}
 
 \begin{remark}
-For a minimal projective resolution of $M$, the kernels $\Ker p_0$ and $\Ker d_i$ for $i\geq1$ are called the successive \defn{syzygies} of $M$.
+For a minimal projective resolution of $M$, the kernels $\Ker p_0$ and $\Ker d_h$ for $h\geq1$ are called the successive \defn{syzygies} of $M$.
 Their isomorphism classes are independent of the chosen minimal resolution by Theorem~\ref{thm:ordinary-minimal-resolutions}.
 \end{remark}
 
@@ -456,17 +456,17 @@ At every step the kernel is non-zero, so the construction by projective covers n
 
 \subsection{Graded version}\label{subsec:graded-resolutions}
 
-Now let $A=\bigoplus_{d\in\Z}A_d$ be locally finite-dimensional non-negatively graded with $S=A_0$ finite-dimensional semisimple.
-Recall that $A_+=\bigoplus_{d>0}A_d$ and $A/A_+\cong S$ so that we can regard $S$ as a graded right $A$-module concentrated in degree $0$.
+Now let $A=\bigoplus_{i\in\Z}A_i$ be locally finite-dimensional non-negatively graded with $S=A_0$ finite-dimensional semisimple.
+Recall that $A_+=\bigoplus_{i>0}A_i$ and $A/A_+\cong S$ so that we can regard $S$ as a graded right $A$-module concentrated in degree $0$.
 All maps in this subsection are degree-preserving unless otherwise stated.
 
 \begin{definition}\label{def:graded-projective}
-A \defn{graded free module} is a direct sum $\bigoplus_{i\in I}A(-d_i)$ for some set $I$ and $d_i\in\Z$.
+A \defn{graded free module} is a direct sum $\bigoplus_{\lambda\in I}A(-i_\lambda)$ for some set $I$ and $i_\lambda\in\Z$.
 A graded module is \defn{graded projective} if it has the lifting property of Definition~\ref{def:projective-module} for degree-preserving maps.
 \end{definition}
 
-The generator $1$ of $A(-d)$ has degree $d$.
-For a graded surjection $q:X\to Y$, an element of $Y_d$ has a preimage in $X_d$.
+The generator $1$ of $A(-i)$ has degree $i$.
+For a graded surjection $q:X\to Y$, an element of $Y_i$ has a preimage in $X_i$.
 Thus the basis-lifting proof works for graded free modules.
 Every graded module is a quotient of a graded free module, by taking homogeneous generators.
 \begin{corollary}\label{cor:graded-projective-characterisations}
@@ -477,7 +477,7 @@ For a graded right $A$-module $P$, the following are equivalent.
 \item Every degree-preserving surjection onto $P$ has a degree-preserving section.
 \item $P$ is a graded direct summand of a graded free module.
 \end{enumerate}
-In particular, $Q\otimes_S A(-d)$ is graded projective for every finite-dimensional right $S$-module $Q$ and every $d\in\Z$.
+In particular, $Q\otimes_S A(-i)$ is graded projective for every finite-dimensional right $S$-module $Q$ and every $i\in\Z$.
 \end{corollary}
 
 \begin{proof}
@@ -491,7 +491,7 @@ We follow $(1)\Leftrightarrow(2)$ and $(1)\Rightarrow(3)\Rightarrow(4)\Rightarro
 
 \underline{$(4)\Rightarrow(1)$.} Restrict lifts from the graded free module to its summand $P$.
 The proof of Corollary~\ref{cor:projective-sums} also applies with degree-preserving maps.
-For the last assertion, Corollary~\ref{cor:semisimple-summands} makes $Q$ a direct summand of $S^{\oplus m}$ for some $m$, so $Q\otimes_S A(-d)$ is a graded direct summand of $A(-d)^{\oplus m}$.
+For the last assertion, Corollary~\ref{cor:semisimple-summands} makes $Q$ a direct summand of $S^{\oplus m}$ for some $m$, so $Q\otimes_S A(-i)$ is a graded direct summand of $A(-i)^{\oplus m}$.
 \end{proof}
 
 \begin{definition}\label{not:graded-top}
@@ -511,7 +511,7 @@ Consequently, $\grtop M=\top M$ for every graded right $A$-module $M$, with $\to
 
 \begin{supplementary}
 \begin{proof}
-If $A$ is finite-dimensional, then $A_d=0$ for all sufficiently large $d$, so $(A_+)^r=0$ for some integer $r\geq1$.
+If $A$ is finite-dimensional, then $A_i=0$ for all sufficiently large $i$, so $(A_+)^r=0$ for some integer $r\geq1$.
 For any simple right module $L$, the submodule $LA_+$ is either $0$ or $L$.
 The latter gives $L=L(A_+)^r=0$, a contradiction.
 Thus $A_+$ annihilates every simple module and is contained in $\rad A$.
@@ -555,8 +555,8 @@ If $N\subseteq M$ is a graded submodule and $N+MA_+=M$, then $N=M$.
 \end{lemma}
 
 \begin{proof}
-If $M=MA_+\neq0$, choose the least integer $d$ with $M_d\neq0$.
-But $(MA_+)_d=\sum_{r>0}M_{d-r}A_r=0$, a contradiction.
+If $M=MA_+\neq0$, choose the least integer $i$ with $M_i\neq0$.
+But $(MA_+)_i=\sum_{r>0}M_{i-r}A_r=0$, a contradiction.
 The second assertion follows by applying the first to $M/N$.
 \end{proof}
 
@@ -584,45 +584,45 @@ Since $\grtop p(W)=\grtop M$, we have $p(U)+MA_+=M$; graded Nakayama gives $p(U)
 Every bounded below lfd graded right $A$-module $M$ has a graded projective cover, unique up to a graded isomorphism.
 Its domain is isomorphic to
 \begin{equation}\label{eq:graded-cover-terms}
-P=\bigoplus_{d\in\Z}\bigl((\grtop M)_d\otimes_S A\bigr)(-d),
+P=\bigoplus_{i\in\Z}\bigl((\grtop M)_i\otimes_S A\bigr)(-i),
 \end{equation}
-where $(\grtop M)_d$ is placed in degree $0$ before shifting.
+where $(\grtop M)_i$ is placed in degree $0$ before shifting.
 \end{proposition}
 
 \begin{proof}
-Since $S$ is semisimple, choose right $S$-linear sections $s_d:(\grtop M)_d\to M_d$ of the quotient maps for every $d\in\Z$.
+Since $S$ is semisimple, choose right $S$-linear sections $s_i:(\grtop M)_i\to M_i$ of the quotient maps for every $i\in\Z$.
 Define on each summand of \eqref{eq:graded-cover-terms}
 \[
-p:\bigl((\grtop M)_d\otimes_S A\bigr)(-d)\longrightarrow M,
-\qquad v\otimes a\longmapsto s_d(v)a.
+p:\bigl((\grtop M)_i\otimes_S A\bigr)(-i)\longrightarrow M,
+\qquad v\otimes a\longmapsto s_i(v)a.
 \]
-The map is well-defined by $S$-linearity of $s_d$, and it preserves degree.
+The map is well-defined by $S$-linearity of $s_i$, and it preserves degree.
 Each summand of $P$ is graded projective.
-Its graded top is $(\grtop M)_d$ placed in degree $d$, since multiplication by $A_+$ generates precisely its components above degree $d$.
+Its graded top is $(\grtop M)_i$ placed in degree $i$, since multiplication by $A_+$ generates precisely its components above degree $i$.
 Thus $\grtop p$ identifies $\grtop P$ with $\grtop M$.
 Graded Nakayama, applied to $M/p(P)$, makes $p$ surjective.
-If $M_d=0$ for $d<b$, then $P_d=0$ for $d<b$, and
+If $M_i=0$ for $i<b$, then $P_i=0$ for $i<b$, and
 \[
-P_q=\bigoplus_{b\leq d\leq q}(\grtop M)_d\otimes_S A_{q-d}
+P_j=\bigoplus_{b\leq i\leq j}(\grtop M)_i\otimes_S A_{j-i}
 \]
-is finite-dimensional for every $q\in\Z$.
+is finite-dimensional for every $j\in\Z$.
 Thus $p$ is a graded projective cover.
 The uniqueness proof of Theorem~\ref{thm:ordinary-projective-covers} applies with degree-preserving lifts and sections.
 \end{proof}
 
 \begin{definition}\label{def:minimal-resolution}
-A \defn{graded projective resolution} is a projective resolution \eqref{eq:projective-resolution} in which the modules are graded, the differentials are degree-preserving, and the $P_i$ are graded projective.
-It is \defn{minimal} if $p_0:P_0\to M$ and the maps $p_i:P_i\to K_i$, $x\mapsto d_i(x)$, with $K_1=\Ker p_0$ and $K_i=\Ker d_{i-1}$ for $i\geq2$, are graded projective covers for all $i\geq1$.
+A \defn{graded projective resolution} is a projective resolution \eqref{eq:projective-resolution} in which the modules are graded, the differentials are degree-preserving, and the $P_h$ are graded projective.
+It is \defn{minimal} if $p_0:P_0\to M$ and the maps $p_h:P_h\to K_h$, $x\mapsto d_h(x)$, with $K_1=\Ker p_0$ and $K_h=\Ker d_{h-1}$ for $h\geq2$, are graded projective covers for all $h\geq1$.
 \end{definition}
 
-The homological degree $i$ and the grading degree $d$\comm{use another letter to not confuse with the differential.  I prefer using $h,k$ for homological degree and $i,j$ for internal/Adams grading} are distinct:
+The homological degree $h$ and the grading degree $i$ are distinct:
 \[
-d_i:(P_i)_d\longrightarrow(P_{i-1})_d.
+d_h:(P_h)_i\longrightarrow(P_{h-1})_i.
 \]
 Exactness is checked separately in each grading degree, as in Remark~\ref{rem:graded-exactness}.
 For bounded below locally finite-dimensional terms, minimality is equivalent to
 \begin{equation}\label{eq:graded-minimal-criterion}
-\Im d_i\subseteq P_{i-1}A_+\quad\text{for all }i\geq1.
+\Im d_h\subseteq P_{h-1}A_+\quad\text{for all }h\geq1.
 \end{equation}
 
 \begin{theorem}\label{thm:minimal-resolution}
@@ -637,9 +637,9 @@ Every kernel remains bounded below and locally finite-dimensional, so the constr
 
 For each term, \eqref{eq:graded-cover-terms} gives
 \[
-P_i\cong\bigoplus_{d\in\Z}\bigl((\grtop P_i)_d\otimes_S A\bigr)(-d).
+P_h\cong\bigoplus_{i\in\Z}\bigl((\grtop P_h)_i\otimes_S A\bigr)(-i).
 \]
-Thus the graded $S$-module $\grtop P_i$ records both the types and the degrees of the generators needed in homological degree $i$.
+Thus the graded $S$-module $\grtop P_h$ records both the types and the degrees of the generators needed in homological degree $h$.
 
 
 \begin{example}\label{ex:minimal-A2}
@@ -681,11 +681,11 @@ The ordinary resolution in Example~\ref{ex:ordinary-exterior-resolution} becomes
 \cdots\longrightarrow E(-3)\xrightarrow{d_3}E(-2)
 \xrightarrow{d_2}E(-1)\xrightarrow{d_1}E\xrightarrow{\pi}\Bbbk
 \longrightarrow0,
-\qquad d_i(a)=\epsilon a.
+\qquad d_h(a)=\epsilon a.
 \]
-For every $i\geq1$, the generator of $E(-i)$ and its image under $d_i$ both have degree $i$.
-Exactness was checked in the ordinary resolution, and $\Im d_i=\epsilon E(-i+1)\subseteq E(-i+1)E_+$ proves minimality.
-The term in homological degree $i$ has one generator, in degree $i$.
+For every $h\geq1$, the generator of $E(-h)$ and its image under $d_h$ both have degree $h$.
+Exactness was checked in the ordinary resolution, and $\Im d_h=\epsilon E(-h+1)\subseteq E(-h+1)E_+$ proves minimality.
+The term in homological degree $h$ has one generator, in degree $h$.
 \end{example}
 
 \begin{advanced}
@@ -693,13 +693,13 @@ The term in homological degree $i$ has one generator, in degree $i$.
 The multiplicities in the graded tops are sometimes called \defn{graded Betti numbers}.
 For representatives $L_1,\ldots,L_n$ of the simple right $S$-modules, one can write
 \[
-(\grtop P_i)_d\cong\bigoplus_{j=1}^nL_j^{\oplus\beta_{i,d,j}(M)},
+(\grtop P_h)_i\cong\bigoplus_{y=1}^nL_y^{\oplus\beta_{h,i,y}(M)},
 \qquad
-\beta_{i,d}(M):=(\beta_{i,d,j}(M))_{1\leq j\leq n}.
+\beta_{h,i}(M):=(\beta_{h,i,y}(M))_{1\leq y\leq n}.
 \]
-Here $i\geq0$ is the homological degree and $d\in\Z$ is the grading degree.
+Here $h\geq0$ is the homological degree and $i\in\Z$ is the grading degree.
 These multiplicities are independent of the chosen minimal resolution by Theorem~\ref{thm:minimal-resolution}.
-We will use the modules $\grtop P_i$ directly, without this additional indexing.
+We will use the modules $\grtop P_h$ directly, without this additional indexing.
 \end{remark}
 \end{advanced}
 
@@ -747,3 +747,22 @@ Right noetherianity ensures finite generation at every step.
 Without that assumption, boundedness below and local finite-dimensionality still suffice for existence of a minimal graded resolution by Theorem~\ref{thm:minimal-resolution}.
 
 
+\subsection{Exercises}
+
+\begin{exercise}
+Let $A=\Bbbk[x]$ with $\deg x=1$, and let $M=\Bbbk[x,x^{-1}]$ be the graded $A$-module with $M_i=\Bbbk x^i$ for all $i\in\Z$ and the action by multiplication.
+Show that $M=MA_+\neq0$, so $\grtop M=0$.
+Which hypothesis of Lemma~\ref{lem:graded-nakayama} fails?
+\end{exercise}
+
+\begin{exercise}
+Let $A=\Bbbk[u,v]/(uv)$ with $\deg u=\deg v=1$ and $S=A_0=\Bbbk$.
+Show that the minimal graded projective resolution of $\Bbbk=A/A_+$ has $P_0=A$ and $P_h\cong A(-h)^{\oplus2}$ for all $h\geq1$.
+
+\emph{Hint.} Show that $ua+vb=0$ in $A$ if and only if $a\in vA$ and $b\in uA$.
+\end{exercise}
+
+\begin{exercise}
+Let $A=\Bbbk A_3$, graded by path length.
+Find the minimal graded projective resolutions of $L_1$, $L_2$ and $L_3$ and the tops of their terms.
+\end{exercise}
