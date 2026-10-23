@@ -2,7 +2,7 @@
 \clearpage
 \section{Ext and Tor}\label{sec:ext-tor}
 
-The functor $\Hom_A(-,N)$ is left exact but in general not exact (Lemma~\ref{lem:Hom-left-exact} and Proposition~\ref{prop:projective-characterisations}).
+The contravariant functor $\Hom_A(-,N)$ is left exact (Lemma~\ref{lem:Hom-contravariant-left-exact}) but in general not exact (Example~\ref{ex:Hom-contravariant-not-exact}).
 The groups $\Ext_A^h(M,N)$ measure this failure, one homological degree $h$ at a time.
 They are computed by applying $\Hom_A(-,N)$ to a projective resolution of $M$, so the resolutions of Section~\ref{sec:minimal-resolutions} are the input.
 We treat $\Ext$ in detail; $\Tor$ is obtained in the same way from $-\otimes_AN$, and we only record what we need.
@@ -11,15 +11,7 @@ We treat $\Ext$ in detail; $\Tor$ is obtained in the same way from $-\otimes_AN$
 
 All modules in this subsection are right $A$-modules over an arbitrary algebra $A$, except where a left module is specified.
 
-\begin{definition}\label{def:cochain-complex}
-A \defn{cochain complex} $C^\bullet$ of vector spaces is a sequence
-\[
-\cdots\longrightarrow C^{h-1}\xrightarrow{\delta^{h-1}}C^h
-\xrightarrow{\delta^h}C^{h+1}\longrightarrow\cdots,
-\qquad\delta^h\delta^{h-1}=0\quad\text{for all }h\in\Z.
-\]
-Its \defn{cohomology} in degree $h$ is $H^h(C^\bullet):=\Ker\delta^h/\Im\delta^{h-1}$.
-\end{definition}
+Cochain complexes $C^\bullet$ with differentials $\delta^h$ and cohomology $H^h$ were introduced together with chain complexes in Definition~\ref{def:chain-complex}.
 
 Let $p_0:P_0\to M$ and $d_h:P_h\to P_{h-1}$ be a projective resolution $P_\bullet\to M$ (Definition~\ref{def:projective-resolution}), and let $N$ be a right $A$-module.
 Postcomposition with the differentials gives the cochain complex $\Hom_A(P_\bullet,N)$, concentrated in degrees $h\geq0$:
@@ -112,8 +104,8 @@ For all modules $M,N$:
 \end{proposition}
 
 \begin{proof}
-(1) The map $p_0^*:\Hom_A(M,N)\to\Hom_A(P_0,N)$ is injective as $p_0$ is surjective, and its image consists of the $\varphi$ with $\varphi d_1=0$, because $M=P_0/\Im d_1$.
-These $\varphi$ are the cocycles in degree $0$.
+(1) Apply Lemma~\ref{lem:Hom-contravariant-left-exact} to the exact sequence $P_1\xrightarrow{d_1}P_0\xrightarrow{p_0}M\to0$.
+It shows that $-\circ p_0:\Hom_A(M,N)\to\Hom_A(P_0,N)$ is injective with image $\Ker\delta^0$, the cocycles in degree $0$.
 (2) Use the resolution with $P_0=M$ and $P_h=0$ for $h\geq1$.
 \end{proof}
 

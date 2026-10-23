@@ -1,13 +1,13 @@
 # Writing Conventions for the 2026 Koszul Lectures
 
-**Updated:** 21 October 2026.
+**Updated:** 23 October 2026.
 
 This guide consolidates the author's instructions, the installed math-discussion skill, and the conventions recorded in the current lecture sources. It is a checklist for future writing, not a claim that every existing passage already complies. It does not authorise changes to the notes.
 
 ## 1. Working Sources and Scope
 
 - Read the installed **math-discussion** skill before mathematical drafting or revision, and read [AGENTS.md](/Users/aaronchan/Documents/GitHub/math_work/2026_Koszul_lectures/AGENTS.md).
-- The mother file is [Lecture_Koszul.tex](/Users/aaronchan/Documents/GitHub/math_work/2026_Koszul_lectures/Lecture_Koszul.tex). Each lecture is one numbered section, in `Lecture_Koszul_S<n>.tex`.
+- The mother file is [Lecture_Koszul.tex](/Users/aaronchan/Documents/GitHub/math_work/2026_Koszul_lectures/Lectures/Lecture_Koszul.tex). Each lecture is one numbered section, in `Lectures/Lecture_Koszul_S<n>.tex`. The section files stay alongside the mother file.
 - Follow [Replan Koszul course.md](</Users/aaronchan/Documents/GitHub/math_work/2026_Koszul_lectures/Planning/Replan Koszul course.md>) for the course trajectory, but respect subsequent decisions and the prerequisites actually established in the notes.
 - Read the latest saved sources. Old theorem numbers and proposal snapshots are not substitutes for reading the current text.
 - Among course-specific editorial directions, later explicit instructions replace earlier incompatible preferences. **Ask when a notation or convention is uncertain; do not guess.**
@@ -263,15 +263,15 @@ Additional cautions:
 
 - Preserve the established preamble, originally based on the previous year's quiver/homological-algebra notes. Make only necessary additions.
 - Keep the title **Topics in Mathematics Science VII**.
-- Put shared macros, formatting, inputs, the symbol list, and the bibliography in `Lecture_Koszul.tex`; keep lecture content in its section file.
+- Put shared macros, formatting, inputs, the symbol list, and the bibliography in `Lectures/Lecture_Koszul.tex`; keep lecture content in its section file in `Lectures/`.
 - Reuse the theorem, proposition, lemma, corollary, definition, example, exercise, assumption, remark, convention, notation, and proof environments already defined. Preserve the shared section-based theorem and equation numbering.
 
 ## 10. Homework and Revision Workflow
 
 ### Homework
 
-- The active assignment is [Homework1_v3.tex](/Users/aaronchan/Documents/GitHub/math_work/2026_Koszul_lectures/Homework1_v3.tex), confirmed by the author on 21 October 2026. `Homework1.tex` and `Homework1_v2.tex` are older versions and must not be updated unless requested.
-- Use v3 for homework edits and comparisons with the lecture notes. Confirm any future version change with the author rather than inferring authority from filenames or modification times.
+- Homework 1 is final at [Homework1_v4.tex](/Users/aaronchan/Documents/GitHub/math_work/2026_Koszul_lectures/Homework/Homework1_v4.tex), confirmed by the author on 23 October 2026. Use v4 for comparisons with the lecture notes; edit the final assignment only when requested.
+- Homework 2 is [Homework2.tex](/Users/aaronchan/Documents/GitHub/math_work/2026_Koszul_lectures/Homework/Homework2.tex). Older Homework 1 versions and the 2025 assignment are in `Homework/Archive/` and must not be updated unless requested. Confirm future version changes with the author rather than inferring authority from filenames or modification times.
 - Lecture exercises and homework overlap, but neither collection contains the other. Match mathematical questions, not merely exercise numbers, before synchronising.
 - Do not add question titles, reminders of definitions or lecture locations, or unnecessary notices such as “The following parts are independent”.
 - Separate the question from its hint and label the hint clearly.

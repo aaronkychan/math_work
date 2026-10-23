@@ -1,7 +1,8 @@
 # Project instructions
 
 - After creating or editing documents, keep the right side panel closed. Open a document or preview only when explicitly requested, and otherwise provide a link.
-- The active first homework assignment is `Homework1_v3.tex`. Use it for homework edits and comparisons with the lecture notes. `Homework1.tex` and `Homework1_v2.tex` are older versions; do not update them unless explicitly requested.
+- Current lecture files are in `Lectures/`, with mother file `Lectures/Lecture_Koszul.tex` and its section files alongside it. Homework files are in `Homework/`, reference papers and notes in `References/`, and plans and proposals in `Planning/`.
+- Homework 1 is final at `Homework/Homework1_v4.tex`; use this version for comparisons with the lecture notes. Homework 2 is `Homework/Homework2.tex`. Superseded Homework 1 versions and the 2025 assignment are in `Homework/Archive/`; do not update archived files unless explicitly requested.
 - In lecture notes and homework, use mathematical terminology only after it has been introduced in the preceding text or the assigned lecture material. Otherwise, define it explicitly before use. Audit terminology before finalising; do not assume that familiar terminology has already been introduced.
 - In particular, replace unexplained phrases such as "tensor relations" with the actual identities or identifications students must check.
 - State an exercise's question separately from its hint, and label the hint clearly.

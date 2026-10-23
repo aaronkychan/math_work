@@ -150,3 +150,16 @@ These were **not** applied.
 - Reflowed two overfull lines in Lecture 5. Four small overfull warnings remain in other lectures and were not introduced here.
 - Mathematical checks: every proof in Lecture 5 was re-derived by hand, including the degree bookkeeping $\Ext_A^h(M,N)_j\leftrightarrow(\operatorname{top}_{\mathrm{gr}}P_h)_{-j}$, the graded duality sign, and the claim $\operatorname{top}_{\mathrm{gr}}P_2\cong R$.
 - Not checked: how the new pages look. No document or preview was opened in the side panel.
+
+---
+
+## Addendum (23 October 2026): the contravariant functor in Lecture 4
+
+On your instruction, Lecture 4 now also treats $\Hom_A(-,N)$, since resolutions are used through this functor. In [Lecture_Koszul_S4.tex](/Users/aaronchan/Documents/GitHub/math_work/2026_Koszul_lectures/Lecture_Koszul_S4.tex), after Example `ex:projective-idempotents`, I added (+36 lines):
+
+- the contravariant functor $\Hom_A(-,N):\Mod A\to\Mod\Bbbk$, defined by precomposition;
+- Lemma `lem:Hom-contravariant-left-exact`: an exact sequence $L\to X\to Y\to0$ gives $0\to\Hom_A(Y,N)\to\Hom_A(X,N)\to\Hom_A(L,N)$ exact, with a short proof;
+- Example `ex:Hom-contravariant-not-exact`: over $\Bbbk A_2$, $\Hom_A(-,L_2)$ applied to $0\to\Bbbk e_{12}\to e_{11}A\to L_1\to0$ is not right exact;
+- one sentence pointing to Lecture 5.
+
+In Lecture 5, the opening paragraph and the proof of $\Ext^0=\Hom$ now cite this lemma; before, the opening paragraph cited the covariant Lemma `lem:Hom-left-exact` by mistake. The mother file compiled with no errors and no undefined references.
