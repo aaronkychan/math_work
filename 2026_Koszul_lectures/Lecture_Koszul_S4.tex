@@ -123,19 +123,6 @@ For an idempotent $e\in A$, the decomposition $A=eA\oplus(1-e)A$ makes $eA$ proj
 Such modules need not be free: for $A=\Bbbk A_2$, the module $e_{22}A$ has dimension $1$, whereas every non-zero free module has dimension at least $\dim_\Bbbk A=3$.
 \end{example}
 
-\begin{example}\label{ex:nonprojective-simple}
-A simple module need not be projective, even over $\Bbbk A_2$.
-Set $L_1=e_{11}A/\Bbbk e_{12}$ and let $q:e_{11}A\to L_1$ be the quotient map.
-If $q$ had an $A$-linear section $s$, then $s(e_{11}+\Bbbk e_{12})=e_{11}+c e_{12}$ for some $c\in\Bbbk$.
-But
-\[
-s((e_{11}+\Bbbk e_{12})e_{12})=s(0)=0,
-\qquad (e_{11}+c e_{12})e_{12}=e_{12}\neq0,
-\]
-contradicting $A$-linearity.
-Thus $L_1$ is not projective; equivalently, $\id_{L_1}$ is not in the image of
-$q\circ-:\Hom_A(L_1,e_{11}A)\to\End_A(L_1)$.
-\end{example}
 
 If $A$ is finite-dimensional semisimple, every surjection splits by Theorem~\ref{thm:artin-wedderburn}; hence every $A$-module is projective.
 
@@ -180,9 +167,9 @@ For the last assertion, apply the first to the finitely generated quotient $M/N$
 \end{supplementary}
 
 \begin{remark}\label{rem:nakayama-finite-dimensional}
-If $A$ is finite-dimensional, then $\rad A$ is \defn{nilpotent}: $(\rad A)^r=0$ for some integer $r\geq1$.
-Indeed, the powers stabilise at $(\rad A)^r=(\rad A)^{r+1}$, and Lemma~\ref{lem:nakayama} applied to the finite-dimensional module $(\rad A)^r$ gives $(\rad A)^r=0$.
-Thus Nakayama's lemma applies even for infinitely generated modules: $M=\rad M$ implies $M=M(\rad A)^r=0$.
+If $A$ is finite-dimensional, then $\rad A$ is \defn{nilpotent}: $\rad^r A := (\rad A)^r=0$ for some integer $r\geq1$.
+Indeed, the powers stabilise at $\rad^r A=\rad^{r+1} A$, and Lemma~\ref{lem:nakayama} applied to the finite-dimensional module $(\rad A)^r$ gives $(\rad A)^r=0$.
+Thus Nakayama's lemma applies even for infinitely generated modules: $M=\rad M$ implies $M=M\rad^r A=0$.
 Applying this to $M/N$ also gives $N+\rad M=M\Longrightarrow N=M$ for every submodule $N\subseteq M$.
 \end{remark}
 
@@ -390,11 +377,11 @@ are projective covers.
 For the diagram, put $K_1:=\Ker p_0$ and $K_i:=\Ker d_{i-1}$ for all $i\geq2$.
 In a minimal resolution, each differential factors as a projective cover onto its image followed by inclusion:
 \[
-\xymatrix@C=60pt@R=42pt{
-\cdots\ar[r] & P_2\ar[r]^{d_2}\ar[dr]^{\substack{p_2\\\text{proj.\ cover}}}
-& P_1\ar[r]^{d_1}\ar[dr]^{\substack{p_1\\\text{proj.\ cover}}}
-& P_0\ar[r]^{p_0}_{\text{proj.\ cover}} & M\ar[r] & 0\\
-& & K_2\ar@{^{(}->}[u] & K_1\ar@{^{(}->}[u]
+\xymatrix@C=30pt@R=30pt{
+\cdots\ar[r] & P_2\ar[rr]^{d_2}\ar@{->>}[dr]|{\substack{p_2\\\text{proj.\ cover}}}
+& & P_1\ar[rr]^{d_1}\ar@{->>}[dr]|{\substack{p_1\\\text{proj.\ cover}}}
+& & P_0\ar[rr]|{p_0}_{\text{proj.\ cover}} && M\ar[r] & 0\\
+& & K_2\ar@{^{(}->}[ur] && K_1\ar@{^{(}->}[ur]
 }
 \]
 
@@ -474,7 +461,7 @@ Recall that $A_+=\bigoplus_{d>0}A_d$ and $A/A_+\cong S$ so that we can regard $S
 All maps in this subsection are degree-preserving unless otherwise stated.
 
 \begin{definition}\label{def:graded-projective}
-A \defn{graded free module} is a direct sum $\bigoplus_{\lambda\in I}A(-d_\lambda)$, where $I$ is a set and $d_\lambda\in\Z$.
+A \defn{graded free module} is a direct sum $\bigoplus_{i\in I}A(-d_i)$ for some set $I$ and $d_i\in\Z$.
 A graded module is \defn{graded projective} if it has the lifting property of Definition~\ref{def:projective-module} for degree-preserving maps.
 \end{definition}
 
@@ -490,15 +477,18 @@ For a graded right $A$-module $P$, the following are equivalent.
 \item Every degree-preserving surjection onto $P$ has a degree-preserving section.
 \item $P$ is a graded direct summand of a graded free module.
 \end{enumerate}
-Arbitrary direct sums and graded direct summands of graded projective modules are graded projective.
 In particular, $Q\otimes_S A(-d)$ is graded projective for every finite-dimensional right $S$-module $Q$ and every $d\in\Z$.
 \end{corollary}
 
 \begin{proof}
 We follow $(1)\Leftrightarrow(2)$ and $(1)\Rightarrow(3)\Rightarrow(4)\Rightarrow(1)$ from Proposition~\ref{prop:projective-characterisations}, using degree-preserving maps.
+
 \underline{$(1)\Leftrightarrow(2)$.} The proof of Lemma~\ref{lem:Hom-left-exact} applies to graded Hom; surjectivity on Hom is the graded lifting property.
+
 \underline{$(1)\Rightarrow(3)$.} Lift $\id_P$.
+
 \underline{$(3)\Rightarrow(4)$.} Split a graded free surjection onto $P$.
+
 \underline{$(4)\Rightarrow(1)$.} Restrict lifts from the graded free module to its summand $P$.
 The proof of Corollary~\ref{cor:projective-sums} also applies with degree-preserving maps.
 For the last assertion, Corollary~\ref{cor:semisimple-summands} makes $Q$ a direct summand of $S^{\oplus m}$ for some $m$, so $Q\otimes_S A(-d)$ is a graded direct summand of $A(-d)^{\oplus m}$.
@@ -539,7 +529,6 @@ Let $A=\Bbbk[x]$ with $\deg x=1$.
 In particular, $A/\rad A=A$, whereas $\grtop A=\Bbbk$.
 \item Prove that the ordinary module $\Bbbk=A/(x)$ has no projective cover.
 \end{enumerate}
-\emph{Hint for (2).} Show that a projective cover would be isomorphic to $A$, and find a proper submodule of $A$ mapping onto $\Bbbk$.
 \end{exercise}
 
 \begin{hidden}
@@ -554,13 +543,13 @@ Since $\Bbbk[x]$ has no idempotents other than $0$ and $1$, we have $P\cong A$.
 But every surjection $A\to\Bbbk$ maps the proper submodule $(x-1)A$ onto $\Bbbk$, contradicting the cover property.
 \end{hidden}
 
-A graded module $M$ is \defn{bounded below} if there is an integer $b$ such that $M_d=0$ for all $d<b$.
-Every finitely generated graded module is bounded below: replace a finite generating set by its homogeneous components and take the least of their degrees.
+Recall that a graded module $M$ is \defn{bounded below} if $M_{<b}=0$ for some $b$.
+Every finitely generated graded module is bounded below: replace a finite generating set by its homogeneous components and take $b$ to be the least of their degrees.
 
 \begin{lemma}[Graded Nakayama lemma]\label{lem:graded-nakayama}
 For a bounded below graded right module $M$,
 \[
-\grtop M=0\quad\Longrightarrow\quad M=0.
+\grtop M:=M/MA_+=0\quad\Longrightarrow\quad M=0.
 \]
 If $N\subseteq M$ is a graded submodule and $N+MA_+=M$, then $N=M$.
 \end{lemma}
@@ -571,11 +560,11 @@ But $(MA_+)_d=\sum_{r>0}M_{d-r}A_r=0$, a contradiction.
 The second assertion follows by applying the first to $M/N$.
 \end{proof}
 
-This version uses boundedness below, not finite generation.
-In particular, homogeneous lifts of generators of $\grtop M$ generate $M$.
+Note that, in contrast to the ungraded bersion, graded Nakayama lemma only needs $M$ to be bounded below, without any finite generation assumption.
+In particular, (the lifts of) homogeneous generators of $\grtop M$ generate $M$.
 
 \begin{definition}\label{def:graded-projective-cover}
-A \defn{graded projective cover} of a bounded below locally finite-dimensional graded module $M$ is a surjection $p:P\to M$, with $P$ bounded below, locally finite-dimensional, and graded projective, such that
+A \defn{graded projective cover} of a bounded below lfd graded module $M$ is a surjection $p:P\to M$, with $P$ bounded below, lfd, and graded projective, such that
 \[
 \grtop p:\grtop P\xrightarrow{\sim}\grtop M.
 \]
@@ -592,7 +581,7 @@ Since $\grtop p(W)=\grtop M$, we have $p(U)+MA_+=M$; graded Nakayama gives $p(U)
 \end{supplementary}
 
 \begin{proposition}\label{prop:graded-projective-covers}
-Every bounded below locally finite-dimensional graded right $A$-module $M$ has a graded projective cover, unique up to a graded isomorphism commuting with the maps to $M$.
+Every bounded below lfd graded right $A$-module $M$ has a graded projective cover, unique up to a graded isomorphism.
 Its domain is isomorphic to
 \begin{equation}\label{eq:graded-cover-terms}
 P=\bigoplus_{d\in\Z}\bigl((\grtop M)_d\otimes_S A\bigr)(-d),
@@ -622,11 +611,11 @@ The uniqueness proof of Theorem~\ref{thm:ordinary-projective-covers} applies wit
 \end{proof}
 
 \begin{definition}\label{def:minimal-resolution}
-A \defn{graded projective resolution} is a projective resolution \eqref{eq:projective-resolution} in which the modules are graded, the maps preserve degree, and the $P_i$ are graded projective.
+A \defn{graded projective resolution} is a projective resolution \eqref{eq:projective-resolution} in which the modules are graded, the differentials are degree-preserving, and the $P_i$ are graded projective.
 It is \defn{minimal} if $p_0:P_0\to M$ and the maps $p_i:P_i\to K_i$, $x\mapsto d_i(x)$, with $K_1=\Ker p_0$ and $K_i=\Ker d_{i-1}$ for $i\geq2$, are graded projective covers for all $i\geq1$.
 \end{definition}
 
-The homological degree $i$ and the grading degree $d$ are distinct:
+The homological degree $i$ and the grading degree $d$\comm{use another letter to not confuse with the differential.  I prefer using $h,k$ for homological degree and $i,j$ for internal/Adams grading} are distinct:
 \[
 d_i:(P_i)_d\longrightarrow(P_{i-1})_d.
 \]
