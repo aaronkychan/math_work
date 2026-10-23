@@ -39,11 +39,11 @@ Let $\cdots\to Q_1\xrightarrow{d'_1}Q_0\xrightarrow{q_0}M'\to0$ be an exact sequ
 \item There are $A$-linear maps $f_h:P_h\to Q_h$ for $h\geq0$ with
 \[
 q_0f_0=fp_0,\qquad d'_hf_h=f_{h-1}d_h\quad\text{for all }h\geq1.
-\]
+\] \comm{use picture}
 \item If $(f'_h)_{h\geq0}$ is another such family, there are $A$-linear maps $s_h:P_h\to Q_{h+1}$ for $h\geq0$ with
 \[
 f_0-f'_0=d'_1s_0,\qquad f_h-f'_h=d'_{h+1}s_h+s_{h-1}d_h\quad\text{for all }h\geq1.
-\]
+\]\comm{use picture}
 \end{enumerate}
 \end{lemma}
 
@@ -114,7 +114,7 @@ Thus $\Ext$ extends $\Hom$ to higher degrees, and it vanishes for projective $M$
 \subsection{Graded Ext and minimal resolutions}\label{subsec:graded-ext}
 
 From now on $A$ is as in Subsection~\ref{subsec:graded-resolutions}: locally finite-dimensional non-negatively graded with $S=A_0$ finite-dimensional semisimple, and $S=A/A_+$ is regarded as a graded module in degree $0$.
-Write $S=\bigoplus_{y=1}^n\Bbbk e_y$ and $L_y=e_yS$ for the simple modules, denoted $L_j$ in Notation~\ref{not:hilbert-simples-summands}.
+Write $S=\bigoplus_{y=1}^n\Bbbk e_y$ and $L_y=e_yS$ for the simple modules.
 Let $M$ be a bounded below locally finite-dimensional graded right module and $N$ a graded right module.
 Let $P_\bullet\to M$ be a graded projective resolution, for instance a minimal one by Theorem~\ref{thm:minimal-resolution}.
 
@@ -128,7 +128,7 @@ For $h\geq0$ and $j\in\Z$, put
 Here $\Hom_A^\Z(P_h,N(j))$ is the space of homogeneous maps of degree $j$ (Notation~\ref{not:graded-hom}), and $\delta^h(\varphi)=\varphi\circ d_{h+1}$ as in \eqref{eq:hom-complex}.
 The proofs of Lemma~\ref{lem:comparison} and Proposition~\ref{prop:ext-well-defined} apply verbatim with degree-preserving maps, using that graded projective modules lift along degree-preserving surjections and that kernels of graded maps are graded.
 Hence $\Ext_A^h(M,N)_j$ is independent of $P_\bullet$ up to canonical isomorphism.
-The index $j$ is the \defn{internal degree}; the index $h$ is the homological degree.
+The index $j$ is the \defn{internal degree} or \defn{Adams degree} \comm{prefer using the term ``Adams grading"}; the index $h$ is the homological degree.
 
 \begin{remark}\label{rem:graded-ext-ungraded}
 A graded projective module is projective as an ungraded module, because it is a graded direct summand of a graded free module (Corollary~\ref{cor:graded-projective-characterisations}).
@@ -203,6 +203,8 @@ For $E=\Bbbk[\epsilon]/(\epsilon^2)$ with $\deg\epsilon=1$, Example~\ref{ex:mini
 In all three examples the non-zero groups $\Ext_A^h(S,S)_j$ lie on the line $j=-h$, because the generators of $P_h$ have degree $h$; we return to this in Section~\ref{sec:koszul-complex}.
 
 \subsection{Tor}
+
+\comm{have as much material in supplementary as possible.  only keep bare minimal essential things.}
 
 Let $M$ be a right $A$-module with a projective resolution $P_\bullet\to M$, and $N$ a left $A$-module.
 The maps $d_h\otimes\id_N$ make $P_\bullet\otimes_AN$ a chain complex of vector spaces (Definition~\ref{def:chain-complex}).
