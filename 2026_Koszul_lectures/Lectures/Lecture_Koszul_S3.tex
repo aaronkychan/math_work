@@ -2,26 +2,34 @@
 \section{The quadratic dual}\label{sec:quadratic-dual}
 
 
-From now on, we require the Assumption~\ref{ass:basic-semisimple}: $A_0=S=\bigoplus_{i=1}^n\Bbbk e_i$.  The general case when this assumption is removed will be dealt with in the advanced sections.
+We use Assumption~\ref{ass:basic-semisimple}: $A_0=S=\bigoplus_{i=1}^n\Bbbk e_i$.  The case of arbitrary finite-dimensional semisimple $S$ is treated in the advanced material.
 
 
 \subsection{Orthogonal complements and quadratic duality}
 
 \begin{proposition}[Duals of tensor products]\label{prop:D-tensor-duals}
-For finite-dimensional bimodules ${}_SV_S$ and ${}_SW_S$, there is a natural bimodule isomorphism
+For finite-dimensional bimodules ${}_SV_S$ and ${}_SW_S$, there is a bimodule isomorphism
 \begin{equation}\label{eq:D-tensor-duals}
-\theta:D(W)\otimes_S D(V)\xrightarrow{\sim}D(V\otimes_S W),\qquad
-\theta(\lambda\otimes\mu)(v\otimes w)=\sum_{i=1}^n\mu(ve_i)\,\lambda(e_iw).
+\begin{aligned}
+\theta_{V,W}:D(W)\otimes_S D(V)&\xrightarrow{\sim}D(V\otimes_S W),\\
+\theta_{V,W}(\lambda\otimes\mu)(v\otimes w)&=\sum_{i=1}^n\mu(ve_i)\,\lambda(e_iw).
+\end{aligned}
 \end{equation}
-\comm{add bi-naturality}
+It is natural contravariantly in both $V$ and $W$: for bimodule maps $f:V\to V'$ and $g:W\to W'$ between finite-dimensional bimodules,
+\begin{equation}\label{eq:D-tensor-binaturality}
+D(f\otimes_S g)\circ\theta_{V',W'}
+=\theta_{V,W}\circ(D(g)\otimes_S D(f)).
+\end{equation}
+We write $\theta$ when the two bimodules are clear.
 \end{proposition}
 
 \begin{supplementary}
 \begin{proof}
 By \eqref{eq:linear-bimodule-dual-action}, $(\lambda e_k)(w)=\lambda(e_kw)$ and $(e_k\mu)(v)=\mu(ve_k)$.
 Hence, for every $k$, replacing $v\otimes e_kw$ by $ve_k\otimes w$, or $\lambda\otimes e_k\mu$ by $\lambda e_k\otimes\mu$, leaves the right-hand side equal to $\mu(ve_k)\lambda(e_kw)$.
-By linearity the formula respects both tensor relations, so $\theta$ is well defined.
-For $s,t\in S$, the same rule gives $\theta(s\lambda\otimes\mu t)(v\otimes w)=\theta(\lambda\otimes\mu)(tv\otimes ws)$, so $\theta$ is a bimodule map; it commutes with precomposition by bimodule maps, so it is natural.
+Since $e_1,\ldots,e_n$ form a basis of $S$, the formula respects the identifications $vs\otimes w=v\otimes sw$ and $\lambda s\otimes\mu=\lambda\otimes s\mu$ for all $s\in S$, so $\theta$ is well defined.
+For $s,t\in S$, the same rule gives $\theta(s\lambda\otimes\mu t)(v\otimes w)=\theta(\lambda\otimes\mu)(tv\otimes ws)$, so $\theta$ is a bimodule map.
+For $\lambda\in D(W')$, $\mu\in D(V')$, $v\in V$, and $w\in W$, both sides of \eqref{eq:D-tensor-binaturality}, applied to $\lambda\otimes\mu$ and evaluated at $v\otimes w$, give $\sum_{i=1}^n\mu(f(v)e_i)\lambda(e_i g(w))$.
 For bijectivity, Lemma~\ref{lem:idempotent-tensors} and \eqref{eq:dual-blocks} decompose both sides into summands indexed by $(i,j,\ell)$, on which $\theta$ is
 \[
 D(e_jWe_\ell)\otimes_\Bbbk D(e_iVe_j)\longrightarrow D(e_iVe_j\otimes_\Bbbk e_jWe_\ell),\qquad
@@ -31,13 +39,16 @@ This map sends tensor products of dual-basis vectors to the dual basis of the te
 \end{proof}
 \end{supplementary}
 \begin{remark}
-Note that the use of $e_i$ is necessary, we cannot just take $\theta(\lambda\otimes \mu)(v\otimes w)=\mu(v)\lambda(w)$ (take for example $v\otimes w$ as $e_1\otimes e_2$ to see this).
+The formula $\mu(v)\lambda(w)$ need not define a functional on $V\otimes_S W$.
+For example, take $S=\Bbbk e_1\oplus\Bbbk e_2$, $V=W=S$, and let $\mu,\lambda:S\to\Bbbk$ be the first and second coordinate functionals, respectively.
+Then $e_1\otimes_S e_2=e_1\otimes_S e_1e_2=0$, whereas $\mu(e_1)\lambda(e_2)=1$.
 \end{remark}
 
 \begin{advanced}
 \begin{remark}[General $S$]
-For an arbitrary finite-dimensional semisimple $S$, there are no coordinate idempotents to sum over.
-After choosing a symmetrising form $\tau$ and bases $(x_k)$, $(y_k)$ of $S$ with $\tau(x_ky_l)=\delta_{kl}$, the sum $\sum_k\mu(vx_k)\lambda(y_kw)$ replaces \eqref{eq:D-tensor-duals}.
+An arbitrary finite-dimensional semisimple $S$ need not have a basis of coordinate idempotents.
+Choose a symmetrising form $\tau$ and bases $\{x_k\mid 1\leq k\leq\dim_\Bbbk S\}$, $\{y_k\mid 1\leq k\leq\dim_\Bbbk S\}$ of $S$ with $\tau(x_ky_\ell)=\delta_{k\ell}$.
+Then $\sum_{k=1}^{\dim_\Bbbk S}\mu(vx_k)\lambda(y_kw)$ replaces the sum in \eqref{eq:D-tensor-duals}.
 Alternatively, the one-sided $S$-duals give the choice-free isomorphisms $\theta_r,\theta_\ell$ in \eqref{eq:tensor-duals} (advanced).
 \end{remark}
 \end{advanced}
@@ -49,14 +60,13 @@ U^\perp:=\{\lambda\in D(M)\mid\lambda(u)=0\text{ for all }u\in U\}.
 \]
 \end{definition}
 
-It is a sub-bimodule of $D(M)$: for $s,t\in S$ and $u\in U$, we have $(s\lambda t)(u)=\lambda(tus)=0$ since $tus\in U$.
-In fact, by definition we have.
-\[U^\perp = \Ker(D\iota: DM\twoheadrightarrow DU)) \cong D(M/U)\]
-for $\iota:U\hookrightarrow M$ the canonical inclusion of $U$ as sub-bimodule of $M$.  In other words, applying $D$ to the canonical short exact sequence 
-\[
-0\to U\to M\to M/U \to 0 \quad \text{yields} \quad 0\to U^\perp \to DM\to DU\to 0
-\]
-in $\mod S^\en$.
+The space $U^\perp$ is a sub-bimodule of $D(M)$: for $\lambda\in U^\perp$, $s,t\in S$, and $u\in U$, we have $(s\lambda t)(u)=\lambda(tus)=0$ since $tus\in U$.
+Let $\iota:U\hookrightarrow M$ be the inclusion.
+Since $D(\iota)(\lambda)=\lambda|_U$, exactness of $D$ gives the short exact sequence of $S$-bimodules
+\begin{equation}\label{eq:orthogonal-exact}
+0\longrightarrow U^\perp\longrightarrow D(M)\xrightarrow{D(\iota)}D(U)\longrightarrow0.
+\end{equation}
+The quotient map $q:M\to M/U$ identifies $D(M/U)$ with $U^\perp$ by $D(q):\varphi\mapsto\varphi\circ q$.
 
 
 \begin{advanced}
@@ -73,10 +83,10 @@ U^\perp&:=\{f\in M^*\mid f(u)=0\text{ for all }u\in U\},\\
 \end{definition}
 
 Both orthogonal complements are $S$-sub-bimodules.
-Indeed, for $s,t\in S$ and $u\in U$, the action on $S$-dual \eqref{eq:bimodule-dual-actions} reads
+Indeed, for $s,t\in S$, $u\in U$, $f\in U^\perp$, and $g\in{}^\perp U$, the actions in \eqref{eq:bimodule-dual-actions} give
 \[
-(sft)(u)=sf(tu)=0\quad(f\in U^\perp),\qquad
-(sgt)(u)=g(us)t=0\quad(g\in{}^\perp U),
+(sft)(u)=sf(tu)=0,\qquad
+(sgt)(u)=g(us)t=0,
 \]
 since $tu,us\in U$.
 The orthogonal complements are defined without choosing a symmetrising form, but it is possible to realise, through the natural isomorphism associated to a chosen symmetrising form, the orthogonal complements as a sub-bimodule of $D(M)$.
@@ -133,12 +143,7 @@ Fix a quadratic presentation $A=T_S(V)/(R)$ as in Definition~\ref{def:quadratic}
 %\end{equation}
 %Here $v,w\in V$. Both isomorphisms reverse the order of the factors.
 
-By Proposition~\ref{prop:D-tensor-duals}, there is a bimodule isomorphism $\theta:D(V)\otimes_S D(V)\xrightarrow{\sim}D(V\otimes_S V)$, given by
-\[
-\theta(\lambda\otimes\mu)(v\otimes w)=\sum_{i=1}^n\mu(ve_i)\,\lambda(e_iw)
-\qquad(\lambda,\mu\in D(V),\ v,w\in V).
-\]
-We use $\theta$ to identify $D(V)\otimes_S D(V)$ with $D(V\otimes_S V)$.
+We use $\theta=\theta_{V,V}$ from \eqref{eq:D-tensor-duals} to identify $D(V)\otimes_S D(V)$ with $D(V\otimes_S V)$.
 In particular, the orthogonal complement $R^\perp\subset D(V\otimes_S V)$ of Definition~\ref{def:D-orthogonal} becomes a sub-bimodule of $D(V)\otimes_S D(V)$.
 
 \begin{definition}\label{def:quadratic-duals}
@@ -153,11 +158,11 @@ R^\perp=\{F\in D(V)\otimes_S D(V)\mid\theta(F)(R)=0\}.
 Note that $D(V)$ is placed in degree $1$ in \eqref{eq:quadratic-duals} -- in contrast to the graded dual $\bbD(V)$, which is placed in degree $-1$.
 By \eqref{eq:dual-blocks}, dualising reverses the idempotents of each generator: $e_jD(V)e_i\cong D(e_iVe_j)$.
 
-Note also that the quadratic dual is independent to the choice of quadratic presentation of $A$, up to $A_0$-preserving isomorphisms of graded algebras. 
+The quadratic dual is independent of the choice of quadratic presentation of $A$, up to $A_0$-preserving isomorphisms of graded algebras.
 Indeed, by Proposition~\ref{prop:quadratic-basic}, a quadratic presentation yields 
 \[S\cong A_0, V\cong A_1, \text{ and }R\cong \Ker(\mu_2:A_1\otimes_{A_0}A_1 \to A_2).
 \]
-Through these isomorphisms, functoriality of $D$ and Proposition~\ref{prop:D-tensor-duals} give
+Through these isomorphisms, functoriality of $D$ and binaturality \eqref{eq:D-tensor-binaturality} give
 \[
 D(V)\cong D(A_1),\qquad
 R^\perp\cong(\Ker\mu_2)^\perp\subset D(A_1)\otimes_{A_0}D(A_1).
@@ -173,13 +178,15 @@ In particular, $\dim_\Bbbk A^!_2=\dim_\Bbbk R$.
 \end{proposition}
 
 \begin{proof}
-To see that $A^!$ is quadratic, apply $D$ to the canonical short exact sequence $0\to R\to V\otimes_S V\to A_2\to 0$ of $S$-bimodules, which yields by exactness of $D$ a short exact sequence
+Since $D(V)$ is finite-dimensional and $R^\perp\subset D(V)\otimes_S D(V)$ is a sub-bimodule, the presentation \eqref{eq:quadratic-duals} is quadratic.
+Proposition~\ref{prop:quadratic-basic} gives the components in degrees $0$ and $1$.
+Applying \eqref{eq:orthogonal-exact} to $R\subset V\otimes_S V$ and using $\theta$ gives
 \begin{equation}\label{eq:restriction-relations}
 0\longrightarrow R^\perp\longrightarrow D(V)\otimes_S D(V)
 \xrightarrow{F\mapsto\theta(F)|_R}D(R)\longrightarrow0,
 \end{equation}
-of $S$-bimodule.
-In particular, we get $A_2^!\cong D(R)$ by Proposition \ref{prop:quadratic-basic}, and the remaining claim follows.
+as a short exact sequence of $S$-bimodules.
+Hence $A_2^!=(D(V)\otimes_S D(V))/R^\perp\cong D(R)$, and $\dim_\Bbbk D(R)=\dim_\Bbbk R$.
 \end{proof}
 %
 %Adding relations has the opposite effect after dualising. For $S$-sub-bimodules $R\subset R'\subset V\otimes_S V$,
@@ -201,12 +208,17 @@ Let $U$ be a sub-bimodule of a finite-dimensional bimodule ${}_SM_S$, and identi
 Then $(U^\perp)^\perp=U$.
 \end{lemma}
 \begin{proof}
-This follows from 
-\[(U^\perp)^\perp \cong D\Big(\frac{DM}{U^\perp}\Big)\cong D\Big(\frac{DM}{D(M/U)}\Big)\cong D D (U)\cong U.
+Let $\iota:U\hookrightarrow M$ be the inclusion.
+Dualising \eqref{eq:orthogonal-exact} and using naturality of evaluation \eqref{eq:vector-bidual-evaluation} gives
+\[
+(U^\perp)^\perp
+=\Im D(D(\iota))
+=\Im\bigl(\mathrm{ev}_M\circ\iota\circ\mathrm{ev}_U^{-1}\bigr)
+=\mathrm{ev}_M(U).
 \]
 \end{proof}
 \begin{supplementary}
-\begin{proof}[By direct calculatin]
+\begin{proof}[By direct calculation]
 If $u\in U$ and $\lambda\in U^\perp$, then $\mathrm{ev}_M(u)(\lambda)=\lambda(u)=0$; hence $U\subset(U^\perp)^\perp$.
 If $m\notin U$, extend a basis of $U$ by $m$ to a basis of $M$; the coordinate functional of $m$ lies in $U^\perp$ and does not vanish at $m$, so $m\notin(U^\perp)^\perp$.
 \end{proof}
@@ -220,24 +232,36 @@ Quadratic duality is an involution: evaluation induces an $S$-preserving isomorp
 \end{theorem}
 
 \begin{proof}
-\emph{Generators.} Evaluation $\mathrm{ev}_V:V\xrightarrow{\sim}D(D(V))$ is a bimodule isomorphism by Lemma~\ref{lem:linear-bidual} and \eqref{eq:linear-bimodule-dual-action}; it identifies the generators of $A$ and $(A^!)^!$.
-
-Now, universal property of tensor algebra (Proposition \ref{prop:tensor-universal}) implies that $\mathrm{ev}$ induces a graded algebra homomorphism $A\to (A^!)^!$.
-
-\emph{Relations.} 
-It remains to show that $\mathrm{ev}$ induces an isomorphism $(R^\perp)^perp$ with $R$, but this follows from Lemma \ref{lem:double-orthogonal}.
-\old{
-The relations of $(A^!)^!$ are $(R^\perp)^\perp\subset D(D(V))\otimes_S D(D(V))$, formed with the map $\theta$ for the bimodule $D(V)$.
-By \eqref{eq:linear-bimodule-dual-action}, $(\lambda e_i)(w)=\lambda(e_iw)$ and $(e_i\mu)(v)=\mu(ve_i)$, so for $v,w\in V$ and $\lambda,\mu\in D(V)$,
+By Lemma~\ref{lem:linear-bidual} and Proposition~\ref{prop:tensor-universal}, the bimodule isomorphism $\mathrm{ev}_V:V\xrightarrow{\sim}D(D(V))$ extends to an $S$-preserving isomorphism of graded algebras $T_S(V)\xrightarrow{\sim}T_S(D(D(V)))$.
+Evaluation is compatible with the tensor-dual identifications:
 \begin{equation}\label{eq:bidual-tensor-square}
-\theta\bigl(\mathrm{ev}_V(v)\otimes\mathrm{ev}_V(w)\bigr)(\lambda\otimes\mu)
-=\sum_{i=1}^n\mathrm{ev}_V(w)(\lambda e_i)\,\mathrm{ev}_V(v)(e_i\mu)
-=\theta(\lambda\otimes\mu)(v\otimes w).
+D(\theta_{V,V}^{-1})\circ\theta_{D(V),D(V)}\circ
+(\mathrm{ev}_V\otimes_S\mathrm{ev}_V)
+=\mathrm{ev}_{V\otimes_S V}.
 \end{equation}
-Thus $\mathrm{ev}_V\otimes\mathrm{ev}_V$ is the evaluation identification of $V\otimes_S V$ with the dual of $D(V\otimes_S V)\cong D(V)\otimes_S D(V)$.
-Lemma~\ref{lem:double-orthogonal}, applied to $R\subset V\otimes_S V$, identifies $(R^\perp)^\perp$ with $R$.
-The presentations \eqref{eq:quadratic-duals} therefore give an $S$-preserving isomorphism of graded algebras $(A^!)^!\cong A$.}
+Thus Lemma~\ref{lem:double-orthogonal} gives $(\mathrm{ev}_V\otimes_S\mathrm{ev}_V)(R)=(R^\perp)^\perp$.
+The tensor algebra isomorphism therefore identifies the ideals generated by these relation spaces and descends to
+\[
+A=T_S(V)/(R)\xrightarrow{\sim}
+T_S(D(D(V)))/((R^\perp)^\perp)=(A^!)^!.
+\]
 \end{proof}
+
+\begin{supplementary}
+To verify \eqref{eq:bidual-tensor-square}, recall that
+$D(\theta_{V,V}^{-1}):D(D(V)\otimes_S D(V))\to D(D(V\otimes_S V))$ sends $F$ to $F\circ\theta_{V,V}^{-1}$.
+For $v,w\in V$ and $\lambda,\mu\in D(V)$, \eqref{eq:linear-bimodule-dual-action} gives
+\[
+\begin{aligned}
+\theta_{D(V),D(V)}\bigl(\mathrm{ev}_V(v)\otimes\mathrm{ev}_V(w)\bigr)(\lambda\otimes\mu)
+&=\sum_{i=1}^n\mathrm{ev}_V(w)(\lambda e_i)\,\mathrm{ev}_V(v)(e_i\mu)\\
+&=\sum_{i=1}^n\mu(ve_i)\lambda(e_iw)\\
+&=\theta_{V,V}(\lambda\otimes\mu)(v\otimes w).
+\end{aligned}
+\]
+These are the evaluations of the two sides of \eqref{eq:bidual-tensor-square} at $v\otimes w$ and then at $\theta_{V,V}(\lambda\otimes\mu)$.
+Since the elements $\theta_{V,V}(\lambda\otimes\mu)$ span $D(V\otimes_S V)$, the identity follows.
+\end{supplementary}
 
 \begin{advanced}
 \begin{remark}[General $S$]
@@ -278,9 +302,10 @@ Under $M\cong{}^*(M^*)$ and $M\cong({}^*M)^*$ from the right and left $S$-dualit
 \begin{proof}
 For $u\in U$ and $f\in U^\perp$, evaluation $\mathrm{ev}_M:M\to{}^*(M^*)$ gives $\mathrm{ev}_M(u)(f)=f(u)=0$, so $U\subset{}^\perp(U^\perp)$ under Lemma~\ref{lem:S-bidual}.
 
-Conversely, suppose that there is some $m\notin U$, semisimplicity of $S$ implies (by Corollary~\ref{cor:semisimple-summands}) that $M/U\hookrightarrow S^{\oplus n}$ as a right $S$-module for some $n$.
-Consider the composition $M\onto M/U\hookrightarrow S^{\oplus n}\twoheadrightarrow S$ which sends $m$ to a non-zero element in a direct summand of $S^{\oplus n}$.
-Then this is a right $S$-linear map in $\Hom_S(M,S)=M^*$ satisfying $f(U)=0$ and $f(m)\neq0$.
+Conversely, let $m\notin U$.
+By Corollary~\ref{cor:semisimple-summands}, $M/U\hookrightarrow S^{\oplus d}$ as a right $S$-module for some $d$.
+Choose a coordinate projection $S^{\oplus d}\twoheadrightarrow S$ for which the composite $f:M\onto M/U\hookrightarrow S^{\oplus d}\twoheadrightarrow S$ is non-zero at $m$.
+Then $f\in\Hom_S(M,S)=M^*$ satisfies $f(U)=0$ and $f(m)\neq0$.
 Thus $f\in U^\perp$ and $m\notin{}^\perp(U^\perp)$.
 The proof of $({}^\perp U)^\perp=U$ is similar.
 \end{proof}
@@ -326,7 +351,7 @@ For $f,g\in V^*$, write $f'=\beta_V^{-1}\alpha_V(f)$ and $g'=\beta_V^{-1}\alpha_
 &=\tau\bigl(f(v)g'(w)\bigr)
 =\tau\bigl(g'(f(v)w)\bigr)\\
 &=\tau\bigl(g(f(v)w)\bigr)
-\qquad(v,w\in V).
+\qquad\text{for all }v,w\in V.
 \end{aligned}
 \]
 By \eqref{eq:orthogonal-comparison}, $(\beta_V^{-1}\alpha_V)^{\otimes_S2}$ therefore identifies $R^\perp$ with ${}^\perp R$.
