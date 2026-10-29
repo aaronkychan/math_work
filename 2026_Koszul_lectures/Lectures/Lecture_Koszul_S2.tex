@@ -910,10 +910,6 @@ Then
 =\sum_{i=1}^n[N:L_i][e_iU:L_j]
 \quad\text{for all }1\leq j\leq n.
 \]
-For a locally finite-dimensional graded right $A$-module $M$,
-\[
-h_{M\otimes_S A}(t)=h_M(t)h_A(t).
-\]
 \end{lemma}
 
 \begin{supplementary}
@@ -926,7 +922,6 @@ N\otimes_S U\cong\bigoplus_{i=1}^n(e_iU)^{\oplus[N:L_i]}.
 \]
 Counting copies of $L_j$ proves the first formula.
 Apply the first formula to $M_p\otimes_S A_q$ and sum over all $p,q\in\Z$ with $p+q=d$.
-By the definition of $h_A(t)$, the resulting sum is the coefficient of $t^d$ in $h_M(t)h_A(t)$.
 \end{proof}
 \end{supplementary}
 
@@ -990,9 +985,6 @@ The decomposition follows by distributing tensor products over direct sums, as i
 When $M,N$ are locally finite-dimensional and bounded below, only finitely many pairs $(p,q)$ contribute in a fixed degree, so the tensor product is locally finite-dimensional and bounded below.
 
 \begin{lemma}\label{lem:hilbert-field-tensor}
-\begin{enumerate}
-\item For locally finite-dimensional graded vector spaces $U,W$, we have 
-\end{enumerate}
 Let $A,B$ be locally finite-dimensional graded algebras with $A_0=\bigoplus_{i=1}^n\Bbbk e_i$ and $B_0=\bigoplus_{j=1}^m\Bbbk f_j$ where $e_i, f_j$'s are the coordinate idempotents.
 Give $A\otimes_\Bbbk B$ the total grading of Definition~\ref{def:total-tensor-grading}, so that $(A\otimes_\Bbbk B)_d=\bigoplus_{i+j=d}A_i\otimes_\Bbbk B_j$ and multiplication
 $(a\otimes b)(a'\otimes b')=aa'\otimes bb'$.
@@ -1055,109 +1047,6 @@ qA=\Bbbk A_4,\qquad
 Thus $qA$ does not impose the cubic relation $e_{12}e_{23}e_{34}=0$.
 \end{example}
 \end{advanced}
-
-\subsection{Orthogonal complements and quadratic duality}
-
-In this subsection, we require the Assumption~\ref{ass:basic-semisimple}: $A_0=S=\bigoplus_{i=1}^n\Bbbk e_i$.  The general case when this assumption is removed will be dealt with in the advanced sections.
-
-\begin{proposition}[Duals of tensor products]\label{prop:D-tensor-duals}
-For finite-dimensional bimodules ${}_SV_S$ and ${}_SW_S$, there is a natural bimodule isomorphism
-\begin{equation}\label{eq:D-tensor-duals}
-\theta:D(W)\otimes_S D(V)\xrightarrow{\sim}D(V\otimes_S W),\qquad
-\theta(\lambda\otimes\mu)(v\otimes w)=\sum_{i=1}^n\mu(ve_i)\,\lambda(e_iw).
-\end{equation}
-In words: dualising reverses the order of the tensor factors.
-\end{proposition}
-
-\begin{supplementary}
-\begin{proof}
-By \eqref{eq:linear-bimodule-dual-action}, $(\lambda e_k)(w)=\lambda(e_kw)$ and $(e_k\mu)(v)=\mu(ve_k)$.
-Hence, for every $k$, replacing $v\otimes e_kw$ by $ve_k\otimes w$, or $\lambda\otimes e_k\mu$ by $\lambda e_k\otimes\mu$, leaves the right-hand side equal to $\mu(ve_k)\lambda(e_kw)$.
-By linearity the formula respects both tensor relations, so $\theta$ is well defined.
-For $s,t\in S$, the same rule gives $\theta(s\lambda\otimes\mu t)(v\otimes w)=\theta(\lambda\otimes\mu)(tv\otimes ws)$, so $\theta$ is a bimodule map; it commutes with precomposition by bimodule maps, so it is natural.
-For bijectivity, Lemma~\ref{lem:idempotent-tensors} and \eqref{eq:dual-blocks} decompose both sides into summands indexed by $(i,j,\ell)$, on which $\theta$ is
-\[
-D(e_jWe_\ell)\otimes_\Bbbk D(e_iVe_j)\longrightarrow D(e_iVe_j\otimes_\Bbbk e_jWe_\ell),\qquad
-\lambda\otimes\mu\longmapsto\bigl(v\otimes w\mapsto\mu(v)\lambda(w)\bigr).
-\]
-This map sends tensor products of dual-basis vectors to the dual basis of the tensor-product basis, so it is an isomorphism.
-\end{proof}
-\end{supplementary}
-\begin{advanced}
-\begin{remark}[General $S$]
-For an arbitrary finite-dimensional semisimple $S$, there are no coordinate idempotents to sum over.
-After choosing a symmetrising form $\tau$ and bases $(x_k)$, $(y_k)$ of $S$ with $\tau(x_ky_l)=\delta_{kl}$, the sum $\sum_k\mu(vx_k)\lambda(y_kw)$ replaces \eqref{eq:D-tensor-duals}.
-Alternatively, the one-sided $S$-duals give the choice-free isomorphisms $\theta_r,\theta_\ell$ in \eqref{eq:tensor-duals} (advanced).
-\end{remark}
-\end{advanced}
-
-\begin{definition}\label{def:D-orthogonal}
-For a sub-bimodule $U$ of a finite-dimensional bimodule ${}_SM_S$, its \defn{orthogonal complement} is
-\[
-U^\perp:=\{\lambda\in D(M)\mid\lambda(u)=0\text{ for all }u\in U\}.
-\]
-\end{definition}
-
-It is a sub-bimodule of $D(M)$: for $s,t\in S$ and $u\in U$, we have $(s\lambda t)(u)=\lambda(tus)=0$ since $tus\in U$.
-
-\begin{advanced}
-For an arbitrary finite-dimensional semisimple $S$, the one-sided $S$-duals give the following choice-free orthogonal complements.
-
-\begin{definition}\label{def:orthogonals}
-For an $S$-sub-bimodule $U$ of a finite-dimensional $S$-bimodule $M$, its \defn{right orthogonal complement} and \defn{left orthogonal complement} are
-\[
-\begin{aligned}
-U^\perp&:=\{f\in M^*\mid f(u)=0\text{ for all }u\in U\},\\
-{}^\perp U&:=\{g\in{}^*M\mid g(u)=0\text{ for all }u\in U\}.
-\end{aligned}
-\]
-\end{definition}
-
-Both orthogonal complements are $S$-sub-bimodules.
-Indeed, for $s,t\in S$ and $u\in U$, the action on $S$-dual \eqref{eq:bimodule-dual-actions} reads
-\[
-(sft)(u)=sf(tu)=0\quad(f\in U^\perp),\qquad
-(sgt)(u)=g(us)t=0\quad(g\in{}^\perp U),
-\]
-since $tu,us\in U$.
-The orthogonal complements are defined without choosing a symmetrising form, but it is possible to realise, through the natural isomorphism associated to a chosen symmetrising form, the orthogonal complements as a sub-bimodule of $D(M)$.
-
-If $S$ is equipped with a symmetrising form $\tau:S\to\Bbbk$, the comparison maps $\alpha_M,\beta_M$ of \eqref{eq:dual-comparison} satisfy
-\begin{equation}\label{eq:orthogonal-comparison}
-\alpha_M(U^\perp)=\{\lambda\in D(M)\mid\lambda(u)=0\text{ for all }u\in U\}=\beta_M({}^\perp U)
-.
-\end{equation}
-The middle space is the orthogonal complement of Definition~\ref{def:D-orthogonal}; it contains $\alpha_M(U^\perp)$ and $\beta_M({}^\perp U)$: if $f\in U^\perp$ and $g\in{}^\perp U$, then $\tau\circ f$ and $\tau\circ g$ vanish on $U$.
-Conversely, $\alpha_M(f)(U)=0$ gives
-\[
-\tau(f(u)s)=\tau(f(us))=0
-\quad\text{for all }s\in S,\ u\in U.
-\]
-Non-degeneracy of $\tau$ forces $f(u)=0$ for every $u\in U$.
-For the left dual, $\tau(sg(u))=\tau(g(su))=0$ gives $g(u)=0$ instead.
-Bijectivity of $\alpha_M,\beta_M$ in Theorem~\ref{prop:dual-comparison} proves \eqref{eq:orthogonal-comparison}.
-\end{advanced}
-
-\begin{example}\label{ex:symmetric-orthogonals}
-We compute the orthogonal complements of the relation spaces of $\SymAlg(V)$ and $\bigwedge W$ for $\dim_{\Bbbk}V=2=\dim_{\Bbbk}W$.
-Take $V=\Bbbk x_1\oplus\Bbbk x_2$ and $W=\Bbbk y_1\oplus\Bbbk y_2$ in Example~\ref{ex:polynomial-exterior}.
-The relation spaces in $V\otimes_\Bbbk V$ and $W\otimes_\Bbbk W$, respectively, are
-\[
-\begin{aligned}
-R_{\SymAlg(V)}&=\Bbbk(x_1\otimes x_2-x_2\otimes x_1),\\
-R_{\bigwedge W}&=\Bbbk(y_1\otimes y_1)\oplus\Bbbk(y_2\otimes y_2)\oplus\Bbbk(y_1\otimes y_2+y_2\otimes y_1).
-\end{aligned}
-\]
-Let $x_1^*,x_2^*$ and $y_1^*,y_2^*$ be the dual bases of $D(V)$ and $D(W)$, respectively.
-By Proposition~\ref{prop:D-tensor-duals} with $S=\Bbbk$, where $\theta(\lambda\otimes\mu)(v\otimes w)=\mu(v)\lambda(w)$,
-\[
-\begin{aligned}
-R_{\SymAlg(V)}^\perp&=\operatorname{span}_\Bbbk\{x_1^*\otimes x_1^*,\,x_2^*\otimes x_2^*,\,x_1^*\otimes x_2^*+x_2^*\otimes x_1^*\},\\
-R_{\bigwedge W}^\perp&=\Bbbk(y_1^*\otimes y_2^*-y_2^*\otimes y_1^*).
-\end{aligned}
-\]
-The first space consists of the exterior relations on $D(V)$; the second consists of the symmetric relations on $D(W)$.
-\end{example}
 
 \Needspace{12\baselineskip}
 \subsection{Exercises}
@@ -1275,16 +1164,6 @@ h_{T_S(V)}(t)=\frac{1}{1-t^2}\begin{pmatrix}1&t\\t&1\end{pmatrix}.
 \item Find a homogeneous basis and the Hilbert series of $A=T_S(V)/(ab)$, and prove that $A$ is finite-dimensional.
 \end{enumerate}
 \emph{Hint for (1).} Count alternating words separately in each degree, including degree $0$.
-\end{exercise}
-
-\begin{exercise}
-For the algebras in Example~\ref{ex:polynomial-exterior}, prove
-\[
-\dim_\Bbbk\SymAlg(V)_2=\frac{n(n+1)}2,\qquad
-\dim_\Bbbk(\bigwedge W)_2=\frac{m(m-1)}2
-\quad\text{where }n=\dim_\Bbbk V,\ m=\dim_\Bbbk W.
-\]
-\emph{Hint.} Count the ordered pairs allowed in the two bases of Example~\ref{ex:polynomial-exterior}.
 \end{exercise}
 
 \pagebreak
