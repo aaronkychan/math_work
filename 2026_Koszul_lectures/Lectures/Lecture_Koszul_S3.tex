@@ -7,12 +7,44 @@ We use Assumption~\ref{ass:basic-semisimple}: $A_0=S=\bigoplus_{i=1}^n\Bbbk e_i$
 
 \subsection{Orthogonal complements and quadratic duality}
 
+
+\begin{lemma}\label{lem:idempotent-tensors}
+Let $S=\bigoplus_{i=1}^n\Bbbk e_i$ with coordinate idempotents, and consider bimodules ${}_SV_S$, ${}_SW_S$.
+There is a bimodule isomorphism
+\begin{equation}\label{eq:idempotent-tensor-decomposition}
+V\otimes_S W\cong\bigoplus_{i,j,k=1}^n e_iVe_j\otimes_\Bbbk e_jWe_k.
+\end{equation}
+Consequently, after choosing a basis of each $e_iVe_j$, a basis of $V^{\otimes_S d}$ for $d\geq1$ consists of products of $d$ chosen basis elements whose adjacent idempotents match.
+\end{lemma}
+
+\comm{proof can be simpler.  We have $e_i\otimes e_j=0$ for $i\neq j$, and so $V\otimes_SW \cong \bigoplus_{j}Ve_j\otimes_{\Bbbk} e_jW$.  Then combines with $V\otimes_S W \cong \Hom_{S^\en}(S^\en, V\otimes_S W)\cong \bigoplus_{i,j}\Hom_{S^\en}(\bigoplus_{i,j}(e_k\otimes e_i)S^\en,V\otimes_S W)\cong \bigoplus_{i,j}\Hom_{S^\en}(e_k\otimes e_i S^\en, V\otimes_SW)\cong \bigoplus_{i,j}e_iV\otimes_S We_k$.  We get the claim}
+\begin{supplementary}
+\begin{proof}
+The orthogonal idempotents sum to $1$, so
+\begin{equation}\label{eq:composable-tensors}
+V=\bigoplus_{i,j=1}^n e_iVe_j,\qquad
+(e_iVe_j)\otimes_S(e_pWe_k)=0
+\quad(1\leq i,j,p,k\leq n,\ j\neq p).
+\end{equation}
+Indeed, $v\otimes_S w=ve_j\otimes_S w=v\otimes_S e_jw=0$ for $v\in e_iVe_j$, $w\in e_pWe_k$, and $j\neq p$.
+The map from right to left in \eqref{eq:idempotent-tensor-decomposition} sends $v\otimes_\Bbbk w$ to $v\otimes_S w$ on each summand.
+Its inverse is
+\[
+V\otimes_S W\longrightarrow\bigoplus_{i,j,k=1}^n e_iVe_j\otimes_\Bbbk e_jWe_k,
+\qquad
+v\otimes_S w\longmapsto\sum_{i,j,k=1}^n e_ive_j\otimes_\Bbbk e_jwe_k.
+\]
+Checking that these two assignments induce well-defined, mutually inverse maps is left to the reader.
+Iterating \eqref{eq:idempotent-tensor-decomposition} and using Definition~\ref{def:vector-tensor} gives the stated basis.
+\end{proof}
+\end{supplementary}
+
 \begin{proposition}[Duals of tensor products]\label{prop:D-tensor-duals}
 For finite-dimensional bimodules ${}_SV_S$ and ${}_SW_S$, there is a bimodule isomorphism
 \begin{equation}\label{eq:D-tensor-duals}
 \begin{aligned}
-\theta_{V,W}:D(W)\otimes_S D(V)&\xrightarrow{\sim}D(V\otimes_S W),\\
-\theta_{V,W}(\lambda\otimes\mu)(v\otimes w)&=\sum_{i=1}^n\mu(ve_i)\,\lambda(e_iw).
+\theta_{V,W}:D(W)\otimes_S D(V)\xrightarrow{\sim}D(V\otimes_S W), \quad
+\lambda\otimes\mu \mapsto \Big(v\otimes w\mapsto \sum_{i=1}^n\mu(ve_i)\,\lambda(e_iw)\Big).
 \end{aligned}
 \end{equation}
 It is natural contravariantly in both $V$ and $W$: for bimodule maps $f:V\to V'$ and $g:W\to W'$ between finite-dimensional bimodules,
@@ -25,33 +57,49 @@ We write $\theta$ when the two bimodules are clear.
 
 \begin{supplementary}
 \begin{proof}
-By \eqref{eq:linear-bimodule-dual-action}, $(\lambda e_k)(w)=\lambda(e_kw)$ and $(e_k\mu)(v)=\mu(ve_k)$.
-Hence, for every $k$, replacing $v\otimes e_kw$ by $ve_k\otimes w$, or $\lambda\otimes e_k\mu$ by $\lambda e_k\otimes\mu$, leaves the right-hand side equal to $\mu(ve_k)\lambda(e_kw)$.
-Since $e_1,\ldots,e_n$ form a basis of $S$, the formula respects the identifications $vs\otimes w=v\otimes sw$ and $\lambda s\otimes\mu=\lambda\otimes s\mu$ for all $s\in S$, so $\theta$ is well defined.
-For $s,t\in S$, the same rule gives $\theta(s\lambda\otimes\mu t)(v\otimes w)=\theta(\lambda\otimes\mu)(tv\otimes ws)$, so $\theta$ is a bimodule map.
-For $\lambda\in D(W')$, $\mu\in D(V')$, $v\in V$, and $w\in W$, both sides of \eqref{eq:D-tensor-binaturality}, applied to $\lambda\otimes\mu$ and evaluated at $v\otimes w$, give $\sum_{i=1}^n\mu(f(v)e_i)\lambda(e_i g(w))$.
+By \eqref{eq:linear-bimodule-dual-action}, we have $(\lambda e_k)(w)=\lambda(e_kw)$ and $(e_k\mu)(v)=\mu(ve_k)$.
+Combining with $D(W)\otimes_S D(V)\cong \bigoplus_{i=1}^n D(W)e_i\otimes_S e_iD(V)$ implies that $\theta$ is a well-defined bimodule map.
+
 For bijectivity, Lemma~\ref{lem:idempotent-tensors} and \eqref{eq:dual-blocks} decompose both sides into summands indexed by $(i,j,\ell)$, on which $\theta$ is
 \[
 D(e_jWe_\ell)\otimes_\Bbbk D(e_iVe_j)\longrightarrow D(e_iVe_j\otimes_\Bbbk e_jWe_\ell),\qquad
 \lambda\otimes\mu\longmapsto\bigl(v\otimes w\mapsto\mu(v)\lambda(w)\bigr).
 \]
 This map sends tensor products of dual-basis vectors to the dual basis of the tensor-product basis, so it is an isomorphism.
+
+For $\lambda\in D(W')$, $\mu\in D(V')$, $v\in V$, and $w\in W$, both sides of \eqref{eq:D-tensor-binaturality}, applied to $\lambda\otimes\mu$ and evaluated at $v\otimes w$, give $\sum_{i=1}^n\mu(f(v)e_i)\lambda(e_i g(w))$.
 \end{proof}
 \end{supplementary}
 
-\begin{lemma}[Evaluation and tensor products]\label{lem:evaluation-tensor-compatibility}
+
+\begin{remark}
+The formula $\mu(v)\lambda(w)$ need not define a functional on $V\otimes_S W$.
+For example, take $S=\Bbbk e_1\oplus\Bbbk e_2$, $V=W=S$, and let $\mu,\lambda$ be the dual of $e_1, e_2$ respectively.
+Then $e_1\otimes_S e_2=e_1\otimes_S e_1e_2=0$, whereas $\mu(e_1)\lambda(e_2)=1$.
+\end{remark}
+
+\begin{advanced}
+\begin{remark}[General $S$]
+An arbitrary finite-dimensional semisimple $S$ need not have a basis of coordinate idempotents.
+Choose a symmetrising form $\tau$ and bases $\{x_k\mid 1\leq k\leq\dim_\Bbbk S\}$, $\{y_k\mid 1\leq k\leq\dim_\Bbbk S\}$ of $S$ with $\tau(x_ky_\ell)=\delta_{k\ell}$.
+Then $\sum_{k=1}^{\dim_\Bbbk S}\mu(vx_k)\lambda(y_kw)$ replaces the sum in \eqref{eq:D-tensor-duals}.
+Alternatively, the one-sided $S$-duals give the choice-free isomorphisms $\theta_r,\theta_\ell$ in \eqref{eq:tensor-duals}.
+\end{remark}
+\end{advanced}
+
+\begin{lemma}[Monoidality of evaluation]\label{lem:evaluation-tensor-compatibility}
 For finite-dimensional bimodules ${}_SV_S$ and ${}_SW_S$, the following diagram commutes:
 \begin{equation}\label{eq:bidual-tensor-square}
-\xymatrix@C=70pt@R=32pt{
+\vcenter{\xymatrix@C=70pt@R=32pt{
 V\otimes_S W
 \ar[r]^{\mathrm{ev}_V\otimes_S\mathrm{ev}_W}
 \ar[d]_{\mathrm{ev}_{V\otimes_S W}}
 & D(D(V))\otimes_S D(D(W))
 \ar[d]^{\theta_{D(W),D(V)}}\\
 D(D(V\otimes_S W))
+\ar[r]_{D(\theta_{V,W})}.
 & D(D(W)\otimes_S D(V))
-\ar[l]_{D(\theta_{V,W}^{-1})}.
-}
+}}
 \end{equation}
 \end{lemma}
 
@@ -78,20 +126,6 @@ Composing with $D(\theta_{V,W}^{-1})$ gives \eqref{eq:bidual-tensor-square}.
 \end{proof}
 \end{supplementary}
 
-\begin{remark}
-The formula $\mu(v)\lambda(w)$ need not define a functional on $V\otimes_S W$.
-For example, take $S=\Bbbk e_1\oplus\Bbbk e_2$, $V=W=S$, and let $\mu,\lambda:S\to\Bbbk$ be the first and second coordinate functionals, respectively.
-Then $e_1\otimes_S e_2=e_1\otimes_S e_1e_2=0$, whereas $\mu(e_1)\lambda(e_2)=1$.
-\end{remark}
-
-\begin{advanced}
-\begin{remark}[General $S$]
-An arbitrary finite-dimensional semisimple $S$ need not have a basis of coordinate idempotents.
-Choose a symmetrising form $\tau$ and bases $\{x_k\mid 1\leq k\leq\dim_\Bbbk S\}$, $\{y_k\mid 1\leq k\leq\dim_\Bbbk S\}$ of $S$ with $\tau(x_ky_\ell)=\delta_{k\ell}$.
-Then $\sum_{k=1}^{\dim_\Bbbk S}\mu(vx_k)\lambda(y_kw)$ replaces the sum in \eqref{eq:D-tensor-duals}.
-Alternatively, the one-sided $S$-duals give the choice-free isomorphisms $\theta_r,\theta_\ell$ in \eqref{eq:tensor-duals}.
-\end{remark}
-\end{advanced}
 
 \begin{definition}\label{def:D-orthogonal}
 For a sub-bimodule $U$ of a finite-dimensional bimodule ${}_SM_S$, its \defn{orthogonal complement} is

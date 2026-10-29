@@ -653,35 +653,6 @@ The determinant vanishes whenever two adjacent factors agree, hence on the degre
 On increasing products it is $1$ on $y_{j_1}\cdots y_{j_d}$ and $0$ on the others, proving independence in every characteristic.
 \end{supplementary}
 
-\begin{lemma}\label{lem:idempotent-tensors}
-Let $S=\bigoplus_{i=1}^n\Bbbk e_i$ with coordinate idempotents, and consider bimodules ${}_SV_S$, ${}_SW_S$.
-There is a bimodule isomorphism
-\begin{equation}\label{eq:idempotent-tensor-decomposition}
-V\otimes_S W\cong\bigoplus_{i,j,k=1}^n e_iVe_j\otimes_\Bbbk e_jWe_k.
-\end{equation}
-Consequently, after choosing a basis of each $e_iVe_j$, a basis of $V^{\otimes_S d}$ for $d\geq1$ consists of products of $d$ chosen basis elements whose adjacent idempotents match.
-\end{lemma}
-\begin{supplementary}
-\begin{proof}
-The orthogonal idempotents sum to $1$, so
-\begin{equation}\label{eq:composable-tensors}
-V=\bigoplus_{i,j=1}^n e_iVe_j,\qquad
-(e_iVe_j)\otimes_S(e_pWe_k)=0
-\quad(1\leq i,j,p,k\leq n,\ j\neq p).
-\end{equation}
-Indeed, $v\otimes_S w=ve_j\otimes_S w=v\otimes_S e_jw=0$ for $v\in e_iVe_j$, $w\in e_pWe_k$, and $j\neq p$.
-The map from right to left in \eqref{eq:idempotent-tensor-decomposition} sends $v\otimes_\Bbbk w$ to $v\otimes_S w$ on each summand.
-Its inverse is
-\[
-V\otimes_S W\longrightarrow\bigoplus_{i,j,k=1}^n e_iVe_j\otimes_\Bbbk e_jWe_k,
-\qquad
-v\otimes_S w\longmapsto\sum_{i,j,k=1}^n e_ive_j\otimes_\Bbbk e_jwe_k.
-\]
-Checking that these two assignments induce well-defined, mutually inverse maps is left to the reader.
-Iterating \eqref{eq:idempotent-tensor-decomposition} and using Definition~\ref{def:vector-tensor} gives the stated basis.
-\end{proof}
-\end{supplementary}
-
 
 \begin{example}\label{ex:tensor-A3}
 We apply Lemma~\ref{lem:idempotent-tensors} to realise $\Bbbk A_3$ as a tensor algebra.
