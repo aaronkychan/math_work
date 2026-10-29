@@ -20,22 +20,40 @@ Consequently, after choosing a basis of each $e_iVe_j$, a basis of $V^{\otimes_S
 \comm{proof can be simpler.  We have $e_i\otimes e_j=0$ for $i\neq j$, and so $V\otimes_SW \cong \bigoplus_{j}Ve_j\otimes_{\Bbbk} e_jW$.  Then combines with $V\otimes_S W \cong \Hom_{S^\en}(S^\en, V\otimes_S W)\cong \bigoplus_{i,j}\Hom_{S^\en}(\bigoplus_{i,j}(e_k\otimes e_i)S^\en,V\otimes_S W)\cong \bigoplus_{i,j}\Hom_{S^\en}(e_k\otimes e_i S^\en, V\otimes_SW)\cong \bigoplus_{i,j}e_iV\otimes_S We_k$.  We get the claim}
 \begin{supplementary}
 \begin{proof}
-The orthogonal idempotents sum to $1$, so
-\begin{equation}\label{eq:composable-tensors}
-V=\bigoplus_{i,j=1}^n e_iVe_j,\qquad
-(e_iVe_j)\otimes_S(e_pWe_k)=0
-\quad(1\leq i,j,p,k\leq n,\ j\neq p).
-\end{equation}
-Indeed, $v\otimes_S w=ve_j\otimes_S w=v\otimes_S e_jw=0$ for $v\in e_iVe_j$, $w\in e_pWe_k$, and $j\neq p$.
-The map from right to left in \eqref{eq:idempotent-tensor-decomposition} sends $v\otimes_\Bbbk w$ to $v\otimes_S w$ on each summand.
-Its inverse is
+Since $S$ is commutative with $se_j=s_je_j$ for $s=\sum_js_je_j$, $s_j\in\Bbbk$, and $\sum_je_j=1$, we have $v=\sum_jve_j$ and $w=\sum_je_jw$ for all $v\in V$, $w\in W$.
+
+\underline{Step 1: $V\otimes_SW\cong\bigoplus_{j=1}^nVe_j\otimes_\Bbbk e_jW$.}
+Define
 \[
-V\otimes_S W\longrightarrow\bigoplus_{i,j,k=1}^n e_iVe_j\otimes_\Bbbk e_jWe_k,
-\qquad
-v\otimes_S w\longmapsto\sum_{i,j,k=1}^n e_ive_j\otimes_\Bbbk e_jwe_k.
+\varphi:\bigoplus_{j=1}^nVe_j\otimes_\Bbbk e_jW\longrightarrow V\otimes_SW,\qquad
+v\otimes w\longmapsto v\otimes_Sw,
 \]
-Checking that these two assignments induce well-defined, mutually inverse maps is left to the reader.
-Iterating \eqref{eq:idempotent-tensor-decomposition} and using Definition~\ref{def:vector-tensor} gives the stated basis.
+and
+\[
+\psi:V\otimes_SW\longrightarrow\bigoplus_{j=1}^nVe_j\otimes_\Bbbk e_jW,\qquad
+v\otimes_Sw\longmapsto\sum_{j=1}^nve_j\otimes_\Bbbk e_jw.
+\]
+The map $\psi$ is well defined: the assignment $(v,w)\mapsto\sum_jve_j\otimes e_jw$ is $\Bbbk$-bilinear and, for $s=\sum_js_je_j\in S$, satisfies
+\[
+\sum_j(vs)e_j\otimes e_jw=\sum_js_j\,ve_j\otimes e_jw=\sum_jve_j\otimes e_j(sw),
+\]
+so it is $S$-balanced.
+Both maps are bimodule maps for the left action on $V$ and the right action on $W$.
+For $v\in Ve_j$ and $w\in e_jW$ we have $ve_p=0$ for $p\neq j$, so $\psi\varphi(v\otimes w)=ve_j\otimes e_jw=v\otimes w$.
+In the other direction,
+\[
+\varphi\psi(v\otimes_Sw)=\sum_jve_j\otimes_Sw=v\otimes_S\Bigl(\sum_je_j\Bigr)w=v\otimes_Sw,
+\]
+using $ve_j\otimes_Sw=v\otimes_Se_jw$.
+Thus $\varphi$ and $\psi$ are inverse isomorphisms.
+
+\underline{Step 2.}
+Write $Ve_j=\bigoplus_ie_iVe_j$ and $e_jW=\bigoplus_ke_jWe_k$ and expand the tensor products over $\Bbbk$; this gives \eqref{eq:idempotent-tensor-decomposition}.
+
+\underline{Basis.}
+For $d\geq2$, apply \eqref{eq:idempotent-tensor-decomposition} with $W=V^{\otimes_S(d-1)}$.
+By induction on $d$, $e_jWe_k$ has a basis of composable products of $d-1$ chosen basis elements from $j$ to $k$ (for $d-1=1$ these are the chosen bases of $e_jVe_k$; Definition~\ref{def:vector-tensor} gives $V^{\otimes_S1}=V$).
+A basis of $e_iVe_j\otimes_\Bbbk e_jWe_k$ is given by the products $b\otimes b'$ of basis elements, which are products of $d$ chosen basis elements with matching adjacent idempotents.
 \end{proof}
 \end{supplementary}
 
@@ -57,17 +75,68 @@ We write $\theta$ when the two bimodules are clear.
 
 \begin{supplementary}
 \begin{proof}
-By \eqref{eq:linear-bimodule-dual-action}, we have $(\lambda e_k)(w)=\lambda(e_kw)$ and $(e_k\mu)(v)=\mu(ve_k)$.
-Combining with $D(W)\otimes_S D(V)\cong \bigoplus_{i=1}^n D(W)e_i\otimes_S e_iD(V)$ implies that $\theta$ is a well-defined bimodule map.
-
-For bijectivity, Lemma~\ref{lem:idempotent-tensors} and \eqref{eq:dual-blocks} decompose both sides into summands indexed by $(i,j,\ell)$, on which $\theta$ is
+By \eqref{eq:linear-bimodule-dual-action}, the actions on the duals are
 \[
-D(e_jWe_\ell)\otimes_\Bbbk D(e_iVe_j)\longrightarrow D(e_iVe_j\otimes_\Bbbk e_jWe_\ell),\qquad
-\lambda\otimes\mu\longmapsto\bigl(v\otimes w\mapsto\mu(v)\lambda(w)\bigr).
+(\lambda t)(w)=\lambda(tw),\quad(s\lambda)(w)=\lambda(ws),\quad(\mu t)(v)=\mu(tv),\quad(s\mu)(v)=\mu(vs),
 \]
-This map sends tensor products of dual-basis vectors to the dual basis of the tensor-product basis, so it is an isomorphism.
+for $s,t\in S$, $\lambda\in D(W)$, $\mu\in D(V)$.
+Write $s=\sum_is_ie_i$ with $s_i\in\Bbbk$, so that $se_i=e_is=s_ie_i$.
 
-For $\lambda\in D(W')$, $\mu\in D(V')$, $v\in V$, and $w\in W$, both sides of \eqref{eq:D-tensor-binaturality}, applied to $\lambda\otimes\mu$ and evaluated at $v\otimes w$, give $\sum_{i=1}^n\mu(f(v)e_i)\lambda(e_i g(w))$.
+\underline{$\theta$ is well defined.}
+Fix $\lambda\in D(W)$ and $\mu\in D(V)$, and put $\Theta(\lambda,\mu)(v,w):=\sum_i\mu(ve_i)\lambda(e_iw)$.
+This is $\Bbbk$-bilinear in $(v,w)$, and $S$-balanced: for $s\in S$,
+\[
+\Theta(\lambda,\mu)(vs,w)=\sum_is_i\,\mu(ve_i)\lambda(e_iw)=\Theta(\lambda,\mu)(v,sw).
+\]
+So $\Theta(\lambda,\mu)$ defines an element of $D(V\otimes_SW)$.
+The assignment $(\lambda,\mu)\mapsto\Theta(\lambda,\mu)$ is $\Bbbk$-bilinear and $S$-balanced, since
+\[
+\Theta(\lambda s,\mu)(v,w)=\sum_i\mu(ve_i)\lambda(se_iw)=\sum_is_i\,\mu(ve_i)\lambda(e_iw)=\sum_i\mu(ve_is)\lambda(e_iw)=\Theta(\lambda,s\mu)(v,w).
+\]
+Hence $\theta$ is a well-defined $\Bbbk$-linear map on $D(W)\otimes_SD(V)$.
+
+\underline{$\theta$ is a bimodule map.}
+For $s\in S$ and $x=v\otimes w\in V\otimes_SW$, the left action on $D(V\otimes_SW)$ is $(sf)(x)=f(xs)=f(v\otimes ws)$.
+Thus
+\[
+\theta(s\lambda\otimes\mu)(v\otimes w)=\sum_i\mu(ve_i)\lambda(e_iws)=\theta(\lambda\otimes\mu)(v\otimes ws),
+\]
+so $\theta(s\lambda\otimes\mu)=s\,\theta(\lambda\otimes\mu)$.
+Similarly, $(fs)(x)=f(sx)=f(sv\otimes w)$ and
+\[
+\theta(\lambda\otimes\mu s)(v\otimes w)=\sum_i\mu(sve_i)\lambda(e_iw)=\theta(\lambda\otimes\mu)(sv\otimes w).
+\]
+
+\underline{$\theta$ is bijective.}
+By Lemma~\ref{lem:idempotent-tensors} and \eqref{eq:dual-blocks},
+\[
+D(W)\otimes_SD(V)\cong\bigoplus_{a,b,c=1}^n e_aD(W)e_b\otimes_\Bbbk e_bD(V)e_c\cong\bigoplus_{a,b,c=1}^nD(e_bWe_a)\otimes_\Bbbk D(e_cVe_b),
+\]
+and, since $V\otimes_SW\cong\bigoplus_{a,b,c}e_cVe_b\otimes_\Bbbk e_bWe_a$ is finite-dimensional,
+\[
+D(V\otimes_SW)\cong\bigoplus_{a,b,c=1}^nD(e_cVe_b\otimes_\Bbbk e_bWe_a).
+\]
+Take $\lambda\in e_aD(W)e_b$ and $\mu\in e_bD(V)e_c$, regarded as functionals supported on $e_bWe_a$ and $e_cVe_b$ by \eqref{eq:dual-blocks}.
+In $\sum_i\mu(ve_i)\lambda(e_iw)$, the first factor can be non-zero only for $i=b$ and $v\in e_cV$, and the second only for $i=b$ and $w\in We_a$.
+Hence $\theta(\lambda\otimes\mu)$ vanishes on all summands of $V\otimes_SW$ other than $e_cVe_b\otimes_\Bbbk e_bWe_a$, and on it equals $v\otimes w\mapsto\mu(v)\lambda(w)$.
+So $\theta$ preserves the decompositions, and on the summand $(a,b,c)$ it is
+\[
+D(e_bWe_a)\otimes_\Bbbk D(e_cVe_b)\longrightarrow D(e_cVe_b\otimes_\Bbbk e_bWe_a),\qquad\lambda\otimes\mu\longmapsto\bigl(v\otimes w\mapsto\mu(v)\lambda(w)\bigr).
+\]
+This is an isomorphism of finite-dimensional vector spaces: it sends the tensor products of dual basis vectors to the dual basis of the tensor product basis.
+
+\underline{Naturality.}
+For $\lambda\in D(W')$, $\mu\in D(V')$, $v\in V$, $w\in W$, and using that $f,g$ commute with the idempotents,
+\[
+\begin{aligned}
+\bigl(D(f\otimes_Sg)\,\theta_{V',W'}(\lambda\otimes\mu)\bigr)(v\otimes w)
+&=\sum_i\mu(f(v)e_i)\lambda(e_ig(w))
+=\sum_i\mu(f(ve_i))\lambda(g(e_iw))\\
+&=\sum_i\bigl(D(f)\mu\bigr)(ve_i)\bigl(D(g)\lambda\bigr)(e_iw)
+=\theta_{V,W}\bigl(D(g)\lambda\otimes D(f)\mu\bigr)(v\otimes w).
+\end{aligned}
+\]
+This is \eqref{eq:D-tensor-binaturality}.
 \end{proof}
 \end{supplementary}
 
