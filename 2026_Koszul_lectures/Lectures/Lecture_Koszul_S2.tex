@@ -641,6 +641,7 @@ Their respective bases are
 \{y_{j_1}\cdots y_{j_d}\mid0\leq d\leq m,\ 1\leq j_1<\cdots<j_d\leq m\}.
 \end{gathered}
 \]
+It is customary to write $\SymAlg^d(V):= \SymAlg(V)_d$ and $\bigwedge^d(W):=(\bigwedge(W))_d$.
 \end{example}
 
 \begin{supplementary}
@@ -912,18 +913,15 @@ Then
 \]
 \end{lemma}
 
-\begin{supplementary}
 \begin{proof}
 Decompose $N\cong\bigoplus_{i=1}^n(e_iS)^{\oplus[N:L_i]}$.
 Multiplication $e_iS\otimes_S U\to e_iU$, $e_is\otimes u\mapsto e_isu$, is an isomorphism with inverse $u\mapsto e_i\otimes u$.
 Distribution over direct sums therefore gives
 \[
-N\otimes_S U\cong\bigoplus_{i=1}^n(e_iU)^{\oplus[N:L_i]}.
+N\otimes_S U\cong\bigoplus_{i=1}^n(e_iU)^{\oplus[N:L_i]},
 \]
-Counting copies of $L_j$ proves the first formula.
-Apply the first formula to $M_p\otimes_S A_q$ and sum over all $p,q\in\Z$ with $p+q=d$.
+which implies the claim.
 \end{proof}
-\end{supplementary}
 
 \begin{example}[Hilbert series of a tensor algebra]\label{ex:hilbert-tensor-algebra}
 Consider the tensor algebra $A=T_S(V)$ and put 
@@ -936,8 +934,7 @@ Since $e_iA_0=L_i$ and $e_iA_{d+1}\cong(e_iA_d)\otimes_S A_1$, Lemma~\ref{lem:di
 \]
 Consequently,
 \begin{equation}\label{eq:hilbert-tensor-algebra}
-\boxed{\displaystyle
-h_{T_S(V)}(t)=\sum_{d\geq0}t^dC^d=(I_n-tC)^{-1}.}
+h_{T_S(V)}(t)=\sum_{d\geq0}t^dC^d=\frac{1}{I_n-tC}.
 \end{equation}
 Indeed, multiplying the series on either side by $I_n-tC$ gives constant coefficient $I_n$; the coefficient of $t^d$ for $d\geq1$ is $C^d-C^d=0$.
 The inverse is therefore an identity of formal power series with the coefficient multiplication defined above.

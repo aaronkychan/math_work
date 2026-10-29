@@ -49,7 +49,7 @@ Then $e_1\otimes_S e_2=e_1\otimes_S e_1e_2=0$, whereas $\mu(e_1)\lambda(e_2)=1$.
 An arbitrary finite-dimensional semisimple $S$ need not have a basis of coordinate idempotents.
 Choose a symmetrising form $\tau$ and bases $\{x_k\mid 1\leq k\leq\dim_\Bbbk S\}$, $\{y_k\mid 1\leq k\leq\dim_\Bbbk S\}$ of $S$ with $\tau(x_ky_\ell)=\delta_{k\ell}$.
 Then $\sum_{k=1}^{\dim_\Bbbk S}\mu(vx_k)\lambda(y_kw)$ replaces the sum in \eqref{eq:D-tensor-duals}.
-Alternatively, the one-sided $S$-duals give the choice-free isomorphisms $\theta_r,\theta_\ell$ in \eqref{eq:tensor-duals} (advanced).
+Alternatively, the one-sided $S$-duals give the choice-free isomorphisms $\theta_r,\theta_\ell$ in \eqref{eq:tensor-duals}.
 \end{remark}
 \end{advanced}
 
@@ -66,7 +66,7 @@ Since $D(\iota)(\lambda)=\lambda|_U$, exactness of $D$ gives the short exact seq
 \begin{equation}\label{eq:orthogonal-exact}
 0\longrightarrow U^\perp\longrightarrow D(M)\xrightarrow{D(\iota)}D(U)\longrightarrow0.
 \end{equation}
-The quotient map $q:M\to M/U$ identifies $D(M/U)$ with $U^\perp$ by $D(q):\varphi\mapsto\varphi\circ q$.
+In particular, let $q:M\to M/U$ be the quotient map identifying $\Cok(\iota)\cong M/U$, then $D(q):D(M/U)\to DM$ (with  $\varphi\mapsto\varphi\circ q$) induces $D(M/U) \cong \Im(D(q)) = U^\perp$.
 
 
 \begin{advanced}
@@ -214,8 +214,9 @@ Dualising \eqref{eq:orthogonal-exact} and using naturality of evaluation \eqref{
 (U^\perp)^\perp
 =\Im D(D(\iota))
 =\Im\bigl(\mathrm{ev}_M\circ\iota\circ\mathrm{ev}_U^{-1}\bigr)
-=\mathrm{ev}_M(U).
+=\mathrm{ev}_M(U),
 \]
+here $D(D\iota)=\mathrm{ev}_M\circ \iota \circ \mathrm{ev}_U^{-1}$ follows from the naturality of $\mathrm{ev}$.
 \end{proof}
 \begin{supplementary}
 \begin{proof}[By direct calculation]
@@ -232,7 +233,12 @@ Quadratic duality is an involution: evaluation induces an $S$-preserving isomorp
 \end{theorem}
 
 \begin{proof}
-By Lemma~\ref{lem:linear-bidual} and Proposition~\ref{prop:tensor-universal}, the bimodule isomorphism $\mathrm{ev}_V:V\xrightarrow{\sim}D(D(V))$ extends to an $S$-preserving isomorphism of graded algebras $T_S(V)\xrightarrow{\sim}T_S(D(D(V)))$.
+By Lemma~\ref{lem:linear-bidual} and the universal property (Proposition~\ref{prop:tensor-universal}), the bimodule isomorphism $\mathrm{ev}_V:V\xrightarrow{\sim}D(D(V))$ extends to an $S$-preserving isomorphism of graded algebras $T_S(V)\xrightarrow{\sim}T_S(D(D(V)))$.
+
+On the degree $2$ component, this is given by $\mathrm{ev}_V\otimes_S\mathrm{ev}_V$.  We need to check that $R\subset V\otimes_SV$ is sent to $(R^\perp)^\perp\subset D(DV)\otimes_S D(DV)$ under this isomorphism.  
+
+\comm{do more general binaturality?  i.e. show ev respect monoidal structure.  then this can simplifies here?} $\theta_{DV,DV}\circ D(\theta_{V,V}^{-1})\circ \mathrm{ev}_{V\otimes V}$, so 
+
 Evaluation is compatible with the tensor-dual identifications:
 \begin{equation}\label{eq:bidual-tensor-square}
 D(\theta_{V,V}^{-1})\circ\theta_{D(V),D(V)}\circ
