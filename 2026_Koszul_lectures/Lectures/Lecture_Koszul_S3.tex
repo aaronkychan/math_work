@@ -2,60 +2,66 @@
 \section{The quadratic dual}\label{sec:quadratic-dual}
 
 
-We use Assumption~\ref{ass:basic-semisimple}: $A_0=S=\bigoplus_{i=1}^n\Bbbk e_i$.  The case of arbitrary finite-dimensional semisimple $S$ is treated in the advanced material.
+We use Assumption~\ref{ass:basic-semisimple}: $A_0=S=\bigoplus_{i=1}^n\Bbbk e_i$.  Such form of $S$ guarantees that $S^\en$ is semisimple as well.
+The case of arbitrary finite-dimensional semisimple $S$ is treated in the advanced material.
 
 
 \subsection{Orthogonal complements and quadratic duality}
 
+Our assumption on $S$ means that $M\in \mod S^\en$ can be decomposed as $M\cong \bigoplus_{i,j=1}^n e_i M e_j$.
 
 \begin{lemma}\label{lem:idempotent-tensors}
-Let $S=\bigoplus_{i=1}^n\Bbbk e_i$ with coordinate idempotents, and consider bimodules ${}_SV_S$, ${}_SW_S$.
-There is a bimodule isomorphism
+For bimodules ${}_SV_S$, ${}_SW_S$, there is a bimodule isomorphism
 \begin{equation}\label{eq:idempotent-tensor-decomposition}
 V\otimes_S W\cong\bigoplus_{i,j,k=1}^n e_iVe_j\otimes_\Bbbk e_jWe_k.
 \end{equation}
 Consequently, after choosing a basis of each $e_iVe_j$, a basis of $V^{\otimes_S d}$ for $d\geq1$ consists of products of $d$ chosen basis elements whose adjacent idempotents match.
 \end{lemma}
 
-\comm{proof can be simpler.  We have $e_i\otimes e_j=0$ for $i\neq j$, and so $V\otimes_SW \cong \bigoplus_{j}Ve_j\otimes_{\Bbbk} e_jW$.  Then combines with $V\otimes_S W \cong \Hom_{S^\en}(S^\en, V\otimes_S W)\cong \bigoplus_{i,j}\Hom_{S^\en}(\bigoplus_{i,j}(e_k\otimes e_i)S^\en,V\otimes_S W)\cong \bigoplus_{i,j}\Hom_{S^\en}(e_k\otimes e_i S^\en, V\otimes_SW)\cong \bigoplus_{i,j}e_iV\otimes_S We_k$.  We get the claim}
 \begin{supplementary}
 \begin{proof}
-Since $S$ is commutative with $se_j=s_je_j$ for $s=\sum_js_je_j$, $s_j\in\Bbbk$, and $\sum_je_j=1$, we have $v=\sum_jve_j$ and $w=\sum_je_jw$ for all $v\in V$, $w\in W$.
-
-\underline{Step 1: $V\otimes_SW\cong\bigoplus_{j=1}^nVe_j\otimes_\Bbbk e_jW$.}
-Define
+Since $e_j\otimes_S e_l=0$ whenever $j\neq l$, we have
 \[
-\varphi:\bigoplus_{j=1}^nVe_j\otimes_\Bbbk e_jW\longrightarrow V\otimes_SW,\qquad
-v\otimes w\longmapsto v\otimes_Sw,
+V\otimes_SW \cong \bigoplus_{i,j,k,l} e_i Ve_j \otimes_{\Bbbk} e_l We_k \cong \bigoplus_{i,j,k} e_i Ve_j \otimes_{\Bbbk} e_j We_k, 
 \]
-and
-\[
-\psi:V\otimes_SW\longrightarrow\bigoplus_{j=1}^nVe_j\otimes_\Bbbk e_jW,\qquad
-v\otimes_Sw\longmapsto\sum_{j=1}^nve_j\otimes_\Bbbk e_jw.
-\]
-The map $\psi$ is well defined: the assignment $(v,w)\mapsto\sum_jve_j\otimes e_jw$ is $\Bbbk$-bilinear and, for $s=\sum_js_je_j\in S$, satisfies
-\[
-\sum_j(vs)e_j\otimes e_jw=\sum_js_j\,ve_j\otimes e_jw=\sum_jve_j\otimes e_j(sw),
-\]
-so it is $S$-balanced.
-Both maps are bimodule maps for the left action on $V$ and the right action on $W$.
-For $v\in Ve_j$ and $w\in e_jW$ we have $ve_p=0$ for $p\neq j$, so $\psi\varphi(v\otimes w)=ve_j\otimes e_jw=v\otimes w$.
-In the other direction,
-\[
-\varphi\psi(v\otimes_Sw)=\sum_jve_j\otimes_Sw=v\otimes_S\Bigl(\sum_je_j\Bigr)w=v\otimes_Sw,
-\]
-using $ve_j\otimes_Sw=v\otimes_Se_jw$.
-Thus $\varphi$ and $\psi$ are inverse isomorphisms.
-
-\underline{Step 2.}
-Write $Ve_j=\bigoplus_ie_iVe_j$ and $e_jW=\bigoplus_ke_jWe_k$ and expand the tensor products over $\Bbbk$; this gives \eqref{eq:idempotent-tensor-decomposition}.
-
-\underline{Basis.}
-For $d\geq2$, apply \eqref{eq:idempotent-tensor-decomposition} with $W=V^{\otimes_S(d-1)}$.
-By induction on $d$, $e_jWe_k$ has a basis of composable products of $d-1$ chosen basis elements from $j$ to $k$ (for $d-1=1$ these are the chosen bases of $e_jVe_k$; Definition~\ref{def:vector-tensor} gives $V^{\otimes_S1}=V$).
-A basis of $e_iVe_j\otimes_\Bbbk e_jWe_k$ is given by the products $b\otimes b'$ of basis elements, which are products of $d$ chosen basis elements with matching adjacent idempotents.
+as claimed.
+%\underline{Step 1: $V\otimes_SW\cong\bigoplus_{j=1}^nVe_j\otimes_\Bbbk e_jW$.}
+%Define
+%\[
+%\varphi:\bigoplus_{j=1}^nVe_j\otimes_\Bbbk e_jW\longrightarrow V\otimes_SW,\qquad
+%v\otimes w\longmapsto v\otimes_Sw,
+%\]
+%and
+%\[
+%\psi:V\otimes_SW\longrightarrow\bigoplus_{j=1}^nVe_j\otimes_\Bbbk e_jW,\qquad
+%v\otimes_Sw\longmapsto\sum_{j=1}^nve_j\otimes_\Bbbk e_jw.
+%\]
+%It is routine to check that these are bimodule maps inverse to each other:
+%
+%The map $\psi$ is well defined: the assignment $(v,w)\mapsto\sum_jve_j\otimes e_jw$ is $\Bbbk$-bilinear and, for $s=\sum_js_je_j\in S$ with $s_j\in\Bbbk$, satisfies
+%\[
+%\sum_j(vs)e_j\otimes e_jw=\sum_js_j\,ve_j\otimes e_jw=\sum_jve_j\otimes e_j(sw),
+%\]
+%so it is $S$-balanced.
+%Both maps are bimodule maps.
+%For $v\in Ve_j$ and $w\in e_jW$ we have $ve_p=0$ for $p\neq j$, so $\psi\varphi(v\otimes w)=ve_j\otimes e_jw=v\otimes w$.
+%In the other direction,
+%\[
+%\varphi\psi(v\otimes_Sw)=\sum_jve_j\otimes_Sw=v\otimes_S\Bigl(\sum_je_j\Bigr)w=v\otimes_Sw,
+%\]
+%using $ve_j\otimes_Sw=v\otimes_Se_jw$.
+%Thus $\varphi$ and $\psi$ are inverse isomorphisms.
+%
+%\underline{Step 2.}
+%Write $Ve_j=\bigoplus_ie_iVe_j$ and $e_jW=\bigoplus_ke_jWe_k$ and expand the tensor products over $\Bbbk$; this gives \eqref{eq:idempotent-tensor-decomposition}.
+%\underline{Basis.}
+%For $d\geq2$, apply \eqref{eq:idempotent-tensor-decomposition} with $W=V^{\otimes_S(d-1)}$.
+%By induction on $d$, $e_jWe_k$ has a basis of composable products of $d-1$ chosen basis elements from $j$ to $k$ (for $d-1=1$ these are the chosen bases of $e_jVe_k$; Definition~\ref{def:vector-tensor} gives $V^{\otimes_S1}=V$).
+%A basis of $e_iVe_j\otimes_\Bbbk e_jWe_k$ is given by the products $b\otimes b'$ of basis elements, which are products of $d$ chosen basis elements with matching adjacent idempotents.
 \end{proof}
 \end{supplementary}
+
+\comm{add remark about general semisimple $S$?}
 
 \begin{proposition}[Duals of tensor products]\label{prop:D-tensor-duals}
 For finite-dimensional bimodules ${}_SV_S$ and ${}_SW_S$, there is a bimodule isomorphism
@@ -75,21 +81,23 @@ We write $\theta$ when the two bimodules are clear.
 
 \begin{supplementary}
 \begin{proof}
-By \eqref{eq:linear-bimodule-dual-action}, the actions on the duals are
+Take $\lambda \in D(W)$ and $\mu\in D(V)$ throughout.
+By \eqref{eq:linear-bimodule-dual-action}, the bimodule $S$-action on the dual spaces are
 \[
 (\lambda t)(w)=\lambda(tw),\quad(s\lambda)(w)=\lambda(ws),\quad(\mu t)(v)=\mu(tv),\quad(s\mu)(v)=\mu(vs),
 \]
-for $s,t\in S$, $\lambda\in D(W)$, $\mu\in D(V)$.
-Write $s=\sum_is_ie_i$ with $s_i\in\Bbbk$, so that $se_i=e_is=s_ie_i$.
+for $s,t\in S$.
+Write $s=\sum_is_ie_i$ with $s_i\in\Bbbk$, so that $se_i=s_ie_i=e_is$.
 
 \underline{$\theta$ is well defined.}
-Fix $\lambda\in D(W)$ and $\mu\in D(V)$, and put $\Theta(\lambda,\mu)(v,w):=\sum_i\mu(ve_i)\lambda(e_iw)$.
-This is $\Bbbk$-bilinear in $(v,w)$, and $S$-balanced: for $s\in S$,
+Put $\Theta(\lambda,\mu)(v,w):=\sum_i\mu(ve_i)\lambda(e_iw)$.
+Then $\Theta(\lambda,\mu):V\times W\to \Bbbk$ is $\Bbbk$-bilinear and $S$-balanced: for $s\in S$,
 \[
 \Theta(\lambda,\mu)(vs,w)=\sum_is_i\,\mu(ve_i)\lambda(e_iw)=\Theta(\lambda,\mu)(v,sw).
 \]
-So $\Theta(\lambda,\mu)$ defines an element of $D(V\otimes_SW)$.
-The assignment $(\lambda,\mu)\mapsto\Theta(\lambda,\mu)$ is $\Bbbk$-bilinear and $S$-balanced, since
+So $\Theta(\lambda,\mu)$ defines an element of $D(V\otimes_SW)$ by the universal property of tensor product over $S$.
+
+The assignment $(\lambda,\mu)\mapsto\Theta(\lambda,\mu)$ is also $\Bbbk$-bilinear and $S$-balanced, since
 \[
 \Theta(\lambda s,\mu)(v,w)=\sum_i\mu(ve_i)\lambda(se_iw)=\sum_is_i\,\mu(ve_i)\lambda(e_iw)=\sum_i\mu(ve_is)\lambda(e_iw)=\Theta(\lambda,s\mu)(v,w).
 \]
@@ -130,10 +138,10 @@ For $\lambda\in D(W')$, $\mu\in D(V')$, $v\in V$, $w\in W$, and using that $f,g$
 \[
 \begin{aligned}
 \bigl(D(f\otimes_Sg)\,\theta_{V',W'}(\lambda\otimes\mu)\bigr)(v\otimes w)
-&=\sum_i\mu(f(v)e_i)\lambda(e_ig(w))
-=\sum_i\mu(f(ve_i))\lambda(g(e_iw))\\
-&=\sum_i\bigl(D(f)\mu\bigr)(ve_i)\bigl(D(g)\lambda\bigr)(e_iw)
-=\theta_{V,W}\bigl(D(g)\lambda\otimes D(f)\mu\bigr)(v\otimes w).
+&=\sum_i\mu(f(v)e_i)\lambda(e_ig(w))\\
+&=\sum_i\mu(f(ve_i))\lambda(g(e_iw))\\
+&=\sum_i\bigl(D(f)\mu\bigr)(ve_i)\bigl(D(g)\lambda\bigr)(e_iw)\\
+&=\theta_{V,W}\bigl(D(g)\lambda\otimes D(f)\mu\bigr)(v\otimes w).
 \end{aligned}
 \]
 This is \eqref{eq:D-tensor-binaturality}.
@@ -153,6 +161,7 @@ An arbitrary finite-dimensional semisimple $S$ need not have a basis of coordina
 Choose a symmetrising form $\tau$ and bases $\{x_k\mid 1\leq k\leq\dim_\Bbbk S\}$, $\{y_k\mid 1\leq k\leq\dim_\Bbbk S\}$ of $S$ with $\tau(x_ky_\ell)=\delta_{k\ell}$.
 Then $\sum_{k=1}^{\dim_\Bbbk S}\mu(vx_k)\lambda(y_kw)$ replaces the sum in \eqref{eq:D-tensor-duals}.
 Alternatively, the one-sided $S$-duals give the choice-free isomorphisms $\theta_r,\theta_\ell$ in \eqref{eq:tensor-duals}.
+\comm{check again if this remark is enough}
 \end{remark}
 \end{advanced}
 
@@ -186,15 +195,9 @@ Thus the definitions of $\theta$, $D$, and evaluation give
 &=\sum_{i=1}^n\mu(ve_i)\lambda(e_iw).
 \end{aligned}
 \]
-Since the elements $v\otimes w$ span $V\otimes_S W$ and the elements $\lambda\otimes\mu$ span $D(W)\otimes_S D(V)$, we obtain
-\[
-\theta_{D(W),D(V)}\circ(\mathrm{ev}_V\otimes_S\mathrm{ev}_W)
-=D(\theta_{V,W})\circ\mathrm{ev}_{V\otimes_S W}.
-\]
-Composing with $D(\theta_{V,W}^{-1})$ gives \eqref{eq:bidual-tensor-square}.
 \end{proof}
 \end{supplementary}
-
+\comm{add advanced remark about general $S$??}
 
 \begin{definition}\label{def:D-orthogonal}
 For a sub-bimodule $U$ of a finite-dimensional bimodule ${}_SM_S$, its \defn{orthogonal complement} is
@@ -362,7 +365,7 @@ Dualising \eqref{eq:orthogonal-exact} gives
 where $D(D\iota)=\mathrm{ev}_M\circ \iota \circ \mathrm{ev}_U^{-1}$ follows from the naturality of $\mathrm{ev}$.
 \end{proof}
 \begin{supplementary}
-\begin{proof}[By direct calculation]
+\begin{proof}[Proof by direct calculation]
 If $u\in U$ and $\lambda\in U^\perp$, then $\mathrm{ev}_M(u)(\lambda)=\lambda(u)=0$; hence $U\subset(U^\perp)^\perp$.
 If $m\notin U$, extend a basis of $U$ by $m$ to a basis of $M$; the coordinate functional of $m$ lies in $U^\perp$ and does not vanish at $m$, so $m\notin(U^\perp)^\perp$.
 \end{proof}
@@ -486,6 +489,10 @@ For an arbitrary finite-dimensional semisimple $S$, the isomorphism $A^!\cong{}^
 Theorem~\ref{thm:quadratic-bidual} involves no choice.
 \end{advanced}
 
+\iffalse 
+
+\comm{keep this subsection hidden.  may be use it later as special examples of Koszul algebras}
+
 \subsection{Tensor algebras and monomial relations}
 
 \begin{advanced}
@@ -597,7 +604,10 @@ The degree $2$ terms occur in different entries: $ba\in e_2Ae_2$, whereas $b^*a^
 \end{example}
 \end{advanced}
 
-\subsection{Symmetric and exterior algebras}
+\fi
+
+
+\subsection{Example: Symmetric and exterior algebras}
 
 \begin{proposition}\label{prop:symmetric-exterior-dual}
 For finite-dimensional $\Bbbk$-vector spaces $V,W$,

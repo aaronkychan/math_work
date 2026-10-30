@@ -953,14 +953,24 @@ The formulas commute with precomposition and postcomposition, so the comparison 
 \end{supplementary}
 
 \begin{assumption}\label{ass:basic-semisimple}
-For simplicity, from now on and unless stated otherwise, we assume that all graded algebras are $\Z$-graded with $A_{<0}=0$, and 
+For simplicity, from now on and unless stated otherwise, we assume that all graded algebras are $\Z$-graded with $A_{<0}=0$, and the degree $0$ component is a product of fields:
 \[
-A_0=S=\bigoplus_{i=1}^n\Bbbk e_i
+A_0=S=\bigoplus_{i=1}^n\Bbbk e_i.
 \]
-is semisimple with coordinate idempotents $e_1,\ldots,e_n$.
+That is $S$ is semisimple with coordinate idempotents $e_1,\ldots,e_n$.
 \end{assumption}
 
 This simplifies many cumbersome check when dealing with dual modules -- the general setting requires using $S$-dual, which is naturally isomorphic to $\Bbbk$-dual via a choice of `symmetrising form'; we will try to deal with this general setting in the advanced sections.
+We note as a fact that such form of $S$ also guarantees $S^\en$ to be a semisimple algebra with primitive idempotents $e_i\otimes e_j$ over all $1\le i,j\le n$.
+
+\begin{advanced}
+It is enough to show that $S$ is separable.  We use the fact that $S$ is separable over $\Bbbk$ if the multiplication map $\mu: S \otimes_\Bbbk S \to A$ splits as a map of $A$-bimodules. Equivalently, there is an element $p \in S \otimes_\Bbbk S$ with $\mu(p) = 1$ and $s p = p s$ for all $s \in S$. Take
+
+
+$$p = \sum_{i=1}^n e_i \otimes e_i.$$
+$\mu(p) = \sum e_i^2 = \sum e_i = 1$.
+For each $j$: $(e_j \otimes 1)p = e_j \otimes e_j = p\,(1 \otimes e_j)$, and since $e_j \otimes 1$ and $1 \otimes e_j$ both act on $p$ the same way on either side, $(e_j\otimes 1)p = p(e_j\otimes 1) = e_j \otimes e_j$ (because $e_i e_j = \delta_{ij} e_j$). Hence $sp = ps$ for all $s$, by linearity.
+\end{advanced}
 %To dualise these components while retaining both actions, we distinguish maps to $S$ that are right or left $S$-linear.
 %For duality of arbitrary $A$-modules we already have the canonical functors in \eqref{eq:linear-dual-functors}.
 

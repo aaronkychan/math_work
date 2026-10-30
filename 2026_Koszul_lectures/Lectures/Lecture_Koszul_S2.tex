@@ -23,6 +23,8 @@ M\otimes_A N := M\otimes_\Bbbk N/\operatorname{span}_\Bbbk\{ma\otimes n-m\otimes
 Write $m\otimes_A n$, or simply $m\otimes n$, for the image of $m\otimes n$ in this quotient.
 Thus $ma\otimes_A n=m\otimes_A an$ for all $m\in M$, $n\in N$, and $a\in A$.
 
+More generally, a bilinear map $b:U\times V\to W$ satisfying $b(u\cdot a, v)=b(u,a\cdot v)$ for all $a\in A$, $u\in U, v\in V$ is said to be \defn{$A$-balanced}; we can think of tensoring over $A$ as an $A$-balanced $\Bbbk$-linear tensor product - as the following universal property justifies.
+
 %No semisimplicity or finiteness assumption on $S,M,N$ is needed for the following properties.
 
 \begin{lemma}[Basic properties of tensor products]\label{lem:tensor-properties}
@@ -31,7 +33,7 @@ Let $A$ be any $\Bbbk$-algebra, $M$ a right $A$-module, and $N$ a left $A$-modul
 \item (Universal property) For a vector space $W$ and a bilinear map $b:M\times N\to W$ satisfying $b(ma,n)=b(m,an)$ for all $m\in M$, $a\in A$, and $n\in N$, there is a unique linear factorisation (commutative diagram)
 \[
 \xymatrix@C=75pt@R=22pt{
-M\times N \ar[r]^{(m,n)\mapsto m\otimes_A n} \ar[dr]_{\forall \text{ bilinear }b \text{ s.t. } b(-\cdot a,-)=b(-,a\cdot-)\phantom{aaaaaaaaaa}}
+M\times N \ar[r]^{(m,n)\mapsto m\otimes_A n} \ar[dr]_{\forall A\text{-balanced bilinear }b\phantom{aaaaaaaaaa}}
 & M\otimes_A N \ar@{-->}[d]^{\exists!\,\widetilde b}\\
 & W.
 }
