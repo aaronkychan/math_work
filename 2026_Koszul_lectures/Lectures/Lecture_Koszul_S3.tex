@@ -20,9 +20,10 @@ Consequently, after choosing a basis of each $e_iVe_j$, a basis of $V^{\otimes_S
 
 \begin{supplementary}
 \begin{proof}
-Since $e_j\otimes_S e_l=0$ whenever $j\neq l$, we have
+For $v\in e_iVe_j$ and $w\in e_lWe_k$ with $j\neq l$, the element $v\otimes w\in V\otimes_\Bbbk W$ becomes $0$ in $V\otimes_SW$, since $v\otimes w=ve_j\otimes w=v\otimes e_jw=v\otimes e_je_lw=0$; for $j=l$ the relations $vs\otimes w=v\otimes sw$ are trivial, as both sides equal $s_jv\otimes w$ for $s=\sum s_me_m$.
+Hence
 \[
-V\otimes_SW \cong \bigoplus_{i,j,k,l} e_i Ve_j \otimes_{\Bbbk} e_l We_k \cong \bigoplus_{i,j,k} e_i Ve_j \otimes_{\Bbbk} e_j We_k, 
+V\otimes_SW \cong \bigoplus_{i,j,k} e_i Ve_j \otimes_{\Bbbk} e_j We_k,
 \]
 as claimed.
 %\underline{Step 1: $V\otimes_SW\cong\bigoplus_{j=1}^nVe_j\otimes_\Bbbk e_jW$.}
@@ -62,6 +63,19 @@ as claimed.
 \end{supplementary}
 
 \comm{add remark about general semisimple $S$?}
+
+\begin{advanced}
+\begin{remark}[General $S$]\label{rem:idempotent-tensors-general}
+By Theorem~\ref{thm:artin-wedderburn}, $S=\prod_a\Mat_{n_a}(\Delta_a)$ with division algebras $\Delta_a$.
+Choose one primitive idempotent $e_a$ in each factor, so $e_aSe_a=\Delta_a$.
+Then \eqref{eq:idempotent-tensor-decomposition} becomes
+\[
+V\otimes_SW\cong\bigoplus_aVe_a\otimes_{\Delta_a}e_aW,
+\]
+that is, the idempotents $e_i$ are replaced by the $e_a$ and $\otimes_\Bbbk$ by $\otimes_{\Delta_a}$.
+Indeed, multiplication gives a bimodule isomorphism $S\cong\bigoplus_aSe_a\otimes_{\Delta_a}e_aS$ (columns times rows in $\Mat_{n_a}(\Delta_a)$), and $V\otimes_SW\cong V\otimes_SS\otimes_SW$ with $V\otimes_SSe_a=Ve_a$ and $e_aS\otimes_SW=e_aW$.
+\end{remark}
+\end{advanced}
 
 \begin{proposition}[Duals of tensor products]\label{prop:D-tensor-duals}
 For finite-dimensional bimodules ${}_SV_S$ and ${}_SW_S$, there is a bimodule isomorphism
@@ -156,12 +170,19 @@ Then $e_1\otimes_S e_2=e_1\otimes_S e_1e_2=0$, whereas $\mu(e_1)\lambda(e_2)=1$.
 \end{remark}
 
 \begin{advanced}
-\begin{remark}[General $S$]
-An arbitrary finite-dimensional semisimple $S$ need not have a basis of coordinate idempotents.
-Choose a symmetrising form $\tau$ and bases $\{x_k\mid 1\leq k\leq\dim_\Bbbk S\}$, $\{y_k\mid 1\leq k\leq\dim_\Bbbk S\}$ of $S$ with $\tau(x_ky_\ell)=\delta_{k\ell}$.
-Then $\sum_{k=1}^{\dim_\Bbbk S}\mu(vx_k)\lambda(y_kw)$ replaces the sum in \eqref{eq:D-tensor-duals}.
-Alternatively, the one-sided $S$-duals give the choice-free isomorphisms $\theta_r,\theta_\ell$ in \eqref{eq:tensor-duals}.
-\comm{check again if this remark is enough}
+\begin{remark}[General $S$]\label{rem:D-tensor-duals-general}
+Fix a symmetrising form $\tau$ and dual bases $\{x_k\},\{y_k\}$ of $S$, that is, $\tau(x_ky_l)=\delta_{kl}$.
+Then \eqref{eq:D-tensor-duals} and \eqref{eq:D-tensor-binaturality} hold with
+\[
+\theta_{V,W}(\lambda\otimes\mu)(v\otimes w)=\sum_k\mu(vx_k)\lambda(y_kw).
+\]
+\emph{Proof.}
+The proof above goes through with $se_i=e_is$ replaced by the Casimir identity $\sum_ksx_k\otimes y_k=\sum_kx_k\otimes y_ks$ for $s\in S$.
+This identity follows from $z=\sum_k\tau(x_kz)y_k$ for $z\in S$ and $\tau(y_lsx_k)=\tau(sx_ky_l)$: expanding $sx_k=\sum_l\tau(sx_ky_l)x_l$ gives $\sum_ksx_k\otimes y_k=\sum_lx_l\otimes\sum_k\tau(y_lsx_k)y_k=\sum_lx_l\otimes y_ls$.
+For bijectivity, let $f\in V^*$ and $\mu=\tau\circ f=\alpha_V(f)$ (Theorem~\ref{prop:dual-comparison}).
+Then $f(v)=\sum_k\tau(f(v)x_k)y_k=\sum_k\mu(vx_k)y_k$, so $\theta(\lambda\otimes\mu)(v\otimes w)=\lambda(f(v)w)$.
+Thus $\theta=\theta_D\circ(\mathrm{id}\otimes\alpha_V^{-1})$ for $\theta_D$ in \S\ref{not:mixed-tensor-dual}, which is bijective as $\theta_D$ and the left $S$-linear map $\alpha_V$ are.
+For $S=\bigoplus_i\Bbbk e_i$ and $\tau_S$, take $x_k=y_k=e_k$ to recover \eqref{eq:D-tensor-duals}.
 \end{remark}
 \end{advanced}
 
@@ -199,6 +220,12 @@ Thus the definitions of $\theta$, $D$, and evaluation give
 \end{supplementary}
 \comm{add advanced remark about general $S$??}
 
+\begin{advanced}
+\begin{remark}[General $S$]
+With $\theta$ as in Remark~\ref{rem:D-tensor-duals-general}, the diagram commutes by the same computation: $\mathrm{ev}_W(w)(\lambda x_k)=\lambda(x_kw)$ and $\mathrm{ev}_V(v)(y_k\mu)=\mu(vy_k)$, and $\sum_kx_k\otimes y_k=\sum_ky_k\otimes x_k$ (the dual bases are interchangeable, as $\tau$ is symmetric), so both paths send $v\otimes w$ to $\lambda\otimes\mu\mapsto\sum_k\mu(vx_k)\lambda(y_kw)$.
+\end{remark}
+\end{advanced}
+
 \begin{definition}\label{def:D-orthogonal}
 For a sub-bimodule $U$ of a finite-dimensional bimodule ${}_SM_S$, its \defn{orthogonal complement} is
 \[
@@ -216,7 +243,7 @@ In particular, let $q:M\to M/U$ be the quotient map identifying $\Cok(\iota)\con
 
 
 \begin{advanced}
-For an arbitrary finite-dimensional semisimple $S$, the one-sided $S$-duals give the following choice-free orthogonal complements.
+For general $S$, the one-sided $S$-duals give the following choice-free orthogonal complements.
 
 \begin{definition}\label{def:orthogonals}
 For an $S$-sub-bimodule $U$ of a finite-dimensional $S$-bimodule $M$, its \defn{right orthogonal complement} and \defn{left orthogonal complement} are
@@ -391,12 +418,12 @@ T_S(D(D(V)))/((R^\perp)^\perp)=(A^!)^!.
 
 \begin{advanced}
 \begin{remark}[General $S$]
-For an arbitrary finite-dimensional semisimple $S$, the map $\theta$, and hence Definition~\ref{def:quadratic-duals}, needs a choice of symmetrising form.
+For general $S$, the map $\theta$, and hence Definition~\ref{def:quadratic-duals}, needs a choice of symmetrising form.
 The choice-free version uses the right and left $S$-duals: the right and left quadratic duals below satisfy ${}^!(A^!)\cong A\cong({}^!A)^!$ with no choice (Theorem~\ref{thm:quadratic-bidual}, advanced).
 \end{remark}
 
 \emph{Quadratic duals via one-sided $S$-duals.}
-For an arbitrary finite-dimensional semisimple $S$, we use the isomorphisms $\theta_r,\theta_\ell$ of \eqref{eq:tensor-duals} instead of $\theta$.
+For general $S$, we use the isomorphisms $\theta_r,\theta_\ell$ of \eqref{eq:tensor-duals} instead of $\theta$.
 
 \begin{definition}\label{def:S-quadratic-duals}
 The \defn{right quadratic dual} and \defn{left quadratic dual} of $A$ are
@@ -485,7 +512,7 @@ The bimodule map $\beta_V^{-1}\circ\alpha_V$ extends by Proposition~\ref{prop:te
 Apply the same comparison to $A^!$ and then Theorem~\ref{thm:quadratic-bidual} to obtain $(A^!)^!\cong{}^!(A^!)\cong A$.
 \end{proof}
 
-For an arbitrary finite-dimensional semisimple $S$, the isomorphism $A^!\cong{}^!A$ of Proposition~\ref{prop:quadratic-dual-sides} depends on $\tau$; changing $\tau$ changes it by the central unit of Remark~\ref{rem:general-S-comparison}.
+For general $S$, the isomorphism $A^!\cong{}^!A$ of Proposition~\ref{prop:quadratic-dual-sides} depends on $\tau$; changing $\tau$ changes it by the central unit of Remark~\ref{rem:general-S-comparison}.
 Theorem~\ref{thm:quadratic-bidual} involves no choice.
 \end{advanced}
 
@@ -750,7 +777,7 @@ c=e_{11}\otimes e_{12},\quad
 d=e_{12}\otimes e_{22}.
 \]
 By Lemma~\ref{lem:idempotent-tensors}, the tensor square of the degree $1$ part has basis $ab,cd$, and both map to $e_{12}\otimes e_{12}$. Thus the relation space is $\Bbbk(ab-cd)$.
-Using the reversed generators from \eqref{eq:dual-basis-idempotents}, its orthogonal complement is $\Bbbk(b^*a^*+d^*c^*)$.
+Using the reversed generators $x^*\in e_jD(V)e_i$ of $x\in e_iVe_j$ from \eqref{eq:dual-blocks}, its orthogonal complement is $\Bbbk(b^*a^*+d^*c^*)$.
 Hence the dual presentation has an anticommuting relation:
 \[
 ab=cd\text{ in }A,\qquad
