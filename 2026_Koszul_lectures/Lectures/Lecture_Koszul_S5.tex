@@ -34,19 +34,25 @@ It compares a projective resolution of $M$ with an arbitrary resolution of $M'$,
 Let $P_\bullet\to M$ be a projective resolution with differentials $d_h$ and augmentation $p_0$.
 Let $\cdots\to Q_1\xrightarrow{d'_1}Q_0\xrightarrow{q_0}M'\to0$ be an exact sequence of $A$-modules, and let $f:M\to M'$ be $A$-linear.
 \begin{enumerate}
-\item There are $A$-linear maps $f_h:P_h\to Q_h$ for $h\geq0$ with
+\item There are $A$-linear maps $f_h:P_h\to Q_h$ for $h\geq0$ making the following diagram commute:
 \[
-q_0f_0=fp_0,\qquad d'_hf_h=f_{h-1}d_h\quad\text{for all }h\geq1.
-\] \comm{use picture}
-\item If $(f'_h)_{h\geq0}$ is another such family, there are $A$-linear maps $s_h:P_h\to Q_{h+1}$ for $h\geq0$ with
+\xymatrix@C=26pt@R=26pt{
+\cdots\ar[r]&P_2\ar[r]^{d_2}\ar@{-->}[d]^{f_2}&P_1\ar[r]^{d_1}\ar@{-->}[d]^{f_1}&P_0\ar[r]^{p_0}\ar@{-->}[d]^{f_0}&M\ar[r]\ar[d]^{f}&0\\
+\cdots\ar[r]&Q_2\ar[r]_{d'_2}&Q_1\ar[r]_{d'_1}&Q_0\ar[r]_{q_0}&M'\ar[r]&0
+}
+\]
+\item If $(f'_h)_{h\geq0}$ is another such family, there are $A$-linear maps $s_h:P_h\to Q_{h+1}$ for $h\geq0$ (the diagonal arrows below) with $f_h-f'_h=d'_{h+1}s_h+s_{h-1}d_h$ for all $h\geq0$, where $s_{-1}:=0$:
 \[
-f_0-f'_0=d'_1s_0,\qquad f_h-f'_h=d'_{h+1}s_h+s_{h-1}d_h\quad\text{for all }h\geq1.
-\]\comm{use picture}
+\xymatrix@C=34pt@R=34pt{
+\cdots\ar[r]&P_2\ar[r]^{d_2}\ar[d]|{f_2-f'_2}&P_1\ar[r]^{d_1}\ar[d]|{f_1-f'_1}\ar[dl]_{s_1}&P_0\ar[d]|{f_0-f'_0}\ar[dl]_{s_0}\\
+\cdots\ar[r]&Q_2\ar[r]_{d'_2}&Q_1\ar[r]_{d'_1}&Q_0
+}
+\]
 \end{enumerate}
 \end{lemma}
 
 We say that $(f_h)_{h\geq0}$ \defn{lifts} $f$, and that two lifts are \defn{homotopic} when maps $s_h$ as in (2) exist.
-For $M=M'$, $Q_\bullet=P_\bullet$ and $f=\id_M$ this recovers the map of resolutions in Theorem~\ref{thm:ordinary-minimal-resolutions}.
+For $M=M'$, $Q_\bullet=P_\bullet$ and $f=\id_M$ this recovers the map of resolutions in Theorem~\ref{thm:minimal-resolution}.
 
 \begin{supplementary}
 \begin{proof}
@@ -170,10 +176,12 @@ In the setting of Theorem~\ref{thm:ext-minimal}, for $1\leq y\leq n$,
 For a right $S$-module $T$ we have $T\cong\bigoplus_x L_x^{\oplus[T:L_x]}$, and $\Hom_S(L_x,L_y)$ is $\Bbbk$ for $x=y$ and $0$ otherwise.
 \end{proof}
 
+\begin{advanced}
 \begin{remark}[General $S$]\label{rem:ext-general-S}
 Corollary~\ref{cor:ext-simple} used $S=\bigoplus_y\Bbbk e_y$.
 For an arbitrary finite-dimensional semisimple $S$, the space $\Hom_S(L_x,L_y)$ is $0$ for $x\neq y$ and the division algebra $\End_S(L_y)$ for $x=y$, so the formula holds with $\dim_\Bbbk$ replaced by the dimension over $\End_S(L_y)$.
 \end{remark}
+\end{advanced}
 
 The multiplicities $[(\grtop P_h)_i:L_y]$ are the graded Betti numbers $\beta_{h,i,y}(M)$ of Remark~\ref{not:graded-betti}.
 Since $S$ is semisimple, $\Hom_S(-,N)$ is exact, so the groups $\Ext_A^h(M,N)_j$ with $h\geq1$ record the resolution over $A$, not any further structure of $S$.
@@ -202,8 +210,6 @@ In all three examples the non-zero groups $\Ext_A^h(S,S)_j$ lie on the line $j=-
 
 \subsection{Tor}
 
-\comm{have as much material in supplementary as possible.  only keep bare minimal essential things.}
-
 Let $M$ be a right $A$-module with a projective resolution $P_\bullet\to M$, and $N$ a left $A$-module.
 The maps $d_h\otimes\id_N$ make $P_\bullet\otimes_AN$ a chain complex of vector spaces (Definition~\ref{def:chain-complex}).
 
@@ -211,24 +217,29 @@ The maps $d_h\otimes\id_N$ make $P_\bullet\otimes_AN$ a chain complex of vector 
 $\Tor_h^A(M,N):=H_h(P_\bullet\otimes_AN)$ for all $h\geq0$.
 \end{definition}
 
-The proofs of Lemma~\ref{lem:comparison} and Proposition~\ref{prop:ext-well-defined} apply with $\Hom_A(-,N)$ replaced by $-\otimes_AN$, which sends lifts and homotopies to lifts and homotopies.
-So $\Tor_h^A(M,N)$ is independent of $P_\bullet$ up to canonical isomorphism and is functorial in $M$ and $N$, and $\Tor_0^A(M,N)=M\otimes_AN$ by right exactness of $-\otimes_AN$.
-For graded $M,N$ and a graded projective resolution, $\Tor_h^A(M,N)$ is graded, with $\Tor_h^A(M,N)_i=H_h((P_\bullet\otimes_AN)_i)$ for the total grading of Definition~\ref{def:total-tensor-grading}.
+As for $\Ext$, this is independent of $P_\bullet$ up to canonical isomorphism and functorial in $M$ and $N$, with $\Tor_0^A(M,N)=M\otimes_AN$; for graded $M,N$ and a graded projective resolution it is graded.
 
-Both statements below apply to the graded left $A$-module $S=A/A_+$ in degree $0$.
+\begin{supplementary}
+The proofs of Lemma~\ref{lem:comparison} and Proposition~\ref{prop:ext-well-defined} apply with $\Hom_A(-,N)$ replaced by $-\otimes_AN$, which sends lifts and homotopies to lifts and homotopies.
+Right exactness of $-\otimes_AN$ gives $\Tor_0^A(M,N)=M\otimes_AN$.
+The grading is $\Tor_h^A(M,N)_i=H_h((P_\bullet\otimes_AN)_i)$ for the total grading of Definition~\ref{def:total-tensor-grading}.
+\end{supplementary}
+
+We only need $N=S=A/A_+$, a graded left $A$-module in degree $0$.
 
 \begin{proposition}\label{prop:tor-top}
 Let $P_\bullet\to M$ be a minimal graded projective resolution.
 Then $\Tor_h^A(M,S)\cong\grtop P_h$ as graded right $S$-modules, for all $h\geq0$.
 \end{proposition}
 
+\begin{supplementary}
 \begin{proof}
 We have $P_h\otimes_AS=P_h/P_hA_+=\grtop P_h$, and the differential of $P_\bullet\otimes_AS$ is induced by $d_h$.
 It is zero because $\Im d_h\subseteq P_{h-1}A_+$.
 \end{proof}
+\end{supplementary}
 
-The next statement relates $\Tor$ to $\Ext$.
-For a left $A$-module $N$, the graded linear dual $\bbD(N)$ is a right $A$-module via $(fa)(n)=f(an)$, and $\bbD(N)_i=D(N_{-i})$.
+For a graded left $A$-module $N$, the graded linear dual $\bbD(N)$ is a right $A$-module via $(fa)(n)=f(an)$, and $\bbD(N)_i=D(N_{-i})$.
 
 \begin{proposition}\label{prop:ext-tor-duality}
 For graded $M,N$ as above, with $N$ a graded left $A$-module, and all $h\geq0$ and $j\in\Z$,
@@ -237,26 +248,29 @@ For graded $M,N$ as above, with $N$ a graded left $A$-module, and all $h\geq0$ a
 \]
 \end{proposition}
 
+\begin{supplementary}
 \begin{proof}
 A degree-preserving $A$-linear map $\varphi:P\to\bbD(N)(j)$ is the same as a bilinear form $b(p,n)=\varphi(p)(n)$ on $P\times N$ with $b(pa,n)=b(p,an)$ that vanishes on $P_i\times N_k$ unless $i+k=-j$.
 This is a linear form on $(P\otimes_AN)_{-j}$, so $\Hom_A^\Z(P,\bbD(N)(j))\cong D((P\otimes_AN)_{-j})$, naturally in $P$.
 Applying this to $P_\bullet$ identifies the cochain complex $\Hom_A^\Z(P_\bullet,\bbD(N)(j))$ with $D((P_\bullet\otimes_AN)_{-j})$.
 Since $D$ is exact, it commutes with taking (co)homology.
 \end{proof}
+\end{supplementary}
 
-For $N=S$ we have $\bbD(S)\cong S$ as graded right $A$-modules.
-Indeed, the dual basis $(e_x^*)_{1\leq x\leq n}$ of $\bbD(S)=D(S)$ satisfies $e_x^*e_y=\delta_{xy}e_x^*$, so $e_x^*\mapsto e_x$ is $S$-linear, and both modules are killed by $A_+$.
-Combining Propositions~\ref{prop:tor-top} and~\ref{prop:ext-tor-duality} gives, for every bounded below locally finite-dimensional $M$,
+For $N=S$ we have $\bbD(S)\cong S$ as graded right $A$-modules, since the dual basis $(e_x^*)_x$ of $D(S)$ satisfies $e_x^*e_y=\delta_{xy}e_x^*$ and both modules are killed by $A_+$.
+Hence, for every bounded below locally finite-dimensional $M$,
 \[
 \Ext_A^h(M,S)_j\cong D\bigl((\grtop P_h)_{-j}\bigr),
 \]
-which agrees with Theorem~\ref{thm:ext-minimal} since $\dim_\Bbbk\Hom_S(T,S)=\dim_\Bbbk T$ for every finite-dimensional right $S$-module $T$.
+by Propositions~\ref{prop:tor-top} and~\ref{prop:ext-tor-duality}; this agrees with Theorem~\ref{thm:ext-minimal}.
 So $\Ext_A^\bullet(M,S)$ and $\Tor_\bullet^A(M,S)$ carry the same information, and we work with $\Ext$.
 
+\begin{advanced}
 \begin{remark}[General $S$]\label{rem:tor-general-S}
 The identification $\bbD(S)\cong S$ above uses $S=\bigoplus_x\Bbbk e_x$.
 For arbitrary semisimple $S$, the module $\bbD(S)$ is isomorphic to $S$ only after choosing a symmetrising form; without it one can use $\Ext_A^h(M,\bbD(S))$ in place of $\Ext_A^h(M,S)$ throughout.
 \end{remark}
+\end{advanced}
 
 \subsection{The beginning of the resolution of $S$}
 
