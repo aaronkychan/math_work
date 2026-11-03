@@ -313,15 +313,15 @@ Fix a quadratic presentation $A=T_S(V)/(R)$ as in Definition~\ref{def:quadratic}
 %\end{equation}
 %Here $v,w\in V$. Both isomorphisms reverse the order of the factors.
 
-We use $\theta=\theta_{V,V}$ from \eqref{eq:D-tensor-duals} to identify $D(V)\otimes_S D(V)$ with $D(V\otimes_S V)$.
-In particular, the orthogonal complement $R^\perp\subset D(V\otimes_S V)$ of Definition~\ref{def:D-orthogonal} becomes a sub-bimodule of $D(V)\otimes_S D(V)$.
+By abuse of notation, we suppress the map $\theta=\theta_{V,V}$ from \eqref{eq:D-tensor-duals} to identify $D(V)\otimes_S D(V)$ with $D(V\otimes_S V)$.
+In particular, the orthogonal complement $R^\perp\subset D(V\otimes_S V)$ of Definition~\ref{def:D-orthogonal} is identified as the sub-bimodule 
+\[\theta_{V,V}(R^\perp)=\{F\in D(V)\otimes_S D(V)\mid\theta(F)(R)=0\}\] 
+of $D(V)\otimes_S D(V)$.
 
 \begin{definition}\label{def:quadratic-duals}
 The \defn{quadratic dual} of $A$ is
 \begin{equation}\label{eq:quadratic-duals}
-A^!:=T_S(D(V))/(R^\perp),
-\qquad
-R^\perp=\{F\in D(V)\otimes_S D(V)\mid\theta(F)(R)=0\}.
+A^!:=T_S(D(V))/(R^\perp).
 \end{equation}
 \end{definition}
 
@@ -382,11 +382,10 @@ Let $\iota:U\hookrightarrow M$ be the inclusion.
 Dualising \eqref{eq:orthogonal-exact} gives
 \[
 (U^\perp)^\perp
-=\Im D(D(\iota))
-=\Im\bigl(\mathrm{ev}_M\circ\iota\circ\mathrm{ev}_U^{-1}\bigr)
-=\mathrm{ev}_M(U),
+=\Im D(D(\iota))\xrightarrow[\mathrm{ev}_M|_U]{\sim}
+\Im \iota = U.
 \]
-where $D(D\iota)=\mathrm{ev}_M\circ \iota \circ \mathrm{ev}_U^{-1}$ follows from the naturality of $\mathrm{ev}$.
+%where $D(D\iota)=\mathrm{ev}_M\circ \iota \circ \mathrm{ev}_U^{-1}$ follows from the naturality of $\mathrm{ev}$.
 \end{proof}
 \begin{supplementary}
 \begin{proof}[Proof by direct calculation]
@@ -404,9 +403,14 @@ Quadratic duality is an involution: evaluation induces an $S$-preserving isomorp
 
 \begin{proof}
 By Proposition~\ref{prop:tensor-universal}, evaluation $\mathrm{ev}_V:V\xrightarrow{\sim}D(D(V))$ extends to an $S$-preserving isomorphism $T_S(V)\xrightarrow{\sim}T_S(D(D(V)))$ of graded algebras.
-Its degree $2$ component is $\mathrm{ev}_V\otimes_S\mathrm{ev}_V$; by \eqref{eq:bidual-tensor-square} with $W=V$ and Lemma~\ref{lem:double-orthogonal},
-$(\mathrm{ev}_V\otimes_S\mathrm{ev}_V)(R)=(R^\perp)^\perp$.
-Hence it sends $(R)$ onto $((R^\perp)^\perp)$ and induces
+Its degree $2$ component is $\mathrm{ev}_V\otimes_S\mathrm{ev}_V$.
+Thus, we have 
+\[
+(\mathrm{ev}_V\otimes_S\mathrm{ev}_V)(R) \stackrel{Lem \ref{lem:evaluation-tensor-compatibility}}{=} \theta_{DV,DV}^{-1}\circ D(\theta_{V,V})\circ \mathrm{ev}_{V\otimes_SV}(R) \stackrel{Lem \ref{lem:S-double-orthogonal}}{=}  \theta_{DV,DV}^{-1}\circ D(\theta_{V,V}\big((R^\perp)^\perp\big ),
+\]
+which is precisely $(R^\perp)^\perp$ in the simplified notation where $\theta$ is suppressed. \comm{probably the better way is to show this duality of $R^\perp$ with proper notations where all involving $\theta$ maps are included, before defining quadratic dual using the abused notation $R^\perp$.  So maybe move the previous Lemma \ref{lem:S-double-orthogonal} to before the definition of quadratic dual, and add the $R^\perp$ as the second part of the lemma.}
+
+Hence we have $(R)\cong ((R^\perp)^\perp)$, which  induces
 \[
 A=T_S(V)/(R)\xrightarrow{\sim}
 T_S(D(D(V)))/((R^\perp)^\perp)=(A^!)^!.
