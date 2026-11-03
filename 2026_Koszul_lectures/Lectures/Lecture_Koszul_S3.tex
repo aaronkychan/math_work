@@ -239,6 +239,40 @@ Since $D(\iota)(\lambda)=\lambda|_U$, exactness of $D$ gives the short exact seq
 In particular, let $q:M\to M/U$ be the quotient map identifying $\Cok(\iota)\cong M/U$, then $D(q):D(M/U)\to DM$ (with  $\varphi\mapsto\varphi\circ q$) induces $D(M/U) \cong \Im(D(q)) = U^\perp$.
 
 
+\begin{lemma}\label{lem:double-orthogonal}
+Let $M$ and $V$ be finite-dimensional bimodules.
+\begin{enumerate}
+\item For a sub-bimodule $U\subset M$, we have $(U^\perp)^\perp=\mathrm{ev}_M(U)$ in $D(D(M))$ (Lemma~\ref{lem:linear-bidual}).
+\item For a sub-bimodule $R\subset V\otimes_SV$, we have
+\[
+\theta_{D(V),D(V)}^{-1}\Bigl(\bigl(\theta_{V,V}^{-1}(R^\perp)\bigr)^\perp\Bigr)=(\mathrm{ev}_V\otimes_S\mathrm{ev}_V)(R)
+\quad\text{in }D(D(V))\otimes_SD(D(V)).
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(1) Let $\iota:U\hookrightarrow M$ be the inclusion.
+Dualising \eqref{eq:orthogonal-exact} gives
+\[
+(U^\perp)^\perp=\Im D(D(\iota))=\mathrm{ev}_M(\Im\iota)=\mathrm{ev}_M(U),
+\]
+by naturality of $\mathrm{ev}$.
+
+(2) Write $\theta=\theta_{V,V}$ and $\theta'=\theta_{D(V),D(V)}$, and put $R_!:=\theta^{-1}(R^\perp)\subset D(V)\otimes_SD(V)$.
+The map $D(\theta):D(D(V\otimes_SV))\to D(D(V)\otimes_SD(V))$, $\Psi\mapsto\Psi\circ\theta$, is bijective, and $\Psi\circ\theta$ vanishes on $R_!$ if and only if $\Psi$ vanishes on $\theta(R_!)=R^\perp$.
+Hence $(R_!)^\perp=D(\theta)\bigl((R^\perp)^\perp\bigr)=D(\theta)\,\mathrm{ev}_{V\otimes_SV}(R)$ by (1).
+Lemma~\ref{lem:evaluation-tensor-compatibility} gives $D(\theta)\circ\mathrm{ev}_{V\otimes_SV}=\theta'\circ(\mathrm{ev}_V\otimes_S\mathrm{ev}_V)$, so $\theta'^{-1}\bigl((R_!)^\perp\bigr)=(\mathrm{ev}_V\otimes_S\mathrm{ev}_V)(R)$.
+\end{proof}
+
+\begin{supplementary}
+\begin{proof}[Proof of (1) by direct calculation]
+If $u\in U$ and $\lambda\in U^\perp$, then $\mathrm{ev}_M(u)(\lambda)=\lambda(u)=0$; hence $\mathrm{ev}_M(U)\subset(U^\perp)^\perp$.
+If $m\notin U$, extend a basis of $U$ by $m$ to a basis of $M$; the coordinate functional of $m$ lies in $U^\perp$ and does not vanish at $m$, so $\mathrm{ev}_M(m)\notin(U^\perp)^\perp$.
+\end{proof}
+\end{supplementary}
+
+
 \begin{advanced}
 For general $S$, the one-sided $S$-duals give the following choice-free orthogonal complements.
 
@@ -291,8 +325,8 @@ Let $x_1^*,x_2^*$ and $y_1^*,y_2^*$ be the dual bases of $D(V)$ and $D(W)$, resp
 By Proposition~\ref{prop:D-tensor-duals} with $S=\Bbbk$, where $\theta(\lambda\otimes\mu)(v\otimes w)=\mu(v)\lambda(w)$,
 \[
 \begin{aligned}
-R_{\SymAlg(V)}^\perp&=\operatorname{span}_\Bbbk\{x_1^*\otimes x_1^*,\,x_2^*\otimes x_2^*,\,x_1^*\otimes x_2^*+x_2^*\otimes x_1^*\},\\
-R_{\bigwedge W}^\perp&=\Bbbk(y_1^*\otimes y_2^*-y_2^*\otimes y_1^*).
+\theta^{-1}\bigl(R_{\SymAlg(V)}^\perp\bigr)&=\operatorname{span}_\Bbbk\{x_1^*\otimes x_1^*,\,x_2^*\otimes x_2^*,\,x_1^*\otimes x_2^*+x_2^*\otimes x_1^*\},\\
+\theta^{-1}\bigl(R_{\bigwedge W}^\perp\bigr)&=\Bbbk(y_1^*\otimes y_2^*-y_2^*\otimes y_1^*).
 \end{aligned}
 \]
 The first space consists of the exterior relations on $D(V)$; the second consists of the symmetric relations on $D(W)$.
@@ -313,16 +347,12 @@ Fix a quadratic presentation $A=T_S(V)/(R)$ as in Definition~\ref{def:quadratic}
 %\end{equation}
 %Here $v,w\in V$. Both isomorphisms reverse the order of the factors.
 
-By abuse of notation, we suppress the map $\theta=\theta_{V,V}$ from \eqref{eq:D-tensor-duals} to identify $D(V)\otimes_S D(V)$ with $D(V\otimes_S V)$.
-In particular, the orthogonal complement $R^\perp\subset D(V\otimes_S V)$ of Definition~\ref{def:D-orthogonal} is identified as the sub-bimodule 
-\[\theta_{V,V}(R^\perp)=\{F\in D(V)\otimes_S D(V)\mid\theta(F)(R)=0\}\] 
-of $D(V)\otimes_S D(V)$.
-
 \begin{definition}\label{def:quadratic-duals}
 The \defn{quadratic dual} of $A$ is
 \begin{equation}\label{eq:quadratic-duals}
-A^!:=T_S(D(V))/(R^\perp).
+A^!:=T_S(D(V))/\bigl(\theta_{V,V}^{-1}(R^\perp)\bigr),
 \end{equation}
+where $\theta_{V,V}:D(V)\otimes_SD(V)\xrightarrow{\sim}D(V\otimes_SV)$ is the map of \eqref{eq:D-tensor-duals} and $R^\perp\subset D(V\otimes_SV)$ is as in Definition~\ref{def:D-orthogonal}.
 \end{definition}
 
 Note that $D(V)$ is placed in degree $1$ in \eqref{eq:quadratic-duals} -- in contrast to the graded dual $\bbD(V)$, which is placed in degree $-1$.
@@ -335,9 +365,9 @@ Indeed, by Proposition~\ref{prop:quadratic-basic}, a quadratic presentation yiel
 Through these isomorphisms, functoriality of $D$ and binaturality \eqref{eq:D-tensor-binaturality} give
 \[
 D(V)\cong D(A_1),\qquad
-R^\perp\cong(\Ker\mu_2)^\perp\subset D(A_1)\otimes_{A_0}D(A_1).
+\theta_{V,V}^{-1}(R^\perp)\cong\theta_{A_1,A_1}^{-1}\bigl((\Ker\mu_2)^\perp\bigr)\subset D(A_1)\otimes_{A_0}D(A_1).
 \]
-By the universal property of tensor algebra (Proposition~\ref{prop:tensor-universal}), we can extend $D(V)\cong D(A_1)$ to a tensor algebra isomorphism, which descends to the quotients by $(R^\perp)$ and $((\Ker\mu_2)^\perp)$.
+By the universal property of tensor algebra (Proposition~\ref{prop:tensor-universal}), we can extend $D(V)\cong D(A_1)$ to a tensor algebra isomorphism, which descends to the quotients by the two ideals generated by these relation spaces.
 
 \begin{proposition}\label{prop:dual-low-degrees}
 The algebra $A^!$ is quadratic and
@@ -348,15 +378,15 @@ In particular, $\dim_\Bbbk A^!_2=\dim_\Bbbk R$.
 \end{proposition}
 
 \begin{proof}
-Since $D(V)$ is finite-dimensional and $R^\perp\subset D(V)\otimes_S D(V)$ is a sub-bimodule, the presentation \eqref{eq:quadratic-duals} is quadratic.
+Since $D(V)$ is finite-dimensional and $\theta_{V,V}^{-1}(R^\perp)\subset D(V)\otimes_S D(V)$ is a sub-bimodule, the presentation \eqref{eq:quadratic-duals} is quadratic.
 Proposition~\ref{prop:quadratic-basic} gives the components in degrees $0$ and $1$.
-Applying \eqref{eq:orthogonal-exact} to $R\subset V\otimes_S V$ and using $\theta$ gives
+Applying \eqref{eq:orthogonal-exact} to $R\subset V\otimes_S V$ and using $\theta=\theta_{V,V}$ gives
 \begin{equation}\label{eq:restriction-relations}
-0\longrightarrow R^\perp\longrightarrow D(V)\otimes_S D(V)
+0\longrightarrow \theta^{-1}(R^\perp)\longrightarrow D(V)\otimes_S D(V)
 \xrightarrow{F\mapsto\theta(F)|_R}D(R)\longrightarrow0,
 \end{equation}
 as a short exact sequence of $S$-bimodules.
-Hence $A_2^!=(D(V)\otimes_S D(V))/R^\perp\cong D(R)$, and $\dim_\Bbbk D(R)=\dim_\Bbbk R$.
+Hence $A_2^!=(D(V)\otimes_S D(V))/\theta^{-1}(R^\perp)\cong D(R)$, and $\dim_\Bbbk D(R)=\dim_\Bbbk R$.
 \end{proof}
 %
 %Adding relations has the opposite effect after dualising. For $S$-sub-bimodules $R\subset R'\subset V\otimes_S V$,
@@ -373,27 +403,6 @@ Hence $A_2^!=(D(V)\otimes_S D(V))/R^\perp\cong D(R)$, and $\dim_\Bbbk D(R)=\dim_
 % (evaluation), as in lem:S-bidual. The left/right dual conventions and
 % mathematical arguments are unchanged.
 
-\begin{lemma}\label{lem:double-orthogonal}
-Let $U$ be a sub-bimodule of a finite-dimensional bimodule ${}_SM_S$, and identify $M$ with $D(D(M))$ by evaluation (Lemma~\ref{lem:linear-bidual}).
-Then $(U^\perp)^\perp=U$.
-\end{lemma}
-\begin{proof}
-Let $\iota:U\hookrightarrow M$ be the inclusion.
-Dualising \eqref{eq:orthogonal-exact} gives
-\[
-(U^\perp)^\perp
-=\Im D(D(\iota))\xrightarrow[\mathrm{ev}_M|_U]{\sim}
-\Im \iota = U.
-\]
-%where $D(D\iota)=\mathrm{ev}_M\circ \iota \circ \mathrm{ev}_U^{-1}$ follows from the naturality of $\mathrm{ev}$.
-\end{proof}
-\begin{supplementary}
-\begin{proof}[Proof by direct calculation]
-If $u\in U$ and $\lambda\in U^\perp$, then $\mathrm{ev}_M(u)(\lambda)=\lambda(u)=0$; hence $U\subset(U^\perp)^\perp$.
-If $m\notin U$, extend a basis of $U$ by $m$ to a basis of $M$; the coordinate functional of $m$ lies in $U^\perp$ and does not vanish at $m$, so $m\notin(U^\perp)^\perp$.
-\end{proof}
-\end{supplementary}
-
 \begin{theorem}\label{thm:quadratic-involution}
 Quadratic duality is an involution: evaluation induces an $S$-preserving isomorphism of graded algebras
 \[
@@ -402,20 +411,15 @@ Quadratic duality is an involution: evaluation induces an $S$-preserving isomorp
 \end{theorem}
 
 \begin{proof}
-By Proposition~\ref{prop:tensor-universal}, evaluation $\mathrm{ev}_V:V\xrightarrow{\sim}D(D(V))$ extends to an $S$-preserving isomorphism $T_S(V)\xrightarrow{\sim}T_S(D(D(V)))$ of graded algebras.
-Its degree $2$ component is $\mathrm{ev}_V\otimes_S\mathrm{ev}_V$.
-Thus, we have 
-\[
-(\mathrm{ev}_V\otimes_S\mathrm{ev}_V)(R) \stackrel{Lem \ref{lem:evaluation-tensor-compatibility}}{=} \theta_{DV,DV}^{-1}\circ D(\theta_{V,V})\circ \mathrm{ev}_{V\otimes_SV}(R) \stackrel{Lem \ref{lem:S-double-orthogonal}}{=}  \theta_{DV,DV}^{-1}\circ D(\theta_{V,V}\big((R^\perp)^\perp\big ),
-\]
-which is precisely $(R^\perp)^\perp$ in the simplified notation where $\theta$ is suppressed. \comm{probably the better way is to show this duality of $R^\perp$ with proper notations where all involving $\theta$ maps are included, before defining quadratic dual using the abused notation $R^\perp$.  So maybe move the previous Lemma \ref{lem:S-double-orthogonal} to before the definition of quadratic dual, and add the $R^\perp$ as the second part of the lemma.}
-
-Hence we have $(R)\cong ((R^\perp)^\perp)$, which  induces
-\[
-A=T_S(V)/(R)\xrightarrow{\sim}
-T_S(D(D(V)))/((R^\perp)^\perp)=(A^!)^!.
-\]
+By Proposition~\ref{prop:tensor-universal}, evaluation $\mathrm{ev}_V:V\xrightarrow{\sim}D(D(V))$ extends to an $S$-preserving isomorphism $T_S(V)\xrightarrow{\sim}T_S(D(D(V)))$ of graded algebras, whose degree $2$ component is $\mathrm{ev}_V\otimes_S\mathrm{ev}_V$.
+By Lemma~\ref{lem:double-orthogonal}(2), it maps $R$ onto the relation space of $(A^!)^!$.
+Hence it maps $(R)$ onto the ideal defining $(A^!)^!=T_S(D(D(V)))/(\cdots)$, and descends to an isomorphism $A\xrightarrow{\sim}(A^!)^!$.
 \end{proof}
+
+\begin{convention}
+From now on we suppress $\theta$ for dual relation spaces: for a quadratic algebra $A=T_S(V)/(R)$, we write $R^\perp$ also for $\theta_{V,V}^{-1}(R^\perp)\subset D(V)\otimes_SD(V)$, so that $A^!=T_S(D(V))/(R^\perp)$.
+Accordingly, $(R^\perp)^\perp$ denotes $\theta_{D(V),D(V)}^{-1}\bigl((\theta_{V,V}^{-1}R^\perp)^\perp\bigr)$, and Lemma~\ref{lem:double-orthogonal}(2) reads $(R^\perp)^\perp=R$ under $\mathrm{ev}_V\otimes_S\mathrm{ev}_V$.
+\end{convention}
 
 \begin{advanced}
 \begin{remark}[General $S$]
