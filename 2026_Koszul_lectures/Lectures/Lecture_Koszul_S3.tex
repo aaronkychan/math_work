@@ -240,10 +240,11 @@ In particular, let $q:M\to M/U$ be the quotient map identifying $\Cok(\iota)\con
 
 
 \begin{lemma}\label{lem:double-orthogonal}
-Let $M$ and $V$ be finite-dimensional bimodules.
+Let ${}_SM_S$ and ${}_SV_S$ be finite-dimensional $S$-bimodules.
 \begin{enumerate}
-\item For a sub-bimodule $U\subset M$, we have $(U^\perp)^\perp=\mathrm{ev}_M(U)$ in $D(D(M))$ (Lemma~\ref{lem:linear-bidual}).
-\item For a sub-bimodule $R\subset V\otimes_SV$, we have
+\item For a sub-bimodule ${}_SU_S\subset M$, we have  $(U^\perp)^\perp=\mathrm{ev}_U(U) \cong U$.
+
+\item For a sub-bimodule ${}_SR_S\subset V\otimes_SV$, we have
 \[
 \theta_{D(V),D(V)}^{-1}\Bigl(\bigl(\theta_{V,V}^{-1}(R^\perp)\bigr)^\perp\Bigr)=(\mathrm{ev}_V\otimes_S\mathrm{ev}_V)(R)
 \quad\text{in }D(D(V))\otimes_SD(D(V)).
@@ -255,22 +256,31 @@ Let $M$ and $V$ be finite-dimensional bimodules.
 (1) Let $\iota:U\hookrightarrow M$ be the inclusion.
 Dualising \eqref{eq:orthogonal-exact} gives
 \[
-(U^\perp)^\perp=\Im D(D(\iota))=\mathrm{ev}_M(\Im\iota)=\mathrm{ev}_M(U),
+(U^\perp)^\perp=\Im D(D(\iota))=\mathrm{ev}_M(\Im\iota)=\mathrm{ev}_U(U),
 \]
 by naturality of $\mathrm{ev}$.
-
-(2) Write $\theta=\theta_{V,V}$ and $\theta'=\theta_{D(V),D(V)}$, and put $R_!:=\theta^{-1}(R^\perp)\subset D(V)\otimes_SD(V)$.
-The map $D(\theta):D(D(V\otimes_SV))\to D(D(V)\otimes_SD(V))$, $\Psi\mapsto\Psi\circ\theta$, is bijective, and $\Psi\circ\theta$ vanishes on $R_!$ if and only if $\Psi$ vanishes on $\theta(R_!)=R^\perp$.
-Hence $(R_!)^\perp=D(\theta)\bigl((R^\perp)^\perp\bigr)=D(\theta)\,\mathrm{ev}_{V\otimes_SV}(R)$ by (1).
-Lemma~\ref{lem:evaluation-tensor-compatibility} gives $D(\theta)\circ\mathrm{ev}_{V\otimes_SV}=\theta'\circ(\mathrm{ev}_V\otimes_S\mathrm{ev}_V)$, so $\theta'^{-1}\bigl((R_!)^\perp\bigr)=(\mathrm{ev}_V\otimes_S\mathrm{ev}_V)(R)$.
-\end{proof}
-
 \begin{supplementary}
-\begin{proof}[Proof of (1) by direct calculation]
-If $u\in U$ and $\lambda\in U^\perp$, then $\mathrm{ev}_M(u)(\lambda)=\lambda(u)=0$; hence $\mathrm{ev}_M(U)\subset(U^\perp)^\perp$.
+We can also prove this by direct calculation:
+If $u\in U$ and $\lambda\in U^\perp$, then $\mathrm{ev}_M(u)(\lambda)=\lambda(u)=0$; hence $\mathrm{ev}_U(U)=\mathrm{ev}_M(U)\subset(U^\perp)^\perp$.
 If $m\notin U$, extend a basis of $U$ by $m$ to a basis of $M$; the coordinate functional of $m$ lies in $U^\perp$ and does not vanish at $m$, so $\mathrm{ev}_M(m)\notin(U^\perp)^\perp$.
-\end{proof}
 \end{supplementary}
+
+(2) Write $\theta_V=\theta_{V,V}$ and $\theta'=\theta_{D(V),D(V)}$, and put $U:=\theta_V^{-1}(R^\perp)\subset D(V)\otimes_SD(V)$.
+Finite-dimensionality ensure that the map
+\[ D(\theta_V):D(D(V\otimes_SV))\to D(D(V)\otimes_SD(V)),\quad  \psi\mapsto\psi\circ\theta,\]
+is bijective.  For $\lambda \in D(V)\otimes_S D(V)$, we have by definition $(\psi\circ \theta_V)(\lambda)= \psi(\theta_V(\lambda))$, and so
+\begin{align*}
+D(\theta_V)(\psi)=\psi\circ\theta_V \in U^\perp &\Leftrightarrow\; 
+0=(\psi\circ\theta_V)(U)=\psi\big(\theta_V(U)\big) \\ &\Leftrightarrow \; \psi \in \big(\theta_V(U)\big)^\perp=(R^\perp)^\perp.
+\end{align*}
+Hence, we have 
+\[
+\begin{array}{rcl}
+U^\perp=D(\theta_V)\big((R^\perp)^\perp\big) & \stackrel{(1)}{=} & D(\theta_V)\big(\mathrm{ev}_{V\otimes_SV}(R)\big) \\
+& \stackrel{\text{Lem }\ref{lem:evaluation-tensor-compatibility}}{=} & \theta'\circ (\mathrm{ev}_V\otimes_S\mathrm{ev}_V)(R),
+\end{array}
+\] which means that $\theta'^{-1}\big((\theta_VR^\perp)^\perp\big)=(\mathrm{ev}_V\otimes_S\mathrm{ev}_V)(R)$ as claimed.
+\end{proof}
 
 
 \begin{advanced}
@@ -380,13 +390,13 @@ In particular, $\dim_\Bbbk A^!_2=\dim_\Bbbk R$.
 \begin{proof}
 Since $D(V)$ is finite-dimensional and $\theta_{V,V}^{-1}(R^\perp)\subset D(V)\otimes_S D(V)$ is a sub-bimodule, the presentation \eqref{eq:quadratic-duals} is quadratic.
 Proposition~\ref{prop:quadratic-basic} gives the components in degrees $0$ and $1$.
-Applying \eqref{eq:orthogonal-exact} to $R\subset V\otimes_S V$ and using $\theta=\theta_{V,V}$ gives
+Applying \eqref{eq:orthogonal-exact} to $R\subset V\otimes_S V$  gives
 \begin{equation}\label{eq:restriction-relations}
-0\longrightarrow \theta^{-1}(R^\perp)\longrightarrow D(V)\otimes_S D(V)
+0\longrightarrow \theta_{V,V}^{-1}(R^\perp)\longrightarrow D(V)\otimes_S D(V)
 \xrightarrow{F\mapsto\theta(F)|_R}D(R)\longrightarrow0,
 \end{equation}
 as a short exact sequence of $S$-bimodules.
-Hence $A_2^!=(D(V)\otimes_S D(V))/\theta^{-1}(R^\perp)\cong D(R)$, and $\dim_\Bbbk D(R)=\dim_\Bbbk R$.
+Hence $A_2^!=(D(V)\otimes_S D(V))/\theta_{V,V}^{-1}(R^\perp)\cong D(R)$, and $\dim_\Bbbk D(R)=\dim_\Bbbk R$.
 \end{proof}
 %
 %Adding relations has the opposite effect after dualising. For $S$-sub-bimodules $R\subset R'\subset V\otimes_S V$,
@@ -397,28 +407,27 @@ Hence $A_2^!=(D(V)\otimes_S D(V))/\theta^{-1}(R^\perp)\cong D(R)$, and $\dim_\Bb
 %\]
 %The displayed surjection fixes $S$ and is induced by $\id_{V^*}$ on the generators.
 
-\subsection{Recovering the original algebra}
-
 % ChangeProposal9 consistency update: forward bidual maps now use ev
 % (evaluation), as in lem:S-bidual. The left/right dual conventions and
 % mathematical arguments are unchanged.
 
-\begin{theorem}\label{thm:quadratic-involution}
-Quadratic duality is an involution: evaluation induces an $S$-preserving isomorphism of graded algebras
+\begin{theorem}[Duality of quadratic algebra]\label{thm:quadratic-involution}
+Evaluation induces an $S$-preserving isomorphism of graded algebras
 \[
 (A^!)^!\cong A.
 \]
 \end{theorem}
 
 \begin{proof}
-By Proposition~\ref{prop:tensor-universal}, evaluation $\mathrm{ev}_V:V\xrightarrow{\sim}D(D(V))$ extends to an $S$-preserving isomorphism $T_S(V)\xrightarrow{\sim}T_S(D(D(V)))$ of graded algebras, whose degree $2$ component is $\mathrm{ev}_V\otimes_S\mathrm{ev}_V$.
-By Lemma~\ref{lem:double-orthogonal}(2), it maps $R$ onto the relation space of $(A^!)^!$.
-Hence it maps $(R)$ onto the ideal defining $(A^!)^!=T_S(D(D(V)))/(\cdots)$, and descends to an isomorphism $A\xrightarrow{\sim}(A^!)^!$.
+By the universal property of tensor algebra (Proposition~\ref{prop:tensor-universal}), evaluation $\mathrm{ev}_V:V\xrightarrow{\sim}D(D(V))$ extends to an $S$-preserving isomorphism $T_S(V)\xrightarrow{\sim}T_S(D(D(V)))$ of graded algebras, whose degree $2$ component is $\mathrm{ev}_V\otimes_S\mathrm{ev}_V$.
+
+The relation space of $(A^!)^!$ is, by definition, $\theta_{D(V),D(V)}^{-1}\Bigl(\bigl(\theta_{V,V}^{-1}(R^\perp)\bigr)^\perp\Bigr)$. 
+By Lemma~\ref{lem:double-orthogonal}(2), this is precisely $\mathrm{ev}_V\otimes_S\mathrm{ev}_V(R)$, which shows that $\mathrm{ev}_V$ induces an isomorphism $A\xrightarrow{\sim}(A^!)^!$.
 \end{proof}
 
 \begin{convention}
-From now on we suppress $\theta$ for dual relation spaces: for a quadratic algebra $A=T_S(V)/(R)$, we write $R^\perp$ also for $\theta_{V,V}^{-1}(R^\perp)\subset D(V)\otimes_SD(V)$, so that $A^!=T_S(D(V))/(R^\perp)$.
-Accordingly, $(R^\perp)^\perp$ denotes $\theta_{D(V),D(V)}^{-1}\bigl((\theta_{V,V}^{-1}R^\perp)^\perp\bigr)$, and Lemma~\ref{lem:double-orthogonal}(2) reads $(R^\perp)^\perp=R$ under $\mathrm{ev}_V\otimes_S\mathrm{ev}_V$.
+From now on we suppress $\theta$: for a quadratic algebra $A=T_S(V)/(R)$, we write $R^\perp$ also for $\theta_{V,V}^{-1}(R^\perp)\subset D(V)\otimes_SD(V)$, so that $A^!=T_S(D(V))/(R^\perp)$.
+Accordingly, $(R^\perp)^\perp$ denotes $\theta_{D(V),D(V)}^{-1}\bigl((\theta_{V,V}^{-1}R^\perp)^\perp\bigr)$, and Lemma~\ref{lem:double-orthogonal}(2) reads ``$(R^\perp)^\perp=R$ under $\mathrm{ev}_V\otimes_S\mathrm{ev}_V$''.
 \end{convention}
 
 \begin{advanced}
@@ -664,23 +673,15 @@ The orthogonal complement is therefore spanned by $y_i^*y_j^*-y_j^*y_i^*$ for $1
 The presentations in \eqref{eq:polynomial-exterior} give both isomorphisms.
 \end{proof}
 
-Consequently, to pair $\SymAlg(V)$ with $\bigwedge W$ by quadratic duality, take $W=D(V)$ and $y_i=x_i^*$, so $m=n$.
-The $\Bbbk$-linear duality $D(D(V))\cong V$ from Example~\ref{ex:linear-duality} then identifies $(\bigwedge W)^!$ with $\SymAlg(V)$.
-
-The proof works in characteristic $2$: the relations $(x_i^*)^2=0$ remain part of the exterior presentation even when the signs $+$ and $-$ coincide.
+Note that the proof works in characteristic $2$: the relations $(x_i^*)^2=0$ remain part of the exterior presentation even when the signs $+$ and $-$ coincide.
 Example~\ref{ex:symmetric-orthogonals} is the calculation for two generators.
-Quadratic duality need not preserve Hilbert series: if $\dim_\Bbbk V>0$, Example~\ref{ex:hilbert-polynomial-exterior} gives different series for $\SymAlg(V)$ and $\SymAlg(V)^!\cong\bigwedge D(V)$.
 
-\begin{advanced}
-The \emph{Koszul condition}, to be defined in Lecture~5, implies the identity
-\begin{equation}\label{eq:matrix-koszul-preview}
-h_A(t)h_{A^!}(-t)^{\mathsf T}=I_n
-\qquad\text{when }A_0=\bigoplus_{i=1}^n\Bbbk e_i.
-\end{equation}
-This is \cite[Lemma~2.11.1]{BGS96}; the proof will be given in Lecture~8.
-Equation~\eqref{eq:matrix-koszul-preview} is not asserted for arbitrary quadratic algebras.
-For $\SymAlg(V)$ and its quadratic dual $\bigwedge D(V)$, with $n=\dim_\Bbbk V$, the case $S=\Bbbk$ gives $(1-t)^{-n}(1-t)^n=1$.
-\end{advanced}
+This example also shows that
+\begin{itemize}
+\item does not preserve Hilber series (see Example~\ref{ex:hilbert-polynomial-exterior});
+
+\item does not preserve (in)finite-dimensionality of the algebra ($\SymAlg\Bbbk=\Bbbk[x]$ is infinite-dimensional, but $\bigwedge\Bbbk=\Bbbk[x]/(x^2)$ is not).
+\end{itemize}
 
 \begin{advanced}[suppressfirstparskip=true,innertopmargin=0pt]
 \subsection{Tensor products and signs}

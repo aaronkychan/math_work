@@ -34,26 +34,31 @@ A short exact sequence $0\to L\xrightarrow{i}X\xrightarrow{q}Y\to0$ \defn{splits
 The map $s$ is called a \defn{section} of $q$.
 \end{definition}
 
-Such a section gives $X=i(L)\oplus s(Y)$: write $x=(x-sq(x))+sq(x)$, and use $qs=\id_Y$ to check that $i(L)\cap s(Y)=0$.
-Thus $(l,y)\mapsto i(l)+s(y)$ is an isomorphism $L\oplus Y\to X$ compatible with the inclusion and quotient maps.
+Such a section gives $X=i(L)\oplus s(Y)$: write $x=\big(x-sq(x)\big)+sq(x)$, by $qs=\id_Y$ we have $qi(L)=0$ and $qs(Y)=Y$, which means that $i(L)\cap s(Y)=0$.
+Thus $(l,y)\mapsto i(l)+s(y)$ defines an isomorphism $L\oplus Y\to X$.
 
 \begin{definition}\label{def:projective-module}
-A module $P$ is \defn{projective} if, for every surjective $A$-linear map $q:X\to Y$ and every $A$-linear map $f:P\to Y$, there is an $A$-linear map $\widetilde f:P\to X$ with $q\widetilde f=f$ (diagram commutes):
+A module $P$ is \defn{projective} if, for every surjective $A$-linear map $q:X\to Y$ the following diagram commutes:
 \[
 \xymatrix@C=32pt@R=20pt{
-& & P\ar[d]^f\ar@{-->}[dl]_{\exists \widetilde f}\\
+& & P\ar[d]^{\forall f}\ar@{-->}[dl]_{\exists \widetilde f}\\
 \text{(exact row:)} & X\ar[r]_{
-\forall q} & Y\ar[r] & 0 & .
+q} & Y\ar[r] & 0 & ,
 }
 \]
+that is, every $A$-linear map $f:P\to Y$ factors through  $q\widetilde f=f$ for some $A$-linear $\widetilde f:P\to X$.
+In this case, we say that $\widetilde{f}$ is the \defn{lift} of $f$.
 \end{definition}
 
-Free modules have this lifting property: for each basis element $u_i$, choose $x_i\in X$ with $q(x_i)=f(u_i)$, and extend $u_i\mapsto x_i$ $A$-linearly.
-Projective modules retain this property without requiring a basis.
+\begin{example}
+Free modules have this lifting property: If $P=\bigoplus_{i\in I}A$, then for each basis element $u_i$, choose $x_i\in X$ with $q(x_i)=f(u_i)$, and extend $u_i\mapsto x_i$.
+\end{example}
 
-For fixed $P$, postcomposition defines the functor $\Hom_A(P,-):\Mod A\to\Mod\Bbbk$, acting on $u:X\to Y$ by
+The (arguably) best characterisation of projective modules is how they guarantee certain functors are always exact.  Let us spell this out in details now.
+
+For any module $M$, postcomposition defines the functor $\Hom_A(M,-):\Mod A\to\Mod\Bbbk$, acting on $u:X\to Y$ by
 \[
-\Hom_A(P,u):\Hom_A(P,X)\longrightarrow\Hom_A(P,Y),
+\Hom_A(M,u):\Hom_A(M,X)\longrightarrow\Hom_A(M,Y),
 \qquad f\longmapsto u\circ f.
 \]
 
@@ -67,7 +72,10 @@ The functor $\Hom_A(P,-)$ is \defn{left exact}, that is, every short exact seque
 
 \begin{proof}
 Since $i$ is injective, $i\circ f=0$ implies $f=0$.
-For $g:P\to X$, the equality $qg=0$ is equivalent to $g(P)\subseteq\Ker q=i(L)$, that is, to a unique factorisation $g=i\widetilde g$ with $\widetilde g:P\to L$ $A$-linear.
+For $g:P\to X$, we have
+\[
+qg =0 \;\Leftrightarrow\; \Im(g)\subseteq \Ker(q)=\Im(i),
+\] which is then equivalent to saying that there is a unique factorisation $g=i\widetilde g$ (namely, $\widetilde{g}(p):=l$ such that $i(l)=g(p)$).
 \end{proof}
 
 Surjectivity of $q$ does not in general imply surjectivity of $q\circ-$; projectivity is precisely the extra condition.
@@ -80,9 +88,9 @@ For a right $A$-module $P$, the following are equivalent.
 \item Every surjective $A$-linear map $q:X\to P$ has an $A$-linear section.
 \item $P$ is isomorphic to a direct summand of a free module.
 \end{enumerate}
-If $P$ is finitely generated, condition (4) can be replaced by $P\in\add A$.
-Direct summands and arbitrary direct sums of projective modules are projective.
+In particular, direct summands and arbitrary direct sums of projective modules are projective.
 \end{proposition}
+Note that if $P$ is finitely generated, condition (4) can be replaced by $P\in\add A$.
 
 \begin{supplementary}
 \begin{proof}
@@ -112,14 +120,16 @@ A map from $\bigoplus_{i\in I}P_i$ is determined by its restrictions to the $P_i
 \end{proof}
 \end{supplementary}
 
+\begin{example}
+If $A$ is finite-dimensional semisimple, every surjection splits by Theorem~\ref{thm:artin-wedderburn}, so every $A$-module is projective (while not every $A$-module is free).
+\end{example}
+
 \begin{example}\label{ex:projective-idempotents}
 For an idempotent $e\in A$, $A=eA\oplus(1-e)A$ makes $eA$ projective.
 For $A=\Bbbk A_2$, the module $e_{22}A$ is projective of dimension $1$, but not free: non-zero free modules have dimension at least $\dim_\Bbbk A=3$.
 \end{example}
 
-The functor $\Hom_A(P,-)$ is covariant in the target.
-Resolutions also need the other variable: for fixed $N$, precomposition gives the contravariant functor $\Hom_A(-,N):\Mod A\to\Mod\Bbbk$, $u\mapsto(g\mapsto g\circ u)$.
-It reverses arrows, so it sends right exact sequences to left exact ones.
+Analogous to $\Hom_A(M,-)$, we also have a contravariant left-exact functor $\Hom_A(-,N)$ for any fixed module $N$ (morphisms are sent by precompositions $u\mapsto(g\mapsto g\circ u)$), which means that \emph{right} exact sequences to left exact ones:
 
 \begin{lemma}\label{lem:Hom-contravariant-left-exact}
 Every exact sequence $L\xrightarrow{i}X\xrightarrow{q}Y\to0$ induces an exact sequence
@@ -130,14 +140,6 @@ Every exact sequence $L\xrightarrow{i}X\xrightarrow{q}Y\to0$ induces an exact se
 \end{lemma}
 
 \begin{supplementary}
-\begin{proof}
-Since $q$ is surjective, $g\circ q=0$ implies $g=0$.
-For $\psi:X\to N$, the equality $\psi i=0$ is equivalent to $\Im i\subseteq\Ker\psi$.
-Since $\Im i=\Ker q$, this is equivalent to a unique factorisation $\psi=g\circ q$ with $g:Y\to N$ $A$-linear.
-\end{proof}
-
-In general $-\circ i$ is not surjective, even when $i$ is injective and $q$ is surjective.
-
 \begin{example}\label{ex:Hom-contravariant-not-exact}
 Let $A=\Bbbk A_2$, $L_1=e_{11}A/\Bbbk e_{12}$ and $L_2=e_{22}A\cong\Bbbk e_{12}$, and consider the exact sequence $0\to\Bbbk e_{12}\xrightarrow{i}e_{11}A\xrightarrow{q}L_1\to0$.
 Apply $\Hom_A(-,L_2)$.
@@ -145,10 +147,9 @@ For an $A$-linear map $\varphi:e_{11}A\to L_2$ we have $\varphi(e_{11})=\varphi(
 So $\Hom_A(e_{11}A,L_2)=0$, while $\Hom_A(\Bbbk e_{12},L_2)\cong\Bbbk$.
 Thus $-\circ i$ is not surjective.
 \end{example}
-\end{supplementary}
 
-Applying $\Hom_A(-,N)$ to a projective resolution of $M$ and taking cohomology will measure this failure of exactness; this is the subject of Section~\ref{sec:ext-tor}.
-If $A$ is finite-dimensional semisimple, every surjection splits by Theorem~\ref{thm:artin-wedderburn}, so every $A$-module is projective.
+A module $I$ is \defn{injective} if $\Hom_A(-,I)$ is exact.  We will not use (or at least try to avoid them) this class of modules in this lecture series.  For finite-dimensional algebra, $\Bbbk$-linear duality swaps projective right/left module with injective left/right module.
+\end{supplementary}
 
 \subsection{Complexes and resolutions}
 
@@ -171,7 +172,6 @@ Writing $C^h:=C_{-h}$ and $\delta^h:=d_{-h}$ turns subscripts into superscripts 
 \qquad H^h(C^\bullet):=\Ker\delta^h/\Im\delta^{h-1}=H_{-h}(C_\bullet).
 \]
 This is a \defn{cochain complex} with \defn{cohomology} $H^h$; algebraically it is the same notion.
-A chain complex with $C_h=0$ for $h<0$ is $\cdots\to C_1\to C_0\to0$, and $H_0=C_0/\Im d_1$.
 
 \begin{definition}\label{def:projective-resolution}
 A \defn{projective resolution} of $M$ is an exact sequence
@@ -180,11 +180,9 @@ A \defn{projective resolution} of $M$ is an exact sequence
 \xrightarrow{d_1}P_0\xrightarrow{p_0}M\longrightarrow0
 \end{equation}
 with every $P_h$ projective.
-We write $P_\bullet\to M$; the complex $P_\bullet$ itself ends in $P_0\to0$, and $M$ is not a term of it.
-It is \defn{free} if every $P_h$ is free.
+Sometimes, we just write $P_\bullet\twoheadrightarrow M$; here  $P_\bullet$ is treated as a complex that ends in $P_0\to0$, and $M$ is not a term of it.
+A \defn{free resolution} if is a projective resolution where every $P_h$ is free.
 \end{definition}
-
-Thus $p_0$ is surjective, $\Ker p_0=\Im d_1$, and $\Ker d_h=\Im d_{h+1}$ for $h\geq1$; equivalently, $H_0(P_\bullet)\cong M$ and $H_h(P_\bullet)=0$ for $h\geq1$.
 
 \begin{proposition}\label{prop:resolutions-exist}
 Every right $A$-module has a free resolution, hence a projective resolution.
@@ -259,16 +257,15 @@ For a bounded below graded right module $M$,
 \[
 \grtop M=M/MA_+=0\quad\Longrightarrow\quad M=0.
 \]
-If $N\subseteq M$ is a graded submodule and $N+MA_+=M$, then $N=M$.
+In particular, if $N\subseteq M$ is a graded submodule and $N+MA_+=M$, then $N=M$.
 \end{lemma}
 
 \begin{proof}
-If $M=MA_+\neq0$, choose the least integer $i$ with $M_i\neq0$.
-But $(MA_+)_i=\sum_{r>0}M_{i-r}A_r=0$, a contradiction.
+Suppose on the contrary that $M=MA_+\neq0$.  Choose the least integer $i$ with $M_i\neq0$.  Then we have
+\[(\grtop M)_i = M_i/(MA_+)_i = M_i/(\underbrace{\sum_{j>0} M_{i-j}A_j}_{=0}) = M_i\neq 0,\]
+ a contradiction.
 The second assertion follows by applying the first to $M/N$.
 \end{proof}
-
-No finite generation is needed: in particular, lifts of homogeneous generators of $\grtop M$ generate $M$.
 
 \begin{supplementary}
 \emph{Ungraded analogue.}
@@ -297,6 +294,10 @@ The last assertion follows by applying the first to $M/N$.
 If $A$ is finite-dimensional, then $\rad A$ is \defn{nilpotent}: $(\rad A)^r=0$ for some $r\geq1$.
 Indeed, the powers stabilise at $\rad^r A=\rad^{r+1} A$, and Lemma~\ref{lem:nakayama} applied to $(\rad A)^r$ gives $(\rad A)^r=0$.
 Thus Nakayama's lemma holds for infinitely generated modules: $M=\rad M$ implies $M=M\rad^r A=0$, and $N+\rad M=M\Rightarrow N=M$ for every submodule $N\subseteq M$.
+\end{remark}
+
+\begin{remark}
+Note that finite generation is crucial in the ungraded setting, but it is not needed in the graded case; in particular, lifts of homogeneous generators of $\grtop M$ generate $M$.
 \end{remark}
 
 For finite-dimensional $A$, every maximal right ideal contains $\rad A$, so $A/\rad A$ is semisimple by Theorem~\ref{thm:artin-wedderburn}.
@@ -342,10 +343,9 @@ Its domain is isomorphic to
 \begin{equation}\label{eq:graded-cover-terms}
 P=\bigoplus_{i\in\Z}\bigl((\grtop M)_i\otimes_S A\bigr)(-i),
 \end{equation}
-where $(\grtop M)_i$ is placed in degree $0$ before shifting.
+where $(\grtop M)_i$ is placed in degree $0$.
 \end{proposition}
 
-\begin{supplementary}
 \begin{proof}
 \underline{Existence.}
 Since $S$ is semisimple, choose right $S$-linear sections $s_i:(\grtop M)_i\to M_i$ of the quotient maps.
@@ -366,7 +366,6 @@ Since $q(f(P))=M$ and $q$ is a cover, $f(P)=Q$.
 Projectivity of $Q$ gives a section $s:Q\to P$ of $f$, and $p(s(Q))=q(Q)=M$ gives $s(Q)=P$.
 Thus $f$ and $s$ are inverse isomorphisms.
 \end{proof}
-\end{supplementary}
 
 \begin{supplementary}
 \emph{Ungraded analogue.}
