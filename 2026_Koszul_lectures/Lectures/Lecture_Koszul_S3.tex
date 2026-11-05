@@ -859,6 +859,28 @@ Check that $(A^!)^!\cong A$ by computing the relations of $A^!$ directly.
 \emph{Hint.} Among $e_{12}e_{23}$ and $e_{23}e_{34}$, only the first is a relation. Complement the forbidden pairs and reverse their order.
 \end{exercise}
 
+\begin{hidden}
+\emph{Solution.}
+Write $a=e_{12}$, $b=e_{23}$, $c=e_{34}$, $V=\Bbbk a\oplus\Bbbk b\oplus\Bbbk c$ and $S=\bigoplus_i\Bbbk e_{ii}$.
+The composable pairs in $V\otimes_SV$ are $a\otimes b$ and $b\otimes c$.
+Since $e_{12}e_{23}=e_{13}$ and $e_{23}e_{34}=e_{24}\neq0$, we have $A=T_S(V)/(ab)$ with $R=\Bbbk\,a\otimes b$ (and $e_{14}=e_{13}e_{34}=0$).
+A homogeneous basis of $A$ is $e_{11},\ldots,e_{44}$ in degree $0$, $a,b,c$ in degree $1$, and $bc=e_{24}$ in degree $2$.
+
+Let $a^*,b^*,c^*$ be the dual basis of $D(V)$, so $a^*\in e_{22}D(V)e_{11}$, and so on: the generators are reversed.
+By \eqref{eq:D-tensor-duals}, $\theta(b^*\otimes a^*)$ and $\theta(c^*\otimes b^*)$ are the functionals on $V\otimes_SV$ dual to $a\otimes b$ and $b\otimes c$, and these are a basis of $D(V\otimes_SV)$.
+Hence $R^\perp=\Bbbk\,\theta(c^*\otimes b^*)$, and
+\[
+A^!=T_S(D(V))/(c^*b^*).
+\]
+A homogeneous basis of $A^!$ is $e_{ii}$ in degree $0$, $a^*,b^*,c^*$ in degree $1$, and $b^*a^*$ in degree $2$; every longer path contains $c^*b^*$ and vanishes.
+The dimensions $4,3,1$ agree with those of $A$.
+
+For $(A^!)^!$, the relation space of $A^!$ is $R^!=\Bbbk\,c^*\otimes b^*\subset D(V)\otimes_SD(V)$, whose basis is $\{b^*\otimes a^*,c^*\otimes b^*\}$.
+Its annihilator in $D(D(V)\otimes_SD(V))$ is spanned by the functional dual to $b^*\otimes a^*$.
+Under $D(D(V))\cong V$ and $\theta$, this is the functional corresponding to $a\otimes b$, so $(A^!)^!=T_S(V)/(ab)=A$.
+\end{hidden}
+
+
 \begin{exercise}
 Let $S=\bigoplus_{i=1}^n\Bbbk e_i$ with coordinate idempotents, and let ${}_SV_S$ be a finite-dimensional bimodule in degree $1$.
 Set $C_{ij}=[e_iV:e_jS]=\dim_\Bbbk(e_iVe_j)$ for $1\leq i,j\leq n$, and put
@@ -875,6 +897,21 @@ h_{A^!}(t)=(I_n-tC^{\mathsf T})^{-1}.
 \end{enumerate}
 \emph{Hint for (1).} Find $(V\otimes_S V)^\perp$ and compute the multiplicities $[e_iD(V):e_jS]$.
 \end{exercise}
+
+\begin{hidden}
+\emph{Solution.}
+(1) Here $R=V\otimes_SV$ is everything, so $R^\perp=0$ and $A^!=T_S(D(V))$.
+The Hilbert matrix of $A=S\oplus V$ is $(h_A(t))_{ij}=\delta_{ij}+t\dim(e_iVe_j)=(I_n+tC)_{ij}$.
+By the dual actions, $e_iD(V)e_j=D(e_jVe_i)$, so $[e_iD(V):e_jS]=C_{ji}$, that is, $D(V)$ has dimension matrix $C^{\mathsf T}$.
+For bimodules $X,Y$ we have $e_i(X\otimes_SY)e_j=\bigoplus_ke_iXe_k\otimes_\Bbbk e_kYe_j$, so dimension matrices multiply.
+Hence $D(V)^{\otimes_Sh}$ has dimension matrix $(C^{\mathsf T})^h$, and
+\[
+h_{A^!}(t)=\sum_{h\geq0}t^h(C^{\mathsf T})^h=(I_n-tC^{\mathsf T})^{-1}.
+\]
+
+(2) We get $h_{A^!}(-t)^{\mathsf T}=\bigl((I_n+tC^{\mathsf T})^{-1}\bigr)^{\mathsf T}=(I_n+tC)^{-1}$, so $h_A(t)h_{A^!}(-t)^{\mathsf T}=(I_n+tC)(I_n+tC)^{-1}=I_n$.
+\end{hidden}
+
 
 \begin{advanced}
 \begin{exercise}
@@ -904,4 +941,29 @@ e_1(A_\lambda)_1e_i\otimes_\Bbbk e_i(A_\lambda)_1e_4
 are zero. For non-zero $\lambda,\mu$, rescale $d$.
 \end{exercise}
 \end{advanced}
+
+\begin{hidden}
+\emph{Solution.}
+(1) The only composable pairs are $a\otimes b$ and $c\otimes d$, so $V\otimes_SV=\Bbbk\,a\otimes b\oplus\Bbbk\,c\otimes d$, and $\theta(b^*\otimes a^*)$, $\theta(d^*\otimes c^*)$ are the dual basis.
+For $\alpha,\beta\in\Bbbk$,
+\[
+\bigl(\alpha\,\theta(b^*\otimes a^*)+\beta\,\theta(d^*\otimes c^*)\bigr)(ab-\lambda cd)=\alpha-\lambda\beta,
+\]
+so $R_\lambda^\perp=\Bbbk\,\theta(\lambda\,b^*\otimes a^*+d^*\otimes c^*)$ for every $\lambda$, including $\lambda=0$, and
+\[
+A_\lambda^!=T_S(D(V))/(\lambda\,b^*a^*+d^*c^*).
+\]
+
+(2) The relation space $\Bbbk(\lambda\,b^*\otimes a^*+d^*\otimes c^*)$ lies in the $2$-dimensional space with basis $b^*\otimes a^*$, $d^*\otimes c^*$, and the functionals dual to these two basis vectors correspond, under $\theta$ and $D(D(V))\cong V$, to $a\otimes b$ and $c\otimes d$.
+A combination $x\,(a\otimes b)+y\,(c\otimes d)$ vanishes on the relation if and only if $\lambda x+y=0$, which is spanned by $a\otimes b-\lambda\,c\otimes d$.
+So $(A_\lambda^!)^!=T_S(V)/(ab-\lambda cd)=A_\lambda$.
+
+(3) A graded isomorphism restricts to an algebra automorphism of $S=A_0$, so it permutes the $e_i$, and it preserves the supports $e_iVe_j\neq0$ of the degree $1$ part.
+Hence it fixes $e_1$ and $e_4$ and fixes or interchanges $e_2,e_3$, so it matches the two multiplication maps $e_1(A)_1e_i\otimes e_i(A)_1e_4\to e_1(A)_2e_4$, $i\in\{2,3\}$, among themselves.
+In $A_\lambda$ the space $e_1(A_\lambda)_2e_4=\Bbbk\{ab,cd\}/\Bbbk(ab-\lambda cd)$ is one-dimensional, with $cd\neq0$, and $ab=\lambda cd$.
+For $\lambda=0$ exactly one of the two maps is zero; for $\lambda\neq0$ none is.
+So $A_\lambda\cong A_\mu$ forces $\lambda=0\Leftrightarrow\mu=0$.
+Conversely, for $\lambda,\mu\neq0$, the algebra map $T_S(V)\to A_\mu$ with $a,b,c\mapsto a,b,c$ and $d\mapsto(\mu/\lambda)d$ sends $ab-\lambda cd$ to $ab-\mu cd=0$, so it induces a graded homomorphism $A_\lambda\to A_\mu$; the same construction with $\lambda,\mu$ swapped gives the inverse.
+\end{hidden}
+
 

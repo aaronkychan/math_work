@@ -1,6 +1,6 @@
 % !TEX root = Lecture_Koszul.tex
 \clearpage
-\section{Koszul algebras}\label{sec:koszul-complex}
+\section{Koszul algebras and the Koszul complex}\label{sec:koszul-complex}
 
 Throughout, $A$ is a locally finite-dimensional non-negatively graded algebra with $S=A_0$ finite-dimensional semisimple, as in Subsection~\ref{subsec:graded-ext}.
 By Theorem~\ref{thm:minimal-resolution} the module $S=A/A_+$ has a minimal graded projective resolution $P_\bullet\to S$, unique up to isomorphism, and by Theorem~\ref{thm:ext-minimal} and Proposition~\ref{prop:tor-top} it records
@@ -38,7 +38,7 @@ Taking their direct sum gives a linear resolution of $S=L_1\oplus L_2$; hence $\
 The exterior algebra $E=\Bbbk[\epsilon]/(\epsilon^2)$ is Koszul: Example~\ref{ex:minimal-exterior} gives a resolution of $\Bbbk$ with $P_h=E(-h)$, which is linear although infinite.
 \end{example}
 
-For the polynomial algebra a resolution is constructed in Subsection~\ref{subsec:koszul-complex}.
+For every quadratic algebra there is a candidate resolution, the Koszul complex of Subsection~\ref{subsec:koszul-complex}; it is exact for the polynomial algebra.
 
 \begin{lemma}\label{lem:resolution-degrees}
 The terms of the minimal resolution of $S$ satisfy $(P_h)_i=0$ for $i<h$.
@@ -53,156 +53,155 @@ So does $\grtop P_{h+1}\cong\grtop\Im d_{h+1}$ (Lemma~\ref{lem:minimal-tops}), h
 
 Thus $A$ is Koszul exactly when the minimal resolution has no generators in degrees $>h$ in homological degree $h$.
 
-\subsection{Characterisation by Ext}
+\subsection{The Koszul complex}\label{subsec:koszul-complex}
 
-A graded module $M$ is \defn{pure of degree $m$} if $M=M_m$.
-Such a module satisfies $MA_+=0$, so it is a right $S$-module, hence semisimple.
+Let $A=T_S(V)/(R)$ be a quadratic algebra with $V=A_1$ and $R\subseteq V\otimes_SV$.
+(Koszul algebras are quadratic by Corollary~\ref{cor:koszul-quadratic}.)
+From $V$ and $R$ alone we write down a complex of projective modules.
+It turns out to be the part of the minimal resolution of $S$ that is generated in the ``diagonal'' degrees, and it is a resolution exactly when $A$ is Koszul.
 
-\begin{proposition}\label{prop:koszul-ext}
-The following are equivalent.
-\begin{enumerate}
-\item $A$ is Koszul.
-\item $\Tor_h^A(S,S)_j=0$ for all $j\neq h$.
-\item $\Ext_A^h(S,S)_j=0$ for all $j\neq-h$.
-\item For all pure lfd modules $M,N$ of degrees $m,n$, we have $\Ext_A^h(M,N)_j=0$ unless $j=n-m-h$.
-\end{enumerate}
-\end{proposition}
+\phantomsection\label{not:koszul-terms}
+For $h\geq2$ put
+\[
+\mathcal K_h:=\bigcap_{\nu=0}^{h-2}V^{\otimes_S\nu}\otimes_SR\otimes_SV^{\otimes_S(h-2-\nu)}\ \subseteq\ V^{\otimes_Sh},
+\]
+and $\mathcal K_0=S$, $\mathcal K_1=V$, so that $\mathcal K_2=R$.
+These are $S$-sub-bimodules of $V^{\otimes_Sh}$.
+Since every $S$-module is flat, $-\otimes_SY$ and $Y\otimes_S-$ are exact and preserve finite intersections of submodules; we use this tacitly.
 
-\begin{proof}
-Let $P_\bullet\to S$ be the minimal resolution.
-By Proposition~\ref{prop:tor-top}, $\Tor_h^A(S,S)\cong\grtop P_h$.
-By Theorem~\ref{thm:ext-minimal}, $\Ext_A^h(S,S)_j\cong\Hom_S((\grtop P_h)_{-j},S)$, which is non-zero if and only if $(\grtop P_h)_{-j}\neq0$, since every simple $S$-module is a summand of $S$.
-So (2) and (3) both say that $\grtop P_h$ is concentrated in degree $h$.
-
-(1)$\Rightarrow$(2).
-A linear resolution is minimal, hence isomorphic to $P_\bullet$ by Theorem~\ref{thm:minimal-resolution}, and $\grtop P_h=(P_h)_h$.
-
-(2)$\Rightarrow$(1).
-By \eqref{eq:graded-cover-terms}, $P_h\cong((\grtop P_h)_h\otimes_SA)(-h)$ is generated in degree $h$.
-
-(1)$\Rightarrow$(4).
-Since $M$ is pure and lfd, $M$ is a finite direct sum of modules $L_y(-m)$, each a summand of $S(-m)$, and $\Ext$ is additive in $M$.
-Shifting $P_\bullet$ gives $\Ext_A^h(S(-m),N)_j=\Ext_A^h(S,N)_{j+m}$.
-As $NA_+=0$, Theorem~\ref{thm:ext-minimal} gives $\Ext_A^h(S,N)_{j'}\cong\Hom_S^\Z(\grtop P_h,N(j'))$.
-Here $\grtop P_h$ lives in degree $h$ and $N(j')$ in degree $n-j'$, so this vanishes unless $j'=n-h$, that is, $j=n-m-h$.
-
-(4)$\Rightarrow$(3) is the case $M=N=S$.
-\end{proof}
-
-Thus a Koszul algebra is a positively graded algebra that is as close to semisimple as possible: Ext between pure modules is concentrated in one internal degree for each homological degree.
-Lemma~\ref{lem:resolution-degrees} shows that for an arbitrary $A$ the groups in (4) already vanish for $j>n-m-h$.
-
-\subsection{Koszul algebras are quadratic}
-
-The groups $\Ext_A^1(S,S)$ and $\Ext_A^2(S,S)$ detect generators and relations, by Proposition~\ref{prop:resolution-first-terms}.
-
-\begin{proposition}\label{prop:koszul-generation}
-\begin{enumerate}
-\item $A$ is generated in degree $1$ if and only if $\Ext_A^1(S,S)_j=0$ for $j\neq-1$.
-\item Suppose that $A$ is generated in degree $1$, and let $I=\Ker(T_S(A_1)\onto A)$.
-Then $A$ is quadratic if and only if $\Ext_A^2(S,S)_j=0$ for $j\neq-2$; in this case $A=T_S(A_1)/(I_2)$.
-\end{enumerate}
-\end{proposition}
-
-\begin{proof}
-(1) By Proposition~\ref{prop:resolution-first-terms}(2), $\grtop P_1\cong A_+/A_+^2$, so the vanishing says $A_i=(A_+^2)_i=\sum_{0<p<i}A_pA_{i-p}$ for $i\geq2$.
-By induction on $i$ this is equivalent to $A_i=A_1^i$, that is, to surjectivity of all $\mu_i$.
-
-(2) Put $V=A_1$.
-By Proposition~\ref{prop:resolution-first-terms}(3), the vanishing says $I_i=V\otimes_SI_{i-1}+I_{i-1}\otimes_SV$ for all $i\geq3$.
-By induction on $i$ this gives $I_i\subseteq(I_2)$, so $I=(I_2)$ and $A$ is quadratic.
-Conversely, if $A=T_S(V)/(R)$ then $I_2=R$, and Proposition~\ref{prop:resolution-first-terms}(3) shows that $\grtop P_2$ is concentrated in degree $2$.
-\end{proof}
-
-\begin{corollary}\label{cor:koszul-quadratic}
-Every Koszul algebra is quadratic: $A\cong T_S(A_1)/(R)$ with $R=I_2\subseteq A_1\otimes_SA_1$.
-\end{corollary}
-
-\begin{proof}
-By Proposition~\ref{prop:koszul-ext}(3), $\Ext_A^1(S,S)$ and $\Ext_A^2(S,S)$ lie on the diagonal.
-Apply Proposition~\ref{prop:koszul-generation}.
-\end{proof}
-
-The converse fails: not every quadratic algebra is Koszul (Exercise~\ref{ex:quadratic-non-koszul}), so Koszulness is a genuine condition on the $\Ext$ groups in homological degrees $\geq3$.
-
-\subsection{The opposite algebra}
-
-Everything above used right modules, while the definition of $\Tor$ treats both sides of $S$ symmetrically.
-
-\begin{lemma}\label{lem:tor-balanced}
-Let $M$ be a graded right and $N$ a graded left $A$-module, both bounded below and lfd, with graded projective resolutions $P_\bullet\to M$ and $Q_\bullet\to N$.
-Then $H_h(P_\bullet\otimes_AN)\cong H_h(M\otimes_AQ_\bullet)$ as graded spaces, for all $h\geq0$.
+\begin{lemma}\label{lem:koszul-recursion}
+For $h\geq2$, inside $V^{\otimes_Sh}$,
+\[
+\mathcal K_h=\bigl(\mathcal K_{h-1}\otimes_SV\bigr)\cap\bigl(V^{\otimes_S(h-2)}\otimes_SR\bigr)=\bigl(\mathcal K_{h-1}\otimes_SV\bigr)\cap\bigl(\mathcal K_{h-2}\otimes_SR\bigr).
+\]
+In particular $\mathcal K_h\subseteq\mathcal K_{h-1}\otimes_SV$, and more generally $\mathcal K_{h+k}\subseteq\mathcal K_h\otimes_S\mathcal K_k$.
 \end{lemma}
 
 \begin{supplementary}
 \begin{proof}
-Let $C$ be the total complex of the double complex $P_p\otimes_AQ_q$.
-Projective modules are flat, so each column $P_p\otimes_AQ_\bullet\to P_p\otimes_AN$ and each row $P_\bullet\otimes_AQ_q\to M\otimes_AQ_q$ is exact.
-By the acyclic assembly lemma, the augmentations $C\to P_\bullet\otimes_AN$ and $C\to M\otimes_AQ_\bullet$ are quasi-isomorphisms; they preserve the grading.
+By the tacit flatness, $\mathcal K_{h-1}\otimes V=\bigcap_{\nu=0}^{h-3}V^{\otimes\nu}\otimes R\otimes V^{\otimes(h-2-\nu)}$.
+These are the conditions defining $\mathcal K_h$ with $\nu\leq h-3$, and the remaining condition is $\nu=h-2$, namely $V^{\otimes(h-2)}\otimes R$.
+This gives the first equality.
+For the second, $\mathcal K_{h-1}\otimes V\subseteq\mathcal K_{h-2}\otimes V\otimes V$, and $(\mathcal K_{h-2}\otimes V\otimes V)\cap(V^{\otimes(h-2)}\otimes R)=\mathcal K_{h-2}\otimes R$, as one sees by choosing an $S$-complement of $\mathcal K_{h-2}$ in $V^{\otimes(h-2)}$.
+Finally, $\mathcal K_{h+k}$ satisfies the conditions defining $\mathcal K_h$ on the first $h$ factors and those defining $\mathcal K_k$ on the last $k$ factors.
 \end{proof}
 \end{supplementary}
 
-\begin{proposition}\label{prop:opposite-koszul}
-$A$ is Koszul if and only if the opposite algebra $A^{\mathrm{op}}$ is Koszul.
-\end{proposition}
-
-\begin{proof}
-The algebra $A^{\mathrm{op}}$ satisfies the standing hypotheses with $(A^{\mathrm{op}})_0=S^{\mathrm{op}}$, and right $A^{\mathrm{op}}$-modules are left $A$-modules.
-By Proposition~\ref{prop:koszul-ext}(2), $A^{\mathrm{op}}$ is Koszul if and only if $\Tor_h^{A^{\mathrm{op}}}(S,S)_j=0$ for $j\neq h$.
-Computing with a projective resolution of the left module $S$, this is $H_h(S\otimes_AQ_\bullet)$, which is $\Tor_h^A(S,S)$ by Lemma~\ref{lem:tor-balanced}.
-So the condition is the same as in Proposition~\ref{prop:koszul-ext}(2) for $A$.
-\end{proof}
-
-Consequently the linear resolution of the right module $S$ exists if and only if one exists for the left module $S$, so ``right Koszul'' and ``left Koszul'' agree.
-
-\subsection{The Koszul complex of a polynomial algebra}\label{subsec:koszul-complex}
-
-The examples so far were small.
-To show that polynomial algebras in several variables are Koszul we write down an explicit resolution of $\Bbbk$.
-
-Let $V$ be an $n$-dimensional $\Bbbk$-vector space, choose a basis $x_1,\ldots,x_n$, and let $A=\SymAlg(V)=\Bbbk[x_1,\ldots,x_n]$, with each $x_j$ in degree $1$.
-Let $\pi:A\to\Bbbk$ be projection onto degree $0$, so $\Bbbk=A/A_+$.
-\phantomsection\label{not:koszul-terms}
-For $0\leq h\leq n$, put
-\[
-K_h:=\bigwedge^h V\otimes_\Bbbk A(-h),
-\qquad K_0=A.
-\]
-The right $A$-action is on the second factor.
-The factor $\bigwedge^hV$ is placed in grading degree $0$, so the generators of $K_h$ have grading degree $h$.
-
 \begin{definition}\label{def:koszul-complex}
-For $1\leq h\leq n$, define the \defn{Koszul differential}
-\begin{equation}\label{eq:koszul-differential}
-\begin{aligned}
-d_h:K_h&\longrightarrow K_{h-1},\\
-(v_1\wedge\cdots\wedge v_h)\otimes a
-&\longmapsto
-\sum_{r=1}^h(-1)^{r-1}
-(v_1\wedge\cdots\wedge\widehat{v_r}\wedge\cdots\wedge v_h)
-\otimes v_ra .
-\end{aligned}
-\end{equation}
-The formula is multilinear and alternating in $v_1,\ldots,v_h$, so it defines a map on $\bigwedge^hV$.
-The sequence $K_\bullet\to\Bbbk$ consists of these maps followed by $\pi:K_0=A\to\Bbbk$.
+The \defn{Koszul complex} of $A$ is $K_\bullet\to S$ with
+\[
+K_h:=\mathcal K_h\otimes_SA(-h)\qquad(h\geq0),\qquad K_0=A,
+\]
+where $\mathcal K_h$ is placed in degree $0$ before the shift, so that $K_h$ is generated in degree $h$.
+The differential $d_h:K_h\to K_{h-1}$ is the composition
+\[
+\mathcal K_h\otimes_SA\xrightarrow{\ \iota_h\otimes\id\ }\mathcal K_{h-1}\otimes_SV\otimes_SA\xrightarrow{\ \id\otimes\mathrm{mult}\ }\mathcal K_{h-1}\otimes_SA,
+\qquad
+(z'\otimes v)\otimes a\longmapsto z'\otimes va,
+\]
+where $\iota_h:\mathcal K_h\hookrightarrow\mathcal K_{h-1}\otimes_SV$ is the inclusion of Lemma~\ref{lem:koszul-recursion}, and the augmentation is the projection $K_0=A\to S$.
 \end{definition}
 
+The maps $d_h$ are right $A$-linear and degree-preserving.
+They satisfy $d_{h-1}d_h=0$: for $h\geq2$, $\mathcal K_h\subseteq\mathcal K_{h-2}\otimes_SR$, and $z''\otimes r\otimes a\mapsto z''\otimes\mu(r)a=0$ because $R$ maps to $0$ in $A_2$; also $K_1\to K_0\to S$ is zero since $VA\subseteq A_+$.
+Each $K_h$ is projective, being a direct summand of a free module ($\mathcal K_h$ is a projective $S$-module).
+
+\begin{theorem}\label{thm:koszul-complex-diagonal}
+Let $P_\bullet\to S$ be the minimal graded projective resolution of the quadratic algebra $A$, and put $T_h:=(P_h)_h$.
+Then $P^\Delta_h:=T_hA\subseteq P_h$ is a subcomplex of $P_\bullet$, and $P^\Delta_\bullet\cong K_\bullet$ as complexes augmented over $S$.
+In particular $T_h\cong\mathcal K_h$ for all $h$.
+\end{theorem}
+
+Thus the Koszul complex is the diagonal part of the minimal resolution: the generators of $P_h$ of the smallest possible degree $h$ (Lemma~\ref{lem:resolution-degrees}), and nothing else.
+
+\begin{proof}
+By Lemma~\ref{lem:resolution-degrees}, $P_h$ lives in degrees $\geq h$, so $(P_hA_+)_h=0$ and $T_h\cong(\grtop P_h)_h$.
+Choose the decomposition of Lemma~\ref{lem:graded-projective-terms} with the summand $P_h^{[i]}$ generated in degree $i$ and $P_h^{[h]}=T_hA\cong T_h\otimes_SA(-h)$.
+The summands $P_h^{[i]}$ with $i>h$ live in degrees $\geq i>h$.
+
+\emph{Step 1: $d_h(T_h)\subseteq T_{h-1}\otimes_SV$.}
+By \eqref{eq:graded-minimal-criterion}, $d_h(T_h)\subseteq P_{h-1}A_+$.
+The degree $h$ part of $P_{h-1}A_+$ is $T_{h-1}A_1$, since the summands $P_{h-1}^{[i]}$ with $i\geq h$ contribute only in degrees $\geq h+1$ after multiplying by $A_+$.
+Hence $P^\Delta_\bullet$ is a subcomplex, and $d_h$ restricts to an $S$-linear map $\iota_h:T_h\to T_{h-1}\otimes_SV=T_{h-1}A_1$.
+
+\emph{Step 2: $\iota_h$ is injective for $h\geq1$.}
+Its kernel is $(\Ker d_h)_h=(\Im d_{h+1})_h=0$, because $P_{h+1}$ lives in degrees $\geq h+1$.
+
+\emph{Step 3: $T_h=\mathcal K_h$ inside $V^{\otimes_Sh}$.}
+We identify $T_h$ with $\iota_h(T_h)$ and argue by induction.
+Clearly $T_0=S=\mathcal K_0$.
+In degree $1$, exactness of $P_\bullet$ gives $A_1=(\Ker p_0)_1=d_1(T_1)$, so $T_1=V=\mathcal K_1$.
+Let $h\geq2$ and assume the claim for $h-1$ and $h-2$.
+Exactness at $P_{h-1}$ in degree $h$ gives $(\Ker d_{h-1})_h=(\Im d_h)_h=d_h(T_h)$, and this lies in $T_{h-1}\otimes_SV$ by Step 1.
+So $d_h(T_h)$ is the kernel of $d_{h-1}$ on $T_{h-1}\otimes_SV=\mathcal K_{h-1}\otimes_SV$.
+For $t=\sum t'\otimes u\in\mathcal K_{h-1}\subseteq\mathcal K_{h-2}\otimes_SV$ and $v\in V$ we have $d_{h-1}(tv)=\sum t'\otimes uv$, which lies in $\mathcal K_{h-2}\otimes_SA_2$.
+Hence the kernel is
+\[
+(\mathcal K_{h-1}\otimes_SV)\cap(\mathcal K_{h-2}\otimes_SR)=\mathcal K_h
+\]
+by Lemma~\ref{lem:koszul-recursion}, since $R=\Ker(V\otimes_SV\to A_2)$.
+We conclude that $P^\Delta_h=T_hA\cong\mathcal K_h\otimes_SA(-h)=K_h$, and the differentials agree by Step 1.
+\end{proof}
+
+\begin{corollary}\label{cor:koszul-complex-exact}
+A quadratic algebra $A$ is Koszul if and only if its Koszul complex $K_\bullet\to S$ is exact.
+\end{corollary}
+
+\begin{proof}
+If $K_\bullet\to S$ is exact, it is a graded projective resolution with $K_h$ generated in degree $h$, hence linear.
+Conversely, if $A$ is Koszul, the minimal resolution is linear, so $P_h=T_hA=P^\Delta_h$ for all $h$.
+Thus $P_\bullet=P^\Delta_\bullet\cong K_\bullet$ is exact.
+\end{proof}
+
+The terms $\mathcal K_h$ are dual to the quadratic dual of Section~\ref{sec:quadratic-dual}.
+
+\begin{proposition}\label{prop:koszul-terms-dual}
+For a quadratic algebra $A=T_S(V)/(R)$, the composite
+\[
+\rho_h:D(V)^{\otimes_Sh}\xrightarrow{\ \theta\ }D(V^{\otimes_Sh})\xrightarrow{\ \mathrm{res}\ }D(\mathcal K_h)
+\]
+of the iterated map $\theta$ of Proposition~\ref{prop:D-tensor-duals} and restriction is surjective with kernel the degree $h$ part of the ideal $(\theta^{-1}(R^\perp))$.
+Hence $\rho_h$ induces $A^!_h\cong D(\mathcal K_h)$, and $K_h\cong D(A^!_h)\otimes_SA(-h)$.
+\end{proposition}
+
+\begin{supplementary}
+\begin{proof}
+By Definition~\ref{def:quadratic-duals}, the degree $h$ part of the ideal is $J_h=\sum_{p+q=h-2}D(V)^{\otimes p}\otimes\theta^{-1}(R^\perp)\otimes D(V)^{\otimes q}$.
+The iterated $\theta:D(V)^{\otimes h}\to D(V^{\otimes h})$ is an isomorphism that reverses the order of the factors, and it sends the $(p,q)$ summand onto the annihilator of $V^{\otimes q}\otimes R\otimes V^{\otimes p}$.
+Since the annihilator of a sum of subspaces is the intersection of the annihilators, and conversely, $\theta(J_h)$ is the annihilator of $\bigcap_{p+q=h-2}V^{\otimes q}\otimes R\otimes V^{\otimes p}=\mathcal K_h$.
+Restriction $D(V^{\otimes h})\to D(\mathcal K_h)$ is surjective with kernel $\mathcal K_h^\perp$, so $\rho_h$ is surjective with kernel $\theta^{-1}(\mathcal K_h^\perp)=J_h$.
+The last claim follows by dualising, as $D(D(\mathcal K_h))\cong\mathcal K_h$.
+\end{proof}
+\end{supplementary}
+
+So $K_\bullet$ is ``$D(A^!)\otimes_SA$'': the quadratic dual produces the generators of the diagonal part of the minimal resolution.
+
+\begin{example}[Polynomial algebra]\label{ex:koszul-polynomial}
+Let $V$ be $n$-dimensional with basis $x_1,\ldots,x_n$, and $A=\SymAlg(V)=\Bbbk[x_1,\ldots,x_n]=T(V)/(R)$ with $R=\langle v\otimes w-w\otimes v\rangle$.
+The antisymmetrisation $v_1\wedge\cdots\wedge v_h\mapsto\sum_\sigma\operatorname{sgn}(\sigma)v_{\sigma(1)}\otimes\cdots\otimes v_{\sigma(h)}$ is an injective map $\bigwedge^hV\to V^{\otimes h}$ with image in $\mathcal K_h$, since pairing terms that differ by swapping positions $\nu+1,\nu+2$ gives elements of $V^{\otimes\nu}\otimes R\otimes V^{\otimes(h-2-\nu)}$.
+By Proposition~\ref{prop:koszul-terms-dual} and Proposition~\ref{prop:symmetric-exterior-dual}, $\dim\mathcal K_h=\dim\bigwedge^hD(V)=\binom nh=\dim\bigwedge^hV$.
+Hence $\mathcal K_h\cong\bigwedge^hV$ and
+\[
+K_h\cong\bigwedge^hV\otimes_\Bbbk A(-h),\qquad K_0=A,
+\]
+with differential $d_h((v_1\wedge\cdots\wedge v_h)\otimes a)=\sum_{r=1}^h(-1)^{h-r}(v_1\wedge\cdots\widehat{v_r}\cdots\wedge v_h)\otimes v_ra$.
+Multiplying $d_h$ by $(-1)^{h-1}$ gives
+\begin{equation}\label{eq:koszul-differential}
+d_h((v_1\wedge\cdots\wedge v_h)\otimes a)=\sum_{r=1}^h(-1)^{r-1}(v_1\wedge\cdots\widehat{v_r}\cdots\wedge v_h)\otimes v_ra,
+\end{equation}
+and this does not affect exactness.
+\end{example}
+
 \begin{proposition}\label{prop:koszul-complex-resolution}
-The sequence
+For $A=\SymAlg(V)$ the Koszul complex, with $\pi:K_0=A\to\Bbbk$ the projection,
 \[
 0\longrightarrow K_n\xrightarrow{d_n}\cdots\xrightarrow{d_2}K_1
 \xrightarrow{d_1}K_0\xrightarrow{\pi}\Bbbk\longrightarrow0
 \]
-is an exact minimal graded free resolution of $\Bbbk$ over $A$.
+is exact.
 \end{proposition}
 
 \begin{proof}
-Each $d_h$ preserves degree and is right $A$-linear.
-For $h\geq2$, compute $d_{h-1}d_h$ on a basis wedge.
-Every term is indexed by two distinct positions $r<s$ deleted from that wedge.
-Deleting position $r$ and then $s$ gives coefficient $(-1)^{r+s-3}x_{j_s}x_{j_r}$; deleting $s$ and then $r$ gives coefficient $(-1)^{r+s-2}x_{j_r}x_{j_s}$.
-Since $x_{j_s}x_{j_r}=x_{j_r}x_{j_s}$, these two terms sum to zero. Hence $d_{h-1}d_h=0$; also $\pi d_1=0$ because every term of $d_1$ is divisible by a variable.
-
 To prove exactness, give $A$ and $\bigwedge V$ the multigrading with $\deg x_j$ equal to the $j$th standard basis vector.
 For $\alpha\in\mathbb Z_{\geq0}^n$, let $\operatorname{supp}(\alpha)=\{j\mid\alpha_j>0\}$.
 The degree $\alpha$ part of $K_h$ has basis
@@ -239,24 +238,13 @@ Thus $d_{h+1}s_{\alpha,h}+s_{\alpha,h-1}d_h=\id_{K_{h,\alpha}}$ for every $h\geq
 All positive multidegrees are therefore exact.
 In multidegree $0$, only $K_0\cong\Bbbk$ is nonzero and $\pi$ is the identity onto $\Bbbk$.
 This proves exactness of the displayed sequence.
-
-Finally, each $K_h$ is a finite direct sum of copies of $A(-h)$, and \eqref{eq:koszul-differential} has image in $K_{h-1}A_+$.
-Also $\Ker\pi=AA_+$.
-Thus $\Im d_h\subseteq K_{h-1}A_+$ for all $h\geq1$ and $\Ker\pi\subseteq K_0A_+$, so the resolution is minimal by \eqref{eq:graded-minimal-criterion}.
 \end{proof}
 
-\begin{proposition}\label{prop:polynomial-koszul}
-For every finite-dimensional vector space $V$, the symmetric algebra $\SymAlg(V)$ is Koszul.
-\end{proposition}
+\begin{corollary}\label{prop:polynomial-koszul}
+For every finite-dimensional vector space $V$, the symmetric algebra $\SymAlg(V)$ is Koszul, and $K_\bullet$ is its minimal resolution of $\Bbbk$.
+\end{corollary}
 
-\begin{proof}
-Proposition~\ref{prop:koszul-complex-resolution} gives a minimal resolution with $K_h=\bigwedge^hV\otimes_\Bbbk A(-h)$.
-Thus $K_h$ is generated in degree $h$ for every $h$.
-\end{proof}
-
-Proposition~\ref{prop:tor-top} gives $\Tor_h^A(\Bbbk,\Bbbk)\cong\grtop K_h=\bigwedge^hV$, so $\Ext_A^h(\Bbbk,\Bbbk)_{-h}\cong D(\bigwedge^hV)\cong\bigwedge^hD(V)$.
-This is the degree $h$ part of $\SymAlg(V)^!\cong\bigwedge D(V)$ from Proposition~\ref{prop:symmetric-exterior-dual}: the quadratic dual computed combinatorially in Section~\ref{sec:quadratic-dual} appears here as an $\Ext$ algebra.
-
+Proposition~\ref{prop:tor-top} gives $\Tor_h^A(\Bbbk,\Bbbk)\cong\grtop K_h=\bigwedge^hV$, so $\Ext_A^h(\Bbbk,\Bbbk)_{-h}\cong D(\bigwedge^hV)\cong\bigwedge^hD(V)$, the degree $h$ part of $\SymAlg(V)^!\cong\bigwedge D(V)$.
 
 \subsection{Exercises}
 
@@ -270,45 +258,31 @@ Use this to show
 and deduce the Hilbert series of $\Bbbk[x_1,\ldots,x_n]$.
 \end{exercise}
 
-\begin{exercise}
+\begin{hidden}
+\emph{Solution.}
+By Proposition~\ref{prop:koszul-complex-resolution}, $K_h=\bigwedge^hV\otimes_\Bbbk A(-h)$ has Hilbert series $\binom nh t^hh_A(t)$.
+Exactness of $0\to K_n\to\cdots\to K_0\to\Bbbk\to0$ in each degree $i$ gives $\sum_h(-1)^h\dim(K_h)_i=\dim\Bbbk_i$, that is,
+\[
+\sum_{h=0}^n(-1)^h\binom nht^h\,h_A(t)=(1-t)^nh_A(t)=1.
+\]
+Hence $h_A(t)=(1-t)^{-n}=\sum_{i\geq0}\binom{n+i-1}{n-1}t^i$.
+\end{hidden}
+
+
+
+\begin{exercise}\label{ex:square-zero-koszul}
 Let $S=\bigoplus_{y=1}^n\Bbbk e_y$, let $V$ be a finite-dimensional bimodule in degree $1$, and let $A=T_S(V)/(V\otimes_SV)=S\oplus V$.
 Prove that the minimal graded projective resolution of $S$ has $P_h\cong(V^{\otimes_Sh}\otimes_SA)(-h)$ for all $h\geq0$, and deduce that $A$ is Koszul.
 
 \emph{Hint.} Show that $\Ker p_0=V$ and that $VA_+=0$, so each kernel is killed by $A_+$.
 \end{exercise}
 
-\begin{exercise}
-Let $A=\Bbbk[x]/(x^3)$ with $\deg x=1$.
-Find the minimal graded projective resolution of $\Bbbk$, and show that $P_h$ is generated in degree $\lfloor 3h/2\rfloor$ for all $h\geq0$.
-Deduce that $A$ is not Koszul.
-Is $A$ quadratic?
-\end{exercise}
-
-\begin{exercise}\label{ex:quadratic-non-koszul}
-Let $A=\Bbbk\langle x,y\rangle/(yx,\;x^2+y^2)$ with $\deg x=\deg y=1$, a quadratic algebra with $S=\Bbbk$.
-\begin{enumerate}
-\item Show that $x^3=0$ and $y^3=0$, and deduce that $A_n=0$ for $n\geq3$ and $h_A(t)=1+2t+2t^2$.
-\item Suppose that $A$ is Koszul, with linear resolution $P_h=(T_h\otimes_\Bbbk A)(-h)$ and $b_h=\dim_\Bbbk T_h$.
-By taking the alternating sum of Hilbert series in the exact sequence $\cdots\to P_1\to P_0\to\Bbbk\to0$ as in Exercise~\ref{ex:hilbert-polynomial}, show that $\bigl(\sum_{h\geq0}(-1)^hb_ht^h\bigr)\,h_A(t)=1$.
-\item Expand $1/h_A(t)$ to degree $4$ and obtain a contradiction.
-Conclude that $A$ is quadratic but not Koszul.
-\end{enumerate}
-\emph{Hint for (1).} $x^3=x\cdot x^2=-xy^2$ and $x^3=x^2\cdot x=-y^2x=-y(yx)$, and similarly for the other words of length $3$.
-\end{exercise}
-
 \begin{hidden}
-\emph{Solution to the last exercise.}
-(1) We have $x^3=x\cdot x^2=-xy^2$ and $x^3=x^2\cdot x=-y^2x=-y(yx)=0$, so $x^3=0$ and $xy^2=0$.
-Likewise $y^3=y\cdot y^2=-yx^2=-(yx)x=0$.
-The remaining words of length $3$ contain $yx$ or are $xxy=-y^3=0$ and $xyy=-x^3=0$, hence vanish.
-So $A_3=0$, and $A_n=0$ for $n\geq3$ since $A$ is generated in degree $1$.
-Also $\dim A_1=2$ and $\dim A_2=4-\dim R=2$, so $h_A(t)=1+2t+2t^2$.
-
-(2) Taking the degree $i$ component of $\cdots\to P_1\to P_0\to\Bbbk\to0$ and the alternating sum of dimensions gives $\sum_h(-1)^h\dim(P_h)_i=\dim\Bbbk_i$.
-In generating functions, $h_{P_h}(t)=b_ht^hh_A(t)$ and $h_\Bbbk(t)=1$, so $\bigl(\sum_h(-1)^hb_ht^h\bigr)h_A(t)=1$.
-
-(3) Put $u(t)=\sum_h(-1)^hb_ht^h=1/(1+2t+2t^2)$.
-Then $u_0=1$, $u_1=-2$, and $u_h=-2u_{h-1}-2u_{h-2}$ gives $u_2=2$, $u_3=0$, $u_4=-4$.
-So $b_4=u_4=-4<0$, which is impossible.
-Hence $A$ has no linear resolution of $\Bbbk$, so $A$ is not Koszul, although it is quadratic.
+\emph{Solution.}
+$\Ker p_0=A_+=V$, and $VA_+=VV=0$, so $V$ is a module with $A_+$ acting by zero, that is, a graded $S$-module in degree $1$.
+Put $Y_1=V$ and, inductively, $Y_h=V^{\otimes_Sh}$ in degree $h$, killed by $A_+$.
+Then $P_h:=(Y_h\otimes_SA)(-h)\to Y_h$, $k\otimes a\mapsto ka$, is surjective, and as $Y_h\otimes_SA=Y_h\otimes_SS\oplus Y_h\otimes_SV$ with $k\otimes v\mapsto kv=0$, its kernel is $Y_h\otimes_SV=V^{\otimes_S(h+1)}=Y_{h+1}$ (in degree $h+1$), again killed by $A_+$.
+In each step $\Ker\subseteq P_hA_+$ since $\Ker=Y_h\otimes V\subseteq P_hA_+$, so this is the minimal resolution, with $P_h=(V^{\otimes_Sh}\otimes_SA)(-h)$ generated in degree $h$.
+It is linear, so $A$ is Koszul.
 \end{hidden}
+

@@ -310,6 +310,8 @@ The main content of the notes are drafted by AI and QA'ed (heavily edited) by my
 \input{Lecture_Koszul_S4.tex}
 \input{Lecture_Koszul_S5.tex}
 \input{Lecture_Koszul_S6.tex}
+\input{Lecture_Koszul_S7.tex}
+\input{Lecture_Koszul_S8.tex}
 
 \clearpage
 \section*{List of Symbols}
@@ -415,8 +417,9 @@ $C^\bullet,\ \delta^h,\ H^h(C^\bullet)$ & Cochain complex with $\delta^h\delta^{
 $\Ext_A^h(M,N)$ & Cohomology of $\Hom_A(P_\bullet,N)$ for a projective resolution $P_\bullet\to M$. & \hyperref[def:ext]{\pageref*{def:ext}}\\[3pt]
 $\Ext_A^h(M,N)_j$ & Graded Ext: cohomology of $\Hom_A^\Z(P_\bullet,N(j))$ for a graded projective resolution; $j$ is the internal degree. & \hyperref[def:graded-ext]{\pageref*{def:graded-ext}}\\[3pt]
 $\Tor_h^A(M,N)$ & Homology of $P_\bullet\otimes_AN$ for a projective resolution $P_\bullet\to M$. & \hyperref[def:tor]{\pageref*{def:tor}}\\[3pt]
-$K_h$ & Koszul term $\bigwedge^hV\otimes_\Bbbk A(-h)$ for $A=\SymAlg(V)$; the exterior factor is placed in degree zero. & \hyperref[not:koszul-terms]{\pageref*{not:koszul-terms}}\\[3pt]
+$\mathcal K_h,\ K_h$ & Koszul terms of a quadratic algebra: $\mathcal K_h=\bigcap_\nu V^{\otimes\nu}\otimes R\otimes V^{\otimes(h-2-\nu)}$ and $K_h=\mathcal K_h\otimes_SA(-h)$; for $A=\SymAlg(V)$, $K_h=\bigwedge^hV\otimes_\Bbbk A(-h)$. & \hyperref[not:koszul-terms]{\pageref*{not:koszul-terms}}\\[3pt]
 $K_\bullet$ & Koszul complex, with degree-preserving differentials $d_h:K_h\to K_{h-1}$. & \hyperref[def:koszul-complex]{\pageref*{def:koszul-complex}}\\[3pt]
+$E(A),\ E^\Delta(A)$ & Yoneda algebra $\bigoplus_{h,j}\Ext_A^h(S,S)_j$ with the Yoneda product; its diagonal part $\bigoplus_h\Ext_A^h(S,S)_{-h}$. & \hyperref[def:yoneda-algebra]{\pageref*{def:yoneda-algebra}}\\[3pt]
 
 \multicolumn{3}{@{}l}{\textbf{Advanced notation}}\\*[4pt]
 $\add_{\mod A^\op}(M)$ & Additive closure in the category of left $A$-modules. & \hyperref[prop:tensor-duals]{\pageref*{prop:tensor-duals}}\\[3pt]

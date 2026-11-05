@@ -334,6 +334,18 @@ Prove that $M$ is projective.
 \emph{Hint for (2).} Take $P_1\to K$ onto $K$ and consider it as a cocycle in $\Hom_A(P_1,K)$.
 \end{exercise}
 
+\begin{hidden}
+\emph{Solution.}
+(1) $P_0=P$ and $P_h=0$ for $h\geq1$ is a projective resolution of $P$, so $\Hom_A(P_\bullet,N)$ is concentrated in degree $0$.
+
+(2) Take a surjection $\pi:P_1\to K$ from a projective module, and extend $P_1\xrightarrow{\iota\pi}P_0$ to a resolution $P_\bullet\to M$, where $\iota:K\hookrightarrow P_0$.
+Since $\Ker(\iota\pi)=\Ker\pi=\Im d_2$, we have $\pi d_2=0$, so $\pi$ is a cocycle in $\Hom_A(P_1,K)$.
+As $\Ext_A^1(M,K)=0$, there is $\sigma\in\Hom_A(P_0,K)$ with $\pi=\sigma d_1=\sigma\iota\pi$.
+Since $\pi$ is surjective, $\sigma\iota=\id_K$.
+So $K$ is a direct summand of $P_0$, with complement $\cong P_0/K\cong M$, and $M$ is projective.
+\end{hidden}
+
+
 \begin{exercise}
 Let $P_\bullet\to M$ be a projective resolution and $K_1=\Ker p_0$.
 Prove that
@@ -343,15 +355,50 @@ Prove that
 where the map is restriction, and that $\Ext_A^h(M,N)\cong\Ext_A^{h-1}(K_1,N)$ for $h\geq2$.
 \end{exercise}
 
+\begin{hidden}
+\emph{Solution.}
+The shifted complex $\cdots\to P_3\to P_2\to P_1\xrightarrow{d_1}K_1\to0$ is a projective resolution of $K_1$, so $\Ext_A^{h-1}(K_1,N)$ is the cohomology of $\Hom_A(P_{\bullet+1},N)$ in degree $h-1$.
+
+For $h\geq2$, the cohomology of $\Hom_A(P_\bullet,N)$ in degree $h$ uses $\Hom_A(P_{h-1},N)\to\Hom_A(P_h,N)\to\Hom_A(P_{h+1},N)$, which is the same piece of the complex, so $\Ext_A^h(M,N)\cong\Ext_A^{h-1}(K_1,N)$.
+
+For $h=1$: $\Ker\delta^1$ consists of maps $P_1\to N$ vanishing on $\Im d_2=\Ker d_1$, that is, maps factoring uniquely through $d_1:P_1\twoheadrightarrow K_1$.
+So $\Ker\delta^1\cong\Hom_A(K_1,N)$, and under this identification $\Im\delta^0=\{\varphi d_1:\varphi\in\Hom_A(P_0,N)\}$ is the image of the restriction map $\Hom_A(P_0,N)\to\Hom_A(K_1,N)$, $\varphi\mapsto\varphi|_{K_1}$.
+Hence $\Ext_A^1(M,N)$ is the cokernel.
+\end{hidden}
+
+
 \begin{exercise}
 Let $A=\Bbbk A_3/(e_{13})$ with the grading by path length.
 Find the minimal graded projective resolution of $L_1$, and compute $\dim_\Bbbk\Ext_A^h(L_1,L_y)_j$ for all $h,y,j$.
 \end{exercise}
 
+\begin{hidden}
+\emph{Solution.}
+Here $e_{11}A=\langle e_{11},e_{12}\rangle$, $e_{22}A=\langle e_{22},e_{23}\rangle$, $e_{33}A=\langle e_{33}\rangle$.
+The kernel of $e_{11}A\to L_1$ is $\Bbbk e_{12}\cong L_2(-1)$, since $e_{12}e_{23}=e_{13}=0$.
+Its projective cover is $e_{22}A(-1)\to\Bbbk e_{12}$, $e_{22}\mapsto e_{12}$, with kernel $\Bbbk e_{23}$ in degree $2$, which is $\cong e_{33}A(-2)$ and projective.
+So the minimal resolution is
+\[
+0\to e_{33}A(-2)\to e_{22}A(-1)\to e_{11}A\to L_1\to0,
+\]
+with $\grtop P_h=L_{h+1}$ in degree $h$ for $h=0,1,2$.
+By Corollary~\ref{cor:ext-simple}, $\dim\Ext_A^h(L_1,L_y)_j=[(\grtop P_h)_{-j}:L_y]$ equals $1$ for $(h,y,j)=(0,1,0),(1,2,-1),(2,3,-2)$ and $0$ otherwise.
+\end{hidden}
+
+
 \begin{exercise}
 Let $A=\Bbbk[x]$ with $\deg x=1$ and $M=A/(x^m)$ for some $m\geq1$.
 Find a minimal graded resolution of $M$, and compute $\Tor_h^A(M,\Bbbk)$ and $\Ext_A^h(M,\Bbbk)_j$ for all $h,j$.
 \end{exercise}
+
+\begin{hidden}
+\emph{Solution.}
+Multiplication by $x^m$ is injective on $A$, so $0\to A(-m)\xrightarrow{x^m}A\to M\to0$ is a graded projective resolution, and it is minimal since $x^m\in A_+$ for $m\geq1$.
+So $\grtop P_0=\Bbbk$ in degree $0$ and $\grtop P_1=\Bbbk$ in degree $m$, and $\grtop P_h=0$ for $h\geq2$.
+By Proposition~\ref{prop:tor-top}, $\Tor_h^A(M,\Bbbk)\cong\grtop P_h$, which is $\Bbbk$ in degree $0$ for $h=0$, $\Bbbk$ in degree $m$ for $h=1$, and $0$ otherwise.
+By Theorem~\ref{thm:ext-minimal}, $\Ext_A^h(M,\Bbbk)_j\cong\Hom_\Bbbk((\grtop P_h)_{-j},\Bbbk)$ is $\Bbbk$ for $(h,j)=(0,0)$ and $(1,-m)$, and $0$ otherwise.
+\end{hidden}
+
 
 \begin{exercise}
 Let $A$ be as in Subsection~\ref{subsec:graded-ext}.
@@ -360,3 +407,14 @@ Let $A$ be as in Subsection~\ref{subsec:graded-ext}.
 \item Prove that $A$ is generated in degree $1$ over $S$ if and only if $\Tor_1^A(S,S)$ is concentrated in degree $1$.
 \end{enumerate}
 \end{exercise}
+
+\begin{hidden}
+\emph{Solution.}
+(1) Let $P_\bullet\to S$ be the minimal resolution and $K_1=\Ker p_0=A_+$.
+By Proposition~\ref{prop:tor-top}, $\Tor_1^A(S,S)\cong\grtop P_1$, and $\grtop P_1\cong\grtop K_1=A_+/A_+^2$ by Lemma~\ref{lem:minimal-tops} applied to $d_1:P_1\to K_1$.
+
+(2) By (1), the condition says $A_+/A_+^2$ is concentrated in degree $1$, that is, $A_i=(A_+^2)_i=\sum_{0<p<i}A_pA_{i-p}$ for $i\geq2$.
+If $A$ is generated in degree $1$, then $A_i=A_1A_{i-1}\subseteq A_+^2$ for $i\geq2$.
+Conversely, if $A_i=\sum_{0<p<i}A_pA_{i-p}$ for all $i\geq2$, induction on $i$ gives $A_p=A_1^p$ for all $p<i$, hence $A_i=A_1^i$, so every $\mu_i$ is surjective.
+\end{hidden}
+
