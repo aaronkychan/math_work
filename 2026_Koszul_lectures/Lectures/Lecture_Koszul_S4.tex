@@ -315,10 +315,159 @@ For $A=\Bbbk A_2$, $\rad A=\Bbbk e_{12}$, $\top(e_{11}A)=e_{11}A/\Bbbk e_{12}=L_
 \end{example}
 \end{supplementary}
 
-\subsection{Projective covers}\label{subsec:ordinary-covers}
 
-A graded free surjection onto $M$ may use unnecessary generators.
-A projective cover removes them.
+\begin{lemma}\label{lem:graded-projective-terms}
+Let $P$ be a bounded below lfd graded projective module.
+Then
+\begin{equation}\label{eq:graded-cover-terms}
+P\cong\bigoplus_{i\in\Z}\bigl((\grtop P)_i\otimes_S A\bigr)(-i),
+\end{equation}
+where $(\grtop P)_i$ is placed in degree $0$ before shifting.
+In particular, $P$ is generated in the degrees $i$ with $(\grtop P)_i\neq0$.
+\end{lemma}
+
+\begin{proof}
+Since $S$ is semisimple, choose right $S$-linear sections $s_i:(\grtop P)_i\to P_i$ of the quotient maps.
+Let $F$ be the right-hand side of \eqref{eq:graded-cover-terms} and $\psi:F\to P$, $v\otimes a\mapsto s_i(v)a$ on the $i$th summand; it is well defined by $S$-linearity of $s_i$.
+By construction $\grtop\psi$ is an isomorphism, so $\psi$ is surjective by graded Nakayama applied to $P/\psi(F)$.
+Since $P$ is projective, $\psi$ splits: $F\cong P\oplus\Ker\psi$, and $\grtop\psi$ being an isomorphism gives $\grtop(\Ker\psi)=0$.
+As $\Ker\psi\subseteq F$ is bounded below, graded Nakayama gives $\Ker\psi=0$.
+\end{proof}
+
+\subsection{Minimal resolutions}
+
+A graded projective resolution can contain redundant terms: adding a contractible summand $A\xrightarrow{\id}A$ in two consecutive degrees gives another resolution.
+A resolution is minimal if the differentials land in $P_{h-1}A_+$, so that no generator is wasted.
+
+\begin{definition}\label{def:minimal-resolution}
+A \defn{graded projective resolution} is a projective resolution \eqref{eq:projective-resolution} in which the modules are graded, the differentials are degree-preserving, and the $P_h$ are graded projective.
+It is \defn{minimal} if all $P_h$ are bounded below and lfd, and
+\begin{equation}\label{eq:graded-minimal-criterion}
+\Im d_h\subseteq P_{h-1}A_+\quad\text{for all }h\geq1.
+\end{equation}
+\end{definition}
+
+Since $\Ker p_0=\Im d_1$, this includes $\Ker p_0\subseteq P_0A_+$.
+Homological degree $h$ and grading degree $i$ are distinct: $d_h:(P_h)_i\to(P_{h-1})_i$, and exactness is checked in each grading degree as in Remark~\ref{rem:graded-exactness}.
+
+\begin{lemma}\label{lem:minimal-tops}
+Let $p:P\to K$ be a surjection of graded modules with $\Ker p\subseteq PA_+$.
+Then $\grtop p:\grtop P\to\grtop K$ is an isomorphism.
+Consequently, for a minimal resolution $P_\bullet\to M$ and $K_h:=\Im d_h$ for $h\geq1$, we have $\grtop P_0\cong\grtop M$ and $\grtop P_h\cong\grtop K_h$.
+\end{lemma}
+
+\begin{proof}
+The map $\grtop p$ is surjective, and $p(PA_+)=KA_+$ gives $\Ker(\grtop p)=(\Ker p+PA_+)/PA_+=0$.
+For the last assertion apply this to $p_0:P_0\to M$ and to $d_h:P_h\to K_h$, whose kernels $\Ker p_0=\Im d_1$ and $\Ker d_h=\Im d_{h+1}$ lie in $P_0A_+$ and $P_hA_+$ by \eqref{eq:graded-minimal-criterion}.
+\end{proof}
+
+\begin{theorem}\label{thm:minimal-resolution}
+Every bounded below locally finite-dimensional graded right $A$-module $M$ has a minimal graded projective resolution.
+Any two such resolutions are isomorphic by degree-preserving isomorphisms $f_h:P_h\to P'_h$ with $p'_0f_0=p_0$ and $d'_hf_h=f_{h-1}d_h$.
+\end{theorem}
+
+The proof builds the resolution from successive graded projective covers and is given in Subsection~\ref{subsec:ordinary-covers}.
+By \eqref{eq:graded-cover-terms}, $P_h\cong\bigoplus_{i\in\Z}\bigl((\grtop P_h)_i\otimes_S A\bigr)(-i)$, so $\grtop P_h$ records the types and degrees of the generators needed in homological degree $h$.
+
+\begin{example}\label{ex:minimal-A2}
+Let $A=\Bbbk A_2$ with $A_0=S=\Bbbk e_{11}\oplus\Bbbk e_{22}$ and $A_1=\Bbbk e_{12}$, and place $L_1,L_2$ in degree $0$.
+Then
+\[
+0\longrightarrow e_{22}A(-1)\xrightarrow{d_1}e_{11}A
+\xrightarrow{p_0}L_1\longrightarrow0,\qquad
+d_1(e_{22}a)=e_{12}a
+\]
+is minimal: $\Ker p_0=\Bbbk e_{12}=(e_{11}A)A_+$ and $d_1$ is an isomorphism onto it, the generator $e_{22}$ and its image $e_{12}$ both having degree $1$.
+Its projective terms have tops $L_1$ and $L_2(-1)$.
+The other simple module $L_2=e_{22}A$ is already projective.
+\end{example}
+
+\begin{example}\label{ex:minimal-polynomial}
+Let $A=\Bbbk[x]$ with $\deg x=1$.
+The quotient $\Bbbk=A/(x)$ has the minimal graded resolution
+\[
+0\longrightarrow A(-1)\xrightarrow{d_1}A\xrightarrow{\pi}\Bbbk
+\longrightarrow0,\qquad d_1(a)=xa,\quad\pi(f)=f(0).
+\]
+Multiplication by $x$ is injective with image $xA=\Ker\pi\subseteq AA_+$, and the shift makes it degree-preserving.
+The two projective terms have one generator each, in degrees $0$ and $1$.
+\end{example}
+
+\begin{supplementary}
+Forgetting the grading need not preserve projective covers.
+In Example~\ref{ex:minimal-polynomial}, the proper ungraded submodule $(x-1)A\subset A$ still maps onto $\Bbbk$ under $\pi$, since $\pi(x-1)=-1$.
+Thus $\pi$ is a graded projective cover but not an ordinary projective cover.
+\end{supplementary}
+
+\begin{example}\label{ex:minimal-exterior}
+Give $E=\Bbbk[\epsilon]/(\epsilon^2)$ the grading $\deg\epsilon=1$.
+Then
+\[
+\cdots\longrightarrow E(-3)\xrightarrow{d_3}E(-2)
+\xrightarrow{d_2}E(-1)\xrightarrow{d_1}E\xrightarrow{\pi}\Bbbk
+\longrightarrow0,
+\qquad d_h(a)=\epsilon a,
+\]
+is a minimal graded resolution: multiplication by $\epsilon$ has kernel and image both equal to $\Bbbk\epsilon$, so it is exact, and $\Im d_h=\epsilon E(-h+1)\subseteq E(-h+1)E_+$.
+For every $h\geq1$, the generator of $E(-h)$ and its image under $d_h$ both have degree $h$.
+The term in homological degree $h$ has one generator, in degree $h$, and the resolution never terminates.
+\end{example}
+
+\begin{advanced}
+\begin{remark}\label{not:graded-betti}
+The multiplicities in the graded tops are sometimes called \defn{graded Betti numbers}.
+For representatives $L_1,\ldots,L_n$ of the simple right $S$-modules, one can write
+\[
+(\grtop P_h)_i\cong\bigoplus_{y=1}^nL_y^{\oplus\beta_{h,i,y}(M)},
+\qquad
+\beta_{h,i}(M):=(\beta_{h,i,y}(M))_{1\leq y\leq n}.
+\]
+Here $h\geq0$ is the homological degree and $i\in\Z$ is the grading degree.
+These multiplicities are independent of the chosen minimal resolution by Theorem~\ref{thm:minimal-resolution}.
+We will use the modules $\grtop P_h$ directly, without this additional indexing.
+\end{remark}
+\end{advanced}
+
+\begin{definition}\label{def:noetherian-algebra}
+$A$ is \defn{right noetherian} if every submodule of every finitely generated right $A$-module is finitely generated; \defn{left noetherian} is defined symmetrically, and \defn{noetherian} means both.
+\end{definition}
+
+\begin{supplementary}
+\begin{remark}\label{rem:noetherian-acc}
+$A$ is right noetherian if and only if every ascending chain $I_1\subseteq I_2\subseteq\cdots$ of right ideals stabilises (the \defn{ascending chain condition}, ACC); similarly on the left.
+Finite-dimensional algebras and $\Bbbk[x_1,\ldots,x_m]$ are noetherian, whereas the free algebra $\Bbbk\langle x,y\rangle$ is not.
+Thus the hypothesis of Corollary~\ref{cor:noetherian-minimal-resolution} is not automatic.
+
+\emph{Proof.}
+If submodules of finitely generated modules are finitely generated, the union of a chain $I_1\subseteq I_2\subseteq\cdots$ of right ideals is finitely generated, with generators in some $I_k$; so the chain stabilises at $I_k$.
+Conversely, assume the ACC.
+Every right ideal $I$ is finitely generated: otherwise choose inductively $u_{k+1}\in I\setminus(u_1A+\cdots+u_kA)$, giving a strictly ascending chain.
+We show by induction on $m$ that every submodule $U\subseteq A^{\oplus m}$ is finitely generated; the case $m=1$ was just proved.
+For $m>1$, let $\pi:A^{\oplus m}\to A$ be the projection onto the last coordinate.
+Then $U\cap\Ker\pi\subseteq A^{\oplus(m-1)}$ and $\pi(U)$ are finitely generated, and generators of $U\cap\Ker\pi$ together with lifts to $U$ of generators of $\pi(U)$ generate $U$.
+Finally, a finitely generated module is a quotient $A^{\oplus m}/K$, and each submodule of it has the form $U/K$ with $K\subseteq U\subseteq A^{\oplus m}$, hence is finitely generated.
+\end{remark}
+\end{supplementary}
+
+\begin{corollary}\label{cor:noetherian-minimal-resolution}
+Assume that $A$ is right noetherian.
+Every finitely generated graded right $A$-module has a minimal graded projective resolution whose terms and successive kernels are finitely generated.
+In particular, this applies to $S=A/A_+$.
+\end{corollary}
+
+\begin{proof}
+A finitely generated graded module $M$ is bounded below and lfd, being a quotient of a finite direct sum of shifts of $A$.
+Let $P_\bullet\to M$ be a minimal resolution (Theorem~\ref{thm:minimal-resolution}).
+By Lemma~\ref{lem:minimal-tops}, $\grtop P_0\cong\grtop M$ is finite-dimensional, so $P_0$ is finitely generated by \eqref{eq:graded-cover-terms}, and $K_1\subseteq P_0$ is finitely generated by right noetherianity.
+The same argument applies to $K_1,K_2,\ldots$.
+\end{proof}
+
+Without noetherianity, boundedness below and local finite-dimensionality still give existence of a minimal graded resolution, but its terms need not be finitely generated.
+
+\subsection{Projective covers and existence of minimal resolutions}\label{subsec:ordinary-covers}
+
+\begin{supplementary}
+A graded free surjection onto $M$ may use unnecessary generators; a projective cover removes them.
 
 \begin{definition}\label{def:graded-projective-cover}
 A \defn{graded projective cover} of a bounded below lfd graded module $M$ is a surjection $p:P\to M$, with $P$ bounded below, lfd, and graded projective, such that
@@ -329,21 +478,15 @@ A \defn{graded projective cover} of a bounded below lfd graded module $M$ is a s
 
 Equivalently, $\Ker p\subseteq PA_+$, and no proper graded submodule of $P$ maps onto $M$.
 
-\begin{supplementary}
 The identity $p(PA_+)=MA_+$ gives $\Ker(\grtop p)=(\Ker p+PA_+)/PA_+$.
 If $\Ker p\subseteq PA_+$ and $p(U)=M$ for a graded submodule $U\subseteq P$, then $U+PA_+=P$; graded Nakayama gives $U=P$.
 Conversely, if $\Ker(\grtop p)\neq0$, choose a graded $S$-module complement $W$ to this kernel in $\grtop P$.
 The inverse image $U$ of $W$ under $P\to\grtop P$ is a proper graded submodule of $P$.
 Since $\grtop p(W)=\grtop M$, we have $p(U)+MA_+=M$; graded Nakayama gives $p(U)=M$.
-\end{supplementary}
 
 \begin{proposition}\label{prop:graded-projective-covers}
 Every bounded below lfd graded right $A$-module $M$ has a graded projective cover, unique up to graded isomorphism over $M$.
-Its domain is isomorphic to
-\begin{equation}\label{eq:graded-cover-terms}
-P=\bigoplus_{i\in\Z}\bigl((\grtop M)_i\otimes_S A\bigr)(-i),
-\end{equation}
-where $(\grtop M)_i$ is placed in degree $0$.
+Its domain is the module in \eqref{eq:graded-cover-terms} for $P=$ the cover, that is, $P\cong\bigoplus_{i\in\Z}\bigl((\grtop M)_i\otimes_S A\bigr)(-i)$.
 \end{proposition}
 
 \begin{proof}
@@ -366,6 +509,14 @@ Since $q(f(P))=M$ and $q$ is a cover, $f(P)=Q$.
 Projectivity of $Q$ gives a section $s:Q\to P$ of $f$, and $p(s(Q))=q(Q)=M$ gives $s(Q)=P$.
 Thus $f$ and $s$ are inverse isomorphisms.
 \end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:minimal-resolution}]
+By Lemma~\ref{lem:minimal-tops}, a resolution satisfying \eqref{eq:graded-minimal-criterion} has all maps $p_h:P_h\to K_h$, $x\mapsto d_h(x)$ (with $K_1=\Ker p_0$ and $K_h=\Ker d_{h-1}$), graded projective covers; conversely, covers satisfy $\Ker\subseteq PA_+$ by the equivalence above.
+So minimal resolutions are exactly the resolutions built from successive graded projective covers.
+Existence follows from Proposition~\ref{prop:graded-projective-covers} applied to $M$ and then to each kernel, which remains bounded below and lfd.
+For uniqueness, an isomorphism $f_0:P_0\to P'_0$ of the covers of $M$ restricts to an isomorphism $K_1\to K'_1$; uniqueness of covers of the kernels gives $f_1$, and so on.
+\end{proof}
+\end{supplementary}
 
 \begin{supplementary}
 \emph{Ungraded analogue.}
@@ -433,90 +584,6 @@ The surjection $A=e_{11}A\oplus e_{22}A\to L_1$ killing $e_{22}A$ is not a cover
 \end{example}
 \end{supplementary}
 
-\subsection{Minimal resolutions}
-
-\begin{definition}\label{def:minimal-resolution}
-A \defn{graded projective resolution} is a projective resolution \eqref{eq:projective-resolution} in which the modules are graded, the differentials are degree-preserving, and the $P_h$ are graded projective.
-It is \defn{minimal} if $p_0:P_0\to M$ and the maps $p_h:P_h\to K_h$, $x\mapsto d_h(x)$, with $K_1=\Ker p_0$ and $K_h=\Ker d_{h-1}$ for $h\geq2$, are graded projective covers for all $h\geq1$.
-\end{definition}
-
-Homological degree $h$ and grading degree $i$ are distinct: $d_h:(P_h)_i\to(P_{h-1})_i$, and exactness is checked in each grading degree as in Remark~\ref{rem:graded-exactness}.
-Since $\Ker p_0=\Im d_1$ and $\Ker d_h=\Im d_{h+1}$, minimality is equivalent to
-\begin{equation}\label{eq:graded-minimal-criterion}
-\Im d_h\subseteq P_{h-1}A_+\quad\text{for all }h\geq1.
-\end{equation}
-
-\begin{theorem}\label{thm:minimal-resolution}
-Every bounded below locally finite-dimensional graded right $A$-module $M$ has a minimal graded projective resolution.
-Any two such resolutions are isomorphic by degree-preserving isomorphisms $f_h:P_h\to P'_h$ with $p'_0f_0=p_0$ and $d'_hf_h=f_{h-1}d_h$.
-\end{theorem}
-
-\begin{proof}
-Apply Proposition~\ref{prop:graded-projective-covers} successively to $M$ and to each kernel $K_h$, which remains bounded below and locally finite-dimensional.
-For uniqueness, an isomorphism $f_0:P_0\to P'_0$ of the covers of $M$ restricts to an isomorphism $K_1\to K'_1$; uniqueness of covers of the kernels gives $f_1$, and so on.
-\end{proof}
-
-By \eqref{eq:graded-cover-terms}, $P_h\cong\bigoplus_{i\in\Z}\bigl((\grtop P_h)_i\otimes_S A\bigr)(-i)$, so $\grtop P_h$ records the types and degrees of the generators needed in homological degree $h$.
-
-\begin{example}\label{ex:minimal-A2}
-Let $A=\Bbbk A_2$ with $A_0=S=\Bbbk e_{11}\oplus\Bbbk e_{22}$ and $A_1=\Bbbk e_{12}$, and place $L_1,L_2$ in degree $0$.
-Then
-\[
-0\longrightarrow e_{22}A(-1)\xrightarrow{d_1}e_{11}A
-\xrightarrow{p_0}L_1\longrightarrow0,\qquad
-d_1(e_{22}a)=e_{12}a
-\]
-is minimal: $\Ker p_0=\Bbbk e_{12}=(e_{11}A)A_+$ and $d_1$ is an isomorphism onto it, the generator $e_{22}$ and its image $e_{12}$ both having degree $1$.
-Its projective terms have tops $L_1$ and $L_2(-1)$.
-The other simple module $L_2=e_{22}A$ is already projective.
-\end{example}
-
-\begin{example}\label{ex:minimal-polynomial}
-Let $A=\Bbbk[x]$ with $\deg x=1$.
-The quotient $\Bbbk=A/(x)$ has the minimal graded resolution
-\[
-0\longrightarrow A(-1)\xrightarrow{d_1}A\xrightarrow{\pi}\Bbbk
-\longrightarrow0,\qquad d_1(a)=xa,\quad\pi(f)=f(0).
-\]
-Multiplication by $x$ is injective with image $xA=\Ker\pi\subseteq AA_+$, and the shift makes it degree-preserving.
-The two projective terms have one generator each, in degrees $0$ and $1$.
-\end{example}
-
-\begin{supplementary}
-Forgetting the grading need not preserve projective covers.
-In Example~\ref{ex:minimal-polynomial}, the proper ungraded submodule $(x-1)A\subset A$ still maps onto $\Bbbk$ under $\pi$, since $\pi(x-1)=-1$.
-Thus $\pi$ is a graded projective cover but not an ordinary projective cover.
-\end{supplementary}
-
-\begin{example}\label{ex:minimal-exterior}
-Give $E=\Bbbk[\epsilon]/(\epsilon^2)$ the grading $\deg\epsilon=1$.
-Then
-\[
-\cdots\longrightarrow E(-3)\xrightarrow{d_3}E(-2)
-\xrightarrow{d_2}E(-1)\xrightarrow{d_1}E\xrightarrow{\pi}\Bbbk
-\longrightarrow0,
-\qquad d_h(a)=\epsilon a,
-\]
-is a minimal graded resolution: multiplication by $\epsilon$ has kernel and image both equal to $\Bbbk\epsilon$, so it is exact, and $\Im d_h=\epsilon E(-h+1)\subseteq E(-h+1)E_+$.
-For every $h\geq1$, the generator of $E(-h)$ and its image under $d_h$ both have degree $h$.
-The term in homological degree $h$ has one generator, in degree $h$, and the resolution never terminates.
-\end{example}
-
-\begin{advanced}
-\begin{remark}\label{not:graded-betti}
-The multiplicities in the graded tops are sometimes called \defn{graded Betti numbers}.
-For representatives $L_1,\ldots,L_n$ of the simple right $S$-modules, one can write
-\[
-(\grtop P_h)_i\cong\bigoplus_{y=1}^nL_y^{\oplus\beta_{h,i,y}(M)},
-\qquad
-\beta_{h,i}(M):=(\beta_{h,i,y}(M))_{1\leq y\leq n}.
-\]
-Here $h\geq0$ is the homological degree and $i\in\Z$ is the grading degree.
-These multiplicities are independent of the chosen minimal resolution by Theorem~\ref{thm:minimal-resolution}.
-We will use the modules $\grtop P_h$ directly, without this additional indexing.
-\end{remark}
-\end{advanced}
-
 \begin{supplementary}
 \emph{Ungraded analogue.}
 For a finite-dimensional algebra $A$ and a right $A$-module $M$, replace graded covers by projective covers in Definition~\ref{def:minimal-resolution}.
@@ -571,41 +638,6 @@ Every $a+b\epsilon$ with $a\neq0$ has inverse $a^{-1}-a^{-2}b\epsilon$, so $\rad
 The sequence $\cdots\xrightarrow{\epsilon\cdot-}E\xrightarrow{\epsilon\cdot-}E\to\Bbbk\to0$ is a minimal resolution of $\Bbbk$ with all terms non-zero: a finite-dimensional algebra can have a simple module with an infinite minimal resolution.
 \end{example}
 \end{supplementary}
-
-\begin{definition}\label{def:noetherian-algebra}
-$A$ is \defn{right noetherian} if every submodule of every finitely generated right $A$-module is finitely generated; \defn{left noetherian} is defined symmetrically, and \defn{noetherian} means both.
-\end{definition}
-
-\begin{supplementary}
-\begin{remark}\label{rem:noetherian-acc}
-$A$ is right noetherian if and only if every ascending chain $I_1\subseteq I_2\subseteq\cdots$ of right ideals stabilises (the \defn{ascending chain condition}, ACC); similarly on the left.
-Finite-dimensional algebras and $\Bbbk[x_1,\ldots,x_m]$ are noetherian, whereas the free algebra $\Bbbk\langle x,y\rangle$ is not.
-Thus the hypothesis of Corollary~\ref{cor:noetherian-minimal-resolution} is not automatic.
-
-\emph{Proof.}
-If submodules of finitely generated modules are finitely generated, the union of a chain $I_1\subseteq I_2\subseteq\cdots$ of right ideals is finitely generated, with generators in some $I_k$; so the chain stabilises at $I_k$.
-Conversely, assume the ACC.
-Every right ideal $I$ is finitely generated: otherwise choose inductively $u_{k+1}\in I\setminus(u_1A+\cdots+u_kA)$, giving a strictly ascending chain.
-We show by induction on $m$ that every submodule $U\subseteq A^{\oplus m}$ is finitely generated; the case $m=1$ was just proved.
-For $m>1$, let $\pi:A^{\oplus m}\to A$ be the projection onto the last coordinate.
-Then $U\cap\Ker\pi\subseteq A^{\oplus(m-1)}$ and $\pi(U)$ are finitely generated, and generators of $U\cap\Ker\pi$ together with lifts to $U$ of generators of $\pi(U)$ generate $U$.
-Finally, a finitely generated module is a quotient $A^{\oplus m}/K$, and each submodule of it has the form $U/K$ with $K\subseteq U\subseteq A^{\oplus m}$, hence is finitely generated.
-\end{remark}
-\end{supplementary}
-
-\begin{corollary}\label{cor:noetherian-minimal-resolution}
-Assume that $A$ is right noetherian.
-Every finitely generated graded right $A$-module has a minimal graded projective resolution whose terms and successive kernels are finitely generated.
-In particular, this applies to $S=A/A_+$.
-\end{corollary}
-
-\begin{proof}
-A finitely generated graded module is bounded below and lfd, being a quotient of a finite direct sum of shifts of $A$.
-Its $\grtop M$ is finite-dimensional, so its graded projective cover is finitely generated by \eqref{eq:graded-cover-terms}.
-Right noetherianity makes the kernel finitely generated, so the same argument applies to every successive kernel.
-\end{proof}
-
-Without noetherianity, boundedness below and local finite-dimensionality still give existence of a minimal graded resolution (Theorem~\ref{thm:minimal-resolution}), but its terms need not be finitely generated.
 
 \subsection{Exercises}
 
