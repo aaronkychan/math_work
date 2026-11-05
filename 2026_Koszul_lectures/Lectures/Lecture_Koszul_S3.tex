@@ -92,7 +92,8 @@ We write $\theta$ when the two bimodules are clear.
 \end{proposition}
 
 \begin{supplementary}
-\begin{proof}
+%\begin{proof}
+\textbf{Proof} \phantom{abc}
 Take $\lambda \in D(W)$ and $\mu\in D(V)$ throughout.
 By \eqref{eq:linear-bimodule-dual-action}, the bimodule $S$-action on the dual spaces are
 \[
@@ -126,6 +127,7 @@ Similarly, $(fs)(x)=f(sx)=f(sv\otimes w)$ and
 \[
 \theta(\lambda\otimes\mu s)(v\otimes w)=\sum_i\mu(sve_i)\lambda(e_iw)=\theta(\lambda\otimes\mu)(sv\otimes w).
 \]
+\end{supplementary}
 
 \underline{$\theta$ is bijective.}
 By Lemma~\ref{lem:idempotent-tensors} and \eqref{eq:dual-blocks},
@@ -145,6 +147,7 @@ D(e_bWe_a)\otimes_\Bbbk D(e_cVe_b)\longrightarrow D(e_cVe_b\otimes_\Bbbk e_bWe_a
 \]
 This is an isomorphism of finite-dimensional vector spaces: it sends the tensor products of dual basis vectors to the dual basis of the tensor product basis.
 
+\begin{supplementary}
 \underline{Naturality.}
 For $\lambda\in D(W')$, $\mu\in D(V')$, $v\in V$, $w\in W$, and using that $f,g$ commute with the idempotents,
 \[
@@ -157,7 +160,7 @@ For $\lambda\in D(W')$, $\mu\in D(V')$, $v\in V$, $w\in W$, and using that $f,g$
 \end{aligned}
 \]
 This is \eqref{eq:D-tensor-binaturality}.
-\end{proof}
+\hfill\qed
 \end{supplementary}
 
 
@@ -204,7 +207,7 @@ D(D(V\otimes_S W))
 \begin{proof}
 For $v\in V$, $w\in W$, $\lambda\in D(W)$, and $\mu\in D(V)$, the dual actions in \eqref{eq:linear-bimodule-dual-action} give
 $\mathrm{ev}_W(w)(\lambda e_i)=\lambda(e_iw)$ and $\mathrm{ev}_V(v)(e_i\mu)=\mu(ve_i)$.
-Thus the definitions of $\theta$, $D$, and evaluation give
+The claim then follows by direct check:
 \[
 \begin{aligned}
 \theta_{D(W),D(V)}\bigl(\mathrm{ev}_V(v)\otimes\mathrm{ev}_W(w)\bigr)(\lambda\otimes\mu)
@@ -236,13 +239,13 @@ Since $D(\iota)(\lambda)=\lambda|_U$, exactness of $D$ gives the short exact seq
 \begin{equation}\label{eq:orthogonal-exact}
 0\longrightarrow U^\perp\longrightarrow D(M)\xrightarrow{D(\iota)}D(U)\longrightarrow0.
 \end{equation}
-In particular, let $q:M\to M/U$ be the quotient map identifying $\Cok(\iota)\cong M/U$, then $D(q):D(M/U)\to DM$ (with  $\varphi\mapsto\varphi\circ q$) induces $D(M/U) \cong \Im(D(q)) = U^\perp$.
+In particular, we have $U^\perp =\Ker D(\iota)=\Im D(q)=D(M/U)$, where $0\to U\xrightarrow{\iota} M \xrightarrow{q} M/U\to 0$ is the canonical short exact sequence.
 
 
 \begin{lemma}\label{lem:double-orthogonal}
 Let ${}_SM_S$ and ${}_SV_S$ be finite-dimensional $S$-bimodules.
 \begin{enumerate}
-\item For a sub-bimodule ${}_SU_S\subset M$, we have  $(U^\perp)^\perp=\mathrm{ev}_U(U) \cong U$.
+\item For a sub-bimodule ${}_SU_S\subset M$, we have  $(U^\perp)^\perp=DD(U) \cong U$.
 
 \item For a sub-bimodule ${}_SR_S\subset V\otimes_SV$, we have
 \[
@@ -256,9 +259,12 @@ Let ${}_SM_S$ and ${}_SV_S$ be finite-dimensional $S$-bimodules.
 (1) Let $\iota:U\hookrightarrow M$ be the inclusion.
 Dualising \eqref{eq:orthogonal-exact} gives
 \[
-(U^\perp)^\perp=\Im D(D(\iota))=\mathrm{ev}_M(\Im\iota)=\mathrm{ev}_U(U),
+(U^\perp)^\perp=\Im D(D(\iota))=\Im(\mathrm{ev}_M\circ \iota\circ \mathrm{ev}_U^{-1})=\Im(\mathrm{ev}_U\circ \mathrm{ev}_U^{-1})=DD(U)=U,
 \]
-by naturality of $\mathrm{ev}$.
+where the second equality follows from the naturality of $\mathrm{ev}$:
+\[
+\xymatrix{U \ar[r]^\iota \ar[d]_{\mathrm{ev}_U} \ar@{}[rd]|{\circlearrowleft}& M \ar[d]^{\mathrm{ev}_M} \\
+DDU \ar[r]_{DD(\iota)}& DD(M). } \]
 \begin{supplementary}
 We can also prove this by direct calculation:
 If $u\in U$ and $\lambda\in U^\perp$, then $\mathrm{ev}_M(u)(\lambda)=\lambda(u)=0$; hence $\mathrm{ev}_U(U)=\mathrm{ev}_M(U)\subset(U^\perp)^\perp$.
@@ -282,6 +288,7 @@ U^\perp=D(\theta_V)\big((R^\perp)^\perp\big) & \stackrel{(1)}{=} & D(\theta_V)\b
 \] which means that $\theta'^{-1}\big((\theta_VR^\perp)^\perp\big)=(\mathrm{ev}_V\otimes_S\mathrm{ev}_V)(R)$ as claimed.
 \end{proof}
 
+\comm{add supplementary:  when given a basis for each $e_aVe_b$ and $e_aWe_b$, how to write down $\theta^{-1}$.}
 
 \begin{advanced}
 For general $S$, the one-sided $S$-duals give the following choice-free orthogonal complements.
@@ -322,6 +329,7 @@ Bijectivity of $\alpha_M,\beta_M$ in Theorem~\ref{prop:dual-comparison} proves \
 \end{advanced}
 
 \begin{example}\label{ex:symmetric-orthogonals}
+\comm{since we do this more generally later, use $\Bbbk A_3$ as example instead.}
 We compute the orthogonal complements of the relation spaces of $\SymAlg(V)$ and $\bigwedge W$ for $\dim_{\Bbbk}V=2=\dim_{\Bbbk}W$.
 Take $V=\Bbbk x_1\oplus\Bbbk x_2$ and $W=\Bbbk y_1\oplus\Bbbk y_2$ in Example~\ref{ex:polynomial-exterior}.
 The relation spaces in $V\otimes_\Bbbk V$ and $W\otimes_\Bbbk W$, respectively, are
@@ -665,7 +673,7 @@ Here $S=\Bbbk$, and \eqref{eq:D-tensor-duals} reads
 \theta(x_j^*\otimes x_i^*)(x_p\otimes x_q)=x_i^*(x_p)\,x_j^*(x_q)=\delta_{ip}\delta_{jq}.
 \]
 A tensor $\sum_{i,j=1}^n c_{ij}x_i^*\otimes x_j^*$ vanishes on each $x_p\otimes x_q-x_q\otimes x_p$ precisely when $c_{pq}=c_{qp}$ for $1\leq p<q\leq n$.
-Thus the orthogonal complement of the symmetric relations is spanned by $(x_i^*)^2$ for $1\leq i\leq n$ and $x_i^*x_j^*+x_j^*x_i^*$ for $1\leq i<j\leq n$, which are the exterior relations on $D(V)$.
+Thus the orthogonal complement of the symmetric relations is spanned by $(x_i^*)^2$ \comm{more properly should be $x_i^*\otimes x_i^*$} for $1\leq i\leq n$ and $x_i^*x_j^*+x_j^*x_i^*$ \comm{more properly, tensor, not just ``multiply"?} for $1\leq i<j\leq n$, which are the exterior relations on $D(V)$.
 
 For $\bigwedge W$, choose a basis $y_1,\ldots,y_m$ of $W$, with dual basis $y_1^*,\ldots,y_m^*$ of $D(W)$.
 A tensor $\sum_{i,j=1}^m c_{ij}y_i^*\otimes y_j^*$ annihilates the exterior relations precisely when $c_{ii}=0$ for $1\leq i\leq m$ and $c_{pq}+c_{qp}=0$ for $1\leq p<q\leq m$.
@@ -674,7 +682,7 @@ The presentations in \eqref{eq:polynomial-exterior} give both isomorphisms.
 \end{proof}
 
 Note that the proof works in characteristic $2$: the relations $(x_i^*)^2=0$ remain part of the exterior presentation even when the signs $+$ and $-$ coincide.
-Example~\ref{ex:symmetric-orthogonals} is the calculation for two generators.
+\old{Example~\ref{ex:symmetric-orthogonals} is the calculation for two generators.}
 
 This example also shows that
 \begin{itemize}
@@ -724,7 +732,7 @@ Then both tensor products are quadratic over $S\otimes_\Bbbk T$, and
 (A\otimes_\Bbbk^{\mathrm{gr}}B)^!\cong A^!\otimes_\Bbbk B^!.
 \end{equation}
 \end{proposition}
-
+\comm{remark if the two type of tensor product algebra are genuinely different:  any example of algebras where graded tensor and ungraded tensor are not isomorphic?}
 The mixed commuting relations become anticommuting relations under the reversed tensor pairing.
 
 The assumption on $S\otimes_\Bbbk T$ holds when $S,T$ are products of matrix algebras over $\Bbbk$, since $\Mat_a(\Bbbk)\otimes_\Bbbk\Mat_b(\Bbbk)\cong\Mat_{ab}(\Bbbk)$.
@@ -832,7 +840,7 @@ Check that $(A^!)^!\cong A$ by computing the relations of $A^!$ directly.
 Let $S=\bigoplus_{i=1}^n\Bbbk e_i$ with coordinate idempotents, and let ${}_SV_S$ be a finite-dimensional bimodule in degree $1$.
 Set $C_{ij}=[e_iV:e_jS]=\dim_\Bbbk(e_iVe_j)$ for $1\leq i,j\leq n$, and put
 \[
-A=T_S(V)/(V\otimes_S V)=S\oplus V.
+A=T_S(V)/(V\otimes_S V)\stackrel{\text{v.sp}}{=}S\oplus V.
 \]
 \begin{enumerate}
 \item Prove that

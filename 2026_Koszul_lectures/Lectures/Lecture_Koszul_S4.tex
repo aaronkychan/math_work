@@ -56,23 +56,23 @@ Free modules have this lifting property: If $P=\bigoplus_{i\in I}A$, then for ea
 
 The (arguably) best characterisation of projective modules is how they guarantee certain functors are always exact.  Let us spell this out in details now.
 
-For any module $M$, postcomposition defines the functor $\Hom_A(M,-):\Mod A\to\Mod\Bbbk$, acting on $u:X\to Y$ by
+For any module $M$, postcomposition defines a functor $\Hom_A(M,-):\Mod A\to\Mod\Bbbk$, acting on $u:X\to Y$ by
 \[
 \Hom_A(M,u):\Hom_A(M,X)\longrightarrow\Hom_A(M,Y),
 \qquad f\longmapsto u\circ f.
 \]
 
 \begin{lemma}\label{lem:Hom-left-exact}
-The functor $\Hom_A(P,-)$ is \defn{left exact}, that is, every short exact sequence $0\to L\xrightarrow{i}X\xrightarrow{q}Y\to0$ induces an exact sequence
+The functor $\Hom_A(P,-)$ is \defn{left exact}, that is, every short exact sequence $0\to L\xrightarrow{i}M\xrightarrow{q}N\to0$ induces an exact sequence
 \[
 0\longrightarrow\Hom_A(P,L)\xrightarrow{i\circ-}
-\Hom_A(P,X)\xrightarrow{q\circ-}\Hom_A(P,Y).
+\Hom_A(P,M)\xrightarrow{q\circ-}\Hom_A(P,N).
 \]
 \end{lemma}
 
 \begin{proof}
 Since $i$ is injective, $i\circ f=0$ implies $f=0$.
-For $g:P\to X$, we have
+For $g:P\to M$, we have
 \[
 qg =0 \;\Leftrightarrow\; \Im(g)\subseteq \Ker(q)=\Im(i),
 \] which is then equivalent to saying that there is a unique factorisation $g=i\widetilde g$ (namely, $\widetilde{g}(p):=l$ such that $i(l)=g(p)$).
@@ -129,13 +129,13 @@ For an idempotent $e\in A$, $A=eA\oplus(1-e)A$ makes $eA$ projective.
 For $A=\Bbbk A_2$, the module $e_{22}A$ is projective of dimension $1$, but not free: non-zero free modules have dimension at least $\dim_\Bbbk A=3$.
 \end{example}
 
-Analogous to $\Hom_A(M,-)$, we also have a contravariant left-exact functor $\Hom_A(-,N)$ for any fixed module $N$ (morphisms are sent by precompositions $u\mapsto(g\mapsto g\circ u)$), which means that \emph{right} exact sequences to left exact ones:
+Analogous to $\Hom_A(M,-)$, we also have a contravariant left-exact functor $\Hom_A(-,N)$ for any fixed module $N$ (morphisms are sent by precompositions $u\mapsto(g\mapsto g\circ u)$):
 
 \begin{lemma}\label{lem:Hom-contravariant-left-exact}
-Every exact sequence $L\xrightarrow{i}X\xrightarrow{q}Y\to0$ induces an exact sequence
+For any $A$-module $Y$, applying $\Hom_A(-,Y)$ to a short exact sequence $0\to L\xrightarrow{i}M\xrightarrow{q}N\to0$ yields an exact sequence
 \[
-0\longrightarrow\Hom_A(Y,N)\xrightarrow{-\circ q}
-\Hom_A(X,N)\xrightarrow{-\circ i}\Hom_A(L,N).
+0\longrightarrow\Hom_A(N,Y)\xrightarrow{-\circ q}
+\Hom_A(M,Y)\xrightarrow{-\circ i}\Hom_A(L,Y).
 \]
 \end{lemma}
 
