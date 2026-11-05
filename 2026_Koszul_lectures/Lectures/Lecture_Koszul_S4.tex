@@ -252,6 +252,8 @@ Regarding these as simple $A$-modules shows that $\rad A\subseteq A_+$.
 A graded module $M$ is \defn{bounded below} if $M_{<b}=0$ for some $b$.
 Every finitely generated graded module is bounded below: take $b$ to be the least degree among the homogeneous components of a finite generating set.
 
+We say that a graded module $M$ is \defn{generated in degree $d$} if $M=M_dA$.  More generally, we say that $M$ is generated in degrees $I$ for a set $I\subset \Z$ if $M=\sum_{i\in I} M_iA$.
+
 \begin{lemma}[Graded Nakayama lemma]\label{lem:graded-nakayama}
 For a bounded below graded right module $M$,
 \[
@@ -322,8 +324,8 @@ Then
 \begin{equation}\label{eq:graded-cover-terms}
 P\cong\bigoplus_{i\in\Z}\bigl((\grtop P)_i\otimes_S A\bigr)(-i),
 \end{equation}
-where $(\grtop P)_i$ is placed in degree $0$ before shifting.
-In particular, $P$ is generated in the degrees $i$ with $(\grtop P)_i\neq0$.
+where $(\grtop P)_i$ is placed in degree $0$.
+In particular, $P$ is generated in degrees $\{i\mid (\grtop P)_i\neq0\}$.
 \end{lemma}
 
 \begin{proof}

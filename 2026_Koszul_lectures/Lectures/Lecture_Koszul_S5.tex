@@ -3,11 +3,10 @@
 \section{Ext and Tor}\label{sec:ext-tor}
 
 The contravariant functor $\Hom_A(-,N)$ is left exact (Lemma~\ref{lem:Hom-contravariant-left-exact}) but in general not exact (Example~\ref{ex:Hom-contravariant-not-exact}).
-The groups $\Ext_A^h(M,N)$ measure this failure, one homological degree $h$ at a time.
-They are computed by applying $\Hom_A(-,N)$ to a projective resolution of $M$, so the resolutions of Section~\ref{sec:minimal-resolutions} are the input.
-We treat $\Ext$ in detail; $\Tor$ is obtained in the same way from $-\otimes_AN$, and we only record what we need.
+The group $\Ext_A^h(M,N)$ measure this failure at homological degree $h$; it is computed by taking homology on the complex  $\Hom_A(P_\bullet,N)$ for a projective resolution $P_\bullet$ of $M$.
+We treat $\Ext$ in detail; $\Tor$ is obtained in a similar way from replacing $\Hom_A(-,N)$ by $-\otimes_AN$, and we only record what we need.
 
-\subsection{Ext via projective resolutions}
+\subsection{Ext-groups via projective resolutions}
 
 All modules in this subsection are right $A$-modules over an arbitrary algebra $A$, except where a left module is specified.
 

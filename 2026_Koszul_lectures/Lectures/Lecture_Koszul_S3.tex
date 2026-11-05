@@ -3,12 +3,11 @@
 
 
 We use Assumption~\ref{ass:basic-semisimple}: $A_0=S=\bigoplus_{i=1}^n\Bbbk e_i$.  Such form of $S$ guarantees that $S^\en$ is semisimple as well.
+This assumption on $S$ means that $M\in \mod S^\en$ can be decomposed as $M\cong \bigoplus_{i,j=1}^n e_i M e_j$.
+
 The case of arbitrary finite-dimensional semisimple $S$ is treated in the advanced material.
 
-
-\subsection{Orthogonal complements and quadratic duality}
-
-Our assumption on $S$ means that $M\in \mod S^\en$ can be decomposed as $M\cong \bigoplus_{i,j=1}^n e_i M e_j$.
+\subsection{Technical preliminaries}
 
 \begin{lemma}\label{lem:idempotent-tensors}
 For bimodules ${}_SV_S$, ${}_SW_S$, there is a bimodule isomorphism
@@ -83,12 +82,19 @@ For finite-dimensional bimodules ${}_SV_S$ and ${}_SW_S$, there is a bimodule is
 \lambda\otimes\mu \mapsto \Big(v\otimes w\mapsto \sum_{i=1}^n\mu(ve_i)\,\lambda(e_iw)\Big).
 \end{aligned}
 \end{equation}
-It is natural contravariantly in both $V$ and $W$: for bimodule maps $f:V\to V'$ and $g:W\to W'$ between finite-dimensional bimodules,
+It is natural contravariantly in both $V$ and $W$: for bimodule maps $f:V\to V'$ and $g:W\to W'$ between finite-dimensional bimodules, the following diagram commutes
 \begin{equation}\label{eq:D-tensor-binaturality}
-D(f\otimes_S g)\circ\theta_{V',W'}
-=\theta_{V,W}\circ(D(g)\otimes_S D(f)).
+\vcenter{\xymatrix@C=70pt@R=32pt{
+D(W')\otimes_S D(V')
+\ar[r]^{\theta_{V',W'}}
+\ar[d]_{D(f)\otimes_S D(g)}
+& D(V'\otimes_S W')
+\ar[d]^{D(f\otimes_S g)}\\
+D(W)\otimes_S D(V)
+\ar[r]_{\theta_{V,W}}
+& D(V\otimes_S W).
+}}
 \end{equation}
-We write $\theta$ when the two bimodules are clear.
 \end{proposition}
 
 \begin{supplementary}
@@ -259,7 +265,7 @@ Let ${}_SM_S$ and ${}_SV_S$ be finite-dimensional $S$-bimodules.
 (1) Let $\iota:U\hookrightarrow M$ be the inclusion.
 Dualising \eqref{eq:orthogonal-exact} gives
 \[
-(U^\perp)^\perp=\Im D(D(\iota))=\Im(\mathrm{ev}_M\circ \iota\circ \mathrm{ev}_U^{-1})=\Im(\mathrm{ev}_U\circ \mathrm{ev}_U^{-1})=DD(U)=U,
+(U^\perp)^\perp=\Im D(D(\iota))=\Im(\mathrm{ev}_M\circ \iota\circ \mathrm{ev}_U^{-1})=\Im(\mathrm{ev}_U\circ \mathrm{ev}_U^{-1})=DD(U)\cong U,
 \]
 where the second equality follows from the naturality of $\mathrm{ev}$:
 \[
@@ -414,13 +420,16 @@ In particular, $\dim_\Bbbk A^!_2=\dim_\Bbbk R$.
 \begin{proof}
 Since $D(V)$ is finite-dimensional and $\theta_{V,V}^{-1}(R^\perp)\subset D(V)\otimes_S D(V)$ is a sub-bimodule, the presentation \eqref{eq:quadratic-duals} is quadratic.
 Proposition~\ref{prop:quadratic-basic} gives the components in degrees $0$ and $1$.
-Applying \eqref{eq:orthogonal-exact} to $R\subset V\otimes_S V$  gives
+Applying $D(-)$ to the bimodule short exact sequence $0\to R\to V\otimes_SV \to A_2\to 0$ combined with $\theta_{V,V}:D(V)\otimes_SD(V)\to D(V\otimes_SV)$ gives the following commutative diagram of $S$-bimodules
 \begin{equation}\label{eq:restriction-relations}
-0\longrightarrow \theta_{V,V}^{-1}(R^\perp)\longrightarrow D(V)\otimes_S D(V)
-\xrightarrow{F\mapsto\theta(F)|_R}D(R)\longrightarrow0,
+\xymatrix@C=50pt{
+0\ar[r]& \theta_{V,V}^{-1}(R^\perp) \ar[r]\ar[d]_{\theta_{V,V}|_R} & D(V)\otimes_S D(V) \ar[r]^{\phantom{ab}f\mapsto\theta_{V,V}(f)|_R}\ar[d]^{\theta_{V,V}} &
+A_2^!\ar[r]\ar[d]^{\cong} & 0\\
+0\ar[r]& R^\perp \ar[r] & D(V\otimes_S V) \ar[r] & D(R)\ar[r] & 0\\
+}
 \end{equation}
-as a short exact sequence of $S$-bimodules.
-Hence $A_2^!=(D(V)\otimes_S D(V))/\theta_{V,V}^{-1}(R^\perp)\cong D(R)$, and $\dim_\Bbbk D(R)=\dim_\Bbbk R$.
+where both rows are exact.
+Hence, $\dim_\Bbbk D(R)=\dim_\Bbbk R$.
 \end{proof}
 %
 %Adding relations has the opposite effect after dualising. For $S$-sub-bimodules $R\subset R'\subset V\otimes_S V$,
@@ -895,7 +904,7 @@ h_{A^!}(t)=(I_n-tC^{\mathsf T})^{-1}.
 \]
 \item Deduce that $h_A(t)h_{A^!}(-t)^{\mathsf T}=I_n$.
 \end{enumerate}
-\emph{Hint for (1).} Find $(V\otimes_S V)^\perp$ and compute the multiplicities $[e_iD(V):e_jS]$.
+\emph{Hint for (1).} Compute the multiplicities $[e_iD(V):e_jS]$.
 \end{exercise}
 
 \begin{hidden}
