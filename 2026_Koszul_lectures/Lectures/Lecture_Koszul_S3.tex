@@ -288,7 +288,22 @@ U^\perp=D(\theta_V)\big((R^\perp)^\perp\big) & \stackrel{(1)}{=} & D(\theta_V)\b
 \] which means that $\theta'^{-1}\big((\theta_VR^\perp)^\perp\big)=(\mathrm{ev}_V\otimes_S\mathrm{ev}_V)(R)$ as claimed.
 \end{proof}
 
-\comm{add supplementary:  when given a basis for each $e_aVe_b$ and $e_aWe_b$, how to write down $\theta^{-1}$.}
+\begin{supplementary}
+\emph{Writing down $\theta^{-1}$ in bases.}
+Choose bases $\mathcal B_{ij}$ of $e_iVe_j$ and $\mathcal C_{jk}$ of $e_jWe_k$.
+By Lemma~\ref{lem:idempotent-tensors}, the products $b\otimes c$ with $b\in\mathcal B_{ij}$ and $c\in\mathcal C_{jk}$ (over all $i,j,k$) form a basis of $V\otimes_SW$.
+Let $b^*\in D(V)$ and $c^*\in D(W)$ be the dual basis functionals, so $b^*\in e_jD(V)e_i$ and $c^*\in e_kD(W)e_j$ by \eqref{eq:dual-blocks}, and the $c^*\otimes b^*$ with $b\otimes c$ as above form a basis of $D(W)\otimes_SD(V)$.
+For $b'\in\mathcal B_{i'j'}$ and $c'\in\mathcal C_{j'k'}$, the definition of $\theta$ gives
+\[
+\theta(c^*\otimes b^*)(b'\otimes c')=\sum_m b^*(b'e_m)\,c^*(e_mc')=b^*(b')\,c^*(c')=\delta_{bb'}\delta_{cc'},
+\]
+since only $m=j'$ contributes.
+Thus $\theta(c^*\otimes b^*)=(b\otimes c)^*$, the dual basis functional of $b\otimes c$, and for $\Phi\in D(V\otimes_SW)$,
+\[
+\theta^{-1}(\Phi)=\sum_{i,j,k}\ \sum_{b\in\mathcal B_{ij},\,c\in\mathcal C_{jk}}\Phi(b\otimes c)\;c^*\otimes b^*.
+\]
+In particular, for $R\subset V\otimes_SV$, the space $\theta^{-1}(R^\perp)$ consists of the tensors $\sum\gamma_{bc}\,c^*\otimes b^*$ with $\sum\gamma_{bc}\,r_{bc}=0$ for every $\sum r_{bc}\,b\otimes c\in R$; note that the order of the two factors is reversed.
+\end{supplementary}
 
 \begin{advanced}
 For general $S$, the one-sided $S$-duals give the following choice-free orthogonal complements.
@@ -328,26 +343,27 @@ For the left dual, $\tau(sg(u))=\tau(g(su))=0$ gives $g(u)=0$ instead.
 Bijectivity of $\alpha_M,\beta_M$ in Theorem~\ref{prop:dual-comparison} proves \eqref{eq:orthogonal-comparison}.
 \end{advanced}
 
-\begin{example}\label{ex:symmetric-orthogonals}
-\comm{since we do this more generally later, use $\Bbbk A_3$ as example instead.}
-We compute the orthogonal complements of the relation spaces of $\SymAlg(V)$ and $\bigwedge W$ for $\dim_{\Bbbk}V=2=\dim_{\Bbbk}W$.
-Take $V=\Bbbk x_1\oplus\Bbbk x_2$ and $W=\Bbbk y_1\oplus\Bbbk y_2$ in Example~\ref{ex:polynomial-exterior}.
-The relation spaces in $V\otimes_\Bbbk V$ and $W\otimes_\Bbbk W$, respectively, are
+\begin{example}\label{ex:A3-orthogonals}
+Let $S=\Bbbk e_{11}\oplus\Bbbk e_{22}\oplus\Bbbk e_{33}$ and $V=\Bbbk a\oplus\Bbbk b$ with $a=e_{12}\in e_{11}Ve_{22}$ and $b=e_{23}\in e_{22}Ve_{33}$.
+By Lemma~\ref{lem:idempotent-tensors}, $V\otimes_SV=\Bbbk(a\otimes b)$, since $b\otimes a$, $a\otimes a$ and $b\otimes b$ are not composable.
+We have $a^*\in e_{22}D(V)e_{11}$ and $b^*\in e_{33}D(V)e_{22}$, and
 \[
-\begin{aligned}
-R_{\SymAlg(V)}&=\Bbbk(x_1\otimes x_2-x_2\otimes x_1),\\
-R_{\bigwedge W}&=\Bbbk(y_1\otimes y_1)\oplus\Bbbk(y_2\otimes y_2)\oplus\Bbbk(y_1\otimes y_2+y_2\otimes y_1).
-\end{aligned}
+D(V)\otimes_SD(V)=\Bbbk(b^*\otimes a^*),\qquad
+\theta(b^*\otimes a^*)(a\otimes b)=a^*(a)\,b^*(b)=1,
 \]
-Let $x_1^*,x_2^*$ and $y_1^*,y_2^*$ be the dual bases of $D(V)$ and $D(W)$, respectively.
-By Proposition~\ref{prop:D-tensor-duals} with $S=\Bbbk$, where $\theta(\lambda\otimes\mu)(v\otimes w)=\mu(v)\lambda(w)$,
+so $\theta$ reverses the order of the factors.
+The path algebra $\Bbbk A_3=T_S(V)$ has $R=0$, and $\Bbbk A_3/(e_{13})=T_S(V)/(V\otimes_SV)$ has $R=V\otimes_SV$.
+Hence
 \[
-\begin{aligned}
-\theta^{-1}\bigl(R_{\SymAlg(V)}^\perp\bigr)&=\operatorname{span}_\Bbbk\{x_1^*\otimes x_1^*,\,x_2^*\otimes x_2^*,\,x_1^*\otimes x_2^*+x_2^*\otimes x_1^*\},\\
-\theta^{-1}\bigl(R_{\bigwedge W}^\perp\bigr)&=\Bbbk(y_1^*\otimes y_2^*-y_2^*\otimes y_1^*).
-\end{aligned}
+\theta^{-1}(0^\perp)=\Bbbk\,b^*\otimes a^*,\qquad
+\theta^{-1}\bigl((V\otimes_SV)^\perp\bigr)=0,
 \]
-The first space consists of the exterior relations on $D(V)$; the second consists of the symmetric relations on $D(W)$.
+and therefore
+\[
+(\Bbbk A_3)^!=T_S(D(V))/(b^*\otimes a^*)=S\oplus D(V),\qquad
+\bigl(\Bbbk A_3/(e_{13})\bigr)^!=T_S(D(V)).
+\]
+The second algebra is the path algebra with arrows $a^*:e_{22}\to e_{11}$ and $b^*:e_{33}\to e_{22}$, that is, $(\Bbbk A_3)^\op$ for the reversed quiver; the first is $\bigl(\Bbbk A_3/(e_{13})\bigr)^\op$.
 \end{example}
 
 
@@ -673,16 +689,15 @@ Here $S=\Bbbk$, and \eqref{eq:D-tensor-duals} reads
 \theta(x_j^*\otimes x_i^*)(x_p\otimes x_q)=x_i^*(x_p)\,x_j^*(x_q)=\delta_{ip}\delta_{jq}.
 \]
 A tensor $\sum_{i,j=1}^n c_{ij}x_i^*\otimes x_j^*$ vanishes on each $x_p\otimes x_q-x_q\otimes x_p$ precisely when $c_{pq}=c_{qp}$ for $1\leq p<q\leq n$.
-Thus the orthogonal complement of the symmetric relations is spanned by $(x_i^*)^2$ \comm{more properly should be $x_i^*\otimes x_i^*$} for $1\leq i\leq n$ and $x_i^*x_j^*+x_j^*x_i^*$ \comm{more properly, tensor, not just ``multiply"?} for $1\leq i<j\leq n$, which are the exterior relations on $D(V)$.
+Thus $\theta^{-1}(R^\perp)$ for the symmetric relations $R$ is spanned by $x_i^*\otimes x_i^*$ for $1\leq i\leq n$ and $x_i^*\otimes x_j^*+x_j^*\otimes x_i^*$ for $1\leq i<j\leq n$, which are the exterior relations on $D(V)$.
 
 For $\bigwedge W$, choose a basis $y_1,\ldots,y_m$ of $W$, with dual basis $y_1^*,\ldots,y_m^*$ of $D(W)$.
 A tensor $\sum_{i,j=1}^m c_{ij}y_i^*\otimes y_j^*$ annihilates the exterior relations precisely when $c_{ii}=0$ for $1\leq i\leq m$ and $c_{pq}+c_{qp}=0$ for $1\leq p<q\leq m$.
-The orthogonal complement is therefore spanned by $y_i^*y_j^*-y_j^*y_i^*$ for $1\leq i<j\leq m$, which are the symmetric relations on $D(W)$.
+Hence $\theta^{-1}(R^\perp)$ is spanned by $y_i^*\otimes y_j^*-y_j^*\otimes y_i^*$ for $1\leq i<j\leq m$, which are the symmetric relations on $D(W)$.
 The presentations in \eqref{eq:polynomial-exterior} give both isomorphisms.
 \end{proof}
 
 Note that the proof works in characteristic $2$: the relations $(x_i^*)^2=0$ remain part of the exterior presentation even when the signs $+$ and $-$ coincide.
-\old{Example~\ref{ex:symmetric-orthogonals} is the calculation for two generators.}
 
 This example also shows that
 \begin{itemize}
@@ -732,7 +747,6 @@ Then both tensor products are quadratic over $S\otimes_\Bbbk T$, and
 (A\otimes_\Bbbk^{\mathrm{gr}}B)^!\cong A^!\otimes_\Bbbk B^!.
 \end{equation}
 \end{proposition}
-\comm{remark if the two type of tensor product algebra are genuinely different:  any example of algebras where graded tensor and ungraded tensor are not isomorphic?}
 The mixed commuting relations become anticommuting relations under the reversed tensor pairing.
 
 The assumption on $S\otimes_\Bbbk T$ holds when $S,T$ are products of matrix algebras over $\Bbbk$, since $\Mat_a(\Bbbk)\otimes_\Bbbk\Mat_b(\Bbbk)\cong\Mat_{ab}(\Bbbk)$.
@@ -779,6 +793,15 @@ Thus an annihilating pair of functionals must have equal components. As these si
 These are the mixed relations of $A^!\otimes_\Bbbk^{\mathrm{gr}}B^!$, proving the first isomorphism in \eqref{eq:dual-tensor-products}.
 For $A\otimes_\Bbbk^{\mathrm{gr}}B$, the minus sign in \eqref{eq:mixed-tensor-relations} is a plus sign. The mixed annihilator then has a minus sign, giving the ordinary tensor product on the dual side.
 \end{proof}
+
+\begin{remark}
+The two tensor products are genuinely different in general.
+Let $\operatorname{char}\Bbbk\neq2$ and $E=\Bbbk[\epsilon]/(\epsilon^2)$ with $\deg\epsilon=1$.
+Then $E\otimes_\Bbbk E=\Bbbk[\epsilon_1,\epsilon_2]/(\epsilon_1^2,\epsilon_2^2)$ is commutative, whereas $\epsilon_1\epsilon_2=-\epsilon_2\epsilon_1\neq0$ in $E\otimes_\Bbbk^{\mathrm{gr}}E$, which is the exterior algebra on two generators and is not commutative.
+Hence they are not isomorphic as algebras; similarly $\Bbbk[x]\otimes_\Bbbk\Bbbk[y]=\Bbbk[x,y]$ and $\Bbbk[x]\otimes_\Bbbk^{\mathrm{gr}}\Bbbk[y]=\Bbbk\langle x,y\rangle/(xy+yx)$, with $\deg x=\deg y=1$.
+The signs are invisible if $\operatorname{char}\Bbbk=2$, or if $A$ or $B$ is concentrated in even degrees, in which case both products coincide.
+This is consistent with Proposition~\ref{prop:dual-tensor-products}: $\Bbbk[x,y]=\SymAlg(\Bbbk^2)$ has dual $\bigwedge\Bbbk^2=E\otimes_\Bbbk^{\mathrm{gr}}E=\Bbbk[x]^!\otimes_\Bbbk^{\mathrm{gr}}\Bbbk[y]^!$.
+\end{remark}
 
 \begin{example}\label{ex:commuting-square-dual}
 We compute how Proposition~\ref{prop:dual-tensor-products} changes a commutation relation in a matrix example.
