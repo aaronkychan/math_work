@@ -214,7 +214,7 @@ For a graded right $A$-module $P$, the following are equivalent.
 \item Every degree-preserving surjection onto $P$ has a degree-preserving section.
 \item $P$ is a graded direct summand of a graded free module.
 \end{enumerate}
-In particular, $Q\otimes_S A(-i)$ is graded projective for every finite-dimensional right $S$-module $Q$ and every $i\in\Z$.
+In particular, $L\otimes_S A(-i)$ is graded projective for every finite-dimensional right $S$-module $L$ and every $i\in\Z$.
 \end{corollary}
 
 \begin{supplementary}
@@ -248,11 +248,12 @@ Since $A/A_+\cong S$ is semisimple, every non-zero element of $S$ acts non-trivi
 Regarding these as simple $A$-modules shows that $\rad A\subseteq A_+$.
 \end{proof}
 \end{supplementary}
+\begin{remark}
+This is not true for general graded algebra $A$ -- for example, $A=\Bbbk[x]$ has $\rad A=0$.
+\end{remark}
 
 A graded module $M$ is \defn{bounded below} if $M_{<b}=0$ for some $b$.
 Every finitely generated graded module is bounded below: take $b$ to be the least degree among the homogeneous components of a finite generating set.
-
-We say that a graded module $M$ is \defn{generated in degree $d$} if $M=M_dA$.  More generally, we say that $M$ is generated in degrees $I$ for a set $I\subset \Z$ if $M=\sum_{i\in I} M_iA$.
 
 \begin{lemma}[Graded Nakayama lemma]\label{lem:graded-nakayama}
 For a bounded below graded right module $M$,
@@ -317,6 +318,7 @@ For $A=\Bbbk A_2$, $\rad A=\Bbbk e_{12}$, $\top(e_{11}A)=e_{11}A/\Bbbk e_{12}=L_
 \end{example}
 \end{supplementary}
 
+%We say that a graded module $M$ is \defn{generated in degree $d$} if $M=M_dA$.  More generally, we say that $M$ is generated in degrees $I$ for a set $I\subset \Z$ if $M=\sum_{i\in I} M_iA$.
 
 \begin{lemma}\label{lem:graded-projective-terms}
 Let $P$ be a bounded below lfd graded projective module.
@@ -325,13 +327,14 @@ Then
 P\cong\bigoplus_{i\in\Z}\bigl((\grtop P)_i\otimes_S A\bigr)(-i),
 \end{equation}
 where $(\grtop P)_i$ is placed in degree $0$.
-In particular, $P$ is generated in degrees $\{i\mid (\grtop P)_i\neq0\}$.
+%In particular, $P$ is generated in degrees $\{i\mid (\grtop P)_i\neq0\}$.
 \end{lemma}
 
 \begin{proof}
-Since $S$ is semisimple, choose right $S$-linear sections $s_i:(\grtop P)_i\to P_i$ of the quotient maps.
-Let $F$ be the right-hand side of \eqref{eq:graded-cover-terms} and $\psi:F\to P$, $v\otimes a\mapsto s_i(v)a$ on the $i$th summand; it is well defined by $S$-linearity of $s_i$.
-By construction $\grtop\psi$ is an isomorphism, so $\psi$ is surjective by graded Nakayama applied to $P/\psi(F)$.
+Since $S$ is semisimple, $(\grtop P)_i$ is a direct summand of $P_i\in \mod S$.
+This means that there is a sections $s_i\in \Hom_S(\grtop P)_i, P_i)$ of the quotient map.
+Let $Q$ be the right-hand side of \eqref{eq:graded-cover-terms} and $\psi:Q\to P$, $v\otimes a\mapsto s_i(v)a$ on the $i$th summand; it is well-defined by $S$-linearity of $s_i$.
+By construction $\grtop\psi$ is an isomorphism, so $\psi$ is surjective by graded Nakayama applied to $P/\psi(Q)$.
 Since $P$ is projective, $\psi$ splits: $F\cong P\oplus\Ker\psi$, and $\grtop\psi$ being an isomorphism gives $\grtop(\Ker\psi)=0$.
 As $\Ker\psi\subseteq F$ is bounded below, graded Nakayama gives $\Ker\psi=0$.
 \end{proof}
