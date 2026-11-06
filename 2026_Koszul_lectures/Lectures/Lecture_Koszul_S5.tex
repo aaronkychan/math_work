@@ -299,7 +299,7 @@ In particular $\Tor_h^A(S,S)\cong S,\ A_1,\ R$ for $h=0,1,2$, concentrated in de
 (2) Put $K_1=\Ker p_0=A_+$.
 By Lemma~\ref{lem:minimal-tops}, $\grtop P_1\cong\grtop K_1=A_+/A_+^2$.
 If $A$ is generated in degree $1$, then $A_+^2=\bigoplus_{i\geq2}A_i$, so $\grtop K_1=A_1$ in degree $1$.
-By \eqref{eq:graded-cover-terms}, $P_1\cong(A_1\otimes_SA)(-1)$, and the cover is $v\otimes a\mapsto va$.
+By \eqref{eq:graded-cover-terms}, $P_1\cong(A_1\otimes_SA)(-1)$, and the surjection $P_1\to K_1$ is $v\otimes a\mapsto va$.
 
 (3) Put $T=T_S(V)$, so $A_i=T_i/I_i$ and $I_1=0$.
 Since every $S$-module is projective, $V\otimes_S-$ is exact, so
@@ -375,7 +375,7 @@ Find the minimal graded projective resolution of $L_1$, and compute $\dim_\Bbbk\
 \emph{Solution.}
 Here $e_{11}A=\langle e_{11},e_{12}\rangle$, $e_{22}A=\langle e_{22},e_{23}\rangle$, $e_{33}A=\langle e_{33}\rangle$.
 The kernel of $e_{11}A\to L_1$ is $\Bbbk e_{12}\cong L_2(-1)$, since $e_{12}e_{23}=e_{13}=0$.
-Its projective cover is $e_{22}A(-1)\to\Bbbk e_{12}$, $e_{22}\mapsto e_{12}$, with kernel $\Bbbk e_{23}$ in degree $2$, which is $\cong e_{33}A(-2)$ and projective.
+The map $e_{22}A(-1)\to\Bbbk e_{12}$, $e_{22}\mapsto e_{12}$, is surjective with kernel $\Bbbk e_{23}\subseteq e_{22}A_+$ in degree $2$, and $\Bbbk e_{23}\cong e_{33}A(-2)$ is projective.
 So the minimal resolution is
 \[
 0\to e_{33}A(-2)\to e_{22}A(-1)\to e_{11}A\to L_1\to0,

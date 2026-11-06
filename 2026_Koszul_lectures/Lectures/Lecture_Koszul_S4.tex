@@ -321,22 +321,51 @@ For $A=\Bbbk A_2$, $\rad A=\Bbbk e_{12}$, $\top(e_{11}A)=e_{11}A/\Bbbk e_{12}=L_
 %We say that a graded module $M$ is \defn{generated in degree $d$} if $M=M_dA$.  More generally, we say that $M$ is generated in degrees $I$ for a set $I\subset \Z$ if $M=\sum_{i\in I} M_iA$.
 
 \begin{lemma}\label{lem:graded-projective-terms}
-Let $P$ be a bounded below lfd graded projective module.
-Then
+Let $M$ be a bounded below graded right $A$-module, and put
+\[
+F:=\bigoplus_{i\in\Z}\bigl((\grtop M)_i\otimes_S A\bigr)(-i),
+\]
+where $(\grtop M)_i$ is placed in degree $0$.
+\begin{enumerate}
+\item There is a graded surjection $p:F\to M$ with $\Ker p\subseteq FA_+$.
+\item If $M$ is graded projective, then $p$ is an isomorphism, so
 \begin{equation}\label{eq:graded-cover-terms}
-P\cong\bigoplus_{i\in\Z}\bigl((\grtop P)_i\otimes_S A\bigr)(-i),
+M\cong\bigoplus_{i\in\Z}\bigl((\grtop M)_i\otimes_S A\bigr)(-i).
 \end{equation}
-where $(\grtop P)_i$ is placed in degree $0$.
-%In particular, $P$ is generated in degrees $\{i\mid (\grtop P)_i\neq0\}$.
+\end{enumerate}
 \end{lemma}
 
 \begin{proof}
-Since $S$ is semisimple, $(\grtop P)_i$ is a direct summand of $P_i\in \mod S$.
-This means that there is a sections $s_i\in \Hom_S(\grtop P)_i, P_i)$ of the quotient map.
-Let $Q$ be the right-hand side of \eqref{eq:graded-cover-terms} and $\psi:Q\to P$, $v\otimes a\mapsto s_i(v)a$ on the $i$th summand; it is well-defined by $S$-linearity of $s_i$.
-By construction $\grtop\psi$ is an isomorphism, so $\psi$ is surjective by graded Nakayama applied to $P/\psi(Q)$.
-Since $P$ is projective, $\psi$ splits: $F\cong P\oplus\Ker\psi$, and $\grtop\psi$ being an isomorphism gives $\grtop(\Ker\psi)=0$.
-As $\Ker\psi\subseteq F$ is bounded below, graded Nakayama gives $\Ker\psi=0$.
+(1) Since $S$ is semisimple, $MA_+$ has a complement in $M$ as graded $S$-modules:
+\[
+M=T\oplus MA_+,\qquad T=\bigoplus_iT_i,\qquad T_i\xrightarrow{\ \sim\ }(\grtop M)_i .
+\]
+Define $p$ on the $i$th summand of $F$ by $p(v\otimes a)=va$, for $v\in T_i\cong(\grtop M)_i$; this is well defined since $T_i$ is an $S$-submodule of $M$.
+Passing to tops gives
+\[
+\xymatrix@C=40pt{
+\grtop F=\bigoplus_iT_i\ar[r]^-{\grtop p} & \grtop M,
+}
+\]
+which is the isomorphism $T\cong\grtop M$ above.
+Hence $M=p(F)+MA_+$, so $M/p(F)$ is bounded below and equals its own $A_+$-multiple; it is $0$ by graded Nakayama, and $p$ is surjective.
+If $x\in\Ker p$, then $\grtop p(x+FA_+)=0$, so $x\in FA_+$.
+
+(2) Put $K=\Ker p$.
+Since $M$ is projective, the sequence splits:
+\[
+\xymatrix@C=30pt{
+0\ar[r] & K\ar[r] & F\ar[r]^p & M\ar[r]\ar@/^1pc/[l]^{s} & 0,
+}
+\qquad F=K\oplus s(M).
+\]
+Let $\pi_K:F\to K$ be the projection along $s(M)$; it is $A$-linear, so $\pi_K(FA_+)=KA_+$.
+Then by (1)
+\[
+K=\pi_K(K)\subseteq\pi_K(FA_+)=KA_+,
+\]
+so $K=KA_+$.
+As $K\subseteq F$ is bounded below, $K=0$ by graded Nakayama.
 \end{proof}
 
 \subsection{Minimal resolutions}
@@ -371,7 +400,7 @@ Every bounded below locally finite-dimensional graded right $A$-module $M$ has a
 Any two such resolutions are isomorphic by degree-preserving isomorphisms $f_h:P_h\to P'_h$ with $p'_0f_0=p_0$ and $d'_hf_h=f_{h-1}d_h$.
 \end{theorem}
 
-The proof builds the resolution from successive graded projective covers and is given in Subsection~\ref{subsec:ordinary-covers}.
+The proof applies Lemma~\ref{lem:graded-projective-terms}(1) to $M$ and then to each successive kernel; it is given in Subsection~\ref{subsec:ordinary-covers}.
 By \eqref{eq:graded-cover-terms}, $P_h\cong\bigoplus_{i\in\Z}\bigl((\grtop P_h)_i\otimes_S A\bigr)(-i)$, so $\grtop P_h$ records the types and degrees of the generators needed in homological degree $h$.
 
 \begin{example}\label{ex:minimal-A2}
@@ -399,9 +428,9 @@ The two projective terms have one generator each, in degrees $0$ and $1$.
 \end{example}
 
 \begin{supplementary}
-Forgetting the grading need not preserve projective covers.
+Minimality is a graded notion, and forgetting the grading can destroy it.
 In Example~\ref{ex:minimal-polynomial}, the proper ungraded submodule $(x-1)A\subset A$ still maps onto $\Bbbk$ under $\pi$, since $\pi(x-1)=-1$.
-Thus $\pi$ is a graded projective cover but not an ordinary projective cover.
+Thus $\pi$ has kernel in $AA_+$, but it is not a projective cover in the ungraded sense of Definition~\ref{def:projective-cover}.
 \end{supplementary}
 
 \begin{example}\label{ex:minimal-exterior}
@@ -469,57 +498,63 @@ The same argument applies to $K_1,K_2,\ldots$.
 
 Without noetherianity, boundedness below and local finite-dimensionality still give existence of a minimal graded resolution, but its terms need not be finitely generated.
 
-\subsection{Projective covers and existence of minimal resolutions}\label{subsec:ordinary-covers}
+\subsection{Existence and uniqueness of minimal resolutions}\label{subsec:ordinary-covers}
 
 \begin{supplementary}
-A graded free surjection onto $M$ may use unnecessary generators; a projective cover removes them.
+Lemma~\ref{lem:graded-projective-terms}(1) constructs a surjection from a graded projective module with kernel in $A_+$ times the source.
+The next lemma shows that such a surjection is unique up to isomorphism, which is the input for uniqueness of minimal resolutions.
 
-\begin{definition}\label{def:graded-projective-cover}
-A \defn{graded projective cover} of a bounded below lfd graded module $M$ is a surjection $p:P\to M$, with $P$ bounded below, lfd, and graded projective, such that
-\[
-\grtop p:\grtop P\xrightarrow{\sim}\grtop M.
-\]
-\end{definition}
-
-Equivalently, $\Ker p\subseteq PA_+$, and no proper graded submodule of $P$ maps onto $M$.
-
-The identity $p(PA_+)=MA_+$ gives $\Ker(\grtop p)=(\Ker p+PA_+)/PA_+$.
-If $\Ker p\subseteq PA_+$ and $p(U)=M$ for a graded submodule $U\subseteq P$, then $U+PA_+=P$; graded Nakayama gives $U=P$.
-Conversely, if $\Ker(\grtop p)\neq0$, choose a graded $S$-module complement $W$ to this kernel in $\grtop P$.
-The inverse image $U$ of $W$ under $P\to\grtop P$ is a proper graded submodule of $P$.
-Since $\grtop p(W)=\grtop M$, we have $p(U)+MA_+=M$; graded Nakayama gives $p(U)=M$.
-
-\begin{proposition}\label{prop:graded-projective-covers}
-Every bounded below lfd graded right $A$-module $M$ has a graded projective cover, unique up to graded isomorphism over $M$.
-Its domain is the module in \eqref{eq:graded-cover-terms} for $P=$ the cover, that is, $P\cong\bigoplus_{i\in\Z}\bigl((\grtop M)_i\otimes_S A\bigr)(-i)$.
-\end{proposition}
+\begin{lemma}\label{lem:graded-top-uniqueness}
+Let $M$ be a graded module, and let $p:P\to M$ and $q:Q\to M$ be graded surjections with $P,Q$ graded projective and bounded below, such that $\Ker p\subseteq PA_+$ and $\Ker q\subseteq QA_+$.
+Then there is a graded isomorphism $f:P\to Q$ with $qf=p$.
+\end{lemma}
 
 \begin{proof}
-\underline{Existence.}
-Since $S$ is semisimple, choose right $S$-linear sections $s_i:(\grtop M)_i\to M_i$ of the quotient maps.
-Define on each summand of \eqref{eq:graded-cover-terms}
+Projectivity of $P$ gives $f$ in
 \[
-p:\bigl((\grtop M)_i\otimes_S A\bigr)(-i)\longrightarrow M,
-\qquad v\otimes a\longmapsto s_i(v)a.
+\xymatrix@R=18pt{
+& P\ar[d]^p\ar@{-->}[dl]_f\\
+Q\ar[r]_q & M
+}
+\qquad qf=p.
 \]
-The map is well defined by $S$-linearity of $s_i$, and preserves degree.
-Each summand of $P$ is graded projective, with graded top $(\grtop M)_i$ in degree $i$.
-Thus $\grtop p$ identifies $\grtop P$ with $\grtop M$.
-Graded Nakayama, applied to $M/p(P)$, makes $p$ surjective.
-If $M_i=0$ for $i<b$, then $P_i=0$ for $i<b$, and $P_j=\bigoplus_{b\leq i\leq j}(\grtop M)_i\otimes_S A_{j-i}$ is finite-dimensional.
+\emph{$f$ is surjective.}
+Since $q(f(P))=p(P)=M$, we have $f(P)+\Ker q=Q$, hence $f(P)+QA_+=Q$.
+So $Q/f(P)$ equals its own $A_+$-multiple, and vanishes by graded Nakayama.
 
-\underline{Uniqueness.}
-For covers $p:P\to M$ and $q:Q\to M$, projectivity of $P$ gives $f:P\to Q$ with $qf=p$.
-Since $q(f(P))=M$ and $q$ is a cover, $f(P)=Q$.
-Projectivity of $Q$ gives a section $s:Q\to P$ of $f$, and $p(s(Q))=q(Q)=M$ gives $s(Q)=P$.
-Thus $f$ and $s$ are inverse isomorphisms.
+\emph{$f$ is injective.}
+Since $Q$ is projective, $f$ has a section $s:Q\to P$, $fs=\id_Q$.
+Then $p(s(Q))=q(f(s(Q)))=q(Q)=M$, so $s(Q)+\Ker p=P$, hence $s(Q)+PA_+=P$ and $s(Q)=P$ by graded Nakayama.
+Thus $s$ is surjective, and injective since $fs=\id$, so $f=s^{-1}$ is an isomorphism.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:minimal-resolution}]
-By Lemma~\ref{lem:minimal-tops}, a resolution satisfying \eqref{eq:graded-minimal-criterion} has all maps $p_h:P_h\to K_h$, $x\mapsto d_h(x)$ (with $K_1=\Ker p_0$ and $K_h=\Ker d_{h-1}$), graded projective covers; conversely, covers satisfy $\Ker\subseteq PA_+$ by the equivalence above.
-So minimal resolutions are exactly the resolutions built from successive graded projective covers.
-Existence follows from Proposition~\ref{prop:graded-projective-covers} applied to $M$ and then to each kernel, which remains bounded below and lfd.
-For uniqueness, an isomorphism $f_0:P_0\to P'_0$ of the covers of $M$ restricts to an isomorphism $K_1\to K'_1$; uniqueness of covers of the kernels gives $f_1$, and so on.
+\underline{Existence.}
+Lemma~\ref{lem:graded-projective-terms}(1) gives $p_0:P_0\to M$ with $P_0=\bigoplus_i((\grtop M)_i\otimes_SA)(-i)$ and $\Ker p_0\subseteq P_0A_+$.
+$P_0$ is graded projective by Corollary~\ref{cor:graded-projective-characterisations}.
+If $M_i=0$ for $i<b$, then $(P_0)_j=\bigoplus_{b\leq i\leq j}(\grtop M)_i\otimes_SA_{j-i}$ is finite-dimensional, so $P_0$ is bounded below and lfd.
+The kernel $K_1:=\Ker p_0\subseteq P_0$ is again bounded below and lfd, so we repeat with $K_1$ in place of $M$:
+\[
+\xymatrix@C=24pt@R=22pt{
+\cdots\ar[r] & P_2\ar[rr]^{d_2}\ar@{->>}[dr]_{p_2} & & P_1\ar[rr]^{d_1}\ar@{->>}[dr]_{p_1} & & P_0\ar[r]^{p_0} & M\ar[r] & 0\\
+& & K_2\ar@{^{(}->}[ur] & & K_1\ar@{^{(}->}[ur] & &
+}
+\]
+with $\Ker p_h\subseteq P_hA_+$ for all $h\geq0$, where $p_h:P_h\to K_h$ for $h\ge1$, $K_{h+1}:=\Ker p_h$ and $d_h$ is $p_h$ followed by the inclusion $K_h\subseteq P_{h-1}$.
+Then $\Ker d_h=\Ker p_h=K_{h+1}=\Im d_{h+1}$ and $\Im d_h=K_h=\Ker p_{h-1}\subseteq P_{h-1}A_+$, which is \eqref{eq:graded-minimal-criterion}.
+
+\underline{Uniqueness.}
+Let $P_\bullet$ and $P'_\bullet$ be minimal resolutions, with $K_h:=\Im d_h$ and $K_0:=M$, and surjections $p_h:P_h\to K_h$ as above, so $\Ker p_h=K_{h+1}\subseteq P_hA_+$.
+Suppose we have an isomorphism $\varphi_h:K_h\to K'_h$, starting with $\varphi_0=\id_M$.
+Both $\varphi_hp_h$ and $p'_h$ are surjections onto $K'_h$ with kernel in $P_hA_+$, resp.\ $P'_hA_+$, so Lemma~\ref{lem:graded-top-uniqueness} gives an isomorphism $f_h$ in
+\[
+\xymatrix@R=20pt@C=40pt{
+P_h\ar[r]^{p_h}\ar[d]_{f_h}^{\wr} & K_h\ar[d]^{\varphi_h}_{\wr}\\
+P'_h\ar[r]_{p'_h} & K'_h .
+}
+\]
+It restricts to an isomorphism $\varphi_{h+1}:K_{h+1}=\Ker p_h\to\Ker p'_h=K'_{h+1}$, and the induction continues.
+The squares give $p'_0f_0=p_0$ and $d'_hf_h=f_{h-1}d_h$.
 \end{proof}
 \end{supplementary}
 
@@ -564,7 +599,11 @@ Over any algebra, projective covers $p:P\to M$ and $q:Q\to M$ are isomorphic ove
 \end{theorem}
 
 \begin{proof}
-Uniqueness is the argument of Proposition~\ref{prop:graded-projective-covers}.
+\underline{Uniqueness.}
+Projectivity of $P$ gives $f:P\to Q$ with $qf=p$.
+Since $q(f(P))=M$ and $q$ is a projective cover, $f(P)=Q$.
+Projectivity of $Q$ gives $s:Q\to P$ with $fs=\id_Q$, and $p(s(Q))=q(Q)=M$ forces $s(Q)=P$.
+So $f$ is an isomorphism.
 
 \underline{Existence for finite-dimensional $M$.}
 Choose a surjection $p:P\to M$ from a finite-dimensional projective module with $\dim_\Bbbk P$ minimal (a quotient of some $A^{\oplus m}$).
@@ -591,7 +630,7 @@ The surjection $A=e_{11}A\oplus e_{22}A\to L_1$ killing $e_{22}A$ is not a cover
 
 \begin{supplementary}
 \emph{Ungraded analogue.}
-For a finite-dimensional algebra $A$ and a right $A$-module $M$, replace graded covers by projective covers in Definition~\ref{def:minimal-resolution}.
+For a finite-dimensional algebra $A$ and a right $A$-module $M$, replace the criterion \eqref{eq:graded-minimal-criterion} in Definition~\ref{def:minimal-resolution} by projective covers.
 
 \begin{definition}\label{def:ordinary-minimal-resolution}
 A projective resolution \eqref{eq:projective-resolution} is \defn{minimal} if $p_0:P_0\to M$ and the surjections $p_h:P_h\to K_h$, $x\mapsto d_h(x)$ (with $K_1=\Ker p_0$, $K_h=\Ker d_{h-1}$ for $h\geq2$) are projective covers.
@@ -674,7 +713,7 @@ So $ua+vb=0$ forces $a_0u+ua_u=0$ and $b_0v+vb_v=0$ (the $u$-powers and $v$-powe
 The converse is clear because $uv=0$.
 Likewise $va=0$ if and only if $a\in uA$, and $ua=0$ if and only if $a\in vA$.
 
-Now $P_0=A$ and $\Ker p_0=A_+=uA+vA$ is generated by $u,v$, so $P_1=A(-1)^{\oplus2}$ with $d_1(a,b)=ua+vb$ is the cover.
+Now $P_0=A$ and $\Ker p_0=A_+=uA+vA$ is generated by $u,v$, so $P_1=A(-1)^{\oplus2}$ with $d_1(a,b)=ua+vb$ is a surjection onto $\Ker p_0$, whose kernel lies in $P_1A_+$ as computed next.
 Its kernel is $\{(va',ub')\}$, generated in degree $2$ by $(v,0)$ and $(0,u)$, so $P_2=A(-2)^{\oplus2}$ with $d_2(a',b')=(va',ub')$.
 Then $\Ker d_2=\{(a',b'):va'=0,ub'=0\}=uA\oplus vA$, generated in degree $3$ by $(u,0)$ and $(0,v)$, so $P_3=A(-3)^{\oplus2}$ with $d_3(a'',b'')=(ua'',vb'')$.
 Finally $\Ker d_3=vA\oplus uA$ has the same form as $\Ker d_1$, so the pattern repeats with period $2$.
