@@ -322,47 +322,39 @@ For $A=\Bbbk A_2$, $\rad A=\Bbbk e_{12}$, $\top(e_{11}A)=e_{11}A/\Bbbk e_{12}=L_
 
 \begin{lemma}\label{lem:graded-projective-terms}
 Let $M$ be a bounded below graded right $A$-module, and put
-\[
-F:=\bigoplus_{i\in\Z}\bigl((\grtop M)_i\otimes_S A\bigr)(-i),
-\]
+\begin{equation}\label{eq:graded-cover-terms}
+P_M:=\bigoplus_{i\in\Z}\bigl((\grtop M)_i\otimes_S A\bigr)(-i),
+\end{equation}
 where $(\grtop M)_i$ is placed in degree $0$.
 \begin{enumerate}
-\item There is a graded surjection $p:F\to M$ with $\Ker p\subseteq FA_+$.
-\item If $M$ is graded projective, then $p$ is an isomorphism, so
-\begin{equation}\label{eq:graded-cover-terms}
-M\cong\bigoplus_{i\in\Z}\bigl((\grtop M)_i\otimes_S A\bigr)(-i).
-\end{equation}
+\item There is a graded surjection $p:P_M\to M$ with $\Ker p\subseteq P_MA_+$.
+\item If $M$ is graded projective, then $p$ is an isomorphism.
 \end{enumerate}
 \end{lemma}
 
 \begin{proof}
-(1) Since $S$ is semisimple, $MA_+$ has a complement in $M$ as graded $S$-modules:
+(1) Since $S$ is semisimple, $MA_+$ has a complement in $M$ as  $S$-modules:
 \[
-M=T\oplus MA_+,\qquad T=\bigoplus_iT_i,\qquad T_i\xrightarrow{\ \sim\ }(\grtop M)_i .
+M=T\oplus MA_+ \quad \text{ with }\quad  T_i\xrightarrow{\ \sim\ }(\grtop M)_i \;\; \forall i\in\Z.
 \]
-Define $p$ on the $i$th summand of $F$ by $p(v\otimes a)=va$, for $v\in T_i\cong(\grtop M)_i$; this is well defined since $T_i$ is an $S$-submodule of $M$.
-Passing to tops gives
-\[
-\xymatrix@C=40pt{
-\grtop F=\bigoplus_iT_i\ar[r]^-{\grtop p} & \grtop M,
-}
-\]
-which is the isomorphism $T\cong\grtop M$ above.
-Hence $M=p(F)+MA_+$, so $M/p(F)$ is bounded below and equals its own $A_+$-multiple; it is $0$ by graded Nakayama, and $p$ is surjective.
-If $x\in\Ker p$, then $\grtop p(x+FA_+)=0$, so $x\in FA_+$.
+Define $p$ on the direct summand $(\grtop M)_i\otimes_S A$ of $P_M$ by $p(v\otimes a)=va$, for $v\in T_i\cong(\grtop M)_i$; this is well defined since $T_i$ is an $S$-submodule of $M$.
+Note that $\grtop(p):\grtop P_M \xrightarrow{\sim} \grtop M$ is precisely the isomorphism $T\cong\grtop M$ above under the identification $\grtop P_M=T$.
+
+Hence $M=p(P_M)+MA_+$, so $\overline{M}:=M/p(P_M)$ is bounded below with $\overline{M}=\overline{M}A_+$.  By the graded Nakayama lemma (Lemma \ref{lem:graded-nakayama}), we get that $\overline{M}=0$, thus $p$ is surjective.
+If $x\in\Ker p$, then $\grtop p(x+P_MA_+)=0$, so $x\in P_MA_+$.
 
 (2) Put $K=\Ker p$.
 Since $M$ is projective, the sequence splits:
 \[
 \xymatrix@C=30pt{
-0\ar[r] & K\ar[r] & F\ar[r]^p & M\ar[r]\ar@/^1pc/[l]^{s} & 0,
+0\ar[r] & K\ar[r] & P_M\ar[r]_p & M\ar[r]\ar@/_1pc/[l]_{s} & 0,
 }
-\qquad F=K\oplus s(M).
+\qquad P_M=K\oplus s(M).
 \]
-Let $\pi_K:F\to K$ be the projection along $s(M)$; it is $A$-linear, so $\pi_K(FA_+)=KA_+$.
+Let $\pi_K:P_M\to K$ be the projection in this decomposition, so $\pi_K(P_MA_+)=KA_+$.
 Then by (1)
 \[
-K=\pi_K(K)\subseteq\pi_K(FA_+)=KA_+,
+K=\pi_K(K)\subseteq\pi_K(P_MA_+)=KA_+,
 \]
 so $K=KA_+$.
 As $K\subseteq F$ is bounded below, $K=0$ by graded Nakayama.
@@ -371,11 +363,11 @@ As $K\subseteq F$ is bounded below, $K=0$ by graded Nakayama.
 \subsection{Minimal resolutions}
 
 A graded projective resolution can contain redundant terms: adding a contractible summand $A\xrightarrow{\id}A$ in two consecutive degrees gives another resolution.
-A resolution is minimal if the differentials land in $P_{h-1}A_+$, so that no generator is wasted.
+A resolution is minimal if the differentials land in $P_{h-1}A_+$ (thus, has no aforementioned redundant summand), so that no generator is wasted.
 
 \begin{definition}\label{def:minimal-resolution}
-A \defn{graded projective resolution} is a projective resolution \eqref{eq:projective-resolution} in which the modules are graded, the differentials are degree-preserving, and the $P_h$ are graded projective.
-It is \defn{minimal} if all $P_h$ are bounded below and lfd, and
+A \defn{graded projective resolution} is a projective resolution \eqref{eq:projective-resolution} in which the modules $P_h$ are graded projective and the differentials are degree-preserving.
+It is \defn{minimal} if all $P_h$ are lfd bounded below, and 
 \begin{equation}\label{eq:graded-minimal-criterion}
 \Im d_h\subseteq P_{h-1}A_+\quad\text{for all }h\geq1.
 \end{equation}
