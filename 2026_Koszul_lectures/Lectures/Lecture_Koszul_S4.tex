@@ -379,17 +379,17 @@ Homological degree $h$ and grading degree $i$ are distinct: $d_h:(P_h)_i\to(P_{h
 \begin{lemma}\label{lem:minimal-tops}
 Let $p:P\to K$ be a surjection of graded modules with $\Ker p\subseteq PA_+$.
 Then $\grtop p:\grtop P\to\grtop K$ is an isomorphism.
-Consequently, for a minimal resolution $P_\bullet\to M$ and $K_h:=\Im d_h$ for $h\geq1$, we have $\grtop P_0\cong\grtop M$ and $\grtop P_h\cong\grtop K_h$.
+Consequently, for a minimal resolution $P_\bullet\to M$, we have $\grtop P_0\cong\grtop M$ and $\grtop P_h\cong\grtop \Im d_h$ for all $h\geq1$.
 \end{lemma}
 
 \begin{proof}
-The map $\grtop p$ is surjective, and $p(PA_+)=KA_+$ gives $\Ker(\grtop p)=(\Ker p+PA_+)/PA_+=0$.
-For the last assertion apply this to $p_0:P_0\to M$ and to $d_h:P_h\to K_h$, whose kernels $\Ker p_0=\Im d_1$ and $\Ker d_h=\Im d_{h+1}$ lie in $P_0A_+$ and $P_hA_+$ by \eqref{eq:graded-minimal-criterion}.
+The map $\grtop (p)$ is surjective, and $p(PA_+)=KA_+$ gives $\Ker(\grtop p)=(\Ker p+PA_+)/PA_+=0$.
+For the last assertion apply this to $p_0:P_0\to M$ and to $d_h:P_h\to \Im d_h$, whose kernels $\Ker p_0=\Im d_1$ and $\Ker d_h=\Im d_{h+1}$ lie in $P_0A_+$ and $P_hA_+$ by \eqref{eq:graded-minimal-criterion}.
 \end{proof}
 
 \begin{theorem}\label{thm:minimal-resolution}
 Every bounded below locally finite-dimensional graded right $A$-module $M$ has a minimal graded projective resolution.
-Any two such resolutions are isomorphic by degree-preserving isomorphisms $f_h:P_h\to P'_h$ with $p'_0f_0=p_0$ and $d'_hf_h=f_{h-1}d_h$.
+Any two such resolutions are isomorphic by degree-preserving isomorphisms $f_h:P_h\to P'_h$ with $p'_0f_0=p_0$ and $d'_hf_h=f_{h-1}d_h$. \comm{draw diagram}
 \end{theorem}
 
 The proof applies Lemma~\ref{lem:graded-projective-terms}(1) to $M$ and then to each successive kernel; it is given in Subsection~\ref{subsec:ordinary-covers}.
