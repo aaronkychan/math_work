@@ -239,12 +239,10 @@ For a graded right $A$-module $P$, the following are equivalent.
 In particular, $L\otimes_S A(-i)$ is graded projective for every finite-dimensional right $S$-module $L$ and every $i\in\Z$.
 \end{corollary}
 
-\begin{supplementary}
 \begin{proof}
 The proof of Proposition~\ref{prop:projective-characterisations} applies verbatim with degree-preserving maps.
 For the last assertion, Corollary~\ref{cor:semisimple-summands} makes $Q$ a direct summand of $S^{\oplus m}$ for some $m$, so $Q\otimes_S A(-i)$ is a graded direct summand of $A(-i)^{\oplus m}$.
 \end{proof}
-\end{supplementary}
 
 \begin{definition}\label{not:graded-top}
 The \defn{graded top} of a graded right $A$-module $M$ is the graded right $S$-module
@@ -404,6 +402,7 @@ where $(\grtop M)_i$ is placed in degree $0$.
 \end{enumerate}
 \end{lemma}
 
+\begin{supplementary}
 \begin{proof}
 (1) Since $S$ is semisimple, $MA_+$ has a complement in $M$ as  $S$-modules:
 \[
@@ -431,6 +430,7 @@ K=\pi_K(K)\subseteq\pi_K(P_MA_+)=KA_+,
 so $K=KA_+$.
 As $K\subseteq P_M$ is bounded below, $K=0$ by graded Nakayama.
 \end{proof}
+\end{supplementary}
 
 \subsection{Minimal resolutions}
 
@@ -464,9 +464,9 @@ By minimality, $\Ker p_h=\Im d_{h+1}\subseteq P_hA_+$ for all $h\geq0$ (with $p_
 Apply Lemma~\ref{lem:minimal-tops} to each $p_h$.
 \end{proof}
 
-\begin{theorem}\label{thm:minimal-resolution}
-Every bounded below locally finite-dimensional graded right $A$-module $M$ has a minimal graded projective resolution.
-Any two such resolutions are isomorphic by degree-preserving isomorphisms $f_h:P_h\to P'_h$ with $p'_0f_0=p_0$ and $d'_hf_h=f_{h-1}d_h$.
+\begin{theorem}[Existence and uniqueness of minimal graded projective resolution]\label{thm:minimal-resolution}
+Every bounded below lfd graded right $A$-module $M$ has a minimal graded projective resolution.
+Moreover, any two such resolutions are isomorphic as complexes of graded modules, i.e. there are isomorphisms $f_h$ making the following diagram commutative
 \[
 \xymatrix@C=26pt@R=22pt{
 \cdots\ar[r] & P_1\ar[r]^{d_1}\ar[d]^{f_1}_{\wr} & P_0\ar[r]^{p_0}\ar[d]^{f_0}_{\wr} & M\ar[r]\ar@{=}[d] & 0\\
