@@ -67,10 +67,11 @@ For $h\geq2$ put
 \]
 and $\mathcal K_0=S$, $\mathcal K_1=V$, so that $\mathcal K_2=R$.
 These are $S$-sub-bimodules of $V^{\otimes_Sh}$.
-Since every $S$-module is flat, $-\otimes_SY$ and $Y\otimes_S-$ are exact and preserve finite intersections of submodules; we use this tacitly.
+Since every $S$-module is flat, the functors $-\otimes_SY$ and $Y\otimes_S-$ are exact, so they preserve inclusions and finite intersections of submodules.
+In particular, if $X\subseteq V^{\otimes_Sa}$ and $X'\subseteq V^{\otimes_Sb}$ are sub-bimodules, then $X\otimes_SV^{\otimes_Sb}$, $V^{\otimes_Sa}\otimes_SX'$ and $X\otimes_SX'$ map injectively to $V^{\otimes_S(a+b)}$, and we regard them as submodules of $V^{\otimes_S(a+b)}$ via these maps.
 
 \begin{lemma}\label{lem:koszul-recursion}
-For $h\geq2$, inside $V^{\otimes_Sh}$,
+For $h\geq2$, the following are equalities of sub-bimodules of $V^{\otimes_Sh}$, where $\mathcal K_{h-1}\otimes_SV$ and $\mathcal K_{h-2}\otimes_SR$ are regarded as submodules as explained above:
 \[
 \mathcal K_h=\bigl(\mathcal K_{h-1}\otimes_SV\bigr)\cap\bigl(V^{\otimes_S(h-2)}\otimes_SR\bigr)=\bigl(\mathcal K_{h-1}\otimes_SV\bigr)\cap\bigl(\mathcal K_{h-2}\otimes_SR\bigr).
 \]
@@ -79,7 +80,7 @@ In particular $\mathcal K_h\subseteq\mathcal K_{h-1}\otimes_SV$, and more genera
 
 \begin{supplementary}
 \begin{proof}
-By the tacit flatness, $\mathcal K_{h-1}\otimes V=\bigcap_{\nu=0}^{h-3}V^{\otimes\nu}\otimes R\otimes V^{\otimes(h-2-\nu)}$.
+Since $-\otimes_SV$ preserves intersections, $\mathcal K_{h-1}\otimes V=\bigcap_{\nu=0}^{h-3}V^{\otimes\nu}\otimes R\otimes V^{\otimes(h-2-\nu)}$.
 These are the conditions defining $\mathcal K_h$ with $\nu\leq h-3$, and the remaining condition is $\nu=h-2$, namely $V^{\otimes(h-2)}\otimes R$.
 This gives the first equality.
 For the second, $\mathcal K_{h-1}\otimes V\subseteq\mathcal K_{h-2}\otimes V\otimes V$, and $(\mathcal K_{h-2}\otimes V\otimes V)\cap(V^{\otimes(h-2)}\otimes R)=\mathcal K_{h-2}\otimes R$, as one sees by choosing an $S$-complement of $\mathcal K_{h-2}$ in $V^{\otimes(h-2)}$.
