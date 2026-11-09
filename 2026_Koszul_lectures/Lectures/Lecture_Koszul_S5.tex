@@ -322,6 +322,7 @@ Let $A$ be as in Subsection~\ref{subsec:graded-ext} and let $P_\bullet\to S$ be 
 \item $P_0=A$, with $p_0:A\to S$ the projection.
 \item $\grtop P_1\cong A_+/A_+^2$.
 If $A$ is generated in degree $1$ over $S$ (see \eqref{eq:multiplication-maps}), then $\grtop P_1\cong A_1$, concentrated in degree $1$, $P_1\cong(A_1\otimes_SA)(-1)$, and $\Ext_A^1(S,S)=\Ext_A^1(S,S)_{-1}$.
+Conversely, if $\Ext_A^1(S,S)_j=0$ for all $j\neq-1$, then $A$ is generated in degree $1$ over $S$.
 
 \item If $A$ is generated in degree $1$, put $V=A_1$ and let $I=\Ker(T_S(V)\onto A)$ be the relational ideal.
 Then
@@ -329,18 +330,24 @@ Then
 (\grtop P_2)_i\cong I_i/\bigl(V\otimes_SI_{i-1}+I_{i-1}\otimes_SV\bigr)\quad\text{for all }i.
 \]
 In particular, if $A=T_S(V)/(R)$ is quadratic with $V=A_1$ and $R\subseteq V\otimes_SV$, then $\grtop P_2\cong R$, concentrated in degree $2$, $P_2\cong(R\otimes_SA)(-2)$, and $\Ext_A^2(S,S)=\Ext_A^2(S,S)_{-2}$.
+Conversely, if $A$ is generated in degree $1$ and $\Ext_A^2(S,S)_j=0$ for all $j\neq-2$, then $A$ is quadratic, with $A=T_S(V)/(I_2)$.
 \end{enumerate}
 In particular, in the quadratic case, $\Tor_h^A(S,S)_i=0$ for $i\neq h$ and $h\leq2$, while $\Tor_h^A(S,S)_h\cong S,\ A_1,\ R$ for $h=0,1,2$.
 \end{proposition}
 
 \begin{supplementary}
 \begin{proof}
+By Theorem~\ref{thm:ext-minimal}, $\Ext_A^h(S,S)_j\cong\Hom_S\bigl((\grtop P_h)_{-j},S\bigr)$, which is non-zero if and only if $(\grtop P_h)_{-j}\neq0$, since every simple $S$-module is a direct summand of $S$.
+So $\Ext_A^h(S,S)_j=0$ for all $j\neq-h$ if and only if $\grtop P_h$ is concentrated in degree $h$; this is how the statements about $\Ext$ below follow from those about $\grtop P_h$.
+
 (1) The module $A$ is projective and $\Ker p_0=A_+=AA_+$, so $\Ker p_0\subseteq P_0A_+$ and $p_0$ is the first step of a minimal resolution.
 
 (2) Put $K_1=\Ker p_0=A_+$.
 By Corollary~\ref{cor:minimal-tops}, $\grtop P_1\cong\grtop K_1=A_+/A_+^2$.
 If $A$ is generated in degree $1$, then $A_+^2=\bigoplus_{i\geq2}A_i$, so $\grtop K_1=A_1$ in degree $1$.
 By \eqref{eq:graded-cover-terms}, $P_1\cong(A_1\otimes_SA)(-1)$, and the surjection $P_1\to K_1$ is $v\otimes a\mapsto va$.
+Conversely, if $\grtop P_1=A_+/A_+^2$ is concentrated in degree $1$, then $A_i=(A_+^2)_i=\sum_{0<p<i}A_pA_{i-p}$ for all $i\geq2$.
+By induction on $i$ this gives $A_i=A_1^i$, so $A$ is generated in degree $1$.
 
 (3) Put $T=T_S(V)$, so $A_i=T_i/I_i$ and $I_1=0$.
 Since every $S$-module is projective, $V\otimes_S-$ is exact, so
@@ -356,6 +363,10 @@ If $I=(R)$, then $I_i=\sum_{p+q=i-2}T_pRT_q$.
 For $i\geq3$ each summand with $p\geq1$ lies in $V\otimes_SI_{i-1}$, and each with $p=0$ lies in $I_{i-1}\otimes_SV$.
 So $I_i=V\otimes_SI_{i-1}+I_{i-1}\otimes_SV$ for $i\geq3$, while $I_1=0$ and $I_2=R$.
 Thus $\grtop P_2=R$ in degree $2$, and \eqref{eq:graded-cover-terms} gives $P_2\cong(R\otimes_SA)(-2)$.
+
+Conversely, suppose $A$ is generated in degree $1$ and $\grtop P_2$ is concentrated in degree $2$.
+By the formula for $(\grtop P_2)_i$, we have $I_i=V\otimes_SI_{i-1}+I_{i-1}\otimes_SV$ for all $i\geq3$.
+By induction on $i$ this gives $I_i\subseteq(I_2)$, so $I=(I_2)$ and $A=T_S(V)/(I_2)$ is quadratic.
 The last sentence follows from Proposition~\ref{prop:tor-top}.
 \end{proof}
 \end{supplementary}
