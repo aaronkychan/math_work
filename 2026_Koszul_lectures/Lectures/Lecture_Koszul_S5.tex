@@ -26,9 +26,8 @@ For right $A$-modules $M,N$ and a projective resolution $P_\bullet\to M$, put
 \]
 \end{definition}
 
-\comm{well-definedness is Prop \ref{prop:ext-well-defined}, not comparison lemma??}
-This depends only on $M$ and $N$, as the next lemma shows.
-It compares a projective resolution of $M$ with an arbitrary resolution of $M'$, which is more than we need now but costs nothing.
+This depends only on $M$ and $N$ up to canonical isomorphism, by Proposition~\ref{prop:ext-well-defined} below, which we deduce from the following comparison lemma.
+The lemma compares a projective resolution of $M$ with an arbitrary resolution of $M'$, which is more than we need now but costs nothing.
 
 \begin{lemma}[Comparison lemma]\label{lem:comparison}
 Let $P_\bullet\to M$ be a projective resolution with differentials $d_h$ and augmentation $p_0$.
@@ -157,7 +156,7 @@ In particular, if $N$ is a right $S$-module placed in degree $0$, then $\Ext_A^h
 Let $\varphi:P_h\to N(j)$ be $A$-linear and degree-preserving.
 Then $\varphi(P_hA_+)=\varphi(P_h)A_+\subseteq NA_+=0$, so $\varphi$ factors uniquely through $P_h\to P_h/P_hA_+=\grtop P_h$, and every degree-preserving $S$-linear map $\grtop P_h\to N(j)$ arises this way.
 This gives the second isomorphism.
-By \eqref{eq:graded-minimal-criterion}, $\Im d_{h+1}\subseteq P_hA_+$, so $\varphi d_{h+1}=0$.
+By minimality of $P_\bullet$ \eqref{eq:graded-minimal-criterion}, $\Im d_{h+1}\subseteq P_hA_+$, so $\varphi d_{h+1}=0$.
 Hence all $\delta^h$ vanish and the cohomology equals the cochain groups.
 If $N$ lies in degree $0$, then $N(j)$ lies in degree $-j$, so a degree-preserving map from $\grtop P_h$ only involves $(\grtop P_h)_{-j}$.
 \end{proof}
@@ -298,7 +297,7 @@ In particular $\Tor_h^A(S,S)\cong S,\ A_1,\ R$ for $h=0,1,2$, concentrated in de
 (1) The module $A$ is projective and $\Ker p_0=A_+=AA_+$, so $\Ker p_0\subseteq P_0A_+$ and $p_0$ is the first step of a minimal resolution.
 
 (2) Put $K_1=\Ker p_0=A_+$.
-By Lemma~\ref{lem:minimal-tops}, $\grtop P_1\cong\grtop K_1=A_+/A_+^2$.
+By Corollary~\ref{cor:minimal-tops}, $\grtop P_1\cong\grtop K_1=A_+/A_+^2$.
 If $A$ is generated in degree $1$, then $A_+^2=\bigoplus_{i\geq2}A_i$, so $\grtop K_1=A_1$ in degree $1$.
 By \eqref{eq:graded-cover-terms}, $P_1\cong(A_1\otimes_SA)(-1)$, and the surjection $P_1\to K_1$ is $v\otimes a\mapsto va$.
 
@@ -310,7 +309,7 @@ Since every $S$-module is projective, $V\otimes_S-$ is exact, so
 and $d_1:(P_1)_i\to A_i=T_i/I_i$ is induced by the identity on $T_i$.
 Hence $K:=\Ker d_1$ has $K_i=I_i/(V\otimes_SI_{i-1})$.
 Since $A_j=A_1^j$, we have $(KA_+)_i=K_{i-1}A_1$, which is the image of $I_{i-1}\otimes_SV$.
-Therefore $(K/KA_+)_i=I_i/(V\otimes_SI_{i-1}+I_{i-1}\otimes_SV)$, and $\grtop P_2\cong\grtop K$ by Lemma~\ref{lem:minimal-tops}.
+Therefore $(K/KA_+)_i=I_i/(V\otimes_SI_{i-1}+I_{i-1}\otimes_SV)$, and $\grtop P_2\cong\grtop K$ by Corollary~\ref{cor:minimal-tops}.
 
 If $I=(R)$, then $I_i=\sum_{p+q=i-2}T_pRT_q$.
 For $i\geq3$ each summand with $p\geq1$ lies in $V\otimes_SI_{i-1}$, and each with $p=0$ lies in $I_{i-1}\otimes_SV$.
@@ -411,7 +410,7 @@ Let $A$ be as in Subsection~\ref{subsec:graded-ext}.
 \begin{hidden}
 \emph{Solution.}
 (1) Let $P_\bullet\to S$ be the minimal resolution and $K_1=\Ker p_0=A_+$.
-By Proposition~\ref{prop:tor-top}, $\Tor_1^A(S,S)\cong\grtop P_1$, and $\grtop P_1\cong\grtop K_1=A_+/A_+^2$ by Lemma~\ref{lem:minimal-tops} applied to $d_1:P_1\to K_1$.
+By Proposition~\ref{prop:tor-top}, $\Tor_1^A(S,S)\cong\grtop P_1$, and $\grtop P_1\cong\grtop K_1=A_+/A_+^2$ by Corollary~\ref{cor:minimal-tops}.
 
 (2) By (1), the condition says $A_+/A_+^2$ is concentrated in degree $1$, that is, $A_i=(A_+^2)_i=\sum_{0<p<i}A_pA_{i-p}$ for $i\geq2$.
 If $A$ is generated in degree $1$, then $A_i=A_1A_{i-1}\subseteq A_+^2$ for $i\geq2$.

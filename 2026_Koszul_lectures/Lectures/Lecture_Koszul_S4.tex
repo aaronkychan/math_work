@@ -183,7 +183,18 @@ with every $P_h$ projective.
 Sometimes, we just write $P_\bullet\twoheadrightarrow M$; here  $P_\bullet$ is treated as a complex that ends in $P_0\to0$, and $M$ is not a term of it.
 A \defn{free resolution} if is a projective resolution where every $P_h$ is free.
 \end{definition}
-\comm{draw diagram where differential factors through $\Im(d_h)=\Ker(d_{h-1})$ with twohead arrows and hook arrow, so proj res is splicing of ses with middle projective term; like what is did in the ungraded case in the supplementary part later on (Def \ref{def:ordinary-minimal-resolution})..... are there any overlapped material??? why the ungraded resolution came so late and repeated this definition here??? Check flow of exposition carefully.}
+Exactness says that each differential factors through its image: $d_h$ is a surjection $p_h:P_h\twoheadrightarrow\Im d_h$ followed by the inclusion $\Im d_h\hookrightarrow P_{h-1}$, where $\Im d_h=\Ker d_{h-1}$ (and $\Im d_1=\Ker p_0$):
+\[
+\xymatrix@C=26pt@R=26pt{
+\cdots\ar[r] & P_2\ar[rr]^{d_2}\ar@{->>}[dr]_{p_2} & & P_1\ar[rr]^{d_1}\ar@{->>}[dr]_{p_1} & & P_0\ar[r]^{p_0} & M\ar[r] & 0\\
+& & \Im d_2\ar@{^{(}->}[ur] & & \Im d_1\ar@{^{(}->}[ur] & &
+}
+\]
+Thus a projective resolution is a splicing of short exact sequences with projective middle terms,
+\[
+0\to\Im d_{h+1}\to P_h\xrightarrow{\,p_h\,}\Im d_h\to0\quad(h\geq1),\qquad
+0\to\Im d_1\to P_0\xrightarrow{\,p_0\,}M\to0.
+\]
 
 \begin{proposition}\label{prop:resolutions-exist}
 Every right $A$-module has a free resolution, hence a projective resolution.
@@ -321,6 +332,50 @@ For $A=\Bbbk A_2$, $\rad A=\Bbbk e_{12}$, $\top(e_{11}A)=e_{11}A/\Bbbk e_{12}=L_
 
 %We say that a graded module $M$ is \defn{generated in degree $d$} if $M=M_dA$.  More generally, we say that $M$ is generated in degrees $I$ for a set $I\subset \Z$ if $M=\sum_{i\in I} M_iA$.
 
+\begin{lemma}\label{lem:minimal-tops}
+Let $p:M\twoheadrightarrow N$ be a surjection of graded modules.
+Then $\Ker p\subseteq MA_+$ if and only if $\grtop p:\grtop M\to\grtop N$ is an isomorphism.
+\end{lemma}
+
+\begin{proof}
+Since $p(MA_+)=NA_+$, the map $\grtop p$ is surjective, with kernel $(\Ker p+MA_+)/MA_+$.
+This vanishes if and only if $\Ker p\subseteq MA_+$.
+\end{proof}
+
+Picture a module as a mountain: the horizontal levels are the degrees $i$ (increasing downwards, since $A_+$ pushes elements down), the peaks are the generators, that is, $\grtop M=M/MA_+$, and everything below the peaks is $MA_+$.
+The condition $\Ker p\subseteq MA_+$ says that the kernel (shaded) avoids the peaks, so $N=M/\Ker p$ has the same peaks:
+
+\begin{center}
+\begin{tikzpicture}[scale=0.75,every node/.style={font=\small}]
+  \foreach \y/\i in {0/0,-1/1,-2/2,-3/3}{
+    \draw[dotted,gray] (-1.8,\y) -- (11.2,\y);
+    \node[left,gray] at (-1.8,\y) {$i=\i$};
+  }
+  % M
+  \draw[thick,fill=blue!6] (-1.6,-3) -- (0,0) -- (1.3,-1.8) -- (2.4,-1) -- (3.8,-3) -- cycle;
+  \fill[red!40] (0.2,-2.4) -- (0.8,-2.1) -- (1.5,-2.3) -- (1.1,-2.8) -- (0.4,-2.8) -- cycle;
+  \node[red!70!black] at (0.85,-2.5) {$\Ker p$};
+  \fill (0,0) circle (2.4pt);
+  \fill (2.4,-1) circle (2.4pt);
+  \node[above] at (0,0.05) {peaks};
+  \node at (1.1,-3.45) {$M$};
+  % arrow
+  \draw[->,thick] (4.3,-1.5) -- node[above]{$p$} (5.6,-1.5);
+  % N
+  \begin{scope}[xshift=7cm]
+    \draw[thick,fill=blue!6] (-1.6,-3) -- (0,0) -- (1.3,-1.8) -- (2.4,-1) -- (3.8,-3) -- cycle;
+    \fill[white] (0.2,-2.4) -- (0.8,-2.1) -- (1.5,-2.3) -- (1.1,-2.8) -- (0.4,-2.8) -- cycle;
+    \draw[dashed,gray] (0.2,-2.4) -- (0.8,-2.1) -- (1.5,-2.3) -- (1.1,-2.8) -- (0.4,-2.8) -- cycle;
+    \fill (0,0) circle (2.4pt);
+    \fill (2.4,-1) circle (2.4pt);
+    \node[above] at (0,0.05) {same peaks};
+    \node at (1.1,-3.45) {$N=M/\Ker p$};
+  \end{scope}
+\end{tikzpicture}
+\end{center}
+
+If the kernel contained a peak, that generator of $M$ would be killed in $N$, and $\grtop p$ would fail to be injective.
+
 \begin{lemma}\label{lem:graded-projective-terms}
 Let $M$ be a bounded below graded right $A$-module, and put
 \begin{equation}\label{eq:graded-cover-terms}
@@ -342,7 +397,7 @@ Define $p$ on the direct summand $(\grtop M)_i\otimes_S A$ of $P_M$ by $p(v\otim
 Note that $\grtop(p):\grtop P_M \xrightarrow{\sim} \grtop M$ is precisely the isomorphism $T\cong\grtop M$ above under the identification $\grtop P_M=T$.
 
 Hence $M=p(P_M)+MA_+$, so $\overline{M}:=M/p(P_M)$ is bounded below with $\overline{M}=\overline{M}A_+$.  By the graded Nakayama lemma (Lemma \ref{lem:graded-nakayama}), we get that $\overline{M}=0$, thus $p$ is surjective.
-If $x\in\Ker p$, then $\grtop p(x+P_MA_+)=0$, so $x\in P_MA_+$.
+Since $p$ is surjective and $\grtop p$ is an isomorphism, Lemma~\ref{lem:minimal-tops} gives $\Ker p\subseteq P_MA_+$.
 
 (2) Put $K=\Ker p$.
 Since $M$ is projective, the sequence splits:
@@ -358,7 +413,7 @@ Then by (1)
 K=\pi_K(K)\subseteq\pi_K(P_MA_+)=KA_+,
 \]
 so $K=KA_+$.
-As $K\subseteq F$ is bounded below, $K=0$ by graded Nakayama.
+As $K\subseteq P_M$ is bounded below, $K=0$ by graded Nakayama.
 \end{proof}
 
 \subsection{Minimal resolutions}
@@ -372,28 +427,36 @@ It is \defn{minimal} if all $P_h$ are lfd bounded below, and
 \begin{equation}\label{eq:graded-minimal-criterion}
 \Im d_h\subseteq P_{h-1}A_+\quad\text{for all }h\geq1.
 \end{equation}
-\comm{use picture similar to ungraded one Def \ref{def:ordinary-minimal-resolution}}
+Equivalently, the surjections $p_h:P_h\twoheadrightarrow\Im d_h$ (and $p_0:P_0\twoheadrightarrow M$) have kernel in $P_hA_+$, since $\Ker p_h=\Im d_{h+1}$:
+\[
+\xymatrix@C=34pt@R=30pt{
+\cdots\ar[r] & P_2\ar[rr]^{d_2}\ar@{->>}[dr]|{\substack{p_2\\\Ker p_2\subseteq P_2A_+}} & & P_1\ar[rr]^{d_1}\ar@{->>}[dr]|{\substack{p_1\\\Ker p_1\subseteq P_1A_+}} & & P_0\ar[r]^{p_0} & M\ar[r] & 0\\
+& & \Im d_2\ar@{^{(}->}[ur] & & \Im d_1\ar@{^{(}->}[ur] & &
+}
+\]
 \end{definition}
 
-Since $\Ker p_0=\Im d_1$, this includes $\Ker p_0\subseteq P_0A_+$.
 Homological degree $h$ and grading degree $i$ are distinct: $d_h:(P_h)_i\to(P_{h-1})_i$, and exactness is checked in each grading degree as in Remark~\ref{rem:graded-exactness}.
 
-\begin{lemma}\label{lem:minimal-tops}
-Let $p:P\twoheadrightarrow K$ \comm{$P$ is too suggestive as projective, use $M$?  Besides, why $K$ and not $N$?} be a surjection of graded modules with $\Ker p\subseteq PA_+$.
-Then $\grtop p:\grtop P\to\grtop K$ is an isomorphism. \comm{draw an intuitive picture (module is like a mountain, graded are `levels', peaks are the graded top, color the kernel to visualise the condition)}
-Consequently, for a minimal resolution $P_\bullet\to M$, we have $\grtop P_0\cong\grtop M$ and $\grtop P_h\cong\grtop \Im d_h$ for all $h\geq1$. \comm{this lemma has any overlap with Lemma \ref{lem:graded-projective-terms} or its proof???}
-\end{lemma}
+\begin{corollary}\label{cor:minimal-tops}
+Let $P_\bullet\twoheadrightarrow M$ be a minimal resolution.
+Then $\grtop P_0\cong\grtop M$ and $\grtop P_h\cong\grtop\Im d_h$ for all $h\geq1$.
+\end{corollary}
 
 \begin{proof}
-The map $\grtop (p)$ is surjective, and $p(PA_+)=KA_+$ gives 
-\[\Ker(\grtop p)=(\Ker p+PA_+)/PA_+=0.
-\]
-For the last assertion apply this to $p_0:P_0\to M$ and to $d_h:P_h\to \Im d_h$, whose kernels $\Ker p_0=\Im d_1$ and $\Ker d_h=\Im d_{h+1}$ lie in $P_0A_+$ and $P_hA_+$ by \eqref{eq:graded-minimal-criterion}. \comm{whenever quoting this equation, always says `by minimality (of ...)', just the number then nobody remember what it is; saying minimality explicitly it is immediately known; check throughout future use}
+By minimality, $\Ker p_h=\Im d_{h+1}\subseteq P_hA_+$ for all $h\geq0$ (with $p_0:P_0\to M$ and $p_h:P_h\to\Im d_h$ for $h\ge1$).
+Apply Lemma~\ref{lem:minimal-tops} to each $p_h$.
 \end{proof}
 
 \begin{theorem}\label{thm:minimal-resolution}
 Every bounded below locally finite-dimensional graded right $A$-module $M$ has a minimal graded projective resolution.
-Any two such resolutions are isomorphic by degree-preserving isomorphisms $f_h:P_h\to P'_h$ with $p'_0f_0=p_0$ and $d'_hf_h=f_{h-1}d_h$. \comm{draw diagram}
+Any two such resolutions are isomorphic by degree-preserving isomorphisms $f_h:P_h\to P'_h$ with $p'_0f_0=p_0$ and $d'_hf_h=f_{h-1}d_h$.
+\[
+\xymatrix@C=26pt@R=22pt{
+\cdots\ar[r] & P_1\ar[r]^{d_1}\ar[d]^{f_1}_{\wr} & P_0\ar[r]^{p_0}\ar[d]^{f_0}_{\wr} & M\ar[r]\ar@{=}[d] & 0\\
+\cdots\ar[r] & P'_1\ar[r]^{d'_1} & P'_0\ar[r]^{p'_0} & M\ar[r] & 0
+}
+\]
 \end{theorem}
 
 The proof applies Lemma~\ref{lem:graded-projective-terms}(1) to $M$ and then to each successive kernel; it is given in Subsection~\ref{subsec:ordinary-covers}.
@@ -488,8 +551,9 @@ In particular, this applies to $S=A/A_+$.
 \begin{proof}
 A finitely generated graded module $M$ is bounded below and lfd, being a quotient of a finite direct sum of shifts of $A$.
 So we have a minimal resolution $P_\bullet\to M$ by Theorem~\ref{thm:minimal-resolution}.
-By Lemma~\ref{lem:minimal-tops}, $\grtop P_0\cong\grtop M$ is finite-dimensional, so $P_0$ is finitely generated by \eqref{eq:graded-cover-terms}, and $K_1\subseteq P_0$ is finitely generated by right noetherianity.\comm{what are $K_i$'s, do not use this notation, if it is kernel of some differential, then right it in full}
-The same argument applies to $K_1,K_2,\ldots$.
+By Corollary~\ref{cor:minimal-tops}, $\grtop P_0\cong\grtop M$ is finite-dimensional, so $P_0$ is finitely generated by \eqref{eq:graded-cover-terms}, and $\Im d_1=\Ker p_0\subseteq P_0$ is finitely generated by right noetherianity.
+Then $\grtop P_1\cong\grtop\Im d_1$ is finite-dimensional, so $P_1$ is finitely generated, and so is $\Im d_2=\Ker d_1\subseteq P_1$.
+Continuing, every $P_h$ and every $\Im d_h$ is finitely generated.
 \end{proof}
 
 Without noetherianity, boundedness below and local finite-dimensionality still give existence of a minimal graded resolution, but its terms need not be finitely generated.
@@ -529,27 +593,27 @@ Thus $s$ is surjective, and injective since $fs=\id$, so $f=s^{-1}$ is an isomor
 Lemma~\ref{lem:graded-projective-terms}(1) gives $p_0:P_0\to M$ with $P_0=\bigoplus_i((\grtop M)_i\otimes_SA)(-i)$ and $\Ker p_0\subseteq P_0A_+$.
 $P_0$ is graded projective by Corollary~\ref{cor:graded-projective-characterisations}.
 If $M_i=0$ for $i<b$, then $(P_0)_j=\bigoplus_{b\leq i\leq j}(\grtop M)_i\otimes_SA_{j-i}$ is finite-dimensional, so $P_0$ is bounded below and lfd.
-The kernel $K_1:=\Ker p_0\subseteq P_0$ is again bounded below and lfd, so we repeat with $K_1$ in place of $M$:
+Hence $\Ker p_0\subseteq P_0$ is again bounded below and lfd, and we repeat with $\Ker p_0$ in place of $M$: this gives a surjection $p_1:P_1\twoheadrightarrow\Ker p_0$ with $\Ker p_1\subseteq P_1A_+$, and we let $d_1$ be $p_1$ followed by the inclusion $\Ker p_0\subseteq P_0$.
+Inductively, $p_h:P_h\twoheadrightarrow\Ker d_{h-1}$ with $\Ker p_h\subseteq P_hA_+$, and $d_h$ is $p_h$ followed by the inclusion $\Ker d_{h-1}\subseteq P_{h-1}$ (where $d_0:=p_0$):
 \[
 \xymatrix@C=24pt@R=22pt{
 \cdots\ar[r] & P_2\ar[rr]^{d_2}\ar@{->>}[dr]_{p_2} & & P_1\ar[rr]^{d_1}\ar@{->>}[dr]_{p_1} & & P_0\ar[r]^{p_0} & M\ar[r] & 0\\
-& & K_2\ar@{^{(}->}[ur] & & K_1\ar@{^{(}->}[ur] & &
+& & \Ker d_1\ar@{^{(}->}[ur] & & \Ker p_0\ar@{^{(}->}[ur] & &
 }
 \]
-with $\Ker p_h\subseteq P_hA_+$ for all $h\geq0$, where $p_h:P_h\to K_h$ for $h\ge1$, $K_{h+1}:=\Ker p_h$ and $d_h$ is $p_h$ followed by the inclusion $K_h\subseteq P_{h-1}$.
-Then $\Ker d_h=\Ker p_h=K_{h+1}=\Im d_{h+1}$ and $\Im d_h=K_h=\Ker p_{h-1}\subseteq P_{h-1}A_+$, which is \eqref{eq:graded-minimal-criterion}.
+Then $\Im d_h=\Ker d_{h-1}$, so the sequence is exact, and $\Im d_h\subseteq P_{h-1}A_+$ for $h\geq1$ because $\Im d_h=\Ker p_{h-1}$: this is minimality.
 
 \underline{Uniqueness.}
-Let $P_\bullet$ and $P'_\bullet$ be minimal resolutions, with $K_h:=\Im d_h$ and $K_0:=M$, and surjections $p_h:P_h\to K_h$ as above, so $\Ker p_h=K_{h+1}\subseteq P_hA_+$.
-Suppose we have an isomorphism $\varphi_h:K_h\to K'_h$, starting with $\varphi_0=\id_M$.
-Both $\varphi_hp_h$ and $p'_h$ are surjections onto $K'_h$ with kernel in $P_hA_+$, resp.\ $P'_hA_+$, so Lemma~\ref{lem:graded-top-uniqueness} gives an isomorphism $f_h$ in
+Let $P_\bullet$ and $P'_\bullet$ be minimal resolutions of $M$; write $\Im d_0:=M$ and $p_h:P_h\twoheadrightarrow\Im d_h$ as above, so $\Ker p_h=\Im d_{h+1}\subseteq P_hA_+$ by minimality.
+Suppose we have an isomorphism $\varphi_h:\Im d_h\to\Im d'_h$, starting with $\varphi_0=\id_M$.
+Both $\varphi_hp_h$ and $p'_h$ are surjections onto $\Im d'_h$ with kernel in $P_hA_+$, resp.\ $P'_hA_+$, so Lemma~\ref{lem:graded-top-uniqueness} gives an isomorphism $f_h$ in
 \[
 \xymatrix@R=20pt@C=40pt{
-P_h\ar[r]^{p_h}\ar[d]_{f_h}^{\wr} & K_h\ar[d]^{\varphi_h}_{\wr}\\
-P'_h\ar[r]_{p'_h} & K'_h .
+P_h\ar[r]^{p_h}\ar[d]_{f_h}^{\wr} & \Im d_h\ar[d]^{\varphi_h}_{\wr}\\
+P'_h\ar[r]_{p'_h} & \Im d'_h .
 }
 \]
-It restricts to an isomorphism $\varphi_{h+1}:K_{h+1}=\Ker p_h\to\Ker p'_h=K'_{h+1}$, and the induction continues.
+It restricts to an isomorphism $\varphi_{h+1}:\Im d_{h+1}=\Ker p_h\to\Ker p'_h=\Im d'_{h+1}$, and the induction continues.
 The squares give $p'_0f_0=p_0$ and $d'_hf_h=f_{h-1}d_h$.
 \end{proof}
 \end{supplementary}
@@ -629,18 +693,10 @@ The surjection $A=e_{11}A\oplus e_{22}A\to L_1$ killing $e_{22}A$ is not a cover
 For a finite-dimensional algebra $A$ and a right $A$-module $M$, replace the criterion \eqref{eq:graded-minimal-criterion} in Definition~\ref{def:minimal-resolution} by projective covers.
 
 \begin{definition}\label{def:ordinary-minimal-resolution}
-A projective resolution \eqref{eq:projective-resolution} is \defn{minimal} if $p_0:P_0\to M$ and the surjections $p_h:P_h\to K_h$, $x\mapsto d_h(x)$ (with $K_1=\Ker p_0$, $K_h=\Ker d_{h-1}$ for $h\geq2$) are projective covers.
+A projective resolution \eqref{eq:projective-resolution} is \defn{minimal} if $p_0:P_0\to M$ and the surjections $p_h:P_h\twoheadrightarrow\Im d_h$ for $h\geq1$ are projective covers.
 \end{definition}
 
-Each differential then factors as a projective cover onto its image followed by an inclusion:
-\[
-\xymatrix@C=30pt@R=30pt{
-\cdots\ar[r] & P_2\ar[rr]^{d_2}\ar@{->>}[dr]|{\substack{p_2\\\text{proj.\ cover}}}
-& & P_1\ar[rr]^{d_1}\ar@{->>}[dr]|{\substack{p_1\\\text{proj.\ cover}}}
-& & P_0\ar[rr]|{p_0}_{\text{proj.\ cover}} && M\ar[r] & 0\\
-& & K_2\ar@{^{(}->}[ur] && K_1\ar@{^{(}->}[ur]
-}
-\]
+In the diagram following Definition~\ref{def:projective-resolution}, this says that every $p_h$ is a projective cover.
 By Proposition~\ref{prop:cover-top}, minimality is equivalent to
 \begin{equation}\label{eq:ordinary-minimal-criterion}
 \Im d_h\subseteq \rad P_{h-1}\quad\text{for all }h\geq1.
@@ -655,15 +711,7 @@ Over any algebra, two minimal resolutions $P_\bullet\to M$ and $P'_\bullet\to M$
 As in Theorem~\ref{thm:minimal-resolution}, using Theorem~\ref{thm:ordinary-projective-covers}; if $M$ is finite-dimensional, choose finite-dimensional covers, whose kernels are again finite-dimensional.
 \end{proof}
 
-More generally, maps $f_h$ with these identities form a \defn{map of resolutions}, that is, a commutative diagram
-\[
-\xymatrix@C=24pt@R=22pt{
-\cdots\ar[r] & P_1\ar[r]^{d_1}\ar[d]^{f_1}
-& P_0\ar[r]^{p_0}\ar[d]^{f_0} & M\ar[r]\ar[d]^{\id_M} & 0\\
-\cdots\ar[r] & P'_1\ar[r]^{d'_1}
-& P'_0\ar[r]^{p'_0} & M\ar[r] & 0.
-}
-\]
+More generally, maps $f_h$ with these identities (the vertical maps in the ladder of Theorem~\ref{thm:minimal-resolution}) form a \defn{map of resolutions}.
 The kernels $\Ker p_0$ and $\Ker d_h$ are the successive \defn{syzygies} of $M$; their isomorphism classes do not depend on the minimal resolution.
 Over an arbitrary algebra, Proposition~\ref{prop:resolutions-exist} still gives a free resolution, but projective covers of the kernels need not exist; the obstruction is to existence of minimal resolutions, not to uniqueness.
 

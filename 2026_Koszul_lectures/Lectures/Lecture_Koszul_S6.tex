@@ -17,7 +17,7 @@ A Koszul algebra is one for which these groups sit as close to the diagonal as p
 A graded projective resolution $P_\bullet\to M$ with every $P_h$ bounded below and lfd is \defn{linear} if $P_h$ is generated in degree $h$, that is, $P_h=(P_h)_hA$, for every $h\geq0$.
 \end{definition}
 
-A linear resolution is automatically minimal: $(P_{h-1})_h=(P_{h-1})_{h-1}A_1\subseteq P_{h-1}A_+$, and $d_h$ maps $P_h=(P_h)_hA$ into $(P_{h-1})_hA\subseteq P_{h-1}A_+$, so \eqref{eq:graded-minimal-criterion} holds.
+A linear resolution is automatically minimal: $(P_{h-1})_h=(P_{h-1})_{h-1}A_1\subseteq P_{h-1}A_+$, and $d_h$ maps $P_h=(P_h)_hA$ into $(P_{h-1})_hA\subseteq P_{h-1}A_+$, so $P_\bullet$ is minimal \eqref{eq:graded-minimal-criterion}.
 Hence minimal resolutions are not needed to define Koszul algebras, only to compute with them.
 
 \begin{definition}\label{def:koszul-algebra}
@@ -48,7 +48,7 @@ Equivalently, $\Ext_A^h(S,S)_j=0$ for $j>-h$.
 \begin{proof}
 For $h=0$, $P_0=A$.
 If $P_h$ lives in degrees $\geq h$, then $\Im d_{h+1}\subseteq P_hA_+$ lives in degrees $\geq h+1$.
-So does $\grtop P_{h+1}\cong\grtop\Im d_{h+1}$ (Lemma~\ref{lem:minimal-tops}), hence so does $P_{h+1}$ by \eqref{eq:graded-cover-terms}.
+So does $\grtop P_{h+1}\cong\grtop\Im d_{h+1}$ (Corollary~\ref{cor:minimal-tops}), hence so does $P_{h+1}$ by \eqref{eq:graded-cover-terms}.
 \end{proof}
 
 Thus $A$ is Koszul exactly when the minimal resolution has no generators in degrees $>h$ in homological degree $h$.
@@ -120,7 +120,7 @@ Choose the decomposition of Lemma~\ref{lem:graded-projective-terms} with the sum
 The summands $P_h^{[i]}$ with $i>h$ live in degrees $\geq i>h$.
 
 \emph{Step 1: $d_h(T_h)\subseteq T_{h-1}\otimes_SV$.}
-By \eqref{eq:graded-minimal-criterion}, $d_h(T_h)\subseteq P_{h-1}A_+$.
+By minimality \eqref{eq:graded-minimal-criterion}, $d_h(T_h)\subseteq P_{h-1}A_+$.
 The degree $h$ part of $P_{h-1}A_+$ is $T_{h-1}A_1$, since the summands $P_{h-1}^{[i]}$ with $i\geq h$ contribute only in degrees $\geq h+1$ after multiplying by $A_+$.
 Hence $P^\Delta_\bullet$ is a subcomplex, and $d_h$ restricts to an $S$-linear map $\iota_h:T_h\to T_{h-1}\otimes_SV=T_{h-1}A_1$.
 
