@@ -27,10 +27,16 @@ For right $A$-modules $M,N$ and a projective resolution $P_\bullet\to M$, put
 \end{definition}
 
 The groups $\Ext_A^h(M,N)$ do not depend on the chosen projective resolution $P_\bullet$, up to canonical isomorphism.
-The reason is that chain maps between complexes have a notion of homotopy, which is the algebraic analogue of deforming a continuous map between spaces.
-Just as deforming a continuous map does not change what it does on homology, homotopic chain maps induce the same map on (co)homology.
-Any two projective resolutions of $M$ can be compared by chain maps in both directions, and the two composites are homotopic to the identities; so the two resolutions are the same up to deformation, and compute the same $\Ext$.
+This is not trivial, and we should delay some details until Section~\ref{sec:yoneda}.
+
+\begin{supplementary}
+For the interested:  
+Being a chain map (hence, isomorphism as chain complexes) is a very rigid notion that is too strict if only only interested in the (co)homology.  Instead, we consider a weaker equivalence relations between chain maps called \defn{homotopy}.  Homotopic chain maps, homotopic chain maps induce the same map on (co)homology.
+In particular, chain maps that are homotopic to identity means we have isomorphism on the level of (co)homology, even though there may not be isomorphism on the level of compleces.
+
+The well-definedness of Ext-group is essentially about existence of homotopic inverse between any choice of resolutions of $M$.
 The precise statements and proofs are in Section~\ref{sec:yoneda} (Lemma~\ref{lem:comparison} and Proposition~\ref{prop:ext-well-defined}), where we need them for the Yoneda product; until then we take this independence for granted.
+\end{supplementary}
 
 \begin{proposition}\label{prop:ext-basic}
 For all modules $M,N$:
@@ -80,14 +86,16 @@ Hence, if $P_h$ is finitely generated for all $h$ (for instance if $A$ is right 
 We will call $\Ext_A^h(M,N)_j$ the \defn{graded Ext-groups} and $\Ext_A^h(M,N)$ the \defn{ungraded Ext-groups}.
 \end{remark}
 
-\begin{theorem}\label{thm:ext-minimal}
+By the same reason in the ungraded setting, graded Ext-groups are always well-defined independent on the choice of graded projective resolution of $M$.
+
+\begin{proposition}\label{prop:ext-minimal}
 Let $P_\bullet\to M$ be a minimal graded projective resolution and $N$ a graded right $A$-module with $NA_+=0$.
 Then every differential of $\Hom_A^\Z(P_\bullet,N(j))$ is zero, and for all $h\geq0$ and $j\in\Z$,
 \[
 \Ext_A^h(M,N)_j\cong\Hom_A^{\Z}(P_h,N(j))\cong\Hom_S^\Z\bigl(\grtop P_h,N(j)\bigr).
 \]
 In particular, if $N$ is a right $S$-module placed in degree $0$, then $\Ext_A^h(M,N)_j\cong\Hom_S\bigl((\grtop P_h)_{-j},N\bigr)$.
-\end{theorem}
+\end{proposition}
 
 \begin{proof}
 Let $\varphi:P_h\to N(j)$ be $A$-linear and degree-preserving.
@@ -111,7 +119,7 @@ where $D_y:=\End_(L_y)$.
 Note that $\Ext_A^h(M,L_y)_j$ is really just a Hom-space, and so is a 
 
 \begin{proof}
-By Theorem~\ref{thm:ext-minimal} with $N=L_y$, we get that $\Ext_A^h(M,L_y)_j\cong\Hom_S\bigl((\grtop P_h)_{-j},L_y\bigr)$, which is a natural $D_y$-vector space (action given by postcomposition).
+By Proposition~\ref{prop:ext-minimal} with $N=L_y$, we get that $\Ext_A^h(M,L_y)_j\cong\Hom_S\bigl((\grtop P_h)_{-j},L_y\bigr)$, which is a natural $D_y$-vector space (action given by postcomposition).
 Then just apply Schur's Lemma since $S$ is semisimple.
 \end{proof}
 
@@ -233,7 +241,7 @@ Then $\Ext_A^h(M,S)_j\cong D\bigl((\grtop P_h)_{-j}\bigr)$ for all $h\geq0$ and 
 
 \begin{proof}
 The dual basis $(e_x^*)_x$ of $D(S)$ satisfies $e_x^*e_y=\delta_{xy}e_x^*$, and both $\bbD(S)$ and $S$ are killed by $A_+$, so $\bbD(S)\cong S$ as graded right $A$-modules.
-Now apply Propositions~\ref{prop:tor-top} and~\ref{prop:ext-tor-duality} with $N=S$; the result agrees with Theorem~\ref{thm:ext-minimal}.
+Now apply Propositions~\ref{prop:tor-top} and~\ref{prop:ext-tor-duality} with $N=S$; the result agrees with Proposition~\ref{prop:ext-minimal}.
 \end{proof}
 
 So $\Ext_A^\bullet(M,S)_\bullet$ and $\Tor^A_\bullet(M,S)_\bullet$ carry the same information, and we work with $\Ext$.
@@ -271,7 +279,7 @@ In particular, in the quadratic case, $\Tor_h^A(S,S)_i=0$ for $i\neq h$ and $h\l
 
 \begin{supplementary}
 \begin{proof}
-By Theorem~\ref{thm:ext-minimal}, $\Ext_A^h(S,S)_j\cong\Hom_S\bigl((\grtop P_h)_{-j},S\bigr)$, which is non-zero if and only if $(\grtop P_h)_{-j}\neq0$, since every simple $S$-module is a direct summand of $S$.
+By Proposition~\ref{prop:ext-minimal}, $\Ext_A^h(S,S)_j\cong\Hom_S\bigl((\grtop P_h)_{-j},S\bigr)$, which is non-zero if and only if $(\grtop P_h)_{-j}\neq0$, since every simple $S$-module is a direct summand of $S$.
 So $\Ext_A^h(S,S)_j=0$ for all $j\neq-h$ if and only if $\grtop P_h$ is concentrated in degree $h$; this is how the statements about $\Ext$ below follow from those about $\grtop P_h$.
 
 (1) The module $A$ is projective and $\Ker p_0=A_+=AA_+$, so $\Ker p_0\subseteq P_0A_+$ and $p_0$ is the first step of a minimal resolution.
@@ -378,7 +386,7 @@ Find a minimal graded resolution of $M$, and compute $\Tor_h^A(M,\Bbbk)_i$ and $
 Multiplication by $x^m$ is injective on $A$, so $0\to A(-m)\xrightarrow{x^m}A\to M\to0$ is a graded projective resolution, and it is minimal since $x^m\in A_+$ for $m\geq1$.
 So $\grtop P_0=\Bbbk$ in degree $0$ and $\grtop P_1=\Bbbk$ in degree $m$, and $\grtop P_h=0$ for $h\geq2$.
 By Proposition~\ref{prop:tor-top}, $\Tor_h^A(M,\Bbbk)_i\cong(\grtop P_h)_i$, which is $\Bbbk$ for $(h,i)=(0,0)$ and $(1,m)$, and $0$ otherwise.
-By Theorem~\ref{thm:ext-minimal}, $\Ext_A^h(M,\Bbbk)_j\cong\Hom_\Bbbk((\grtop P_h)_{-j},\Bbbk)$ is $\Bbbk$ for $(h,j)=(0,0)$ and $(1,-m)$, and $0$ otherwise.
+By Proposition~\ref{prop:ext-minimal}, $\Ext_A^h(M,\Bbbk)_j\cong\Hom_\Bbbk((\grtop P_h)_{-j},\Bbbk)$ is $\Bbbk$ for $(h,j)=(0,0)$ and $(1,-m)$, and $0$ otherwise.
 \end{hidden}
 
 
