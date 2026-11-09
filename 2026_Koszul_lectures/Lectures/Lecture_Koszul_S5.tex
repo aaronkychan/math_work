@@ -26,77 +26,11 @@ For right $A$-modules $M,N$ and a projective resolution $P_\bullet\to M$, put
 \]
 \end{definition}
 
-This depends only on $M$ and $N$ up to canonical isomorphism, by Proposition~\ref{prop:ext-well-defined} below, which we deduce from the following comparison lemma.
-The lemma compares a projective resolution of $M$ with an arbitrary resolution of $M'$, which is more than we need now but costs nothing.
-
-\begin{lemma}[Comparison lemma]\label{lem:comparison}
-Let $P_\bullet\to M$ be a projective resolution with differentials $d_h$ and augmentation $p_0$.
-Let $\cdots\to Q_1\xrightarrow{d'_1}Q_0\xrightarrow{q_0}M'\to0$ be an exact sequence of $A$-modules, and let $f:M\to M'$ be $A$-linear.
-\begin{enumerate}
-\item There are $A$-linear maps $f_h:P_h\to Q_h$ for $h\geq0$ making the following diagram commute:
-\[
-\xymatrix@C=26pt@R=26pt{
-\cdots\ar[r]&P_2\ar[r]^{d_2}\ar@{-->}[d]^{f_2}&P_1\ar[r]^{d_1}\ar@{-->}[d]^{f_1}&P_0\ar[r]^{p_0}\ar@{-->}[d]^{f_0}&M\ar[r]\ar[d]^{f}&0\\
-\cdots\ar[r]&Q_2\ar[r]_{d'_2}&Q_1\ar[r]_{d'_1}&Q_0\ar[r]_{q_0}&M'\ar[r]&0
-}
-\]
-\item If $(f'_h)_{h\geq0}$ is another such family, there are $A$-linear maps $s_h:P_h\to Q_{h+1}$ for $h\geq0$ (the diagonal arrows below) with $f_h-f'_h=d'_{h+1}s_h+s_{h-1}d_h$ for all $h\geq0$, where $s_{-1}:=0$:
-\[
-\xymatrix@C=34pt@R=34pt{
-\cdots\ar[r]&P_2\ar[r]^{d_2}\ar[d]|{f_2-f'_2}&P_1\ar[r]^{d_1}\ar[d]|{f_1-f'_1}\ar[dl]_{s_1}&P_0\ar[d]|{f_0-f'_0}\ar[dl]_{s_0}\\
-\cdots\ar[r]&Q_2\ar[r]_{d'_2}&Q_1\ar[r]_{d'_1}&Q_0
-}
-\]
-\end{enumerate}
-\end{lemma}
-
-We say that $(f_h)_{h\geq0}$ \defn{lifts} $f$, and that two lifts are \defn{homotopic} when maps $s_h$ as in (2) exist.
-For $M=M'$, $Q_\bullet=P_\bullet$ and $f=\id_M$ this recovers the map of resolutions in Theorem~\ref{thm:minimal-resolution}.
-
-\begin{supplementary}
-\begin{proof}
-(1) Since $P_0$ is projective and $q_0$ is surjective, there is $f_0$ with $q_0f_0=fp_0$.
-Suppose $f_0,\ldots,f_{h-1}$ are constructed, $h\geq1$, and consider $f_{h-1}d_h:P_h\to Q_{h-1}$.
-For $h=1$, we have $q_0f_0d_1=fp_0d_1=0$, so $f_0d_1$ has image in $\Ker q_0=\Im d'_1$.
-For $h\geq2$, $d'_{h-1}f_{h-1}d_h=f_{h-2}d_{h-1}d_h=0$, so $f_{h-1}d_h$ has image in $\Ker d'_{h-1}=\Im d'_h$.
-Since $P_h$ is projective and $d'_h:Q_h\to\Im d'_h$ is surjective, there is $f_h:P_h\to Q_h$ with $d'_hf_h=f_{h-1}d_h$.
-
-(2) Put $g_h=f_h-f'_h$, so $q_0g_0=0$ and $d'_hg_h=g_{h-1}d_h$ for $h\geq1$.
-The image of $g_0$ lies in $\Ker q_0=\Im d'_1$, so projectivity of $P_0$ gives $s_0$ with $d'_1s_0=g_0$.
-Let $h\geq1$ and suppose $s_0,\ldots,s_{h-1}$ are constructed.
-Then
-\[
-d'_h(g_h-s_{h-1}d_h)=g_{h-1}d_h-(g_{h-1}-s_{h-2}d_{h-1})d_h=0,
-\]
-where $s_{-1}:=0$ and $d_{h-1}d_h=0$.
-Thus $g_h-s_{h-1}d_h$ has image in $\Ker d'_h=\Im d'_{h+1}$, and projectivity of $P_h$ gives $s_h$ with $d'_{h+1}s_h=g_h-s_{h-1}d_h$.
-\end{proof}
-\end{supplementary}
-
-\begin{proposition}\label{prop:ext-well-defined}
-Let $P_\bullet\to M$ and $Q_\bullet\to M'$ be projective resolutions, $f:M\to M'$ be $A$-linear, $(f_h)$ a lift of $f$, and $N$ a module.
-\begin{enumerate}
-\item The map $[\varphi]\mapsto[\varphi f_h]$ is a well-defined linear map $f^*:H^h(\Hom_A(Q_\bullet,N))\to H^h(\Hom_A(P_\bullet,N))$ that does not depend on the choice of lift.
-\item If $g:M'\to M''$ is $A$-linear and $R_\bullet\to M''$ is a projective resolution, then $(gf)^*=f^*g^*$; also $(\id_M)^*=\id$.
-\end{enumerate}
-In particular, up to canonical isomorphism $\Ext_A^h(M,N)$ does not depend on the projective resolution of $M$.
-It is contravariant in $M$ through $f^*$.
-It is covariant in $N$: an $A$-linear map $\psi:N\to N'$ gives $\psi_*[\varphi]=[\psi\varphi]$.
-\end{proposition}
-
-\begin{proof}
-(1) Let $\varphi:Q_h\to N$ be a cocycle, so $\varphi d'_{h+1}=0$.
-Then $\varphi f_hd_{h+1}=\varphi d'_{h+1}f_{h+1}=0$, so $\varphi f_h$ is a cocycle.
-If $\varphi=\psi d'_h$ is a coboundary, then $\varphi f_h=\psi f_{h-1}d_h$ is a coboundary.
-For another lift $(f'_h)$ with homotopy $(s_h)$ as in Lemma~\ref{lem:comparison}(2),
-\[
-\varphi(f_h-f'_h)=\varphi d'_{h+1}s_h+\varphi s_{h-1}d_h=(\varphi s_{h-1})d_h,
-\]
-a coboundary; for $h=0$ the same computation gives $\varphi d'_1s_0=0$.
-(2) If $(f_h)$ lifts $f$ and $(g_h)$ lifts $g$, then $(g_hf_h)$ lifts $gf$, and $(\id_{P_h})$ lifts $\id_M$; use (1).
-For two resolutions $P_\bullet,P'_\bullet$ of $M$, the lifts of $\id_M$ in each direction give maps $\id^*$ that are inverse to each other by (2).
-Finally $\psi\varphi$ is a cocycle (coboundary) if $\varphi$ is, and $\psi_*$ is compatible with $f^*$.
-\end{proof}
+The groups $\Ext_A^h(M,N)$ do not depend on the chosen projective resolution $P_\bullet$, up to canonical isomorphism.
+The reason is that chain maps between complexes have a notion of homotopy, which is the algebraic analogue of deforming a continuous map between spaces.
+Just as deforming a continuous map does not change what it does on homology, homotopic chain maps induce the same map on (co)homology.
+Any two projective resolutions of $M$ can be compared by chain maps in both directions, and the two composites are homotopic to the identities; so the two resolutions are the same up to deformation, and compute the same $\Ext$.
+The precise statements and proofs are in Section~\ref{sec:yoneda} (Lemma~\ref{lem:comparison} and Proposition~\ref{prop:ext-well-defined}), where we need them for the Yoneda product; until then we take this independence for granted.
 
 \begin{proposition}\label{prop:ext-basic}
 For all modules $M,N$:
