@@ -116,21 +116,22 @@ Thus $\Ext$ extends $\Hom$ to higher degrees, and it vanishes for projective $M$
 
 \subsection{Graded Ext and minimal resolutions}\label{subsec:graded-ext}
 
-From now on $A$ is as in Subsection~\ref{subsec:graded-resolutions}: locally finite-dimensional non-negatively graded with $S=A_0$ finite-dimensional semisimple, and $S=A/A_+$ is regarded as a graded module in degree $0$.
-Write $S=\bigoplus_{y=1}^n\Bbbk e_y$ and $L_y=e_yS$ for the simple modules.
-Let $M$ be a bounded below locally finite-dimensional graded right module and $N$ a graded right module.
-Let $P_\bullet\to M$ be a graded projective resolution, for instance a minimal one by Theorem~\ref{thm:minimal-resolution}.
+From now on $A$ is a graded algebra as in Subsection~\ref{subsec:graded-resolutions}: locally finite-dimensional non-negatively graded with $S=A_0$ finite-dimensional semisimple.
+\old{Write $S=\bigoplus_{y=1}^n\Bbbk e_y$ and $L_y=e_yS$ for the simple modules.}
+\comm{any problem using non-elementary setting??? Redefine $L_y$ as list of simple $S$-modules up to isomorphism. check carefully throughout which result really need this simplification, and always add the explicit condition in the statement, then a remark about general case when simplification is needed.}
 
 \begin{definition}\label{def:graded-ext}
+Let $M$ be a bounded below locally finite-dimensional graded right module and $N$ a graded right module.
+Let $P_\bullet\to M$ be a graded projective resolution, for instance a minimal one by Theorem~\ref{thm:minimal-resolution}. \comm{remember: do not put condition outside of definition or any statement of claim; unless they are too long (like half-a-page)}
 For $h\geq0$ and $j\in\Z$, put
 \[
 \Ext_A^h(M,N)_j:=H^h\bigl(\Hom_A^{\Z}(P_\bullet,N(j))\bigr).
 \]
 \end{definition}
 
-Here $\Hom_A^\Z(P_h,N(j))$ is the space of homogeneous maps of degree $j$ (Notation~\ref{not:graded-hom}), and $\delta^h(\varphi)=\varphi\circ d_{h+1}$ as in \eqref{eq:hom-complex}.
-The proofs of Lemma~\ref{lem:comparison} and Proposition~\ref{prop:ext-well-defined} apply verbatim with degree-preserving maps, using that graded projective modules lift along degree-preserving surjections and that kernels of graded maps are graded.
-Hence $\Ext_A^h(M,N)_j$ is independent of $P_\bullet$ up to canonical isomorphism.
+$\Ext_A^h(M,N)_j$ is independent of $P_\bullet$ up to canonical isomorphism: 
+The proofs of Lemma~\ref{lem:comparison} and Proposition~\ref{prop:ext-well-defined} apply verbatim with degree-preserving maps and graded modules.
+
 The index $j$ is the \defn{internal degree} or \defn{Adams degree}; the index $h$ is the \defn{homological degree}.
 
 \begin{remark}\label{rem:graded-ext-ungraded}
@@ -141,6 +142,7 @@ If $P_h$ is finitely generated, then by Lemma \ref{lem:homogeneous-hom-sum} we h
 \Hom_A(P_h,N)=\bigoplus_{j\in\Z}\Hom_A^\Z\bigl(P_h,N(j)\bigr).
 \]
 Hence, if $P_h$ is finitely generated for all $h$ (for instance if $A$ is right noetherian and $M$ is finitely generated, by Corollary~\ref{cor:noetherian-minimal-resolution}), then the ordinary $\Ext_A^h(M,N)=\bigoplus_{j\in\Z}\Ext_A^h(M,N)_j$.
+We will call $\Ext_A^h(M,N)_j$ the \defn{graded Ext-groups} and $\Ext_A^h(M,N)$ the \defn{ungraded Ext-groups}.
 \end{remark}
 
 \begin{theorem}\label{thm:ext-minimal}
@@ -161,8 +163,7 @@ Hence all $\delta^h$ vanish and the cohomology equals the cochain groups.
 If $N$ lies in degree $0$, then $N(j)$ lies in degree $-j$, so a degree-preserving map from $\grtop P_h$ only involves $(\grtop P_h)_{-j}$.
 \end{proof}
 
-Thus the graded top of $P_h$ is computed by $\Ext$ with values in $S$-modules.
-For the simple modules the answer is a multiplicity.
+Thus $\grtop P_h$ can be computed by $\Ext$, and when specialising $N$ to a graded simple module, then we get its multiplicity in $\grtop P_h$ as follows:
 
 \begin{corollary}\label{cor:ext-simple}
 In the setting of Theorem~\ref{thm:ext-minimal}, for $1\leq y\leq n$,
@@ -180,29 +181,30 @@ For a right $S$-module $T$ we have $T\cong\bigoplus_x L_x^{\oplus[T:L_x]}$, and 
 Corollary~\ref{cor:ext-simple} used $S=\bigoplus_y\Bbbk e_y$.
 For an arbitrary finite-dimensional semisimple $S$, the space $\Hom_S(L_x,L_y)$ is $0$ for $x\neq y$ and the division algebra $\End_S(L_y)$ for $x=y$, so the formula holds with $\dim_\Bbbk$ replaced by the dimension over $\End_S(L_y)$.
 \end{remark}
-\end{advanced}
 
 The multiplicities $[(\grtop P_h)_i:L_y]$ are the graded Betti numbers $\beta_{h,i,y}(M)$ of Remark~\ref{not:graded-betti}.
 Since $S$ is semisimple, $\Hom_S(-,N)$ is exact, so the groups $\Ext_A^h(M,N)_j$ with $h\geq1$ record the resolution over $A$, not any further structure of $S$.
+\end{advanced}
 
 \begin{example}\label{ex:ext-A2}
 Let $A=\Bbbk A_2$.
-By Example~\ref{ex:minimal-A2}, the minimal resolution of $L_1$ is $0\to e_{22}A(-1)\to e_{11}A\to L_1\to0$, so $\grtop P_0=L_1$ in degree $0$ and $\grtop P_1=L_2$ in degree $1$.
+By Example~\ref{ex:minimal-A2}, the minimal resolution of $L_1$ is $0\to e_{22}A(-1)\to e_{11}A\to L_1\to0$.
 By Corollary~\ref{cor:ext-simple}, the only non-zero groups $\Ext_A^h(L_1,L_y)_j$ are
 \[
-\Ext_A^0(L_1,L_1)_0\cong\Bbbk,\qquad\Ext_A^1(L_1,L_2)_{-1}\cong\Bbbk.
+\Ext_A^0(L_1,L_1)_0\cong\Bbbk,\qquad\Ext_A^1(L_1,L_2)_{-1}\cong\Bbbk,
 \]
-The class in $\Ext_A^1(L_1,L_2)_{-1}$ reflects the exact sequence $0\to L_2\to e_{11}A\to L_1\to0$, which does not split since $e_{11}A$ is not semisimple.
-In general, $\Ext_A^1(M,N)$ classifies such extensions of $M$ by $N$; we do not use this.
+where the basis corresponds to the projections $e_{11}A\twoheadrightarrow L_1$ and $e_{22}A(-1)\twoheadrightarrow L_2$ respectively.
+\old{The class in $\Ext_A^1(L_1,L_2)_{-1}$ reflects the exact sequence $0\to L_2\to e_{11}A\to L_1\to0$, which does not split since $e_{11}A$ is not semisimple.
+In general, $\Ext_A^1(M,N)$ classifies such extensions of $M$ by $N$; we do not use this.}\comm{we do not use identification of Ext-group with ses, do not talk about these stuff.}
 \end{example}
 
 \begin{example}\label{ex:ext-polynomial-exterior}
-For $A=\Bbbk[x]$ with $\deg x=1$, Example~\ref{ex:minimal-polynomial} gives $\grtop P_0=\Bbbk$ in degree $0$ and $\grtop P_1=\Bbbk$ in degree $1$, so
+For $A=\Bbbk[x]$ with $\deg x=1$ and minimal graded free resolution of $A_0=\Bbbk$ as in Example~\ref{ex:minimal-polynomial}.  Then
 \[
 \Ext_A^0(\Bbbk,\Bbbk)_0\cong\Bbbk,\qquad\Ext_A^1(\Bbbk,\Bbbk)_{-1}\cong\Bbbk,
 \]
 and all other groups vanish.
-For $E=\Bbbk[\epsilon]/(\epsilon^2)$ with $\deg\epsilon=1$, Example~\ref{ex:minimal-exterior} gives $\grtop P_h=\Bbbk$ in degree $h$ for all $h\geq0$, so $\Ext_E^h(\Bbbk,\Bbbk)_j\cong\Bbbk$ if $j=-h$ and $0$ otherwise.
+Similarly, for $E=\Bbbk[\epsilon]/(\epsilon^2)$ with $\deg\epsilon=1$, Example~\ref{ex:minimal-exterior} implies that $\Ext_E^h(\Bbbk,\Bbbk)_j\cong\Bbbk$ if $j=-h$ and $0$ otherwise.
 \end{example}
 
 In all three examples the non-zero groups $\Ext_A^h(S,S)_j$ lie on the line $j=-h$, because the generators of $P_h$ have degree $h$; we return to this in Section~\ref{sec:koszul-complex}.
