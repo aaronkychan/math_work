@@ -43,39 +43,6 @@ Here $\grtop P_h$ lives in degree $h$ and $N(j')$ in degree $n-j'$, so this vani
 Thus a Koszul algebra is a positively graded algebra that is as close to semisimple as possible: Ext between pure modules is concentrated in one internal degree for each homological degree.
 Lemma~\ref{lem:resolution-degrees} shows that for an arbitrary $A$ the groups in (4) already vanish for $j>n-m-h$.
 
-\subsection{Koszul algebras are quadratic}
-
-The groups $\Ext_A^1(S,S)$ and $\Ext_A^2(S,S)$ detect generators and relations, by Proposition~\ref{prop:resolution-first-terms}.
-
-\begin{proposition}\label{prop:koszul-generation}
-\begin{enumerate}
-\item $A$ is generated in degree $1$ if and only if $\Ext_A^1(S,S)_j=0$ for $j\neq-1$.
-\item Suppose that $A$ is generated in degree $1$, and let $I=\Ker(T_S(A_1)\onto A)$.
-Then $A$ is quadratic if and only if $\Ext_A^2(S,S)_j=0$ for $j\neq-2$; in this case $A=T_S(A_1)/(I_2)$.
-\end{enumerate}
-\end{proposition}
-
-\begin{proof}
-(1) By Proposition~\ref{prop:resolution-first-terms}(2), $\grtop P_1\cong A_+/A_+^2$, so the vanishing says $A_i=(A_+^2)_i=\sum_{0<p<i}A_pA_{i-p}$ for $i\geq2$.
-By induction on $i$ this is equivalent to $A_i=A_1^i$, that is, to surjectivity of all $\mu_i$.
-
-(2) Put $V=A_1$.
-By Proposition~\ref{prop:resolution-first-terms}(3), the vanishing says $I_i=V\otimes_SI_{i-1}+I_{i-1}\otimes_SV$ for all $i\geq3$.
-By induction on $i$ this gives $I_i\subseteq(I_2)$, so $I=(I_2)$ and $A$ is quadratic.
-Conversely, if $A=T_S(V)/(R)$ then $I_2=R$, and Proposition~\ref{prop:resolution-first-terms}(3) shows that $\grtop P_2$ is concentrated in degree $2$.
-\end{proof}
-
-\begin{corollary}\label{cor:koszul-quadratic}
-Every Koszul algebra is quadratic: $A\cong T_S(A_1)/(R)$ with $R=I_2\subseteq A_1\otimes_SA_1$.
-\end{corollary}
-
-\begin{proof}
-By Proposition~\ref{prop:koszul-ext}(3), $\Ext_A^1(S,S)$ and $\Ext_A^2(S,S)$ lie on the diagonal.
-Apply Proposition~\ref{prop:koszul-generation}.
-\end{proof}
-
-The converse fails: not every quadratic algebra is Koszul (Exercise~\ref{ex:quadratic-non-koszul}), so Koszulness is a genuine condition on the $\Ext$ groups in homological degrees $\geq3$.
-
 \subsection{The opposite algebra}
 
 Everything above used right modules, while the definition of $\Tor$ treats both sides of $S$ symmetrically.

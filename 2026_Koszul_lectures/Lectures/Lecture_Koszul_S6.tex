@@ -2,23 +2,23 @@
 \clearpage
 \section{Koszul algebras and the Koszul complex}\label{sec:koszul-complex}
 
-Throughout, $A$ is a locally finite-dimensional non-negatively graded algebra with $S=A_0$ finite-dimensional semisimple, as in Subsection~\ref{subsec:graded-ext}.
+Let $A$ be a graded algebra (i.e. a lfd with $S=A_0$ finite-dimensional semisimple and $A_{<0}=0$).
 By Theorem~\ref{thm:minimal-resolution} the module $S=A/A_+$ has a minimal graded projective resolution $P_\bullet\to S$, unique up to isomorphism, and by Theorem~\ref{thm:ext-minimal} and Proposition~\ref{prop:tor-top} it records
 \[
 \Ext_A^h(S,S)_j\cong\Hom_S\bigl((\grtop P_h)_{-j},S\bigr),
 \qquad
 \Tor_h^A(S,S)_i\cong(\grtop P_h)_i.
 \]
-A Koszul algebra is one for which these groups sit as close to the diagonal as possible.
+A Koszul algebra is one for which these groups vanishes outside the diagonal $h=-j$ (equivalently $h=i$).
 
 \subsection{Koszul algebras}
+
 
 \begin{definition}\label{def:linear-resolution}
 A graded projective resolution $P_\bullet\to M$ with every $P_h$ bounded below and lfd is \defn{linear} if $P_h$ is generated in degree $h$, that is, $P_h=P_{h,h}A$, for every $h\geq0$.
 \end{definition}
 
 A linear resolution is automatically minimal: $P_{h-1,h}=P_{h-1,h-1}A_1\subseteq P_{h-1}A_+$, and $d_h$ maps $P_h=P_{h,h}A$ into $P_{h-1,h}A\subseteq P_{h-1}A_+$, so $P_\bullet$ is minimal \eqref{eq:graded-minimal-criterion}.
-Hence minimal resolutions are not needed to define Koszul algebras, only to compute with them.
 
 \begin{definition}\label{def:koszul-algebra}
 The algebra $A$ is \defn{Koszul} if the graded right module $S=A/A_+$ has a linear graded projective resolution.
@@ -26,10 +26,8 @@ The algebra $A$ is \defn{Koszul} if the graded right module $S=A/A_+$ has a line
 
 The generators in homological degree $h$ must then all have grading degree $h$.
 Since $S$ can have several simple modules, the definition requires a linear resolution of their direct sum, not just of one chosen simple module.
-We do not assume that $A$ is quadratic: this follows from the definition (Corollary~\ref{cor:koszul-quadratic}).
 
 \begin{example}\label{ex:koszul-nonconnected}
-The definition also applies when $S$ has several simple modules.
 For $A=\Bbbk A_2$, the resolution in Example~\ref{ex:minimal-A2} is linear for $L_1$, and $L_2=e_{22}A$ is projective in degree $0$.
 Taking their direct sum gives a linear resolution of $S=L_1\oplus L_2$; hence $\Bbbk A_2$ is Koszul.
 \end{example}
@@ -38,20 +36,40 @@ Taking their direct sum gives a linear resolution of $S=L_1\oplus L_2$; hence $\
 The exterior algebra $E=\Bbbk[\epsilon]/(\epsilon^2)$ is Koszul: Example~\ref{ex:minimal-exterior} gives a resolution of $\Bbbk$ with $P_h=E(-h)$, which is linear although infinite.
 \end{example}
 
-For every quadratic algebra there is a candidate resolution, the Koszul complex of Subsection~\ref{subsec:koszul-complex}; it is exact for the polynomial algebra.
 
-\begin{lemma}\label{lem:resolution-degrees}
-The terms of the minimal resolution of $S$ satisfy $P_{h,i}=0$ for $i<h$.
-Equivalently, $\Ext_A^h(S,S)_j=0$ for $j>-h$.
-\end{lemma}
+\subsection{Koszul algebras are quadratic}
+
+In Proposition~\ref{prop:resolution-first-terms}, we have seen that diagonality of $\Ext_A^1(S,S)$ and $\Ext_A^2(S,S)$ detect quadradicity.
+
+\begin{proposition}\label{prop:koszul-generation}
+\begin{enumerate}
+\item $A$ is generated in degree $1$ if and only if $\Ext_A^1(S,S)_j=0$ for $j\neq-1$.
+\item Suppose that $A$ is generated in degree $1$, and let $I=\Ker(T_S(A_1)\onto A)$.
+Then $A$ is quadratic if and only if $\Ext_A^2(S,S)_j=0$ for $j\neq-2$; in this case $A=T_S(A_1)/(I_2)$.
+\end{enumerate}
+\end{proposition}
 
 \begin{proof}
-For $h=0$, $P_0=A$.
-If $P_h$ lives in degrees $\geq h$, then $\Im d_{h+1}\subseteq P_hA_+$ lives in degrees $\geq h+1$.
-So does $\grtop P_{h+1}\cong\grtop\Im d_{h+1}$ (Corollary~\ref{cor:minimal-tops}), hence so does $P_{h+1}$ by \eqref{eq:graded-cover-terms}.
+(1) By Proposition~\ref{prop:resolution-first-terms}(2), $\grtop P_1\cong A_+/A_+^2$, so the vanishing says $A_i=(A_+^2)_i=\sum_{0<p<i}A_pA_{i-p}$ for $i\geq2$.
+By induction on $i$ this is equivalent to $A_i=A_1^i$, that is, to surjectivity of all $\mu_i$.
+
+(2) Put $V=A_1$.
+By Proposition~\ref{prop:resolution-first-terms}(3), the vanishing says $I_i=V\otimes_SI_{i-1}+I_{i-1}\otimes_SV$ for all $i\geq3$.
+By induction on $i$ this gives $I_i\subseteq(I_2)$, so $I=(I_2)$ and $A$ is quadratic.
+Conversely, if $A=T_S(V)/(R)$ then $I_2=R$, and Proposition~\ref{prop:resolution-first-terms}(3) shows that $\grtop P_2$ is concentrated in degree $2$.
 \end{proof}
 
-Thus $A$ is Koszul exactly when the minimal resolution has no generators in degrees $>h$ in homological degree $h$.
+\begin{corollary}\label{cor:koszul-quadratic}
+Every Koszul algebra is quadratic: $A\cong T_S(A_1)/(R)$ with $R=I_2\subseteq A_1\otimes_SA_1$.
+\end{corollary}
+
+\begin{proof}
+By Proposition~\ref{prop:koszul-ext}(3), $\Ext_A^1(S,S)$ and $\Ext_A^2(S,S)$ lie on the diagonal.
+Apply Proposition~\ref{prop:koszul-generation}.
+\end{proof}
+
+The converse fails: not every quadratic algebra is Koszul (Exercise~\ref{ex:quadratic-non-koszul}), so Koszulness is a genuine condition on the $\Ext$ groups in homological degrees $\geq3$.
+
 
 \subsection{The Koszul complex}\label{subsec:koszul-complex}
 
