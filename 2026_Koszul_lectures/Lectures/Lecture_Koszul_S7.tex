@@ -21,12 +21,12 @@ The following are equivalent.
 
 \begin{proof}
 Let $P_\bullet\to S$ be the minimal resolution.
-By Proposition~\ref{prop:tor-top}, $\Tor_h^A(S,S)\cong\grtop P_h$.
+By Proposition~\ref{prop:tor-top}, $\Tor_h^A(S,S)_j\cong(\grtop P_h)_j$.
 By Theorem~\ref{thm:ext-minimal}, $\Ext_A^h(S,S)_j\cong\Hom_S((\grtop P_h)_{-j},S)$, which is non-zero if and only if $(\grtop P_h)_{-j}\neq0$, since every simple $S$-module is a summand of $S$.
 So (2) and (3) both say that $\grtop P_h$ is concentrated in degree $h$.
 
 (1)$\Rightarrow$(2).
-A linear resolution is minimal, hence isomorphic to $P_\bullet$ by Theorem~\ref{thm:minimal-resolution}, and $\grtop P_h=(P_h)_h$.
+A linear resolution is minimal, hence isomorphic to $P_\bullet$ by Theorem~\ref{thm:minimal-resolution}, and $\grtop P_h=P_{h,h}$.
 
 (2)$\Rightarrow$(1).
 By \eqref{eq:graded-cover-terms}, $P_h\cong((\grtop P_h)_h\otimes_SA)(-h)$ is generated in degree $h$.
@@ -82,7 +82,7 @@ Everything above used right modules, while the definition of $\Tor$ treats both 
 
 \begin{lemma}\label{lem:tor-balanced}
 Let $M$ be a graded right and $N$ a graded left $A$-module, both bounded below and lfd, with graded projective resolutions $P_\bullet\to M$ and $Q_\bullet\to N$.
-Then $H_h(P_\bullet\otimes_AN)\cong H_h(M\otimes_AQ_\bullet)$ as graded spaces, for all $h\geq0$.
+Then $H_h\bigl((P_\bullet\otimes_AN)_i\bigr)\cong H_h\bigl((M\otimes_AQ_\bullet)_i\bigr)$ for all $h\geq0$ and $i\in\Z$; in particular the left side is $\Tor_h^A(M,N)_i$.
 \end{lemma}
 
 \begin{supplementary}
@@ -100,7 +100,7 @@ $A$ is Koszul if and only if the opposite algebra $A^{\mathrm{op}}$ is Koszul.
 \begin{proof}
 The algebra $A^{\mathrm{op}}$ satisfies the standing hypotheses with $(A^{\mathrm{op}})_0=S^{\mathrm{op}}$, and right $A^{\mathrm{op}}$-modules are left $A$-modules.
 By Proposition~\ref{prop:koszul-ext}(2), $A^{\mathrm{op}}$ is Koszul if and only if $\Tor_h^{A^{\mathrm{op}}}(S,S)_j=0$ for $j\neq h$.
-Computing with a projective resolution of the left module $S$, this is $H_h(S\otimes_AQ_\bullet)$, which is $\Tor_h^A(S,S)$ by Lemma~\ref{lem:tor-balanced}.
+Computing with a graded projective resolution $Q_\bullet$ of the left module $S$, this is $H_h((S\otimes_AQ_\bullet)_j)$, which is $\Tor_h^A(S,S)_j$ by Lemma~\ref{lem:tor-balanced}.
 So the condition is the same as in Proposition~\ref{prop:koszul-ext}(2) for $A$.
 \end{proof}
 
@@ -151,7 +151,7 @@ The remaining words of length $3$ contain $yx$ or are $xxy=-y^3=0$ and $xyy=-x^3
 So $A_3=0$, and $A_n=0$ for $n\geq3$ since $A$ is generated in degree $1$.
 Also $\dim A_1=2$ and $\dim A_2=4-\dim R=2$, so $h_A(t)=1+2t+2t^2$.
 
-(2) Taking the degree $i$ component of $\cdots\to P_1\to P_0\to\Bbbk\to0$ and the alternating sum of dimensions gives $\sum_h(-1)^h\dim(P_h)_i=\dim\Bbbk_i$.
+(2) Taking the degree $i$ component of $\cdots\to P_1\to P_0\to\Bbbk\to0$ and the alternating sum of dimensions gives $\sum_h(-1)^h\dim P_{h,i}=\dim\Bbbk_i$.
 In generating functions, $h_{P_h}(t)=b_ht^hh_A(t)$ and $h_\Bbbk(t)=1$, so $\bigl(\sum_h(-1)^hb_ht^h\bigr)h_A(t)=1$.
 
 (3) Put $u(t)=\sum_h(-1)^hb_ht^h=1/(1+2t+2t^2)$.

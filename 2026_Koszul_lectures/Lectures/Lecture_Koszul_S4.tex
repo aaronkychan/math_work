@@ -211,6 +211,16 @@ From now on $A=\bigoplus_{i\in\Z}A_i$ is locally finite-dimensional non-negative
 Since $A/A_+\cong S$, we regard $S$ as a graded right $A$-module in degree $0$.
 All maps are degree-preserving unless otherwise stated.
 
+\begin{notation}\label{not:bigrading}
+A complex $C_\bullet$ of graded modules, with degree-preserving differentials, has two gradings: the \defn{homological degree} $h$ of the term $C_h$, and the \defn{internal degree} $i$ (also called the \defn{Adams degree}) inside each $C_h$.
+We write
+\[
+C_{h,i}:=(C_h)_i
+\]
+for the degree $i$ part of the $h$th term.
+The differentials $d_h:C_{h,i}\to C_{h-1,i}$ preserve $i$, so $C_\bullet$ is a direct sum over $i\in\Z$ of complexes of vector spaces $C_{\bullet,i}$, and exactness is checked in each internal degree $i$ (Remark~\ref{rem:graded-exactness}).
+\end{notation}
+
 \begin{definition}\label{def:graded-projective}
 A \defn{graded free module} is a direct sum $\bigoplus_{\lambda\in I}A(-i_\lambda)$ for some set $I$ and $i_\lambda\in\Z$; the generator $1$ of $A(-i)$ has degree $i$.
 A graded module is \defn{graded projective} if it has the lifting property of Definition~\ref{def:projective-module} for degree-preserving maps.
@@ -442,7 +452,7 @@ Equivalently, the surjections $p_h:P_h\twoheadrightarrow\Im d_h$ (and $p_0:P_0\t
 \]
 \end{definition}
 
-Homological degree $h$ and grading degree $i$ are distinct: $d_h:(P_h)_i\to(P_{h-1})_i$, and exactness is checked in each grading degree as in Remark~\ref{rem:graded-exactness}.
+Homological degree $h$ and internal degree $i$ are distinct (Notation~\ref{not:bigrading}): $d_h:P_{h,i}\to P_{h-1,i}$, and exactness is checked in each internal degree.
 
 \begin{corollary}\label{cor:minimal-tops}
 Let $P_\bullet\twoheadrightarrow M$ be a minimal graded projective resolution.
@@ -513,7 +523,7 @@ For representatives $L_1,\ldots,L_n$ of the simple right $S$-modules, one can wr
 \qquad
 \beta_{h,i}(M):=(\beta_{h,i,y}(M))_{1\leq y\leq n}.
 \]
-Here $h\geq0$ is the homological degree and $i\in\Z$ is the grading degree.
+Here $h\geq0$ is the homological degree and $i\in\Z$ is the internal degree.
 These multiplicities are independent of the chosen minimal resolution by Theorem~\ref{thm:minimal-resolution}.
 We will use the modules $\grtop P_h$ directly, without this additional indexing.
 \end{remark}
@@ -590,7 +600,7 @@ Thus $s$ is surjective, and injective since $fs=\id$, so $f=s^{-1}$ is an isomor
 \underline{Existence.}
 Lemma~\ref{lem:graded-projective-terms}(1) gives $p_0:P_0\to M$ with $P_0=\bigoplus_i((\grtop M)_i\otimes_SA)(-i)$ and $\Ker p_0\subseteq P_0A_+$.
 $P_0$ is graded projective by Corollary~\ref{cor:graded-projective-characterisations}.
-If $M_i=0$ for $i<b$, then $(P_0)_j=\bigoplus_{b\leq i\leq j}(\grtop M)_i\otimes_SA_{j-i}$ is finite-dimensional, so $P_0$ is bounded below and lfd.
+If $M_i=0$ for $i<b$, then $P_{0,j}=\bigoplus_{b\leq i\leq j}(\grtop M)_i\otimes_SA_{j-i}$ is finite-dimensional, so $P_0$ is bounded below and lfd.
 Hence $\Ker p_0\subseteq P_0$ is again bounded below and lfd, and we repeat with $\Ker p_0$ in place of $M$: this gives a surjection $p_1:P_1\twoheadrightarrow\Ker p_0$ with $\Ker p_1\subseteq P_1A_+$, and we let $d_1$ be $p_1$ followed by the inclusion $\Ker p_0\subseteq P_0$.
 Inductively, $p_h:P_h\twoheadrightarrow\Ker d_{h-1}$ with $\Ker p_h\subseteq P_hA_+$, and $d_h$ is $p_h$ followed by the inclusion $\Ker d_{h-1}\subseteq P_{h-1}$ (where $d_0:=p_0$):
 \[

@@ -7,17 +7,17 @@ By Theorem~\ref{thm:minimal-resolution} the module $S=A/A_+$ has a minimal grade
 \[
 \Ext_A^h(S,S)_j\cong\Hom_S\bigl((\grtop P_h)_{-j},S\bigr),
 \qquad
-\Tor_h^A(S,S)\cong\grtop P_h.
+\Tor_h^A(S,S)_i\cong(\grtop P_h)_i.
 \]
 A Koszul algebra is one for which these groups sit as close to the diagonal as possible.
 
 \subsection{Koszul algebras}
 
 \begin{definition}\label{def:linear-resolution}
-A graded projective resolution $P_\bullet\to M$ with every $P_h$ bounded below and lfd is \defn{linear} if $P_h$ is generated in degree $h$, that is, $P_h=(P_h)_hA$, for every $h\geq0$.
+A graded projective resolution $P_\bullet\to M$ with every $P_h$ bounded below and lfd is \defn{linear} if $P_h$ is generated in degree $h$, that is, $P_h=P_{h,h}A$, for every $h\geq0$.
 \end{definition}
 
-A linear resolution is automatically minimal: $(P_{h-1})_h=(P_{h-1})_{h-1}A_1\subseteq P_{h-1}A_+$, and $d_h$ maps $P_h=(P_h)_hA$ into $(P_{h-1})_hA\subseteq P_{h-1}A_+$, so $P_\bullet$ is minimal \eqref{eq:graded-minimal-criterion}.
+A linear resolution is automatically minimal: $P_{h-1,h}=P_{h-1,h-1}A_1\subseteq P_{h-1}A_+$, and $d_h$ maps $P_h=P_{h,h}A$ into $P_{h-1,h}A\subseteq P_{h-1}A_+$, so $P_\bullet$ is minimal \eqref{eq:graded-minimal-criterion}.
 Hence minimal resolutions are not needed to define Koszul algebras, only to compute with them.
 
 \begin{definition}\label{def:koszul-algebra}
@@ -41,7 +41,7 @@ The exterior algebra $E=\Bbbk[\epsilon]/(\epsilon^2)$ is Koszul: Example~\ref{ex
 For every quadratic algebra there is a candidate resolution, the Koszul complex of Subsection~\ref{subsec:koszul-complex}; it is exact for the polynomial algebra.
 
 \begin{lemma}\label{lem:resolution-degrees}
-The terms of the minimal resolution of $S$ satisfy $(P_h)_i=0$ for $i<h$.
+The terms of the minimal resolution of $S$ satisfy $P_{h,i}=0$ for $i<h$.
 Equivalently, $\Ext_A^h(S,S)_j=0$ for $j>-h$.
 \end{lemma}
 
@@ -107,7 +107,7 @@ They satisfy $d_{h-1}d_h=0$: for $h\geq2$, $\mathcal K_h\subseteq\mathcal K_{h-2
 Each $K_h$ is projective, being a direct summand of a free module ($\mathcal K_h$ is a projective $S$-module).
 
 \begin{theorem}\label{thm:koszul-complex-diagonal}
-Let $P_\bullet\to S$ be the minimal graded projective resolution of the quadratic algebra $A$, and put $T_h:=(P_h)_h$.
+Let $P_\bullet\to S$ be the minimal graded projective resolution of the quadratic algebra $A$, and put $T_h:=P_{h,h}$.
 Then $P^\Delta_h:=T_hA\subseteq P_h$ is a subcomplex of $P_\bullet$, and $P^\Delta_\bullet\cong K_\bullet$ as complexes augmented over $S$.
 In particular $T_h\cong\mathcal K_h$ for all $h$.
 \end{theorem}
@@ -244,7 +244,7 @@ This proves exactness of the displayed sequence.
 For every finite-dimensional vector space $V$, the symmetric algebra $\SymAlg(V)$ is Koszul, and $K_\bullet$ is its minimal resolution of $\Bbbk$.
 \end{corollary}
 
-Proposition~\ref{prop:tor-top} gives $\Tor_h^A(\Bbbk,\Bbbk)\cong\grtop K_h=\bigwedge^hV$, so $\Ext_A^h(\Bbbk,\Bbbk)_{-h}\cong D(\bigwedge^hV)\cong\bigwedge^hD(V)$, the degree $h$ part of $\SymAlg(V)^!\cong\bigwedge D(V)$.
+Proposition~\ref{prop:tor-top} gives $\Tor_h^A(\Bbbk,\Bbbk)_h\cong(\grtop K_h)_h=\bigwedge^hV$, so $\Ext_A^h(\Bbbk,\Bbbk)_{-h}\cong D(\bigwedge^hV)\cong\bigwedge^hD(V)$, the degree $h$ part of $\SymAlg(V)^!\cong\bigwedge D(V)$.
 
 \subsection{Exercises}
 
@@ -261,7 +261,7 @@ and deduce the Hilbert series of $\Bbbk[x_1,\ldots,x_n]$.
 \begin{hidden}
 \emph{Solution.}
 By Proposition~\ref{prop:koszul-complex-resolution}, $K_h=\bigwedge^hV\otimes_\Bbbk A(-h)$ has Hilbert series $\binom nh t^hh_A(t)$.
-Exactness of $0\to K_n\to\cdots\to K_0\to\Bbbk\to0$ in each degree $i$ gives $\sum_h(-1)^h\dim(K_h)_i=\dim\Bbbk_i$, that is,
+Exactness of $0\to K_n\to\cdots\to K_0\to\Bbbk\to0$ in each degree $i$ gives $\sum_h(-1)^h\dim K_{h,i}=\dim\Bbbk_i$, that is,
 \[
 \sum_{h=0}^n(-1)^h\binom nht^h\,h_A(t)=(1-t)^nh_A(t)=1.
 \]
