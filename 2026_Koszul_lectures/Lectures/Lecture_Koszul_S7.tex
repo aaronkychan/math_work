@@ -13,7 +13,6 @@ Such a module satisfies $MA_+=0$, so it is a right $S$-module, hence semisimple.
 The following are equivalent.
 \begin{enumerate}
 \item $A$ is Koszul.
-\item $\Tor_h^A(S,S)_j=0$ for all $j\neq h$.
 \item $\Ext_A^h(S,S)_j=0$ for all $j\neq-h$.
 \item For all pure lfd modules $M,N$ of degrees $m,n$, we have $\Ext_A^h(M,N)_j=0$ unless $j=n-m-h$.
 \end{enumerate}
@@ -21,9 +20,8 @@ The following are equivalent.
 
 \begin{proof}
 Let $P_\bullet\to S$ be the minimal resolution.
-By Proposition~\ref{prop:tor-top}, $\Tor_h^A(S,S)_j\cong(\grtop P_h)_j$.
-By Theorem~\ref{thm:ext-minimal}, $\Ext_A^h(S,S)_j\cong\Hom_S((\grtop P_h)_{-j},S)$, which is non-zero if and only if $(\grtop P_h)_{-j}\neq0$, since every simple $S$-module is a summand of $S$.
-So (2) and (3) both say that $\grtop P_h$ is concentrated in degree $h$.
+By Proposition~\ref{prop:ext-minimal}, $\Ext_A^h(S,S)_j\cong\Hom_S((\grtop P_h)_{-j},S)$, which is non-zero if and only if $(\grtop P_h)_{-j}\neq0$, since every simple $S$-module is a summand of $S$.
+So (2) says that $\grtop P_h$ is concentrated in degree $h$.
 
 (1)$\Rightarrow$(2).
 A linear resolution is minimal, hence isomorphic to $P_\bullet$ by Theorem~\ref{thm:minimal-resolution}, and $\grtop P_h=P_{h,h}$.
@@ -31,47 +29,48 @@ A linear resolution is minimal, hence isomorphic to $P_\bullet$ by Theorem~\ref{
 (2)$\Rightarrow$(1).
 By \eqref{eq:graded-cover-terms}, $P_h\cong((\grtop P_h)_h\otimes_SA)(-h)$ is generated in degree $h$.
 
-(1)$\Rightarrow$(4).
+(1)$\Rightarrow$(3).
 Since $M$ is pure and lfd, $M$ is a finite direct sum of modules $L_y(-m)$, each a summand of $S(-m)$, and $\Ext$ is additive in $M$.
 Shifting $P_\bullet$ gives $\Ext_A^h(S(-m),N)_j=\Ext_A^h(S,N)_{j+m}$.
-As $NA_+=0$, Theorem~\ref{thm:ext-minimal} gives $\Ext_A^h(S,N)_{j'}\cong\Hom_S^\Z(\grtop P_h,N(j'))$.
+As $NA_+=0$, Proposition~\ref{prop:ext-minimal} gives $\Ext_A^h(S,N)_{j'}\cong\Hom_S^\Z(\grtop P_h,N(j'))$.
 Here $\grtop P_h$ lives in degree $h$ and $N(j')$ in degree $n-j'$, so this vanishes unless $j'=n-h$, that is, $j=n-m-h$.
 
-(4)$\Rightarrow$(3) is the case $M=N=S$.
+(3)$\Rightarrow$(2) is the case $M=N=S$.
 \end{proof}
 
 Thus a Koszul algebra is a positively graded algebra that is as close to semisimple as possible: Ext between pure modules is concentrated in one internal degree for each homological degree.
-Lemma~\ref{lem:resolution-degrees} shows that for an arbitrary $A$ the groups in (4) already vanish for $j>n-m-h$.
+Lemma~\ref{lem:resolution-degrees} shows that for an arbitrary $A$ the groups in (3) already vanish for $j>n-m-h$.
 
+\begin{advanced}[suppressfirstparskip=true,innertopmargin=0pt]
 \subsection{The opposite algebra}
 
-Everything above used right modules, while the definition of $\Tor$ treats both sides of $S$ symmetrically.
+Everything above used right modules.
+The Tor-groups of Section~\ref{sec:ext-tor} treat both sides of $S$ symmetrically, which gives the following.
 
 \begin{lemma}\label{lem:tor-balanced}
 Let $M$ be a graded right and $N$ a graded left $A$-module, both bounded below and lfd, with graded projective resolutions $P_\bullet\to M$ and $Q_\bullet\to N$.
 Then $H_h\bigl((P_\bullet\otimes_AN)_i\bigr)\cong H_h\bigl((M\otimes_AQ_\bullet)_i\bigr)$ for all $h\geq0$ and $i\in\Z$; in particular the left side is $\Tor_h^A(M,N)_i$.
 \end{lemma}
 
-\begin{supplementary}
 \begin{proof}
 Let $C$ be the total complex of the double complex $P_p\otimes_AQ_q$.
 Projective modules are flat, so each column $P_p\otimes_AQ_\bullet\to P_p\otimes_AN$ and each row $P_\bullet\otimes_AQ_q\to M\otimes_AQ_q$ is exact.
 By the acyclic assembly lemma, the augmentations $C\to P_\bullet\otimes_AN$ and $C\to M\otimes_AQ_\bullet$ are quasi-isomorphisms; they preserve the grading.
 \end{proof}
-\end{supplementary}
 
 \begin{proposition}\label{prop:opposite-koszul}
 $A$ is Koszul if and only if the opposite algebra $A^{\mathrm{op}}$ is Koszul.
 \end{proposition}
 
 \begin{proof}
+By Proposition~\ref{prop:tor-top}, $\Tor_h^A(S,S)_j\cong(\grtop P_h)_j$, so as in the proof of Proposition~\ref{prop:koszul-ext}, $A$ is Koszul if and only if $\Tor_h^A(S,S)_j=0$ for all $j\neq h$.
 The algebra $A^{\mathrm{op}}$ satisfies the standing hypotheses with $(A^{\mathrm{op}})_0=S^{\mathrm{op}}$, and right $A^{\mathrm{op}}$-modules are left $A$-modules.
-By Proposition~\ref{prop:koszul-ext}(2), $A^{\mathrm{op}}$ is Koszul if and only if $\Tor_h^{A^{\mathrm{op}}}(S,S)_j=0$ for $j\neq h$.
+So $A^{\mathrm{op}}$ is Koszul if and only if $\Tor_h^{A^{\mathrm{op}}}(S,S)_j=0$ for $j\neq h$.
 Computing with a graded projective resolution $Q_\bullet$ of the left module $S$, this is $H_h((S\otimes_AQ_\bullet)_j)$, which is $\Tor_h^A(S,S)_j$ by Lemma~\ref{lem:tor-balanced}.
-So the condition is the same as in Proposition~\ref{prop:koszul-ext}(2) for $A$.
 \end{proof}
 
 Consequently the linear resolution of the right module $S$ exists if and only if one exists for the left module $S$, so ``right Koszul'' and ``left Koszul'' agree.
+\end{advanced}
 
 \subsection{Exercises}
 

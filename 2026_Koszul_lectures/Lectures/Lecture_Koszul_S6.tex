@@ -3,13 +3,11 @@
 \section{Koszul algebras and the Koszul complex}\label{sec:koszul-complex}
 
 Let $A$ be a graded algebra (i.e. a lfd with $S=A_0$ finite-dimensional semisimple and $A_{<0}=0$).
-By Theorem~\ref{thm:minimal-resolution} the module $S=A/A_+$ has a minimal graded projective resolution $P_\bullet\to S$, unique up to isomorphism, and by Theorem~\ref{thm:ext-minimal} and Proposition~\ref{prop:tor-top} it records
+By Theorem~\ref{thm:minimal-resolution} the module $S=A/A_+$ has a minimal graded projective resolution $P_\bullet\to S$, unique up to isomorphism, and by Proposition~\ref{prop:ext-minimal} it records
 \[
-\Ext_A^h(S,S)_j\cong\Hom_S\bigl((\grtop P_h)_{-j},S\bigr),
-\qquad
-\Tor_h^A(S,S)_i\cong(\grtop P_h)_i.
+\Ext_A^h(S,S)_j\cong\Hom_S\bigl((\grtop P_h)_{-j},S\bigr).
 \]
-A Koszul algebra is one for which these groups vanishes outside the diagonal $h=-j$ (equivalently $h=i$).
+A Koszul algebra is one for which these groups vanish outside the diagonal $j=-h$.
 
 \subsection{Koszul algebras}
 
@@ -251,7 +249,7 @@ This proves exactness of the displayed sequence.
 For every finite-dimensional vector space $V$, the symmetric algebra $\SymAlg(V)$ is Koszul, and $K_\bullet$ is its minimal resolution of $\Bbbk$.
 \end{corollary}
 
-Proposition~\ref{prop:tor-top} gives $\Tor_h^A(\Bbbk,\Bbbk)_h\cong(\grtop K_h)_h=\bigwedge^hV$, so $\Ext_A^h(\Bbbk,\Bbbk)_{-h}\cong D(\bigwedge^hV)\cong\bigwedge^hD(V)$, the degree $h$ part of $\SymAlg(V)^!\cong\bigwedge D(V)$.
+Here $\grtop K_h=\bigwedge^hV$ in degree $h$, so Proposition~\ref{prop:ext-minimal} gives $\Ext_A^h(\Bbbk,\Bbbk)_{-h}\cong D(\bigwedge^hV)\cong\bigwedge^hD(V)$, the degree $h$ part of $\SymAlg(V)^!\cong\bigwedge D(V)$.
 
 \subsection{Exercises}
 
