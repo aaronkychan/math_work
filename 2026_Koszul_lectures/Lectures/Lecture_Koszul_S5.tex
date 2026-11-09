@@ -117,20 +117,19 @@ Thus $\Ext$ extends $\Hom$ to higher degrees, and it vanishes for projective $M$
 \subsection{Graded Ext and minimal resolutions}\label{subsec:graded-ext}
 
 From now on $A$ is a graded algebra as in Subsection~\ref{subsec:graded-resolutions}: locally finite-dimensional non-negatively graded with $S=A_0$ finite-dimensional semisimple.
-\old{Write $S=\bigoplus_{y=1}^n\Bbbk e_y$ and $L_y=e_yS$ for the simple modules.}
-\comm{any problem using non-elementary setting??? Redefine $L_y$ as list of simple $S$-modules up to isomorphism. check carefully throughout which result really need this simplification, and always add the explicit condition in the statement, then a remark about general case when simplification is needed.}
+Unless a statement says otherwise, we make no further assumption on $S$; the statements that need more carry their hypothesis explicitly.
+Let $L_1,\ldots,L_n$ be representatives of the isomorphism classes of simple right $S$-modules, regarded as graded $A$-modules in degree $0$ via $A\to S$.
 
 \begin{definition}\label{def:graded-ext}
 Let $M$ be a bounded below locally finite-dimensional graded right module and $N$ a graded right module.
-Let $P_\bullet\to M$ be a graded projective resolution, for instance a minimal one by Theorem~\ref{thm:minimal-resolution}. \comm{remember: do not put condition outside of definition or any statement of claim; unless they are too long (like half-a-page)}
+Let $P_\bullet\to M$ be a graded projective resolution, for instance a minimal one by Theorem~\ref{thm:minimal-resolution}.
 For $h\geq0$ and $j\in\Z$, put
 \[
 \Ext_A^h(M,N)_j:=H^h\bigl(\Hom_A^{\Z}(P_\bullet,N(j))\bigr).
 \]
 \end{definition}
 
-$\Ext_A^h(M,N)_j$ is independent of $P_\bullet$ up to canonical isomorphism: 
-The proofs of Lemma~\ref{lem:comparison} and Proposition~\ref{prop:ext-well-defined} apply verbatim with degree-preserving maps and graded modules.
+$\Ext_A^h(M,N)_j$ is independent of $P_\bullet$ up to canonical isomorphism, because the proofs of Lemma~\ref{lem:comparison} and Proposition~\ref{prop:ext-well-defined} apply verbatim with degree-preserving maps and graded modules.
 
 The index $j$ is the \defn{internal degree} or \defn{Adams degree}; the index $h$ is the \defn{homological degree}.
 
@@ -166,20 +165,22 @@ If $N$ lies in degree $0$, then $N(j)$ lies in degree $-j$, so a degree-preservi
 Thus $\grtop P_h$ can be computed by $\Ext$, and when specialising $N$ to a graded simple module, then we get its multiplicity in $\grtop P_h$ as follows:
 
 \begin{corollary}\label{cor:ext-simple}
-In the setting of Theorem~\ref{thm:ext-minimal}, for $1\leq y\leq n$,
+Let $P_\bullet\to M$ be a minimal graded projective resolution, and assume $\End_S(L_y)=\Bbbk$ for all $y$ (this holds if $S=\bigoplus_y\Bbbk e_y$, or if $\Bbbk$ is algebraically closed).
+Then for $1\leq y\leq n$, $h\geq0$ and $j\in\Z$,
 \[
 \dim_\Bbbk\Ext_A^h(M,L_y)_j=\bigl[(\grtop P_h)_{-j}:L_y\bigr].
 \]
 \end{corollary}
 
 \begin{proof}
-For a right $S$-module $T$ we have $T\cong\bigoplus_x L_x^{\oplus[T:L_x]}$, and $\Hom_S(L_x,L_y)$ is $\Bbbk$ for $x=y$ and $0$ otherwise.
+By Theorem~\ref{thm:ext-minimal} with $N=L_y$, $\Ext_A^h(M,L_y)_j\cong\Hom_S\bigl((\grtop P_h)_{-j},L_y\bigr)$.
+A right $S$-module $T$ satisfies $T\cong\bigoplus_xL_x^{\oplus[T:L_x]}$, and $\Hom_S(L_x,L_y)$ is $0$ for $x\neq y$ by Schur's lemma and $\End_S(L_y)=\Bbbk$ for $x=y$.
 \end{proof}
 
 \begin{advanced}
 \begin{remark}[General $S$]\label{rem:ext-general-S}
-Corollary~\ref{cor:ext-simple} used $S=\bigoplus_y\Bbbk e_y$.
-For an arbitrary finite-dimensional semisimple $S$, the space $\Hom_S(L_x,L_y)$ is $0$ for $x\neq y$ and the division algebra $\End_S(L_y)$ for $x=y$, so the formula holds with $\dim_\Bbbk$ replaced by the dimension over $\End_S(L_y)$.
+Corollary~\ref{cor:ext-simple} needs $\End_S(L_y)=\Bbbk$.
+For an arbitrary finite-dimensional semisimple $S$, the space $\Hom_S(L_x,L_y)$ is $0$ for $x\neq y$ and the division algebra $D_y:=\End_S(L_y)$ for $x=y$, so $\Ext_A^h(M,L_y)_j$ is a $D_y$-vector space (acting by postcomposition) with $\dim_{D_y}\Ext_A^h(M,L_y)_j=\bigl[(\grtop P_h)_{-j}:L_y\bigr]$.
 \end{remark}
 
 The multiplicities $[(\grtop P_h)_i:L_y]$ are the graded Betti numbers $\beta_{h,i,y}(M)$ of Remark~\ref{not:graded-betti}.
@@ -189,13 +190,11 @@ Since $S$ is semisimple, $\Hom_S(-,N)$ is exact, so the groups $\Ext_A^h(M,N)_j$
 \begin{example}\label{ex:ext-A2}
 Let $A=\Bbbk A_2$.
 By Example~\ref{ex:minimal-A2}, the minimal resolution of $L_1$ is $0\to e_{22}A(-1)\to e_{11}A\to L_1\to0$.
-By Corollary~\ref{cor:ext-simple}, the only non-zero groups $\Ext_A^h(L_1,L_y)_j$ are
+Here $S=\Bbbk e_{11}\oplus\Bbbk e_{22}$, so Corollary~\ref{cor:ext-simple} applies, and the only non-zero groups $\Ext_A^h(L_1,L_y)_j$ are
 \[
 \Ext_A^0(L_1,L_1)_0\cong\Bbbk,\qquad\Ext_A^1(L_1,L_2)_{-1}\cong\Bbbk,
 \]
 where the basis corresponds to the projections $e_{11}A\twoheadrightarrow L_1$ and $e_{22}A(-1)\twoheadrightarrow L_2$ respectively.
-\old{The class in $\Ext_A^1(L_1,L_2)_{-1}$ reflects the exact sequence $0\to L_2\to e_{11}A\to L_1\to0$, which does not split since $e_{11}A$ is not semisimple.
-In general, $\Ext_A^1(M,N)$ classifies such extensions of $M$ by $N$; we do not use this.}\comm{we do not use identification of Ext-group with ses, do not talk about these stuff.}
 \end{example}
 
 \begin{example}\label{ex:ext-polynomial-exterior}
@@ -211,11 +210,12 @@ In all three examples the non-zero groups $\Ext_A^h(S,S)_j$ lie on the line $j=-
 
 \subsection{Tor}
 
-Let $M$ be a right $A$-module with a projective resolution $P_\bullet\to M$, and $N$ a left $A$-module.
-The maps $d_h\otimes\id_N$ make $P_\bullet\otimes_AN$ a chain complex of vector spaces (Definition~\ref{def:chain-complex}).
-
 \begin{definition}\label{def:tor}
-$\Tor_h^A(M,N):=H_h(P_\bullet\otimes_AN)$ for all $h\geq0$.
+Let $M$ be a right $A$-module with a projective resolution $P_\bullet\to M$, and let $N$ be a left $A$-module.
+The maps $d_h\otimes\id_N$ make $P_\bullet\otimes_AN$ a chain complex of vector spaces (Definition~\ref{def:chain-complex}), and
+\[
+\Tor_h^A(M,N):=H_h(P_\bullet\otimes_AN)\qquad\text{for all }h\geq0.
+\]
 \end{definition}
 
 As for $\Ext$, this is independent of $P_\bullet$ up to canonical isomorphism and functorial in $M$ and $N$, with $\Tor_0^A(M,N)=M\otimes_AN$; for graded $M,N$ and a graded projective resolution it is graded.
@@ -243,7 +243,8 @@ It is zero because $\Im d_h\subseteq P_{h-1}A_+$.
 For a graded left $A$-module $N$, the graded linear dual $\bbD(N)$ is a right $A$-module via $(fa)(n)=f(an)$, and $\bbD(N)_i=D(N_{-i})$.
 
 \begin{proposition}\label{prop:ext-tor-duality}
-For graded $M,N$ as above, with $N$ a graded left $A$-module, and all $h\geq0$ and $j\in\Z$,
+Let $M$ be a bounded below locally finite-dimensional graded right $A$-module and $N$ a graded left $A$-module.
+Then for all $h\geq0$ and $j\in\Z$,
 \[
 \Ext_A^h\bigl(M,\bbD(N)\bigr)_j\cong D\bigl(\Tor_h^A(M,N)_{-j}\bigr).
 \]
@@ -258,17 +259,21 @@ Since $D$ is exact, it commutes with taking (co)homology.
 \end{proof}
 \end{supplementary}
 
-For $N=S$ we have $\bbD(S)\cong S$ as graded right $A$-modules, since the dual basis $(e_x^*)_x$ of $D(S)$ satisfies $e_x^*e_y=\delta_{xy}e_x^*$ and both modules are killed by $A_+$.
-Hence, for every bounded below locally finite-dimensional $M$,
-\[
-\Ext_A^h(M,S)_j\cong D\bigl((\grtop P_h)_{-j}\bigr),
-\]
-by Propositions~\ref{prop:tor-top} and~\ref{prop:ext-tor-duality}; this agrees with Theorem~\ref{thm:ext-minimal}.
+\begin{corollary}\label{cor:ext-S-dual}
+Assume $S=\bigoplus_x\Bbbk e_x$ (Assumption~\ref{ass:basic-semisimple}), and let $P_\bullet\to M$ be a minimal graded projective resolution of a bounded below locally finite-dimensional graded right $A$-module $M$.
+Then $\Ext_A^h(M,S)_j\cong D\bigl((\grtop P_h)_{-j}\bigr)$ for all $h\geq0$ and $j\in\Z$.
+\end{corollary}
+
+\begin{proof}
+The dual basis $(e_x^*)_x$ of $D(S)$ satisfies $e_x^*e_y=\delta_{xy}e_x^*$, and both $\bbD(S)$ and $S$ are killed by $A_+$, so $\bbD(S)\cong S$ as graded right $A$-modules.
+Now apply Propositions~\ref{prop:tor-top} and~\ref{prop:ext-tor-duality} with $N=S$; the result agrees with Theorem~\ref{thm:ext-minimal}.
+\end{proof}
+
 So $\Ext_A^\bullet(M,S)$ and $\Tor_\bullet^A(M,S)$ carry the same information, and we work with $\Ext$.
 
 \begin{advanced}
 \begin{remark}[General $S$]\label{rem:tor-general-S}
-The identification $\bbD(S)\cong S$ above uses $S=\bigoplus_x\Bbbk e_x$.
+The identification $\bbD(S)\cong S$ in Corollary~\ref{cor:ext-S-dual} uses $S=\bigoplus_x\Bbbk e_x$.
 For arbitrary semisimple $S$, the module $\bbD(S)$ is isomorphic to $S$ only after choosing a symmetrising form; without it one can use $\Ext_A^h(M,\bbD(S))$ in place of $\Ext_A^h(M,S)$ throughout.
 \end{remark}
 \end{advanced}
@@ -276,14 +281,14 @@ For arbitrary semisimple $S$, the module $\bbD(S)$ is isomorphic to $S$ only aft
 \subsection{The beginning of the resolution of $S$}
 
 We determine the first terms of the minimal resolution of $S$ for algebras generated in degree 1 and for quadratic algebras.
-Here $A$ is as in Subsection~\ref{subsec:graded-ext}, and generation in degree $1$ over $S$ is as in \eqref{eq:multiplication-maps}.
+
 
 \begin{proposition}\label{prop:resolution-first-terms}
-Let $P_\bullet\to S$ be the minimal graded projective resolution of $S=A/A_+$.
+Let $A$ be as in Subsection~\ref{subsec:graded-ext} and let $P_\bullet\to S$ be the minimal graded projective resolution of $S=A/A_+$.
 \begin{enumerate}
 \item $P_0=A$, with $p_0:A\to S$ the projection.
 \item $\grtop P_1\cong A_+/A_+^2$.
-If $A$ is generated in degree $1$, then $\grtop P_1\cong A_1$, concentrated in degree $1$, and $P_1\cong(A_1\otimes_SA)(-1)$ with $d_1(v\otimes a)=va$.
+If $A$ is generated in degree $1$ over $S$ (see \eqref{eq:multiplication-maps}), then $\grtop P_1\cong A_1$, concentrated in degree $1$, and $P_1\cong(A_1\otimes_SA)(-1)$ with $d_1(v\otimes a)=va$.
 \item If $A$ is generated in degree $1$, put $V=A_1$ and let $I=\Ker(T_S(V)\onto A)$ as in Corollary~\ref{cor:tensor-presentation}.
 Then
 \[
@@ -321,7 +326,7 @@ The last sentence follows from Proposition~\ref{prop:tor-top}.
 \end{proof}
 \end{supplementary}
 
-Dually, by Theorem~\ref{thm:ext-minimal} the space $\Ext_A^h(S,S)_{-h}$ has dimension $\dim_\Bbbk\grtop P_h$, which is $n$, $\dim_\Bbbk A_1$, $\dim_\Bbbk R$ for $h=0,1,2$ when $A$ is quadratic.
+Dually, if $S=\bigoplus_x\Bbbk e_x$ (Assumption~\ref{ass:basic-semisimple}), then by Theorem~\ref{thm:ext-minimal} the space $\Ext_A^h(S,S)_{-h}$ has dimension $\dim_\Bbbk\grtop P_h$, which is $n$, $\dim_\Bbbk A_1$, $\dim_\Bbbk R$ for $h=0,1,2$ when $A$ is quadratic.
 These are the dimensions of $A^!_0=S$, $A^!_1=D(A_1)$ and $A^!_2\cong D(R)$ from Section~\ref{sec:quadratic-dual}, so $\Ext_A^\bullet(S,S)$ and $A^!$ already agree in dimension up to degree $2$; making this precise requires a product on $\Ext$.
 
 \subsection{Exercises}
@@ -383,7 +388,7 @@ So the minimal resolution is
 0\to e_{33}A(-2)\to e_{22}A(-1)\to e_{11}A\to L_1\to0,
 \]
 with $\grtop P_h=L_{h+1}$ in degree $h$ for $h=0,1,2$.
-By Corollary~\ref{cor:ext-simple}, $\dim\Ext_A^h(L_1,L_y)_j=[(\grtop P_h)_{-j}:L_y]$ equals $1$ for $(h,y,j)=(0,1,0),(1,2,-1),(2,3,-2)$ and $0$ otherwise.
+Here $S=\Bbbk^3$, so by Corollary~\ref{cor:ext-simple}, $\dim\Ext_A^h(L_1,L_y)_j=[(\grtop P_h)_{-j}:L_y]$ equals $1$ for $(h,y,j)=(0,1,0),(1,2,-1),(2,3,-2)$ and $0$ otherwise.
 \end{hidden}
 
 
