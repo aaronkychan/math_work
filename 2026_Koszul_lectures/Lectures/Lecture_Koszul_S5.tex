@@ -17,7 +17,7 @@ Postcomposition with the differentials gives the \underline{cochain} complex $\H
 \qquad\delta^h(\varphi)=\varphi\circ d_{h+1}.
 \end{equation}
 Indeed $\delta^{h+1}\delta^h(\varphi)=\varphi\, d_{h+1}d_{h+2}=0$.
-The module $M$ does not appear in this complex.
+
 
 \begin{definition}\label{def:ext}
 For right $A$-modules $M,N$ and a projective resolution $P_\bullet\to M$, put
@@ -26,6 +26,7 @@ For right $A$-modules $M,N$ and a projective resolution $P_\bullet\to M$, put
 \]
 \end{definition}
 
+\comm{well-definedness is Prop \ref{prop:ext-well-defined}, not comparison lemma??}
 This depends only on $M$ and $N$, as the next lemma shows.
 It compares a projective resolution of $M$ with an arbitrary resolution of $M'$, which is more than we need now but costs nothing.
 
@@ -136,7 +137,7 @@ The index $j$ is the \defn{internal degree} or \defn{Adams degree}; the index $h
 \begin{remark}\label{rem:graded-ext-ungraded}
 A graded projective module is projective as an ungraded module, because it is a graded direct summand of a graded free module (Corollary~\ref{cor:graded-projective-characterisations}).
 So $P_\bullet\to M$ is also an ordinary projective resolution.
-Each $\Hom_A^\Z(P_h,N(j))$ is contained in $\Hom_A(P_h,N)$, and if $P_h$ is finitely generated, then
+If $P_h$ is finitely generated, then by Lemma \ref{lem:homogeneous-hom-sum} we have
 \[
 \Hom_A(P_h,N)=\bigoplus_{j\in\Z}\Hom_A^\Z\bigl(P_h,N(j)\bigr).
 \]
