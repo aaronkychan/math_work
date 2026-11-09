@@ -1,11 +1,11 @@
 % !TEX root = Lecture_Koszul.tex
 \clearpage
-\section{Ext-groups and minimal resolutions}\label{sec:ext-tor}
+\section{Ext-groups}\label{sec:ext-tor}
 
 The contravariant functor $\Hom_A(-,N)$ is left exact (Lemma~\ref{lem:Hom-contravariant-left-exact}) but in general not exact (Example~\ref{ex:Hom-contravariant-not-exact}).
 The group $\Ext_A^h(M,N)$ measure this failure at homological degree $h$; it is computed by taking homology on the complex  $\Hom_A(P_\bullet,N)$ for a projective resolution $P_\bullet$ of $M$.
 
-\subsection{Ext-groups via projective resolutions}
+\subsection{Ungraded Ext-groups via projective resolutions}
 
 All modules in this subsection are right $A$-modules over an arbitrary algebra $A$, except where a left module is specified.
 
@@ -54,7 +54,7 @@ It shows that $-\circ p_0:\Hom_A(M,N)\to\Hom_A(P_0,N)$ is injective with image $
 Thus $\Ext$ extends $\Hom$ to higher degrees, and it vanishes for projective $M$ as one expects from Proposition~\ref{prop:projective-characterisations}.
 
 
-\subsection{Graded Ext and minimal resolutions}\label{subsec:graded-ext}
+\subsection{Graded Ext}\label{subsec:graded-ext}
 
 From now on $A$ is a graded algebra as in Subsection~\ref{subsec:graded-resolutions}: locally finite-dimensional non-negatively graded with $S=A_0$ finite-dimensional semisimple.
 Unless a statement says otherwise, we make no further assumption on $S$.
@@ -72,7 +72,7 @@ For $h\geq0$ and $j\in\Z$, put
 
 $\Ext_A^h(M,N)_j$ is independent of $P_\bullet$ up to canonical isomorphism, because the proofs of Lemma~\ref{lem:comparison} and Proposition~\ref{prop:ext-well-defined} apply verbatim with degree-preserving maps and graded modules.
 
-The index $j$ is the internal degree and $h$ is the homological degree, as in Notation~\ref{not:bigrading}.
+The index $j$ is the Adams degree and $h$ is the homological degree, as in Notation~\ref{not:bigrading}.
 
 \begin{remark}\label{rem:graded-ext-ungraded}
 A graded projective module is projective as an ungraded module, because it is a graded direct summand of a graded free module (Corollary~\ref{cor:graded-projective-characterisations}).
@@ -115,7 +115,6 @@ Then for $h\geq0$ and $j\in\Z$,
 \]
 where $D_y:=\End_(L_y)$.
 \end{corollary}
-Note that $\Ext_A^h(M,L_y)_j$ is really just a Hom-space, and so is a 
 
 \begin{proof}
 By Proposition~\ref{prop:ext-minimal} with $N=L_y$, we get that $\Ext_A^h(M,L_y)_j\cong\Hom_S\bigl((\grtop P_h)_{-j},L_y\bigr)$, which is a natural $D_y$-vector space (action given by postcomposition).
@@ -187,7 +186,7 @@ Then $P_\bullet\otimes_AN$ is a chain complex of graded vector spaces for the to
 \]
 \end{definition}
 
-The index $i$ is the internal degree, and $h$ is the homological degree, so $\Tor_h^A(M,N)_i$ is the homology of $(P_\bullet\otimes_AN)_{\bullet,i}$ in homological degree $h$.
+The index $i$ is the Adams degree, and $h$ is the homological degree, so $\Tor_h^A(M,N)_i$ is the homology of $(P_\bullet\otimes_AN)_{\bullet,i}$ in homological degree $h$.
 The groups $\Tor_h^A(M,N)_i$ are independent of $P_\bullet$ up to canonical isomorphism, by the same proofs with degree-preserving maps.
 
 \begin{remark}\label{rem:graded-tor-ungraded}
@@ -247,7 +246,7 @@ For arbitrary semisimple $S$, the module $\bbD(S)$ is isomorphic to $S$ only aft
 \end{remark}
 \end{advanced}
 
-\subsection{The beginning of the resolution of $S$}
+\subsection{Detecting quadraticity via graded Ext-groups}
 
 We determine the first terms of the minimal resolution of $S$ for algebras generated in degree 1 and for quadratic algebras.
 
@@ -270,7 +269,6 @@ Conversely, if $A$ is generated in degree $1$ and $\Ext_A^2(S,S)_j=0$ for all $j
 \end{enumerate}
 \end{proposition}
 
-\begin{supplementary}
 \begin{proof}
 By Proposition~\ref{prop:ext-minimal}, $\Ext_A^h(S,S)_j\cong\Hom_S\bigl((\grtop P_h)_{-j},S\bigr)$, which is non-zero if and only if $(\grtop P_h)_{-j}\neq0$, since every simple $S$-module is a direct summand of $S$.
 So $\Ext_A^h(S,S)_j=0$ for all $j\neq-h$ if and only if $\grtop P_h$ is concentrated in degree $h$; this is how the statements about $\Ext$ below follow from those about $\grtop P_h$.
@@ -303,7 +301,6 @@ Conversely, suppose $A$ is generated in degree $1$ and $\grtop P_2$ is concentra
 By the formula for $(\grtop P_2)_i$, we have $I_i=V\otimes_SI_{i-1}+I_{i-1}\otimes_SV$ for all $i\geq3$.
 By induction on $i$ this gives $I_i\subseteq(I_2)$, so $I=(I_2)$ and $A=T_S(V)/(I_2)$ is quadratic.
 \end{proof}
-\end{supplementary}
 
 \subsection{Exercises}
 

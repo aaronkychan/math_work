@@ -22,13 +22,13 @@ A linear resolution is automatically minimal: $P_{h-1,h}=P_{h-1,h-1}A_1\subseteq
 The algebra $A$ is \defn{Koszul} if the graded right module $S=A/A_+$ has a linear graded projective resolution.
 \end{definition}
 
-The generators in homological degree $h$ must then all have grading degree $h$.
+The generators in homological degree $h$ must then all have Adams degree $h$.
 Since $S$ can have several simple modules, the definition requires a linear resolution of their direct sum, not just of one chosen simple module.
 
 Koszul algebras are quadratic.
 
 \begin{corollary}\label{cor:koszul-quadratic}
-Every Koszul algebra is quadratic: $A\cong T_S(A_1)/(R)$ with $R=I_2\subseteq A_1\otimes_SA_1$, where $I=\Ker(T_S(A_1)\onto A)$.
+Every Koszul algebra is quadratic: $A\cong T_S(A_1)/(\Ker(\mu_2:A_1\otimes_SA_1\onto A_2))$.
 \end{corollary}
 
 \begin{proof}
@@ -37,6 +37,7 @@ Since $P_h=P_{h,h}A$, we have $P_{h,i}=0$ for $i<h$, and $P_{h,i}=P_{h,h}A_{i-h}
 So $\grtop P_h$ is concentrated in degree $h$.
 For $h=1$, Proposition~\ref{prop:resolution-first-terms}(2) shows that $A$ is generated in degree $1$; for $h=2$, Proposition~\ref{prop:resolution-first-terms}(3) shows that $A$ is quadratic.
 \end{proof}
+The converse fails: not every quadratic algebra is Koszul (Exercise~\ref{ex:quadratic-non-koszul}), so Koszulness is a genuine condition on the $\Ext$ groups in homological degrees $\geq3$.
 
 
 \begin{example}\label{ex:koszul-nonconnected}
@@ -49,14 +50,12 @@ The exterior algebra $E=\Bbbk[\epsilon]/(\epsilon^2)$ is Koszul: Example~\ref{ex
 \end{example}
 
 
-The converse fails: not every quadratic algebra is Koszul (Exercise~\ref{ex:quadratic-non-koszul}), so Koszulness is a genuine condition on the $\Ext$ groups in homological degrees $\geq3$.
 
 
 \subsection{The Koszul complex}\label{subsec:koszul-complex}
 
 Let $A=T_S(V)/(R)$ be a quadratic algebra with $V=A_1$ and $R\subseteq V\otimes_SV$.
-(Koszul algebras are quadratic by Corollary~\ref{cor:koszul-quadratic}.)
-For a Koszul algebra, Proposition~\ref{prop:resolution-first-terms} shows that the minimal resolution of $S$ begins
+For a Koszul algebra, which is quadratic (by Corollary~\ref{cor:koszul-quadratic}),  Proposition~\ref{prop:resolution-first-terms} shows that the minimal resolution of $S$ begins
 \[
 \cdots\to R\otimes_SA(-2)\to V\otimes_SA(-1)\to A\to S\to0,
 \]
