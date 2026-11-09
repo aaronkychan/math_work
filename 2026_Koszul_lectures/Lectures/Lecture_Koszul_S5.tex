@@ -117,8 +117,9 @@ Thus $\Ext$ extends $\Hom$ to higher degrees, and it vanishes for projective $M$
 \subsection{Graded Ext and minimal resolutions}\label{subsec:graded-ext}
 
 From now on $A$ is a graded algebra as in Subsection~\ref{subsec:graded-resolutions}: locally finite-dimensional non-negatively graded with $S=A_0$ finite-dimensional semisimple.
-Unless a statement says otherwise, we make no further assumption on $S$; the statements that need more carry their hypothesis explicitly.
-Let $L_1,\ldots,L_n$ be representatives of the isomorphism classes of simple right $S$-modules, regarded as graded $A$-modules in degree $0$ via $A\to S$.
+Unless a statement says otherwise, we make no further assumption on $S$.
+
+Let $L_1,\ldots,L_n$ be representatives of the isomorphism classes of simple right $S$-modules, regarded as graded $A$-modules in degree $0$ via $A\twoheadrightarrow A_0=S$.
 
 \begin{definition}\label{def:graded-ext}
 Let $M$ be a bounded below locally finite-dimensional graded right module and $N$ a graded right module.
@@ -162,29 +163,25 @@ Hence all $\delta^h$ vanish and the cohomology equals the cochain groups.
 If $N$ lies in degree $0$, then $N(j)$ lies in degree $-j$, so a degree-preserving map from $\grtop P_h$ only involves $(\grtop P_h)_{-j}$.
 \end{proof}
 
-Thus $\grtop P_h$ can be computed by $\Ext$, and when specialising $N$ to a graded simple module, then we get its multiplicity in $\grtop P_h$ as follows:
+Thus $\grtop P_h$ can be computed by graded Ext-groups, and when specialising $N$ to a graded simple module, then we get its multiplicity in $\grtop P_h$ as follows:
 
 \begin{corollary}\label{cor:ext-simple}
-Let $P_\bullet\to M$ be a minimal graded projective resolution, and assume $\End_S(L_y)=\Bbbk$ for all $y$ (this holds if $S=\bigoplus_y\Bbbk e_y$, or if $\Bbbk$ is algebraically closed).
-Then for $1\leq y\leq n$, $h\geq0$ and $j\in\Z$,
+Let $P_\bullet\to M$ be a minimal graded projective resolution.
+Then for $h\geq0$ and $j\in\Z$,
 \[
-\dim_\Bbbk\Ext_A^h(M,L_y)_j=\bigl[(\grtop P_h)_{-j}:L_y\bigr].
+\dim_{D_y}\Ext_A^h(M,L_y)_j=\bigl[(\grtop P_h)_{-j}:L_y\bigr],
 \]
+where $D_y:=\End_(L_y)$.
 \end{corollary}
+Note that $\Ext_A^h(M,L_y)_j$ is really just a Hom-space, and so is a 
 
 \begin{proof}
-By Theorem~\ref{thm:ext-minimal} with $N=L_y$, $\Ext_A^h(M,L_y)_j\cong\Hom_S\bigl((\grtop P_h)_{-j},L_y\bigr)$.
-A right $S$-module $T$ satisfies $T\cong\bigoplus_xL_x^{\oplus[T:L_x]}$, and $\Hom_S(L_x,L_y)$ is $0$ for $x\neq y$ by Schur's lemma and $\End_S(L_y)=\Bbbk$ for $x=y$.
+By Theorem~\ref{thm:ext-minimal} with $N=L_y$, we get that $\Ext_A^h(M,L_y)_j\cong\Hom_S\bigl((\grtop P_h)_{-j},L_y\bigr)$, which is a natural $D_y$-vector space (action given by postcomposition).
+Then just apply Schur's Lemma since $S$ is semisimple.
 \end{proof}
 
 \begin{advanced}
-\begin{remark}[General $S$]\label{rem:ext-general-S}
-Corollary~\ref{cor:ext-simple} needs $\End_S(L_y)=\Bbbk$.
-For an arbitrary finite-dimensional semisimple $S$, the space $\Hom_S(L_x,L_y)$ is $0$ for $x\neq y$ and the division algebra $D_y:=\End_S(L_y)$ for $x=y$, so $\Ext_A^h(M,L_y)_j$ is a $D_y$-vector space (acting by postcomposition) with $\dim_{D_y}\Ext_A^h(M,L_y)_j=\bigl[(\grtop P_h)_{-j}:L_y\bigr]$.
-\end{remark}
-
 The multiplicities $[(\grtop P_h)_i:L_y]$ are the graded Betti numbers $\beta_{h,i,y}(M)$ of Remark~\ref{not:graded-betti}.
-Since $S$ is semisimple, $\Hom_S(-,N)$ is exact, so the groups $\Ext_A^h(M,N)_j$ with $h\geq1$ record the resolution over $A$, not any further structure of $S$.
 \end{advanced}
 
 \begin{example}\label{ex:ext-A2}
@@ -243,7 +240,7 @@ It is zero because $\Im d_h\subseteq P_{h-1}A_+$.
 For a graded left $A$-module $N$, the graded linear dual $\bbD(N)$ is a right $A$-module via $(fa)(n)=f(an)$, and $\bbD(N)_i=D(N_{-i})$.
 
 \begin{proposition}\label{prop:ext-tor-duality}
-Let $M$ be a bounded below locally finite-dimensional graded right $A$-module and $N$ a graded left $A$-module.
+Let $M$ be a bounded below lfd graded right $A$-module and $N$ a graded left $A$-module.
 Then for all $h\geq0$ and $j\in\Z$,
 \[
 \Ext_A^h\bigl(M,\bbD(N)\bigr)_j\cong D\bigl(\Tor_h^A(M,N)_{-j}\bigr).
@@ -260,7 +257,7 @@ Since $D$ is exact, it commutes with taking (co)homology.
 \end{supplementary}
 
 \begin{corollary}\label{cor:ext-S-dual}
-Assume $S=\bigoplus_x\Bbbk e_x$ (Assumption~\ref{ass:basic-semisimple}), and let $P_\bullet\to M$ be a minimal graded projective resolution of a bounded below locally finite-dimensional graded right $A$-module $M$.
+Assume $S=\bigoplus_x\Bbbk e_x$ (Assumption~\ref{ass:basic-semisimple}), and let $M$ be  a bounded below lfd graded right $A$-module.
 Then $\Ext_A^h(M,S)_j\cong D\bigl((\grtop P_h)_{-j}\bigr)$ for all $h\geq0$ and $j\in\Z$.
 \end{corollary}
 
