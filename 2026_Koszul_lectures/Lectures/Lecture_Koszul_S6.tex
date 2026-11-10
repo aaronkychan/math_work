@@ -92,73 +92,73 @@ Since $N=N_{n}$, $N(j+m)$ is concentrated in $n-j-m$.  Hence, comparing the degr
 \end{proof}
 
 
-\subsection{The opposite algebra}\label{subsec:opposite}
+\subsection{Koszulity of the opposite ring}\label{subsec:opposite}
 
-Everything above used right modules, and Koszulity was defined through the right module $S=A/A_+$.
-Left modules are handled by passing to the opposite algebra: by Notation~\ref{not:opposite-algebra}, a left $A$-module is the same thing as a right module over $A^{\mathrm{op}}$, and $A^{\mathrm{op}}$ is again a graded algebra with $(A^{\mathrm{op}})_i=A_i$.
-Its degree $0$ part is $(A^{\mathrm{op}})_0=S^{\mathrm{op}}$, so the results above apply to $A^{\mathrm{op}}$.
-We write $S^{\mathrm{op}}$ for the left $A$-module $S=A/A_+$, regarded as a right $A^{\mathrm{op}}$-module; it is $A^{\mathrm{op}}/A^{\mathrm{op}}_+$.
-Thus $A^{\mathrm{op}}$ is Koszul if $S^{\mathrm{op}}$ has a linear graded projective resolution by right $A^{\mathrm{op}}$-modules, that is, by graded projective left $A$-modules.
-We show that this is equivalent to $A$ being Koszul, using linear duality to pass between right and left modules.
+Strictly speaking, we have only defined \emph{right} Koszul algebra, since the definition uses the right $A$-module $S$.
+In this subsection, we show that being right Koszul and being left Koszul are equivalent conditions.
+The trick is nothing but to utilises the fact that linear duality allows us to switch side.
 
-Recall from \eqref{eq:linear-dual-actions} that the graded linear dual $\bbD(P)$ of a graded right $A$-module $P$ is a graded left $A$-module by $(af)(p)=f(pa)$, that is, a graded right $A^{\mathrm{op}}$-module.
+In the following, for clarity, we write $S^{\op}$ for the left $A$-module $S=A/A_+$, regarded as a right $A^{\op}$-module.
+Recall from \eqref{eq:linear-dual-actions} that the graded linear dual $\bbD(P)$ of a graded right $A$-module $P$ is a graded left $A$-module by $(af)(p)=f(pa)$, that is, a graded right $A^{\op}$-module.
 Linear duality is exact \eqref{eq:linear-dual-functors}, and by Lemma~\ref{lem:linear-bidual}(2) it is a duality
 \[
-\bbD:(\grmod A)^{\mathrm{op}}\xrightarrow{\sim}\grmod(A^{\mathrm{op}})
+\bbD:(\grmod A)^{\op}\xrightarrow{\sim}\grmod(A^{\op})
 \]
 between locally finite-dimensional graded right $A$-modules and locally finite-dimensional graded left $A$-modules.
-In particular, $\bbD$ takes projective objects to injective objects.
 
-\begin{lemma}\label{lem:ext-duality}
+\begin{lemma}\label{lem:ext-LR-symmetry}
 Let $M$ and $N$ be finite-dimensional graded right $A$-modules.
-Then $\ext_{A^{\mathrm{op}}}^h(\bbD N,\bbD M)\cong\ext_A^h(M,N)$ for all $h\geq0$.
+Then $\ext_{A^{\op}}^h(\bbD N,\bbD M)\cong\ext_A^h(M,N)$ for all $h\geq0$.
 \end{lemma}
 
+\begin{supplementary}
 \begin{proof}
-Let $P_\bullet\to M$ be the minimal graded projective resolution, so every $P_q$ is lfd.
-Dualising gives an exact sequence $0\to\bbD(M)\to\bbD(P_0)\to\bbD(P_1)\to\cdots$ of lfd graded left modules, which is an injective coresolution of $\bbD(M)$ in $\grmod(A^{\mathrm{op}})$ since $\bbD$ takes projectives to injectives.
-By the balancing of Ext (Remark~\ref{rem:ext-balancing}) over $A^{\mathrm{op}}$, $\ext_{A^{\mathrm{op}}}^h(\bbD N,\bbD M)\cong H^h\bigl(\Hom_{A^{\mathrm{op}}}^\Z(\bbD N,\bbD(P_\bullet))\bigr)$.
-Since $\bbD$ is a duality, $\Hom_{A^{\mathrm{op}}}^\Z(\bbD N,\bbD(P_q))\cong\Hom_A^\Z(P_q,N)$ naturally in $q$, so the cohomology is $\ext_A^h(M,N)$.
-\end{proof}
+First note that $\bbD$ takes graded projectives to graded injectives: the characterisation Proposition \ref{prop:projective-characterisations} is completely dual (reversing arrows and compositions) for injectives.
 
+Let $P_\bullet\to M$ be the minimal graded projective resolution, so every $P_q$ is lfd.
+The remark in the previous paragraph says that dualising yields an injective coresolution $0\to\bbD(M)\to\bbD(P_0)\to\bbD(P_1)\to\cdots$ of lfd graded left modules $\bbD(M)\in \grmod(A^{\op})$.
+By the balancing of Ext (Remark~\ref{rem:ext-balancing}) over $A^{\op}$, we have 
+\[\ext_{A^{\op}}^h(\bbD N,\bbD M)\cong H^h\bigl(\Hom_{A^{\op}}^\Z(\bbD N,\bbD(P_\bullet))\bigr) \cong H^h\bigl(\Hom_A^\Z(P_\bullet,N)\bigr)= \ext_A^h(M,N),
+\]
+where the second isomorphism is induced by the natural isomorphism $\Hom_{A^{\op}}^\Z(\bbD N,\bbD(-))\cong\Hom_A^\Z(-,N)$ using the fact that $\bbD$ is a duality.
+\end{proof}
+\end{supplementary}
 \begin{proposition}\label{prop:opposite-koszul}
-Assume that $S=\bigoplus_x\Bbbk e_x$ (Assumption~\ref{ass:basic-semisimple}).
-Then $A$ is Koszul if and only if the opposite algebra $A^{\mathrm{op}}$ is Koszul.
+$A$ is Koszul if and only if the opposite algebra $A^{\mathrm{op}}$ is Koszul.
 \end{proposition}
 
 \begin{proof}
-Since $S$ is commutative, $S^{\mathrm{op}}=S$.
-First, $S^{\mathrm{op}}\cong\bbD(S)$ as graded right $A^{\mathrm{op}}$-modules.
-Indeed, both are concentrated in degree $0$ and killed by $A_+$, so they are left $S$-modules, and it remains to compare them as such.
-By Theorem~\ref{prop:dual-comparison} with the standard symmetrising form (Remark~\ref{rem:standard-form}), there is an isomorphism of left $S$-modules $S^*\cong D(S)=\bbD(S)$, and $S^*=\Hom_S(S,S)\cong S$ as left $S$-modules by $f\mapsto f(1)$.
+First, we show that $S^\op \cong \bbD(S)$ in $\grmod A^\op$.
+Indeed, if $S$ is of the form $\bigoplus_x \Bbbk e_x$ as in Assumption \ref{ass:basic-semisimple}, then the isomorphism is given by sending $e_x$ to its dual $\Bbbk$-basis.
+\begin{advanced}
+For more general finite-dimensional semisimple $S$, choose a symmetrising form $\tau$.  Then the desired isomorphism is given by $s\mapsto \tau(a\cdot-)$ -- this was already explained in the first step of the proof of Theorem \ref{prop:dual-comparison}.
+\end{advanced}
 
-Since $\bbD(S)(j)=\bbD(S(-j))$, Lemma~\ref{lem:ext-duality} with $M=S(-j)$ and $N=S$ gives
-\[
-\ext_{A^{\mathrm{op}}}^h\bigl(S^{\mathrm{op}},S^{\mathrm{op}}(j)\bigr)\cong\ext_{A^{\mathrm{op}}}^h\bigl(\bbD S,\bbD(S(-j))\bigr)\cong\ext_A^h\bigl(S(-j),S\bigr)=\ext_A^h\bigl(S,S(j)\bigr)
-\]
-for all $h\geq0$ and $j\in\Z$.
-In particular, $\ext_A^h(S,S(j))=0$ for all $j\neq-h$ if and only if $\ext_{A^{\mathrm{op}}}^h(S^{\mathrm{op}},S^{\mathrm{op}}(j))=0$ for all $j\neq-h$.
-By Proposition~\ref{prop:koszul-ext}(3) applied to $A$ and to $A^{\mathrm{op}}$, this says that $A$ is Koszul if and only if $A^{\mathrm{op}}$ is.
+%Observe from the definition that $\ext$ is additive in both variables for finite direct sums (as in the case of $\Hom$, like Lemma \ref{lem:hom-finite-sums}).
+Hence, by combining Lemma~\ref{lem:ext-LR-symmetry}, we have 
+\begin{align*}
+\ext_{A^{\op}}^h\bigl(S^\op,S^\op(j)\bigr) &\cong 
+\ext_{A^{\op}}^h\bigl(\bbD S,\bbD(S)(j)\bigr) \cong 
+\ext_{A^{\op}}^h\bigl(\bbD S,\bbD(S(-j))\bigr)\\
+&\cong 
+\ext_{A}^h(S(-j),S)\cong 
+\ext_{A}^h(S,S(j))
+\end{align*}
+holds for all $h\geq0$ and $j\in\Z$.
+The claim now follows from Proposition~\ref{prop:koszul-ext}(3).
 \end{proof}
 
-Consequently the linear resolution of the right module $S$ exists if and only if one exists for the left module $S$, so ``right Koszul'' and ``left Koszul'' agree.
+\begin{corollary}
+The following are equivalent for a graded algebra $A$.
+\begin{itemize}
+\item $A$ is Koszul.
+\item $S\in \grmod A$ has a linear graded (right) projective resolution.
+\item $S\in\grmod A^\op$ has a linear graded (left) projective resolution.
+\item $S\in \grmod A$ has a linear graded (right) injective coresolution.
+\item $S\in\grmod A^\op$ has a linear graded (left) injective coresolution.
+\end{itemize}
+\end{corollary}
 
-\begin{advanced}
-\begin{remark}[General $S$]
-Let $S$ be an arbitrary finite-dimensional semisimple algebra.
-Then $S^{\mathrm{op}}$ is the left module $S$, and $(A^{\mathrm{op}})_0=S^{\mathrm{op}}$ need not equal $S$.
-The natural substitute for $\bbD$ is the graded $S$-dual $(-)^{\grstar}$ of Definition~\ref{def:graded-S-duals}, which is choice-free on $S$-modules.
-To make $M^{\grstar}$ a left $A$-module for a graded right $A$-module $M$ we choose a symmetrising form $\tau$ on $S$ and transport the action of $A$ on $\bbD(M)$ along the isomorphism $\alpha_M:M^{\grstar}\to\bbD(M)$ of Theorem~\ref{prop:dual-comparison}, as in Remark~\ref{rem:transported-dual-action}.
-With this structure, $\alpha$ is a natural isomorphism of functors $(-)^{\grstar}\cong\bbD$ on lfd graded right $A$-modules, so $(-)^{\grstar}$ is again an exact duality between lfd graded right and left $A$-modules.
-Then Lemma~\ref{lem:ext-duality} holds with $\bbD$ replaced by $(-)^{\grstar}$, for any finite-dimensional graded right $A$-modules $M$ and $N$,
-\[
-\ext_{A^{\mathrm{op}}}^h\bigl(N^{\grstar},M^{\grstar}\bigr)\cong\ext_A^h(M,N),
-\]
-with the same proof, using the natural isomorphism $\alpha$; this is where the choice of $\tau$ enters.
-Proposition~\ref{prop:opposite-koszul} then holds for every $S$ with the same proof: the identification $S^{\mathrm{op}}\cong S^{\grstar}$ is now canonical, since $S^{\grstar}=\Hom_S(S,S)$ and $f\mapsto f(1)$ is an isomorphism of left $S$-modules.
-The conclusion of the proposition does not depend on $\tau$.
-\end{remark}
-\end{advanced}
 
 \subsection{Exercises}
 
@@ -227,14 +227,13 @@ The Koszul complex continues this pattern: it is a complex of projective modules
 It turns out to be the part of the minimal graded projective resolution of $S$ that is generated in the ``diagonal'' degrees, and it is a resolution exactly when $A$ is Koszul.
 
 \phantomsection\label{not:koszul-terms}
-For $h\geq2$ put
-\[
-\mathcal K_h:=\bigcap_{\nu=0}^{h-2}V^{\otimes_S\nu}\otimes_SR\otimes_SV^{\otimes_S(h-2-\nu)}\ \subseteq\ V^{\otimes_Sh},
+Define $S$-bimodules $\mathcal K_0=S$, $\mathcal K_1=V$, and \[
+\mathcal K_h:=\bigcap_{\nu=0}^{h-2}V^{\otimes_S\nu}\otimes_SR\otimes_SV^{\otimes_S(h-2-\nu)}\qquad \forall h\ge 2.
 \]
-and $\mathcal K_0=S$, $\mathcal K_1=V$, so that $\mathcal K_2=R$.
-These are $S$-sub-bimodules of $V^{\otimes_Sh}$.
-Since every $S$-module is flat, the functors $-\otimes_SY$ and $Y\otimes_S-$ are exact, so they preserve inclusions and finite intersections of submodules.
-In particular, if $X\subseteq V^{\otimes_Sa}$ and $X'\subseteq V^{\otimes_Sb}$ are sub-bimodules, then $X\otimes_SV^{\otimes_Sb}$, $V^{\otimes_Sa}\otimes_SX'$ and $X\otimes_SX'$ map injectively to $V^{\otimes_S(a+b)}$, and we regard them as submodules of $V^{\otimes_S(a+b)}$ via these maps.
+Note that $\mathcal{K}_2=R$.
+These are all $S$-sub-bimodules of $V^{\otimes_Sh}$.
+Since $S$ being semisimple implies that $\mod S=\add S=\proj S$, the functors $-\otimes_SY$ and $Y\otimes_S-$ are exact (see this using commutation of $\oplus$ and $\otimes$ on decomposition of free modules), so they preserve inclusions and finite intersections of submodules.
+In particular, if $X\subseteq V^{\otimes_Sa}$ and $X'\subseteq V^{\otimes_Sb}$ are sub-bimodules, then we have canonical injective map from $X\otimes_SV^{\otimes_Sb}$, $V^{\otimes_Sa}\otimes_SX'$ and $X\otimes_SX'$ to $V^{\otimes_S(a+b)}$; hence we can regard them as sub-bimodules of $V^{\otimes_S(a+b)}$ canonically.
 
 \begin{lemma}\label{lem:koszul-recursion}
 For $h\geq2$, the following are equalities of sub-bimodules of $V^{\otimes_Sh}$, where $\mathcal K_{h-1}\otimes_SV$ and $\mathcal K_{h-2}\otimes_SR$ are regarded as submodules as explained above:
@@ -255,59 +254,67 @@ Finally, $\mathcal K_{h+k}$ satisfies the conditions defining $\mathcal K_h$ on 
 \end{supplementary}
 
 \begin{definition}\label{def:koszul-complex}
-The \defn{Koszul complex} of $A$ is $K_\bullet\to S$ with
+The \defn{Koszul complex} of $A$ is $K_\bullet=(K_\bullet,d_\bullet)$ with
 \[
 K_h:=\mathcal K_h\otimes_SA(-h)\qquad(h\geq0),\qquad K_0=A,
 \]
 where $\mathcal K_h$ is placed in degree $0$ before the shift, so that $K_h$ is generated in degree $h$.
 The differential $d_h:K_h\to K_{h-1}$ is the composition
 \[
-\mathcal K_h\otimes_SA\xrightarrow{\ \iota_h\otimes\id\ }\mathcal K_{h-1}\otimes_SV\otimes_SA\xrightarrow{\ \id\otimes\mathrm{mult}\ }\mathcal K_{h-1}\otimes_SA,
+\mathcal K_h\otimes_SA\xrightarrow{\ \iota_h\otimes\id_A\ }\mathcal K_{h-1}\otimes_SV\otimes_SA\xrightarrow{\ \id_{\mathcal{K}_{h-1}}\otimes\mu\  }\mathcal K_{h-1}\otimes_SA,
 \qquad
-(z'\otimes v)\otimes a\longmapsto z'\otimes va,
+(z\otimes v)\otimes a\longmapsto z\otimes va,
 \]
-where $\iota_h:\mathcal K_h\hookrightarrow\mathcal K_{h-1}\otimes_SV$ is the inclusion of Lemma~\ref{lem:koszul-recursion}, and the augmentation is the projection $K_0=A\to S$.
+where $\iota_h:\mathcal K_h\hookrightarrow\mathcal K_{h-1}\otimes_SV$ is the inclusion of Lemma~\ref{lem:koszul-recursion} and $\mu$ is the multiplication map. 
 \end{definition}
 
 The maps $d_h$ are right $A$-linear and degree-preserving.
-They satisfy $d_{h-1}d_h=0$: for $h\geq2$, $\mathcal K_h\subseteq\mathcal K_{h-2}\otimes_SR$, and $z''\otimes r\otimes a\mapsto z''\otimes\mu(r)a=0$ because $R$ maps to $0$ in $A_2$; also $K_1\to K_0\to S$ is zero since $VA\subseteq A_+$.
-Each $K_h$ is projective, being a direct summand of a free module ($\mathcal K_h$ is a projective $S$-module).
+Koszul complex is an honest complex $d_{h-1}d_h=0$: for $h\geq2$, by Lemma \ref{lem:koszul-recursion} we have $\mathcal K_h\subseteq\mathcal K_{h-2}\otimes_SR$, and $z\otimes r\otimes a\mapsto z\otimes\mu(ra)=0$ for $z\in\mathcal{K}_{h-2}, r\in R, a\in A$.
+
+We also have an exact sequence $K_1\to K_0\to S\to 0$ where $K_0\to S$ is the projection $A\to A/A_+=S$; the exactness at $K_0$ follows from the definition that $VA\subseteq A_+$.
 
 \begin{theorem}\label{thm:koszul-complex-diagonal}
-Let $P_\bullet\to S$ be the minimal graded projective resolution of the quadratic algebra $A$, and put $T_h:=P_{h,h}$.
-Then $P^\Delta_h:=T_hA\subseteq P_h$ is a subcomplex of $P_\bullet$, and $P^\Delta_\bullet\cong K_\bullet$ as complexes augmented over $S$.
-In particular $T_h\cong\mathcal K_h$ for all $h$.
+Let $P_\bullet\to S$ be a minimal graded projective resolution of a quadratic algebra $A$.
+Then $P^\Delta_h:=P_{h,h}A\subseteq P_h$ is a subcomplex of $P_\bullet$, and $P^\Delta_\bullet\cong K_\bullet$ as complexes.
+In particular, $P_{h,h}\cong\mathcal K_h$ for all $h$.
 \end{theorem}
 
-Thus the Koszul complex is the diagonal part of the minimal graded projective resolution: the generators of $P_h$ of the smallest possible degree $h$ (Lemma~\ref{lem:resolution-degrees}), and nothing else.
+Thus the Koszul complex is the `diagonal part' of the minimal graded projective resolution of $S$ for a quadratic algebra.
 
 \begin{proof}
-By Lemma~\ref{lem:resolution-degrees}, $P_h$ lives in degrees $\geq h$, so $(P_hA_+)_h=0$ and $T_h\cong(\grtop P_h)_h$.
-Choose the decomposition of Lemma~\ref{lem:graded-projective-terms} with the summand $P_h^{[i]}$ generated in degree $i$ and $P_h^{[h]}=T_hA\cong T_h\otimes_SA(-h)$.
-The summands $P_h^{[i]}$ with $i>h$ live in degrees $\geq i>h$.
+By Lemma~\ref{lem:resolution-degrees}, $P_h$ lives in degrees $\geq h$, so $(P_hA_+)_h=0$ and $P_{h,h}\cong(\grtop P_h)_h$.
+Choose a decomposition of $P_h$ so that $P_h^{[i]}$ is the maximal direct summand generated in degree $i$.  Hence, we have $P_h^{[h]}=P_{h,h}A\cong P_{h,h}\otimes_SA(-h)$ by Lemma~\ref{lem:graded-projective-terms}.
 
-\emph{Step 1: $d_h(T_h)\subseteq T_{h-1}\otimes_SV$.}
-By minimality \eqref{eq:graded-minimal-criterion}, $d_h(T_h)\subseteq P_{h-1}A_+$.
-The degree $h$ part of $P_{h-1}A_+$ is $T_{h-1}A_1$, since the summands $P_{h-1}^{[i]}$ with $i\geq h$ contribute only in degrees $\geq h+1$ after multiplying by $A_+$.
-Hence $P^\Delta_\bullet$ is a subcomplex, and $d_h$ restricts to an $S$-linear map $\iota_h:T_h\to T_{h-1}\otimes_SV=T_{h-1}A_1$.
+\underline{Step 1: $P^\Delta_\bullet$ is a subcomplex of $P_\bullet$.}  It is enough to show that $d_h(P_{h,h})\subseteq P_{h-1,h-1}\otimes_SV$.  Indeed,
+by minimality \eqref{eq:graded-minimal-criterion} and that $d_h$ is degree-preserving, we have $d_h(P_{h,h})\subseteq (P_{h-1}A_+)_h$.
+Since $P_{h-1}^{[i]}A_+$ with $i\geq h$ contribute only in degrees $\geq h+1$, we have  \[(P_{h-1}A_+)_h=P_{h-1,h-1}A_1\cong P_{h-1,h-1}\otimes_S V,\]
+as claimed.
 
-\emph{Step 2: $\iota_h$ is injective for $h\geq1$.}
-Its kernel is $(\Ker d_h)_h=(\Im d_{h+1})_h=0$, because $P_{h+1}$ lives in degrees $\geq h+1$.
+For each $h\ge 1$, restricting $d_h$ to degree $h$ we obtain an $S$-module map $\jmath_h:P_{h,h}\to P_{h-1,h-1}\otimes_SV=P_{h-1,h-1}A_1$.
 
-\emph{Step 3: $T_h=\mathcal K_h$ inside $V^{\otimes_Sh}$.}
-We identify $T_h$ with $\iota_h(T_h)$ and argue by induction.
-Clearly $T_0=S=\mathcal K_0$.
-In degree $1$, exactness of $P_\bullet$ gives $A_1=(\Ker p_0)_1=d_1(T_1)$, so $T_1=V=\mathcal K_1$.
+\underline{Step 2: $\jmath_h$ is injective.}
+This is because
+\[
+\Ker\jmath_h=(\Ker d_h)_h=(\Im d_{h+1})_h=0,
+\]
+where the second equality follows from the exactness of $P_\bullet$ and the last follows from $P_{h+1}$ living in degrees $\geq h+1$.
+
+\underline{Step 3: $P_{h,h}=\mathcal K_h$ inside $V^{\otimes_Sh}$.}
+We argue by induction on $h$.
+Clearly $P_{0,0}=S=\mathcal K_0$.
+In degree $1$, exactness of $P_\bullet$ gives $A_1=(\Ker( P_0\xrightarrow{p_0}S))_1=d_1(P_{1,1})$, so $P_{1,1}=V=\mathcal K_1$.
+
 Let $h\geq2$ and assume the claim for $h-1$ and $h-2$.
-Exactness at $P_{h-1}$ in degree $h$ gives $(\Ker d_{h-1})_h=(\Im d_h)_h=d_h(T_h)$, and this lies in $T_{h-1}\otimes_SV$ by Step 1.
-So $d_h(T_h)$ is the kernel of $d_{h-1}$ on $T_{h-1}\otimes_SV=\mathcal K_{h-1}\otimes_SV$.
+In homological degree $h-1$, we identify $\jmath_h(P_{h,h})$ with $P_{h,h}$. 
+Exactness at $P_{h-1}$ in homological degree $h$ gives $(\Ker d_{h-1})_h=(\Im d_h)_h=d_h(P_{h,h})$, and this lies in $P_{h-1,h-1}\otimes_SV$ by Step 1.
+So $d_h(P_{h,h})$ is the kernel of $d_{h-1}$ on $P_{h-1,h-1}\otimes_SV=\mathcal K_{h-1}\otimes_SV$.
 For $t=\sum t'\otimes u\in\mathcal K_{h-1}\subseteq\mathcal K_{h-2}\otimes_SV$ and $v\in V$ we have $d_{h-1}(tv)=\sum t'\otimes uv$, which lies in $\mathcal K_{h-2}\otimes_SA_2$.
 Hence the kernel is
 \[
 (\mathcal K_{h-1}\otimes_SV)\cap(\mathcal K_{h-2}\otimes_SR)=\mathcal K_h
 \]
 by Lemma~\ref{lem:koszul-recursion}, since $R=\Ker(V\otimes_SV\to A_2)$.
-We conclude that $P^\Delta_h=T_hA\cong\mathcal K_h\otimes_SA(-h)=K_h$, and the differentials agree by Step 1.
+We conclude that $P^\Delta_h=P_{h,h}A\cong\mathcal K_h\otimes_SA(-h)=K_h$, and the differentials agree by Step 1.
 \end{proof}
 
 \begin{corollary}\label{cor:koszul-complex-exact}
@@ -316,7 +323,7 @@ A quadratic algebra $A$ is Koszul if and only if its Koszul complex $K_\bullet\t
 
 \begin{proof}
 If $K_\bullet\to S$ is exact, it is a graded projective resolution with $K_h$ generated in degree $h$, hence linear.
-Conversely, if $A$ is Koszul, the minimal graded projective resolution is linear, so $P_h=T_hA=P^\Delta_h$ for all $h$.
+Conversely, if $A$ is Koszul, the minimal graded projective resolution is linear, so $P_h=P_{h,h}A=P^\Delta_h$ for all $h$.
 Thus $P_\bullet=P^\Delta_\bullet\cong K_\bullet$ is exact.
 \end{proof}
 

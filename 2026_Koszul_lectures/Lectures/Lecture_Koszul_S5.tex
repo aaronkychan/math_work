@@ -83,7 +83,8 @@ If $P_h$ is finitely generated, then by Lemma \ref{lem:homogeneous-hom-sum} we h
 \Hom_A(P_h,N)=\bigoplus_{j\in\Z}\Hom_A^\Z\bigl(P_h,N(j)\bigr).
 \]
 Hence, if $P_h$ is finitely generated for all $h$ (for instance if $A$ is right noetherian and $M$ is finitely generated, by Corollary~\ref{cor:noetherian-minimal-resolution}), then the ordinary $\Ext_A^h(M,N)=\bigoplus_{j\in\Z}\ext_A^h(M,N(j))$.
-We call $\ext_A^h(M,N)$ (with lower-case letters) the \defn{graded Ext-groups} and $\Ext_A^h(M,N)$ the \defn{ungraded Ext-groups}.
+It is also possible to write $\Ext_A^h(M,N)_j$ (or more often in the literature, $\Ext_A^{h,j}(M,N)$) for $\ext_A^h(M,N(j))$, but we will try to avoid this notation.
+To distinguish setting, we call $\Ext_A^h(M,N)$ the \defn{ungraded Ext-groups}.
 \end{remark}
 
 By the same reason in the ungraded setting, graded Ext-groups are always well-defined independent on the choice of graded projective resolution of $M$.
@@ -91,14 +92,11 @@ By the same reason in the ungraded setting, graded Ext-groups are always well-de
 \begin{advanced}
 \begin{remark}[Balancing of Ext]\label{rem:ext-balancing}
 So far $\Ext$ was computed from a projective resolution of the first variable.
-It can equally be computed from an injective coresolution of the second variable: let $\mathcal C$ be an abelian category, such as the category of graded right $A$-modules with degree-preserving maps, or its full subcategory of lfd modules.
-If $P_\bullet\to M$ is a projective resolution and $N\to I^0\to I^1\to\cdots$ is an injective coresolution in $\mathcal C$, then
+It can equally be computed from an injective coresolution of the second variable: If $P_\bullet\to M$ is a (graded or ungraded) projective resolution and $N\to I^0\to I^1\to\cdots$ is an (graded or ungraded) injective coresolution in $\mathcal C$ for $\mathcal{C}=\Mod A$ or $\Grmod A$, then
 \[
 H^h\bigl(\Hom_{\mathcal C}(P_\bullet,N)\bigr)\cong H^h\bigl(\Hom_{\mathcal C}(M,I^\bullet)\bigr)\qquad\text{for all }h\geq0.
 \]
 Both sides are identified with the cohomology of the total complex of the double complex $\Hom_{\mathcal C}(P_p,I^q)$, see for instance \cite[Theorem~2.7.6]{Wei94}.
-For the category of graded modules the left-hand side is $\ext_A^h(M,N)$.
-We use this in Subsection~\ref{subsec:opposite} to compare Ext over $A$ and over the opposite algebra $A^{\mathrm{op}}$.
 \end{remark}
 \end{advanced}
 
@@ -128,7 +126,7 @@ Then for $h\geq0$ and $j\in\Z$,
 \[
 \dim_{D_y}\ext_A^h(M,L_y(j))=\bigl[(\grtop P_h)_{-j}:L_y\bigr],
 \]
-where $D_y:=\End_(L_y)$.
+where $D_y:=\End_A(L_y)$.
 \end{corollary}
 
 \begin{proof}
@@ -273,10 +271,10 @@ Let $A$ be as in Subsection~\ref{subsec:graded-ext} and let $P_\bullet\to S$ be 
 \begin{enumerate}
 \item $P_0=A$, with $p_0:A\to S$ the projection.
 \item $\grtop P_1\cong A_+/A_+^2$.
-If $A$ is generated in degree $1$ over $S$ (see \eqref{eq:multiplication-maps}), then $\grtop P_1\cong A_1$, concentrated in degree $1$, $P_1\cong(A_1\otimes_SA)(-1)$, and $\ext_A^1(S,S(j))=0$ for all $j\neq-1$.
+If $A$ is generated in degree $1$ over $S$, then $\grtop P_1\cong A_1$ and is concentrated in degree $1$, $P_1\cong(A_1\otimes_SA)(-1)$, and $\ext_A^1(S,S(j))=0$ for all $j\neq-1$.
 Conversely, if $\ext_A^1(S,S(j))=0$ for all $j\neq-1$, then $A$ is generated in degree $1$ over $S$.
 
-\item If $A$ is generated in degree $1$, put $V=A_1$ and let $I=\Ker(T_S(V)\onto A)$ be the relational ideal.
+\item If $A$ is generated in degree $1$ by $V:=A_1$ with relational ideal $I:=\Ker(T_S(V)\onto A)$.
 Then
 \[
 (\grtop P_2)_i\cong I_i/\bigl(V\otimes_SI_{i-1}+I_{i-1}\otimes_SV\bigr)\quad\text{for all }i.
