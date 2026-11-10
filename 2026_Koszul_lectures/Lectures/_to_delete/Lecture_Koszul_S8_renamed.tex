@@ -2,14 +2,14 @@
 \clearpage
 \section{The Yoneda algebra}\label{sec:yoneda}
 
-The groups $\Ext_A^h(S,S)_j$ of Section~\ref{sec:ext-tor} do not just sit side by side: they multiply, and the resulting algebra is intrinsic to $A$.
+The groups $\ext_A^h(S,S(j))$ of Section~\ref{sec:ext-tor} do not just sit side by side: they multiply, and the resulting algebra is intrinsic to $A$.
 We show that on the diagonal $j=-h$ this algebra is the quadratic dual $A^!$ of Section~\ref{sec:quadratic-dual}, for every quadratic algebra $A$, and that for Koszul algebras the diagonal is everything.
 Here $A$ is as in Section~\ref{sec:koszul-complex}, $P_\bullet\to S$ is its minimal graded projective resolution, and $S=\bigoplus_x\Bbbk e_x$ as in Assumption~\ref{ass:basic-semisimple}.
 
 \subsection{Comparing projective resolutions}\label{subsec:comparison}
 
 To define the Yoneda product we must continue a map out of one term of a resolution to the whole resolution, and the continuation is unique only up to homotopy.
-The same comparison shows that $\Ext$ does not depend on the chosen resolution, as used in Section~\ref{sec:ext-tor}.
+The same comparison shows that ungraded $\Ext$ and graded $\ext$ do not depend on the chosen resolution, as used in Section~\ref{sec:ext-tor}.
 
 \begin{lemma}[Comparison lemma]\label{lem:comparison}
 Let $P_\bullet\to M$ be a projective resolution with differentials $d_h$ and augmentation $p_0$.
@@ -63,7 +63,7 @@ Let $P_\bullet\to M$ and $Q_\bullet\to M'$ be projective resolutions, $f:M\to M'
 \item The map $[\varphi]\mapsto[\varphi f_h]$ is a well-defined linear map $f^*:H^h(\Hom_A(Q_\bullet,N))\to H^h(\Hom_A(P_\bullet,N))$ that does not depend on the choice of lift.
 \item If $g:M'\to M''$ is $A$-linear and $R_\bullet\to M''$ is a projective resolution, then $(gf)^*=f^*g^*$; also $(\id_M)^*=\id$.
 \end{enumerate}
-In particular, up to canonical isomorphism $\Ext_A^h(M,N)$ does not depend on the projective resolution of $M$.
+In particular, up to canonical isomorphism the ungraded $\Ext_A^h(M,N)$ does not depend on the projective resolution of $M$.
 It is contravariant in $M$ through $f^*$.
 It is covariant in $N$: an $A$-linear map $\psi:N\to N'$ gives $\psi_*[\varphi]=[\psi\varphi]$.
 \end{proposition}
@@ -86,13 +86,13 @@ Finally $\psi\varphi$ is a cocycle (coboundary) if $\varphi$ is, and $\psi_*$ is
 
 By Proposition~\ref{prop:ext-minimal}, every cochain in $\Hom_A^\Z(P_\bullet,S(j))$ is a cocycle and no cochain is a coboundary, so
 \[
-\Ext_A^h(S,S)_j=\Hom_A^\Z\bigl(P_h,S(j)\bigr)=\Hom_S\bigl((\grtop P_h)_{-j},S\bigr).
+\ext_A^h(S,S(j))=\Hom_A^\Z\bigl(P_h,S(j)\bigr)=\Hom_S\bigl((\grtop P_h)_{-j},S\bigr).
 \]
-A class $\varphi\in\Ext_A^h(S,S)_j$ is thus a degree-preserving $A$-linear map $\varphi:P_h\to S(j)$, which vanishes on $P_hA_+$.
+A class $\varphi\in\ext_A^h(S,S(j))$ is thus a degree-preserving $A$-linear map $\varphi:P_h\to S(j)$, which vanishes on $P_hA_+$.
 The idea of the product is to continue $\varphi$ to the whole resolution and compose.
 
 \begin{lemma}\label{lem:yoneda-lift}
-For $\varphi\in\Ext_A^h(S,S)_j$ there are degree-preserving $A$-linear maps $\tilde\varphi_i:P_{h+i}\to P_i(j)$ for $i\geq0$ with
+For $\varphi\in\ext_A^h(S,S(j))$ there are degree-preserving $A$-linear maps $\tilde\varphi_i:P_{h+i}\to P_i(j)$ for $i\geq0$ with
 \[
 p_0\tilde\varphi_0=\varphi,\qquad d_i\tilde\varphi_i=\tilde\varphi_{i-1}d_{h+i}\quad(i\geq1).
 \]
@@ -106,40 +106,40 @@ Apply Lemma~\ref{lem:comparison} (in its degree-preserving form, Subsection~\ref
 \end{proof}
 
 \begin{definition}\label{def:yoneda-product}
-For $\varphi\in\Ext_A^h(S,S)_j$ and $\psi\in\Ext_A^k(S,S)_{j'}$, the \defn{Yoneda product} is
+For $\varphi\in\ext_A^h(S,S(j))$ and $\psi\in\ext_A^k(S,S(j'))$, the \defn{Yoneda product} is
 \[
-\psi\cdot\varphi:=\psi(j)\circ\tilde\varphi_k:\ P_{h+k}\longrightarrow S(j+j')\ \in\ \Ext_A^{h+k}(S,S)_{j+j'}.
+\psi\cdot\varphi:=\psi(j)\circ\tilde\varphi_k:\ P_{h+k}\longrightarrow S(j+j')\ \in\ \ext_A^{h+k}(S,S(j+j')).
 \]
 \end{definition}
 
 \begin{proposition}\label{prop:yoneda-algebra}
-The Yoneda product is well defined, bilinear, and associative, with unit $\id_S\in\Ext_A^0(S,S)_0$.
+The Yoneda product is well defined, bilinear, and associative, with unit $\id_S\in\ext_A^0(S,S)$.
 \end{proposition}
 
 \begin{proof}
 Let $\tilde\varphi$ and $\tilde\varphi'$ be two lifts, with $\tilde\varphi_k-\tilde\varphi'_k=d_{k+1}s_k+s_{k-1}d_{h+k}$.
 Now $\psi d_{k+1}=0$ and $\psi s_{k-1}d_{h+k}=0$, because both $d_{k+1}$ and $s_{k-1}d_{h+k}$ map into $P_kA_+$ and $\psi$ kills $P_kA_+$.
 So $\psi\cdot\varphi$ does not depend on the lift; bilinearity is clear since sums of lifts are lifts.
-If $\tilde\psi$ lifts $\psi$, then $\tilde\psi_i\tilde\varphi_{k+i}$ lifts $\psi\cdot\varphi$, so for $\chi\in\Ext_A^l(S,S)$,
+If $\tilde\psi$ lifts $\psi$, then $\tilde\psi_i\tilde\varphi_{k+i}$ lifts $\psi\cdot\varphi$, so for $\chi\in\ext_A^l(S,S(j''))$,
 \[
 \chi\cdot(\psi\cdot\varphi)=\chi\tilde\psi_l\tilde\varphi_{k+l}=(\chi\cdot\psi)\cdot\varphi.
 \]
-Finally $\id_S\in\Hom_S(S,S)=\Ext_A^0(S,S)_0$ lifts to the identity of $P_\bullet$.
+Finally $\id_S\in\Hom_S(S,S)=\ext_A^0(S,S)$ lifts to the identity of $P_\bullet$.
 \end{proof}
 
 \begin{definition}\label{def:yoneda-algebra}
 The \defn{Yoneda algebra} of $A$ is the bigraded algebra
 \[
-E(A):=\bigoplus_{h\geq0,\,j\in\Z}\Ext_A^h(S,S)_j,
+E(A):=\bigoplus_{h\geq0,\,j\in\Z}\ext_A^h(S,S(j)),
 \]
-with $E(A)^h_j:=\Ext_A^h(S,S)_j$.
+with $E(A)^h_j:=\ext_A^h(S,S(j))$.
 The \defn{diagonal Yoneda algebra} is
 \[
-E^\Delta(A):=\bigoplus_{h\geq0}E(A)^h_{-h}=\bigoplus_{h\geq0}\Ext_A^h(S,S)_{-h}.
+E^\Delta(A):=\bigoplus_{h\geq0}E(A)^h_{-h}=\bigoplus_{h\geq0}\ext_A^h(S,S(-h)).
 \]
 \end{definition}
 
-By Remark~\ref{rem:graded-ext-ungraded}, if the terms $P_h$ are finitely generated then $E(A)$ is the ordinary $\Ext$-algebra $\Ext_A^\bullet(S,S)=\bigoplus_h\Ext_A^h(S,S)$ of the simple modules, with the same construction in the ungraded setting; the extra index $j$ remembers the grading of $A$.
+By Remark~\ref{rem:graded-ext-ungraded}, if the terms $P_h$ are finitely generated then $E(A)$ is the ordinary (ungraded) $\Ext$-algebra $\Ext_A^\bullet(S,S)=\bigoplus_h\Ext_A^h(S,S)$ of the simple modules, with the same construction in the ungraded setting; the extra index $j$ remembers the grading of $A$.
 The degree $0$ part is $E(A)^0_0=\Hom_S(S,S)=S$.
 By Lemma~\ref{lem:resolution-degrees}, $E(A)^h_j=0$ for $j>-h$.
 So the product of classes of types $(h,j)$ and $(k,j')$ lies in $j+j'\leq-(h+k)$, with equality only if both factors are diagonal.
@@ -182,7 +182,7 @@ Under Assumption~\ref{ass:basic-semisimple} there is the isomorphism $\alpha_X:\
 Let $A=T_S(V)/(R)$ be a quadratic algebra.
 Then there is an isomorphism of graded algebras
 \[
-A^!\xrightarrow{\ \sim\ }E^\Delta(A),\qquad A^!_h\xrightarrow{\ \sim\ }\Ext_A^h(S,S)_{-h}\cong\Hom_S(\mathcal K_h,S).
+A^!\xrightarrow{\ \sim\ }E^\Delta(A),\qquad A^!_h\xrightarrow{\ \sim\ }\ext_A^h(S,S(-h))\cong\Hom_S(\mathcal K_h,S).
 \]
 \end{theorem}
 
@@ -200,7 +200,7 @@ By associativity and binaturality of $\theta$ (Proposition~\ref{prop:D-tensor-du
 Applying $\alpha^{-1}$ and the identity above gives $\Phi_{h+k}(w'\otimes w)=\Phi_k(w')\star\Phi_h(w)|_{\mathcal K_{h+k}}$, which is $\Phi_k(w')\cdot\Phi_h(w)$ by Proposition~\ref{prop:diagonal-product}.
 \end{proof}
 
-In particular $E^\Delta(A)$ is generated by $E(A)^1_{-1}=\Ext^1_A(S,S)_{-1}\cong D(V)$, with quadratic relations $\theta^{-1}(R^\perp)$.
+In particular $E^\Delta(A)$ is generated by $E(A)^1_{-1}=\ext^1_A(S,S(-1))\cong D(V)$, with quadratic relations $\theta^{-1}(R^\perp)$.
 
 \begin{advanced}
 \begin{remark}[General $S$]
@@ -219,10 +219,10 @@ Let $A$ be a quadratic algebra, and let $A^!\cong E^\Delta(A)\hookrightarrow E(A
 The following are equivalent:
 \begin{enumerate}
 \item $A$ is Koszul;
-\item $E(A)=E^\Delta(A)$, that is, $\Ext_A^h(S,S)_j=0$ for $j\neq-h$;
+\item $E(A)=E^\Delta(A)$, that is, $\ext_A^h(S,S(j))=0$ for $j\neq-h$;
 \item $A^!\to E(A)$ is an isomorphism.
 \end{enumerate}
-In this case $\Ext_A^h(S,S)\cong A^!_h$ for all $h$, the Yoneda algebra is generated by $\Ext_A^1(S,S)$, and $E(A)$ is the ordinary $\Ext$-algebra of the simple $A$-modules.
+In this case $\ext_A^h(S,S(-h))\cong A^!_h$ for all $h$, the Yoneda algebra is generated by $\ext_A^1(S,S(-1))$, and $E(A)$ is the ordinary (ungraded) $\Ext$-algebra of the simple $A$-modules.
 \end{corollary}
 
 \begin{proof}
@@ -230,13 +230,13 @@ In this case $\Ext_A^h(S,S)\cong A^!_h$ for all $h$, the Yoneda algebra is gener
 If $A$ is Koszul, each $P_h=K_h=\mathcal K_h\otimes_SA(-h)$ is finitely generated, so Remark~\ref{rem:graded-ext-ungraded} gives the last statement.
 \end{proof}
 
-Thus the Koszul property can be read as ``the quadratic dual computes all of $\Ext$''; for a quadratic algebra that is not Koszul, $A^!$ is a proper subalgebra of $E(A)$ (Exercise~\ref{ex:quadratic-non-koszul}).
+Thus the Koszul property can be read as ``the quadratic dual computes all of the graded Ext-groups $\ext_A^h(S,S(j))$''; for a quadratic algebra that is not Koszul, $A^!$ is a proper subalgebra of $E(A)$ (Exercise~\ref{ex:quadratic-non-koszul}).
 
 \begin{example}\label{ex:yoneda-examples}
 (1) For $A=\SymAlg(V)$, Corollary~\ref{prop:polynomial-koszul} and Proposition~\ref{prop:symmetric-exterior-dual} give $E(A)\cong\bigwedge D(V)$, concentrated on the diagonal.
 
 (2) For $A=\bigwedge W$, Proposition~\ref{prop:symmetric-exterior-dual} gives $A^!\cong\SymAlg(D(W))$.
-If $\dim W=1$, $A=\Bbbk[\epsilon]/(\epsilon^2)$ is Koszul (Example~\ref{ex:minimal-exterior}), so $E(A)\cong\Bbbk[t]$ with $t\in\Ext^1_A(\Bbbk,\Bbbk)_{-1}$, in agreement with Example~\ref{ex:ext-polynomial-exterior}.
+If $\dim W=1$, $A=\Bbbk[\epsilon]/(\epsilon^2)$ is Koszul (Example~\ref{ex:minimal-exterior}), so $E(A)\cong\Bbbk[t]$ with $t\in\ext^1_A(\Bbbk,\Bbbk(-1))$, in agreement with Example~\ref{ex:ext-polynomial-exterior}.
 
 (3) For $A=\Bbbk A_2$ we have $R=0$ and $V\otimes_SV=0$, so $A^!=S\oplus D(V)$, of dimension $2+1$, matching Example~\ref{ex:ext-A2}.
 \end{example}
@@ -342,13 +342,13 @@ So $T_S(V)$ is the algebra with $A^!=S\oplus D(V)$.
 
 \begin{exercise}
 Let $A=\Bbbk[x]/(x^3)$ be as in Exercise~\ref{ex:x-cubed}.
-Show that $\Ext_A^h(\Bbbk,\Bbbk)_j\neq0$ for some $j\neq-h$ when $h\geq2$, and deduce that $E(A)\neq E^\Delta(A)$.
+Show that $\ext_A^h(\Bbbk,\Bbbk(j))\neq0$ for some $j\neq-h$ when $h\geq2$, and deduce that $E(A)\neq E^\Delta(A)$.
 \end{exercise}
 
 \begin{hidden}
 \emph{Solution.}
-By the solution of Exercise~\ref{ex:x-cubed}, the minimal resolution of $\Bbbk$ has $P_h$ generated in degree $\lfloor3h/2\rfloor$, so by Proposition~\ref{prop:ext-minimal}, $\Ext_A^h(\Bbbk,\Bbbk)_j\neq0$ if and only if $j=-\lfloor3h/2\rfloor$.
-For $h\geq2$ we have $\lfloor3h/2\rfloor>h$, so these groups are off the diagonal, while $E^\Delta(A)=\Bbbk\oplus\Ext^1_A(\Bbbk,\Bbbk)_{-1}$ (as $\Ext^h_A(\Bbbk,\Bbbk)_{-h}=0$ for $h\geq2$).
+By the solution of Exercise~\ref{ex:x-cubed}, the minimal resolution of $\Bbbk$ has $P_h$ generated in degree $\lfloor3h/2\rfloor$, so by Proposition~\ref{prop:ext-minimal}, $\ext_A^h(\Bbbk,\Bbbk(j))\neq0$ if and only if $j=-\lfloor3h/2\rfloor$.
+For $h\geq2$ we have $\lfloor3h/2\rfloor>h$, so these groups are off the diagonal, while $E^\Delta(A)=\Bbbk\oplus\ext^1_A(\Bbbk,\Bbbk(-1))$ (as $\ext^h_A(\Bbbk,\Bbbk(-h))=0$ for $h\geq2$).
 Hence $E(A)\neq E^\Delta(A)$.
 \end{hidden}
 

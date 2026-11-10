@@ -5,9 +5,9 @@
 Let $A$ be a graded algebra (i.e. a lfd with $S=A_0$ finite-dimensional semisimple and $A_{<0}=0$).
 By Theorem~\ref{thm:minimal-resolution} the module $S=A/A_+$ has a minimal graded projective resolution $P_\bullet\to S$, unique up to isomorphism, and by Proposition~\ref{prop:ext-minimal} it records
 \[
-\Ext_A^h(S,S)_j\cong\Hom_S\bigl((\grtop P_h)_{-j},S\bigr).
+\ext_A^h(S,S(j))\cong\Hom_S\bigl((\grtop P_h)_{-j},S\bigr).
 \]
-A Koszul algebra is one for which these groups vanish outside the diagonal $j=-h$.
+A Koszul algebra is one for which these graded Ext-groups vanish outside the diagonal $j=-h$.
 
 \subsection{Koszul algebras}
 
@@ -36,7 +36,7 @@ Since $P_h=P_{h,h}A$, we have $P_{h,i}=0$ for $i<h$, and $P_{h,i}=P_{h,h}A_{i-h}
 So $\grtop P_h$ is concentrated in degree $h$.
 For $h=1$, Proposition~\ref{prop:resolution-first-terms}(2) shows that $A$ is generated in degree $1$; for $h=2$, Proposition~\ref{prop:resolution-first-terms}(3) shows that $A$ is quadratic.
 \end{proof}
-The converse fails: not every quadratic algebra is Koszul (Exercise~\ref{ex:quadratic-non-koszul}), so Koszulness is a genuine condition on the $\Ext$ groups in homological degrees $\geq3$.
+The converse fails: not every quadratic algebra is Koszul (Exercise~\ref{ex:quadratic-non-koszul}), so Koszulness is a genuine condition on the graded Ext-groups $\ext_A^h(S,S(j))$ in homological degrees $\geq3$.
 
 
 \begin{example}\label{ex:koszul-nonconnected}
@@ -50,7 +50,7 @@ The exterior algebra $E=\Bbbk[\epsilon]/(\epsilon^2)$ is Koszul: Example~\ref{ex
 
 
 
-Recall from Lemma~\ref{lem:resolution-degrees} that for an arbitrary graded algebra $A$ we always have $\Ext_A^{h}(S,S)_{j}=0$  for all $j>-h$.  
+Recall from Lemma~\ref{lem:resolution-degrees} that for an arbitrary graded algebra $A$ we always have $\ext_A^{h}(S,S(j))=0$  for all $j>-h$.  
 Koszulity refines this to the diagonal $j=-h$:
 
 
@@ -61,10 +61,10 @@ The following are equivalent.
 
 \item $\grtop P_h=P_{h,h}$ for all $h\ge 0$, where $P_\bullet\to S$ is a minimal graded projective resolution of $S$.
 
-\item The graded Ext-groups are concentrated in the diagonal, i.e. $\Ext_A^h(S,S)_j=0$ for all $j\neq-h$.
+\item The graded Ext-groups are concentrated in the diagonal, i.e. $\ext_A^h(S,S(j))=0$ for all $j\neq-h$.
 
 
-\item Let $M$ and $N$ be lfd modules $M,N$ concentrated in degrees $m$ and $n$ respectively.  Then we have $\Ext_A^h(M,N)_j=0$ unless $j=n-m-h$.
+\item Let $M$ and $N$ be lfd modules $M,N$ concentrated in degrees $m$ and $n$ respectively.  Then we have $\ext_A^h(M,N(j))=0$ unless $j=n-m-h$.
 \end{enumerate}
 \end{proposition}
 
@@ -76,7 +76,7 @@ A linear graded projective resolution is minimal, hence isomorphic to $P_\bullet
 By \eqref{eq:graded-cover-terms}, $P_h\cong((\grtop P_h)_h\otimes_SA)(-h)$ is generated in degree $h$.
 
 
-\underline{(2)$\Leftrightarrow$(3)}: By Proposition~\ref{prop:ext-minimal}, we have $\Ext_A^h(S,S)_j\cong\Hom_S((\grtop P_h)_{-j},S)$, so it is non-zero if and only if $(\grtop P_h)_{-j}\neq0$, since every simple $S$-module is a direct summand of $S$.
+\underline{(2)$\Leftrightarrow$(3)}: By Proposition~\ref{prop:ext-minimal}, we have $\ext_A^h(S,S(j))\cong\Hom_S((\grtop P_h)_{-j},S)$, so it is non-zero if and only if $(\grtop P_h)_{-j}\neq0$, since every simple $S$-module is a direct summand of $S$.
 So (2) says that $\grtop P_h$ is concentrated in degree $h$.
 
 \underline{(2)$\Rightarrow$(4)}:
@@ -84,7 +84,7 @@ On one hand, the condition on $M$ we have $M\in \add_{\grmod A}(S(-m))$.
 On the other hand, the condition on $N$ implies that $NA_+=0$.
 By Proposition~\ref{prop:ext-minimal}, we have
 \[
-\Ext_A^h(S(-m),N)_j=\Ext_A^h(S,N)_{j+m}=\Hom_S(\grtop P_h, N(j+m))=\Hom_S( P_{h,h}, N(j+m)).
+\ext_A^h(S(-m),N(j))=\ext_A^h(S,N(j+m))=\Hom_S(\grtop P_h, N(j+m))=\Hom_S( P_{h,h}, N(j+m)).
 \]
 Since $N=N_{n}$, $N(j+m)$ is concentrated in $n-j-m$.  Hence, comparing the degrees, the last Hom-space vanishes unless $n-j-m=h$.
 
@@ -92,34 +92,73 @@ Since $N=N_{n}$, $N(j+m)$ is concentrated in $n-j-m$.  Hence, comparing the degr
 \end{proof}
 
 
-\subsection{The opposite algebra}
+\subsection{The opposite algebra}\label{subsec:opposite}
 
-Everything above used right modules.
-The Tor-groups of Section~\ref{sec:ext-tor} treat both sides of $S$ symmetrically, which gives the following.
+Everything above used right modules, and Koszulity was defined through the right module $S=A/A_+$.
+Left modules are handled by passing to the opposite algebra: by Notation~\ref{not:opposite-algebra}, a left $A$-module is the same thing as a right module over $A^{\mathrm{op}}$, and $A^{\mathrm{op}}$ is again a graded algebra with $(A^{\mathrm{op}})_i=A_i$.
+Its degree $0$ part is $(A^{\mathrm{op}})_0=S^{\mathrm{op}}$, so the results above apply to $A^{\mathrm{op}}$.
+We write $S^{\mathrm{op}}$ for the left $A$-module $S=A/A_+$, regarded as a right $A^{\mathrm{op}}$-module; it is $A^{\mathrm{op}}/A^{\mathrm{op}}_+$.
+Thus $A^{\mathrm{op}}$ is Koszul if $S^{\mathrm{op}}$ has a linear graded projective resolution by right $A^{\mathrm{op}}$-modules, that is, by graded projective left $A$-modules.
+We show that this is equivalent to $A$ being Koszul, using linear duality to pass between right and left modules.
 
-\begin{lemma}\label{lem:tor-balanced}
-Let $M$ be a graded right and $N$ a graded left $A$-module, both bounded below and lfd, with graded projective resolutions $P_\bullet\to M$ and $Q_\bullet\to N$.
-Then $H_h\bigl((P_\bullet\otimes_AN)_i\bigr)\cong H_h\bigl((M\otimes_AQ_\bullet)_i\bigr)$ for all $h\geq0$ and $i\in\Z$; in particular the left side is $\Tor_h^A(M,N)_i$.
+Recall from \eqref{eq:linear-dual-actions} that the graded linear dual $\bbD(P)$ of a graded right $A$-module $P$ is a graded left $A$-module by $(af)(p)=f(pa)$, that is, a graded right $A^{\mathrm{op}}$-module.
+Linear duality is exact \eqref{eq:linear-dual-functors}, and by Lemma~\ref{lem:linear-bidual}(2) it is a duality
+\[
+\bbD:(\grmod A)^{\mathrm{op}}\xrightarrow{\sim}\grmod(A^{\mathrm{op}})
+\]
+between locally finite-dimensional graded right $A$-modules and locally finite-dimensional graded left $A$-modules.
+In particular, $\bbD$ takes projective objects to injective objects.
+
+\begin{lemma}\label{lem:ext-duality}
+Let $M$ and $N$ be finite-dimensional graded right $A$-modules.
+Then $\ext_{A^{\mathrm{op}}}^h(\bbD N,\bbD M)\cong\ext_A^h(M,N)$ for all $h\geq0$.
 \end{lemma}
 
 \begin{proof}
-Let $C$ be the total complex of the double complex $P_p\otimes_AQ_q$.
-Projective modules are flat, so each column $P_p\otimes_AQ_\bullet\to P_p\otimes_AN$ and each row $P_\bullet\otimes_AQ_q\to M\otimes_AQ_q$ is exact.
-By the acyclic assembly lemma, the augmentations $C\to P_\bullet\otimes_AN$ and $C\to M\otimes_AQ_\bullet$ are quasi-isomorphisms; they preserve the grading.
+Let $P_\bullet\to M$ be the minimal graded projective resolution, so every $P_q$ is lfd.
+Dualising gives an exact sequence $0\to\bbD(M)\to\bbD(P_0)\to\bbD(P_1)\to\cdots$ of lfd graded left modules, which is an injective coresolution of $\bbD(M)$ in $\grmod(A^{\mathrm{op}})$ since $\bbD$ takes projectives to injectives.
+By the balancing of Ext (Remark~\ref{rem:ext-balancing}) over $A^{\mathrm{op}}$, $\ext_{A^{\mathrm{op}}}^h(\bbD N,\bbD M)\cong H^h\bigl(\Hom_{A^{\mathrm{op}}}^\Z(\bbD N,\bbD(P_\bullet))\bigr)$.
+Since $\bbD$ is a duality, $\Hom_{A^{\mathrm{op}}}^\Z(\bbD N,\bbD(P_q))\cong\Hom_A^\Z(P_q,N)$ naturally in $q$, so the cohomology is $\ext_A^h(M,N)$.
 \end{proof}
 
 \begin{proposition}\label{prop:opposite-koszul}
-$A$ is Koszul if and only if the opposite algebra $A^{\mathrm{op}}$ is Koszul.
+Assume that $S=\bigoplus_x\Bbbk e_x$ (Assumption~\ref{ass:basic-semisimple}).
+Then $A$ is Koszul if and only if the opposite algebra $A^{\mathrm{op}}$ is Koszul.
 \end{proposition}
 
 \begin{proof}
-By Proposition~\ref{prop:tor-top}, $\Tor_h^A(S,S)_j\cong(\grtop P_h)_j$, so as in the proof of Proposition~\ref{prop:koszul-ext}, $A$ is Koszul if and only if $\Tor_h^A(S,S)_j=0$ for all $j\neq h$.
-The algebra $A^{\mathrm{op}}$ satisfies the standing hypotheses with $(A^{\mathrm{op}})_0=S^{\mathrm{op}}$, and right $A^{\mathrm{op}}$-modules are left $A$-modules.
-So $A^{\mathrm{op}}$ is Koszul if and only if $\Tor_h^{A^{\mathrm{op}}}(S,S)_j=0$ for $j\neq h$.
-Computing with a graded projective resolution $Q_\bullet$ of the left module $S$, this is $H_h((S\otimes_AQ_\bullet)_j)$, which is $\Tor_h^A(S,S)_j$ by Lemma~\ref{lem:tor-balanced}.
+Since $S$ is commutative, $S^{\mathrm{op}}=S$.
+First, $S^{\mathrm{op}}\cong\bbD(S)$ as graded right $A^{\mathrm{op}}$-modules.
+Indeed, both are concentrated in degree $0$ and killed by $A_+$, so they are left $S$-modules, and it remains to compare them as such.
+By Theorem~\ref{prop:dual-comparison} with the standard symmetrising form (Remark~\ref{rem:standard-form}), there is an isomorphism of left $S$-modules $S^*\cong D(S)=\bbD(S)$, and $S^*=\Hom_S(S,S)\cong S$ as left $S$-modules by $f\mapsto f(1)$.
+
+Since $\bbD(S)(j)=\bbD(S(-j))$, Lemma~\ref{lem:ext-duality} with $M=S(-j)$ and $N=S$ gives
+\[
+\ext_{A^{\mathrm{op}}}^h\bigl(S^{\mathrm{op}},S^{\mathrm{op}}(j)\bigr)\cong\ext_{A^{\mathrm{op}}}^h\bigl(\bbD S,\bbD(S(-j))\bigr)\cong\ext_A^h\bigl(S(-j),S\bigr)=\ext_A^h\bigl(S,S(j)\bigr)
+\]
+for all $h\geq0$ and $j\in\Z$.
+In particular, $\ext_A^h(S,S(j))=0$ for all $j\neq-h$ if and only if $\ext_{A^{\mathrm{op}}}^h(S^{\mathrm{op}},S^{\mathrm{op}}(j))=0$ for all $j\neq-h$.
+By Proposition~\ref{prop:koszul-ext}(3) applied to $A$ and to $A^{\mathrm{op}}$, this says that $A$ is Koszul if and only if $A^{\mathrm{op}}$ is.
 \end{proof}
 
 Consequently the linear resolution of the right module $S$ exists if and only if one exists for the left module $S$, so ``right Koszul'' and ``left Koszul'' agree.
+
+\begin{advanced}
+\begin{remark}[General $S$]
+Let $S$ be an arbitrary finite-dimensional semisimple algebra.
+Then $S^{\mathrm{op}}$ is the left module $S$, and $(A^{\mathrm{op}})_0=S^{\mathrm{op}}$ need not equal $S$.
+The natural substitute for $\bbD$ is the graded $S$-dual $(-)^{\grstar}$ of Definition~\ref{def:graded-S-duals}, which is choice-free on $S$-modules.
+To make $M^{\grstar}$ a left $A$-module for a graded right $A$-module $M$ we choose a symmetrising form $\tau$ on $S$ and transport the action of $A$ on $\bbD(M)$ along the isomorphism $\alpha_M:M^{\grstar}\to\bbD(M)$ of Theorem~\ref{prop:dual-comparison}, as in Remark~\ref{rem:transported-dual-action}.
+With this structure, $\alpha$ is a natural isomorphism of functors $(-)^{\grstar}\cong\bbD$ on lfd graded right $A$-modules, so $(-)^{\grstar}$ is again an exact duality between lfd graded right and left $A$-modules.
+Then Lemma~\ref{lem:ext-duality} holds with $\bbD$ replaced by $(-)^{\grstar}$, for any finite-dimensional graded right $A$-modules $M$ and $N$,
+\[
+\ext_{A^{\mathrm{op}}}^h\bigl(N^{\grstar},M^{\grstar}\bigr)\cong\ext_A^h(M,N),
+\]
+with the same proof, using the natural isomorphism $\alpha$; this is where the choice of $\tau$ enters.
+Proposition~\ref{prop:opposite-koszul} then holds for every $S$ with the same proof: the identification $S^{\mathrm{op}}\cong S^{\grstar}$ is now canonical, since $S^{\grstar}=\Hom_S(S,S)$ and $f\mapsto f(1)$ is an isomorphism of left $S$-modules.
+The conclusion of the proposition does not depend on $\tau$.
+\end{remark}
+\end{advanced}
 
 \subsection{Exercises}
 
@@ -372,7 +411,7 @@ This proves exactness of the displayed sequence.
 For every finite-dimensional vector space $V$, the symmetric algebra $\SymAlg(V)$ is Koszul, and $K_\bullet$ is its minimal graded projective resolution of $\Bbbk$.
 \end{corollary}
 
-Here $\grtop K_h=\bigwedge^hV$ in degree $h$, so Proposition~\ref{prop:ext-minimal} gives $\Ext_A^h(\Bbbk,\Bbbk)_{-h}\cong D(\bigwedge^hV)\cong\bigwedge^hD(V)$, the degree $h$ part of $\SymAlg(V)^!\cong\bigwedge D(V)$.
+Here $\grtop K_h=\bigwedge^hV$ in degree $h$, so Proposition~\ref{prop:ext-minimal} gives $\ext_A^h(\Bbbk,\Bbbk(-h))\cong D(\bigwedge^hV)\cong\bigwedge^hD(V)$, the degree $h$ part of $\SymAlg(V)^!\cong\bigwedge D(V)$.
 
 \subsection{Exercises}
 

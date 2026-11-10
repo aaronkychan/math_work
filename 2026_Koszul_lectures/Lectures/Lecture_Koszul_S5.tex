@@ -3,7 +3,7 @@
 \section{Ext-groups}\label{sec:ext-tor}
 
 The contravariant functor $\Hom_A(-,N)$ is left exact (Lemma~\ref{lem:Hom-contravariant-left-exact}) but in general not exact (Example~\ref{ex:Hom-contravariant-not-exact}).
-The group $\Ext_A^h(M,N)$ measure this failure at homological degree $h$; it is computed by taking homology on the complex  $\Hom_A(P_\bullet,N)$ for a projective resolution $P_\bullet$ of $M$.
+The ungraded Ext-group $\Ext_A^h(M,N)$ measures this failure at homological degree $h$; it is computed by taking homology on the complex  $\Hom_A(P_\bullet,N)$ for a projective resolution $P_\bullet$ of $M$.
 
 \subsection{Ungraded Ext-groups via projective resolutions}
 
@@ -51,7 +51,7 @@ It shows that $-\circ p_0:\Hom_A(M,N)\to\Hom_A(P_0,N)$ is injective with image $
 (2) Use the resolution with $P_0=M$ and $P_h=0$ for $h\geq1$.
 \end{proof}
 
-Thus $\Ext$ extends $\Hom$ to higher degrees, and it vanishes for projective $M$ as one expects from Proposition~\ref{prop:projective-characterisations}.
+Thus the ungraded $\Ext$ extends $\Hom$ to higher degrees, and it vanishes for projective $M$ as one expects from Proposition~\ref{prop:projective-characterisations}.
 
 
 \subsection{Graded Ext}\label{subsec:graded-ext}
@@ -64,15 +64,16 @@ Let $L_1,\ldots,L_n$ be representatives of the isomorphism classes of simple rig
 \begin{definition}\label{def:graded-ext}
 Let $M$ be a bounded below locally finite-dimensional graded right module and $N$ a graded right module.
 Let $P_\bullet\to M$ be a graded projective resolution, for instance a minimal one by Theorem~\ref{thm:minimal-resolution}.
-For $h\geq0$ and $j\in\Z$, put
+For $h\geq0$, put
 \[
-\Ext_A^h(M,N)_j:=H^h\bigl(\Hom_A^{\Z}(P_\bullet,N(j))\bigr).
+\ext_A^h(M,N):=H^h\bigl(\Hom_A^{\Z}(P_\bullet,N)\bigr),
 \]
+where $\Hom_A^\Z$ denotes the degree-preserving $A$-linear maps.
 \end{definition}
 
-$\Ext_A^h(M,N)_j$ is independent of $P_\bullet$ up to canonical isomorphism, because the proofs of Lemma~\ref{lem:comparison} and Proposition~\ref{prop:ext-well-defined} apply verbatim with degree-preserving maps and graded modules.
+The \defn{graded Ext-group} $\ext_A^h(M,N)$ is independent of $P_\bullet$ up to canonical isomorphism, because the proofs of Lemma~\ref{lem:comparison} and Proposition~\ref{prop:ext-well-defined} apply verbatim with degree-preserving maps and graded modules.
 
-The index $j$ is the Adams degree and $h$ is the homological degree, as in Notation~\ref{not:bigrading}.
+Applying this to the shifted module $N(j)$ gives $\ext_A^h(M,N(j))$, which records the $A$-linear maps raising the Adams degree by $j$; here $h$ is the homological degree and $j$ is the shift in the Adams degree, as in Notation~\ref{not:bigrading}.
 
 \begin{remark}\label{rem:graded-ext-ungraded}
 A graded projective module is projective as an ungraded module, because it is a graded direct summand of a graded free module (Corollary~\ref{cor:graded-projective-characterisations}).
@@ -81,43 +82,57 @@ If $P_h$ is finitely generated, then by Lemma \ref{lem:homogeneous-hom-sum} we h
 \[
 \Hom_A(P_h,N)=\bigoplus_{j\in\Z}\Hom_A^\Z\bigl(P_h,N(j)\bigr).
 \]
-Hence, if $P_h$ is finitely generated for all $h$ (for instance if $A$ is right noetherian and $M$ is finitely generated, by Corollary~\ref{cor:noetherian-minimal-resolution}), then the ordinary $\Ext_A^h(M,N)=\bigoplus_{j\in\Z}\Ext_A^h(M,N)_j$.
-We will call $\Ext_A^h(M,N)_j$ the \defn{graded Ext-groups} and $\Ext_A^h(M,N)$ the \defn{ungraded Ext-groups}.
+Hence, if $P_h$ is finitely generated for all $h$ (for instance if $A$ is right noetherian and $M$ is finitely generated, by Corollary~\ref{cor:noetherian-minimal-resolution}), then the ordinary $\Ext_A^h(M,N)=\bigoplus_{j\in\Z}\ext_A^h(M,N(j))$.
+We call $\ext_A^h(M,N)$ (with lower-case letters) the \defn{graded Ext-groups} and $\Ext_A^h(M,N)$ the \defn{ungraded Ext-groups}.
 \end{remark}
 
 By the same reason in the ungraded setting, graded Ext-groups are always well-defined independent on the choice of graded projective resolution of $M$.
 
+\begin{advanced}
+\begin{remark}[Balancing of Ext]\label{rem:ext-balancing}
+So far $\Ext$ was computed from a projective resolution of the first variable.
+It can equally be computed from an injective coresolution of the second variable: let $\mathcal C$ be an abelian category, such as the category of graded right $A$-modules with degree-preserving maps, or its full subcategory of lfd modules.
+If $P_\bullet\to M$ is a projective resolution and $N\to I^0\to I^1\to\cdots$ is an injective coresolution in $\mathcal C$, then
+\[
+H^h\bigl(\Hom_{\mathcal C}(P_\bullet,N)\bigr)\cong H^h\bigl(\Hom_{\mathcal C}(M,I^\bullet)\bigr)\qquad\text{for all }h\geq0.
+\]
+Both sides are identified with the cohomology of the total complex of the double complex $\Hom_{\mathcal C}(P_p,I^q)$, see for instance \cite[Theorem~2.7.6]{Wei94}.
+For the category of graded modules the left-hand side is $\ext_A^h(M,N)$.
+We use this in Subsection~\ref{subsec:opposite} to compare Ext over $A$ and over the opposite algebra $A^{\mathrm{op}}$.
+\end{remark}
+\end{advanced}
+
 \begin{proposition}\label{prop:ext-minimal}
 Let $P_\bullet\to M$ be a minimal graded projective resolution and $N$ a graded right $A$-module with $NA_+=0$.
-Then every differential of $\Hom_A^\Z(P_\bullet,N(j))$ is zero, and for all $h\geq0$ and $j\in\Z$,
+Then every differential of $\Hom_A^\Z(P_\bullet,N)$ is zero, and for all $h\geq0$,
 \[
-\Ext_A^h(M,N)_j\cong\Hom_A^{\Z}(P_h,N(j))\cong\Hom_S\bigl(\grtop P_h,N(j)\bigr).
+\ext_A^h(M,N)\cong\Hom_A^{\Z}(P_h,N)\cong\Hom_S\bigl(\grtop P_h,N\bigr).
 \]
-In particular, if $N$ is a right $S$-module placed in degree $0$, then $\Ext_A^h(M,N)_j\cong\Hom_S\bigl((\grtop P_h)_{-j},N\bigr)$.
+In particular, if $N$ is a right $S$-module placed in degree $0$, then $\ext_A^h(M,N(j))\cong\Hom_S\bigl((\grtop P_h)_{-j},N\bigr)$ for all $j\in\Z$.
 \end{proposition}
 
 \begin{proof}
-Let $\varphi:P_h\to N(j)$ be $A$-linear and degree-preserving.
-Then $\varphi(P_hA_+)=\varphi(P_h)A_+\subseteq NA_+=0$, so $\varphi$ factors uniquely through $P_h\to P_h/P_hA_+=\grtop P_h$, and every degree-preserving $S$-linear map $\grtop P_h\to N(j)$ arises this way.
+Let $\varphi:P_h\to N$ be $A$-linear and degree-preserving.
+Then $\varphi(P_hA_+)=\varphi(P_h)A_+\subseteq NA_+=0$, so $\varphi$ factors uniquely through $P_h\to P_h/P_hA_+=\grtop P_h$, and every degree-preserving $S$-linear map $\grtop P_h\to N$ arises this way.
 This gives the second isomorphism.
 By minimality of $P_\bullet$ \eqref{eq:graded-minimal-criterion}, $\Im d_{h+1}\subseteq P_hA_+$, so $\varphi d_{h+1}=0$.
 Hence all $\delta^h$ vanish and the cohomology equals the cochain groups.
-If $N$ lies in degree $0$, then $N(j)$ lies in degree $-j$, so a degree-preserving map from $\grtop P_h$ only involves $(\grtop P_h)_{-j}$.
+If $N$ lies in degree $0$, then $N(j)$ lies in degree $-j$ and $N(j)A_+=0$, so by the above a degree-preserving map $\grtop P_h\to N(j)$ only involves $(\grtop P_h)_{-j}$.
 \end{proof}
 
-Thus $\grtop P_h$ can be computed by graded Ext-groups, and when specialising $N$ to a graded simple module, then we get its multiplicity in $\grtop P_h$ as follows:
+Thus $\grtop P_h$ can be computed from graded Ext-groups, and when specialising $N$ to a graded simple module, then we get its multiplicity in $\grtop P_h$ as follows:
 
 \begin{corollary}\label{cor:ext-simple}
 Let $P_\bullet\to M$ be a minimal graded projective resolution.
 Then for $h\geq0$ and $j\in\Z$,
 \[
-\dim_{D_y}\Ext_A^h(M,L_y)_j=\bigl[(\grtop P_h)_{-j}:L_y\bigr],
+\dim_{D_y}\ext_A^h(M,L_y(j))=\bigl[(\grtop P_h)_{-j}:L_y\bigr],
 \]
 where $D_y:=\End_(L_y)$.
 \end{corollary}
 
 \begin{proof}
-By Proposition~\ref{prop:ext-minimal} with $N=L_y$, we get that $\Ext_A^h(M,L_y)_j\cong\Hom_S\bigl((\grtop P_h)_{-j},L_y\bigr)$, which is a natural $D_y$-vector space (action given by postcomposition).
+By Proposition~\ref{prop:ext-minimal} with $N=L_y$, we get that $\ext_A^h(M,L_y(j))\cong\Hom_S\bigl((\grtop P_h)_{-j},L_y\bigr)$, which is a natural $D_y$-vector space (action given by postcomposition).
 Then just apply Schur's Lemma since $S$ is semisimple.
 \end{proof}
 
@@ -128,9 +143,9 @@ The multiplicities $[(\grtop P_h)_i:L_y]$ are the graded Betti numbers $\beta_{h
 \begin{example}\label{ex:ext-A2}
 Let $A=\Bbbk A_2$.
 By Example~\ref{ex:minimal-A2}, the minimal resolution of $L_1$ is $0\to e_{22}A(-1)\to e_{11}A\to L_1\to0$.
-Here $S=\Bbbk e_{11}\oplus\Bbbk e_{22}$, so Corollary~\ref{cor:ext-simple} applies, and the only non-zero groups $\Ext_A^h(L_1,L_y)_j$ are
+Here $S=\Bbbk e_{11}\oplus\Bbbk e_{22}$, so Corollary~\ref{cor:ext-simple} applies, and the only non-zero groups $\ext_A^h(L_1,L_y(j))$ are
 \[
-\Ext_A^0(L_1,L_1)_0\cong\Bbbk,\qquad\Ext_A^1(L_1,L_2)_{-1}\cong\Bbbk,
+\ext_A^0(L_1,L_1)\cong\Bbbk,\qquad\ext_A^1(L_1,L_2(-1))\cong\Bbbk,
 \]
 where the basis corresponds to the projections $e_{11}A\twoheadrightarrow L_1$ and $e_{22}A(-1)\twoheadrightarrow L_2$ respectively.
 \end{example}
@@ -138,18 +153,18 @@ where the basis corresponds to the projections $e_{11}A\twoheadrightarrow L_1$ a
 \begin{example}\label{ex:ext-polynomial-exterior}
 For $A=\Bbbk[x]$ with $\deg x=1$ and minimal graded free resolution of $A_0=\Bbbk$ as in Example~\ref{ex:minimal-polynomial}.  Then
 \[
-\Ext_A^0(\Bbbk,\Bbbk)_0\cong\Bbbk,\qquad\Ext_A^1(\Bbbk,\Bbbk)_{-1}\cong\Bbbk,
+\ext_A^0(\Bbbk,\Bbbk)\cong\Bbbk,\qquad\ext_A^1(\Bbbk,\Bbbk(-1))\cong\Bbbk,
 \]
 and all other groups vanish.
-Similarly, for $E=\Bbbk[\epsilon]/(\epsilon^2)$ with $\deg\epsilon=1$, Example~\ref{ex:minimal-exterior} implies that $\Ext_E^h(\Bbbk,\Bbbk)_j\cong\Bbbk$ if $j=-h$ and $0$ otherwise.
+Similarly, for $E=\Bbbk[\epsilon]/(\epsilon^2)$ with $\deg\epsilon=1$, Example~\ref{ex:minimal-exterior} implies that $\ext_E^h(\Bbbk,\Bbbk(j))\cong\Bbbk$ if $j=-h$ and $0$ otherwise.
 \end{example}
 
-In all three examples the non-zero groups $\Ext_A^h(S,S)_j$ lie on the line $j=-h$, because the generators of $P_h$ have degree $h$.
+In all three examples the non-zero groups $\ext_A^h(S,S(j))$ lie on the line $j=-h$, because the generators of $P_h$ have degree $h$.
 
 In general, we know that graded Ext-groups always lie below this diagonal $j=-h$.
 
 \begin{lemma}\label{lem:resolution-degrees}
-For any minimal graded projective resolution $P_\bullet \to S$, we have  $P_{h,<h}=0$; equivalently, $\Ext_A^h(S,S)_{>-h}=0$.
+For any minimal graded projective resolution $P_\bullet \to S$, we have  $P_{h,<h}=0$; equivalently, $\ext_A^h(S,S(j))=0$ for all $j>-h$.
 \end{lemma}
 
 \begin{proof}
@@ -170,44 +185,45 @@ The maps $d_h\otimes\id_N$ make $P_\bullet\otimes_AN$ a chain complex of vector 
 \]
 \end{definition}
 
-Replacing $\Hom_A(-,N)$ by $-\otimes_AN$ in the definition of $\Ext$ gives the Tor-groups.
+Replacing $\Hom_A(-,N)$ by $-\otimes_AN$ in the definition of ungraded $\Ext$ gives the ungraded Tor-groups.
 As for $\Ext$, this is independent of $P_\bullet$ up to canonical isomorphism and functorial in $M$ and $N$, with $\Tor_0^A(M,N)=M\otimes_AN$.
 
 The proofs of Lemma~\ref{lem:comparison} and Proposition~\ref{prop:ext-well-defined} apply with $\Hom_A(-,N)$ replaced by $-\otimes_AN$, which sends lifts and homotopies to lifts and homotopies.
 Right exactness of $-\otimes_AN$ gives $\Tor_0^A(M,N)=M\otimes_AN$.
 
-As for $\Ext$, there is a graded version.
+As for $\Ext$, there is a graded version, denoted by lower-case letters.
 
 \begin{definition}\label{def:graded-tor}
 Let $M$ be a graded right $A$-module and $N$ a graded left $A$-module, and let $P_\bullet\to M$ be a graded projective resolution.
-Then $P_\bullet\otimes_AN$ is a chain complex of graded vector spaces for the total grading of Definition~\ref{def:total-tensor-grading}, and for $h\geq0$ and $i\in\Z$ we put
+Then $P_\bullet\otimes_AN$ is a chain complex of graded vector spaces for the total grading of Definition~\ref{def:total-tensor-grading}, and for $h\geq0$ we put
 \[
-\Tor_h^A(M,N)_i:=H_h\bigl((P_\bullet\otimes_AN)_i\bigr).
+\tor_h^A(M,N):=H_h\bigl((P_\bullet\otimes_AN)_0\bigr),
 \]
+the homology of the Adams degree $0$ part.
 \end{definition}
 
-The index $i$ is the Adams degree, and $h$ is the homological degree, so $\Tor_h^A(M,N)_i$ is the homology of $(P_\bullet\otimes_AN)_{\bullet,i}$ in homological degree $h$.
-The groups $\Tor_h^A(M,N)_i$ are independent of $P_\bullet$ up to canonical isomorphism, by the same proofs with degree-preserving maps.
+Since $(P_\bullet\otimes_AN(i))_0=(P_\bullet\otimes_AN)_i$, the group $\tor_h^A(M,N(i))$ is the homology in homological degree $h$ of the Adams degree $i$ part of $P_\bullet\otimes_AN$.
+The groups $\tor_h^A(M,N)$ are independent of $P_\bullet$ up to canonical isomorphism, by the same proofs with degree-preserving maps.
 
 \begin{remark}\label{rem:graded-tor-ungraded}
 As in Remark~\ref{rem:graded-ext-ungraded}, $P_\bullet\to M$ is also an ordinary projective resolution.
 Since $P_h\otimes_AN=\bigoplus_i(P_h\otimes_AN)_i$ with degree-preserving differentials, and homology commutes with direct sums,
 \[
-\Tor_h^A(M,N)=\bigoplus_{i\in\Z}\Tor_h^A(M,N)_i,
+\Tor_h^A(M,N)=\bigoplus_{i\in\Z}\tor_h^A(M,N(i)),
 \]
-with no finiteness assumption on $P_h$ (unlike for $\Ext$).
-We call $\Tor_h^A(M,N)_i$ the \defn{graded Tor-groups} and $\Tor_h^A(M,N)$ the \defn{ungraded Tor-groups}.
+with no finiteness assumption on $P_h$ (unlike for ungraded $\Ext$).
+We call $\tor_h^A(M,N)$ the \defn{graded Tor-groups} and $\Tor_h^A(M,N)$ the \defn{ungraded Tor-groups}.
 \end{remark}
 
 We only need $N=S=A/A_+$, a graded left $A$-module in degree $0$.
 
 \begin{proposition}\label{prop:tor-top}
 Let $P_\bullet\to M$ be a minimal graded projective resolution.
-Then $\Tor_h^A(M,S)_i\cong(\grtop P_h)_i$ as right $S$-modules, for all $h\geq0$ and $i\in\Z$.
+Then $\tor_h^A(M,S(i))\cong(\grtop P_h)_i$ as right $S$-modules, for all $h\geq0$ and $i\in\Z$.
 \end{proposition}
 
 \begin{proof}
-We have $P_h\otimes_AS=P_h/P_hA_+=\grtop P_h$, with $(P_h\otimes_AS)_i=(\grtop P_h)_i$, and the differential of $P_\bullet\otimes_AS$ is induced by $d_h$.
+We have $P_h\otimes_AS=P_h/P_hA_+=\grtop P_h$, so $(P_h\otimes_AS(i))_0=(\grtop P_h)_i$, and the differential of $P_\bullet\otimes_AS$ is induced by $d_h$.
 It is zero because $\Im d_h\subseteq P_{h-1}A_+$.
 \end{proof}
 
@@ -215,34 +231,35 @@ For a graded left $A$-module $N$, the graded linear dual $\bbD(N)$ is a right $A
 
 \begin{proposition}\label{prop:ext-tor-duality}
 Let $M$ be a bounded below lfd graded right $A$-module and $N$ a graded left $A$-module.
-Then for all $h\geq0$ and $j\in\Z$,
+Then for all $h\geq0$,
 \[
-\Ext_A^h\bigl(M,\bbD(N)\bigr)_j\cong D\bigl(\Tor_h^A(M,N)_{-j}\bigr).
+\ext_A^h\bigl(M,\bbD(N)\bigr)\cong D\bigl(\tor_h^A(M,N)\bigr).
 \]
 \end{proposition}
 
 \begin{proof}
-A degree-preserving $A$-linear map $\varphi:P\to\bbD(N)(j)$ is the same as a bilinear form $b(p,n)=\varphi(p)(n)$ on $P\times N$ with $b(pa,n)=b(p,an)$ that vanishes on $P_i\times N_k$ unless $i+k=-j$.
-This is a linear form on $(P\otimes_AN)_{-j}$, so $\Hom_A^\Z(P,\bbD(N)(j))\cong D((P\otimes_AN)_{-j})$, naturally in $P$.
-Applying this to $P_\bullet$ identifies the cochain complex $\Hom_A^\Z(P_\bullet,\bbD(N)(j))$ with $D((P_\bullet\otimes_AN)_{-j})$.
+A degree-preserving $A$-linear map $\varphi:P\to\bbD(N)$ is the same as a bilinear form $b(p,n)=\varphi(p)(n)$ on $P\times N$ with $b(pa,n)=b(p,an)$ that vanishes on $P_i\times N_k$ unless $i+k=0$.
+This is a linear form on $(P\otimes_AN)_0$, so $\Hom_A^\Z(P,\bbD(N))\cong D((P\otimes_AN)_0)$, naturally in $P$.
+Applying this to $P_\bullet$ identifies the cochain complex $\Hom_A^\Z(P_\bullet,\bbD(N))$ with $D((P_\bullet\otimes_AN)_0)$.
 Since $D$ is exact, it commutes with taking (co)homology.
 \end{proof}
 
 \begin{corollary}\label{cor:ext-S-dual}
 Assume $S=\bigoplus_x\Bbbk e_x$ (Assumption~\ref{ass:basic-semisimple}), and let $M$ be  a bounded below lfd graded right $A$-module.
-Then $\Ext_A^h(M,S)_j\cong D\bigl((\grtop P_h)_{-j}\bigr)$ for all $h\geq0$ and $j\in\Z$.
+Then $\ext_A^h(M,S(j))\cong D\bigl((\grtop P_h)_{-j}\bigr)$ for all $h\geq0$ and $j\in\Z$.
 \end{corollary}
 
 \begin{proof}
 The dual basis $(e_x^*)_x$ of $D(S)$ satisfies $e_x^*e_y=\delta_{xy}e_x^*$, and both $\bbD(S)$ and $S$ are killed by $A_+$, so $\bbD(S)\cong S$ as graded right $A$-modules.
-Now apply Propositions~\ref{prop:tor-top} and~\ref{prop:ext-tor-duality} with $N=S$; the result agrees with Proposition~\ref{prop:ext-minimal}.
+Now apply Propositions~\ref{prop:ext-tor-duality} and~\ref{prop:tor-top} with $N=S(-j)$, noting $\bbD(S(-j))\cong S(j)$; the result agrees with Proposition~\ref{prop:ext-minimal}.
 \end{proof}
 
-So $\Ext_A^\bullet(M,S)_\bullet$ and $\Tor^A_\bullet(M,S)_\bullet$ carry the same information, and in the main text we only use $\Ext$.
+So the graded Ext-groups $\ext_A^h(M,S(j))$ and the graded Tor-groups $\tor_h^A(M,S(-j))$ carry the same information, and in the main text we only use graded Ext.
 
 \begin{remark}[General $S$]\label{rem:tor-general-S}
-The identification $\bbD(S)\cong S$ in Corollary~\ref{cor:ext-S-dual} uses $S=\bigoplus_x\Bbbk e_x$.
-For arbitrary semisimple $S$, the module $\bbD(S)$ is isomorphic to $S$ only after choosing a symmetrising form; without it one can use $\Ext_A^h(M,\bbD(S))$ in place of $\Ext_A^h(M,S)$ throughout.
+The proof of Corollary~\ref{cor:ext-S-dual} uses the dual basis of $S=\bigoplus_x\Bbbk e_x$ to identify $\bbD(S)\cong S$.
+For arbitrary semisimple $S$ the modules $\bbD(S)$ and $S$ are still isomorphic as graded right $A$-modules: both are killed by $A_+$, hence are right $S$-modules, and after choosing a symmetrising form on $S$, Theorem~\ref{prop:dual-comparison} applied to the left module $S$ gives $\bbD(S)\cong{}^*S=\Hom_{S^{\mathrm{op}}}(S,S)\cong S$ (see also Remark~\ref{rem:general-S-comparison}).
+So Corollary~\ref{cor:ext-S-dual} holds for arbitrary $S$ as an isomorphism of vector spaces, which depends on the choice of symmetrising form.
 \end{remark}
 \end{advanced}
 
@@ -256,22 +273,22 @@ Let $A$ be as in Subsection~\ref{subsec:graded-ext} and let $P_\bullet\to S$ be 
 \begin{enumerate}
 \item $P_0=A$, with $p_0:A\to S$ the projection.
 \item $\grtop P_1\cong A_+/A_+^2$.
-If $A$ is generated in degree $1$ over $S$ (see \eqref{eq:multiplication-maps}), then $\grtop P_1\cong A_1$, concentrated in degree $1$, $P_1\cong(A_1\otimes_SA)(-1)$, and $\Ext_A^1(S,S)=\Ext_A^1(S,S)_{-1}$.
-Conversely, if $\Ext_A^1(S,S)_j=0$ for all $j\neq-1$, then $A$ is generated in degree $1$ over $S$.
+If $A$ is generated in degree $1$ over $S$ (see \eqref{eq:multiplication-maps}), then $\grtop P_1\cong A_1$, concentrated in degree $1$, $P_1\cong(A_1\otimes_SA)(-1)$, and $\ext_A^1(S,S(j))=0$ for all $j\neq-1$.
+Conversely, if $\ext_A^1(S,S(j))=0$ for all $j\neq-1$, then $A$ is generated in degree $1$ over $S$.
 
 \item If $A$ is generated in degree $1$, put $V=A_1$ and let $I=\Ker(T_S(V)\onto A)$ be the relational ideal.
 Then
 \[
 (\grtop P_2)_i\cong I_i/\bigl(V\otimes_SI_{i-1}+I_{i-1}\otimes_SV\bigr)\quad\text{for all }i.
 \]
-In particular, if $A=T_S(V)/(R)$ is quadratic with $V=A_1$ and $R\subseteq V\otimes_SV$, then $\grtop P_2\cong R$, concentrated in degree $2$, $P_2\cong(R\otimes_SA)(-2)$, and $\Ext_A^2(S,S)=\Ext_A^2(S,S)_{-2}$.
-Conversely, if $A$ is generated in degree $1$ and $\Ext_A^2(S,S)_j=0$ for all $j\neq-2$, then $A$ is quadratic, with $A=T_S(V)/(I_2)$.
+In particular, if $A=T_S(V)/(R)$ is quadratic with $V=A_1$ and $R\subseteq V\otimes_SV$, then $\grtop P_2\cong R$, concentrated in degree $2$, $P_2\cong(R\otimes_SA)(-2)$, and $\ext_A^2(S,S(j))=0$ for all $j\neq-2$.
+Conversely, if $A$ is generated in degree $1$ and $\ext_A^2(S,S(j))=0$ for all $j\neq-2$, then $A$ is quadratic, with $A=T_S(V)/(I_2)$.
 \end{enumerate}
 \end{proposition}
 
 \begin{proof}
-By Proposition~\ref{prop:ext-minimal}, $\Ext_A^h(S,S)_j\cong\Hom_S\bigl((\grtop P_h)_{-j},S\bigr)$, which is non-zero if and only if $(\grtop P_h)_{-j}\neq0$, since every simple $S$-module is a direct summand of $S$.
-So $\Ext_A^h(S,S)_j=0$ for all $j\neq-h$ if and only if $\grtop P_h$ is concentrated in degree $h$; this is how the statements about $\Ext$ below follow from those about $\grtop P_h$.
+By Proposition~\ref{prop:ext-minimal}, $\ext_A^h(S,S(j))\cong\Hom_S\bigl((\grtop P_h)_{-j},S\bigr)$, which is non-zero if and only if $(\grtop P_h)_{-j}\neq0$, since every simple $S$-module is a direct summand of $S$.
+So $\ext_A^h(S,S(j))=0$ for all $j\neq-h$ if and only if $\grtop P_h$ is concentrated in degree $h$; this is how the statements about graded Ext below follow from those about $\grtop P_h$.
 
 (1) The module $A$ is projective and $\Ker p_0=A_+=AA_+$, so $\Ker p_0\subseteq P_0A_+$ and $p_0$ is the first step of a minimal resolution.
 
@@ -348,7 +365,7 @@ Hence $\Ext_A^1(M,N)$ is the cokernel.
 
 \begin{exercise}
 Let $A=\Bbbk A_3/(e_{13})$ with the grading by path length.
-Find the minimal graded projective resolution of $L_1$, and compute $\dim_\Bbbk\Ext_A^h(L_1,L_y)_j$ for all $h,y,j$.
+Find the minimal graded projective resolution of $L_1$, and compute $\dim_\Bbbk\ext_A^h(L_1,L_y(j))$ for all $h,y,j$.
 \end{exercise}
 
 \begin{hidden}
@@ -361,35 +378,35 @@ So the minimal resolution is
 0\to e_{33}A(-2)\to e_{22}A(-1)\to e_{11}A\to L_1\to0,
 \]
 with $\grtop P_h=L_{h+1}$ in degree $h$ for $h=0,1,2$.
-Here $S=\Bbbk^3$, so by Corollary~\ref{cor:ext-simple}, $\dim\Ext_A^h(L_1,L_y)_j=[(\grtop P_h)_{-j}:L_y]$ equals $1$ for $(h,y,j)=(0,1,0),(1,2,-1),(2,3,-2)$ and $0$ otherwise.
+Here $S=\Bbbk^3$, so by Corollary~\ref{cor:ext-simple}, $\dim\ext_A^h(L_1,L_y(j))=[(\grtop P_h)_{-j}:L_y]$ equals $1$ for $(h,y,j)=(0,1,0),(1,2,-1),(2,3,-2)$ and $0$ otherwise.
 \end{hidden}
 
 
 \begin{exercise}
 Let $A=\Bbbk[x]$ with $\deg x=1$ and $M=A/(x^m)$ for some $m\geq1$.
-Find a minimal graded resolution of $M$, and compute $\grtop P_h$ and $\Ext_A^h(M,\Bbbk)_j$ for all $h,j$.
+Find a minimal graded resolution of $M$, and compute $\grtop P_h$ and $\ext_A^h(M,\Bbbk(j))$ for all $h,j$.
 \end{exercise}
 
 \begin{hidden}
 \emph{Solution.}
 Multiplication by $x^m$ is injective on $A$, so $0\to A(-m)\xrightarrow{x^m}A\to M\to0$ is a graded projective resolution, and it is minimal since $x^m\in A_+$ for $m\geq1$.
 So $\grtop P_0=\Bbbk$ in degree $0$ and $\grtop P_1=\Bbbk$ in degree $m$, and $\grtop P_h=0$ for $h\geq2$.
-By Proposition~\ref{prop:ext-minimal}, $\Ext_A^h(M,\Bbbk)_j\cong\Hom_\Bbbk((\grtop P_h)_{-j},\Bbbk)$ is $\Bbbk$ for $(h,j)=(0,0)$ and $(1,-m)$, and $0$ otherwise.
+By Proposition~\ref{prop:ext-minimal}, $\ext_A^h(M,\Bbbk(j))\cong\Hom_\Bbbk((\grtop P_h)_{-j},\Bbbk)$ is $\Bbbk$ for $(h,j)=(0,0)$ and $(1,-m)$, and $0$ otherwise.
 \end{hidden}
 
 
 \begin{exercise}
 Let $A$ be as in Subsection~\ref{subsec:graded-ext}.
 \begin{enumerate}
-\item Prove that $\Ext_A^1(S,S)_j\cong\Hom_S\bigl((A_+/A_+^2)_{-j},S\bigr)$ for all $j\in\Z$.
-\item Prove that $A$ is generated in degree $1$ over $S$ if and only if $\Ext_A^1(S,S)_j=0$ for all $j\neq-1$.
+\item Prove that $\ext_A^1(S,S(j))\cong\Hom_S\bigl((A_+/A_+^2)_{-j},S\bigr)$ for all $j\in\Z$.
+\item Prove that $A$ is generated in degree $1$ over $S$ if and only if $\ext_A^1(S,S(j))=0$ for all $j\neq-1$.
 \end{enumerate}
 \end{exercise}
 
 \begin{hidden}
 \emph{Solution.}
 (1) Let $P_\bullet\to S$ be the minimal resolution and $K_1=\Ker p_0=A_+$.
-By Proposition~\ref{prop:ext-minimal}, $\Ext_A^1(S,S)_j\cong\Hom_S((\grtop P_1)_{-j},S)$, and $\grtop P_1\cong\grtop K_1=A_+/A_+^2$ by Corollary~\ref{cor:minimal-tops}.
+By Proposition~\ref{prop:ext-minimal}, $\ext_A^1(S,S(j))\cong\Hom_S((\grtop P_1)_{-j},S)$, and $\grtop P_1\cong\grtop K_1=A_+/A_+^2$ by Corollary~\ref{cor:minimal-tops}.
 
 (2) By (1), and since every simple $S$-module is a direct summand of $S$, the condition says $A_+/A_+^2$ is concentrated in degree $1$, that is, $A_i=(A_+^2)_i=\sum_{0<p<i}A_pA_{i-p}$ for $i\geq2$.
 If $A$ is generated in degree $1$, then $A_i=A_1A_{i-1}\subseteq A_+^2$ for $i\geq2$.

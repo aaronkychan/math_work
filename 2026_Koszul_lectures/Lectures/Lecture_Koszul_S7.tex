@@ -1,5 +1,366 @@
 % !TEX root = Lecture_Koszul.tex
 \clearpage
-\section{Basic properties of Koszul algebras}\label{sec:koszul-properties}
+\section{The Yoneda algebra}\label{sec:yoneda}
 
-Throughout, $A$ is as in Section~\ref{sec:koszul-complex}, and $P_\bullet\to S$ is the minimal graded projective resolution of $S=A/A_+$.
+The groups $\ext_A^h(S,S(j))$ of Section~\ref{sec:ext-tor} do not just sit side by side: they multiply, and the resulting algebra is intrinsic to $A$.
+We show that on the diagonal $j=-h$ this algebra is the quadratic dual $A^!$ of Section~\ref{sec:quadratic-dual}, for every quadratic algebra $A$, and that for Koszul algebras the diagonal is everything.
+Here $A$ is as in Section~\ref{sec:koszul-complex}, $P_\bullet\to S$ is its minimal graded projective resolution, and $S=\bigoplus_x\Bbbk e_x$ as in Assumption~\ref{ass:basic-semisimple}.
+
+\subsection{Comparing projective resolutions}\label{subsec:comparison}
+
+To define the Yoneda product we must continue a map out of one term of a resolution to the whole resolution, and the continuation is unique only up to homotopy.
+The same comparison shows that ungraded $\Ext$ and graded $\ext$ do not depend on the chosen resolution, as used in Section~\ref{sec:ext-tor}.
+
+\begin{lemma}[Comparison lemma]\label{lem:comparison}
+Let $P_\bullet\to M$ be a projective resolution with differentials $d_h$ and augmentation $p_0$.
+Let $\cdots\to Q_1\xrightarrow{d'_1}Q_0\xrightarrow{q_0}M'\to0$ be an exact sequence of $A$-modules, and let $f:M\to M'$ be $A$-linear.
+\begin{enumerate}
+\item There are $A$-linear maps $f_h:P_h\to Q_h$ for $h\geq0$ making the following diagram commute:
+\[
+\xymatrix@C=26pt@R=26pt{
+\cdots\ar[r]&P_2\ar[r]^{d_2}\ar@{-->}[d]^{f_2}&P_1\ar[r]^{d_1}\ar@{-->}[d]^{f_1}&P_0\ar[r]^{p_0}\ar@{-->}[d]^{f_0}&M\ar[r]\ar[d]^{f}&0\\
+\cdots\ar[r]&Q_2\ar[r]_{d'_2}&Q_1\ar[r]_{d'_1}&Q_0\ar[r]_{q_0}&M'\ar[r]&0
+}
+\]
+\item If $(f'_h)_{h\geq0}$ is another such family, there are $A$-linear maps $s_h:P_h\to Q_{h+1}$ for $h\geq0$ (the diagonal arrows below) with $f_h-f'_h=d'_{h+1}s_h+s_{h-1}d_h$ for all $h\geq0$, where $s_{-1}:=0$:
+\[
+\xymatrix@C=34pt@R=34pt{
+\cdots\ar[r]&P_2\ar[r]^{d_2}\ar[d]|{f_2-f'_2}&P_1\ar[r]^{d_1}\ar[d]|{f_1-f'_1}\ar[dl]_{s_1}&P_0\ar[d]|{f_0-f'_0}\ar[dl]_{s_0}\\
+\cdots\ar[r]&Q_2\ar[r]_{d'_2}&Q_1\ar[r]_{d'_1}&Q_0
+}
+\]
+\end{enumerate}
+\end{lemma}
+
+We say that $(f_h)_{h\geq0}$ \defn{lifts} $f$, and that two lifts are \defn{homotopic} when maps $s_h$ as in (2) exist.
+Intuitively, this is the algebraic version of a continuous deformation: $(f_h)$ can be deformed into $(f'_h)$, with the maps $s_h$ recording the deformation.
+As for continuous maps, a deformation does not change the effect on (co)homology; this is checked in Proposition~\ref{prop:ext-well-defined} below.
+For $M=M'$, $Q_\bullet=P_\bullet$ and $f=\id_M$ the lifts are the maps of resolutions in Theorem~\ref{thm:minimal-resolution}.
+
+\begin{supplementary}
+\begin{proof}[Proof of Lemma~\ref{lem:comparison}]
+(1) Since $P_0$ is projective and $q_0$ is surjective, there is $f_0$ with $q_0f_0=fp_0$.
+Suppose $f_0,\ldots,f_{h-1}$ are constructed, $h\geq1$, and consider $f_{h-1}d_h:P_h\to Q_{h-1}$.
+For $h=1$, we have $q_0f_0d_1=fp_0d_1=0$, so $f_0d_1$ has image in $\Ker q_0=\Im d'_1$.
+For $h\geq2$, $d'_{h-1}f_{h-1}d_h=f_{h-2}d_{h-1}d_h=0$, so $f_{h-1}d_h$ has image in $\Ker d'_{h-1}=\Im d'_h$.
+Since $P_h$ is projective and $d'_h:Q_h\to\Im d'_h$ is surjective, there is $f_h:P_h\to Q_h$ with $d'_hf_h=f_{h-1}d_h$.
+
+(2) Put $g_h=f_h-f'_h$, so $q_0g_0=0$ and $d'_hg_h=g_{h-1}d_h$ for $h\geq1$.
+The image of $g_0$ lies in $\Ker q_0=\Im d'_1$, so projectivity of $P_0$ gives $s_0$ with $d'_1s_0=g_0$.
+Let $h\geq1$ and suppose $s_0,\ldots,s_{h-1}$ are constructed.
+Then
+\[
+d'_h(g_h-s_{h-1}d_h)=g_{h-1}d_h-(g_{h-1}-s_{h-2}d_{h-1})d_h=0,
+\]
+where $s_{-1}:=0$ and $d_{h-1}d_h=0$.
+Thus $g_h-s_{h-1}d_h$ has image in $\Ker d'_h=\Im d'_{h+1}$, and projectivity of $P_h$ gives $s_h$ with $d'_{h+1}s_h=g_h-s_{h-1}d_h$.
+\end{proof}
+\end{supplementary}
+
+\begin{proposition}\label{prop:ext-well-defined}
+Let $P_\bullet\to M$ and $Q_\bullet\to M'$ be projective resolutions, $f:M\to M'$ be $A$-linear, $(f_h)$ a lift of $f$, and $N$ a module.
+\begin{enumerate}
+\item The map $[\varphi]\mapsto[\varphi f_h]$ is a well-defined linear map $f^*:H^h(\Hom_A(Q_\bullet,N))\to H^h(\Hom_A(P_\bullet,N))$ that does not depend on the choice of lift.
+\item If $g:M'\to M''$ is $A$-linear and $R_\bullet\to M''$ is a projective resolution, then $(gf)^*=f^*g^*$; also $(\id_M)^*=\id$.
+\end{enumerate}
+In particular, up to canonical isomorphism the ungraded $\Ext_A^h(M,N)$ does not depend on the projective resolution of $M$.
+It is contravariant in $M$ through $f^*$.
+It is covariant in $N$: an $A$-linear map $\psi:N\to N'$ gives $\psi_*[\varphi]=[\psi\varphi]$.
+\end{proposition}
+
+\begin{proof}
+(1) Let $\varphi:Q_h\to N$ be a cocycle, so $\varphi d'_{h+1}=0$.
+Then $\varphi f_hd_{h+1}=\varphi d'_{h+1}f_{h+1}=0$, so $\varphi f_h$ is a cocycle.
+If $\varphi=\psi d'_h$ is a coboundary, then $\varphi f_h=\psi f_{h-1}d_h$ is a coboundary.
+For another lift $(f'_h)$ with homotopy $(s_h)$ as in Lemma~\ref{lem:comparison}(2),
+\[
+\varphi(f_h-f'_h)=\varphi d'_{h+1}s_h+\varphi s_{h-1}d_h=(\varphi s_{h-1})d_h,
+\]
+a coboundary; for $h=0$ the same computation gives $\varphi d'_1s_0=0$.
+(2) If $(f_h)$ lifts $f$ and $(g_h)$ lifts $g$, then $(g_hf_h)$ lifts $gf$, and $(\id_{P_h})$ lifts $\id_M$; use (1).
+For two resolutions $P_\bullet,P'_\bullet$ of $M$, the lifts of $\id_M$ in each direction give maps $\id^*$ that are inverse to each other by (2).
+Finally $\psi\varphi$ is a cocycle (coboundary) if $\varphi$ is, and $\psi_*$ is compatible with $f^*$.
+\end{proof}
+
+\subsection{The Yoneda product}
+
+By Proposition~\ref{prop:ext-minimal}, every cochain in $\Hom_A^\Z(P_\bullet,S(j))$ is a cocycle and no cochain is a coboundary, so
+\[
+\ext_A^h(S,S(j))=\Hom_A^\Z\bigl(P_h,S(j)\bigr)=\Hom_S\bigl((\grtop P_h)_{-j},S\bigr).
+\]
+A class $\varphi\in\ext_A^h(S,S(j))$ is thus a degree-preserving $A$-linear map $\varphi:P_h\to S(j)$, which vanishes on $P_hA_+$.
+The idea of the product is to continue $\varphi$ to the whole resolution and compose.
+
+\begin{lemma}\label{lem:yoneda-lift}
+For $\varphi\in\ext_A^h(S,S(j))$ there are degree-preserving $A$-linear maps $\tilde\varphi_i:P_{h+i}\to P_i(j)$ for $i\geq0$ with
+\[
+p_0\tilde\varphi_0=\varphi,\qquad d_i\tilde\varphi_i=\tilde\varphi_{i-1}d_{h+i}\quad(i\geq1).
+\]
+Any two such families are homotopic in the sense of Lemma~\ref{lem:comparison}.
+\end{lemma}
+
+\begin{proof}
+Since $\varphi$ kills $\Im d_{h+1}\subseteq P_hA_+$, it factors through $\bar\varphi:\Omega\to S(j)$ with $\Omega=P_h/\Im d_{h+1}$.
+The complex $P_{h+\bullet}\to\Omega$ is a graded projective resolution, and so is $P_\bullet(j)\to S(j)$.
+Apply Lemma~\ref{lem:comparison} (in its degree-preserving form, Subsection~\ref{subsec:graded-ext}) to $\bar\varphi$.
+\end{proof}
+
+\begin{definition}\label{def:yoneda-product}
+For $\varphi\in\ext_A^h(S,S(j))$ and $\psi\in\ext_A^k(S,S(j'))$, the \defn{Yoneda product} is
+\[
+\psi\cdot\varphi:=\psi(j)\circ\tilde\varphi_k:\ P_{h+k}\longrightarrow S(j+j')\ \in\ \ext_A^{h+k}(S,S(j+j')).
+\]
+\end{definition}
+
+\begin{proposition}\label{prop:yoneda-algebra}
+The Yoneda product is well defined, bilinear, and associative, with unit $\id_S\in\ext_A^0(S,S)$.
+\end{proposition}
+
+\begin{proof}
+Let $\tilde\varphi$ and $\tilde\varphi'$ be two lifts, with $\tilde\varphi_k-\tilde\varphi'_k=d_{k+1}s_k+s_{k-1}d_{h+k}$.
+Now $\psi d_{k+1}=0$ and $\psi s_{k-1}d_{h+k}=0$, because both $d_{k+1}$ and $s_{k-1}d_{h+k}$ map into $P_kA_+$ and $\psi$ kills $P_kA_+$.
+So $\psi\cdot\varphi$ does not depend on the lift; bilinearity is clear since sums of lifts are lifts.
+If $\tilde\psi$ lifts $\psi$, then $\tilde\psi_i\tilde\varphi_{k+i}$ lifts $\psi\cdot\varphi$, so for $\chi\in\ext_A^l(S,S(j''))$,
+\[
+\chi\cdot(\psi\cdot\varphi)=\chi\tilde\psi_l\tilde\varphi_{k+l}=(\chi\cdot\psi)\cdot\varphi.
+\]
+Finally $\id_S\in\Hom_S(S,S)=\ext_A^0(S,S)$ lifts to the identity of $P_\bullet$.
+\end{proof}
+
+\begin{definition}\label{def:yoneda-algebra}
+The \defn{Yoneda algebra} of $A$ is the bigraded algebra
+\[
+E(A):=\bigoplus_{h\geq0,\,j\in\Z}\ext_A^h(S,S(j)),
+\]
+with $E(A)^h_j:=\ext_A^h(S,S(j))$.
+The \defn{diagonal Yoneda algebra} is
+\[
+E^\Delta(A):=\bigoplus_{h\geq0}E(A)^h_{-h}=\bigoplus_{h\geq0}\ext_A^h(S,S(-h)).
+\]
+\end{definition}
+
+By Remark~\ref{rem:graded-ext-ungraded}, if the terms $P_h$ are finitely generated then $E(A)$ is the ordinary (ungraded) $\Ext$-algebra $\Ext_A^\bullet(S,S)=\bigoplus_h\Ext_A^h(S,S)$ of the simple modules, with the same construction in the ungraded setting; the extra index $j$ remembers the grading of $A$.
+The degree $0$ part is $E(A)^0_0=\Hom_S(S,S)=S$.
+By Lemma~\ref{lem:resolution-degrees}, $E(A)^h_j=0$ for $j>-h$.
+So the product of classes of types $(h,j)$ and $(k,j')$ lies in $j+j'\leq-(h+k)$, with equality only if both factors are diagonal.
+Hence $E^\Delta(A)$ is a subalgebra of $E(A)$, and the off-diagonal part $\bigoplus_{j<-h}E(A)^h_j$ is an ideal.
+
+\subsection{The diagonal part of a quadratic algebra}
+
+From now on $A=T_S(V)/(R)$ is quadratic.
+By Theorem~\ref{thm:koszul-complex-diagonal}, $P_{h,h}=T_h\cong\mathcal K_h$, so
+\[
+E^\Delta(A)^h=\Hom_S(\mathcal K_h,S),
+\]
+a space of right $S$-linear maps $\mathcal K_h\to S$.
+Recall that $\mathcal K_{h+k}\subseteq\mathcal K_h\otimes_S\mathcal K_k$ (Lemma~\ref{lem:koszul-recursion}).
+For $\varphi\in\Hom_S(\mathcal K_h,S)$ and $\psi\in\Hom_S(\mathcal K_k,S)$ put
+\[
+\psi\star\varphi:\mathcal K_h\otimes_S\mathcal K_k\to S,\qquad x\otimes y\longmapsto\psi\bigl(\varphi(x)\,y\bigr),
+\]
+which is the map $\theta_r(\psi\otimes\varphi)$ of Section~\ref{sec:quadratic-dual} (advanced).
+
+\begin{proposition}\label{prop:diagonal-product}
+For $\varphi\in E^\Delta(A)^h$ and $\psi\in E^\Delta(A)^k$, the Yoneda product $\psi\cdot\varphi\in E^\Delta(A)^{h+k}$ is the restriction of $\psi\star\varphi$ to $\mathcal K_{h+k}\subseteq\mathcal K_h\otimes_S\mathcal K_k$.
+\end{proposition}
+
+\begin{proof}
+The class $\psi\cdot\varphi$ is determined by its values on $T_{h+k}=\mathcal K_{h+k}$, and only the restriction of $\tilde\varphi_k$ to $T_{h+k}$ matters: it maps $T_{h+k}$ into $(P_k(-h))_{h+k}=T_k=\mathcal K_k$, where $\psi$ is evaluated.
+We claim that $\tilde\varphi_i(z)=(\varphi\otimes\id)(z)$ for $z\in\mathcal K_{h+i}\subseteq\mathcal K_h\otimes_S\mathcal K_i$, where $\varphi\otimes\id:\mathcal K_h\otimes_S\mathcal K_i\to S\otimes_S\mathcal K_i=\mathcal K_i$.
+For $i=0$ this is $p_0\tilde\varphi_0=\varphi$, as $p_0$ is the identity on $S$.
+For $i\geq1$ write $z=\sum z'\otimes v$ with $z'\in\mathcal K_{h+i-1}$ and $v\in V$.
+Then $d_{h+i}(z)=\sum z'v$, so $\tilde\varphi_{i-1}d_{h+i}(z)=\sum\tilde\varphi_{i-1}(z')v=\sum(\varphi\otimes\id)(z')\otimes v$ by the induction hypothesis.
+This is the image of $(\varphi\otimes\id)(z)\in\mathcal K_i\subseteq\mathcal K_{i-1}\otimes_SV$ under $d_i$.
+Since $d_i$ is injective on $T_i$ (Step~2 of Theorem~\ref{thm:koszul-complex-diagonal}), the claim follows.
+Hence $(\psi\cdot\varphi)(z)=\psi((\varphi\otimes\id)(z))=(\psi\star\varphi)(z)$.
+\end{proof}
+
+We now compare with the quadratic dual.
+Under Assumption~\ref{ass:basic-semisimple} there is the isomorphism $\alpha_X:\Hom_S(X,S)\to D(X)$, $f\mapsto\tau_S\circ f$, of Section~\ref{sec:quadratic-dual}, where $\tau_S(\sum_xc_xe_x)=\sum_xc_x$.
+
+\begin{theorem}\label{thm:yoneda-quadratic-dual}
+Let $A=T_S(V)/(R)$ be a quadratic algebra.
+Then there is an isomorphism of graded algebras
+\[
+A^!\xrightarrow{\ \sim\ }E^\Delta(A),\qquad A^!_h\xrightarrow{\ \sim\ }\ext_A^h(S,S(-h))\cong\Hom_S(\mathcal K_h,S).
+\]
+\end{theorem}
+
+\begin{proof}
+Let $\Phi_h:D(V)^{\otimes h}\to E^\Delta(A)^h$ be $\alpha_{\mathcal K_h}^{-1}\circ\rho_h$, with $\rho_h$ as in Proposition~\ref{prop:koszul-terms-dual}.
+By that proposition, $\Phi_h$ is surjective with kernel the degree $h$ part of $(\theta^{-1}(R^\perp))$, so $\Phi$ induces a linear isomorphism $A^!_h\cong E^\Delta(A)^h$.
+It remains to show $\Phi_{h+k}(w'\otimes w)=\Phi_k(w')\cdot\Phi_h(w)$ for $w\in D(V)^{\otimes h}$ and $w'\in D(V)^{\otimes k}$.
+
+For right $S$-modules $X,Y$ and $\varphi\in\Hom_S(X,S)$, $\psi\in\Hom_S(Y,S)$ we have
+\[
+\theta_{X,Y}\bigl(\alpha_Y\psi\otimes\alpha_X\varphi\bigr)=\alpha_{X\otimes_SY}(\psi\star\varphi).
+\]
+Indeed, writing $\varphi(x)=\sum_ic_ie_i$ with $c_i=\tau_S(\varphi(x)e_i)=\alpha_X\varphi(xe_i)$, both sides send $x\otimes y$ to $\sum_ic_i\,\tau_S(\psi(e_iy))$.
+By associativity and binaturality of $\theta$ (Proposition~\ref{prop:D-tensor-duals}), $\rho_{h+k}(w'\otimes w)$ is the restriction to $\mathcal K_{h+k}\subseteq\mathcal K_h\otimes_S\mathcal K_k$ of $\theta_{\mathcal K_h,\mathcal K_k}(\rho_k(w')\otimes\rho_h(w))$.
+Applying $\alpha^{-1}$ and the identity above gives $\Phi_{h+k}(w'\otimes w)=\Phi_k(w')\star\Phi_h(w)|_{\mathcal K_{h+k}}$, which is $\Phi_k(w')\cdot\Phi_h(w)$ by Proposition~\ref{prop:diagonal-product}.
+\end{proof}
+
+In particular $E^\Delta(A)$ is generated by $E(A)^1_{-1}=\ext^1_A(S,S(-1))\cong D(V)$, with quadratic relations $\theta^{-1}(R^\perp)$.
+
+\begin{advanced}
+\begin{remark}[General $S$]
+For arbitrary semisimple $S$, the proof of Proposition~\ref{prop:diagonal-product} works verbatim, and $E^\Delta(A)^h=\Hom_S(\mathcal K_h,S)=\mathcal K_h^*$ with product $\theta_r$.
+Hence $E^\Delta(A)\cong T_S(V^*)/(R^\perp)$, the right quadratic dual of Definition~\ref{def:S-quadratic-duals}, without choosing a symmetrising form.
+\end{remark}
+\end{advanced}
+
+\subsection{Consequences for Koszul algebras}
+
+By Proposition~\ref{prop:koszul-ext}, $A$ is Koszul if and only if $E(A)=E^\Delta(A)$.
+Combining this with Theorem~\ref{thm:yoneda-quadratic-dual} gives the following.
+
+\begin{corollary}\label{cor:yoneda-koszul}
+Let $A$ be a quadratic algebra, and let $A^!\cong E^\Delta(A)\hookrightarrow E(A)$ be the natural algebra map.
+The following are equivalent:
+\begin{enumerate}
+\item $A$ is Koszul;
+\item $E(A)=E^\Delta(A)$, that is, $\ext_A^h(S,S(j))=0$ for $j\neq-h$;
+\item $A^!\to E(A)$ is an isomorphism.
+\end{enumerate}
+In this case $\ext_A^h(S,S(-h))\cong A^!_h$ for all $h$, the Yoneda algebra is generated by $\ext_A^1(S,S(-1))$, and $E(A)$ is the ordinary (ungraded) $\Ext$-algebra of the simple $A$-modules.
+\end{corollary}
+
+\begin{proof}
+(1)$\Leftrightarrow$(2) is Proposition~\ref{prop:koszul-ext}(2), and (2)$\Leftrightarrow$(3) is Theorem~\ref{thm:yoneda-quadratic-dual}, since $E^\Delta(A)\subseteq E(A)$ is an equality if and only if the inclusion is bijective.
+If $A$ is Koszul, each $P_h=K_h=\mathcal K_h\otimes_SA(-h)$ is finitely generated, so Remark~\ref{rem:graded-ext-ungraded} gives the last statement.
+\end{proof}
+
+Thus the Koszul property can be read as ``the quadratic dual computes all of the graded Ext-groups $\ext_A^h(S,S(j))$''; for a quadratic algebra that is not Koszul, $A^!$ is a proper subalgebra of $E(A)$ (Exercise~\ref{ex:quadratic-non-koszul}).
+
+\begin{example}\label{ex:yoneda-examples}
+(1) For $A=\SymAlg(V)$, Corollary~\ref{prop:polynomial-koszul} and Proposition~\ref{prop:symmetric-exterior-dual} give $E(A)\cong\bigwedge D(V)$, concentrated on the diagonal.
+
+(2) For $A=\bigwedge W$, Proposition~\ref{prop:symmetric-exterior-dual} gives $A^!\cong\SymAlg(D(W))$.
+If $\dim W=1$, $A=\Bbbk[\epsilon]/(\epsilon^2)$ is Koszul (Example~\ref{ex:minimal-exterior}), so $E(A)\cong\Bbbk[t]$ with $t\in\ext^1_A(\Bbbk,\Bbbk(-1))$, in agreement with Example~\ref{ex:ext-polynomial-exterior}.
+
+(3) For $A=\Bbbk A_2$ we have $R=0$ and $V\otimes_SV=0$, so $A^!=S\oplus D(V)$, of dimension $2+1$, matching Example~\ref{ex:ext-A2}.
+\end{example}
+
+The linear resolution also gives a numerical consequence.
+For $S=\Bbbk$, write $h_A(t)=\sum_i\dim A_i\,t^i$.
+
+\begin{corollary}\label{cor:hilbert-koszul}
+If $S=\Bbbk$ and $A$ is Koszul, then $h_A(t)\,h_{A^!}(-t)=1$.
+\end{corollary}
+
+\begin{proof}
+The Koszul complex is a resolution with $K_h=\mathcal K_h\otimes_\Bbbk A(-h)$ and $\dim\mathcal K_h=\dim A^!_h$ (Proposition~\ref{prop:koszul-terms-dual}).
+Taking the alternating sum of Hilbert series in the exact sequence $\cdots\to K_1\to K_0\to\Bbbk\to0$ as in Exercise~\ref{ex:hilbert-polynomial} gives $\sum_h(-1)^h\dim A^!_h\,t^h\cdot h_A(t)=1$.
+\end{proof}
+
+\subsection{The quadratic dual of a Koszul algebra is Koszul}
+
+Let $A=T_S(V)/(R)$ be quadratic and $B=A^!$, with $B_1=D(V)$ and $B^!\cong A$ (Theorem~\ref{thm:quadratic-involution}); all $A_i,B_j$ are finite-dimensional.
+By Corollary~\ref{cor:koszul-complex-exact}, $A$ is Koszul if and only if $K_\bullet\to S$ is exact, where $K_h=D(B_h)\otimes_SA(-h)$ by Proposition~\ref{prop:koszul-terms-dual}.
+Fixing the internal degree $n$, this is the complex of vector spaces $K_{\bullet,n}$:
+\[
+0\to D(B_n)\otimes_SA_0\to D(B_{n-1})\otimes_SA_1\to\cdots\to D(B_0)\otimes_SA_n\to0,
+\]
+which is exact for $n\geq1$ (and equals $S$ for $n=0$).
+Transposing it produces a complex with terms $D(A_i)\otimes_SB_{n-i}$ that turns out to be a resolution of $S$ over $B$.
+
+\begin{lemma}\label{lem:koszul-differential-transpose}
+Under $\mathcal K_h\cong D(B_h)$, the inclusion $\iota_h:\mathcal K_h\hookrightarrow\mathcal K_{h-1}\otimes_SV$ is the transpose of the multiplication $B_1\otimes_SB_{h-1}\to B_h$, followed by $D(D(V))\cong V$:
+\[
+\iota_h:D(B_h)\xrightarrow{\ D(m_B)\ }D(B_1\otimes_SB_{h-1})\cong D(B_{h-1})\otimes_SD(B_1)\cong D(B_{h-1})\otimes_SV.
+\]
+\end{lemma}
+
+\begin{supplementary}
+\begin{proof}
+Let $\pi_h:D(V)^{\otimes h}\to B_h$ be the quotient map; the isomorphism $D(B_h)\cong\mathcal K_h$ of Proposition~\ref{prop:koszul-terms-dual} is $D(\pi_h)$ followed by the evaluation identification $D(D(V)^{\otimes h})\cong V^{\otimes h}$ (Lemma~\ref{lem:evaluation-tensor-compatibility}), which reverses the order of the factors.
+Since $\pi_h=m_B\circ(\id\otimes\pi_{h-1})$, we have $D(\pi_h)=D(\id\otimes\pi_{h-1})\circ D(m_B)$.
+By Lemma~\ref{lem:evaluation-tensor-compatibility} again, the last tensor factor of $V^{\otimes h}$ corresponds to the left factor $B_1$, so $D(\id\otimes\pi_{h-1})\circ D(m_B)$ is the inclusion $\mathcal K_h\subseteq\mathcal K_{h-1}\otimes_SV\subseteq V^{\otimes(h-1)}\otimes_SV$.
+\end{proof}
+\end{supplementary}
+
+\begin{theorem}\label{thm:koszul-dual-koszul}
+A quadratic algebra $A$ is Koszul if and only if $A^!$ is Koszul.
+\end{theorem}
+
+\begin{proof}
+Since $(A^!)^!\cong A$, it suffices to show that if $A$ is Koszul then so is $B=A^!$.
+For $i\geq0$ put
+\[
+\Lambda_i:=D(A_i)\otimes_SB(-i),
+\]
+a graded projective right $B$-module generated in degree $i$, with $\Lambda_0=B$.
+Let $\iota^A:D(A_{i+1})\to D(A_i)\otimes_SD(A_1)=D(A_i)\otimes_SB_1$ be the transpose of the multiplication $A_1\otimes_SA_i\to A_{i+1}$, and define the right $B$-linear map
+\[
+\delta_{i+1}:\Lambda_{i+1}\to\Lambda_i,\qquad\lambda\otimes b\longmapsto\sum\mu\otimes\beta b\quad\text{where }\iota^A(\lambda)=\sum\mu\otimes\beta.
+\]
+Let $\varepsilon:\Lambda_0=B\to S$ be the projection.
+We claim that $\Lambda_\bullet\xrightarrow{\varepsilon}S$ is a linear projective resolution of $S$.
+
+In internal degree $n$, the complex $\Lambda_{\bullet,n}$ is
+\[
+0\to D(A_n)\otimes_SB_0\to D(A_{n-1})\otimes_SB_1\to\cdots\to D(A_0)\otimes_SB_n\to0.
+\]
+Dualising the complex above, $D\bigl(D(B_h)\otimes_SA_i\bigr)\cong D(A_i)\otimes_SD(D(B_h))\cong D(A_i)\otimes_SB_h$ term by term.
+By Lemma~\ref{lem:koszul-differential-transpose}, the differential of $K_\bullet$ is $\varphi\otimes a\mapsto(\id\otimes\mathrm{mult}_A)(\kappa(\varphi)\otimes a)$ with $\kappa=D(m_B)$, and its transpose is $(\id\otimes m_B)\circ(\iota^A\otimes\id)$, which is $\delta$.
+Hence $\Lambda_\bullet$ in internal degree $n$ is the dual of $K_\bullet$ in internal degree $n$.
+Since $D$ is exact on finite-dimensional spaces and $K_\bullet\to S$ is exact (Corollary~\ref{cor:koszul-complex-exact}), $\Lambda_\bullet\to S$ is exact in every internal degree $n\geq1$, and for $n=0$ it is $S\xrightarrow{\ \sim\ }S$.
+In particular $\delta\delta=0$ and $\varepsilon\delta_1=0$.
+Thus $\Lambda_\bullet\to S$ is a resolution with $\Lambda_i$ generated in degree $i$, so $B$ is Koszul.
+\end{proof}
+
+\begin{corollary}\label{cor:yoneda-double}
+If $A$ is Koszul, then $E(E(A))\cong A$.
+\end{corollary}
+
+\begin{proof}
+By Corollary~\ref{cor:yoneda-koszul}, $E(A)\cong A^!$, which is Koszul by Theorem~\ref{thm:koszul-dual-koszul}.
+Applying Corollary~\ref{cor:yoneda-koszul} to $A^!$ gives $E(A^!)\cong(A^!)^!\cong A$.
+\end{proof}
+
+This is the algebraic core of Koszul duality: for a Koszul algebra $A$, the algebra $A^!=E(A)$ is again Koszul, and dualising twice returns $A$.
+
+\subsection{Exercises}
+
+\begin{exercise}
+Let $V$ be a finite-dimensional bimodule over $S$.
+Verify Theorem~\ref{thm:yoneda-quadratic-dual} for $A=T_S(V)$ (no relations) and for $A=S\oplus V=T_S(V)/(V\otimes_SV)$, by computing $E(A)$ from the minimal resolutions: Exercise~\ref{ex:square-zero-koszul} for $S\oplus V$, and $0\to V\otimes_SA(-1)\to A\to S\to0$ for $T_S(V)$.
+Which of the two algebras has $A^!=S\oplus D(V)$?
+\end{exercise}
+
+\begin{hidden}
+\emph{Solution.}
+For $A=S\oplus V=T_S(V)/(V\otimes_SV)$, Exercise~\ref{ex:square-zero-koszul} gives the linear resolution $P_h=(V^{\otimes_Sh}\otimes_SA)(-h)$, so $\mathcal K_h=V^{\otimes_Sh}$ (here $R=V\otimes_SV$) and $E(A)^h=\Hom_S(V^{\otimes_Sh},S)\cong D(V)^{\otimes_Sh}$.
+By Proposition~\ref{prop:diagonal-product} the product is concatenation, so $E(A)\cong T_S(D(V))$, which is $A^!$ by the exercise in Section~\ref{sec:quadratic-dual}.
+
+For $A=T_S(V)$, the sequence $0\to V\otimes_SA(-1)\xrightarrow{v\otimes a\mapsto va}A\to S\to0$ is exact, since $A_+=V\otimes_SA$ as $T_S(V)$ is free.
+It is linear, so $E(A)=S\oplus\Hom_S(V,S)=S\oplus D(V)$ with $E^2=0$, hence all products of degree $1$ elements vanish.
+This agrees with $A^!=T_S(D(V))/(D(V\otimes_SV))$ for $R=0$, as $R^\perp$ is everything.
+So $T_S(V)$ is the algebra with $A^!=S\oplus D(V)$.
+\end{hidden}
+
+
+\begin{exercise}
+Let $A=\Bbbk[x]/(x^3)$ be as in Exercise~\ref{ex:x-cubed}.
+Show that $\ext_A^h(\Bbbk,\Bbbk(j))\neq0$ for some $j\neq-h$ when $h\geq2$, and deduce that $E(A)\neq E^\Delta(A)$.
+\end{exercise}
+
+\begin{hidden}
+\emph{Solution.}
+By the solution of Exercise~\ref{ex:x-cubed}, the minimal resolution of $\Bbbk$ has $P_h$ generated in degree $\lfloor3h/2\rfloor$, so by Proposition~\ref{prop:ext-minimal}, $\ext_A^h(\Bbbk,\Bbbk(j))\neq0$ if and only if $j=-\lfloor3h/2\rfloor$.
+For $h\geq2$ we have $\lfloor3h/2\rfloor>h$, so these groups are off the diagonal, while $E^\Delta(A)=\Bbbk\oplus\ext^1_A(\Bbbk,\Bbbk(-1))$ (as $\ext^h_A(\Bbbk,\Bbbk(-h))=0$ for $h\geq2$).
+Hence $E(A)\neq E^\Delta(A)$.
+\end{hidden}
+
+
+\begin{exercise}
+Using the Koszulness of $\SymAlg(V)$, deduce that the exterior algebra $\bigwedge W$ of a finite-dimensional vector space $W$ is Koszul, and that $E(\bigwedge W)\cong\SymAlg(D(W))$.
+\end{exercise}
+
+\begin{hidden}
+\emph{Solution.}
+Apply Theorem~\ref{thm:koszul-dual-koszul} to $\SymAlg(D(W))$, which is Koszul by Corollary~\ref{prop:polynomial-koszul}.
+Its quadratic dual is $\bigwedge D(D(W))\cong\bigwedge W$ by Proposition~\ref{prop:symmetric-exterior-dual}, so $\bigwedge W$ is Koszul.
+By Corollary~\ref{cor:yoneda-koszul} and the second isomorphism of Proposition~\ref{prop:symmetric-exterior-dual}, $E(\bigwedge W)\cong(\bigwedge W)^!\cong\SymAlg(D(W))$.
+\end{hidden}
+
