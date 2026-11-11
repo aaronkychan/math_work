@@ -1,16 +1,7 @@
 % !TEX root = Lecture_Koszul.tex
 \clearpage
-\section{Homological algebra}\label{sec:minimal-resolutions}
+\section{Projective modules and resolutions}\label{sec:minimal-resolutions}
 
-% TODO (ChangeProposal9, Lecture 4 follow-up): After approval, refer to
-% def:positive-ideal and eq:degree-zero-projection for A_+ and A/A_+ = S.
-% When Ext and Tor are introduced in Lectures 6--7, explain
-% Hom_A(M,S) = Hom_S(M/MA_+,S) naturally, and
-% Ext_A^i(M,S) = Hom_S(Tor_i^A(M,S),S) naturally (ungraded right modules).
-% For a minimal graded resolution, identify the graded Ext groups with the
-% S-duals of the generator modules P_i/P_iA_+; check the shift sign carefully.
-% This is not higher Hom_S(-,S), which is exact. Specify the Yoneda algebra
-% action and its opposite convention when formulating Koszul duality.
 
 \subsection{Free and projective modules}
 
@@ -70,6 +61,7 @@ The functor $\Hom_A(P,-)$ is \defn{left exact}, that is, every short exact seque
 \]
 \end{lemma}
 
+\begin{supplementary}
 \begin{proof}
 Since $i$ is injective, $i\circ f=0$ implies $f=0$.
 For $g:P\to M$, we have
@@ -77,6 +69,8 @@ For $g:P\to M$, we have
 qg =0 \;\Leftrightarrow\; \Im(g)\subseteq \Ker(q)=\Im(i),
 \] which is then equivalent to saying that there is a unique factorisation $g=i\widetilde g$ (namely, $\widetilde{g}(p):=l$ such that $i(l)=g(p)$).
 \end{proof}
+\end{supplementary}
+
 
 Surjectivity of $q$ does not in general imply surjectivity of $q\circ-$; projectivity is precisely the extra condition.
 
@@ -251,25 +245,6 @@ The \defn{graded top} of a graded right $A$-module $M$ is the graded right $S$-m
 
 A degree-preserving $f:M\to N$ induces $\grtop f:\grtop M\to\grtop N$, $m+MA_+\mapsto f(m)+NA_+$.
 
-\begin{lemma}\label{lem:graded-radical}
-If $A$ is finite-dimensional, then $A_+=\rad A$.
-Consequently, $\grtop M=\top M$ for every graded right $A$-module $M$, with $\top M:=M/M\rad A$ carrying the quotient grading.
-\end{lemma}
-
-\begin{supplementary}
-\begin{proof}
-If $A$ is finite-dimensional, then $A_i=0$ for all sufficiently large $i$, so $(A_+)^r=0$ for some integer $r\geq1$.
-For any simple right module $L$, the submodule $LA_+$ is either $0$ or $L$.
-The latter gives $L=L(A_+)^r=0$, a contradiction.
-Thus $A_+$ annihilates every simple module and is contained in $\rad A$.
-Since $A/A_+\cong S$ is semisimple, every non-zero element of $S$ acts non-trivially on some simple right $S$-module.
-Regarding these as simple $A$-modules shows that $\rad A\subseteq A_+$.
-\end{proof}
-\end{supplementary}
-\begin{remark}
-This is not true for general graded algebra $A$ -- for example, $A=\Bbbk[x]$ has $\rad A=0$.
-\end{remark}
-
 A graded module $M$ is \defn{bounded below} if $M_{<b}=0$ for some $b$.
 Every finitely generated graded module is bounded below: take $b$ to be the least degree among the homogeneous components of a finite generating set.
 
@@ -334,6 +309,25 @@ By Nakayama, lifts to $M$ of generators of $\top M$ generate $M$; in particular,
 \begin{example}
 For $A=\Bbbk A_2$, $\rad A=\Bbbk e_{12}$, $\top(e_{11}A)=e_{11}A/\Bbbk e_{12}=L_1$ and $\top(e_{22}A)=L_2$.
 \end{example}
+
+
+\begin{lemma}\label{lem:graded-radical}
+If $A$ is finite-dimensional, then $A_+=\rad A$.
+Consequently, $\grtop M=\top M$ for every graded right $A$-module $M$, with $\top M:=M/M\rad A$ carrying the quotient grading.
+\end{lemma}
+
+\begin{proof}
+If $A$ is finite-dimensional, then $A_i=0$ for all sufficiently large $i$, so $(A_+)^r=0$ for some integer $r\geq1$.
+For any simple right module $L$, the submodule $LA_+$ is either $0$ or $L$.
+The latter gives $L=L(A_+)^r=0$, a contradiction.
+Thus $A_+$ annihilates every simple module and is contained in $\rad A$.
+Since $A/A_+\cong S$ is semisimple, every non-zero element of $S$ acts non-trivially on some simple right $S$-module.
+Regarding these as simple $A$-modules shows that $\rad A\subseteq A_+$.
+\end{proof}
+\begin{remark}
+This is not true for general graded algebra $A$ -- for example, $A=\Bbbk[x]$ has $\rad A=0$.
+\end{remark}
+
 \end{advanced}
 
 %We say that a graded module $M$ is \defn{generated in degree $d$} if $M=M_dA$.  More generally, we say that $M$ is generated in degrees $I$ for a set $I\subset \Z$ if $M=\sum_{i\in I} M_iA$.
