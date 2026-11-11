@@ -370,11 +370,12 @@ The quadratic dual $A^!$ records (the generators of)\\ the diagonal part of the 
 \label{sec:koszul-complex-polynomial-ring}
 
 Let $V$ be $n$-dimensional with basis $x_1,\ldots,x_n$, and $A=\SymAlg(V)=\Bbbk[x_1,\ldots,x_n]=T(V)/(R)$ with $R=\langle v\otimes w-w\otimes v\rangle$.
-We have an injective map 
+We have a map 
 \[
-\bigwedge^hV\to V^{\otimes h}, \qquad v_1\wedge\cdots\wedge v_h\mapsto\sum_\sigma\operatorname{sgn}(\sigma)v_{\sigma(1)}\otimes\cdots\otimes v_{\sigma(h)}
+\bigwedge^hV\to V^{\otimes h}, \qquad v_1\wedge\cdots\wedge v_h\mapsto\sum_\sigma\operatorname{sgn}(\sigma)v_{\sigma(1)}\otimes\cdots\otimes v_{\sigma(h)},
 \]
-with image lying in $\mathcal K_h$ ($\because$ pairing terms that differ by swapping positions $\nu+1,\nu+2$ gives elements of $V^{\otimes\nu}\otimes R\otimes V^{\otimes(h-2-\nu)}$).
+where $\sigma$ varies over of all permutations of $h$ letters.
+This is an injective map whose image lies in $\mathcal K_h$ ($\because$ pairing terms that differ by a transposition $(i+1,i+2)$ gives elements of $V^{\otimes\nu}\otimes R\otimes V^{\otimes(h-2-\nu)}$).
 By Proposition~\ref{prop:koszul-terms-dual} and Proposition~\ref{prop:symmetric-exterior-dual}, we have
 \[ \dim\mathcal K_h=\dim\bigwedge^hD(V)=\dim\bigwedge^hV=\binom nh.\]
 Hence,
