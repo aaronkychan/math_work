@@ -322,7 +322,7 @@ By induction on $i$ this gives $I_i\subseteq(I_2)$, so $I=(I_2)$ and $A=T_S(V)/(
 \begin{exercise}
 \begin{enumerate}
 \item Prove that $\Ext_A^h(P,N)=0$ for $h\geq1$ and all $N$ if $P$ is projective.
-\item Conversely, let $p_0:P_0\to M$ be a surjection from a projective module with $K=\Ker p_0$, and suppose $\Ext_A^1(M,K)=0$.
+\item Conversely, let $d_0:P_0\to M$ be a surjection from a projective module with $K=\Ker d_0$, and suppose $\Ext_A^1(M,K)=0$.
 Prove that $M$ is projective.
 \end{enumerate}
 \emph{Hint for (2).} Take $P_1\to K$ onto $K$ and consider it as a cocycle in $\Hom_A(P_1,K)$.
@@ -341,7 +341,7 @@ So $K$ is a direct summand of $P_0$, with complement $\cong P_0/K\cong M$, and $
 
 
 \begin{exercise}
-Let $P_\bullet\to M$ be a projective resolution and $K_1=\Ker p_0$.
+Let $P_\bullet\to M$ be a projective resolution and $K_1=\Ker d_0$.
 Prove that
 \[
 \Ext_A^1(M,N)\cong\operatorname{coker}\bigl(\Hom_A(P_0,N)\to\Hom_A(K_1,N)\bigr),
@@ -403,7 +403,7 @@ Let $A$ be as in Subsection~\ref{subsec:graded-ext}.
 
 \begin{hidden}
 \emph{Solution.}
-(1) Let $P_\bullet\to S$ be the minimal resolution and $K_1=\Ker p_0=A_+$.
+(1) Let $P_\bullet\to S$ be the minimal resolution and $K_1=\Ker d_0=A_+$.
 By Proposition~\ref{prop:ext-minimal}, $\ext_A^1(S,S(j))\cong\Hom_S((\grtop P_1)_{-j},S)$, and $\grtop P_1\cong\grtop K_1=A_+/A_+^2$ by Corollary~\ref{cor:minimal-tops}.
 
 (2) By (1), and since every simple $S$-module is a direct summand of $S$, the condition says $A_+/A_+^2$ is concentrated in degree $1$, that is, $A_i=(A_+^2)_i=\sum_{0<p<i}A_pA_{i-p}$ for $i\geq2$.

@@ -12,14 +12,14 @@ To define the Yoneda product we must continue a map out of one term of a resolut
 The same comparison shows that ungraded $\Ext$ and graded $\ext$ do not depend on the chosen resolution, as used in Section~\ref{sec:ext-tor}.
 
 \begin{lemma}[Comparison lemma]\label{lem:comparison}
-Let $P_\bullet\to M$ be a projective resolution with differentials $d_h$ and augmentation $p_0$.
-Let $\cdots\to Q_1\xrightarrow{d'_1}Q_0\xrightarrow{q_0}M'\to0$ be an exact sequence of $A$-modules, and let $f:M\to M'$ be $A$-linear.
+Let $P_\bullet\to M$ be a projective resolution with differentials $d_h$ and with $d_0:P_0\to M$ the surjection onto $M$.
+Let $\cdots\to Q_1\xrightarrow{d'_1}Q_0\xrightarrow{d'_0}M'\to0$ be an exact sequence of $A$-modules, and let $f:M\to M'$ be $A$-linear.
 \begin{enumerate}
 \item There are $A$-linear maps $f_h:P_h\to Q_h$ for $h\geq0$ making the following diagram commute:
 \[
 \xymatrix@C=26pt@R=26pt{
-\cdots\ar[r]&P_2\ar[r]^{d_2}\ar@{-->}[d]^{f_2}&P_1\ar[r]^{d_1}\ar@{-->}[d]^{f_1}&P_0\ar[r]^{p_0}\ar@{-->}[d]^{f_0}&M\ar[r]\ar[d]^{f}&0\\
-\cdots\ar[r]&Q_2\ar[r]_{d'_2}&Q_1\ar[r]_{d'_1}&Q_0\ar[r]_{q_0}&M'\ar[r]&0
+\cdots\ar[r]&P_2\ar[r]^{d_2}\ar@{-->}[d]^{f_2}&P_1\ar[r]^{d_1}\ar@{-->}[d]^{f_1}&P_0\ar[r]^{d_0}\ar@{-->}[d]^{f_0}&M\ar[r]\ar[d]^{f}&0\\
+\cdots\ar[r]&Q_2\ar[r]_{d'_2}&Q_1\ar[r]_{d'_1}&Q_0\ar[r]_{d'_0}&M'\ar[r]&0
 }
 \]
 \item If $(f'_h)_{h\geq0}$ is another such family, there are $A$-linear maps $s_h:P_h\to Q_{h+1}$ for $h\geq0$ (the diagonal arrows below) with $f_h-f'_h=d'_{h+1}s_h+s_{h-1}d_h$ for all $h\geq0$, where $s_{-1}:=0$:
@@ -39,14 +39,14 @@ For $M=M'$, $Q_\bullet=P_\bullet$ and $f=\id_M$ the lifts are the maps of resolu
 
 \begin{supplementary}
 \begin{proof}[Proof of Lemma~\ref{lem:comparison}]
-(1) Since $P_0$ is projective and $q_0$ is surjective, there is $f_0$ with $q_0f_0=fp_0$.
+(1) Since $P_0$ is projective and $d'_0$ is surjective, there is $f_0$ with $d'_0f_0=fd_0$.
 Suppose $f_0,\ldots,f_{h-1}$ are constructed, $h\geq1$, and consider $f_{h-1}d_h:P_h\to Q_{h-1}$.
-For $h=1$, we have $q_0f_0d_1=fp_0d_1=0$, so $f_0d_1$ has image in $\Ker q_0=\Im d'_1$.
+For $h=1$, we have $d'_0f_0d_1=fd_0d_1=0$, so $f_0d_1$ has image in $\Ker d'_0=\Im d'_1$.
 For $h\geq2$, $d'_{h-1}f_{h-1}d_h=f_{h-2}d_{h-1}d_h=0$, so $f_{h-1}d_h$ has image in $\Ker d'_{h-1}=\Im d'_h$.
 Since $P_h$ is projective and $d'_h:Q_h\to\Im d'_h$ is surjective, there is $f_h:P_h\to Q_h$ with $d'_hf_h=f_{h-1}d_h$.
 
-(2) Put $g_h=f_h-f'_h$, so $q_0g_0=0$ and $d'_hg_h=g_{h-1}d_h$ for $h\geq1$.
-The image of $g_0$ lies in $\Ker q_0=\Im d'_1$, so projectivity of $P_0$ gives $s_0$ with $d'_1s_0=g_0$.
+(2) Put $g_h=f_h-f'_h$, so $d'_0g_0=0$ and $d'_hg_h=g_{h-1}d_h$ for $h\geq1$.
+The image of $g_0$ lies in $\Ker d'_0=\Im d'_1$, so projectivity of $P_0$ gives $s_0$ with $d'_1s_0=g_0$.
 Let $h\geq1$ and suppose $s_0,\ldots,s_{h-1}$ are constructed.
 Then
 \[
@@ -89,21 +89,35 @@ By Proposition~\ref{prop:ext-minimal}, every cochain in $\Hom_A^\Z(P_\bullet,S(j
 \ext_A^h(S,S(j))=\Hom_A^\Z\bigl(P_h,S(j)\bigr)=\Hom_S\bigl((\grtop P_h)_{-j},S\bigr).
 \]
 A class $\varphi\in\ext_A^h(S,S(j))$ is thus a degree-preserving $A$-linear map $\varphi:P_h\to S(j)$, which vanishes on $P_hA_+$.
-The idea of the product is to continue $\varphi$ to the whole resolution and compose.
+
+The product is best understood by viewing $\varphi$ as a kind of endomorphism of the resolution $P_\bullet$.
+Indeed, $S(j)$ is the end of the resolution $P_\bullet(j)\to S(j)$, so $\varphi$ can be continued to a chain map $P_{h+\bullet}\to P_\bullet(j)$: it lowers the homological degree by $h$ and raises the Adams degree by $j$.
+Composing two such maps is then the Yoneda product.
 
 \begin{lemma}\label{lem:yoneda-lift}
-For $\varphi\in\ext_A^h(S,S(j))$ there are degree-preserving $A$-linear maps $\tilde\varphi_i:P_{h+i}\to P_i(j)$ for $i\geq0$ with
+For $\varphi\in\ext_A^h(S,S(j))$ there are degree-preserving $A$-linear maps $\tilde\varphi_i:P_{h+i}\to P_i(j)$, $i\geq0$, making the following diagram commute:
 \[
-p_0\tilde\varphi_0=\varphi,\qquad d_i\tilde\varphi_i=\tilde\varphi_{i-1}d_{h+i}\quad(i\geq1).
+\xymatrix@C=28pt@R=30pt{
+\cdots\ar[r]&P_{h+2}\ar[r]^{d_{h+2}}\ar@{-->}[d]_{\tilde\varphi_2}&P_{h+1}\ar[r]^{d_{h+1}}\ar@{-->}[d]_{\tilde\varphi_1}&P_h\ar@{-->}[d]_{\tilde\varphi_0}\ar[dr]^{\varphi}&\\
+\cdots\ar[r]&P_2(j)\ar[r]_{d_2}&P_1(j)\ar[r]_{d_1}&P_0(j)\ar[r]_{d_0}&S(j)
+}
 \]
-Any two such families are homotopic in the sense of Lemma~\ref{lem:comparison}.
+Any two such families $\tilde\varphi,\tilde\varphi'$ are homotopic: there are maps $s_i:P_{h+i}\to P_{i+1}(j)$ (the diagonal arrows below) with $\tilde\varphi_i-\tilde\varphi'_i=d_{i+1}s_i+s_{i-1}d_{h+i}$, where $s_{-1}:=0$:
+\[
+\xymatrix@C=40pt@R=34pt{
+\cdots\ar[r]&P_{h+2}\ar[r]^{d_{h+2}}\ar[d]|{\tilde\varphi_2-\tilde\varphi'_2}&P_{h+1}\ar[r]^{d_{h+1}}\ar[d]|{\tilde\varphi_1-\tilde\varphi'_1}\ar[dl]_{s_1}&P_h\ar[d]|{\tilde\varphi_0-\tilde\varphi'_0}\ar[dl]_{s_0}\\
+\cdots\ar[r]&P_2(j)\ar[r]_{d_2}&P_1(j)\ar[r]_{d_1}&P_0(j)
+}
+\]
 \end{lemma}
 
 \begin{proof}
-Since $\varphi$ kills $\Im d_{h+1}\subseteq P_hA_+$, it factors through $\bar\varphi:\Omega\to S(j)$ with $\Omega=P_h/\Im d_{h+1}$.
-The complex $P_{h+\bullet}\to\Omega$ is a graded projective resolution, and so is $P_\bullet(j)\to S(j)$.
+Since $\varphi$ kills $\Im d_{h+1}\subseteq P_hA_+$, it factors as $\varphi=\bar\varphi\,p_h$ with $p_h:P_h\twoheadrightarrow\Im d_h$ and $\bar\varphi:\Im d_h\to S(j)$.
+Both $P_{h+\bullet}\to\Im d_h$ (with $p_h$ the map onto $\Im d_h$) and $P_\bullet(j)\to S(j)$ (with $d_0$ the map onto $S(j)$) are graded projective resolutions.
 Apply Lemma~\ref{lem:comparison} (in its degree-preserving form, Subsection~\ref{subsec:graded-ext}) to $\bar\varphi$.
 \end{proof}
+
+We call $\tilde\varphi=(\tilde\varphi_i)_i$ a \defn{lift} of $\varphi$.
 
 \begin{definition}\label{def:yoneda-product}
 For $\varphi\in\ext_A^h(S,S(j))$ and $\psi\in\ext_A^k(S,S(j'))$, the \defn{Yoneda product} is
@@ -112,19 +126,43 @@ For $\varphi\in\ext_A^h(S,S(j))$ and $\psi\in\ext_A^k(S,S(j'))$, the \defn{Yoned
 \]
 \end{definition}
 
+The next statement says that on the level of lifts, the product is just composition.
+
 \begin{proposition}\label{prop:yoneda-algebra}
-The Yoneda product is well defined, bilinear, and associative, with unit $\id_S\in\ext_A^0(S,S)$.
+Let $\tilde\varphi$ and $\tilde\psi$ be lifts of $\varphi\in\ext_A^h(S,S(j))$ and $\psi\in\ext_A^k(S,S(j'))$.
+\begin{enumerate}
+\item The maps $\tilde\psi_i(j)\circ\tilde\varphi_{k+i}:P_{h+k+i}\to P_i(j+j')$ form a lift of $\psi\cdot\varphi$.
+\item The Yoneda product is well defined, that is, does not depend on the choice of $\tilde\varphi$.
+\item The Yoneda product is bilinear and associative, with unit $\id_S\in\ext_A^0(S,S)$.
+\end{enumerate}
 \end{proposition}
 
 \begin{proof}
-Let $\tilde\varphi$ and $\tilde\varphi'$ be two lifts, with $\tilde\varphi_k-\tilde\varphi'_k=d_{k+1}s_k+s_{k-1}d_{h+k}$.
-Now $\psi d_{k+1}=0$ and $\psi s_{k-1}d_{h+k}=0$, because both $d_{k+1}$ and $s_{k-1}d_{h+k}$ map into $P_kA_+$ and $\psi$ kills $P_kA_+$.
-So $\psi\cdot\varphi$ does not depend on the lift; bilinearity is clear since sums of lifts are lifts.
-If $\tilde\psi$ lifts $\psi$, then $\tilde\psi_i\tilde\varphi_{k+i}$ lifts $\psi\cdot\varphi$, so for $\chi\in\ext_A^l(S,S(j''))$,
+(1) The lift condition is the commutativity of
 \[
-\chi\cdot(\psi\cdot\varphi)=\chi\tilde\psi_l\tilde\varphi_{k+l}=(\chi\cdot\psi)\cdot\varphi.
+\xymatrix@C=34pt@R=30pt{
+P_{h+k+i}\ar[r]^{d}\ar[d]_{\tilde\varphi_{k+i}}&P_{h+k+i-1}\ar[d]^{\tilde\varphi_{k+i-1}}\\
+P_{k+i}(j)\ar[r]^{d}\ar[d]_{\tilde\psi_i(j)}&P_{k+i-1}(j)\ar[d]^{\tilde\psi_{i-1}(j)}\\
+P_i(j+j')\ar[r]_{d}&P_{i-1}(j+j')
+}
 \]
-Finally $\id_S\in\Hom_S(S,S)=\ext_A^0(S,S)$ lifts to the identity of $P_\bullet$.
+for $i\geq1$, which holds because both squares commute, by Lemma~\ref{lem:yoneda-lift}.
+For $i=0$ we need $d_0\tilde\psi_0(j)\tilde\varphi_k=\psi(j)\tilde\varphi_k$, which is $d_0\tilde\psi_0=\psi$.
+
+(2) Let $\tilde\varphi'$ be another lift, with $\tilde\varphi_k-\tilde\varphi'_k=d_{k+1}s_k+s_{k-1}d_{h+k}$ by Lemma~\ref{lem:yoneda-lift}.
+Then
+\[
+\psi(\tilde\varphi_k-\tilde\varphi'_k)\;\overset{(*)}{=}\;\psi d_{k+1}s_k+\psi s_{k-1}d_{h+k}\;\overset{(**)}{=}\;0,
+\]
+where (*) is the homotopy formula, and (**) holds because $d_{k+1}s_k$ and $s_{k-1}d_{h+k}$ both map into $P_kA_+$ (by minimality, $\Im d_{k+1}\subseteq P_kA_+$ and $\Im d_{h+k}\subseteq P_{h+k-1}A_+$) while $\psi$ kills $P_kA_+$.
+
+(3) Bilinearity holds since sums of lifts are lifts.
+For $\chi\in\ext_A^l(S,S(j''))$, part (1) applied twice gives
+\[
+\chi\cdot(\psi\cdot\varphi)\;\overset{(1)}{=}\;\chi\,\tilde\psi_l\,\tilde\varphi_{k+l}\;\overset{(2)}{=}\;(\chi\cdot\psi)\cdot\varphi,
+\]
+where (1) uses that $(\tilde\psi_i\tilde\varphi_{k+i})_i$ is a lift of $\psi\cdot\varphi$, and (2) that $\chi\tilde\psi_l$ is $\chi\cdot\psi$.
+Finally $\id_S\in\Hom_S(S,S)=\ext_A^0(S,S)$ lifts to $\id_{P_\bullet}$, so $\id_S\cdot\varphi=\varphi$ and $\varphi\cdot\id_S=\varphi\circ\id_{P_h}=\varphi$.
 \end{proof}
 
 \begin{definition}\label{def:yoneda-algebra}
@@ -167,7 +205,7 @@ For $\varphi\in E^\Delta(A)^h$ and $\psi\in E^\Delta(A)^k$, the Yoneda product $
 \begin{proof}
 The class $\psi\cdot\varphi$ is determined by its values on $T_{h+k}=\mathcal K_{h+k}$, and only the restriction of $\tilde\varphi_k$ to $T_{h+k}$ matters: it maps $T_{h+k}$ into $(P_k(-h))_{h+k}=T_k=\mathcal K_k$, where $\psi$ is evaluated.
 We claim that $\tilde\varphi_i(z)=(\varphi\otimes\id)(z)$ for $z\in\mathcal K_{h+i}\subseteq\mathcal K_h\otimes_S\mathcal K_i$, where $\varphi\otimes\id:\mathcal K_h\otimes_S\mathcal K_i\to S\otimes_S\mathcal K_i=\mathcal K_i$.
-For $i=0$ this is $p_0\tilde\varphi_0=\varphi$, as $p_0$ is the identity on $S$.
+For $i=0$ this is $d_0\tilde\varphi_0=\varphi$, as $d_0$ is the identity on $S$.
 For $i\geq1$ write $z=\sum z'\otimes v$ with $z'\in\mathcal K_{h+i-1}$ and $v\in V$.
 Then $d_{h+i}(z)=\sum z'v$, so $\tilde\varphi_{i-1}d_{h+i}(z)=\sum\tilde\varphi_{i-1}(z')v=\sum(\varphi\otimes\id)(z')\otimes v$ by the induction hypothesis.
 This is the image of $(\varphi\otimes\id)(z)\in\mathcal K_i\subseteq\mathcal K_{i-1}\otimes_SV$ under $d_i$.

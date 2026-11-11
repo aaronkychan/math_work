@@ -172,7 +172,7 @@ Is $A$ quadratic?
 \begin{hidden}
 \emph{Solution.}
 Let $g_h$ denote the generator of $P_h$.
-$P_0=A$, and $\Ker p_0=xA$, so $P_1=A(-1)$ with $d_1(g_1)=x$.
+$P_0=A$, and $\Ker d_0=xA$, so $P_1=A(-1)$ with $d_1(g_1)=x$.
 Since $xa=0$ if and only if $a\in x^2A$, $\Ker d_1=x^2g_1A$ is generated in degree $3$, so $P_2=A(-3)$ with $d_2(g_2)=x^2g_1$.
 Since $x^2a=0$ if and only if $a\in xA$, $\Ker d_2=xg_2A$ is generated in degree $4$, so $P_3=A(-4)$ with $d_3(g_3)=xg_2$, and $\Ker d_3=x^2g_3A$ is generated in degree $6$.
 The pattern repeats: $P_{2m}=A(-3m)$ and $P_{2m+1}=A(-3m-1)$, with generator degrees $3m=\lfloor 3\cdot2m/2\rfloor$ and $3m+1=\lfloor3(2m+1)/2\rfloor$.
@@ -271,7 +271,7 @@ where $\iota_h:\mathcal K_h\hookrightarrow\mathcal K_{h-1}\otimes_SV$ is the inc
 The maps $d_h$ are right $A$-linear and degree-preserving.
 Koszul complex is an honest complex $d_{h-1}d_h=0$: for $h\geq2$, by Lemma \ref{lem:koszul-recursion} we have $\mathcal K_h\subseteq\mathcal K_{h-2}\otimes_SR$, and $z\otimes r\otimes a\mapsto z\otimes\mu(ra)=0$ for $z\in\mathcal{K}_{h-2}, r\in R, a\in A$.
 
-We also have an exact sequence $K_1\to K_0\to S\to 0$ where $K_0\to S$ is the projection $A\to A/A_+=S$; the exactness at $K_0$ follows from the definition that $VA\subseteq A_+$.
+We also have an exact sequence $K_1\to K_0\to S\to 0$ where $d_0:K_0=A\to A/A_+=S$ is the projection; the exactness at $K_0$ follows from the definition that $VA\subseteq A_+$.
 
 \begin{theorem}\label{thm:koszul-complex-diagonal}
 Let $P_\bullet\to S$ be a minimal graded projective resolution of a quadratic algebra $A$.
@@ -325,7 +325,7 @@ Since $K_h\cong K_{h,h}\otimes_SA(-h)$ and $P^\Delta_h\cong P_{h,h}\otimes_SA(-h
 \Phi_h:K_h\xrightarrow{\sim}P^\Delta_h,\qquad \Phi_h(za)=\varphi_h(z)a.
 \]
 We construct $\varphi_h$ by induction on $h$ so that $d_h\Phi_h=\Phi_{h-1}d^K_h$.
-Start with $\Phi_0=\id_A$, which commutes with the augmentations.
+Start with $\Phi_0=\id_A$, which commutes with the maps $d_0$ to $S$.
 For $h\geq1$, define $\varphi_h$ as the composite
 \[
 \varphi_h:\ K_{h,h}\xrightarrow[\ \sim\ ]{(1)}(\Ker d^K_{h-1})_h\xrightarrow[\ \sim\ ]{(2)}(\Ker d_{h-1})_h\xrightarrow[\ \sim\ ]{(3)}P_{h,h},
@@ -391,10 +391,10 @@ and this does not affect exactness.
 \end{example}
 
 \begin{proposition}\label{prop:koszul-complex-resolution}
-For $A=\SymAlg(V)$ the Koszul complex, with $\pi:K_0=A\to\Bbbk$ the projection,
+For $A=\SymAlg(V)$ the Koszul complex, with $d_0:K_0=A\to\Bbbk$ the projection,
 \[
 0\longrightarrow K_n\xrightarrow{d_n}\cdots\xrightarrow{d_2}K_1
-\xrightarrow{d_1}K_0\xrightarrow{\pi}\Bbbk\longrightarrow0
+\xrightarrow{d_1}K_0\xrightarrow{d_0}\Bbbk\longrightarrow0
 \]
 is exact.
 \end{proposition}
@@ -434,7 +434,7 @@ For $h=0$, $J=\varnothing$ and $d_1s_{\alpha,0}(b_\varnothing)=b_\varnothing$.
 For $q\in J$, the term of $d_h(b_J)$ deleting $q$ is the only term on which $s_{\alpha,h-1}$ is nonzero, and it gives $s_{\alpha,h-1}d_h(b_J)=b_J$ while $d_{h+1}s_{\alpha,h}(b_J)=0$.
 Thus $d_{h+1}s_{\alpha,h}+s_{\alpha,h-1}d_h=\id_{K_{h,\alpha}}$ for every $h\geq1$ in positive multidegree; the case $h=0$ was checked separately.
 All positive multidegrees are therefore exact.
-In multidegree $0$, only $K_0\cong\Bbbk$ is nonzero and $\pi$ is the identity onto $\Bbbk$.
+In multidegree $0$, only $K_0\cong\Bbbk$ is nonzero and $d_0$ is the identity onto $\Bbbk$.
 This proves exactness of the displayed sequence.
 \end{proof}
 
@@ -472,12 +472,12 @@ Hence $h_A(t)=(1-t)^{-n}=\sum_{i\geq0}\binom{n+i-1}{n-1}t^i$.
 Let $S=\bigoplus_{y=1}^n\Bbbk e_y$, let $V$ be a finite-dimensional bimodule in degree $1$, and let $A=T_S(V)/(V\otimes_SV)=S\oplus V$.
 Prove that the minimal graded projective resolution of $S$ has $P_h\cong(V^{\otimes_Sh}\otimes_SA)(-h)$ for all $h\geq0$, and deduce that $A$ is Koszul.
 
-\emph{Hint.} Show that $\Ker p_0=V$ and that $VA_+=0$, so each kernel is killed by $A_+$.
+\emph{Hint.} Show that $\Ker d_0=V$ and that $VA_+=0$, so each kernel is killed by $A_+$.
 \end{exercise}
 
 \begin{hidden}
 \emph{Solution.}
-$\Ker p_0=A_+=V$, and $VA_+=VV=0$, so $V$ is a module with $A_+$ acting by zero, that is, a graded $S$-module in degree $1$.
+$\Ker d_0=A_+=V$, and $VA_+=VV=0$, so $V$ is a module with $A_+$ acting by zero, that is, a graded $S$-module in degree $1$.
 Put $Y_1=V$ and, inductively, $Y_h=V^{\otimes_Sh}$ in degree $h$, killed by $A_+$.
 Then $P_h:=(Y_h\otimes_SA)(-h)\to Y_h$, $k\otimes a\mapsto ka$, is surjective, and as $Y_h\otimes_SA=Y_h\otimes_SS\oplus Y_h\otimes_SV$ with $k\otimes v\mapsto kv=0$, its kernel is $Y_h\otimes_SV=V^{\otimes_S(h+1)}=Y_{h+1}$ (in degree $h+1$), again killed by $A_+$.
 In each step $\Ker\subseteq P_hA_+$ since $\Ker=Y_h\otimes V\subseteq P_hA_+$, so this is the minimal graded projective resolution, with $P_h=(V^{\otimes_Sh}\otimes_SA)(-h)$ generated in degree $h$.
