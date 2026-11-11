@@ -382,11 +382,6 @@ Hence,
 \mathcal{K}_h\cong \bigwedge^hV, \qquad K_h\cong\bigwedge^hV\otimes_\Bbbk A(-h),\qquad K_0=A.
 \]
 with differential $d_h((v_1\wedge\cdots\wedge v_h)\otimes a)=\sum_{r=1}^h(-1)^{h-r}(v_1\wedge\cdots\widehat{v_r}\cdots\wedge v_h)\otimes v_ra$.
-Multiplying $d_h$ by $(-1)^{h-1}$ gives
-\begin{equation}\label{eq:koszul-differential}
-d_h((v_1\wedge\cdots\wedge v_h)\otimes a)=\sum_{r=1}^h(-1)^{r-1}(v_1\wedge\cdots\widehat{v_r}\cdots\wedge v_h)\otimes v_ra,
-\end{equation}
-and this does not affect exactness.
 
 
 \begin{proposition}\label{prop:koszul-complex-resolution}
@@ -408,7 +403,9 @@ b_J:=(x_{j_1}\wedge\cdots\wedge x_{j_h})\otimes x^{\alpha-\mathbf1_J},
 J=\{j_1<\cdots<j_h\}\subseteq\operatorname{supp}(\alpha),
 \]
 where $\mathbf1_J$ has entry $1$ at indices in $J$ and $0$ elsewhere.
-The differential is $d_h(b_J)=\sum_{r=1}^h(-1)^{r-1}b_{J\setminus\{j_r\}}$.
+In this basis the differential is $d_h(b_J)=\sum_{r=1}^h(-1)^{h-r}b_{J\setminus\{j_r\}}$.
+Replacing $d_h$ by $(-1)^{h-1}d_h$ for all $h\geq1$ does not affect exactness: multiplication by $(-1)^{h(h-1)/2}$ on $K_h$ is an isomorphism from the complex with the old differentials to the one with the new differentials, and it is the identity on $K_0$ and $K_1$.
+So we may and do assume $d_h(b_J)=\sum_{r=1}^h(-1)^{r-1}b_{J\setminus\{j_r\}}$.
 
 If $\alpha\neq0$, let $q$ be the least index in $\operatorname{supp}(\alpha)$.
 For each $h\geq0$, define $s_{\alpha,h}:K_{h,\alpha}\to K_{h+1,\alpha}$ on basis vectors by
