@@ -11,7 +11,7 @@
 
 \newcommand{\CourseTitle}{Topics in Math. Sci. VII 2026}
 \newcommand{\AssignmentNumber}{2}
-\newcommand{\Deadline}{to be announced}
+\newcommand{\Deadline}{6th December 2026}
 
 \pagestyle{headandfoot}
 \header{}{\small\CourseTitle}
@@ -35,6 +35,7 @@
 \DeclareMathOperator{\Im}{Im}
 \DeclareMathOperator{\grtop}{grtop}
 \newcommand{\Z}{\mathbb Z}
+\newcommand{\dimvec}{\operatorname{\mathbf{dim}}}
 
 \qformat{\textbf{Exercise \thequestion.\ \thequestiontitle}\hfill}
 \renewcommand{\questionshook}{%
@@ -72,11 +73,12 @@ A basis of $B_d$ is the set of words in $x,y$ of length $d$ containing no $xx$ (
 For $d\geq2$: words starting with $y$ are $y\cdot w$ with $w$ admissible of length $d-1$ ($a_{d-1}$ choices); words starting with $x$ must continue with $y$, and are $xy\cdot w$ with $w$ admissible of length $d-2$ ($a_{d-2}$).
 So $(1-t-t^2)h_B=a_0+(a_1-a_0)t=1+t$.
 \end{solution}
-\subpart Compute $B^!$ (with $X=x^*$, $Y=y^*$).
+\subpart Compute $B^!$.
 \begin{solution}
+Let $X=x^*$ and $Y=y^*$.
 For $F=\alpha XX+\beta XY+\gamma YX+\delta YY$ one has $F(x\otimes x)=\alpha$, so $R^\perp=\operatorname{span}\{XY,YX,YY\}$ and $B^!=\kk\langle X,Y\rangle/(XY,YX,Y^2)$.
 \end{solution}
-\subpart Find a homogeneous basis of $B^!$ and compute $h_{B^!}(t)$.
+\subpart Compute $h_{B^!}(t)$.
 \begin{solution}
 Any word of length $\geq2$ containing $Y$ contains one of $XY,YX,YY$; so $\{X^n\mid n\geq0\}\cup\{Y\}$ spans, and it is a basis because the ideal is spanned by words containing $XY$, $YX$ or $YY$, none of which occurs in $X^n$ or $Y$.
 Thus $h_{B^!}(t)=\frac1{1-t}+t$.
@@ -87,7 +89,7 @@ Thus $h_{B^!}(t)=\frac1{1-t}+t$.
 \begin{subparts}
 \subpart Prove that $C_q\cong C_{q'}$ as graded algebras if and only if $q=q'$ or $qq'=1$.
 
-\emph{Hint.} A graded isomorphism is determined by a linear bijection of the degree-$1$ parts and preserves $\{\kk u\mid u^2=0\}$. You may use that $\{1,x,y,yx\}$ is a basis of $C_q$ and that $u^2=\alpha\beta(1-q)\,yx$ for $u=\alpha x+\beta y$.
+\emph{Hint.} Consider the basis $\{1,x,y,yx\}$ of $C_q$.  It may be helpful to consider $u^2=\alpha\beta(1-q)\,yx$ for $u=\alpha x+\beta y$ with $\alpha,\beta\in\Bbbk$.
 \begin{solution}
 ($\Leftarrow$) If $qq'=1$ then $q\neq0$ and $x\mapsto y$, $y\mapsto x$ sends $x^2,y^2$ to $y^2,x^2$ and $xy+qyx\mapsto yx+qxy=q(xy+q'yx)$, so it induces a graded isomorphism $C_q\to C_{q'}$ (inverse of the same form).
 ($\Rightarrow$) Let $\varphi:C_q\to C_{q'}$ be a graded isomorphism; $\varphi$ is determined by the bijection $\varphi_1$ on degree $1$ and preserves $u^2=0$.
@@ -100,8 +102,9 @@ either $\varphi(x)=\lambda x$, $\varphi(y)=\mu y$, and $0=\varphi(xy+qyx)=\lambd
 \begin{solution}
 Now if $\operatorname{char}\kk\neq2$, then $q=1$, $q'=-1$ satisfy neither $q=q'$ nor $qq'=1$, so $C_1\not\cong C_{-1}$.
 \end{solution}
-\subpart Compute a quadratic presentation of $C_q^!$ (with $X=x^*$, $Y=y^*$).
+\subpart Compute a quadratic presentation of $C_q^!$.
 \begin{solution}
+Let $X=x^*$, $Y=y^*$.
 For $S=\kk$, $(\lambda\otimes\mu)(v\otimes w)=\mu(v)\lambda(w)$. For $F=\alpha X\otimes X+\beta X\otimes Y+\gamma Y\otimes X+\delta Y\otimes Y$,
 \[
   F(x\otimes x)=\alpha,\qquad F(y\otimes y)=\delta,\qquad F(x\otimes y+q\,y\otimes x)=\gamma+q\beta.
@@ -114,7 +117,7 @@ Using $XY=qYX$, every word is a multiple of $Y^aX^b$, so these span; they are in
 for $q=0$ the relation is monomial and $\{Y^aX^b\}$ is the set of words avoiding $XY$; for $q\neq0$ let $X$ act on $\kk[s,t]$ by multiplication by $s$ and $Y$ by $(Yf)(s,t)=t\,f(q^{-1}s,t)$; then $XY=qYX$ and $Y^aX^b\cdot1=q^{-ab}s^bt^a$, which are independent.
 Hence $h_{C_q^!}=\sum_d(d+1)t^d=(1-t)^{-2}$.
 \end{solution}
-\subpart Compare $C_0^!$ with $C_1^!$.
+\subpart Show that $C_0^!$ and $C_1^!$ has the same Hilbert series while being non-isomorphic algebras.
 \begin{solution}
 $C_1^!=\kk[X,Y]$ is commutative while in $C_0^!=\kk\langle X,Y\rangle/(XY)$ one has $XY=0\neq YX$: same Hilbert series, non-isomorphic algebras.
 \end{solution}
@@ -148,10 +151,19 @@ For $h\geq2$, the cohomology of $\Hom_A(P_\bullet,N)$ in degree $h$ uses $\Hom_A
 \begin{parts}
 \part Let $S=\bigoplus_{i=1}^4\kk e_i$ and let $V=\kk a\oplus\kk b\oplus\kk c\oplus\kk d$ be the $S$-bimodule with
 \[
-  a\in e_1Ve_2,\qquad b\in e_2Ve_4,\qquad c\in e_1Ve_3,\qquad d\in e_3Ve_4,
+  \Bbbk a= e_1Ve_2,\qquad \Bbbk b= e_2Ve_4,\qquad \Bbbk c= e_1Ve_3,\qquad \Bbbk d= e_3Ve_4,
 \]
 and $e_iVe_j=0$ for all other $(i,j)$. For $\lambda\in\kk$ put $A_\lambda=T_S(V)/(ab-\lambda cd)$.
 \begin{subparts}
+\subpart Check that
+\[
+  h_{A_\lambda}(t)=\begin{pmatrix}1&t&t&t^2\\0&1&0&t\\0&0&1&t\\0&0&0&1\end{pmatrix}.
+\]
+\begin{solution}
+The projectives are $e_1A=\operatorname{span}\{e_1,a,c,cd\}$ (with $ab=\lambda cd$), $e_2A=\{e_2,b\}$, $e_3A=\{e_3,d\}$, $e_4A=\{e_4\}$, which gives the Hilbert series.
+
+\end{solution}
+
 \subpart Find $R^\perp$ and a presentation of $A_\lambda^!$, for every $\lambda\in\kk$.
 \begin{solution}
 $D(V)$ has the dual basis $a^*\in e_2D(V)e_1$, $b^*\in e_4D(V)e_2$, $c^*\in e_3D(V)e_1$, $d^*\in e_4D(V)e_3$, and the composable words of length $2$ are $b^*a^*$, $d^*c^*$.
@@ -162,7 +174,7 @@ So
 \]
 giving $R^\perp=\kk(\lambda b^*a^*+d^*c^*)$ and $A_\lambda^!=T_S(D(V))/(\lambda b^*a^*+d^*c^*)$.
 \end{solution}
-\subpart Check that $(A_\lambda^!)^!\cong A_\lambda$.
+\subpart Compute $(R^\perp)^\perp$ and verify that $(A_\lambda^!)^!\cong A_\lambda$.
 \begin{solution}
 Identifying $D(D(V))=V$ (with $a^{**}=a$, and so on), the same computation shows $(\mu\,ab+\nu\,cd)(\lambda b^*a^*+d^*c^*)=\lambda\mu+\nu$, so the annihilator of $R^\perp$ is $\kk(ab-\lambda cd)=R$ and $(A_\lambda^!)^!=A_\lambda$.
 \end{solution}
@@ -179,14 +191,6 @@ The induced map on $T_S(V)$ sends $ab-\lambda cd$ to $\alpha\beta\,ab-\lambda\ga
 \]
 Hence $\lambda=0\Leftrightarrow\mu=0$.
 Conversely if $\lambda,\mu\neq0$ take $\alpha=\beta=\gamma=1$, $\delta=\mu/\lambda$ (the inverse is of the same form); for $\lambda=\mu=0$ take the identity.
-\end{solution}
-\subpart Check that
-\[
-  h_{A_\lambda}(t)=\begin{pmatrix}1&t&t&t^2\\0&1&0&t\\0&0&1&t\\0&0&0&1\end{pmatrix}.
-\]
-\begin{solution}
-The projectives are $e_1A=\operatorname{span}\{e_1,a,c,cd\}$ (with $ab=\lambda cd$), $e_2A=\{e_2,b\}$, $e_3A=\{e_3,d\}$, $e_4A=\{e_4\}$, which gives the Hilbert series.
-
 \end{solution}
 \subpart Find the minimal graded projective resolution of each simple module $e_iS$.
 \begin{solution}
@@ -213,7 +217,7 @@ In every resolution $P_h$ is generated in degree $h$, so all are linear, hence s
 The only composable words of length $2$ in $D(V)$ are $b^*a^*$ and $d^*c^*$, both in $e_4A^!e_1$, and the relation $\lambda b^*a^*+d^*c^*=0$ leaves $\dim e_4A^!_2e_1=1$ for every $\lambda$; there are no composable words of length $3$.
 Hence $h_{A_\lambda^!}(t)=I+tN^{\mathsf T}+t^2E_{41}$, where $N=E_{12}+E_{13}+E_{24}+E_{34}$ and $h_{A_\lambda}(t)=I+tN+t^2E_{14}$.
 \end{solution}
-\subpart Verify that $h_{A_\lambda}(t)\,h_{A_\lambda^!}(-t)^{\mathsf T}=I_4$.
+\subpart Show that $h_{A_\lambda}(t)\,h_{A_\lambda^!}(-t)^{\mathsf T}=I_4$.
 \begin{solution}
 Using $N^2=2E_{14}$ and $NE_{14}=E_{14}N=E_{14}^2=0$,
 \[
@@ -222,16 +226,6 @@ Using $N^2=2E_{14}$ and $NE_{14}=E_{14}N=E_{14}^2=0$,
 \end{solution}
 \end{subparts}
 
-\part Let $A$ be a graded algebra with $A_0=\kk$ and let $M$ be a bounded below locally finite-dimensional graded $A$-module whose minimal graded projective resolution $P_\bullet\to M$ has $P_h=0$ for $h\gg0$.
-Prove that
-\[
-h_M(t)=h_A(t)\cdot\sum_{h\geq0}(-1)^h\sum_{i\in\Z}\dim_\kk\ext_A^h\bigl(M,\kk(-i)\bigr)\,t^i .
-\]
-\begin{solution}
-By the description of $\ext$ via a minimal resolution, with $S=\kk$, $\dim\ext_A^h(M,\kk(-i))=\dim(\grtop P_h)_i$, so the inner sum is $h_{\grtop P_h}(t)$.
-Since $P_h\cong\grtop P_h\otimes_\kk A$ as graded vector spaces, $h_{P_h}(t)=h_{\grtop P_h}(t)\,h_A(t)$.
-Taking the degree $i$ component of the exact sequence $0\to P_N\to\cdots\to P_0\to M\to0$ of vector spaces and the alternating sum of dimensions gives $h_M(t)=\sum_h(-1)^hh_{P_h}(t)$, which is the claim.
-\end{solution}
 
 \part Let $M$ be a graded right module with $M=M_mA$ for some $m\in\Z$, bounded below and locally finite-dimensional, with minimal graded projective resolution $P_\bullet\to M$.
 \begin{subparts}
@@ -253,6 +247,48 @@ Finally $\ext^h(M,L(j))\cong\Hom_S((\grtop P_h)_{-j},L)=0$ whenever $-j<m+h$, th
 \newpage
 \titledquestion{}
 \begin{parts}
+\part Let $A=\kk\langle x,y\rangle/(yx,\ x^2+y^2)$ with $\deg x=\deg y=1$.
+\begin{subparts}
+\subpart Show that $x^3=0$ and $y^3=0$, and deduce that $A_d=0$ for $d\geq3$ and $h_A(t)=1+2t+2t^2$.
+
+\begin{solution}
+We have $x^3=x\cdot x^2=-xy^2$ and $x^3=x^2\cdot x=-y^2x=-y(yx)=0$, so $x^3=0$ and $xy^2=0$.
+Likewise $y^3=y\cdot y^2=-yx^2=-(yx)x=0$.
+The remaining words of length $3$ contain $yx$ or are $xxy=-y^3=0$ and $xyy=-x^3=0$, hence vanish.
+So $A_3=0$, and $A_d=0$ for $d\geq3$ since $A$ is generated in degree $1$.
+Also $\dim A_1=2$ and $\dim A_2=4-2=2$, so $h_A(t)=1+2t+2t^2$.
+\end{solution}
+\subpart Compute the first three terms of the minimal graded projective resolution $P_\bullet\to \Bbbk$ 
+
+\subpart Show that $A$ is not Koszul, but quadratic.
+\begin{solution}
+We have 
+\[
+cA(-2)b\oplus dA(-2) \to aA(-1)\oplus bA(-1) \to A \to \Bbbk \to 0
+\]
+with basis vector $a,b,c,d$ so that
+\[d_1:\begin{array}{c}
+a\mapsto x\\
+b\mapsto y
+\end{array}, \quad d_2:\begin{array}{c}
+c\mapsto ax-by\\
+d\mapsto bx
+\end{array}. \]
+Then $\Ker(d_2)$ is spanned by $cxy, cx^2, dxy, dx^2$.
+\end{solution}
+\end{subparts}
+
+
+\part Let $A$ be a graded algebra with $A_0=\kk$ and let $M$ be a bounded below locally finite-dimensional graded $A$-module whose minimal graded projective resolution $P_\bullet\to M$ has $P_h=0$ for $h\gg0$.
+Prove that
+\[
+h_M(t)=h_A(t)\cdot\sum_{h\geq0}(-1)^h\sum_{i\in\Z}\dim_\kk\ext_A^h\bigl(M,\kk(-i)\bigr)\,t^i .
+\]
+\begin{solution}
+By the description of $\ext$ via a minimal resolution, with $S=\kk$, $\dim\ext_A^h(M,\kk(-i))=\dim(\grtop P_h)_i$, so the inner sum is $h_{\grtop P_h}(t)$.
+Since $P_h\cong\grtop P_h\otimes_\kk A$ as graded vector spaces, $h_{P_h}(t)=h_{\grtop P_h}(t)\,h_A(t)$.
+Taking the degree $i$ component of the exact sequence $0\to P_N\to\cdots\to P_0\to M\to0$ of vector spaces and the alternating sum of dimensions gives $h_M(t)=\sum_h(-1)^hh_{P_h}(t)$, which is the claim.
+\end{solution}
 \part Let $n\geq3$ and $Z\subseteq\{1,\ldots,n-2\}$, and let $A_Z=\kk A_n/(e_{k,k+2}\mid k\in Z)$ be the quotient of the algebra of upper triangular $n\times n$ matrices, with $\deg e_{ij}=j-i$.
 \begin{subparts}
 \subpart Check that $h_{A_Z}(t)_{ij}=t^{j-i}$ if $i\leq j$ and there is no $k\in Z$ with $i\leq k\leq j-2$, and $0$ otherwise.
@@ -310,44 +346,6 @@ With $N=E_{12}+E_{23}+E_{34}$ we have $N^2=E_{13}+E_{24}$ and $NE_{13}=E_{24}N=E
 \]
 \end{solution}
 \end{subparts}
-
-\part Let $A$ be a Koszul algebra with $S=\bigoplus_{i=1}^n\kk e_i$, and let $b^{(i)}_h$ be the dimension vector of $\grtop P_h$ for the minimal graded projective resolution of $e_iS$; let $B_h$ be the matrix with rows $b^{(i)}_h$.
-\begin{subparts}
-\subpart Prove that
-\[
-\sum_{h\geq0}(-1)^ht^hB_h\cdot h_A(t)=I_n .
-\]
-\begin{solution}
-The minimal resolution of $S$ is the direct sum of those of the $e_iS$, and it is linear by assumption; so each is linear, that is, $\grtop P_h$ lies in degree $h$.
-Hence $P_h\cong\bigoplus_j(e_jA)(-h)^{\oplus(b^{(i)}_h)_j}$ and $h_{P_h}(t)=t^hb^{(i)}_h\,h_A(t)$.
-Taking the degree $d$ component of $\cdots\to P_1\to P_0\to e_iS\to0$ and the alternating sum of dimension vectors (only $h\leq d$ contribute) gives $\sum_h(-1)^ht^hb^{(i)}_h\,h_A(t)=h_{e_iS}(t)=\varepsilon_i$, the $i$-th unit row vector.
-Stacking over $i$ gives the claim.
-\end{solution}
-\subpart Deduce that the coefficient of $t^h$ in $h_A(t)^{-1}$ has entries of sign $(-1)^h$ (or zero).
-\begin{solution}
-By~(a), $h_A(t)^{-1}=\sum_h(-1)^ht^hB_h$, and $B_h$ has non-negative entries.
-\end{solution}
-\end{subparts}
-
-\part Let $A=\kk\langle x,y\rangle/(yx,\ x^2+y^2)$ with $\deg x=\deg y=1$.
-\begin{subparts}
-\subpart Show that $x^3=0$ and $y^3=0$, and deduce that $A_d=0$ for $d\geq3$ and $h_A(t)=1+2t+2t^2$.
-
-\emph{Hint.} $x^3=x\cdot x^2=-xy^2$ and $x^3=x^2\cdot x=-y^2x=-y(yx)$, and similarly for the other words of length $3$.
-\begin{solution}
-We have $x^3=x\cdot x^2=-xy^2$ and $x^3=x^2\cdot x=-y^2x=-y(yx)=0$, so $x^3=0$ and $xy^2=0$.
-Likewise $y^3=y\cdot y^2=-yx^2=-(yx)x=0$.
-The remaining words of length $3$ contain $yx$ or are $xxy=-y^3=0$ and $xyy=-x^3=0$, hence vanish.
-So $A_3=0$, and $A_d=0$ for $d\geq3$ since $A$ is generated in degree $1$.
-Also $\dim A_1=2$ and $\dim A_2=4-2=2$, so $h_A(t)=1+2t+2t^2$.
-\end{solution}
-\subpart Using part~(2), prove that $A$ is not Koszul, although it is quadratic.
-\begin{solution}
-If $A$ were Koszul, then the series $1/h_A(t)=1/(1+2t+2t^2)=\sum_h(-1)^hb_ht^h$ would have $b_h\geq0$.
-Expanding, $u_0=1$, $u_1=-2$, and $u_h=-2u_{h-1}-2u_{h-2}$ gives $u_2=2$, $u_3=0$, $u_4=-4$, so $b_4=-4<0$, a contradiction.
-\end{solution}
-\end{subparts}
-
 \end{parts}
 
 \newpage
