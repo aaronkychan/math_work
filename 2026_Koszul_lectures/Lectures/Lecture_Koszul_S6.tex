@@ -471,6 +471,89 @@ For $\alpha=0$ we have $\operatorname{supp}(\alpha)=\varnothing$, so only $K_{0,
 Together with Step 4 this shows that $0\to K_n\to\cdots\to K_0\xrightarrow{d_0}\Bbbk\to0$ is exact.
 \end{proof}
 
+\begin{advanced}
+\subsection*{A second proof: the Koszul complex as a tensor product}
+
+The proof above verifies exactness by brute force.
+Here is a conceptual explanation: the Koszul complex of $\SymAlg(V)$ is the tensor product of $n$ one-variable complexes, and each one-variable complex is obviously exact.
+We first collect the three facts we need.
+
+\begin{lemma}[A polynomial ring is a tensor product]\label{lem:poly-tensor}
+Let $\Bbbk[x_j]$ be the polynomial ring in one variable, graded by $\deg x_j=1$.
+Give $\Bbbk[x_1]\otimes_\Bbbk\cdots\otimes_\Bbbk\Bbbk[x_n]$ the ordinary tensor product algebra structure (Definition~\ref{def:algebra-tensor-products}), that is, the componentwise product without signs.
+Then $p_1\otimes\cdots\otimes p_n\mapsto p_1\cdots p_n$ is an isomorphism of graded algebras onto $A=\Bbbk[x_1,\ldots,x_n]$.
+\end{lemma}
+
+\begin{proof}
+The map is well defined because the product $(p_1,\ldots,p_n)\mapsto p_1\cdots p_n$ is multilinear.
+A basis of a tensor product of vector spaces is given by the tensors of basis elements, so the pure tensors $x_1^{a_1}\otimes\cdots\otimes x_n^{a_n}$ form a basis of the left-hand side.
+They are sent to the monomials $x_1^{a_1}\cdots x_n^{a_n}$, which form a basis of $A$, so the map is bijective.
+It preserves degrees because degrees add on both sides, and it is multiplicative because $A$ is commutative: both products multiply the monomials factor by factor.
+\end{proof}
+
+Under this isomorphism $x_j$ corresponds to $1\otimes\cdots\otimes x_j\otimes\cdots\otimes1$.
+So if $M_j$ is a graded $\Bbbk[x_j]$-module for each $j$, then $M_1\otimes_\Bbbk\cdots\otimes_\Bbbk M_n$ is a graded $A$-module in which $x_j$ acts on the $j$th factor only.
+
+\begin{lemma}[Tensor product of complexes]\label{lem:tensor-complexes}
+Let $C,C'$ be complexes of graded vector spaces, with differentials $d,d'$ lowering the homological degree by $1$ and preserving the Adams degree.
+Define $C\otimes_\Bbbk C'$ by $(C\otimes_\Bbbk C')_m=\bigoplus_{p+q=m}C_p\otimes_\Bbbk C'_q$ and
+$d(c\otimes c')=(-1)^q\,dc\otimes c'+c\otimes d'c'$ for $c\in C_p$ and $c'\in C'_q$.
+Then $d^2=0$.
+\end{lemma}
+
+\begin{proof}
+Apply $d$ twice.
+The terms containing $d^2c$ or $d'^2c'$ vanish, and the two remaining terms are $(-1)^q\,dc\otimes d'c'$ and $(-1)^{q-1}\,dc\otimes d'c'$, which cancel.
+\end{proof}
+
+The sign is there to make $d^2=0$.
+For a tensor product $C_1\otimes_\Bbbk\cdots\otimes_\Bbbk C_n$ of $n$ complexes, iterating the rule shows that the differential of a pure tensor $c_1\otimes\cdots\otimes c_n$ is the sum over $r$ of the terms obtained by applying $d$ to the $r$th factor, each with the sign $(-1)^{m_r}$, where $m_r$ is the sum of the homological degrees of the factors to the right of the $r$th one.
+
+\begin{lemma}[K\"unneth formula]\label{lem:kunneth}
+Let $C,C'$ be complexes of vector spaces over a field.
+If $c\in C_p$ and $c'\in C'_q$ are cycles, then $c\otimes c'$ is a cycle of $C\otimes_\Bbbk C'$, and its homology class only depends on the classes of $c$ and $c'$.
+The resulting map
+$\bigoplus_{p+q=m}H_p(C)\otimes_\Bbbk H_q(C')\to H_m(C\otimes_\Bbbk C')$, $[c]\otimes[c']\mapsto[c\otimes c']$,
+is an isomorphism for every $m$.
+\end{lemma}
+
+This is a standard result of homological algebra (see \cite[Section~3.6]{Wei94} or \cite[Chapter~V, Section~10]{ML95}, where the general version has an extra Tor term, which vanishes over a field); its proof totalises the double complex, and we omit it.
+Intuitively, over a field each complex is quasi-isomorphic to its homology, and tensor products preserve quasi-isomorphisms.
+
+We now identify the Koszul complex.
+For $1\leq j\leq n$ let $C^{(j)}$ be the complex of graded $\Bbbk[x_j]$-modules $0\to\Bbbk[x_j]\,e_j\to\Bbbk[x_j]\to0$, where $\Bbbk[x_j]$ is in homological degree $0$, the free module on $e_j$ is in homological degree $1$ with $\deg e_j=1$, and the differential is $e_jp\mapsto x_jp$.
+Multiplication by $x_j$ is injective with cokernel $\Bbbk$, so
+$H_1(C^{(j)})=0$ and $H_0(C^{(j)})=\Bbbk$.
+
+\begin{lemma}[The Koszul complex is a tensor product]\label{lem:koszul-tensor}
+Regard $C=C^{(1)}\otimes_\Bbbk\cdots\otimes_\Bbbk C^{(n)}$ as a complex of graded $A$-modules via Lemma~\ref{lem:poly-tensor}.
+Then $C\cong(K_\bullet,d_\bullet)$ as complexes of graded $A$-modules (ignoring the augmentation $d_0$).
+\end{lemma}
+
+\begin{proof}
+\emph{The terms.}
+A pure tensor in $C$ has, in each factor $j$, either an element of $\Bbbk[x_j]$ or an element of $\Bbbk[x_j]\,e_j$.
+Sort the pure tensors by the set $J=\{j_1<\cdots<j_h\}$ of factors where $e_j$ appears, which is exactly the homological degree $h=|J|$.
+For a fixed $J$, the corresponding summand is a tensor product of $n$ copies of $\Bbbk[x_j]$ (one in each factor), so by Lemma~\ref{lem:poly-tensor} it is a free $A$-module of rank $1$, generated by the pure tensor $e_J$ with $e_j$ in each factor $j\in J$ and $1$ in the other factors.
+So $C_h=\bigoplus_{|J|=h}e_JA$, and $e_J\mapsto x_{j_1}\wedge\cdots\wedge x_{j_h}$ identifies this with $\bigwedge^hV\otimes_\Bbbk A(-h)=K_h$, since $\deg e_J=h$.
+
+\emph{The differential.}
+The differential on $C$ is $A$-linear, since each $C^{(j)}$ has $\Bbbk[x_j]$-linear differential, so it is determined by its values on the $e_J$.
+Applying $d$ to the factor $j_r$ replaces $e_{j_r}$ by $x_{j_r}$, so that the result is $x_{j_r}e_{J\setminus\{j_r\}}$.
+The factors to the right of it that have homological degree $1$ are $e_{j_{r+1}},\ldots,e_{j_h}$, which are $h-r$ in number, so the sign is $(-1)^{h-r}$.
+Hence $d(e_J)=\sum_{r=1}^h(-1)^{h-r}\,x_{j_r}\,e_{J\setminus\{j_r\}}$, which is the formula for $d_h$ in the example above, now with $x_{j_r}$ written on the right.
+\end{proof}
+
+For instance, for $n=2$ we get $d(e_1)=x_1$, $d(e_2)=x_2$ and $d(e_1e_2)=x_2e_1-x_1e_2$, which matches $d_2((x_1\wedge x_2)\otimes1)=x_1\otimes x_2-x_2\otimes x_1$ under $e_i\leftrightarrow x_i$.
+
+\begin{proof}[Second proof of Proposition~\ref{prop:koszul-complex-resolution}]
+By Lemma~\ref{lem:koszul-tensor}, $K_\bullet\cong C^{(1)}\otimes_\Bbbk\cdots\otimes_\Bbbk C^{(n)}$.
+Each $C^{(j)}$ has homology $\Bbbk$ in homological degree $0$ and nothing else, so applying Lemma~\ref{lem:kunneth} repeatedly shows that $K_\bullet$ has homology $\Bbbk\otimes_\Bbbk\cdots\otimes_\Bbbk\Bbbk=\Bbbk$ in degree $0$ and $0$ in all other degrees.
+Thus $K_n\to\cdots\to K_1$ is exact at every $K_h$ with $h\geq1$, and $H_0=K_0/\operatorname{Im}d_1=A/A_+=\Bbbk$ (the image of $d_1$ is $\sum_jx_jA=A_+$), where $d_0$ is the projection to this quotient.
+This is the exactness of $0\to K_n\to\cdots\to K_0\xrightarrow{d_0}\Bbbk\to0$.
+\end{proof}
+\end{advanced}
+
 \begin{corollary}\label{prop:polynomial-koszul}
 For every finite-dimensional vector space $V$, the symmetric algebra $\SymAlg(V)$ is Koszul, and $K_\bullet$ is its minimal graded projective resolution of $\Bbbk$.
 \end{corollary}
