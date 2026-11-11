@@ -344,9 +344,9 @@ The terms $\mathcal K_h$ are dual to the quadratic dual of Section~\ref{sec:quad
 \begin{proposition}\label{prop:koszul-terms-dual}
 For a quadratic algebra $A=T_S(V)/(R)$, the composite
 \[
-\rho_h:D(V)^{\otimes_Sh}\xrightarrow{\ \theta\ }D(V^{\otimes_Sh})\xrightarrow{\ \mathrm{res}\ }D(\mathcal K_h)
+\rho_h:D(V)^{\otimes_Sh}\xrightarrow{\ \theta\ }D(V^{\otimes_Sh})\xrightarrow{\ \mathrm{res}\ }D(\mathcal K_h),
 \]
-of the iterated map $\theta$ of Proposition~\ref{prop:D-tensor-duals} and restriction is surjective with kernel the degree $h$ part of the ideal $(\theta^{-1}(R^\perp))$.
+where $\theta$ is induced by the isomorphism $\theta_{V,V}$ of Proposition~\ref{prop:D-tensor-duals} and $\mathrm{res}$ is the dual of canonical embedding $\mathcal{K}_h\hookrightarrow V^{\otimes_S h}$, is surjective with kernel $\Ker(\rho_h) = (A^!\theta_{V,V}^{-1}(R^\perp) A^!)_h$.
 Hence $\rho_h$ induces $A^!_h\cong D(\mathcal K_h)$, and $K_h\cong D(A^!_h)\otimes_SA(-h)$.
 \end{proposition}
 
@@ -360,15 +360,26 @@ The last claim follows by dualising, as $D(D(\mathcal K_h))\cong\mathcal K_h$.
 \end{proof}
 \end{supplementary}
 
-So $K_\bullet$ is ``$D(A^!)\otimes_SA$'': the quadratic dual produces the generators of the diagonal part of the minimal graded projective resolution.
+The slogan of this proposition is:
+\begin{center}
+$K_\bullet$ is ``$D(A_{\bullet}^!)\otimes_SA$''.\\
+The quadratic dual $A^!$ records (the generators of)\\ the diagonal part of the minimal graded projective resolution of $S$ over $A$.
+\end{center}
 
-\begin{example}[Polynomial algebra]\label{ex:koszul-polynomial}
+\subsection{Koszul complex of the polynomial ring}
+\label{sec:koszul-complex-polynomial-ring}
+
 Let $V$ be $n$-dimensional with basis $x_1,\ldots,x_n$, and $A=\SymAlg(V)=\Bbbk[x_1,\ldots,x_n]=T(V)/(R)$ with $R=\langle v\otimes w-w\otimes v\rangle$.
-The antisymmetrisation $v_1\wedge\cdots\wedge v_h\mapsto\sum_\sigma\operatorname{sgn}(\sigma)v_{\sigma(1)}\otimes\cdots\otimes v_{\sigma(h)}$ is an injective map $\bigwedge^hV\to V^{\otimes h}$ with image in $\mathcal K_h$, since pairing terms that differ by swapping positions $\nu+1,\nu+2$ gives elements of $V^{\otimes\nu}\otimes R\otimes V^{\otimes(h-2-\nu)}$.
-By Proposition~\ref{prop:koszul-terms-dual} and Proposition~\ref{prop:symmetric-exterior-dual}, $\dim\mathcal K_h=\dim\bigwedge^hD(V)=\binom nh=\dim\bigwedge^hV$.
-Hence $\mathcal K_h\cong\bigwedge^hV$ and
+We have an injective map 
 \[
-K_h\cong\bigwedge^hV\otimes_\Bbbk A(-h),\qquad K_0=A,
+\bigwedge^hV\to V^{\otimes h}, \qquad v_1\wedge\cdots\wedge v_h\mapsto\sum_\sigma\operatorname{sgn}(\sigma)v_{\sigma(1)}\otimes\cdots\otimes v_{\sigma(h)}
+\]
+with image lying in $\mathcal K_h$ ($\because$ pairing terms that differ by swapping positions $\nu+1,\nu+2$ gives elements of $V^{\otimes\nu}\otimes R\otimes V^{\otimes(h-2-\nu)}$).
+By Proposition~\ref{prop:koszul-terms-dual} and Proposition~\ref{prop:symmetric-exterior-dual}, we have
+\[ \dim\mathcal K_h=\dim\bigwedge^hD(V)=\dim\bigwedge^hV=\binom nh.\]
+Hence,
+\[
+\mathcal{K}_h\cong \bigwedge^hV, \qquad K_h\cong\bigwedge^hV\otimes_\Bbbk A(-h),\qquad K_0=A.
 \]
 with differential $d_h((v_1\wedge\cdots\wedge v_h)\otimes a)=\sum_{r=1}^h(-1)^{h-r}(v_1\wedge\cdots\widehat{v_r}\cdots\wedge v_h)\otimes v_ra$.
 Multiplying $d_h$ by $(-1)^{h-1}$ gives
@@ -376,7 +387,7 @@ Multiplying $d_h$ by $(-1)^{h-1}$ gives
 d_h((v_1\wedge\cdots\wedge v_h)\otimes a)=\sum_{r=1}^h(-1)^{r-1}(v_1\wedge\cdots\widehat{v_r}\cdots\wedge v_h)\otimes v_ra,
 \end{equation}
 and this does not affect exactness.
-\end{example}
+
 
 \begin{proposition}\label{prop:koszul-complex-resolution}
 For $A=\SymAlg(V)$ the Koszul complex, with $d_0:K_0=A\to\Bbbk$ the projection,
