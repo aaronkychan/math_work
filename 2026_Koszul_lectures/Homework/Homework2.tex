@@ -57,63 +57,117 @@
 
 Complete at least 2 exercises.
 
-Throughout, $\kk$ is a field, and all modules are right modules unless a
-left action is specified.
-
+Throughout, $\kk$ is a field and all modules are graded right modules.
+A graded algebra $A=\bigoplus_{i\geq0}A_i$ is locally finite-dimensional with $S=A_0$ semisimple; in all explicit examples $S=\bigoplus_i\kk e_i$ with coordinate idempotents $e_i$.
 
 \begin{questions}
 
 \titledquestion{}
 \begin{parts}
-\part Let $A=\kk A_n$ be the algebra of upper triangular $n\times n$ matrices with $n\geq3$, graded by $\deg e_{ij}=j-i$.
-Describe the minimal graded projective resolution of each simple module $L_i$, $1\leq i\leq n$, and show that it is linear.
-Deduce that $A$ is Koszul.
+\part Let $B=T_\kk(\kk x\oplus\kk y)/(x^2)$ with $\deg x=\deg y=1$.
+\begin{subparts}
+\subpart Let $a_d=\dim_\kk B_d$. Prove that $a_d=a_{d-1}+a_{d-2}$ for $d\geq2$ and $h_B(t)=\dfrac{1+t}{1-t-t^2}$.
 \begin{solution}
-$L_n=e_{nn}A$ is projective.
-For $i<n$, the kernel of $e_{ii}A\to L_i$ is $e_{ii}A_+=\operatorname{span}\{e_{ij}:j>i\}=e_{i,i+1}A$, because $e_{ij}=e_{i,i+1}e_{i+1,j}$.
-The map $e_{i+1,i+1}A(-1)\to e_{i,i+1}A$, $a\mapsto e_{i,i+1}a$, is a degree-preserving bijection ($e_{i+1,j}\mapsto e_{ij}$), so the kernel is projective and
-\[
-0\to e_{i+1,i+1}A(-1)\to e_{ii}A\to L_i\to0
-\]
-is a graded projective resolution; it is minimal since $\Im d_1=e_{ii}A_+$, and $\grtop P_0=L_i$ in degree $0$, $\grtop P_1=L_{i+1}$ in degree $1$.
-Both terms are generated in degrees $0$ and $1$ respectively, so the resolution is linear.
-The direct sum of these resolutions over $i$ is a linear resolution of $S=\bigoplus_iL_i$, so $A$ is Koszul.
+A basis of $B_d$ is the set of words in $x,y$ of length $d$ containing no $xx$ (the ideal $(x^2)$ is spanned by words containing $xx$).
+For $d\geq2$: words starting with $y$ are $y\cdot w$ with $w$ admissible of length $d-1$ ($a_{d-1}$ choices); words starting with $x$ must continue with $y$, and are $xy\cdot w$ with $w$ admissible of length $d-2$ ($a_{d-2}$).
+So $(1-t-t^2)h_B=a_0+(a_1-a_0)t=1+t$.
 \end{solution}
-
-\part Let $S=\bigoplus_{i=1}^r\kk e_i$, let $V$ be a finite-dimensional $S$-bimodule in degree $1$, and put
-\[
-  C_{ij}=\dim_\kk e_iVe_j,\qquad A=T_S(V)/(V\otimes_SV)=S\oplus V.
-\]
-Prove that
-\[
-  A^!=T_S(D(V)),\qquad h_A(t)=I+tC,\qquad h_{A^!}(t)=(I-tC^{\mathsf T})^{-1}.
-\]
+\subpart Compute $B^!$ (with $X=x^*$, $Y=y^*$).
 \begin{solution}
-The relation space is $R=V\otimes_SV$; since $D(V)\otimes_SD(V)\cong D(V\otimes_SV)$ (Lecture~3), the annihilator of $R=V\otimes_SV$ is $R^\perp=0$ and $A^!=T_S(D(V))$.
-$\dim e_iA_0e_j=\delta_{ij}$ and $\dim e_iA_1e_j=C_{ij}$ give $h_A=I+tC$.
-For $D(V)$, $\dim e_iD(V)e_j=\dim e_jVe_i$, so its matrix is $C^{\mathsf T}$ and $h_{A^!}=(I-tC^{\mathsf T})^{-1}$.
+For $F=\alpha XX+\beta XY+\gamma YX+\delta YY$ one has $F(x\otimes x)=\alpha$, so $R^\perp=\operatorname{span}\{XY,YX,YY\}$ and $B^!=\kk\langle X,Y\rangle/(XY,YX,Y^2)$.
 \end{solution}
+\subpart Find a homogeneous basis of $B^!$ and compute $h_{B^!}(t)$.
+\begin{solution}
+Any word of length $\geq2$ containing $Y$ contains one of $XY,YX,YY$; so $\{X^n\mid n\geq0\}\cup\{Y\}$ spans, and it is a basis because the ideal is spanned by words containing $XY$, $YX$ or $YY$, none of which occurs in $X^n$ or $Y$.
+Thus $h_{B^!}(t)=\frac1{1-t}+t$.
+\end{solution}
+\end{subparts}
 
-\part Let $S=\bigoplus_{i=1}^4\kk e_i$ with coordinate idempotents $e_i$, and let $V=\kk a\oplus\kk b\oplus\kk c\oplus\kk d$ be the $S$-bimodule with
+\part For $q\in\kk$ let $C_q=\kk\langle x,y\rangle/(x^2,\ y^2,\ xy+qyx)$ with $\deg x=\deg y=1$.
+\begin{subparts}
+\subpart Prove that $C_q\cong C_{q'}$ as graded algebras if and only if $q=q'$ or $qq'=1$.
+
+\emph{Hint.} A graded isomorphism is determined by a linear bijection of the degree-$1$ parts and preserves $\{\kk u\mid u^2=0\}$. You may use that $\{1,x,y,yx\}$ is a basis of $C_q$ and that $u^2=\alpha\beta(1-q)\,yx$ for $u=\alpha x+\beta y$.
+\begin{solution}
+($\Leftarrow$) If $qq'=1$ then $q\neq0$ and $x\mapsto y$, $y\mapsto x$ sends $x^2,y^2$ to $y^2,x^2$ and $xy+qyx\mapsto yx+qxy=q(xy+q'yx)$, so it induces a graded isomorphism $C_q\to C_{q'}$ (inverse of the same form).
+($\Rightarrow$) Let $\varphi:C_q\to C_{q'}$ be a graded isomorphism; $\varphi$ is determined by the bijection $\varphi_1$ on degree $1$ and preserves $u^2=0$.
+If $q=1$, every $u$ squares to zero in $C_1$, hence in $C_{q'}$, so $q'=1$; symmetrically $q'=1\Rightarrow q=1$.
+If $q,q'\neq1$, then $\varphi_1$ permutes the two lines $\kk x,\kk y$ (the only $u$ with $u^2=0$):
+either $\varphi(x)=\lambda x$, $\varphi(y)=\mu y$, and $0=\varphi(xy+qyx)=\lambda\mu(q-q')yx$ gives $q=q'$; or $\varphi(x)=\lambda y$, $\varphi(y)=\mu x$, and $0=\lambda\mu(yx+qxy)=\lambda\mu(1-qq')yx$ gives $qq'=1$ (here $\lambda\mu\neq0$ and $yx\neq0$).
+
+\end{solution}
+\subpart Deduce that $C_1\not\cong C_{-1}$ if $\operatorname{char}\kk\neq2$.
+\begin{solution}
+Now if $\operatorname{char}\kk\neq2$, then $q=1$, $q'=-1$ satisfy neither $q=q'$ nor $qq'=1$, so $C_1\not\cong C_{-1}$.
+\end{solution}
+\subpart Compute a quadratic presentation of $C_q^!$ (with $X=x^*$, $Y=y^*$).
+\begin{solution}
+For $S=\kk$, $(\lambda\otimes\mu)(v\otimes w)=\mu(v)\lambda(w)$. For $F=\alpha X\otimes X+\beta X\otimes Y+\gamma Y\otimes X+\delta Y\otimes Y$,
+\[
+  F(x\otimes x)=\alpha,\qquad F(y\otimes y)=\delta,\qquad F(x\otimes y+q\,y\otimes x)=\gamma+q\beta.
+\]
+So $R^\perp=\kk(X\otimes Y-qY\otimes X)$ and $C_q^!=\kk\langle X,Y\rangle/(XY-qYX)$.
+\end{solution}
+\subpart Compute $h_{C_q^!}(t)$.
+\begin{solution}
+Using $XY=qYX$, every word is a multiple of $Y^aX^b$, so these span; they are independent:
+for $q=0$ the relation is monomial and $\{Y^aX^b\}$ is the set of words avoiding $XY$; for $q\neq0$ let $X$ act on $\kk[s,t]$ by multiplication by $s$ and $Y$ by $(Yf)(s,t)=t\,f(q^{-1}s,t)$; then $XY=qYX$ and $Y^aX^b\cdot1=q^{-ab}s^bt^a$, which are independent.
+Hence $h_{C_q^!}=\sum_d(d+1)t^d=(1-t)^{-2}$.
+\end{solution}
+\subpart Compare $C_0^!$ with $C_1^!$.
+\begin{solution}
+$C_1^!=\kk[X,Y]$ is commutative while in $C_0^!=\kk\langle X,Y\rangle/(XY)$ one has $XY=0\neq YX$: same Hilbert series, non-isomorphic algebras.
+\end{solution}
+\end{subparts}
+
+\part Let $P_\bullet\to M$ be a projective resolution of an ordinary (ungraded) module with differentials $d_h$ and let $K_1=\Ker d_0$.
+\begin{subparts}
+\subpart Prove that
+\[
+\Ext_A^1(M,N)\cong\operatorname{coker}\bigl(\Hom_A(P_0,N)\to\Hom_A(K_1,N)\bigr),
+\]
+where the map is restriction.
+\begin{solution}
+Let $\delta^h$ be the differentials of $\Hom_A(P_\bullet,N)$.
+For $h=1$: $\Ker\delta^1$ consists of maps $P_1\to N$ vanishing on $\Im d_2=\Ker d_1$, that is, maps factoring uniquely through $d_1:P_1\twoheadrightarrow K_1$.
+So $\Ker\delta^1\cong\Hom_A(K_1,N)$, and under this identification $\Im\delta^0=\{\varphi d_1:\varphi\in\Hom_A(P_0,N)\}$ is the image of the restriction map $\Hom_A(P_0,N)\to\Hom_A(K_1,N)$, $\varphi\mapsto\varphi|_{K_1}$.
+Hence $\Ext_A^1(M,N)$ is the cokernel.
+\end{solution}
+\subpart Prove that $\Ext_A^h(M,N)\cong\Ext_A^{h-1}(K_1,N)$ for $h\geq2$.
+\begin{solution}
+The shifted complex $\cdots\to P_3\to P_2\to P_1\xrightarrow{d_1}K_1\to0$ is a projective resolution of $K_1$, so $\Ext_A^{h-1}(K_1,N)$ is the cohomology of $\Hom_A(P_{\bullet+1},N)$ in degree $h-1$.
+
+For $h\geq2$, the cohomology of $\Hom_A(P_\bullet,N)$ in degree $h$ uses $\Hom_A(P_{h-1},N)\to\Hom_A(P_h,N)\to\Hom_A(P_{h+1},N)$, which is the same piece of the complex, so $\Ext_A^h(M,N)\cong\Ext_A^{h-1}(K_1,N)$.
+\end{solution}
+\end{subparts}
+
+\end{parts}
+
+\newpage
+\titledquestion{}
+\begin{parts}
+\part Let $S=\bigoplus_{i=1}^4\kk e_i$ and let $V=\kk a\oplus\kk b\oplus\kk c\oplus\kk d$ be the $S$-bimodule with
 \[
   a\in e_1Ve_2,\qquad b\in e_2Ve_4,\qquad c\in e_1Ve_3,\qquad d\in e_3Ve_4,
 \]
-and $e_iVe_j=0$ for all other $(i,j)$.
-For $\lambda\in\kk$ put $A_\lambda=T_S(V)/(ab-\lambda cd)$.
-Find $R^\perp$ and a presentation of $A_\lambda^!$, for every $\lambda\in\kk$.
+and $e_iVe_j=0$ for all other $(i,j)$. For $\lambda\in\kk$ put $A_\lambda=T_S(V)/(ab-\lambda cd)$.
+\begin{subparts}
+\subpart Find $R^\perp$ and a presentation of $A_\lambda^!$, for every $\lambda\in\kk$.
 \begin{solution}
 $D(V)$ has the dual basis $a^*\in e_2D(V)e_1$, $b^*\in e_4D(V)e_2$, $c^*\in e_3D(V)e_1$, $d^*\in e_4D(V)e_3$, and the composable words of length $2$ are $b^*a^*$, $d^*c^*$.
-Evaluating by $(\lambda\otimes\mu)(v\otimes w)=\sum_i\mu(ve_i)\,\lambda(e_iw)$: $(b^*\otimes a^*)(a\otimes b)=a^*(a)\,b^*(b)=1$ and it vanishes on $c\otimes d$; $(d^*\otimes c^*)(c\otimes d)=1$ and it vanishes on $a\otimes b$.
+Evaluating by $(\lambda\otimes\mu)(v\otimes w)=\sum_i\mu(ve_i)\,\lambda(e_iw)$: $(b^*\otimes a^*)(a\otimes b)=1$ and it vanishes on $c\otimes d$; $(d^*\otimes c^*)(c\otimes d)=1$ and it vanishes on $a\otimes b$.
 So
 \[
   (\mu b^*a^*+\nu d^*c^*)(ab-\lambda cd)=\mu-\lambda\nu,
 \]
 giving $R^\perp=\kk(\lambda b^*a^*+d^*c^*)$ and $A_\lambda^!=T_S(D(V))/(\lambda b^*a^*+d^*c^*)$.
 \end{solution}
+\subpart Check that $(A_\lambda^!)^!\cong A_\lambda$.
+\begin{solution}
+Identifying $D(D(V))=V$ (with $a^{**}=a$, and so on), the same computation shows $(\mu\,ab+\nu\,cd)(\lambda b^*a^*+d^*c^*)=\lambda\mu+\nu$, so the annihilator of $R^\perp$ is $\kk(ab-\lambda cd)=R$ and $(A_\lambda^!)^!=A_\lambda$.
+\end{solution}
+\subpart Prove that $A_\lambda\cong A_\mu$ as graded algebras if and only if $\lambda,\mu$ are either both zero or both non-zero.
 
-\part With $A_\lambda$ as in (3), prove that $A_\lambda\cong A_\mu$ as graded algebras if and only if $\lambda,\mu$ are either both zero or both non-zero.
-
-\emph{Hint.} A graded isomorphism over $S$ sends each of $a,b,c,d$ to a scalar multiple of itself.
 \begin{solution}
 A graded isomorphism $\varphi:A_\lambda\to A_\mu$ over $S$ fixes each $e_i$, so $\varphi_1$ preserves each $e_iVe_j$ (all at most one-dimensional):
 \[
@@ -126,291 +180,271 @@ The induced map on $T_S(V)$ sends $ab-\lambda cd$ to $\alpha\beta\,ab-\lambda\ga
 Hence $\lambda=0\Leftrightarrow\mu=0$.
 Conversely if $\lambda,\mu\neq0$ take $\alpha=\beta=\gamma=1$, $\delta=\mu/\lambda$ (the inverse is of the same form); for $\lambda=\mu=0$ take the identity.
 \end{solution}
-
-\part Let $S=\bigoplus_{i=1}^4\kk e_i$ and let $V=\kk a\oplus\kk b\oplus\kk c$ be the $S$-bimodule with $a\in e_1Ve_2$, $b\in e_2Ve_3$, $c\in e_3Ve_4$ and $e_iVe_j=0$ for all other $(i,j)$.
-Let $R=\kk\,(a\otimes b)\subset V\otimes_SV$ and $A=T_S(V)/(R)$.
-Find a basis of $A$ and $h_A(t)$.
-Compute $R^\perp$, a presentation and a basis of $A^!$, and $h_{A^!}(t)$, and verify
+\subpart Check that
 \[
-  h_A(t)\,h_{A^!}(-t)^{\mathsf T}=I_4.
+  h_{A_\lambda}(t)=\begin{pmatrix}1&t&t&t^2\\0&1&0&t\\0&0&1&t\\0&0&0&1\end{pmatrix}.
 \]
 \begin{solution}
-The ideal $(R)$ is spanned by $ab$ and $abc$, so a basis of $A$ is
-\[
-  e_1,\ e_2,\ e_3,\ e_4,\ a,\ b,\ c,\ bc,\qquad h_A(t)=I+t(E_{12}+E_{23}+E_{34})+t^2E_{24}.
-\]
-$D(V)$ has the dual basis $a^*\in e_2D(V)e_1$, $b^*\in e_3D(V)e_2$, $c^*\in e_4D(V)e_3$; the composable words of length $2$ are $b^*a^*$ and $c^*b^*$.
-With $(\lambda\otimes\mu)(v\otimes w)=\sum_i\mu(ve_i)\,\lambda(e_iw)$,
-\[
-  (b^*\otimes a^*)(a\otimes b)=1,\qquad(c^*\otimes b^*)(a\otimes b)=0,
-\]
-so $R^\perp=\kk\,c^*b^*$ and $A^!=T_S(D(V))/(c^*b^*)$.
-A word of length $3$ would be $c^*b^*a^*$, which contains $c^*b^*$; hence a basis of $A^!$ is $e_i,\ a^*,\ b^*,\ c^*,\ b^*a^*$, and
-\[
-  h_{A^!}(t)=I+t(E_{21}+E_{32}+E_{43})+t^2E_{31}.
-\]
-With $N=E_{12}+E_{23}+E_{34}$ we have $N^2=E_{13}+E_{24}$ and $NE_{13}=E_{24}N=E_{24}E_{13}=0$, so
-\[
-  h_A(t)h_{A^!}(-t)^{\mathsf T}=(I+tN+t^2E_{24})(I-tN+t^2E_{13})=I+t^2\bigl(E_{13}-N^2+E_{24}\bigr)=I.
-\]
+The projectives are $e_1A=\operatorname{span}\{e_1,a,c,cd\}$ (with $ab=\lambda cd$), $e_2A=\{e_2,b\}$, $e_3A=\{e_3,d\}$, $e_4A=\{e_4\}$, which gives the Hilbert series.
+
 \end{solution}
-\end{parts}
-
-\newpage
-\titledquestion{}
-\begin{parts}
-\part Let $B=T_\kk(\kk x\oplus\kk y)/(x^2)$ with $\deg x=\deg y=1$, and $a_d=\dim_\kk B_d$.
-Prove that $a_d=a_{d-1}+a_{d-2}$ for $d\geq2$ and $h_B(t)=\dfrac{1+t}{1-t-t^2}$.
-Then compute $B^!$ (with $X=x^*$, $Y=y^*\in D(V)$), a homogeneous basis of $B^!$ and $h_{B^!}(t)$, and verify $h_B(t)\,h_{B^!}(-t)=1$.
+\subpart Find the minimal graded projective resolution of each simple module $e_iS$.
 \begin{solution}
-A basis of $B_d$ is the set of words in $x,y$ of length $d$ containing no $xx$ (the ideal $(x^2)$ is spanned by words containing $xx$).
-For $d\geq2$: words starting with $y$ are $y\cdot w$ with $w$ admissible of length $d-1$ ($a_{d-1}$ choices); words starting with $x$ must continue with $y$, and are $xy\cdot w$ with $w$ admissible of length $d-2$ ($a_{d-2}$).
-So $(1-t-t^2)h_B=a_0+(a_1-a_0)t=1+t$.
-
-For $F=\alpha XX+\beta XY+\gamma YX+\delta YY$ one has $F(x\otimes x)=\alpha$, so $R^\perp=\operatorname{span}\{XY,YX,YY\}$ and $B^!=\kk\langle X,Y\rangle/(XY,YX,Y^2)$.
-Any word of length $\geq2$ containing $Y$ contains one of $XY,YX,YY$; so $\{X^n\mid n\geq0\}\cup\{Y\}$ spans, and it is a basis because the ideal is spanned by words containing $XY$, $YX$ or $YY$, none of which occurs in $X^n$ or $Y$.
-Thus $h_{B^!}(t)=\frac1{1-t}+t$ and
+$e_4S=e_4A$ is projective.
+For $e_2S$: the kernel of $e_2A\to e_2S$ is $\kk b$, and $b\,e_4=b$, $bA_+=0$, so it is isomorphic to $e_4A(-1)$ and $0\to e_4A(-1)\to e_2A\to e_2S\to0$ is the minimal resolution; similarly $0\to e_4A(-1)\to e_3A\to e_3S\to0$.
+For $e_1S$: the kernel of $e_1A\to e_1S$ is $e_1A_+=\operatorname{span}\{a,c,cd\}$, and
 \[
-  h_B(t)h_{B^!}(-t)=\frac{1+t}{1-t-t^2}\Bigl(\frac1{1+t}-t\Bigr)=\frac{1+t}{1-t-t^2}\cdot\frac{1-t-t^2}{1+t}=1.
+d_1:e_2A(-1)\oplus e_3A(-1)\to e_1A_+,\qquad(x,y)\mapsto ax+cy,
+\]
+is surjective ($e_2\mapsto a$, $e_3\mapsto c$, $d\mapsto cd$, $b\mapsto\lambda cd$).
+Its kernel is one-dimensional, spanned by $z=(b,-\lambda d)$ in degree $2$, and $zA_+=0$, so it is isomorphic to $e_4A(-2)$ (projective).
+So
+\[
+0\to e_4A(-2)\to e_2A(-1)\oplus e_3A(-1)\to e_1A\to e_1S\to0
+\]
+is the minimal resolution (the kernels lie in $PA_+$).
+\end{solution}
+\subpart Deduce that $A_\lambda$ is Koszul for every $\lambda\in\kk$.
+\begin{solution}
+In every resolution $P_h$ is generated in degree $h$, so all are linear, hence so is the resolution of $S=\bigoplus_ie_iS$, and $A_\lambda$ is Koszul.
+\end{solution}
+\subpart Compute $h_{A_\lambda^!}(t)$.
+\begin{solution}
+The only composable words of length $2$ in $D(V)$ are $b^*a^*$ and $d^*c^*$, both in $e_4A^!e_1$, and the relation $\lambda b^*a^*+d^*c^*=0$ leaves $\dim e_4A^!_2e_1=1$ for every $\lambda$; there are no composable words of length $3$.
+Hence $h_{A_\lambda^!}(t)=I+tN^{\mathsf T}+t^2E_{41}$, where $N=E_{12}+E_{13}+E_{24}+E_{34}$ and $h_{A_\lambda}(t)=I+tN+t^2E_{14}$.
+\end{solution}
+\subpart Verify that $h_{A_\lambda}(t)\,h_{A_\lambda^!}(-t)^{\mathsf T}=I_4$.
+\begin{solution}
+Using $N^2=2E_{14}$ and $NE_{14}=E_{14}N=E_{14}^2=0$,
+\[
+  (I+tN+t^2E_{14})(I-tN+t^2E_{14})=I+t^2(E_{14}-N^2+E_{14})=I.
 \]
 \end{solution}
+\end{subparts}
 
-\part For $q\in\kk$ let
-\[
-  C_q=\kk\langle x,y\rangle/(x^2,\ y^2,\ xy+qyx),\qquad\deg x=\deg y=1.
-\]
-Find a homogeneous basis of $C_q$ (justify linear independence) and determine, for each $q$, the set
-\[
-  \{(\alpha,\beta)\in\kk^2\mid u^2=0\ \text{ for }u=\alpha x+\beta y\}.
-\]
-\begin{solution}
-The degree-$2$ relation space $R=\operatorname{span}\{x\otimes x,\ y\otimes y,\ x\otimes y+qy\otimes x\}$ is $3$-dimensional (the three tensors involve different basis tensors), so $\dim(C_q)_2=4-3=1$.
-Modulo $R$: $xx\equiv yy\equiv0$ and $xy\equiv-q\,yx$, so $(C_q)_2$ is spanned by the class of $yx$, which is therefore non-zero.
-In degree $3$, a word contains $xx$ or $yy$ or equals $xyx$ or $yxy$; and $xyx\equiv-qyxx\equiv0$, $yxy\equiv-qyyx\equiv0$; hence $(C_q)_d=0$ for $d\geq3$.
-Thus $\{1,x,y,yx\}$ is a basis (dimensions $1,2,1$), and $h_{C_q}(t)=1+2t+t^2$ for every $q$.
-Products: $x\cdot x=y\cdot y=0$, $x\cdot y=-q\,yx$, $y\cdot x=yx$.
-
-$u^2=\alpha^2x^2+\alpha\beta(xy+yx)+\beta^2y^2=\alpha\beta(1-q)\,yx$, and $yx\neq0$.
-So $u^2=0$ iff $\alpha\beta(1-q)=0$: for $q\neq1$, iff $\alpha=0$ or $\beta=0$ (the two lines $\kk x,\kk y$); for $q=1$, for all $(\alpha,\beta)$.
-\end{solution}
-
-\part With $C_q$ as in (2), prove that
-\[
-  C_q\cong C_{q'}\ \text{ as graded algebras}\quad\Longleftrightarrow\quad q=q'\ \text{ or }\ qq'=1.
-\]
-Deduce that $C_1\not\cong C_{-1}$ if $\operatorname{char}\kk\neq2$ (even ungraded), and say what changes if $\operatorname{char}\kk=2$.
-
-\emph{Hint.} A graded isomorphism is determined by a linear bijection of the degree-$1$ parts, and preserves $\{\kk u\mid u^2=0\}$; you may use that $\{1,x,y,yx\}$ is a basis of $C_q$ and $u^2=\alpha\beta(1-q)\,yx$ for $u=\alpha x+\beta y$.
-\begin{solution}
-($\Leftarrow$) If $qq'=1$ then $q\neq0$ and $x\mapsto y$, $y\mapsto x$ sends $x^2,y^2$ to $y^2,x^2$ and $xy+qyx\mapsto yx+qxy=q(xy+q'yx)$, so it induces a graded isomorphism $C_q\to C_{q'}$ (inverse of the same form).
-($\Rightarrow$) Let $\varphi:C_q\to C_{q'}$ be a graded isomorphism; $\varphi$ is determined by the bijection $\varphi_1$ on degree $1$ and preserves $u^2=0$.
-If $q=1$, every $u$ squares to zero in $C_1$, hence in $C_{q'}$, so $q'=1$; symmetrically $q'=1\Rightarrow q=1$.
-If $q,q'\neq1$, then $\varphi_1$ permutes the two lines $\kk x,\kk y$:
-either $\varphi(x)=\lambda x$, $\varphi(y)=\mu y$, and $0=\varphi(xy+qyx)=\lambda\mu(q-q')yx$ gives $q=q'$; or $\varphi(x)=\lambda y$, $\varphi(y)=\mu x$, and $0=\lambda\mu(yx+qxy)=\lambda\mu(1-qq')yx$ gives $qq'=1$ (here $\lambda\mu\neq0$ and $yx\neq0$).
-
-Now if $\operatorname{char}\kk\neq2$, then $1\neq-1$ and $1\cdot(-1)\neq1$, so $C_1\not\cong C_{-1}$ as graded algebras; even ungraded, $C_{-1}$ is commutative ($xy=yx$) whereas $C_1$ is not ($xy=-yx\neq yx$ as $2yx\neq0$).
-In characteristic $2$, $1=-1$, so $C_1=C_{-1}$.
-\end{solution}
-\part For $C_q$ as in (2), compute a quadratic presentation of $C_q^!$ (with $X=x^*$, $Y=y^*\in D(V)$) and $h_{C_q^!}(t)$.
-Compare $C_0^!$ with $C_1^!$.
-\begin{solution}
-For $S=\kk$, $(\lambda\otimes\mu)(v\otimes w)=\mu(v)\lambda(w)$.
-For $F=\alpha X\otimes X+\beta X\otimes Y+\gamma Y\otimes X+\delta Y\otimes Y$,
-\[
-  F(x\otimes x)=\alpha,\qquad F(y\otimes y)=\delta,\qquad F(x\otimes y+q\,y\otimes x)=\gamma+q\beta.
-\]
-So $R^\perp=\kk(X\otimes Y-qY\otimes X)$ and $C_q^!=\kk\langle X,Y\rangle/(XY-qYX)$.
-Using $XY=qYX$, every word is a multiple of $Y^aX^b$, so these span; they are independent:
-for $q=0$ the relation is monomial and $\{Y^aX^b\}$ is the set of words avoiding $XY$; for $q\neq0$ let $X$ act on $\kk[s,t]$ by multiplication by $s$ and $Y$ by $(Yf)(s,t)=t\,f(q^{-1}s,t)$; then $XY=qYX$ and $Y^aX^b\cdot1=q^{-ab}s^bt^a$, which are independent.
-Hence $h_{C_q^!}=\sum_d(d+1)t^d=(1-t)^{-2}$.
-$C_1^!=\kk[X,Y]$ is commutative while in $C_0^!=\kk\langle X,Y\rangle/(XY)$ one has $XY=0\neq YX$: same Hilbert series, non-isomorphic algebras.
-\end{solution}
-\end{parts}
-
-\newpage
-\titledquestion{}
-\begin{parts}
-\part Let $A=\kk[x]$ with $\deg x=1$. Prove that $\rad A=0$ whereas $A_+=(x)\neq0$.
-\begin{solution}
-If $0\neq f\in\rad A$, then $xf\in\rad A$, so $1-xf$ has a right inverse.
-This is impossible because $1-xf$ has positive degree.
-\end{solution}
-
-\part Let $A=\kk[u,v]/(uv)$ with $\deg u=\deg v=1$.
-Show that the minimal graded projective resolution of $\kk=A/A_+$ has $P_0=A$ and $P_h\cong A(-h)^{\oplus2}$ for all $h\geq1$.
-
-\emph{Hint.} Show that $ua+vb=0$ in $A$ if and only if $a\in vA$ and $b\in uA$.
-\begin{solution}
-A basis of $A$ is $1,u^i,v^j$ for $i,j\geq1$.
-For $a=a_0+a_u+a_v$ with $a_u\in\operatorname{span}\{u^i\}_{i\geq1}$ and $a_v\in\operatorname{span}\{v^j\}_{j\geq1}$ we have $ua=a_0u+ua_u$, and similarly for $vb$.
-So $ua+vb=0$ forces $a_0u+ua_u=0$ and $b_0v+vb_v=0$ (the $u$-powers and $v$-powers are independent), hence $a_0=a_u=0$ and $b_0=b_v=0$, that is, $a\in vA$ and $b\in uA$.
-The converse is clear because $uv=0$.
-Likewise $va=0$ if and only if $a\in uA$, and $ua=0$ if and only if $a\in vA$.
-
-Now $P_0=A$ and $\Ker d_0=A_+=uA+vA$ is generated by $u,v$, so $P_1=A(-1)^{\oplus2}$ with $d_1(a,b)=ua+vb$ is a surjection onto $\Ker d_0$.
-Its kernel is $\{(va',ub')\}$, generated in degree $2$ by $(v,0)$ and $(0,u)$, so $P_2=A(-2)^{\oplus2}$ with $d_2(a',b')=(va',ub')$.
-Then $\Ker d_2=\{(a',b'):va'=0,ub'=0\}=uA\oplus vA$, generated in degree $3$ by $(u,0)$ and $(0,v)$, so $P_3=A(-3)^{\oplus2}$ with $d_3(a'',b'')=(ua'',vb'')$.
-Finally $\Ker d_3=vA\oplus uA$ has the same form as $\Ker d_1$, so the pattern repeats with period $2$.
-Thus $P_h\cong A(-h)^{\oplus2}$ for all $h\geq1$, and all differentials map into $PA_+$, so the resolution is minimal.
-\end{solution}
-
-\part Let $A$ be as in Lecture~5, let $M$ be a bounded below locally finite-dimensional graded right $A$-module with minimal graded projective resolution $P_\bullet\to M$, and let $n\geq0$.
-Prove that the following are equivalent:
-\begin{enumerate}
-\item[(a)] $P_h=0$ for all $h>n$;
-\item[(b)] $\ext_A^{n+1}(M,L(j))=0$ for every simple graded $S$-module $L$ in degree $0$ and every $j\in\Z$.
-\end{enumerate}
-
-\emph{Hint.} Use the description of $\ext_A^h(M,L(j))$ via $\grtop P_h$ and the graded Nakayama lemma.
-\begin{solution}
-(a)$\Rightarrow$(b): $\ext_A^{n+1}(M,L(j))\cong\Hom_S((\grtop P_{n+1})_{-j},L)=0$, because $P_{n+1}=0$.
-
-(b)$\Rightarrow$(a): By the description of $\ext$ via a minimal resolution (Lecture~5) with $N=L$, the hypothesis says $\Hom_S((\grtop P_{n+1})_{-j},L)=0$ for all simple $L$ and all $j$.
-Every non-zero $S$-module has a non-zero map to some simple module, since $S$ is semisimple, so $\grtop P_{n+1}=0$, that is, $P_{n+1}=P_{n+1}A_+$.
-As $P_{n+1}$ is bounded below, graded Nakayama gives $P_{n+1}=0$.
-Then $\Ker d_{n+1}=0$, so $\Im d_{n+2}=0$ and $P_{n+2}\to\Ker d_{n+1}=0$ is the projective cover of $0$, whence $P_{n+2}=P_{n+2}A_+$ (by minimality, $\Ker=P_{n+2}\subseteq P_{n+2}A_+$) and $P_{n+2}=0$ again by Nakayama.
-Induction gives $P_h=0$ for all $h>n$.
-\end{solution}
-
-\part Let $S=\bigoplus_{x=1}^n\kk e_x$, let $V$ be a finite-dimensional $S$-bimodule in degree $1$, and let $A=T_S(V)$ be the tensor algebra.
-Prove that the multiplication map $V\otimes_SA\to A_+$ is an isomorphism of right $A$-modules, and deduce that $S$ has the minimal graded projective resolution
-\[
-0\to(V\otimes_SA)(-1)\to A\to S\to0,
-\]
-so that $A$ is Koszul.
-\begin{solution}
-The tensor algebra has $A_i=V^{\otimes_Si}$, so the multiplication map $V\otimes_SA_{i-1}\to A_i$ is the identity of $V^{\otimes_Si}$ for $i\geq1$.
-Hence $V\otimes_SA\to A_+$, $v\otimes a\mapsto va$, is bijective; it is right $A$-linear and raises degrees by $1$, so $A_+\cong(V\otimes_SA)(-1)$.
-This module is projective (as $V\otimes_S-$ takes projective $S$-modules, that is all $S$-modules, to projective ones, so $V\otimes_SA$ is a direct summand of a free $A$-module).
-Thus $0\to A_+\to A\to S\to0$ is a graded projective resolution, with $A_+\subseteq AA_+$, so it is minimal.
-Its terms are generated in degrees $0$ and $1$, so it is linear and $A$ is Koszul.
-\end{solution}
-\end{parts}
-
-\newpage
-\titledquestion{}
-\begin{parts}
-\part Let $P_\bullet\to M$ be a projective resolution with differentials $d_h$ and $K_1=\Ker d_0$.
-Prove that
-\[
-\Ext_A^1(M,N)\cong\operatorname{coker}\bigl(\Hom_A(P_0,N)\to\Hom_A(K_1,N)\bigr),
-\]
-where the map is restriction, and that $\Ext_A^h(M,N)\cong\Ext_A^{h-1}(K_1,N)$ for $h\geq2$.
-\begin{solution}
-The shifted complex $\cdots\to P_3\to P_2\to P_1\xrightarrow{d_1}K_1\to0$ is a projective resolution of $K_1$, so $\Ext_A^{h-1}(K_1,N)$ is the cohomology of $\Hom_A(P_{\bullet+1},N)$ in degree $h-1$.
-
-For $h\geq2$, the cohomology of $\Hom_A(P_\bullet,N)$ in degree $h$ uses $\Hom_A(P_{h-1},N)\to\Hom_A(P_h,N)\to\Hom_A(P_{h+1},N)$, which is the same piece of the complex, so $\Ext_A^h(M,N)\cong\Ext_A^{h-1}(K_1,N)$.
-
-For $h=1$: $\Ker\delta^1$ consists of maps $P_1\to N$ vanishing on $\Im d_2=\Ker d_1$, that is, maps factoring uniquely through $d_1:P_1\twoheadrightarrow K_1$.
-So $\Ker\delta^1\cong\Hom_A(K_1,N)$, and under this identification $\Im\delta^0=\{\varphi d_1:\varphi\in\Hom_A(P_0,N)\}$ is the image of the restriction map $\Hom_A(P_0,N)\to\Hom_A(K_1,N)$, $\varphi\mapsto\varphi|_{K_1}$.
-Hence $\Ext_A^1(M,N)$ is the cokernel.
-\end{solution}
-
-\part Let $A=\kk A_3/(e_{13})$ with $\deg e_{ij}=j-i$.
-Find the minimal graded projective resolution of $L_1$, and compute $\dim_\kk\ext_A^h(L_1,L_y(j))$ for all $h,y,j$.
-\begin{solution}
-Here $e_{11}A=\langle e_{11},e_{12}\rangle$, $e_{22}A=\langle e_{22},e_{23}\rangle$, $e_{33}A=\langle e_{33}\rangle$.
-The kernel of $e_{11}A\to L_1$ is $\kk e_{12}\cong L_2(-1)$, since $e_{12}e_{23}=e_{13}=0$.
-The map $e_{22}A(-1)\to\kk e_{12}$, $e_{22}\mapsto e_{12}$, is surjective with kernel $\kk e_{23}\subseteq e_{22}A_+$ in degree $2$, and $\kk e_{23}\cong e_{33}A(-2)$ is projective.
-So the minimal resolution is
-\[
-0\to e_{33}A(-2)\to e_{22}A(-1)\to e_{11}A\to L_1\to0,
-\]
-with $\grtop P_h=L_{h+1}$ in degree $h$ for $h=0,1,2$.
-Here $S=\kk^3$, so by the formula for $\ext$ with simple coefficients (Lecture~5), $\dim\ext_A^h(L_1,L_y(j))=[(\grtop P_h)_{-j}:L_y]$ equals $1$ for $(h,y,j)=(0,1,0),(1,2,-1),(2,3,-2)$ and $0$ otherwise.
-\end{solution}
-
-\part Let $A$ be as in Lecture~5.
-Prove that $\ext_A^1(S,S(j))\cong\Hom_S\bigl((A_+/A_+^2)_{-j},S\bigr)$ for all $j\in\Z$.
-\begin{solution}
-Let $P_\bullet\to S$ be the minimal resolution and $K_1=\Ker d_0=A_+$.
-By the description of graded $\ext$ via a minimal resolution (Lecture~5), $\ext_A^1(S,S(j))\cong\Hom_S((\grtop P_1)_{-j},S)$, and $\grtop P_1\cong\grtop K_1=A_+/A_+^2$ since $P_1\to K_1$ is a projective cover.
-\end{solution}
-
-\part Let $A$ be as in (3).
-Prove that $A$ is generated in degree $1$ over $S$ if and only if $\ext_A^1(S,S(j))=0$ for all $j\neq-1$.
-
-\emph{Hint.} You may use the isomorphism in (3).
-\begin{solution}
-By (3), and since every simple $S$-module is a direct summand of $S$, the condition says $A_+/A_+^2$ is concentrated in degree $1$, that is, $A_i=(A_+^2)_i=\sum_{0<p<i}A_pA_{i-p}$ for $i\geq2$.
-If $A$ is generated in degree $1$, then $A_i=A_1A_{i-1}\subseteq A_+^2$ for $i\geq2$.
-Conversely, if $A_i=\sum_{0<p<i}A_pA_{i-p}$ for all $i\geq2$, induction on $i$ gives $A_p=A_1^p$ for all $p<i$, hence $A_i=A_1^i$, so $A$ is generated in degree $1$.
-\end{solution}
-\part Let $A$ be a graded algebra with $A_0=\kk$, locally finite-dimensional, and let $M$ be a bounded below locally finite-dimensional graded right $A$-module whose minimal graded projective resolution $P_\bullet\to M$ has $P_h=0$ for $h\gg0$.
+\part Let $A$ be a graded algebra with $A_0=\kk$ and let $M$ be a bounded below locally finite-dimensional graded $A$-module whose minimal graded projective resolution $P_\bullet\to M$ has $P_h=0$ for $h\gg0$.
 Prove that
 \[
 h_M(t)=h_A(t)\cdot\sum_{h\geq0}(-1)^h\sum_{i\in\Z}\dim_\kk\ext_A^h\bigl(M,\kk(-i)\bigr)\,t^i .
 \]
 \begin{solution}
-By the description of $\ext$ via a minimal resolution (Lecture~5), with $S=\kk$,, $\dim\ext_A^h(M,\kk(-i))=\dim(\grtop P_h)_i$, so the inner sum is $h_{\grtop P_h}(t)$.
-Since $P_h\cong\grtop P_h\otimes_\kk A$ as graded vector spaces (the graded projective cover formula), $h_{P_h}(t)=h_{\grtop P_h}(t)\,h_A(t)$.
+By the description of $\ext$ via a minimal resolution, with $S=\kk$, $\dim\ext_A^h(M,\kk(-i))=\dim(\grtop P_h)_i$, so the inner sum is $h_{\grtop P_h}(t)$.
+Since $P_h\cong\grtop P_h\otimes_\kk A$ as graded vector spaces, $h_{P_h}(t)=h_{\grtop P_h}(t)\,h_A(t)$.
 Taking the degree $i$ component of the exact sequence $0\to P_N\to\cdots\to P_0\to M\to0$ of vector spaces and the alternating sum of dimensions gives $h_M(t)=\sum_h(-1)^hh_{P_h}(t)$, which is the claim.
 \end{solution}
+
+\part Let $M$ be a graded right module with $M=M_mA$ for some $m\in\Z$, bounded below and locally finite-dimensional, with minimal graded projective resolution $P_\bullet\to M$.
+\begin{subparts}
+\subpart Prove that $(P_h)_i=0$ for $i<m+h$.
+\begin{solution}
+For $h=0$: $M_i=0$ for $i<m$ and $M=M_mA$, so $\grtop M$ is concentrated in degree $m$, and $\grtop P_0\cong\grtop M$, so $P_0$ is generated in degree $m$ and $(P_0)_i=0$ for $i<m$.
+Let $h\geq1$ and assume $(P_{h-1})_i=0$ for $i<m+h-1$.
+Then $P_{h-1}A_+$ vanishes in degrees $<m+h$, and so does $\Im d_h\subseteq P_{h-1}A_+$.
+Since $P_h\to\Im d_h$ is a projective cover, $\grtop P_h\cong\grtop\Im d_h$ is concentrated in degrees $\geq m+h$, so $P_h$ is generated in degrees $\geq m+h$ and $(P_h)_i=0$ for $i<m+h$.
+\end{solution}
+\subpart Deduce that $\ext^h(M,L(j))=0$ for $j>-m-h$ and every simple graded $S$-module $L$ in degree $0$.
+\begin{solution}
+Finally $\ext^h(M,L(j))\cong\Hom_S((\grtop P_h)_{-j},L)=0$ whenever $-j<m+h$, that is, $j>-m-h$.
+\end{solution}
+\end{subparts}
+
 \end{parts}
 
 \newpage
 \titledquestion{}
 \begin{parts}
-\part Let $A=\kk\langle x,y\rangle/(yx,\;x^2+y^2)$ with $\deg x=\deg y=1$, a quadratic algebra.
-Show that $x^3=0$ and $y^3=0$, and deduce that $A_n=0$ for $n\geq3$ and $h_A(t)=1+2t+2t^2$.
+\part Let $n\geq3$ and $Z\subseteq\{1,\ldots,n-2\}$, and let $A_Z=\kk A_n/(e_{k,k+2}\mid k\in Z)$ be the quotient of the algebra of upper triangular $n\times n$ matrices, with $\deg e_{ij}=j-i$.
+\begin{subparts}
+\subpart Check that $h_{A_Z}(t)_{ij}=t^{j-i}$ if $i\leq j$ and there is no $k\in Z$ with $i\leq k\leq j-2$, and $0$ otherwise.
+\begin{solution}
+$e_{ij}=e_{ik}e_{k,k+2}e_{k+2,j}$ for $i\leq k$, $k+2\leq j$, so the ideal is spanned by the $e_{ij}$ for which such $k\in Z$ exists (it is a two-sided ideal, since a product $e_{pq}e_{ij}e_{rs}\neq0$ has $p\leq i$ and $j\leq s$).
+The remaining matrix units form a basis of $A_Z$, and $e_{ij}\in e_iA_Ze_j$ has degree $j-i$.
+\end{solution}
+\subpart For each $i$, find the minimal graded projective resolution of $e_{ii}S$.
+
+\emph{Hint.} Let $\ell_i\geq0$ be maximal with $i,i+1,\ldots,i+\ell_i-1\in Z$. Show that $P_h=e_{i+h,i+h}A(-h)$.
+\begin{solution}
+$e_{nn}S=e_{nn}A$ is projective. Let $i<n$.
+The kernel of $e_{ii}A\to e_{ii}S$ is $e_{ii}A_+=e_{i,i+1}A$, since $e_{ij}=e_{i,i+1}e_{i+1,j}$.
+The map $e_{i+1,i+1}A(-1)\to e_{i,i+1}A$, $x\mapsto e_{i,i+1}x$, is surjective, and its kernel is spanned by the non-zero $e_{i+1,j}$ with $e_{ij}=0$.
+By (a), $e_{ij}=0\neq e_{i+1,j}$ happens exactly when $i\in Z$ and $j\geq i+2$.
+So the kernel is $0$ if $i\notin Z$, and equals $e_{i+1,i+1}A_+$ if $i\in Z$.
+In the second case we are in the same situation at $i+1$.
+By induction, the minimal resolution is
+\[
+0\to e_{i+\ell_i+1,i+\ell_i+1}A(-\ell_i-1)\to\cdots\to e_{i+1,i+1}A(-1)\to e_{ii}A\to e_{ii}S\to0,
+\]
+that is, $P_h=e_{i+h,i+h}A(-h)$ for $0\leq h\leq\ell_i+1$, and $P_h=0$ beyond (all kernels lie in $PA_+$).
+\end{solution}
+\subpart Deduce that $A_Z$ is Koszul.
+\begin{solution}
+It is linear, so $A_Z$ is Koszul.
+\end{solution}
+\subpart Compute $\dim_\kk\ext^h(e_{ii}S,e_{jj}S(m))$ for all $h,j,m$, with $\ell_i$ as in the hint of~(b).
+\begin{solution}
+By the description of $\ext$ with simple coefficients via $\grtop P_h$, $\dim\ext^h(e_{ii}S,e_{jj}S(m))=1$ if $j=i+h$, $m=-h$ and $h\leq\ell_i+1$ (and $i<n$ if $h>0$), and $0$ otherwise.
+\end{solution}
+\subpart Let $n=4$ and $Z=\{1\}$. Then $A_Z=T_S(V)/(R)$ with $S=\bigoplus_i\kk e_{ii}$, $V=\kk e_{12}\oplus\kk e_{23}\oplus\kk e_{34}$ and $R=\kk\,(e_{12}\otimes e_{23})$.
+Compute $R^\perp$ and a presentation of $A_Z^!$.
+\begin{solution}
+Write $a=e_{12}$, $b=e_{23}$, $c=e_{34}$; a basis of $A_Z$ is $e_{ii}$, $a,b,c,bc$, so $h_{A_Z}(t)=I+t(E_{12}+E_{23}+E_{34})+t^2E_{24}$.
+$D(V)$ has the dual basis $a^*\in e_{22}D(V)e_{11}$, $b^*\in e_{33}D(V)e_{22}$, $c^*\in e_{44}D(V)e_{33}$; the composable words of length $2$ are $b^*a^*$ and $c^*b^*$.
+With $(\lambda\otimes\mu)(v\otimes w)=\sum_i\mu(ve_i)\,\lambda(e_iw)$,
+\[
+  (b^*\otimes a^*)(a\otimes b)=1,\qquad(c^*\otimes b^*)(a\otimes b)=0,
+\]
+so $R^\perp=\kk\,c^*b^*$ and $A_Z^!=T_S(D(V))/(c^*b^*)$.
+\end{solution}
+\subpart Find a basis of $A_Z^!$ and compute $h_{A_Z^!}(t)$.
+\begin{solution}
+A word of length $3$ would be $c^*b^*a^*$, which contains $c^*b^*$; hence a basis of $A_Z^!$ is $e_{ii},\ a^*,\ b^*,\ c^*,\ b^*a^*$, and
+\[
+  h_{A_Z^!}(t)=I+t(E_{21}+E_{32}+E_{43})+t^2E_{31}.
+\]
+\end{solution}
+\subpart Verify that $h_{A_Z}(t)\,h_{A_Z^!}(-t)^{\mathsf T}=I_4$.
+\begin{solution}
+With $N=E_{12}+E_{23}+E_{34}$ we have $N^2=E_{13}+E_{24}$ and $NE_{13}=E_{24}N=E_{24}E_{13}=0$, so
+\[
+  h_{A_Z}(t)h_{A_Z^!}(-t)^{\mathsf T}=(I+tN+t^2E_{24})(I-tN+t^2E_{13})=I+t^2\bigl(E_{13}-N^2+E_{24}\bigr)=I.
+\]
+\end{solution}
+\end{subparts}
+
+\part Let $A$ be a Koszul algebra with $S=\bigoplus_{i=1}^n\kk e_i$, and let $b^{(i)}_h$ be the dimension vector of $\grtop P_h$ for the minimal graded projective resolution of $e_iS$; let $B_h$ be the matrix with rows $b^{(i)}_h$.
+\begin{subparts}
+\subpart Prove that
+\[
+\sum_{h\geq0}(-1)^ht^hB_h\cdot h_A(t)=I_n .
+\]
+\begin{solution}
+The minimal resolution of $S$ is the direct sum of those of the $e_iS$, and it is linear by assumption; so each is linear, that is, $\grtop P_h$ lies in degree $h$.
+Hence $P_h\cong\bigoplus_j(e_jA)(-h)^{\oplus(b^{(i)}_h)_j}$ and $h_{P_h}(t)=t^hb^{(i)}_h\,h_A(t)$.
+Taking the degree $d$ component of $\cdots\to P_1\to P_0\to e_iS\to0$ and the alternating sum of dimension vectors (only $h\leq d$ contribute) gives $\sum_h(-1)^ht^hb^{(i)}_h\,h_A(t)=h_{e_iS}(t)=\varepsilon_i$, the $i$-th unit row vector.
+Stacking over $i$ gives the claim.
+\end{solution}
+\subpart Deduce that the coefficient of $t^h$ in $h_A(t)^{-1}$ has entries of sign $(-1)^h$ (or zero).
+\begin{solution}
+By~(a), $h_A(t)^{-1}=\sum_h(-1)^ht^hB_h$, and $B_h$ has non-negative entries.
+\end{solution}
+\end{subparts}
+
+\part Let $A=\kk\langle x,y\rangle/(yx,\ x^2+y^2)$ with $\deg x=\deg y=1$.
+\begin{subparts}
+\subpart Show that $x^3=0$ and $y^3=0$, and deduce that $A_d=0$ for $d\geq3$ and $h_A(t)=1+2t+2t^2$.
 
 \emph{Hint.} $x^3=x\cdot x^2=-xy^2$ and $x^3=x^2\cdot x=-y^2x=-y(yx)$, and similarly for the other words of length $3$.
 \begin{solution}
 We have $x^3=x\cdot x^2=-xy^2$ and $x^3=x^2\cdot x=-y^2x=-y(yx)=0$, so $x^3=0$ and $xy^2=0$.
 Likewise $y^3=y\cdot y^2=-yx^2=-(yx)x=0$.
 The remaining words of length $3$ contain $yx$ or are $xxy=-y^3=0$ and $xyy=-x^3=0$, hence vanish.
-So $A_3=0$, and $A_n=0$ for $n\geq3$ since $A$ is generated in degree $1$.
-Also $\dim A_1=2$ and $\dim A_2=4-\dim R=2$, so $h_A(t)=1+2t+2t^2$.
+So $A_3=0$, and $A_d=0$ for $d\geq3$ since $A$ is generated in degree $1$.
+Also $\dim A_1=2$ and $\dim A_2=4-2=2$, so $h_A(t)=1+2t+2t^2$.
 \end{solution}
-
-\part Let $A$ be a graded algebra with $A_0=\kk$ and $h_A(t)$ a polynomial, and suppose that $A$ is Koszul, with linear resolution $P_h=(T_h\otimes_\kk A)(-h)$ of $\kk$ and $b_h=\dim_\kk T_h$.
-Prove that
-\[
-\Bigl(\sum_{h\geq0}(-1)^hb_ht^h\Bigr)\,h_A(t)=1.
-\]
+\subpart Using part~(2), prove that $A$ is not Koszul, although it is quadratic.
 \begin{solution}
-Taking the degree $i$ component of $\cdots\to P_1\to P_0\to\kk\to0$ and the alternating sum of dimensions gives $\sum_h(-1)^h\dim P_{h,i}=\dim\kk_i$.
-In generating functions, $h_{P_h}(t)=b_ht^hh_A(t)$ and $h_\kk(t)=1$, so $\bigl(\sum_h(-1)^hb_ht^h\bigr)h_A(t)=1$.
+If $A$ were Koszul, then the series $1/h_A(t)=1/(1+2t+2t^2)=\sum_h(-1)^hb_ht^h$ would have $b_h\geq0$.
+Expanding, $u_0=1$, $u_1=-2$, and $u_h=-2u_{h-1}-2u_{h-2}$ gives $u_2=2$, $u_3=0$, $u_4=-4$, so $b_4=-4<0$, a contradiction.
 \end{solution}
+\end{subparts}
 
-\part Let $A$ be as in (1).
-Using the identity of (2), prove that $A$ is not Koszul, although it is quadratic.
+\end{parts}
 
-\emph{Hint.} Expand $1/h_A(t)$ to degree $4$.
-\begin{solution}
-If $A$ were Koszul, then $u(t):=\sum_h(-1)^hb_ht^h=1/(1+2t+2t^2)$ by (2).
-Then $u_0=1$, $u_1=-2$, and $u_h=-2u_{h-1}-2u_{h-2}$ gives $u_2=2$, $u_3=0$, $u_4=-4$.
-So $b_4=u_4=-4<0$, which is impossible.
-Hence $A$ has no linear resolution of $\kk$, so $A$ is not Koszul.
-\end{solution}
-
-\part Let $A=\kk[x]/(x^3)$ with $\deg x=1$.
-Find the minimal graded projective resolution of $\kk$, and show that $P_h$ is generated in degree $\lfloor 3h/2\rfloor$ for all $h\geq0$.
-Deduce that $A$ is not Koszul.
-Is $A$ quadratic?
+\newpage
+\titledquestion{}
+\begin{parts}
+\part Let $n\geq2$ and $A=\kk[x]/(x^n)$ with $\deg x=1$.
+\begin{subparts}
+\subpart Find the minimal graded projective resolution of $\kk=A/A_+$.
 \begin{solution}
 Let $g_h$ denote the generator of $P_h$.
-$P_0=A$, and $\Ker d_0=xA$, so $P_1=A(-1)$ with $d_1(g_1)=x$.
-Since $xa=0$ if and only if $a\in x^2A$, $\Ker d_1=x^2g_1A$ is generated in degree $3$, so $P_2=A(-3)$ with $d_2(g_2)=x^2g_1$.
-Since $x^2a=0$ if and only if $a\in xA$, $\Ker d_2=xg_2A$ is generated in degree $4$, so $P_3=A(-4)$ with $d_3(g_3)=xg_2$, and $\Ker d_3=x^2g_3A$ is generated in degree $6$.
-The pattern repeats: $P_{2m}=A(-3m)$ and $P_{2m+1}=A(-3m-1)$, with generator degrees $3m=\lfloor 3\cdot2m/2\rfloor$ and $3m+1=\lfloor3(2m+1)/2\rfloor$.
-All differentials land in $PA_+$, so the resolution is minimal.
-For $h\geq2$ we have $\lfloor3h/2\rfloor>h$, so $P_h$ is not generated in degree $h$.
-A linear resolution would be isomorphic to this minimal one, so $A$ is not Koszul.
-
-$A$ is not quadratic: $A_1=\kk x$ and $V\otimes V=\kk x\otimes x$, so a quadratic algebra with $V=A_1$ is $\kk[x]$ (if $R=0$) or $\kk[x]/(x^2)$ (if $R=V\otimes V$), and $A$ is neither, as $\dim A_2=1$ and $A_3=0$.
+$P_0=A$ and $\Ker d_0=xA$, so $P_1=A(-1)$ with $d_1(g_1)=x$.
+Since $xa=0$ if and only if $a\in x^{n-1}A$, $\Ker d_1=x^{n-1}g_1A$ is generated in degree $n$, so $P_2=A(-n)$ with $d_2(g_2)=x^{n-1}g_1$.
+Since $x^{n-1}a=0$ if and only if $a\in xA$, $\Ker d_2=xg_2A$ is generated in degree $n+1$, so $P_3=A(-n-1)$ with $d_3(g_3)=xg_2$, and the pattern repeats with period $2$:
+\[
+P_{2m}=A(-nm),\qquad P_{2m+1}=A(-nm-1)\qquad(m\geq0).
+\]
+All differentials map into $PA_+$ since $n\geq2$, so the resolution is minimal.
 \end{solution}
-\part Let $S=\bigoplus_{y=1}^n\kk e_y$, let $V$ be a finite-dimensional bimodule in degree $1$, and let $A=T_S(V)/(V\otimes_SV)=S\oplus V$.
-Prove that the minimal graded projective resolution of $S$ has $P_h\cong(V^{\otimes_Sh}\otimes_SA)(-h)$ for all $h\geq0$, and deduce that $A$ is Koszul.
-
-\emph{Hint.} Show that $\Ker d_0=V$ and that $VA_+=0$, so each kernel is killed by $A_+$.
+\subpart Compute $\ext_A^h(\kk,\kk(j))$ for all $h,j$.
 \begin{solution}
-$\Ker d_0=A_+=V$, and $VA_+=VV=0$, so $V$ is a module with $A_+$ acting by zero, that is, a graded $S$-module in degree $1$.
-Put $Y_h=V^{\otimes_Sh}$ in degree $h$, killed by $A_+$.
-Then $P_h:=(Y_h\otimes_SA)(-h)\to Y_h$, $k\otimes a\mapsto ka$, is surjective, and as $Y_h\otimes_SA=Y_h\otimes_SS\oplus Y_h\otimes_SV$ with $k\otimes v\mapsto kv=0$, its kernel is $Y_h\otimes_SV=V^{\otimes_S(h+1)}=Y_{h+1}$ (in degree $h+1$), again killed by $A_+$.
-In each step $\Ker\subseteq P_hA_+$ since $\Ker=Y_h\otimes V\subseteq P_hA_+$, so this is the minimal graded projective resolution, with $P_h=(V^{\otimes_Sh}\otimes_SA)(-h)$ generated in degree $h$.
-It is linear, so $A$ is Koszul.
+Here $\grtop P_h=\kk$ is concentrated in degree $nm$ for $h=2m$ and in degree $nm+1$ for $h=2m+1$, so $\ext_A^h(\kk,\kk(j))\cong\Hom_S((\grtop P_h)_{-j},\kk)$ is $\kk$ if $(h,j)=(2m,-nm)$ or $(2m+1,-nm-1)$ for some $m\geq0$, and $0$ otherwise.
 \end{solution}
+\subpart Let $1\leq r<n$ and $M=A/x^rA$. Find the minimal graded projective resolution of $M$.
+\begin{solution}
+$\Ker(A\to M)=x^rA$ is generated by $x^r$ in degree $r$, so $P_1=A(-r)$ with $d_1(g_1)=x^r$.
+Since $x^ra=0$ if and only if $a\in x^{n-r}A$, $\Ker d_1=x^{n-r}g_1A$ is generated in degree $n$, so $P_2=A(-n)$ with $d_2(g_2)=x^{n-r}g_1$.
+Since $x^{n-r}a=0$ if and only if $a\in x^rA$, $\Ker d_2=x^rg_2A$ is generated in degree $n+r$, so $P_3=A(-n-r)$, and the pattern repeats with period $2$:
+\[
+P_{2m}=A(-nm),\qquad P_{2m+1}=A(-nm-r)\qquad(m\geq0).
+\]
+All differentials map into $PA_+$ since $1\leq r<n$, so the resolution is minimal.
+\end{solution}
+\subpart Compute $\ext_A^h(M,\kk(j))$ for all $h,j$.
+\begin{solution}
+As in~(b), $\ext_A^h(M,\kk(j))$ is $\kk$ if $(h,j)=(2m,-nm)$ or $(2m+1,-nm-r)$ for some $m\geq0$, and $0$ otherwise.
+\end{solution}
+\end{subparts}
+
+\part Let $M$ be a bounded below locally finite-dimensional graded module with minimal graded projective resolution $P_\bullet\to M$, and let $n\geq0$.
+Prove that the following are equivalent:
+\begin{enumerate}
+\item[(a)] $P_h=0$ for all $h>n$;
+\item[(b)] $\ext^{n+1}(M,L(j))=0$ for every simple graded $S$-module $L$ in degree $0$ and every $j\in\Z$.
+\end{enumerate}
+
+\emph{Hint.} Use the description of $\ext^h(M,L(j))$ via $\grtop P_h$ and the graded Nakayama lemma.
+\begin{solution}
+(a)$\Rightarrow$(b): $\ext^{n+1}(M,L(j))\cong\Hom_S((\grtop P_{n+1})_{-j},L)=0$, because $P_{n+1}=0$.
+
+(b)$\Rightarrow$(a): By the same description, the hypothesis says $\Hom_S((\grtop P_{n+1})_{-j},L)=0$ for all simple $L$ and all $j$.
+Every non-zero $S$-module has a non-zero map to some simple module, since $S$ is semisimple, so $\grtop P_{n+1}=0$, that is, $P_{n+1}=P_{n+1}A_+$.
+As $P_{n+1}$ is bounded below, graded Nakayama gives $P_{n+1}=0$.
+Then $\Ker d_{n+1}=0$, so $\Im d_{n+2}=0$, and $P_{n+2}\to\Im d_{n+2}=0$ has kernel $P_{n+2}\subseteq P_{n+2}A_+$ by minimality, so $P_{n+2}=0$ again by Nakayama.
+Induction gives $P_h=0$ for all $h>n$.
+\end{solution}
+
+\part Let $S=\kk e_1\oplus\kk e_2$ and $V=\kk a\oplus\kk b$ with $a\in e_1Ve_2$, $b\in e_2Ve_1$, and $A=T_S(V)/(a\otimes b)$.
+\begin{subparts}
+\subpart Check that $h_A(t)=\begin{pmatrix}1&t\\t&1+t^2\end{pmatrix}$.
+\begin{solution}
+$ab=0$, so $e_1A=\operatorname{span}\{e_1,a\}$ and $e_2A=\operatorname{span}\{e_2,b,ba\}$, with $a\in e_1Ae_2$, $b\in e_2Ae_1$, $ba\in e_2Ae_2$.
+
+\end{solution}
+\subpart Find the minimal graded projective resolutions of $e_1S$ and $e_2S$.
+\begin{solution}
+The kernel of $e_2A\to e_2S$ is $\operatorname{span}\{b,ba\}=bA$, and $e_1A(-1)\to bA$, $x\mapsto bx$, is a degree-preserving bijection ($e_1\mapsto b$, $a\mapsto ba$).
+So $0\to e_1A(-1)\to e_2A\to e_2S\to0$ is the minimal resolution of $e_2S$.
+The kernel of $e_1A\to e_1S$ is $\kk a$, and $aA_+=0$ (as $ab=0$), so it is isomorphic to $e_2S(-1)$; splicing the resolution of $e_2S$ shifted by $1$ gives
+\[
+0\to e_1A(-2)\to e_2A(-1)\to e_1A\to e_1S\to0 .
+\]
+\end{solution}
+\subpart Deduce that $A$ is Koszul.
+\begin{solution}
+Both resolutions are linear, hence so is that of $S=e_1S\oplus e_2S$, and $A$ is Koszul.
+\end{solution}
+\subpart Compute a presentation of $A^!$.
+\begin{solution}
+The composable words of length $2$ in $V$ are $a\otimes b$ and $b\otimes a$.
+Let $a^*\in e_2D(V)e_1$, $b^*\in e_1D(V)e_2$ be the dual basis.
+The functional $\theta(a^*\otimes b^*)$ is dual to $b\otimes a$ and vanishes on $a\otimes b$, so $R^\perp=\kk\,a^*b^*$ and $A^!=T_S(D(V))/(a^*b^*)$.
+\end{solution}
+\subpart Find a basis of $A^!$ and compute $h_{A^!}(t)$.
+\begin{solution}
+Since $a^*b^*=0$, a basis is $e_1,e_2,a^*,b^*,b^*a^*$, so
+\[
+h_{A^!}(t)=\begin{pmatrix}1+t^2&t\\t&1\end{pmatrix}.
+\]
+\end{solution}
+\subpart Verify that $h_A(t)\,h_{A^!}(-t)^{\mathsf T}=I_2$.
+\begin{solution}
+\[
+h_A(t)h_{A^!}(-t)^{\mathsf T}=\begin{pmatrix}1&t\\t&1+t^2\end{pmatrix}\begin{pmatrix}1+t^2&-t\\-t&1\end{pmatrix}=I_2 .
+\]
+\end{solution}
+\end{subparts}
+
 \end{parts}
 
 \end{questions}
