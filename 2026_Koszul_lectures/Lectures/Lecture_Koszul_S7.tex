@@ -329,7 +329,7 @@ In this case $\ext_A^h(S,S(-h))\cong A^!_h$ for all $h$, the Yoneda algebra is g
 If $A$ is Koszul, each $P_h=K_h=\mathcal K_h\otimes_SA(-h)$ is finitely generated, so Remark~\ref{rem:graded-ext-ungraded} gives the last statement.
 \end{proof}
 
-Thus the Koszul property can be read as ``the quadratic dual computes all of the graded Ext-groups $\ext_A^h(S,S(j))$''; for a quadratic algebra that is not Koszul, $A^!$ is a proper subalgebra of $E(A)$ (Exercise~\ref{ex:quadratic-non-koszul}).
+Thus the Koszul property can be read as ``the quadratic dual computes all of the graded Ext-groups $\ext_A^h(S,S(j))$''; for a quadratic algebra that is not Koszul, $A^!$ is a proper subalgebra of $E(A)$ (for an example of such an algebra, see Exercise~\ref{ex:quadratic-non-koszul}).
 
 \begin{example}\label{ex:yoneda-examples}
 (1) For $A=\SymAlg(V)$, Corollary~\ref{prop:polynomial-koszul} and Proposition~\ref{prop:symmetric-exterior-dual} give $E(A)\cong\bigwedge D(V)$, concentrated on the diagonal.
@@ -339,18 +339,6 @@ If $\dim W=1$, $A=\Bbbk[\epsilon]/(\epsilon^2)$ is Koszul (Example~\ref{ex:minim
 
 (3) For $A=\Bbbk A_2$ we have $R=0$ and $V\otimes_SV=0$, so $A^!=S\oplus D(V)$, of dimension $2+1$, matching Example~\ref{ex:ext-A2}.
 \end{example}
-
-The linear resolution also gives a numerical consequence.
-For $S=\Bbbk$, write $h_A(t)=\sum_i\dim A_i\,t^i$.
-
-\begin{corollary}\label{cor:hilbert-koszul}
-If $S=\Bbbk$ and $A$ is Koszul, then $h_A(t)\,h_{A^!}(-t)=1$.
-\end{corollary}
-
-\begin{proof}
-The Koszul complex is a resolution with $K_h=\mathcal K_h\otimes_\Bbbk A(-h)$ and $\dim\mathcal K_h=\dim A^!_h$ (Proposition~\ref{prop:koszul-terms-dual}).
-Taking the alternating sum of Hilbert series in the exact sequence $\cdots\to K_1\to K_0\to\Bbbk\to0$ as in Exercise~\ref{ex:hilbert-polynomial} gives $\sum_h(-1)^h\dim A^!_h\,t^h\cdot h_A(t)=1$.
-\end{proof}
 
 \subsection{The quadratic dual of a Koszul algebra is Koszul}
 
