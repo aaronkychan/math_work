@@ -291,23 +291,22 @@ Since $P_{h-1}^{[i]}A_+$ with $i\geq h$ contribute only in degrees $\geq h+1$, w
 as claimed.
 
 \underline{Step 2: $d_h:P_{h,h}\xrightarrow{\sim}(\Ker d_{h-1})_h$ is an isomorphism for $h\geq1$.}
-Here $d_0:=p_0$.
-The image is the whole kernel and the restriction is injective, because
+We have
 \[
-(\Ker d_{h-1})_h=(\Im d_h)_h=d_h(P_{h,h}),
-\qquad
-\Ker\bigl(d_h|_{P_{h,h}}\bigr)=(\Ker d_h)_h=(\Im d_{h+1})_h=0.
+\begin{array}{rcccccl}
+(\Ker d_{h-1})_h & \stackrel{(\ast)}{=}& (\Im d_h)_h &\stackrel{(\ast\ast)}{=} & d_h(P_{h,h}) &\stackrel{\text{Step 1}}{\subseteq}& P_{h-1}^{\Delta}, \quad \text{and}\\
+\Ker\bigl(d_h|_{P_{h,h}}\bigr) =(\Ker d_h)_h & \stackrel{(\ast)}{=} & (\Im d_{h+1})_h&\stackrel{(\ast\ast)}{=}&0,
+\end{array}
 \]
-In both chains the first equality is exactness of $P_\bullet$.
-The second equality in the first chain holds because $P_h$ lives in degrees $\geq h$ and $d_h$ preserves degrees, and the last equality in the second chain holds because $P_{h+1}$ lives in degrees $\geq h+1$.
-By Step 1, $d_h(P_{h,h})\subseteq P^\Delta_{h-1}$, so $(\Ker d_{h-1})_h$ is also the degree $h$ part of the kernel of $d_{h-1}$ on $P^\Delta_{h-1}$.
+where, ($\ast$) is the exactness of $P_\bullet$, and ($\ast\ast$) is 
+ $P_h=P_{h,\ge h}$ for all $h\ge 1$ and $d_h$ being degree-preserving.
 
-<<<<<<< HEAD
 \underline{Step 3: $d_h:K_{h,h}\xrightarrow{\sim}(\Ker d_{h-1})_h$ is an isomorphism for $h\geq1$.}
 Here $K_{h,h}=\mathcal K_h$, and $d_h$ restricts to $\iota_h:\mathcal K_h\hookrightarrow\mathcal K_{h-1}\otimes_SV=K_{h-1,h}$, which is injective.
 For $h=1$, $(\Ker d_0)_1=A_1=V=\iota_1(\mathcal K_1)$.
 For $h\geq2$,
-=======
+
+
 \underline{Step 3: $P_{h,h}\cong\mathcal K_h$, compatible with the differentials.}
 We construct isomorphisms of right $S$-modules $\varphi_h:\mathcal K_h\to P_{h,h}$ for $h\geq0$ such that for all $h\geq1$,
 \begin{equation}\label{eq:diagonal-compatibility}

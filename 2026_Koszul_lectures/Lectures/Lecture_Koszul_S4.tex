@@ -177,23 +177,21 @@ This is a \defn{cochain complex} with \defn{cohomology} $H^h$; algebraically it 
 A \defn{projective resolution} of $M$ is an exact sequence
 \begin{equation}\label{eq:projective-resolution}
 \cdots\longrightarrow P_2\xrightarrow{d_2}P_1
-\xrightarrow{d_1}P_0\xrightarrow{p_0}M\longrightarrow0
+\xrightarrow{d_1}P_0\xrightarrow{d_0}M\longrightarrow0
 \end{equation}
 with every $P_h$ projective.
 Sometimes, we just write $P_\bullet\twoheadrightarrow M$; here  $P_\bullet$ is treated as a complex that ends in $P_0\to0$, and $M$ is not a term of it.
 A \defn{free resolution} if is a projective resolution where every $P_h$ is free.
 \end{definition}
-Exactness says that each differential factors through its image: $d_h$ is a surjection $p_h:P_h\twoheadrightarrow\Im d_h$ followed by the inclusion $\Im d_h\hookrightarrow P_{h-1}$, where $\Im d_h=\Ker d_{h-1}$ (and $\Im d_1=\Ker p_0$):
-\[
+Exactness says that each differential factors through its image: $d_h$ is a surjection $p_h:P_h\twoheadrightarrow\Im d_h$ followed by the inclusion $\Im d_h\hookrightarrow P_{h-1}$, where $\Im d_h=\Ker d_{h-1}$: \[
 \xymatrix@C=26pt@R=26pt{
-\cdots\ar[r] & P_2\ar[rr]^{d_2}\ar@{->>}[dr]_{p_2} & & P_1\ar[rr]^{d_1}\ar@{->>}[dr]_{p_1} & & P_0\ar[r]^{p_0} & M\ar[r] & 0\\
+\cdots\ar[r] & P_2\ar[rr]^{d_2}\ar@{->>}[dr]_{p_2} & & P_1\ar[rr]^{d_1}\ar@{->>}[dr]_{p_1} & & P_0\ar[r]^{d_0} & M\ar[r] & 0\\
 & & \Im d_2\ar@{^{(}->}[ur] & & \Im d_1\ar@{^{(}->}[ur] & &
 }
 \]
 Thus a projective resolution is a splicing of short exact sequences with projective middle terms,
 \[
-0\to\Im d_{h+1}\to P_h\xrightarrow{\,p_h\,}\Im d_h\to0\quad(h\geq1),\qquad
-0\to\Im d_1\to P_0\xrightarrow{\,p_0\,}M\to0.
+0\to\Im d_{h+1}\to P_h\xrightarrow{\,p_h\,}\Im d_h\to0\quad \forall h\geq0.
 \]
 
 \begin{proposition}\label{prop:resolutions-exist}
@@ -218,7 +216,7 @@ We write
 C_{h,i}:=(C_h)_i
 \]
 for the degree $i$ part of the $h$th term.
-The differentials $d_h:C_{h,i}\to C_{h-1,i}$ preserve $i$, so $C_\bullet$ is a direct sum over $i\in\Z$ of complexes of vector spaces $C_{\bullet,i}$, and exactness is checked in each internal degree $i$ (Remark~\ref{rem:graded-exactness}).
+Restricting the differentials $d_h$ to degree $i$ component is a degree-preserving map $d_{h,i}:C_{h,i}\to C_{h-1,i}$, so $C_\bullet$ is a direct sum over $i\in\Z$ of complexes of vector spaces $C_{\bullet,i}$, and exactness is checked in each internal degree $i$ (Remark~\ref{rem:graded-exactness}).
 \end{notation}
 
 \begin{definition}\label{def:graded-projective}
@@ -446,7 +444,7 @@ It is \defn{minimal} if all $P_h$ are lfd bounded below, and
 Equivalently, the surjections $p_h:P_h\twoheadrightarrow\Im d_h$ (and $p_0:P_0\twoheadrightarrow M$) have kernel in $P_hA_+$, since $\Ker p_h=\Im d_{h+1}$:
 \[
 \xymatrix@C=25pt@R=30pt{
-\cdots\ar[r] & P_2\ar[rrr]^{d_2}\ar@{->>}[dr]_{p_2} & & & P_1\ar[rrr]^{d_1}\ar@{->>}[dr]_{p_1} & & & P_0\ar[r]^{p_0} & M\ar[r] & 0\\
+\cdots\ar[r] & P_2\ar[rrr]^{d_2}\ar@{->>}[dr]_{p_2} & & & P_1\ar[rrr]^{d_1}\ar@{->>}[dr]_{p_1} & & & P_0\ar[r]^{d_0} & M\ar[r] & 0\\
 & & \Im d_2\ar@{^{(}->}[urr] \ar@{^{(}->}[r] & P_1A+\ar@{^{(}->}[ur]& & \Im d_1\ar@{^{(}->}[urr]\ar@{^{(}->}[r] & P_0A+\ar@{^{(}->}[ur]& &
 }
 \]
@@ -460,7 +458,7 @@ Then $\grtop P_0\cong\grtop M$ and $\grtop P_h\cong\grtop\Im d_h$ for all $h\geq
 \end{corollary}
 
 \begin{proof}
-By minimality, $\Ker p_h=\Im d_{h+1}\subseteq P_hA_+$ for all $h\geq0$ (with $p_0:P_0\to M$ and $p_h:P_h\to\Im d_h$ for $h\ge1$).
+By minimality, $\Ker p_h=\Im d_{h+1}\subseteq P_hA_+$ for all $h\geq0$.
 Apply Lemma~\ref{lem:minimal-tops} to each $p_h$.
 \end{proof}
 
@@ -469,8 +467,8 @@ Every bounded below lfd graded right $A$-module $M$ has a minimal graded project
 Moreover, any two such resolutions are isomorphic as complexes of graded modules, i.e. there are isomorphisms $f_h$ making the following diagram commutative
 \[
 \xymatrix@C=26pt@R=22pt{
-\cdots\ar[r] & P_1\ar[r]^{d_1}\ar[d]^{f_1}_{\wr} & P_0\ar[r]^{p_0}\ar[d]^{f_0}_{\wr} & M\ar[r]\ar@{=}[d] & 0\\
-\cdots\ar[r] & P'_1\ar[r]^{d'_1} & P'_0\ar[r]^{p'_0} & M\ar[r] & 0
+\cdots\ar[r] & P_1\ar[r]^{d_1}\ar[d]^{f_1}_{\wr} & P_0\ar[r]^{d_0}\ar[d]^{f_0}_{\wr} & M\ar[r]\ar@{=}[d] & 0\\
+\cdots\ar[r] & P'_1\ar[r]^{d'_1} & P'_0\ar[r]^{d'_0} & M\ar[r] & 0
 }
 \]
 \end{theorem}
@@ -483,10 +481,10 @@ Let $A=\Bbbk A_2$ with $A_0=S=\Bbbk e_{11}\oplus\Bbbk e_{22}$ and $A_1=\Bbbk e_{
 Then
 \[
 0\longrightarrow e_{22}A(-1)\xrightarrow{d_1}e_{11}A
-\xrightarrow{p_0}L_1\longrightarrow0,\qquad
+\xrightarrow{d_0}L_1\longrightarrow0,\qquad
 d_1(e_{22}a)=e_{12}a
 \]
-is minimal: $\Ker p_0=\Bbbk e_{12}=(e_{11}A)A_+$ and $d_1$ is an isomorphism onto it, the generator $e_{22}$ and its image $e_{12}$ both having degree $1$.
+is minimal: $\Ker d_0=\Bbbk e_{12}=(e_{11}A)A_+$ and $d_1$ is an isomorphism onto it, the generator $e_{22}$ and its image $e_{12}$ both having degree $1$.
 Its projective terms have tops $L_1$ and $L_2(-1)$.
 The other simple module $L_2=e_{22}A$ is already projective.
 \end{example}
@@ -495,10 +493,10 @@ The other simple module $L_2=e_{22}A$ is already projective.
 Let $A=\Bbbk[x]$ with $\deg x=1$.
 The quotient $\Bbbk=A/(x)$ has the minimal graded free resolution
 \[
-0\longrightarrow A(-1)\xrightarrow{d_1}A\xrightarrow{\pi}\Bbbk
-\longrightarrow0,\qquad d_1(a)=xa,\quad\pi(f)=f(0).
+0\longrightarrow A(-1)\xrightarrow{d_1}A\xrightarrow{d_0}\Bbbk
+\longrightarrow0,\qquad d_1(a)=xa,\quad d_0(f)=f(0).
 \]
-Multiplication by $x$ is injective with image $xA=\Ker\pi\subseteq AA_+$, and the shift makes it degree-preserving.
+Multiplication by $x$ is injective with image $xA=\Ker d_0\subseteq AA_+$, and the shift makes it degree-preserving.
 The two projective terms have one generator each, in degrees $0$ and $1$.
 \end{example}
 
@@ -597,22 +595,23 @@ Thus $s$ is surjective, and injective since $fs=\id$, so $f=s^{-1}$ is an isomor
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:minimal-resolution}]
+
 \underline{Existence.}
-Lemma~\ref{lem:graded-projective-terms}(1) gives $p_0:P_0\to M$ with $P_0=\bigoplus_i((\grtop M)_i\otimes_SA)(-i)$ and $\Ker p_0\subseteq P_0A_+$.
+Lemma~\ref{lem:graded-projective-terms}(1) gives $d_0:P_0\to M$ with $P_0=\bigoplus_i((\grtop M)_i\otimes_SA)(-i)$ and $\Ker d_0\subseteq P_0A_+$.
 $P_0$ is graded projective by Corollary~\ref{cor:graded-projective-characterisations}.
 If $M_i=0$ for $i<b$, then $P_{0,j}=\bigoplus_{b\leq i\leq j}(\grtop M)_i\otimes_SA_{j-i}$ is finite-dimensional, so $P_0$ is bounded below and lfd.
-Hence $\Ker p_0\subseteq P_0$ is again bounded below and lfd, and we repeat with $\Ker p_0$ in place of $M$: this gives a surjection $p_1:P_1\twoheadrightarrow\Ker p_0$ with $\Ker p_1\subseteq P_1A_+$, and we let $d_1$ be $p_1$ followed by the inclusion $\Ker p_0\subseteq P_0$.
-Inductively, $p_h:P_h\twoheadrightarrow\Ker d_{h-1}$ with $\Ker p_h\subseteq P_hA_+$, and $d_h$ is $p_h$ followed by the inclusion $\Ker d_{h-1}\subseteq P_{h-1}$ (where $d_0:=p_0$):
+Hence $\Ker d_0\subseteq P_0$ is again bounded below and lfd, and we repeat with $\Ker d_0$ in place of $M$: this gives a surjection $p_1:P_1\twoheadrightarrow\Ker p_0$ with $\Ker p_1\subseteq P_1A_+$, and we let $d_1$ be $p_1$ followed by the inclusion $\Ker p_0\subseteq P_0$.
+Inductively, $p_h:P_h\twoheadrightarrow\Ker d_{h-1}$ with $\Ker p_h\subseteq P_hA_+$, and $d_h$ is $p_h$ followed by the inclusion $\Ker d_{h-1}\subseteq P_{h-1}$:
 \[
 \xymatrix@C=24pt@R=22pt{
-\cdots\ar[r] & P_2\ar[rr]^{d_2}\ar@{->>}[dr]_{p_2} & & P_1\ar[rr]^{d_1}\ar@{->>}[dr]_{p_1} & & P_0\ar[r]^{p_0} & M\ar[r] & 0\\
-& & \Ker d_1\ar@{^{(}->}[ur] & & \Ker p_0\ar@{^{(}->}[ur] & &
+\cdots\ar[r] & P_2\ar[rr]^{d_2}\ar@{->>}[dr]_{p_2} & & P_1\ar[rr]^{d_1}\ar@{->>}[dr]_{p_1} & & P_0\ar[r]^{d_0} & M\ar[r] & 0\\
+& & \Ker d_1\ar@{^{(}->}[ur] & & \Ker d_0\ar@{^{(}->}[ur] & &
 }
 \]
 Then $\Im d_h=\Ker d_{h-1}$, so the sequence is exact, and $\Im d_h\subseteq P_{h-1}A_+$ for $h\geq1$ because $\Im d_h=\Ker p_{h-1}$: this is minimality.
 
 \underline{Uniqueness.}
-Let $P_\bullet$ and $P'_\bullet$ be minimal resolutions of $M$; write $\Im d_0:=M$ and $p_h:P_h\twoheadrightarrow\Im d_h$ as above, so $\Ker p_h=\Im d_{h+1}\subseteq P_hA_+$ by minimality.
+Let $P_\bullet$ and $P'_\bullet$ be minimal resolutions of $M$; write  $p_h:P_h\twoheadrightarrow\Im d_h$ as above, so $\Ker p_h=\Im d_{h+1}\subseteq P_hA_+$ by minimality.
 Suppose we have an isomorphism $\varphi_h:\Im d_h\to\Im d'_h$, starting with $\varphi_0=\id_M$.
 Both $\varphi_hp_h$ and $p'_h$ are surjections onto $\Im d'_h$ with kernel in $P_hA_+$, resp.\ $P'_hA_+$, so Lemma~\ref{lem:graded-top-uniqueness} gives an isomorphism $f_h$ in
 \[
@@ -622,7 +621,7 @@ P'_h\ar[r]_{p'_h} & \Im d'_h .
 }
 \]
 It restricts to an isomorphism $\varphi_{h+1}:\Im d_{h+1}=\Ker p_h\to\Ker p'_h=\Im d'_{h+1}$, and the induction continues.
-The squares give $p'_0f_0=p_0$ and $d'_hf_h=f_{h-1}d_h$.
+The squares give $d'_hf_h=f_{h-1}d_h$ (where $f_{-1}:=\id_M$).
 \end{proof}
 \end{supplementary}
 
