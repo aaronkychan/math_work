@@ -65,20 +65,19 @@ left action is specified.
 
 \titledquestion{}
 \begin{parts}
-\part Let $A=\kk A_3$ be the algebra of upper triangular $3\times3$ matrices, with basis the matrix units $e_{ij}$ ($i\leq j$) and $e_{ij}e_{jk}=e_{ik}$, graded by $\deg e_{ij}=j-i$, and let $L_i=e_{ii}A/e_{ii}A_+$.
-Find the minimal graded projective resolutions of $L_1$, $L_2$ and $L_3$, and the graded tops $\grtop P_h$ of their terms.
+\part Let $A=\kk A_n$ be the algebra of upper triangular $n\times n$ matrices with $n\geq3$, graded by $\deg e_{ij}=j-i$.
+Describe the minimal graded projective resolution of each simple module $L_i$, $1\leq i\leq n$, and show that it is linear.
+Deduce that $A$ is Koszul.
 \begin{solution}
-We have $e_{11}A=\langle e_{11},e_{12},e_{13}\rangle$, $e_{22}A=\langle e_{22},e_{23}\rangle$, $e_{33}A=\langle e_{33}\rangle$.
-
-$L_3=e_{33}A$ is projective, so $P_0=e_{33}A$ with top $L_3$ in degree $0$.
-
-For $L_2$, the kernel of $e_{22}A\to L_2$ is $\kk e_{23}\cong e_{33}A(-1)$, which is projective.
-So $0\to e_{33}A(-1)\to e_{22}A\to L_2\to0$, with $\grtop P_0=L_2$ in degree $0$ and $\grtop P_1=L_3$ in degree $1$.
-
-For $L_1$, the kernel of $e_{11}A\to L_1$ is $\langle e_{12},e_{13}\rangle=e_{12}A\cong e_{22}A(-1)$ (via $e_{22}\mapsto e_{12}$, since $e_{12}e_{23}=e_{13}$), which is projective.
-So $0\to e_{22}A(-1)\to e_{11}A\to L_1\to0$, with $\grtop P_0=L_1$ in degree $0$ and $\grtop P_1=L_2$ in degree $1$.
-
-In each case $\Im d_1\subseteq P_0A_+$, so the resolutions are minimal.
+$L_n=e_{nn}A$ is projective.
+For $i<n$, the kernel of $e_{ii}A\to L_i$ is $e_{ii}A_+=\operatorname{span}\{e_{ij}:j>i\}=e_{i,i+1}A$, because $e_{ij}=e_{i,i+1}e_{i+1,j}$.
+The map $e_{i+1,i+1}A(-1)\to e_{i,i+1}A$, $a\mapsto e_{i,i+1}a$, is a degree-preserving bijection ($e_{i+1,j}\mapsto e_{ij}$), so the kernel is projective and
+\[
+0\to e_{i+1,i+1}A(-1)\to e_{ii}A\to L_i\to0
+\]
+is a graded projective resolution; it is minimal since $\Im d_1=e_{ii}A_+$, and $\grtop P_0=L_i$ in degree $0$, $\grtop P_1=L_{i+1}$ in degree $1$.
+Both terms are generated in degrees $0$ and $1$ respectively, so the resolution is linear.
+The direct sum of these resolutions over $i$ is a linear resolution of $S=\bigoplus_iL_i$, so $A$ is Koszul.
 \end{solution}
 
 \part Let $S=\bigoplus_{i=1}^r\kk e_i$, let $V$ be a finite-dimensional $S$-bimodule in degree $1$, and put
@@ -212,7 +211,7 @@ either $\varphi(x)=\lambda x$, $\varphi(y)=\mu y$, and $0=\varphi(xy+qyx)=\lambd
 Now if $\operatorname{char}\kk\neq2$, then $1\neq-1$ and $1\cdot(-1)\neq1$, so $C_1\not\cong C_{-1}$ as graded algebras; even ungraded, $C_{-1}$ is commutative ($xy=yx$) whereas $C_1$ is not ($xy=-yx\neq yx$ as $2yx\neq0$).
 In characteristic $2$, $1=-1$, so $C_1=C_{-1}$.
 \end{solution}
-\part For $C_q$ as in (2), compute a quadratic presentation of $C_q^!$ (with $X=x^*$, $Y=y^*\in D(V)$) and $h_{C_q^!}(t)$, and verify that $h_{C_q}(t)\,h_{C_q^!}(-t)=1$, where $h_{C_q}(t)=(1+t)^2$.
+\part For $C_q$ as in (2), compute a quadratic presentation of $C_q^!$ (with $X=x^*$, $Y=y^*\in D(V)$) and $h_{C_q^!}(t)$.
 Compare $C_0^!$ with $C_1^!$.
 \begin{solution}
 For $S=\kk$, $(\lambda\otimes\mu)(v\otimes w)=\mu(v)\lambda(w)$.
@@ -223,7 +222,7 @@ For $F=\alpha X\otimes X+\beta X\otimes Y+\gamma Y\otimes X+\delta Y\otimes Y$,
 So $R^\perp=\kk(X\otimes Y-qY\otimes X)$ and $C_q^!=\kk\langle X,Y\rangle/(XY-qYX)$.
 Using $XY=qYX$, every word is a multiple of $Y^aX^b$, so these span; they are independent:
 for $q=0$ the relation is monomial and $\{Y^aX^b\}$ is the set of words avoiding $XY$; for $q\neq0$ let $X$ act on $\kk[s,t]$ by multiplication by $s$ and $Y$ by $(Yf)(s,t)=t\,f(q^{-1}s,t)$; then $XY=qYX$ and $Y^aX^b\cdot1=q^{-ab}s^bt^a$, which are independent.
-Hence $h_{C_q^!}=\sum_d(d+1)t^d=(1-t)^{-2}$ and $h_{C_q}(t)h_{C_q^!}(-t)=(1+t)^2(1+t)^{-2}=1$.
+Hence $h_{C_q^!}=\sum_d(d+1)t^d=(1-t)^{-2}$.
 $C_1^!=\kk[X,Y]$ is commutative while in $C_0^!=\kk\langle X,Y\rangle/(XY)$ one has $XY=0\neq YX$: same Hilbert series, non-isomorphic algebras.
 \end{solution}
 \end{parts}
@@ -237,7 +236,7 @@ If $0\neq f\in\rad A$, then $xf\in\rad A$, so $1-xf$ has a right inverse.
 This is impossible because $1-xf$ has positive degree.
 \end{solution}
 
-\part Let $A=\kk[u,v]/(uv)$ with $\deg u=\deg v=1$ and $S=A_0=\kk$.
+\part Let $A=\kk[u,v]/(uv)$ with $\deg u=\deg v=1$.
 Show that the minimal graded projective resolution of $\kk=A/A_+$ has $P_0=A$ and $P_h\cong A(-h)^{\oplus2}$ for all $h\geq1$.
 
 \emph{Hint.} Show that $ua+vb=0$ in $A$ if and only if $a\in vA$ and $b\in uA$.
@@ -255,7 +254,7 @@ Finally $\Ker d_3=vA\oplus uA$ has the same form as $\Ker d_1$, so the pattern r
 Thus $P_h\cong A(-h)^{\oplus2}$ for all $h\geq1$, and all differentials map into $PA_+$, so the resolution is minimal.
 \end{solution}
 
-\part Let $A$ be a graded algebra as in Lecture~5, let $M$ be a bounded below locally finite-dimensional graded right $A$-module with minimal graded projective resolution $P_\bullet\to M$, and let $n\geq0$.
+\part Let $A$ be as in Lecture~5, let $M$ be a bounded below locally finite-dimensional graded right $A$-module with minimal graded projective resolution $P_\bullet\to M$, and let $n\geq0$.
 Prove that the following are equivalent:
 \begin{enumerate}
 \item[(a)] $P_h=0$ for all $h>n$;
@@ -273,22 +272,6 @@ Then $\Ker d_{n+1}=0$, so $\Im d_{n+2}=0$ and $P_{n+2}\to\Ker d_{n+1}=0$ is the 
 Induction gives $P_h=0$ for all $h>n$.
 \end{solution}
 
-\part Let $A=\kk[x]/(x^3)$ with $\deg x=1$.
-Find the minimal graded projective resolution of $\kk$, and show that $P_h$ is generated in degree $\lfloor 3h/2\rfloor$ for all $h\geq0$.
-Deduce that $A$ is not Koszul.
-Is $A$ quadratic?
-\begin{solution}
-Let $g_h$ denote the generator of $P_h$.
-$P_0=A$, and $\Ker d_0=xA$, so $P_1=A(-1)$ with $d_1(g_1)=x$.
-Since $xa=0$ if and only if $a\in x^2A$, $\Ker d_1=x^2g_1A$ is generated in degree $3$, so $P_2=A(-3)$ with $d_2(g_2)=x^2g_1$.
-Since $x^2a=0$ if and only if $a\in xA$, $\Ker d_2=xg_2A$ is generated in degree $4$, so $P_3=A(-4)$ with $d_3(g_3)=xg_2$, and $\Ker d_3=x^2g_3A$ is generated in degree $6$.
-The pattern repeats: $P_{2m}=A(-3m)$ and $P_{2m+1}=A(-3m-1)$, with generator degrees $3m=\lfloor 3\cdot2m/2\rfloor$ and $3m+1=\lfloor3(2m+1)/2\rfloor$.
-All differentials land in $PA_+$, so the resolution is minimal.
-For $h\geq2$ we have $\lfloor3h/2\rfloor>h$, so $P_h$ is not generated in degree $h$.
-A linear resolution would be isomorphic to this minimal one, so $A$ is not Koszul.
-
-$A$ is not quadratic: $A_1=\kk x$ and $V\otimes V=\kk x\otimes x$, so a quadratic algebra with $V=A_1$ is $\kk[x]$ (if $R=0$) or $\kk[x]/(x^2)$ (if $R=V\otimes V$), and $A$ is neither, as $\dim A_2=1$ and $A_3=0$.
-\end{solution}
 \part Let $S=\bigoplus_{x=1}^n\kk e_x$, let $V$ be a finite-dimensional $S$-bimodule in degree $1$, and let $A=T_S(V)$ be the tensor algebra.
 Prove that the multiplication map $V\otimes_SA\to A_+$ is an isomorphism of right $A$-modules, and deduce that $S$ has the minimal graded projective resolution
 \[
@@ -323,7 +306,7 @@ So $\Ker\delta^1\cong\Hom_A(K_1,N)$, and under this identification $\Im\delta^0=
 Hence $\Ext_A^1(M,N)$ is the cokernel.
 \end{solution}
 
-\part Let $A$ be the quotient of the algebra of upper triangular $3\times3$ matrices (with matrix units $e_{ij}$, $e_{ij}e_{jk}=e_{ik}$, $\deg e_{ij}=j-i$) by the ideal $(e_{13})$, and let $L_i=e_{ii}A/e_{ii}A_+$.
+\part Let $A=\kk A_3/(e_{13})$ with $\deg e_{ij}=j-i$.
 Find the minimal graded projective resolution of $L_1$, and compute $\dim_\kk\ext_A^h(L_1,L_y(j))$ for all $h,y,j$.
 \begin{solution}
 Here $e_{11}A=\langle e_{11},e_{12}\rangle$, $e_{22}A=\langle e_{22},e_{23}\rangle$, $e_{33}A=\langle e_{33}\rangle$.
@@ -337,7 +320,7 @@ with $\grtop P_h=L_{h+1}$ in degree $h$ for $h=0,1,2$.
 Here $S=\kk^3$, so by the formula for $\ext$ with simple coefficients (Lecture~5), $\dim\ext_A^h(L_1,L_y(j))=[(\grtop P_h)_{-j}:L_y]$ equals $1$ for $(h,y,j)=(0,1,0),(1,2,-1),(2,3,-2)$ and $0$ otherwise.
 \end{solution}
 
-\part Let $A$ be a graded algebra with $A_{<0}=0$, locally finite-dimensional, with $S=A_0$ semisimple.
+\part Let $A$ be as in Lecture~5.
 Prove that $\ext_A^1(S,S(j))\cong\Hom_S\bigl((A_+/A_+^2)_{-j},S\bigr)$ for all $j\in\Z$.
 \begin{solution}
 Let $P_\bullet\to S$ be the minimal resolution and $K_1=\Ker d_0=A_+$.
@@ -368,7 +351,7 @@ Taking the degree $i$ component of the exact sequence $0\to P_N\to\cdots\to P_0\
 \newpage
 \titledquestion{}
 \begin{parts}
-\part Let $A=\kk\langle x,y\rangle/(yx,\;x^2+y^2)$ with $\deg x=\deg y=1$, a quadratic algebra with $S=\kk$.
+\part Let $A=\kk\langle x,y\rangle/(yx,\;x^2+y^2)$ with $\deg x=\deg y=1$, a quadratic algebra.
 Show that $x^3=0$ and $y^3=0$, and deduce that $A_n=0$ for $n\geq3$ and $h_A(t)=1+2t+2t^2$.
 
 \emph{Hint.} $x^3=x\cdot x^2=-xy^2$ and $x^3=x^2\cdot x=-y^2x=-y(yx)$, and similarly for the other words of length $3$.
@@ -401,6 +384,22 @@ So $b_4=u_4=-4<0$, which is impossible.
 Hence $A$ has no linear resolution of $\kk$, so $A$ is not Koszul.
 \end{solution}
 
+\part Let $A=\kk[x]/(x^3)$ with $\deg x=1$.
+Find the minimal graded projective resolution of $\kk$, and show that $P_h$ is generated in degree $\lfloor 3h/2\rfloor$ for all $h\geq0$.
+Deduce that $A$ is not Koszul.
+Is $A$ quadratic?
+\begin{solution}
+Let $g_h$ denote the generator of $P_h$.
+$P_0=A$, and $\Ker d_0=xA$, so $P_1=A(-1)$ with $d_1(g_1)=x$.
+Since $xa=0$ if and only if $a\in x^2A$, $\Ker d_1=x^2g_1A$ is generated in degree $3$, so $P_2=A(-3)$ with $d_2(g_2)=x^2g_1$.
+Since $x^2a=0$ if and only if $a\in xA$, $\Ker d_2=xg_2A$ is generated in degree $4$, so $P_3=A(-4)$ with $d_3(g_3)=xg_2$, and $\Ker d_3=x^2g_3A$ is generated in degree $6$.
+The pattern repeats: $P_{2m}=A(-3m)$ and $P_{2m+1}=A(-3m-1)$, with generator degrees $3m=\lfloor 3\cdot2m/2\rfloor$ and $3m+1=\lfloor3(2m+1)/2\rfloor$.
+All differentials land in $PA_+$, so the resolution is minimal.
+For $h\geq2$ we have $\lfloor3h/2\rfloor>h$, so $P_h$ is not generated in degree $h$.
+A linear resolution would be isomorphic to this minimal one, so $A$ is not Koszul.
+
+$A$ is not quadratic: $A_1=\kk x$ and $V\otimes V=\kk x\otimes x$, so a quadratic algebra with $V=A_1$ is $\kk[x]$ (if $R=0$) or $\kk[x]/(x^2)$ (if $R=V\otimes V$), and $A$ is neither, as $\dim A_2=1$ and $A_3=0$.
+\end{solution}
 \part Let $S=\bigoplus_{y=1}^n\kk e_y$, let $V$ be a finite-dimensional bimodule in degree $1$, and let $A=T_S(V)/(V\otimes_SV)=S\oplus V$.
 Prove that the minimal graded projective resolution of $S$ has $P_h\cong(V^{\otimes_Sh}\otimes_SA)(-h)$ for all $h\geq0$, and deduce that $A$ is Koszul.
 
