@@ -382,7 +382,17 @@ Hence,
 \[
 \mathcal{K}_h\cong \bigwedge^hV, \qquad K_h\cong\bigwedge^hV\otimes_\Bbbk A(-h),\qquad K_0=A.
 \]
-with differential $d_h((v_1\wedge\cdots\wedge v_h)\otimes a)=\sum_{r=1}^h(-1)^{h-r}(v_1\wedge\cdots\widehat{v_r}\cdots\wedge v_h)\otimes v_ra$.
+To compute the differential, we express the inclusion $\iota_h:\mathcal K_h\hookrightarrow\mathcal K_{h-1}\otimes_SV$ of Lemma~\ref{lem:koszul-recursion} under these identifications.
+In the antisymmetrisation of $v_1\wedge\cdots\wedge v_h$, group the permutations $\sigma$ according to the vector $v_r$ sitting in the last tensor factor, that is, $\sigma(h)=r$.
+Moving $v_r$ to the last position takes $h-r$ transpositions, and the remaining $h-1$ tensor factors then run over the antisymmetrisation of $v_1,\ldots,\widehat{v_r},\ldots,v_h$.
+Hence
+\[
+\iota_h(v_1\wedge\cdots\wedge v_h)=\sum_{r=1}^h(-1)^{h-r}\,(v_1\wedge\cdots\widehat{v_r}\cdots\wedge v_h)\otimes v_r\in\bigwedge^{h-1}V\otimes V=\mathcal K_{h-1}\otimes V,
+\]
+and composing with $\id\otimes\mu$ gives the differential
+\[
+d_h\bigl((v_1\wedge\cdots\wedge v_h)\otimes a\bigr)=\sum_{r=1}^h(-1)^{h-r}\,(v_1\wedge\cdots\widehat{v_r}\cdots\wedge v_h)\otimes v_ra.
+\]
 
 
 \begin{proposition}\label{prop:koszul-complex-resolution}
@@ -395,44 +405,70 @@ is exact.
 \end{proposition}
 
 \begin{proof}
-To prove exactness, give $A$ and $\bigwedge V$ the multigrading with $\deg x_j$ equal to the $j$th standard basis vector.
-For $\alpha\in\mathbb Z_{\geq0}^n$, let $\operatorname{supp}(\alpha)=\{j\mid\alpha_j>0\}$.
-The degree $\alpha$ part of $K_h$ has basis
+The idea is to split the complex into finite-dimensional pieces by a multigrading and to contract each piece by an explicit homotopy.
+
+\emph{Step 1: multigrading.}
+Give $A=\Bbbk[x_1,\ldots,x_n]$ the $\mathbb Z_{\geq0}^n$-grading with $\deg x_j$ the $j$th standard basis vector, and $\bigwedge V$ the one with $\deg(x_{j_1}\wedge\cdots\wedge x_{j_h})=\mathbf1_J:=\sum_r\mathbf e_{j_r}$ for $J=\{j_1<\cdots<j_h\}$.
+Then $K_h=\bigwedge^hV\otimes_\Bbbk A$ is multigraded, and each $d_h$ preserves the multidegree because it moves a factor $x_{j_r}$ from the wedge to $A$.
+Hence $K_\bullet=\bigoplus_\alpha K_{\bullet,\alpha}$ as complexes, and it suffices to show that each multidegree piece $K_{\bullet,\alpha}$ is exact (in multidegree $\alpha=0$ together with $d_0$).
+
+\emph{Step 2: a basis and the differential in it.}
+For $\alpha\in\mathbb Z_{\geq0}^n$ put $\operatorname{supp}(\alpha)=\{j\mid\alpha_j>0\}$.
+The space $K_{h,\alpha}$ has basis
 \[
 b_J:=(x_{j_1}\wedge\cdots\wedge x_{j_h})\otimes x^{\alpha-\mathbf1_J},
 \qquad
 J=\{j_1<\cdots<j_h\}\subseteq\operatorname{supp}(\alpha),
 \]
-where $\mathbf1_J$ has entry $1$ at indices in $J$ and $0$ elsewhere.
-In this basis the differential is $d_h(b_J)=\sum_{r=1}^h(-1)^{h-r}b_{J\setminus\{j_r\}}$.
-Replacing $d_h$ by $(-1)^{h-1}d_h$ for all $h\geq1$ does not affect exactness: multiplication by $(-1)^{h(h-1)/2}$ on $K_h$ is an isomorphism from the complex with the old differentials to the one with the new differentials, and it is the identity on $K_0$ and $K_1$.
-So we may and do assume $d_h(b_J)=\sum_{r=1}^h(-1)^{r-1}b_{J\setminus\{j_r\}}$.
-
-If $\alpha\neq0$, let $q$ be the least index in $\operatorname{supp}(\alpha)$.
-For each $h\geq0$, define $s_{\alpha,h}:K_{h,\alpha}\to K_{h+1,\alpha}$ on basis vectors by
+since $x_J\otimes x^\beta$ has multidegree $\alpha$ exactly when $\beta=\alpha-\mathbf1_J$, which requires $J\subseteq\operatorname{supp}(\alpha)$.
+In particular $K_{h,\alpha}=0$ for $h>|\operatorname{supp}(\alpha)|$.
+Since $x_{j_r}\,x^{\alpha-\mathbf1_J}=x^{\alpha-\mathbf1_{J\setminus\{j_r\}}}$, the formula for $d_h$ gives
 \[
-s_{\alpha,h}(b_J)=
+d_h(b_J)=\sum_{r=1}^h(-1)^{h-r}\,b_{J\setminus\{j_r\}}.
+\]
+
+\emph{Step 3: normalising the sign.}
+Replacing $d_h$ by $(-1)^{h-1}d_h$ for all $h\geq1$ does not affect exactness: multiplication by $(-1)^{h(h-1)/2}$ on $K_h$ is an isomorphism from the complex with the old differentials to the one with the new differentials, and it is the identity on $K_0$ and $K_1$.
+So we may and do assume
+\[
+d_h(b_J)=\sum_{r=1}^h(-1)^{r-1}\,b_{J\setminus\{j_r\}},
+\]
+that is, the differential deletes one element of $J$ at a time with alternating signs.
+
+\emph{Step 4: a contracting homotopy for $\alpha\neq0$.}
+Let $q$ be the least index in $\operatorname{supp}(\alpha)$, and define $s_h:K_{h,\alpha}\to K_{h+1,\alpha}$ by
+\[
+s_h(b_J)=
 \begin{cases}
 b_{\{q\}\cup J},&q\notin J,\\
 0,&q\in J,
 \end{cases}
 \]
-inserting $q$ first in the ordered wedge.
-For $q\notin J$ and $h\geq1$, direct substitution gives
+that is, $s_h$ inserts $q$ in the first position of the wedge.
+We claim that
 \[
-\begin{aligned}
-d_{h+1}s_{\alpha,h}(b_J)
-&=b_J-\sum_{r=1}^h(-1)^{r-1}b_{\{q\}\cup(J\setminus\{j_r\})},\\
-s_{\alpha,h-1}d_h(b_J)
-&=\sum_{r=1}^h(-1)^{r-1}b_{\{q\}\cup(J\setminus\{j_r\})}.
-\end{aligned}
+d_{h+1}s_h+s_{h-1}d_h=\id_{K_{h,\alpha}}\qquad(h\geq0,\ s_{-1}:=0),
 \]
-For $h=0$, $J=\varnothing$ and $d_1s_{\alpha,0}(b_\varnothing)=b_\varnothing$.
-For $q\in J$, the term of $d_h(b_J)$ deleting $q$ is the only term on which $s_{\alpha,h-1}$ is nonzero, and it gives $s_{\alpha,h-1}d_h(b_J)=b_J$ while $d_{h+1}s_{\alpha,h}(b_J)=0$.
-Thus $d_{h+1}s_{\alpha,h}+s_{\alpha,h-1}d_h=\id_{K_{h,\alpha}}$ for every $h\geq1$ in positive multidegree; the case $h=0$ was checked separately.
-All positive multidegrees are therefore exact.
-In multidegree $0$, only $K_0\cong\Bbbk$ is nonzero and $d_0$ is the identity onto $\Bbbk$.
-This proves exactness of the displayed sequence.
+which we check on a basis vector $b_J$.
+
+\emph{Case $q\notin J$.}
+Since $q$ is smaller than all elements of $J$, in $\{q\}\cup J$ it is the first element and $j_r$ is the $(r+1)$st.
+So $d_{h+1}s_h(b_J)=b_J-\sum_{r=1}^h(-1)^{r-1}b_{\{q\}\cup(J\setminus\{j_r\})}$, where the first term comes from deleting $q$.
+On the other hand $q\notin J\setminus\{j_r\}$, so $s_{h-1}d_h(b_J)=\sum_{r=1}^h(-1)^{r-1}b_{\{q\}\cup(J\setminus\{j_r\})}$.
+The sum of the two is $b_J$.
+(For $h=0$ we have $J=\varnothing$ and the second term is absent.)
+
+\emph{Case $q\in J$.}
+Then $q=j_1$, because $J\subseteq\operatorname{supp}(\alpha)$ and $q$ is the least element of the support.
+Now $s_h(b_J)=0$, and in $d_h(b_J)$ the only term on which $s_{h-1}$ is non-zero is the one deleting $q$, that is $r=1$, with sign $+1$; it gives $s_{h-1}(b_{J\setminus\{q\}})=b_J$.
+Hence $d_{h+1}s_h(b_J)+s_{h-1}d_h(b_J)=b_J$ again.
+
+Thus $K_{\bullet,\alpha}$ is contractible, in particular exact.
+(Here $d_0$ plays no role: its target $\Bbbk$ is concentrated in multidegree $0$.)
+
+\emph{Step 5: multidegree $0$.}
+For $\alpha=0$ we have $\operatorname{supp}(\alpha)=\varnothing$, so only $K_{0,0}=\Bbbk\cdot1$ is non-zero, and $d_0:K_{0,0}\to\Bbbk$ is an isomorphism.
+Together with Step 4 this shows that $0\to K_n\to\cdots\to K_0\xrightarrow{d_0}\Bbbk\to0$ is exact.
 \end{proof}
 
 \begin{corollary}\label{prop:polynomial-koszul}
