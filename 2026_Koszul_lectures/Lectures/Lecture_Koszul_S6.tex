@@ -299,7 +299,7 @@ This is because
 \]
 where the second equality follows from the exactness of $P_\bullet$ and the last follows from $P_{h+1}$ living in degrees $\geq h+1$.
 
-\underline{Step 3: $P_{h,h}\cong\mathcal K_h$, compatibly with the differentials.}
+\underline{Step 3: $P_{h,h}\cong\mathcal K_h$, compatible with the differentials.}
 We construct isomorphisms of right $S$-modules $\varphi_h:\mathcal K_h\to P_{h,h}$ for $h\geq0$ such that for all $h\geq1$,
 \begin{equation}\label{eq:diagonal-compatibility}
 \jmath_h\circ\varphi_h=(\varphi_{h-1}\otimes\id_V)\circ\iota_h:\ \mathcal K_h\longrightarrow P_{h-1,h-1}\otimes_SV,
@@ -312,13 +312,13 @@ For $h=1$, exactness of $P_\bullet$ gives $A_1=(\Ker(P_0\xrightarrow{p_0}S))_1=d
 Put $\varphi_1:=\jmath_1^{-1}:\mathcal K_1=V\to P_{1,1}$; then \eqref{eq:diagonal-compatibility} holds for $h=1$.
 
 Let $h\geq2$, and assume that $\varphi_{h-1}$ and $\varphi_{h-2}$ are constructed and satisfy \eqref{eq:diagonal-compatibility} for $h-1$.
-Put $Y=P_{h-1,h-1}\otimes_SV=P_{h-1,h-1}A_1$ and $\Theta=\varphi_{h-1}\otimes\id_V:\mathcal K_{h-1}\otimes_SV\xrightarrow{\sim}Y$.
-Exactness of $P_\bullet$ at $P_{h-1}$ gives $(\Ker d_{h-1})_h=(\Im d_h)_h=d_h(P_{h,h})$, and this lies in $Y$ by Step 1.
-Since $\jmath_h$ is injective by Step 2, $\jmath_h$ is an isomorphism from $P_{h,h}$ onto $\Ker(d_{h-1}|_Y)$.
+Put $Q_{h-1}=P_{h-1,h-1}\otimes_SV=P_{h-1,h-1}A_1$ and $\Theta=\varphi_{h-1}\otimes\id_V:\mathcal K_{h-1}\otimes_SV\xrightarrow{\sim}Q_{h-1}$.
+Exactness of $P_\bullet$ at $P_{h-1}$ gives $(\Ker d_{h-1})_h=(\Im d_h)_h=d_h(P_{h,h})$, and this lies in $Q_{h-1}$ by Step 1.
+Since $\jmath_h$ is injective by Step 2, $\jmath_h$ is an isomorphism from $P_{h,h}$ onto $\Ker(d_{h-1}|_{Q_{h-1}})$.
 
-We compute $\Ker(d_{h-1}|_Y)$.
+We compute $\Ker(d_{h-1}|_{Q_{h-1}})$.
 For $y\in P_{h-1,h-1}$ and $v\in V$ we have $d_{h-1}(yv)=\jmath_{h-1}(y)v$, which lies in $P_{h-2,h-2}A_2\cong P_{h-2,h-2}\otimes_SA_2$ (Lemma~\ref{lem:graded-projective-terms}).
-So $d_{h-1}|_Y=(\id\otimes\mu_2)\circ(\jmath_{h-1}\otimes\id_V)$, where $\mu_2:V\otimes_SV\to A_2$ is the multiplication.
+So $d_{h-1}|_{Q_{h-1}}=(\id\otimes\mu_2)\circ(\jmath_{h-1}\otimes\id_V)$, where $\mu_2:V\otimes_SV\to A_2$ is the multiplication.
 By \eqref{eq:diagonal-compatibility} for $h-1$, $(\jmath_{h-1}\otimes\id_V)\circ\Theta=(\varphi_{h-2}\otimes\id_V\otimes\id_V)\circ(\iota_{h-1}\otimes\id_V)$, and therefore
 \[
 d_{h-1}\circ\Theta=(\varphi_{h-2}\otimes\id_{A_2})\circ(\id_{\mathcal K_{h-2}}\otimes\mu_2)\circ(\iota_{h-1}\otimes\id_V).
@@ -327,7 +327,7 @@ Here $\varphi_{h-2}\otimes\id_{A_2}$ is an isomorphism, and $\iota_{h-1}\otimes\
 Since $\mathcal K_{h-2}\otimes_S-$ is exact and $R=\Ker\mu_2$, the kernel of $\id_{\mathcal K_{h-2}}\otimes\mu_2$ is $\mathcal K_{h-2}\otimes_SR$.
 Hence
 \[
-\Theta^{-1}\bigl(\Ker(d_{h-1}|_Y)\bigr)=(\mathcal K_{h-1}\otimes_SV)\cap(\mathcal K_{h-2}\otimes_SR)=\iota_h(\mathcal K_h)
+\Theta^{-1}\bigl(\Ker(d_{h-1}|_{Q_{h-1}})\bigr)=(\mathcal K_{h-1}\otimes_SV)\cap(\mathcal K_{h-2}\otimes_SR)=\iota_h(\mathcal K_h)
 \]
 by Lemma~\ref{lem:koszul-recursion}, regarding all these as submodules of $\mathcal K_{h-2}\otimes_SV\otimes_SV$.
 So $\jmath_h(P_{h,h})=\Theta(\iota_h(\mathcal K_h))$, and $\varphi_h:=\jmath_h^{-1}\circ\Theta\circ\iota_h:\mathcal K_h\to P_{h,h}$ is an isomorphism satisfying \eqref{eq:diagonal-compatibility}.
