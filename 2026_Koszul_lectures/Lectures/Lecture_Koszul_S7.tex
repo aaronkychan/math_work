@@ -183,6 +183,67 @@ By Lemma~\ref{lem:resolution-degrees}, $E(A)^h_j=0$ for $j>-h$.
 So the product of classes of types $(h,j)$ and $(k,j')$ lies in $j+j'\leq-(h+k)$, with equality only if both factors are diagonal.
 Hence $E^\Delta(A)$ is a subalgebra of $E(A)$, and the off-diagonal part $\bigoplus_{j<-h}E(A)^h_j$ is an ideal.
 
+\subsection{The Yoneda product as splicing of exact sequences}\label{subsec:yoneda-splicing}
+
+\begin{advanced}
+The Yoneda product has a second description that does not mention resolutions: it is the splicing of exact sequences.
+This is how it is usually introduced in the literature, and it explains the name; we only state the result and indicate why it agrees with Definition~\ref{def:yoneda-product}.
+For the general theory see \cite[Section~3.4]{Wei94} or \cite[Chapter~III, Sections~5--6]{ML95}.
+
+\medskip
+\noindent\emph{From classes to exact sequences.}
+Let $\varphi\in\ext_A^h(S,S(j))$ with $h\geq1$, viewed as a map $\varphi:P_h\to S(j)$ vanishing on $\Im d_{h+1}$, so that $\varphi=\bar\varphi\,p_h$ with $\bar\varphi:\Im d_h\to S(j)$.
+Truncating the resolution gives an exact sequence
+\[
+0\to\Im d_h\hookrightarrow P_{h-1}\xrightarrow{d_{h-1}}\cdots\xrightarrow{d_1}P_0\xrightarrow{d_0}S\to0 .
+\]
+Replace $\Im d_h$ by $S(j)$ along $\bar\varphi$, that is, replace $P_{h-1}$ by the \defn{pushout}
+\[
+E_h:=\bigl(P_{h-1}\oplus S(j)\bigr)\big/\{(z,-\bar\varphi(z)):z\in\Im d_h\}.
+\]
+The result is an exact sequence of graded modules with $h$ middle terms
+\[
+\xi_\varphi:\quad0\to S(j)\to E_h\to P_{h-2}\to\cdots\to P_0\to S\to0 ,
+\]
+and a morphism of exact sequences from the truncated resolution to $\xi_\varphi$ which is $\bar\varphi$ at the left end and the identity at the right end.
+For $h=0$ a class is a map $S\to S(j)$ and we put $\xi_\varphi:=\varphi$.
+
+\medskip
+\noindent\emph{Yoneda's theorem.}
+Call two exact sequences $0\to S(j)\to E_h\to\cdots\to E_1\to S\to0$ equivalent if they are related by a chain of morphisms of sequences which are the identity at both ends.
+Then $\varphi\mapsto\xi_\varphi$ is a bijection from $\ext_A^h(S,S(j))$ to the set of equivalence classes of such sequences, and $\ext_A^1(S,S(j))$ is the set of extensions $0\to S(j)\to E\to S\to0$ of $S$ by $S(j)$ in the usual sense; see \cite[Theorem~3.4.3]{Wei94}.
+Here all modules and maps are graded and degree-preserving.
+
+\medskip
+\noindent\emph{The product is splicing.}
+Let $\varphi\in\ext_A^h(S,S(j))$ and $\psi\in\ext_A^k(S,S(j'))$.
+Shifting $\xi_\psi$ by $(j)$ gives a sequence $0\to S(j+j')\to F_k(j)\to\cdots\to F_1(j)\to S(j)\to0$ ending in $S(j)$, and $\xi_\varphi$ starts with $S(j)$.
+Their \defn{splice} is obtained by gluing along $S(j)$:
+\[
+\xymatrix@C=17pt@R=14pt{
+0\ar[r]&S(j+j')\ar[r]&F_k(j)\ar[r]&\cdots\ar[r]&F_1(j)\ar[dr]&&E_h\ar[r]&\cdots\ar[r]&E_1\ar[r]&S\ar[r]&0\\
+&&&&&S(j)\ar[ur]&&&&&
+}
+\]
+It is an exact sequence with $h+k$ middle terms from $S$ to $S(j+j')$, hence represents a class in $\ext_A^{h+k}(S,S(j+j'))$.
+
+\begin{proposition}\label{prop:yoneda-splicing}
+$\xi_{\psi\cdot\varphi}$ is equivalent to the splice of $\xi_\psi(j)$ and $\xi_\varphi$.
+\end{proposition}
+
+\begin{proof}[Sketch of proof]
+Let $\tilde\varphi$ be a lift of $\varphi$.
+The maps $\tilde\varphi_i:P_{h+i}\to P_i(j)$ together with the identity maps on $P_{h-1},\ldots,P_0$ give a morphism from the truncated resolution
+$0\to\Im d_{h+k}\to P_{h+k-1}\to\cdots\to P_0\to S\to0$
+to the splice of $\xi_\psi(j)$ and $\xi_\varphi$, which is the identity at $S$ and, at the left end, the map $\Im d_{h+k}\to S(j+j')$ induced by $\psi(j)\tilde\varphi_k$.
+A sequence admitting such a morphism from the truncated resolution is, by the construction of $\xi$, the pushout of the truncated resolution along this map, that is, $\xi_{\psi\cdot\varphi}$.
+\end{proof}
+
+Thus $E(A)$ is the algebra of exact sequences from $S$ to shifts of $S$ under splicing.
+In this language associativity is clear, since splicing is evidently associative; and the unit is the identity $S\to S$.
+It also shows that the product is intrinsic: it uses neither the resolution $P_\bullet$ nor the lifts $\tilde\varphi$ in its definition.
+\end{advanced}
+
 \subsection{The diagonal part of a quadratic algebra}
 
 From now on $A=T_S(V)/(R)$ is quadratic.

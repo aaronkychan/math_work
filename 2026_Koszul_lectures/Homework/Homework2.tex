@@ -65,7 +65,7 @@ left action is specified.
 
 \titledquestion{}
 \begin{parts}
-\part Let $A=\kk A_3$ be the path algebra of the quiver $1\to2\to3$, graded by path length, with $e_{ij}e_{jk}=e_{ik}$, and let $L_i=e_{ii}A/e_{ii}A_+$.
+\part Let $A=\kk A_3$ be the algebra of upper triangular $3\times3$ matrices, with basis the matrix units $e_{ij}$ ($i\leq j$) and $e_{ij}e_{jk}=e_{ik}$, graded by $\deg e_{ij}=j-i$, and let $L_i=e_{ii}A/e_{ii}A_+$.
 Find the minimal graded projective resolutions of $L_1$, $L_2$ and $L_3$, and the graded tops $\grtop P_h$ of their terms.
 \begin{solution}
 We have $e_{11}A=\langle e_{11},e_{12},e_{13}\rangle$, $e_{22}A=\langle e_{22},e_{23}\rangle$, $e_{33}A=\langle e_{33}\rangle$.
@@ -128,24 +128,25 @@ Hence $\lambda=0\Leftrightarrow\mu=0$.
 Conversely if $\lambda,\mu\neq0$ take $\alpha=\beta=\gamma=1$, $\delta=\mu/\lambda$ (the inverse is of the same form); for $\lambda=\mu=0$ take the identity.
 \end{solution}
 
-\part Let $A=\kk A_4/(e_{13})$ with the quotient grading, and put $a=e_{12}$, $b=e_{23}$, $c=e_{34}$, so that $A=T_S(V)/(R)$ with $S=\bigoplus_{i=1}^4\kk e_{ii}$, $V=\kk a\oplus\kk b\oplus\kk c$ and $R=\kk\,(a\otimes b)$.
-Compute $R^\perp$, a presentation and a basis of $A^!$, and $h_{A^!}(t)$.
-Find a basis of $A$ and $h_A(t)$, and verify
+\part Let $S=\bigoplus_{i=1}^4\kk e_i$ and let $V=\kk a\oplus\kk b\oplus\kk c$ be the $S$-bimodule with $a\in e_1Ve_2$, $b\in e_2Ve_3$, $c\in e_3Ve_4$ and $e_iVe_j=0$ for all other $(i,j)$.
+Let $R=\kk\,(a\otimes b)\subset V\otimes_SV$ and $A=T_S(V)/(R)$.
+Find a basis of $A$ and $h_A(t)$.
+Compute $R^\perp$, a presentation and a basis of $A^!$, and $h_{A^!}(t)$, and verify
 \[
   h_A(t)\,h_{A^!}(-t)^{\mathsf T}=I_4.
 \]
 \begin{solution}
-The ideal $(e_{13})$ is spanned by $e_{13},e_{14}$ ($e_{14}=e_{13}e_{34}$), so a basis of $A$ is
+The ideal $(R)$ is spanned by $ab$ and $abc$, so a basis of $A$ is
 \[
-  e_{11},\ e_{22},\ e_{33},\ e_{44},\ a,\ b,\ c,\ bc\ (=e_{24}),\qquad h_A(t)=I+t(E_{12}+E_{23}+E_{34})+t^2E_{24}.
+  e_1,\ e_2,\ e_3,\ e_4,\ a,\ b,\ c,\ bc,\qquad h_A(t)=I+t(E_{12}+E_{23}+E_{34})+t^2E_{24}.
 \]
-$D(V)$ has the dual basis $a^*\in e_{22}D(V)e_{11}$, $b^*\in e_{33}D(V)e_{22}$, $c^*\in e_{44}D(V)e_{33}$; the composable words of length $2$ are $b^*a^*$ and $c^*b^*$.
+$D(V)$ has the dual basis $a^*\in e_2D(V)e_1$, $b^*\in e_3D(V)e_2$, $c^*\in e_4D(V)e_3$; the composable words of length $2$ are $b^*a^*$ and $c^*b^*$.
 With $(\lambda\otimes\mu)(v\otimes w)=\sum_i\mu(ve_i)\,\lambda(e_iw)$,
 \[
   (b^*\otimes a^*)(a\otimes b)=1,\qquad(c^*\otimes b^*)(a\otimes b)=0,
 \]
 so $R^\perp=\kk\,c^*b^*$ and $A^!=T_S(D(V))/(c^*b^*)$.
-A word of length $3$ would be $c^*b^*a^*$, which contains $c^*b^*$; hence a basis of $A^!$ is $e_{ii},\ a^*,\ b^*,\ c^*,\ b^*a^*$, and
+A word of length $3$ would be $c^*b^*a^*$, which contains $c^*b^*$; hence a basis of $A^!$ is $e_i,\ a^*,\ b^*,\ c^*,\ b^*a^*$, and
 \[
   h_{A^!}(t)=I+t(E_{21}+E_{32}+E_{43})+t^2E_{31}.
 \]
@@ -159,22 +160,6 @@ With $N=E_{12}+E_{23}+E_{34}$ we have $N^2=E_{13}+E_{24}$ and $NE_{13}=E_{24}N=E
 \newpage
 \titledquestion{}
 \begin{parts}
-\part Let $P_\bullet\to M$ be a projective resolution with differentials $d_h$ and $K_1=\Ker d_0$.
-Prove that
-\[
-\Ext_A^1(M,N)\cong\operatorname{coker}\bigl(\Hom_A(P_0,N)\to\Hom_A(K_1,N)\bigr),
-\]
-where the map is restriction, and that $\Ext_A^h(M,N)\cong\Ext_A^{h-1}(K_1,N)$ for $h\geq2$.
-\begin{solution}
-The shifted complex $\cdots\to P_3\to P_2\to P_1\xrightarrow{d_1}K_1\to0$ is a projective resolution of $K_1$, so $\Ext_A^{h-1}(K_1,N)$ is the cohomology of $\Hom_A(P_{\bullet+1},N)$ in degree $h-1$.
-
-For $h\geq2$, the cohomology of $\Hom_A(P_\bullet,N)$ in degree $h$ uses $\Hom_A(P_{h-1},N)\to\Hom_A(P_h,N)\to\Hom_A(P_{h+1},N)$, which is the same piece of the complex, so $\Ext_A^h(M,N)\cong\Ext_A^{h-1}(K_1,N)$.
-
-For $h=1$: $\Ker\delta^1$ consists of maps $P_1\to N$ vanishing on $\Im d_2=\Ker d_1$, that is, maps factoring uniquely through $d_1:P_1\twoheadrightarrow K_1$.
-So $\Ker\delta^1\cong\Hom_A(K_1,N)$, and under this identification $\Im\delta^0=\{\varphi d_1:\varphi\in\Hom_A(P_0,N)\}$ is the image of the restriction map $\Hom_A(P_0,N)\to\Hom_A(K_1,N)$, $\varphi\mapsto\varphi|_{K_1}$.
-Hence $\Ext_A^1(M,N)$ is the cokernel.
-\end{solution}
-
 \part Let $B=T_\kk(\kk x\oplus\kk y)/(x^2)$ with $\deg x=\deg y=1$, and $a_d=\dim_\kk B_d$.
 Prove that $a_d=a_{d-1}+a_{d-2}$ for $d\geq2$ and $h_B(t)=\dfrac{1+t}{1-t-t^2}$.
 Then compute $B^!$ (with $X=x^*$, $Y=y^*\in D(V)$), a homogeneous basis of $B^!$ and $h_{B^!}(t)$, and verify $h_B(t)\,h_{B^!}(-t)=1$.
@@ -210,7 +195,7 @@ $u^2=\alpha^2x^2+\alpha\beta(xy+yx)+\beta^2y^2=\alpha\beta(1-q)\,yx$, and $yx\ne
 So $u^2=0$ iff $\alpha\beta(1-q)=0$: for $q\neq1$, iff $\alpha=0$ or $\beta=0$ (the two lines $\kk x,\kk y$); for $q=1$, for all $(\alpha,\beta)$.
 \end{solution}
 
-\part With $C_q$ as in (3), prove that
+\part With $C_q$ as in (2), prove that
 \[
   C_q\cong C_{q'}\ \text{ as graded algebras}\quad\Longleftrightarrow\quad q=q'\ \text{ or }\ qq'=1.
 \]
@@ -226,6 +211,20 @@ either $\varphi(x)=\lambda x$, $\varphi(y)=\mu y$, and $0=\varphi(xy+qyx)=\lambd
 
 Now if $\operatorname{char}\kk\neq2$, then $1\neq-1$ and $1\cdot(-1)\neq1$, so $C_1\not\cong C_{-1}$ as graded algebras; even ungraded, $C_{-1}$ is commutative ($xy=yx$) whereas $C_1$ is not ($xy=-yx\neq yx$ as $2yx\neq0$).
 In characteristic $2$, $1=-1$, so $C_1=C_{-1}$.
+\end{solution}
+\part For $C_q$ as in (2), compute a quadratic presentation of $C_q^!$ (with $X=x^*$, $Y=y^*\in D(V)$) and $h_{C_q^!}(t)$, and verify that $h_{C_q}(t)\,h_{C_q^!}(-t)=1$, where $h_{C_q}(t)=(1+t)^2$.
+Compare $C_0^!$ with $C_1^!$.
+\begin{solution}
+For $S=\kk$, $(\lambda\otimes\mu)(v\otimes w)=\mu(v)\lambda(w)$.
+For $F=\alpha X\otimes X+\beta X\otimes Y+\gamma Y\otimes X+\delta Y\otimes Y$,
+\[
+  F(x\otimes x)=\alpha,\qquad F(y\otimes y)=\delta,\qquad F(x\otimes y+q\,y\otimes x)=\gamma+q\beta.
+\]
+So $R^\perp=\kk(X\otimes Y-qY\otimes X)$ and $C_q^!=\kk\langle X,Y\rangle/(XY-qYX)$.
+Using $XY=qYX$, every word is a multiple of $Y^aX^b$, so these span; they are independent:
+for $q=0$ the relation is monomial and $\{Y^aX^b\}$ is the set of words avoiding $XY$; for $q\neq0$ let $X$ act on $\kk[s,t]$ by multiplication by $s$ and $Y$ by $(Yf)(s,t)=t\,f(q^{-1}s,t)$; then $XY=qYX$ and $Y^aX^b\cdot1=q^{-ab}s^bt^a$, which are independent.
+Hence $h_{C_q^!}=\sum_d(d+1)t^d=(1-t)^{-2}$ and $h_{C_q}(t)h_{C_q^!}(-t)=(1+t)^2(1+t)^{-2}=1$.
+$C_1^!=\kk[X,Y]$ is commutative while in $C_0^!=\kk\langle X,Y\rangle/(XY)$ one has $XY=0\neq YX$: same Hilbert series, non-isomorphic algebras.
 \end{solution}
 \end{parts}
 
@@ -256,15 +255,22 @@ Finally $\Ker d_3=vA\oplus uA$ has the same form as $\Ker d_1$, so the pattern r
 Thus $P_h\cong A(-h)^{\oplus2}$ for all $h\geq1$, and all differentials map into $PA_+$, so the resolution is minimal.
 \end{solution}
 
-\part Let $A=\kk[x]$ with $\deg x=1$.
-Prove that the ungraded module $\kk=A/(x)$ has no projective cover.
+\part Let $A$ be a graded algebra as in Lecture~5, let $M$ be a bounded below locally finite-dimensional graded right $A$-module with minimal graded projective resolution $P_\bullet\to M$, and let $n\geq0$.
+Prove that the following are equivalent:
+\begin{enumerate}
+\item[(a)] $P_h=0$ for all $h>n$;
+\item[(b)] $\ext_A^{n+1}(M,L(j))=0$ for every simple graded $S$-module $L$ in degree $0$ and every $j\in\Z$.
+\end{enumerate}
+
+\emph{Hint.} Use the description of $\ext_A^h(M,L(j))$ via $\grtop P_h$ and the graded Nakayama lemma.
 \begin{solution}
-Suppose $p:P\to\kk$ is a projective cover, and choose $u\in P$ with $p(u)=1$.
-Then $p(uA)=\kk$, so $P=uA$.
-The surjection $A\to P$, $a\mapsto ua$, splits because $P$ is projective.
-The resulting projection $A\to A$ is multiplication by an idempotent $e\neq0$, and $P\cong eA$.
-Since $\kk[x]$ has no idempotents other than $0$ and $1$, we have $P\cong A$.
-But every surjection $A\to\kk$ maps the proper submodule $(x-1)A$ onto $\kk$, contradicting the cover property.
+(a)$\Rightarrow$(b): $\ext_A^{n+1}(M,L(j))\cong\Hom_S((\grtop P_{n+1})_{-j},L)=0$, because $P_{n+1}=0$.
+
+(b)$\Rightarrow$(a): By the description of $\ext$ via a minimal resolution (Lecture~5) with $N=L$, the hypothesis says $\Hom_S((\grtop P_{n+1})_{-j},L)=0$ for all simple $L$ and all $j$.
+Every non-zero $S$-module has a non-zero map to some simple module, since $S$ is semisimple, so $\grtop P_{n+1}=0$, that is, $P_{n+1}=P_{n+1}A_+$.
+As $P_{n+1}$ is bounded below, graded Nakayama gives $P_{n+1}=0$.
+Then $\Ker d_{n+1}=0$, so $\Im d_{n+2}=0$ and $P_{n+2}\to\Ker d_{n+1}=0$ is the projective cover of $0$, whence $P_{n+2}=P_{n+2}A_+$ (by minimality, $\Ker=P_{n+2}\subseteq P_{n+2}A_+$) and $P_{n+2}=0$ again by Nakayama.
+Induction gives $P_h=0$ for all $h>n$.
 \end{solution}
 
 \part Let $A=\kk[x]/(x^3)$ with $\deg x=1$.
@@ -283,29 +289,41 @@ A linear resolution would be isomorphic to this minimal one, so $A$ is not Koszu
 
 $A$ is not quadratic: $A_1=\kk x$ and $V\otimes V=\kk x\otimes x$, so a quadratic algebra with $V=A_1$ is $\kk[x]$ (if $R=0$) or $\kk[x]/(x^2)$ (if $R=V\otimes V$), and $A$ is neither, as $\dim A_2=1$ and $A_3=0$.
 \end{solution}
+\part Let $S=\bigoplus_{x=1}^n\kk e_x$, let $V$ be a finite-dimensional $S$-bimodule in degree $1$, and let $A=T_S(V)$ be the tensor algebra.
+Prove that the multiplication map $V\otimes_SA\to A_+$ is an isomorphism of right $A$-modules, and deduce that $S$ has the minimal graded projective resolution
+\[
+0\to(V\otimes_SA)(-1)\to A\to S\to0,
+\]
+so that $A$ is Koszul.
+\begin{solution}
+The tensor algebra has $A_i=V^{\otimes_Si}$, so the multiplication map $V\otimes_SA_{i-1}\to A_i$ is the identity of $V^{\otimes_Si}$ for $i\geq1$.
+Hence $V\otimes_SA\to A_+$, $v\otimes a\mapsto va$, is bijective; it is right $A$-linear and raises degrees by $1$, so $A_+\cong(V\otimes_SA)(-1)$.
+This module is projective (as $V\otimes_S-$ takes projective $S$-modules, that is all $S$-modules, to projective ones, so $V\otimes_SA$ is a direct summand of a free $A$-module).
+Thus $0\to A_+\to A\to S\to0$ is a graded projective resolution, with $A_+\subseteq AA_+$, so it is minimal.
+Its terms are generated in degrees $0$ and $1$, so it is linear and $A$ is Koszul.
+\end{solution}
 \end{parts}
 
 \newpage
 \titledquestion{}
 \begin{parts}
-\part Prove that $\Ext_A^h(P,N)=0$ for $h\geq1$ and all $N$ if $P$ is projective.
+\part Let $P_\bullet\to M$ be a projective resolution with differentials $d_h$ and $K_1=\Ker d_0$.
+Prove that
+\[
+\Ext_A^1(M,N)\cong\operatorname{coker}\bigl(\Hom_A(P_0,N)\to\Hom_A(K_1,N)\bigr),
+\]
+where the map is restriction, and that $\Ext_A^h(M,N)\cong\Ext_A^{h-1}(K_1,N)$ for $h\geq2$.
 \begin{solution}
-$P_0=P$ and $P_h=0$ for $h\geq1$ is a projective resolution of $P$, so $\Hom_A(P_\bullet,N)$ is concentrated in degree $0$.
+The shifted complex $\cdots\to P_3\to P_2\to P_1\xrightarrow{d_1}K_1\to0$ is a projective resolution of $K_1$, so $\Ext_A^{h-1}(K_1,N)$ is the cohomology of $\Hom_A(P_{\bullet+1},N)$ in degree $h-1$.
+
+For $h\geq2$, the cohomology of $\Hom_A(P_\bullet,N)$ in degree $h$ uses $\Hom_A(P_{h-1},N)\to\Hom_A(P_h,N)\to\Hom_A(P_{h+1},N)$, which is the same piece of the complex, so $\Ext_A^h(M,N)\cong\Ext_A^{h-1}(K_1,N)$.
+
+For $h=1$: $\Ker\delta^1$ consists of maps $P_1\to N$ vanishing on $\Im d_2=\Ker d_1$, that is, maps factoring uniquely through $d_1:P_1\twoheadrightarrow K_1$.
+So $\Ker\delta^1\cong\Hom_A(K_1,N)$, and under this identification $\Im\delta^0=\{\varphi d_1:\varphi\in\Hom_A(P_0,N)\}$ is the image of the restriction map $\Hom_A(P_0,N)\to\Hom_A(K_1,N)$, $\varphi\mapsto\varphi|_{K_1}$.
+Hence $\Ext_A^1(M,N)$ is the cokernel.
 \end{solution}
 
-\part Conversely, let $d_0:P_0\to M$ be a surjection from a projective module with $K=\Ker d_0$, and suppose $\Ext_A^1(M,K)=0$.
-Prove that $M$ is projective.
-
-\emph{Hint.} Take $P_1\to K$ onto $K$ and consider it as a cocycle in $\Hom_A(P_1,K)$.
-\begin{solution}
-Take a surjection $\pi:P_1\to K$ from a projective module, and extend $P_1\xrightarrow{\iota\pi}P_0$ to a resolution $P_\bullet\to M$, where $\iota:K\hookrightarrow P_0$.
-Since $\Ker(\iota\pi)=\Ker\pi=\Im d_2$, we have $\pi d_2=0$, so $\pi$ is a cocycle in $\Hom_A(P_1,K)$.
-As $\Ext_A^1(M,K)=0$, there is $\sigma\in\Hom_A(P_0,K)$ with $\pi=\sigma d_1=\sigma\iota\pi$.
-Since $\pi$ is surjective, $\sigma\iota=\id_K$.
-So $K$ is a direct summand of $P_0$, with complement $\cong P_0/K\cong M$, and $M$ is projective.
-\end{solution}
-
-\part Let $A=\kk A_3/(e_{13})$ with the grading by path length.
+\part Let $A$ be the quotient of the algebra of upper triangular $3\times3$ matrices (with matrix units $e_{ij}$, $e_{ij}e_{jk}=e_{ik}$, $\deg e_{ij}=j-i$) by the ideal $(e_{13})$, and let $L_i=e_{ii}A/e_{ii}A_+$.
 Find the minimal graded projective resolution of $L_1$, and compute $\dim_\kk\ext_A^h(L_1,L_y(j))$ for all $h,y,j$.
 \begin{solution}
 Here $e_{11}A=\langle e_{11},e_{12}\rangle$, $e_{22}A=\langle e_{22},e_{23}\rangle$, $e_{33}A=\langle e_{33}\rangle$.
@@ -326,14 +344,24 @@ Let $P_\bullet\to S$ be the minimal resolution and $K_1=\Ker d_0=A_+$.
 By the description of graded $\ext$ via a minimal resolution (Lecture~5), $\ext_A^1(S,S(j))\cong\Hom_S((\grtop P_1)_{-j},S)$, and $\grtop P_1\cong\grtop K_1=A_+/A_+^2$ since $P_1\to K_1$ is a projective cover.
 \end{solution}
 
-\part Let $A$ be as in (4).
+\part Let $A$ be as in (3).
 Prove that $A$ is generated in degree $1$ over $S$ if and only if $\ext_A^1(S,S(j))=0$ for all $j\neq-1$.
 
-\emph{Hint.} You may use the isomorphism in (4).
+\emph{Hint.} You may use the isomorphism in (3).
 \begin{solution}
-By (4), and since every simple $S$-module is a direct summand of $S$, the condition says $A_+/A_+^2$ is concentrated in degree $1$, that is, $A_i=(A_+^2)_i=\sum_{0<p<i}A_pA_{i-p}$ for $i\geq2$.
+By (3), and since every simple $S$-module is a direct summand of $S$, the condition says $A_+/A_+^2$ is concentrated in degree $1$, that is, $A_i=(A_+^2)_i=\sum_{0<p<i}A_pA_{i-p}$ for $i\geq2$.
 If $A$ is generated in degree $1$, then $A_i=A_1A_{i-1}\subseteq A_+^2$ for $i\geq2$.
 Conversely, if $A_i=\sum_{0<p<i}A_pA_{i-p}$ for all $i\geq2$, induction on $i$ gives $A_p=A_1^p$ for all $p<i$, hence $A_i=A_1^i$, so $A$ is generated in degree $1$.
+\end{solution}
+\part Let $A$ be a graded algebra with $A_0=\kk$, locally finite-dimensional, and let $M$ be a bounded below locally finite-dimensional graded right $A$-module whose minimal graded projective resolution $P_\bullet\to M$ has $P_h=0$ for $h\gg0$.
+Prove that
+\[
+h_M(t)=h_A(t)\cdot\sum_{h\geq0}(-1)^h\sum_{i\in\Z}\dim_\kk\ext_A^h\bigl(M,\kk(-i)\bigr)\,t^i .
+\]
+\begin{solution}
+By the description of $\ext$ via a minimal resolution (Lecture~5), with $S=\kk$,, $\dim\ext_A^h(M,\kk(-i))=\dim(\grtop P_h)_i$, so the inner sum is $h_{\grtop P_h}(t)$.
+Since $P_h\cong\grtop P_h\otimes_\kk A$ as graded vector spaces (the graded projective cover formula), $h_{P_h}(t)=h_{\grtop P_h}(t)\,h_A(t)$.
+Taking the degree $i$ component of the exact sequence $0\to P_N\to\cdots\to P_0\to M\to0$ of vector spaces and the alternating sum of dimensions gives $h_M(t)=\sum_h(-1)^hh_{P_h}(t)$, which is the claim.
 \end{solution}
 \end{parts}
 

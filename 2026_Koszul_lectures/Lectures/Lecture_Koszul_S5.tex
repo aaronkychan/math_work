@@ -41,17 +41,25 @@ The precise statements and proofs are in Section~\ref{sec:yoneda} (Lemma~\ref{le
 For all modules $M,N$:
 \begin{enumerate}
 \item $\Ext_A^0(M,N)\cong\Hom_A(M,N)$.
-\item If $M$ is projective, then $\Ext_A^h(M,N)=0$ for all $h\geq1$.
+\item The following are equivalent: (a) $M$ is projective; (b) $\Ext_A^1(M,N)=0$ for all $N$; (c) $\Ext_A^h(M,N)=0$ for all $h\geq1$ and all $N$.
 \end{enumerate}
 \end{proposition}
 
 \begin{proof}
-(1) Apply Lemma~\ref{lem:Hom-contravariant-left-exact} to the exact sequence $P_1\xrightarrow{d_1}P_0\xrightarrow{p_0}M\to0$.
-It shows that $-\circ p_0:\Hom_A(M,N)\to\Hom_A(P_0,N)$ is injective with image $\Ker\delta^0$, the cocycles in degree $0$.
-(2) Use the resolution with $P_0=M$ and $P_h=0$ for $h\geq1$.
+(1) Apply Lemma~\ref{lem:Hom-contravariant-left-exact} to the exact sequence $P_1\xrightarrow{d_1}P_0\xrightarrow{d_0}M\to0$.
+It shows that $-\circ d_0:\Hom_A(M,N)\to\Hom_A(P_0,N)$ is injective with image $\Ker\delta^0$, the cocycles in degree $0$.
+
+(2) (a)$\Rightarrow$(c): use the resolution with $P_0=M$ and $P_h=0$ for $h\geq1$.
+(c)$\Rightarrow$(b) is clear.
+(b)$\Rightarrow$(a): choose a surjection $d_0:P_0\to M$ from a projective module and put $K=\Ker d_0$ with inclusion $\iota:K\hookrightarrow P_0$.
+Choose a surjection $\pi:P_1\to K$ from a projective module, and extend $P_1\xrightarrow{\iota\pi}P_0\xrightarrow{d_0}M$ to a projective resolution $P_\bullet\to M$.
+Since $\Ker(\iota\pi)=\Ker\pi=\Im d_2$, we have $\pi d_2=0$, so $\pi$ is a cocycle in $\Hom_A(P_1,K)$.
+As $\Ext_A^1(M,K)=0$, there is $\sigma\in\Hom_A(P_0,K)$ with $\pi=\sigma d_1=\sigma\iota\pi$.
+Since $\pi$ is surjective, $\sigma\iota=\id_K$.
+So $K$ is a direct summand of $P_0$ with complement $\cong P_0/K\cong M$, and $M$ is projective.
 \end{proof}
 
-Thus the ungraded $\Ext$ extends $\Hom$ to higher degrees, and it vanishes for projective $M$ as one expects from Proposition~\ref{prop:projective-characterisations}.
+Thus the ungraded $\Ext$ extends $\Hom$ to higher degrees, and its vanishing in positive degrees characterises projective modules, in agreement with Proposition~\ref{prop:projective-characterisations}.
 
 
 \subsection{Graded Ext}\label{subsec:graded-ext}
@@ -318,27 +326,6 @@ By induction on $i$ this gives $I_i\subseteq(I_2)$, so $I=(I_2)$ and $A=T_S(V)/(
 \end{proof}
 
 \subsection{Exercises}
-
-\begin{exercise}
-\begin{enumerate}
-\item Prove that $\Ext_A^h(P,N)=0$ for $h\geq1$ and all $N$ if $P$ is projective.
-\item Conversely, let $d_0:P_0\to M$ be a surjection from a projective module with $K=\Ker d_0$, and suppose $\Ext_A^1(M,K)=0$.
-Prove that $M$ is projective.
-\end{enumerate}
-\emph{Hint for (2).} Take $P_1\to K$ onto $K$ and consider it as a cocycle in $\Hom_A(P_1,K)$.
-\end{exercise}
-
-\begin{hidden}
-\emph{Solution.}
-(1) $P_0=P$ and $P_h=0$ for $h\geq1$ is a projective resolution of $P$, so $\Hom_A(P_\bullet,N)$ is concentrated in degree $0$.
-
-(2) Take a surjection $\pi:P_1\to K$ from a projective module, and extend $P_1\xrightarrow{\iota\pi}P_0$ to a resolution $P_\bullet\to M$, where $\iota:K\hookrightarrow P_0$.
-Since $\Ker(\iota\pi)=\Ker\pi=\Im d_2$, we have $\pi d_2=0$, so $\pi$ is a cocycle in $\Hom_A(P_1,K)$.
-As $\Ext_A^1(M,K)=0$, there is $\sigma\in\Hom_A(P_0,K)$ with $\pi=\sigma d_1=\sigma\iota\pi$.
-Since $\pi$ is surjective, $\sigma\iota=\id_K$.
-So $K$ is a direct summand of $P_0$, with complement $\cong P_0/K\cong M$, and $M$ is projective.
-\end{hidden}
-
 
 \begin{exercise}
 Let $P_\bullet\to M$ be a projective resolution and $K_1=\Ker d_0$.
