@@ -2,7 +2,7 @@
 \clearpage
 \section{Ext-groups}\label{sec:ext-tor}
 
-The contravariant functor $\Hom_A(-,N)$ is left exact (Lemma~\ref{lem:Hom-contravariant-left-exact}) but in general not exact (Example~\ref{ex:Hom-contravariant-not-exact}).
+The contravariant functor $\Hom_A(-,N)$ is left exact (Lemma~\ref{lem:Hom-left-exact}) but in general not exact (Example~\ref{ex:Hom-contravariant-not-exact}).
 The ungraded Ext-group $\Ext_A^h(M,N)$ measures this failure at homological degree $h$; it is computed by taking homology on the complex  $\Hom_A(P_\bullet,N)$ for a projective resolution $P_\bullet$ of $M$.
 
 \subsection{Ungraded Ext-groups via projective resolutions}
@@ -46,7 +46,7 @@ For all modules $M,N$:
 \end{proposition}
 
 \begin{proof}
-(1) Apply Lemma~\ref{lem:Hom-contravariant-left-exact} to the exact sequence $P_1\xrightarrow{d_1}P_0\xrightarrow{d_0}M\to0$.
+(1) Apply Lemma~\ref{lem:Hom-left-exact} to the exact sequence $P_1\xrightarrow{d_1}P_0\xrightarrow{d_0}M\to0$.
 It shows that $-\circ d_0:\Hom_A(M,N)\to\Hom_A(P_0,N)$ is injective with image $\Ker\delta^0$, the cocycles in degree $0$.
 
 (2) (a)$\Rightarrow$(c): use the resolution with $P_0=M$ and $P_h=0$ for $h\geq1$.
