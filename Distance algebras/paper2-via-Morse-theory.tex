@@ -1058,11 +1058,12 @@ where the first equivalence is Lemma~\ref{lem:d(X,Y)}, the second follows from L
 
 
 \new{
-When we first wrote down the candidate complex, we are looking forward that the minimal resolution can be obtained by extracting homologies of $\Delta(\D_X)$.  If we restrict to the local part $\widetilde{\mathcal P}_\bullet e_W$, then it is natural to expect that only homologies of the subcomplex given by chains bounded above by $\underline{W}$ appear. From this, we expect that $\widetilde{\mathcal P}_\bullet e_W$ should be homotopic to a similar $\mathcal{P}_\bullet$-construction associated to the the subposet 
-$\D_X^{\le \underline{W}} := \{\underline{Z}\in\D_X\mid \underline{Z}\le \underline{W}\}$, and such a homotopy could be obtain naturally from similar to Lemma \ref{lem:order homotopy}.
+When we first wrote down the candidate complex, we are looking forward that the minimal resolution can be obtained by extracting homologies of $\Delta(\D_X)$.  If we restrict to the local part $\widetilde{\mathcal P}_\bullet e_W$, then it is natural to expect that only homologies of the subcomplex given by chains bounded above by $\underline{W}$ appear. \old{From this, we expect that $\widetilde{\mathcal P}_\bullet e_W$ should be homotopic to a similar $\mathcal{P}_\bullet$-construction associated to the the subposet 
+$\D_X^{\le \underline{W}} := \{\underline{Z}\in\D_X\mid \underline{Z}\le \underline{W}\}$, and such a homotopy could be obtain naturally from similar to Lemma \ref{lem:order homotopy}.}
+\new{From this, we expect that $\widetilde{\mathcal P}_\bullet e_W$ is homotopy equivalent to a (twisted) chain complex of the subposet $\D_X^{\le \underline{W}} := \{\underline{Z}\in\D_X\mid \underline{Z}\le \underline{W}\}$, via a homotopy similar to that of Lemma~\ref{lem:order homotopy}.}
 
-Our strategy is as follows.  The first step (Lemma \ref{lem:evaluated-differential}) is to show that $\widetilde{\mathcal P}_\bullet e_W$ can be identified as the chain complex associated to $\Delta(\D_X)$ with a twist in the differential; this is the content of  below.  Then we show in Lemma \ref{lem:twisted-retraction} that this twisted chain complex is homotopy to the twisted chain complex associated to $\D_X^{\le \underline{W}}$.
-Finally, we lift this homotopy back to $\mathcal{\mathcal P}_\bullet$ side.
+Our strategy is as follows.  The first step (Lemma \ref{lem:evaluated-differential}) is to show that $\widetilde{\mathcal P}_\bullet e_W$ can be identified as the chain complex associated to $\Delta(\D_X)$ with a twist in the differential\old{; this is the content of  below.  Then we show in Lemma \ref{lem:twisted-retraction} that this twisted chain complex is homotopy to the twisted chain complex associated to $\D_X^{\le \underline{W}}$.
+Finally, we lift this homotopy back to $\mathcal{\mathcal P}_\bullet$ side.}\new{.  Then we show in Lemma~\ref{lem:twisted-retraction} that this twisted chain complex is homotopy equivalent to the twisted chain complex associated to $\D_X^{\le \underline{W}}$, and that the latter is exact; this proves Theorem~\ref{thm:exactness}.}
 
 In view of utilising Lemma \ref{lem:order homotopy}, we consider
 \[
@@ -1078,27 +1079,28 @@ Consider the $R$-linear maps
 \theta_k\colon& \mathcal P_ke_W\to C_k(\Delta(\D_X)), & (b_{Z_0W})^{(\underline{Z}_\ast)}&\mapsto\langle\underline{Z}_\ast\rangle \qquad (k\ge 0),
 \end{align*} 
 where $b_{WX}^*$ is the basis of $D(e_W\Sigma e_X)$ dual to $b_{WX}$.
-Define $\eta_k\colon C_k(\Delta(\D_X))\to C_{k-1}(\Delta(\D_X))$ by
+Define $\omega_k\colon C_k(\Delta(\D_X))\to C_{k-1}(\Delta(\D_X))$ by
 \[
- \eta_0\langle\underline{Z}\rangle:=
+ \omega_0\langle\underline{Z}\rangle:=
  \begin{cases}
  1, & \underline{W}\not\subseteq\underline{Z},\\
  0, & \text{otherwise},
  \end{cases}
  \qquad
- \eta_k\langle\underline{Z}_0<\cdots<\underline{Z}_k\rangle:=
+ \omega_k\langle\underline{Z}_0<\cdots<\underline{Z}_k\rangle:=
  \begin{cases}
  \langle\underline{Z}_1<\cdots<\underline{Z}_k\rangle, & r_W(\underline{Z}_0)\neq r_W(\underline{Z}_1),\\
  0, & \text{otherwise},
  \end{cases}
 \]
-for $k\geq1$. Then $\theta\colon\widetilde{\mathcal P}_\bullet e_W\to\bigl(\widetilde C_\bullet(\Delta(\D_X)),\partial-\eta\bigr)$ is an isomorphism of complexes of $R$-modules.
+for $k\geq1$. Then $\theta\colon\widetilde{\mathcal P}_\bullet e_W\to\bigl(\widetilde C_\bullet(\Delta(\D_X)),\partial-\omega\bigr)$ is an isomorphism of complexes of $R$-modules.
 \end{lem}
+\comment{Claude: renamed $\eta$ to $\omega$ (``omitted faces'') in Lemmas~\ref{lem:evaluated-differential} and~\ref{lem:twisted-retraction} and in Example~\ref{eg:twisted-lemmas}, since $\eta$ denotes a different map in Section~\ref{sec:minimal-morse} (the zeroth-face part of $d$).}
 
 \begin{proof}
 Each $\theta_k$ is an isomorphism, since $(P_{Z_0}e_W)^{(\underline{Z}_\ast)}=R\,(b_{Z_0W})^{(\underline{Z}_\ast)}$ and $I_Xe_W=D(e_WAe_X)$ are free of rank one. 
 
-It remains to show $\theta_{k-1}d_k=(\partial_k-\eta_k)\theta_k$ for $k\geq0$.
+It remains to show $\theta_{k-1}d_k=(\partial_k-\omega_k)\theta_k$ for $k\geq0$.
 Let $k\geq1$. Writing out \eqref{eq:candidate-differential} explicitly yields
 \begin{equation}
  d_k\bigl((b_{Z_0W})^{(\underline{Z}_\ast)}\bigr)
@@ -1118,17 +1120,17 @@ We have
  \iff(\underline{Z}_1\setminus\underline{Z}_0)\cap\underline{W}=\emptyset
  \iff r_W(\underline{Z}_0)=r_W(\underline{Z}_1),
 \]
-where the first equivalence is Lemma~\ref{lem:multiplication-criterion} with $(U,V)=(Z_0,Z_1)$, and the second holds as $\underline{Z}_0\subseteq\underline{Z}_1$. Hence $\theta_{k-1}$ sends the term $(b_{Z_1Z_0}b_{Z_0W})^{(\underline{Z}_\ast^{\widetilde{0}})}$ of \eqref{eq:evaluated-differential} to
+where the first equivalence is Lemma~\ref{lem:multiplication-criterion} with $(U,V)=(Z_0,Z_1)$, and the second holds as $\underline{Z}_0\subseteq\underline{Z}_1$. Hence $\theta_{k-1}$ sends the term $(b_{Z_1Z_0}b_{Z_0W})^{(\underline{Z}_\ast^{\old{\widetilde{0}}\new{\widehat{0}}})}$ of \eqref{eq:evaluated-differential} to
 \begin{align*}
-\theta_{k-1}\big( (b_{Z_1Z_0}b_{Z_0W})^{(\underline{Z}_\ast^{\widetilde{0}})} \big) &= \begin{cases}
+\theta_{k-1}\big( (b_{Z_1Z_0}b_{Z_0W})^{(\underline{Z}_\ast^{\old{\widetilde{0}}\new{\widehat{0}}})} \big) &= \begin{cases}
  \langle\underline{Z}_\ast^{\widehat{0}}\rangle, & \text{if }r_W(\underline{Z}_0)=r_W(\underline{Z}_1),\\
  0, & \text{otherwise}
  \end{cases}
  \\
  &=\quad
- \langle\underline{Z}_\ast^{\widehat{0}}\rangle-\eta_k\langle\underline{Z}_\ast\rangle.
+ \langle\underline{Z}_\ast^{\widehat{0}}\rangle-\omega_k\langle\underline{Z}_\ast\rangle.
 \end{align*}
-This shows that $\theta_{k-1}d_k=(\partial_k-\eta_k)\theta_k$ holds for $k\ge 1$.
+This shows that $\theta_{k-1}d_k=(\partial_k-\omega_k)\theta_k$ holds for $k\ge 1$.
 
 For the case when $k=0$. Recall that $\phi_Z:P_Z\to I_X$ is the homomorphism that sends $e_Z$ to the element $b_{ZX}^*\in D(e_Z \Sigma e_X )\subset I_X$ dual to $b_{ZX}\in e_Z \Sigma e_X$.  Observe that
 \[
@@ -1145,16 +1147,16 @@ Thus, we obtain
     0, &\text{otherwise}.
 \end{cases}
 \]
-This is exactly $(\partial_0-\eta_0)\langle\underline{Z}\rangle$ as required.
+This is exactly $(\partial_0-\omega_0)\langle\underline{Z}\rangle$ as required.
 \end{proof}}
 
 \new{
 \begin{lem}\label{lem:twisted-retraction}
-Consider the chain complex $C_\bullet:=(C_\bullet(\Delta(\D_X)), \delta:=\partial-\eta)$ of Lemma~\ref{lem:evaluated-differential}.
+Consider the chain complex \old{$C_\bullet:=(C_\bullet(\Delta(\D_X)), \delta:=\partial-\omega)$}\new{$C_\bullet:=(\widetilde C_\bullet(\Delta(\D_X)), \delta:=\partial-\omega)$} of Lemma~\ref{lem:evaluated-differential}.
 \begin{enumerate}[(1)]
 \item $(C^{\leq\underline{W}}_\bullet:=\widetilde{C}_\bullet(\Delta(\D_X^{\leq\underline{W}})), \delta_\bullet)$ is a subcomplex of $C_\bullet$ whose differential is
 \[
- \delta_k\langle\underline{Z}_\ast\rangle=(\partial_k-\eta_k)\langle\underline{Z}_\ast\rangle= 
+ \delta_k\langle\underline{Z}_\ast\rangle=(\partial_k-\omega_k)\langle\underline{Z}_\ast\rangle= 
  \begin{cases}
  \sum_{i=1}^k(-1)^i\langle\underline{Z}_\ast^{\widehat{i}}\rangle, & k\geq1,\\
  1, & k=0, \text{ and }\underline{Z}=\underline{W},\\
@@ -1162,13 +1164,14 @@ Consider the chain complex $C_\bullet:=(C_\bullet(\Delta(\D_X)), \delta:=\partia
  \end{cases}
 \]
 \item The inclusion $\mathrm{inc}\colon\widetilde C_\bullet(\Delta(\D_X^{\leq\underline{W}}))\to\widetilde C_\bullet(\Delta(\D_X))$ is a homotopy equivalence, with homotopy inverse given by the induced map $(r_W)_\#$.
+\item \new{The complex $C^{\leq\underline{W}}_\bullet$ is exact.}
 \end{enumerate}
 \end{lem}
 
 \begin{proof}
-(1)  First consdier teh case when $k\geq1$ and let $\underline{Z}_\ast=(\underline{Z}_0<\cdots<\underline{Z}_k)$ be a chain in $\D_X^{\leq\underline{W}}$. Since $r_W$ is the identity on $\D_X^{\leq\underline{W}}$, we have $r_W(\underline{Z}_0)=\underline{Z}_0\neq\underline{Z}_1=r_W(\underline{Z}_1)$, so $\eta_k\langle\underline{Z}_\ast\rangle=\langle\underline{Z}_\ast^{\widehat{0}}\rangle$. This gives the displayed formula for $k\geq1$. In particular, as $\underline{Z}_\ast^{\widehat{i}}$ is still bounded by $\underline{W}$, the range of $\delta_k$ is in $C_{k-1}(\Delta(\D_X^{\leq\underline{W}}))$. 
+(1)  First \old{consdier teh}\new{consider the} case when $k\geq1$ and let $\underline{Z}_\ast=(\underline{Z}_0<\cdots<\underline{Z}_k)$ be a chain in $\D_X^{\leq\underline{W}}$. Since $r_W$ is the identity on $\D_X^{\leq\underline{W}}$, we have $r_W(\underline{Z}_0)=\underline{Z}_0\neq\underline{Z}_1=r_W(\underline{Z}_1)$, so $\omega_k\langle\underline{Z}_\ast\rangle=\langle\underline{Z}_\ast^{\widehat{0}}\rangle$. This gives the displayed formula for $k\geq1$. In particular, as $\underline{Z}_\ast^{\widehat{i}}$ is still bounded by $\underline{W}$, the range of $\delta_k$ is in $C_{k-1}(\Delta(\D_X^{\leq\underline{W}}))$. 
 
-For $k=0$ and $\underline{Z}\in\D_X^{\leq\underline{W}}$, we have $\underline{W}\subseteq\underline{Z}$ if and only if $\underline{Z}=\underline{W}$, which gives the formula for $\partial_0-\eta_0$; it takes values in $C_{-1}(\Delta(\D_X^{\leq\underline{W}}))=R$ as claimed.
+For $k=0$ and $\underline{Z}\in\D_X^{\leq\underline{W}}$, we have $\underline{W}\subseteq\underline{Z}$ if and only if $\underline{Z}=\underline{W}$, which gives the formula for $\partial_0-\omega_0$; it takes values in $C_{-1}(\Delta(\D_X^{\leq\underline{W}}))=R$ as claimed.
 
 (2) Since $r_W$ is the identity on $\D_X^{\leq\underline{W}}$, we have $r_\#\circ\mathrm{inc}=\id$. Apply Lemma~\ref{lem:order homotopy} to $f:=r_W$, regarded as a map $\D_X\to\D_X$, and $g:=\id_{\D_X}$. Then $f\leq g$, $f_\#=\mathrm{inc}\circ r_\#$ and $g_\#=\id$, and there exists $h$ with $\partial h+h\partial=\id-\mathrm{inc}\circ r_\#$, namely $h_{-1}:=0$ and
 \[
@@ -1178,9 +1181,9 @@ For $k=0$ and $\underline{Z}\in\D_X^{\leq\underline{W}}$, we have $\underline{W}
 \]
 where summands with a repeated entry are zero. Therefore
 \[
- (\partial-\eta)h+h(\partial-\eta)=(\partial h+h\partial)-(\eta h+h\eta)=\id-\mathrm{inc}\circ r_\#-(\eta h+h\eta),
+ (\partial-\omega)h+h(\partial-\omega)=(\partial h+h\partial)-(\omega h+h\omega)=\id-\mathrm{inc}\circ r_\#-(\omega h+h\omega),
 \]
-and it remains to show that $\eta h+h\eta=0$.
+and it remains to show that $\omega h+h\omega=0$.
 
 Fix a chain $\underline{Z}_\ast=(\underline{Z}_0<\cdots<\underline{Z}_k)$ in $\D_X$. The first two entries of the $j$-th summand of $h_k\langle\underline{Z}_\ast\rangle$ are
 \[
@@ -1188,22 +1191,45 @@ Fix a chain $\underline{Z}_\ast=(\underline{Z}_0<\cdots<\underline{Z}_k)$ in $\D
  \qquad
  r_W(\underline{Z}_0)\leq r_W(\underline{Z}_1)\quad(j\geq1).
 \]
-For $j=0$, both entries have the same image $r_W(\underline{Z}_0)$ under $r_W$, so $\eta$ kills the summand; in particular $\eta h_0=0$. For $j\geq1$, both entries are fixed by $r_W$, so the summand is zero if $r_W(\underline{Z}_0)=r_W(\underline{Z}_1)$, and otherwise $\eta$ deletes $r_W(\underline{Z}_0)$. Hence, if $r_W(\underline{Z}_0)=r_W(\underline{Z}_1)$, then $\eta h\langle\underline{Z}_\ast\rangle=0=h\eta\langle\underline{Z}_\ast\rangle$. Otherwise
+For $j=0$, both entries have the same image $r_W(\underline{Z}_0)$ under $r_W$, so $\omega$ kills the summand; in particular $\omega h_0=0$. For $j\geq1$, both entries are fixed by $r_W$, so the summand is zero if $r_W(\underline{Z}_0)=r_W(\underline{Z}_1)$, and otherwise $\omega$ deletes $r_W(\underline{Z}_0)$. Hence, if $r_W(\underline{Z}_0)=r_W(\underline{Z}_1)$, then $\omega h\langle\underline{Z}_\ast\rangle=0=h\omega\langle\underline{Z}_\ast\rangle$. Otherwise
 \begin{align*}
- \eta h\langle\underline{Z}_\ast\rangle
+ \omega h\langle\underline{Z}_\ast\rangle
  &=\sum_{j=1}^k(-1)^{j}
  \langle r_W(\underline{Z}_1)\leq\cdots\leq r_W(\underline{Z}_{j})\leq\underline{Z}_{j}<\cdots<\underline{Z}_k\rangle\\
  &=-h\langle\underline{Z}_1<\cdots<\underline{Z}_k\rangle
- =-h\eta\langle\underline{Z}_\ast\rangle,
+ =-h\omega\langle\underline{Z}_\ast\rangle,
 \end{align*}
-where the second equality is the formula for $h_{k-1}$ with the index shifted by one, and the third is the definition of $\eta$.
+where the second equality is the formula for $h_{k-1}$ with the index shifted by one, and the third is the definition of $\omega$.
 
-Thus $(\partial-\eta)h+h(\partial-\eta)=\id-\mathrm{inc}\circ r_\#$. Then $(\partial-\eta)(\id-\mathrm{inc}\circ r_\#)=(\partial-\eta)h(\partial-\eta)=(\id-\mathrm{inc}\circ r_\#)(\partial-\eta)$, so $(\partial-\eta)\circ\mathrm{inc}\circ r_\#=\mathrm{inc}\circ r_\#\circ(\partial-\eta)$. Since $\mathrm{inc}$ is an injective chain map by (1), $r_\#$ is a chain map. Hence $ r_\#\circ\mathrm{inc}=\id$ and $\mathrm{inc}\circ r_\#$ is homotopic to $\id$.
+Thus $(\partial-\omega)h+h(\partial-\omega)=\id-\mathrm{inc}\circ r_\#$. Then $(\partial-\omega)(\id-\mathrm{inc}\circ r_\#)=(\partial-\omega)h(\partial-\omega)=(\id-\mathrm{inc}\circ r_\#)(\partial-\omega)$, so $(\partial-\omega)\circ\mathrm{inc}\circ r_\#=\mathrm{inc}\circ r_\#\circ(\partial-\omega)$. Since $\mathrm{inc}$ is an injective chain map by (1), $r_\#$ is a chain map. Hence $ r_\#\circ\mathrm{inc}=\id$ and $\mathrm{inc}\circ r_\#$ is homotopic to $\id$.
+
+\new{(3) For $\underline{Y}\in\D_X^{\leq\underline{W}}$ and $k\geq0$, let $K_{Y,k}\subseteq C_k(\Delta(\D_X^{\leq\underline{W}}))$ be the span of the chains $\underline{Y}<\underline{Z}_1<\cdots<\underline{Z}_k$ in $\D_X^{\leq\underline{W}}$ that start with $\underline{Y}$, so that
+\[
+ C_k(\Delta(\D_X^{\leq\underline{W}}))=\bigoplus_{\underline{Y}\in\D_X^{\leq\underline{W}}}K_{Y,k}\qquad(k\geq0).
+\]
+By the formula in (1), $\delta_k$ never deletes the first member of a chain for $k\geq1$, so $\delta_k(K_{Y,k})\subseteq K_{Y,k-1}$; and $\delta_0$ vanishes on $K_{Y,0}=R\langle\underline{Y}\rangle$ unless $\underline{Y}=\underline{W}$. Moreover, $K_{W,k}=0$ for $k\geq1$, as $\underline{W}$ is the maximum of $\D_X^{\leq\underline{W}}$. Hence we have a decomposition of complexes
+\[
+ C^{\leq\underline{W}}_\bullet=\Bigl(\bigoplus_{\underline{Y}<\underline{W}}K_{Y,\bullet}\Bigr)\oplus\Bigl(K_{W,0}\xrightarrow{\ \delta_0\ }R\Bigr),
+\]
+where $\delta_0\colon K_{W,0}=R\langle\underline{W}\rangle\to R$ is an isomorphism. Let $\underline{Y}<\underline{W}$, and put $(\underline{Y},\underline{W}]:=\{\underline{T}\in\D_X\mid\underline{Y}<\underline{T}\leq\underline{W}\}$. Deleting the first member,
+\[
+ K_{Y,\bullet}\xrightarrow{\ \sim\ }\widetilde C_\bullet\bigl(\Delta((\underline{Y},\underline{W}])\bigr)[1],
+ \qquad
+ \langle\underline{Y}<\underline{Z}_1<\cdots<\underline{Z}_k\rangle\longmapsto\langle\underline{Z}_1<\cdots<\underline{Z}_k\rangle,
+\]
+is an isomorphism of complexes, where $[1]$ lowers degrees by one and negates the differential. Indeed, by (1),
+\[
+ \delta_k\langle\underline{Y}<\underline{Z}_1<\cdots<\underline{Z}_k\rangle
+ =\sum_{i=1}^k(-1)^i\langle\underline{Y}<\underline{Z}_1<\cdots<\widehat{\underline{Z}_i}<\cdots<\underline{Z}_k\rangle
+ \longmapsto-\partial_{k-1}\langle\underline{Z}_1<\cdots<\underline{Z}_k\rangle.
+\]
+Since $\underline{W}$ is the maximum of $(\underline{Y},\underline{W}]$, its order complex is a cone, so its augmented chain complex is exact. Hence every summand in the decomposition is exact, and so is $C^{\leq\underline{W}}_\bullet$.}
 \end{proof}
 }
 
 
 
+\begingroup\color[rgb]{1,0,0}
 \begin{prop}\label{prop:lower-deformation-retract}
 For $k\geq0$, put
 \[
@@ -1244,7 +1270,7 @@ Since $P_{Z_0}e_W=R\,b_{Z_0W}$, the differential \eqref{eq:candidate-differentia
  =\bigl(b_{Z_1Z_0}b_{Z_0W}\bigr)^{(\underline{Z}_\ast^{\widehat{0}})}
  +\sum_{i=1}^k(-1)^i
  (b_{Z_0W})^{(\underline{Z}_\ast^{\widehat{i}})}.
- \label{eq:evaluated-differential}
+ \label{eq:evaluated-differential-old}
 \end{equation}
 Deleting a member of a chain whose largest member is at most $\underline{W}$ preserves this property, so the displayed modules form a subcomplex.
 
@@ -1382,8 +1408,14 @@ of exact complexes, which shows the exacteness of $\widetilde{P}_\bullet^{\le W}
 \begin{proof}[Proof of Theorem~\ref{thm:exactness}]
 For every $W\in\mathcal J(P)$, Proposition~\ref{prop:lower-deformation-retract} identifies $\widetilde{\mathcal P}_\bullet e_W$, up to homotopy, with the exact complex $\widetilde{\mathcal P}_\bullet^{\leq \underline{W}}$ from Proposition~\ref{prop:lower-subcomplex-exact}.  Hence every $\widetilde{\mathcal P}_\bullet e_W$ is exact, and so taking the direct sum over $W\in \mathcal{J}(P)$ yields an exact complex $\widetilde{\mathcal P}_\bullet =\bigoplus_{W\in\mathcal J(P)} \widetilde{\mathcal P}_\bullet e_W$.
 \end{proof}
+\endgroup
 
-\begin{eg}\label{subsec:eg3}
+\comment{Claude: the red block above (Propositions on the lower subcomplex and the old proof of Theorem~\ref{thm:exactness}) is no longer needed: the lower subcomplex $\widetilde{\mathcal P}^{\le \underline{W}}_\bullet$ is replaced by $C^{\leq\underline{W}}_\bullet$ of Lemma~\ref{lem:twisted-retraction}. It is wrapped in a red group instead of the \texttt{old}-tag because it contains a tikzcd diagram. Its copy of the label \texttt{eq:evaluated-differential} was renamed to \texttt{eq:evaluated-differential-old}, so that references go to the equation in Lemma~\ref{lem:evaluated-differential}.}
+\new{\begin{proof}[Proof of Theorem~\ref{thm:exactness}]
+Since $\widetilde{\mathcal P}_\bullet=\bigoplus_{W\in\mathcal J(P)}\widetilde{\mathcal P}_\bullet e_W$, it suffices to show that each $\widetilde{\mathcal P}_\bullet e_W$ is exact. By Lemma~\ref{lem:evaluated-differential}, $\widetilde{\mathcal P}_\bullet e_W$ is isomorphic to the complex $C_\bullet$ of Lemma~\ref{lem:twisted-retraction}, which is homotopy equivalent to $C^{\leq\underline{W}}_\bullet$ by Lemma~\ref{lem:twisted-retraction}\textup{(2)}, and $C^{\leq\underline{W}}_\bullet$ is exact by Lemma~\ref{lem:twisted-retraction}\textup{(3)}.
+\end{proof}}
+
+\old{\begin{eg}\label{subsec:eg3}
 We continue with Examples~\ref{subsec:eg1} and~\ref{subsec:eg2}. Put $W=[13]$, so $\underline{W}=\{3\}$.  Right multiplication by $e_W$ gives
 
 \[
@@ -1407,7 +1439,136 @@ because $b_{[13],[1]}b_{[1],[13]}=0$. In the indicated bases, the augmented lowe
 \[
  0\longrightarrow R\xrightarrow{\binom{-1}{0}}R^2\xrightarrow{(0\;1)}R\longrightarrow0.
 \]
-\end{eg}
+\end{eg}}
+
+\new{\begin{eg}\label{eg:twisted-lemmas}
+We continue with Examples~\ref{subsec:eg1} and~\ref{subsec:eg2}, where $X=[1]$, and take $W=[13]$, so that $\underline{W}=\underline{3}$. Then $r_W$ sends $\underline{\emptyset},\underline{1},\underline{2}$ to $\underline{\emptyset}$, and $\underline{3},\underline{13},\underline{23}$ to $\underline{3}$. Figure~\ref{fig:twisted-complex} shows the complex $C_\bullet$ of Lemma~\ref{lem:twisted-retraction}, drawn in the same layout as Figure~\ref{fig:complex-picture}.
+
+\smallskip
+\noindent\textit{Lemma~\ref{lem:evaluated-differential}.}
+Right multiplying by $e_W$, each node $P_{Z_0}^{(\underline{Z}_\ast)}$ of Figure~\ref{fig:complex-picture} becomes $R\,(b_{Z_0W})^{(\underline{Z}_\ast)}$, which $\theta$ maps onto $R\langle\underline{Z}_\ast\rangle$. The arrows labelled $\pm1$ or unlabelled in Figure~\ref{fig:complex-picture} are the faces $i\geq1$, and they become the corresponding terms of $\partial$. An arrow labelled $b_{Z_1Z_0}$ is a zeroth face; it becomes $b_{Z_1Z_0}b_{Z_0W}$, which is $b_{Z_1W}$ if $r_W(\underline{Z}_0)=r_W(\underline{Z}_1)$ and $0$ otherwise. For instance, the zeroth face of $\underline{3}<\underline{13}$ becomes $b_{[3][13]}b_{[13][13]}=b_{[3][13]}$, whereas that of $\underline{\emptyset}<\underline{3}$ becomes $b_{[13][1]}b_{[1][13]}=0$. Hence $\omega$ removes exactly the zeroth faces of
+\[
+ \underline{\emptyset}<\underline{3},\quad
+ \underline{\emptyset}<\underline{13},\quad
+ \underline{\emptyset}<\underline{23},\quad
+ \underline{1}<\underline{13},\quad
+ \underline{2}<\underline{23},\quad
+ \underline{\emptyset}<\underline{3}<\underline{13},\quad
+ \underline{\emptyset}<\underline{3}<\underline{23},
+\]
+together with the augmentation of $\underline{\emptyset},\underline{1},\underline{2}$, which are the $\underline{Z}$ with $\underline{W}\not\subseteq\underline{Z}$. These are the dashed arrows in Figure~\ref{fig:twisted-complex}. Note that the remaining arrows never join nodes of different colours: the faces $i\geq1$ keep the first member, and the zeroth face is kept only when $r_W$ does not change.
+
+\smallskip
+\noindent\textit{Lemma~\ref{lem:twisted-retraction}.}
+Here $\D_X^{\leq\underline{W}}=\{\underline{\emptyset}<\underline{3}\}$, so $C^{\leq\underline{W}}_\bullet$ consists of the framed nodes in Figure~\ref{fig:twisted-complex}:
+\[
+ 0\longrightarrow R\langle\underline{\emptyset}<\underline{3}\rangle
+ \xrightarrow{\ \delta_1\ }R\langle\underline{\emptyset}\rangle\oplus R\langle\underline{3}\rangle
+ \xrightarrow{\ \delta_0\ }R\longrightarrow0,
+ \qquad
+ \delta_1\langle\underline{\emptyset}<\underline{3}\rangle=-\langle\underline{\emptyset}\rangle,\quad
+ \delta_0\langle\underline{\emptyset}\rangle=0,\quad
+ \delta_0\langle\underline{3}\rangle=1.
+\]
+This is exact, and it is the decomposition $K_{[1],\bullet}\oplus\bigl(K_{[13],0}\xrightarrow{\sim}R\bigr)$ of the proof of~(3). The retraction $(r_W)_\#$ replaces each member of a chain by its image under $r_W$; for example,
+\[
+ (r_W)_\#\langle\underline{1}<\underline{13}\rangle=\langle\underline{\emptyset}<\underline{3}\rangle,
+ \qquad
+ (r_W)_\#\langle\underline{3}<\underline{13}\rangle=0=(r_W)_\#\langle\underline{\emptyset}<\underline{3}<\underline{13}\rangle,
+\]
+the last two because of repeated entries. For the homotopy, $h_0\langle\underline{13}\rangle=\langle\underline{3}<\underline{13}\rangle$, and
+\[
+ \delta_1h_0\langle\underline{13}\rangle=\langle\underline{13}\rangle-\langle\underline{3}\rangle=(\id-\mathrm{inc}\circ(r_W)_\#)\langle\underline{13}\rangle.
+\]
+To see the cancellation $\omega h+h\omega=0$ in the proof of~(2), take the chain $\underline{1}<\underline{13}$, for which $r_W(\underline{1})=\underline{\emptyset}\neq\underline{3}=r_W(\underline{13})$:
+\[
+ h_1\langle\underline{1}<\underline{13}\rangle=\langle\underline{\emptyset}<\underline{1}<\underline{13}\rangle-\langle\underline{\emptyset}<\underline{3}<\underline{13}\rangle,
+ \qquad
+ \omega_2h_1\langle\underline{1}<\underline{13}\rangle=-\langle\underline{3}<\underline{13}\rangle,
+\]
+while $h_0\omega_1\langle\underline{1}<\underline{13}\rangle=h_0\langle\underline{13}\rangle=\langle\underline{3}<\underline{13}\rangle$, so the two cancel.
+\end{eg}}
+
+\comment{Claude: new figure (not inside a new-block, since the colour would also change the drawing).}
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}[
+  >=stealth,
+  every node/.style={inner sep=2pt},
+  fa/.style={fill=cyan!25, rounded corners},
+  fb/.style={fill=green!30, rounded corners},
+  sub/.style={draw=red, very thick},
+  kept/.style={->},
+  gone/.style={->, dashed, black!40}
+]
+% degree 2
+\node[fa] (a2) at (0,-2.4)  {$\langle\underline{\emptyset}<\underline{1}<\underline{13}\rangle$};
+\node[fa] (b2) at (0,-4.8)  {$\langle\underline{\emptyset}<\underline{3}<\underline{13}\rangle$};
+\node[fa] (c2) at (0,-7.2)  {$\langle\underline{\emptyset}<\underline{3}<\underline{23}\rangle$};
+\node[fa] (d2) at (0,-9.6)  {$\langle\underline{\emptyset}<\underline{2}<\underline{23}\rangle$};
+% degree 1
+\node[fa] (one-13)  at (4.3,-1.2)  {$\langle\underline{1}<\underline{13}\rangle$};
+\node[fa] (e-1)     at (4.3,-2.4)  {$\langle\underline{\emptyset}<\underline{1}\rangle$};
+\node[fa] (e-13)    at (4.3,-3.6)  {$\langle\underline{\emptyset}<\underline{13}\rangle$};
+\node[fb] (three-13) at (4.3,-4.8) {$\langle\underline{3}<\underline{13}\rangle$};
+\node[fa,sub] (e-3) at (4.3,-6.0)  {$\langle\underline{\emptyset}<\underline{3}\rangle$};
+\node[fb] (three-23) at (4.3,-7.2) {$\langle\underline{3}<\underline{23}\rangle$};
+\node[fa] (e-23)    at (4.3,-8.4)  {$\langle\underline{\emptyset}<\underline{23}\rangle$};
+\node[fa] (e-2)     at (4.3,-9.6)  {$\langle\underline{\emptyset}<\underline{2}\rangle$};
+\node[fa] (two-23)  at (4.3,-10.8) {$\langle\underline{2}<\underline{23}\rangle$};
+% degree 0
+\node[fa] (one)       at (8.6,-1.2)  {$\langle\underline{1}\rangle$};
+\node[fb] (thirteen)  at (8.6,-2.4)  {$\langle\underline{13}\rangle$};
+\node[fa,sub] (e)     at (8.6,-4.8)  {$\langle\underline{\emptyset}\rangle$};
+\node[fb,sub] (three) at (8.6,-7.2)  {$\langle\underline{3}\rangle$};
+\node[fb] (twentythree) at (8.6,-9.6) {$\langle\underline{23}\rangle$};
+\node[fa] (two)       at (8.6,-10.8) {$\langle\underline{2}\rangle$};
+% degree -1
+\node[sub, rounded corners] (R) at (11.4,-6.0) {$R$};
+
+% degree 2 -> 1
+\draw[kept] (a2) -- (one-13);
+\draw[kept] (a2) -- (e-13);
+\draw[kept] (a2) -- (e-1);
+\draw[gone] (b2) -- (three-13);
+\draw[kept] (b2) -- (e-13);
+\draw[kept] (b2) -- (e-3);
+\draw[gone] (c2) -- (three-23);
+\draw[kept] (c2) -- (e-23);
+\draw[kept] (c2) -- (e-3);
+\draw[kept] (d2) -- (two-23);
+\draw[kept] (d2) -- (e-23);
+\draw[kept] (d2) -- (e-2);
+% degree 1 -> 0
+\draw[gone] (one-13) -- (thirteen);
+\draw[kept] (one-13) -- (one);
+\draw[kept] (e-1) -- (one);
+\draw[kept] (e-1) -- (e);
+\draw[gone] (e-13) -- (thirteen);
+\draw[kept] (e-13) -- (e);
+\draw[kept] (three-13) -- (thirteen);
+\draw[kept] (three-13) -- (three);
+\draw[gone] (e-3) -- (three);
+\draw[kept] (e-3) -- (e);
+\draw[kept] (three-23) -- (twentythree);
+\draw[kept] (three-23) -- (three);
+\draw[gone] (e-23) -- (twentythree);
+\draw[kept] (e-23) -- (e);
+\draw[kept] (e-2) -- (two);
+\draw[kept] (e-2) -- (e);
+\draw[gone] (two-23) -- (twentythree);
+\draw[kept] (two-23) -- (two);
+% degree 0 -> -1
+\draw[gone] (one) -- (R);
+\draw[kept] (thirteen) -- (R);
+\draw[gone] (e) -- (R);
+\draw[kept] (three) -- (R);
+\draw[kept] (twentythree) -- (R);
+\draw[gone] (two) -- (R);
+\end{tikzpicture}
+\caption{The complex $C_\bullet=\bigl(\widetilde C_\bullet(\Delta(\D_X)),\partial-\omega\bigr)$ for $X=[1]$ and $W=[13]$ (Example~\ref{eg:twisted-lemmas}). A node is cyan if the first member of its chain is sent to $\underline{\emptyset}$ by $r_W$, and green if it is sent to $\underline{3}$. Solid arrows are the components of $\partial-\omega$; the arrow deleting the $i$-th member of a chain has coefficient $(-1)^i$. Dashed arrows are the components of $\partial$ removed by $\omega$. The subcomplex $C^{\leq\underline{W}}_\bullet$ is framed in red.}
+\label{fig:twisted-complex}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1615,7 +1776,7 @@ In particular, if $X_\bullet$ is a projective resolution of a module, then its M
 \subsection{Construction of the Morse matching}
 \label{subsec:construction-morse-matching}
 
-Let us first explain the idea of how to find a Morse matching. The differential formula~\eqref{eq:candidate-differential} separates the faces of a strict chain into two types: the zeroth face deletes its initial member, whereas the remaining faces preserve the initial member.  Under the identification~\eqref{eq:candidate-terms}, these two contributions give a decomposition $d=\eta+\partial$, where the non-zero components of $\partial$ are signed identity maps between copies of the same projective, while those of $\eta$ are induced by the left-multiplication map (more precise formulation will come after the next paragraph); c.f. this separation is also used in the proof of Proposition \ref{prop:lower-deformation-retract}.
+Let us first explain the idea of how to find a Morse matching. The differential formula~\eqref{eq:candidate-differential} separates the faces of a strict chain into two types: the zeroth face deletes its initial member, whereas the remaining faces preserve the initial member.  Under the identification~\eqref{eq:candidate-terms}, these two contributions give a decomposition $d=\eta+\partial$, where the non-zero components of $\partial$ are signed identity maps between copies of the same projective, while those of $\eta$ are induced by the left-multiplication map (more precise formulation will come after the next paragraph)\old{; c.f. this separation is also used in the proof of Proposition \ref{prop:lower-deformation-retract}}\new{; a related separation is used in Lemma~\ref{lem:evaluated-differential}}.
 
 We want to use Morse matching to eliminate the identity components in the differential, but several of them may share a source or target (see Example \ref{subsec:eg2}) which obstructs any simple choice of components to form a Morse matching. 
 The `solution' is to use homological perturbation theory~\cite{GL89}: decompose using a choice of kernel--image splitting for each chain complex $C_\bullet(\Delta^{>\underline{Z}})$. 
