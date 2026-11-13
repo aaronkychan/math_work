@@ -145,11 +145,17 @@ For every finite poset $P$ and every $X\in\mathcal J(P)$, we construct a minimal
 
 \medskip
 \noindent
-\textbf{Use of AI.} The candidate complex is suggested to us by ChatGPT model 5.6 Sol, after we calculated the projective cover of the first syzygy (see subsection \ref{subsec:multi-free deg 0 1}); the appendix records our retrospect explanation in why one should consider such construction of complex. ChatGPT also suggested the strategy to show is exactness, helped us to refine the Morse matching described in Subsection~\ref{subsec:construction-morse-matching}, the entire subsection~\ref{subsec:higher-multiplicities}, and some of the figures throughout this paper. All mathematical arguments were independently verified and finalized by the authors. The authors take full responsibility for the accuracy, originality, and integrity of the paper.
+\textbf{Use of AI.} After we calculated the projective cover of the first syzygy (see subsection \ref{subsec:multi-free deg 0 1}) and fed it to ChatGPT 5.6 Sol, it suggested the candidate resolution to us; first half of Appendix \ref{app:thin-modules} records our retrospect explanation of this suggestion in a more general setting, and the second half (material after Example \ref{eg:non exact cpx from simple}) is pointed out by ChatGPT after we fed it this viewpoint.
+The key reduction (Proposition \ref{prop:lower-subcomplex-exact}) step is also ChatGPT's suggestion.
+After feeding ChatGPT again with the write up of Theorem \ref{thm:exactness} and 
+Theorem \ref{thm:minimal-resolution}, and exploring various phenomena, ChatGPT 5.6 Sol obtained subsection~\ref{subsec:higher-multiplicities}.
+A statement similar to Theorem \ref{thm:pdim=reg} was first speculated by ChatGPT 5.5 when we fed it the companion paper \cite{CX26}, without a sound argument; the correct form and proof of Theorem \ref{thm:pdim=reg} was obtained by ChatGPT 5.6 Sol after feeding it our Theorem \ref{thm:minimal-resolution}.
+All mathematical arguments were independently verified and finalized by the authors. The authors take full responsibility for the accuracy, originality, and integrity of the paper.
+AI was also used for grammar checking and diagram drawing.
 
 \medskip
 \noindent
-\textbf{Acknowledgements.}
+\textbf{Acknowledgments.}
 %We thank Osamu Iyama for telling us about the connection between distance algeberas and tiled orders.  
 AC is deeply grateful for Yasuhiko Asao and Shun Wakatsuki on teaching him about the connection between distance algebras and magnitude homolgies, and the many discussions on the subject.
 AC is supported by JSPS Grant-in-Aid for Scientific Research (C) 24K06666. BX is supported by the China Scholarship Council (No. 202506040127).
@@ -193,14 +199,6 @@ An \defn{$A$-lattice} is a right $A$-module whose underlying $R$-module is finit
 For finite projective algebras over a commutative noetherian ring, we recall the following fact from the theory of lattices over orders; see, for example, \cite[Section~25]{CR81}.
 The following formulation can be found in \cite[Section~2]{BBIKP25}; we include a proof as it is straightforward.
 
-\comment{
-Claude suggestion:
-Shorten Lemma 2.1, Cor. 2.2 and Cor. 2.5 by citing [IK22], [GN01] and [IKWY15] for the dimension formula and keeping only what is specific to $\Sigma_G$. Merge Cor. 2.2 and Cor. 2.5 into one statement.
-	
-    
-Our response: Lemma 2.1, 2.2: Proof can move to a new Appendix section (if referee don't like, can remove).  Rest should be kept it is.  Let GPT/Claude handle this change.
-}
-
 \begin{lem}\label{lem:lattice-canonical-duality}
 The functor $D$ induces an exact duality
 \[
@@ -211,19 +209,11 @@ The category $\lat(A)$ has enough projective and injective objects, given by $\a
 \end{lem}
 
 \begin{proof}
-\new{The proof is deferred to Appendix~\ref{app:lattice-proofs}.}
-\old{
-The functor $D$ is exact on $R$-split short exact sequences, and evaluation gives a natural isomorphism $M\xrightarrow{\sim}D^2(M)$ for every $M\in\lat(A)$. This proves the duality assertion.
-
-For $M\in\lat(A)$, choose a surjection $A^{\oplus m}\twoheadrightarrow M$ with $m$ finite. It splits over $R$, so its kernel is again an $A$-lattice. Thus $\lat(A)$ has enough projectives, and its projective objects are precisely $\add A$. Assertion about enough injective follows by applying $D$ to left projective modules.  Since syzygy of $M\in \lat(A)$ stays in $\lat(A)$, projective resolution in $\lat(A)$ is the same as ordinary projective resolution; this last assertion follows.
-
-}
+See Appendix~\ref{app:lattice-proofs}.
 \end{proof}
 
 We call the objects of $\add D(A)$ \defn{relative injective} $A$-modules. For $M\in\lat(A)$, write $\idim^{\lat}_A M$ for its  injective dimension in $\lat(A)$, namely, the least length of a coresolution by the relative injectives, or $\infty$ if no finite such coresolution exists. When $R=\Bbbk$, relative injectives are the finitely generated ordinary injectives, and relative injective dimension agrees with ordinary injective dimension.
-\new{The algebra $A$ is \defn{self-injective} if $A$ is a relative injective $A$-module -- for instance, when $A$ is \defn{self-injective} if $A\cong D(A)$ as right $A$-module (in this case, $A\cong D(A)$ also as left $A$-module).
-Note that self-injective implies Iwanaga--Gorenstein.} \comment{ask Claude if she is happy with this}
-\comment{Claude: Not quite yet -- the blue sentence above is garbled (``for instance, when $A$ is self-injective if $A\cong D(A)$''), and the last sentence is too strong over a general base. Over a general $R$ two things are true and should be kept apart: (i) if $A\cong D(A)$ as a right module (Frobenius) then $A_A\in\add D(A)$, i.e. $A_A$ is relative injective; (ii) if $A$ is relative injective on both sides then $\idim^{\lat}A=0$ on both sides, so Corollary~\ref{cor:relative-ordinary-injective-dimension} gives $\idim A_A,\idim{}_AA\le\idim_RR$, hence Iwanaga--Gorenstein only when $\idim_RR<\infty$ (automatic for $R=\Bbbk$). Suggested wording: ``We say that $A$ is \defn{self-injective} if $A_A$ and ${}_AA$ are relative injective, i.e.\ both lie in $\add D(A)$; this holds, for instance, when $A\cong D(A)$ as right $A$-modules (and then also as left $A$-modules). For $R=\Bbbk$ this is the usual notion. A self-injective algebra is Iwanaga--Gorenstein provided $\idim_RR<\infty$, by Corollary~\ref{cor:relative-ordinary-injective-dimension}.''}
+We say that $A$ is \defn{self-injective} if $A_A$ and ${}_AA$ are relative injective; this holds, for instance, when $A\cong D(A)$ as right $A$-modules (which also implies isomorphism as left $A$-modules). For $R=\Bbbk$ this is the usual notion.  A self-injective algebra is Iwanaga--Gorenstein if $\idim_RR<\infty$, by the following Corollary~\ref{cor:relative-ordinary-injective-dimension}.
 
 \begin{cor}\label{cor:relative-ordinary-injective-dimension}
 Let $A$ be a finite projective $R$-algebra. Then
@@ -251,54 +241,12 @@ When $R=\Bbbk$ is a field, both inequalities are equalities.
 %\comment{c.f. O. Iyama, M. Kalck, M. Wemyss and D. Yang, Frobenius categories, Gorenstein algebras and rational surface singularities, Compositio Mathematica 151 (2015), no. 3, 502–534, Lemma 4.17}
 
 \begin{rmk}
-For related formulas for self-injective dimensions, see \cite[Proposition~1.1(3)]{GN01} and \cite[Lemma~4.17]{IKWY15}. We include an elementary proof of the above estimate for completeness.\new{ It is deferred to Appendix~\ref{app:lattice-proofs}.}
+For related formulas for self-injective dimensions, see \cite[Proposition~1.1(3)]{GN01} and \cite[Lemma~4.17]{IKWY15}.
 \end{rmk}
 %\comment{their IKWY setting is different, but practically we are only interested in $R$ is a field or ring of integers, i.e. Dedekind domain (which has canonical module $R$ itself), suffices.  Then the quoted Lemma can be applied. (Dedekind domain is also the setting in Curtis--Reiner, which Iyama recommended using} \xnew{I see, thank you for the clarification.}
 
 \begin{proof}
-\new{The proof is deferred to Appendix~\ref{app:lattice-proofs}.}
-\old{
-Since $A$ is finitely generated over the noetherian ring $R$, it is noetherian on both sides. By Lemma~\ref{lem:lattice-canonical-duality}, the exact duality $D:\lat(A)^{\operatorname{op}}
- \xrightarrow{\sim}\lat(A^{\operatorname{op}})$
-swaps relative injective coresolutions of $A_A$ with projective resolutions of ${}_A D(A)$. Since projective dimension in the lattice category agrees with ordinary projective dimension, we obtain $\idim^{\lat}_A A
- =\pdim_{A^{\operatorname{op}}}D(A).$
-Applying the same argument to $A^{\operatorname{op}}$ gives the other relative dimension equality.
-
-Assume now that $\idim_R R<\infty$. 
-We claim that $\idim D(A)_A\leq\idim_R R$.  Indeed, for any right $A$-module $N$, so long as $A$ is $R$-projective, any $A$-projective resolution of $N$ is also an $R$-projective resolution.  So tensor-Hom adjunction $\Hom_A(-,D(A)_A)\cong\Hom_R(-,R)$ gives
-\[
- \Ext_A^q(N,D(A)_A)
- \cong \Ext_R^q(N,R)
- \qquad(q\geq0),
-\]
-and the claim follows.
-
-Put $n:=\pdim_{A^{\operatorname{op}}}D(A)$. The bound for $\idim A_A$ is immediate if $n=\infty$. If $n<\infty$, choose a resolution by finitely generated projective left $A$-modules
-\[
- 0\longrightarrow Q_n\longrightarrow\cdots
- \longrightarrow Q_0\longrightarrow {}_A D(A)
- \longrightarrow0.
-\]
-The modules $Q_i$ and $D(A)$ are projective over $R$. Starting with the surjection $Q_0\to D(A)$, it follows inductively that every syzygy is projective over $R$ and every successive short exact sequence splits over $R$. Applying $D$ and using $D^2(A)\cong A$ then yields an exact sequence of right $A$-modules
-\[
- 0\longrightarrow A_A\longrightarrow D(Q_0)
- \longrightarrow\cdots\longrightarrow D(Q_n)
- \longrightarrow0.
-\]
-For every $0\leq i\leq n$, we have $D(Q_i)\in\add D(A)_A$, and hence $\idim_A D(Q_i)\leq\idim_R R$ by the claim in the previous paragraph. Dimension shifting along this exact sequence yields
-\[
- \idim A_A
- \leq
- \max_{0\leq i\leq n}
- \bigl\{\idim_A D(Q_i)+i\bigr\}
- \leq \idim_R R+n.
-\]
-Applying the same argument to $A^{\operatorname{op}}$ gives
-$\idim {}_A A\leq\idim_R R+\pdim_A D(A)$.  Thus, if both $\pdim_{A^{\operatorname{op}}}D(A)$ and $\pdim_{A}D(A)$ are finite, $A$ is Iwanaga--Gorenstein.
-
-Finally, when $R=\Bbbk$, we have $\idim_R R=0$, and relative injective dimension agrees with ordinary injective dimension.  Putting this into the inequalities and the claim follows immediately.
-
-}
+See Appendix~\ref{app:lattice-proofs}.
 \end{proof}
 
 
@@ -358,48 +306,13 @@ These are projective and relative injective right $\Sigma_G$-modules, respective
 When $R=\Bbbk$, $P_x$ and $I_x$ are indecomposable, and $I_x$ is precisely the injective envelope of $S_x:=P_x/\rad P_x$.
 Moreover, every finitely generated projective right $\Sigma_G$-module $Q$ admits a decomposition $Q\cong\bigoplus_{x\in V(G)}P_x^{\oplus m_x}$, where the non-negative integers $m_x$ are uniquely determined (by the Krull--Schmidt theorem).  We call $m_x$ the \defn{multiplicity} of $P_x$ in $Q$ and write $[Q:P_x]:=m_x$. We say that $Q$ is \defn{multiplicity-free} if $[Q:P_x]\leq1$ for every $x\in V(G)$.
 
-\comment{
-Claude suggestion:
-The treatment of the anti-involution $\tau$ (lines 270–285) is about 15 lines. It is needed only to say left-right symmetry of pdim of $D(\Sigma)$. Consider reducing it to "$\tau$ gives $\Sigma\cong \Sigma^{\mathrm{op}}$, hence all left/right statements are equivalent".
-
-Our reponse: Write a proposal change in new tag, put current exposition in old tag.
-}
-\new{Path reversal $\tau\colon\Sigma_G\to\Sigma_G$, $b_{xy}\mapsto b_{yx}$, is an $R$-linear anti-involution fixing every $e_x$. It identifies $\Sigma_G^{\operatorname{op}}\cong\Sigma_G$, and so gives an exact equivalence $M\mapsto\tau_*M$ from right to left $\Sigma_G$-modules (same underlying module, with $a\cdot m:=m\tau(a)$) that preserves projective dimension. Since $\tau(e_x)=e_x$, there is an isomorphism of left $\Sigma_G$-modules}
-\old{Path reversal defines an $R$-linear anti-involution
-\[
- \tau:\Sigma_G\longrightarrow\Sigma_G,
- \qquad b_{xy}\longmapsto b_{yx}.
-\]
-Thus $\tau$ induces an isomorphism of $R$-algebras
-$\Sigma_G^{\operatorname{op}}\cong\Sigma_G$.
-
-For a right $\Sigma_G$-module $M$, let $\tau_*M$ be the left
-$\Sigma_G$-module with action $a\cdot m:=m\tau(a)$. This gives a covariant exact equivalence between right and left module categories, preserving projectives and injectives. Its inverse is defined by the same construction for left modules. Since $\tau(e_x)=e_x$, there is an isomorphism of left $\Sigma_G$-modules}
+Path reversal $\tau\colon\Sigma_G\to\Sigma_G$, $b_{xy}\mapsto b_{yx}$, is an $R$-linear anti-involution fixing every $e_x$. It identifies $\Sigma_G^{\operatorname{op}}\cong\Sigma_G$, and so gives an exact equivalence $M\mapsto\tau_*M$ from right to left $\Sigma_G$-modules (same underlying module, with $a\cdot m:=m\tau(a)$) that preserves projective dimension.
+Since $\tau(e_x)=e_x$, there is an isomorphism of left $\Sigma_G$-modules
 \begin{equation}
  \tau_*I_x\xrightarrow{\sim}D(e_x\Sigma_G),
  \qquad f\longmapsto\bigl(b\longmapsto f(\tau(b))\bigr).
  \label{eq:tau-canonical-summands}
 \end{equation}
-\old{Thus, we have the following lattice version of duality on distance algebras \cite[Section~2]{CX26}.
-
-\begin{prop}\label{prop:distance-lattice-duality}
-For $M\in\lat(\Sigma_G)$, equip $D(M)$ with the right $\Sigma_G$-action
-\[
- (f\cdot a)(m):=f\bigl(m\tau(a)\bigr).
-\]
-With this right action, $D$ defines an exact contravariant self-duality of $\lat(\Sigma_G)$, with $ D(P_x)\cong I_x$ and $D(I_x)\cong P_x$. Consequently, for every $M\in\lat(\Sigma_G)$,
-\[
- \idim^{\lat}_{\Sigma_G} M=\pdim_{\Sigma_G}D(M),
- \qquad
- \pdim_{\Sigma_G} M=\idim^{\lat}_{\Sigma_G}D(M).
-\]
-\end{prop}
-
-\begin{proof}
-Compose the duality of Lemma~\ref{lem:lattice-canonical-duality} with the equivalence induced by $\tau$. The asserted action and the isomorphisms follow from $\tau^2=\id$ and \eqref{eq:tau-canonical-summands}. This self-duality exchanges projective resolutions and relative injective coresolutions, giving the dimension equalities.
-\end{proof}
-}
-\comment{The proposition above is not referred to anywhere else in the paper, so it is moved into the old-tag; only the equation \eqref{eq:tau-canonical-summands} is used (in the proof of Corollary~\ref{cor:distance-gorenstein-criterion}). If a referee wants the lattice duality $D\circ\tau_*$ it can be restored from \cite[Section~2]{CX26}.}
 
 Applying Corollary~\ref{cor:relative-ordinary-injective-dimension} to $\Sigma_G$ gives the following criterion. Here $D(\Sigma_G)$ is regarded as the dualizing bimodule with its natural left and right actions.
 
@@ -442,86 +355,47 @@ The remaining assertions follow immediately from Corollary~\ref{cor:relative-ord
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Simplicial complexes, homologies, and order complexes}
+\subsection{Simplicial complexes and homologies}
 \label{subsec:simplicial-topology}
 
-Unless a coefficient ring is specified, all chain groups and homology groups are taken over $R$.
+Unless a coefficient ring is specified, all chain groups and homology groups are taken over $R$.  We refer the reader to \cite{Mun84} for any possible missing details.
 
-\new{A finite \defn{simplicial complex} $\Delta$ on a finite vertex set $V$ is a collection of subsets of $V$, called \defn{faces}, such that $\sigma\in\Delta$ and $\tau\subseteq\sigma$ imply $\tau\in\Delta$. A face $\sigma$ has \defn{dimension} $|\sigma|-1$, and $\Delta_r$ denotes the set of its $r$-dimensional faces. Two degenerate complexes must not be confused: the \defn{void complex} $\emptyset$, which has no faces at all, and the \defn{trivial complex} $\{\emptyset\}$, whose only face is the empty face (of dimension $-1$). Every other complex contains the empty face and at least one vertex.
+A finite \defn{simplicial complex} $\Delta$ on a finite vertex set $V$ is a collection of subsets of $V$, called \defn{faces}, such that $\sigma\in\Delta$ and $\tau\subseteq\sigma$ imply $\tau\in\Delta$. A face $\sigma$ has \defn{dimension} $|\sigma|-1$, and $\Delta_r$ denotes the set of its $r$-dimensional faces. Two degenerate complexes must not be confused: the \defn{void complex} $\emptyset$, which has no faces at all, and the \defn{trivial complex} $\{\emptyset\}$, whose only face is the empty face (of dimension $-1$). Every other complex contains the empty face and at least one vertex.
 
-Fix a total order on $V$. An $r$-face $\sigma=\{v_0<\cdots<v_r\}$ ($r\geq-1$) gives a basis symbol $\langle v_0<\cdots<v_r\rangle$, and we write $1:=\langle\,\rangle$ for the empty face. For $r\geq-1$ let $C_r(\Delta):=R\Delta_r$ be the free $R$-module on the $r$-faces; thus $C_{-1}(\Delta)=R\cdot1$ unless $\Delta$ is void, in which case $C_{-1}(\Delta)=0$. For $r\geq0$ the \defn{boundary map} $\partial_r\colon C_r(\Delta)\to C_{r-1}(\Delta)$ is
+For $r\geq-1$, we define a free $R$-module
 \[
-\partial_r\langle v_0<\cdots<v_r\rangle:=\sum_{i=0}^{r}(-1)^i\langle v_0<\cdots<\widehat{v_i}<\cdots<v_r\rangle,
+C_r(\Delta):= R\Delta_r = \bigoplus_{\sigma\in \Delta_r} R \langle \sigma\rangle; \text{ in particular, }C_{-1}(\Delta)= \begin{cases}
+    R \cdot 1, & \Delta\neq \emptyset;\\
+    0, & \Delta=\emptyset;
+\end{cases}
 \]
-where $\widehat{v_i}$ means that $v_i$ is removed; in particular $\partial_0\langle v\rangle=1$ is the \defn{augmentation}. When we want to write this compactly, for a face $v_\ast=(v_0<\cdots<v_r)$ we write $v_\ast^{\widehat i}$ for the face obtained by deleting $v_i$, so that $\partial_r\langle v_\ast\rangle=\sum_{i=0}^r(-1)^i\langle v_\ast^{\widehat i}\rangle$. One checks $\partial_{r-1}\partial_r=0$, and the \defn{reduced homology} $\widetilde H_r(\Delta)$, $r\geq-1$, is the homology of the augmented complex
+where $1:=\langle\,\rangle$ is the shorthand for the basis element corresponding to the empty face. 
+Fix a total order on $V$.  Then we can write any $r$-face as an \defn{$r$-chain}  $v_\ast := (v_0<v_1<\cdots <v_r)$. 
+For $r\geq0$ the \defn{boundary map} $\partial_r\colon C_r(\Delta)\to C_{r-1}(\Delta)$ is
 \[
-\widetilde C_\bullet(\Delta)\colon\quad\cdots\longrightarrow C_1(\Delta)\xrightarrow{\partial_1}C_0(\Delta)\xrightarrow{\partial_0}C_{-1}(\Delta)\longrightarrow0.
+\partial_r\langle v_\ast\rangle =\partial_r\langle v_0<\cdots<v_r\rangle:= \sum_{i=0}^{r}(-1)^i \langle v_*^{\widehat{i}}\rangle=\sum_{i=0}^{r}(-1)^i\langle v_0<\cdots<\widehat{v_i}<\cdots<v_r\rangle,
 \]
-Concretely, $\widetilde H_r(\emptyset)=0$ for all $r$ (the void complex has no chains), whereas $\widetilde H_{-1}(\{\emptyset\})=R$ and $\widetilde H_r(\{\emptyset\})=0$ for $r\geq0$. For a complex with at least one vertex we have $\widetilde H_{-1}=0$; thus $\widetilde H_{-1}(\Delta)\neq0$ if and only if $\Delta=\{\emptyset\}$. For $r\geq1$, $\widetilde H_r(\Delta)$ is the ordinary simplicial homology $H_r(\Delta)$, i.e.\ the homology of the non-augmented complex $C_\bullet(\Delta)=(C_r(\Delta))_{r\geq0}$.
-
-For later use, we call $C_{-1}(\Delta)$ the \defn{augmentation part} and $C_\bullet(\Delta)$ the \defn{resolution part} of $\widetilde C_\bullet(\Delta)$. If clarification of the ground ring is needed, we add ``$;R$'' inside the brackets, for example $C_\bullet(\Delta;R)$. Another choice of total order on $V$ changes the basis symbols by signs only; for order complexes (next subsection) no choice is needed.}
-
-
-\old{A finite \defn{simplicial complex} $\Delta$ on a finite vertex set $V$ is a collection of subsets of $V$ such that $\sigma\in\Delta$ and $\tau\subseteq\sigma$ imply $\tau\in\Delta$. The elements of $\Delta$ are called its \defn{faces}, and a face $\sigma$ has \defn{dimension} $|\sigma|-1$. We denote by $\Delta_r$ the set of $r$-dimensional faces of $\Delta$.  We allow the void complex $\emptyset$, which has no faces. We fix a total order on the vertex set when necessary, then an $r$-dimensional face equipped with the the inherited ordering is called an \defn{$r$-chain} in $\Delta$.}
-
-\comment{Rewrite subsection using arbitrary finite simplicial complex.  Mover order complex part to next section.  Also Ask Claude to decide convention to distinguish void complex $\emptyset$ and $\Delta(\emptyset)$ in the homology groups.}
-\old{For a finite poset $(P,<)$, its \defn{order complex} $\Delta(P)$ is the simplicial complex whose $r$-chains are the strict chains $x_0<x_1<\cdots<x_r$ in $P$. In particular, $\Delta(\emptyset)=\{\emptyset\}$ is not the void complex $\emptyset$. Note that we do not need to linearize $P$ to a total order since every $r$-simplex is already totally ordered by definition.
-
-For $r\geq0$, let $C_r(\Delta):=R \Delta_r$ be the free $R$-module generated by the $r$-chains of $\Delta$. We denote the corresponding basis element by $\langle x_0<x_1<\cdots<x_r\rangle.$
-
-For $r\geq1$, the simplicial \defn{boundary map} is given by
+where $\widehat{v_i}$ means that $v_i$ is removed, and $v_*^{\widehat{i}}:=( v_0<\cdots<\widehat{v_i}<\cdots<v_r)$.
+The map $\partial_0$ which sends $\langle v\rangle\mapsto 1$ is also called \defn{augmentation}. 
+This makes 
 \[
-\partial_r
-\langle x_0<\cdots<x_r\rangle
- :=  \sum_{i=0}^{r}(-1)^i
- \langle x_0<\cdots<\widehat{x_i}<\cdots<x_r
- \rangle,
+\widetilde C_\bullet(\Delta)\colon\quad\cdots\longrightarrow C_1(\Delta)\xrightarrow{\partial_1}C_0(\Delta)\xrightarrow{\partial_0}C_{-1}(\Delta)\longrightarrow0
 \]
-where $\widehat{x_i}$ means that $x_i$ is removed from the chain. When we want to write in a more compact form, for a chain $x_\ast = ( x_0 < x_1 < \cdots < x_r )$, we write $x_\ast^{\widehat i}$ for the chain obtained from $x_\ast$ by deleting $x_i$; thus, we have $\partial_r \langle x_\ast\rangle =\sum_{i=0}^r (-1)^i \langle x_\ast^{\widehat{i}}\rangle$. The boundary maps satisfy $\partial_{r-1}\partial_r=0$. The \defn{ordinary simplicial homology} of $\Delta$ is the homology of the chain complex
-\[
-C_\bullet(\Delta)\colon
-\quad
-\cdots
-\longrightarrow C_2(\Delta)
-\xrightarrow{\partial_2}C_1(\Delta)
-\xrightarrow{\partial_1}C_0(\Delta)
-\longrightarrow0,
-\]
-and is denoted by $H_r(\Delta):=\Ker\partial_r/\Image\partial_{r+1}$.
+a \defn{chain complex}, i.e. $\partial_{r-1}\partial_r=0$ for all $r>0$, and the \defn{reduced homology} $\widetilde H_r(\Delta)$ for $r\geq-1$ is its homology.
+A different choice of total order on $V$ changes the boundary by some sign changes, but the reduced homologies will be canonically isomorphic; the majority of simplicial complexes we consider in this paper comes from \emph{order complex} (see next subsection), where there is a canonical choice on the vertex set.
 
-Set $C_{-1}(\Delta):=R$ and define the \defn{augmentation map}
-\[
-\partial_0\colon C_0(\Delta)\longrightarrow C_{-1}(\Delta),
-\qquad \partial_0\langle x\rangle:=1.
-\]
-Adjoining to $C_\bullet(\Delta)$ yields a chain complex starting in degree $-1$:
-\begin{equation}
-\widetilde C_\bullet(\Delta)\colon
-\quad
-\cdots
-\longrightarrow C_1(\Delta)
-\xrightarrow{\partial_1}C_0(\Delta)
-\xrightarrow{\partial_0}C_{-1}(\Delta)
-\longrightarrow0.
-\label{eq:reduced-chain-complex}
-\end{equation}
-Its homology is the \defn{reduced homology} $\widetilde H_r(\Delta)$. In particular, we have
-\[
-\widetilde H_{-1}(\emptyset)=R,
-\qquad \text{and}\qquad 
-\widetilde H_r(\Delta)=H_r(\Delta)
-\quad\text{for }r>0.
-\]
-For later use, we call $C_{-1}(\Delta)$ the \defn{augmentation part} and the non-negative degree part $C_\bullet(\Delta)$ the \defn{resolution part} of $\widetilde C_\bullet(\Delta)$.
-If clarification of ground ring is needed, we will add ``$;R$'' inside the brackets, for example, $C_\bullet(\Delta;R)$ for the $R$-valued chain complex.
-}
+For clarity, let us note that, the void complex has vanishing reduced homology everywhere whereas the trivial complex has a single non-vanishing reduced homology $\widetilde{H}_{-1}(\{\emptyset\})=R$. 
+Also, a simplicial complex $\Delta$ with at least one vertex has $\widetilde H_{-1}=0$; in other words, $\widetilde H_{-1}(\Delta)\neq0$ if and only if $\Delta=\{\emptyset\}$. 
 
-\subsection{More on order complexes}
+For $r\geq1$, $\widetilde H_r(\Delta)$ is the ordinary simplicial homology $H_r(\Delta)$, i.e. the homology of the `non-augmented complex' $C_\bullet(\Delta):=(C_r(\Delta))_{r\geq0}$.
+For later use, we call $C_{-1}(\Delta)$ the \defn{augmentation part} and $C_\bullet(\Delta)$ the \defn{resolution part} of $\widetilde C_\bullet(\Delta)$. 
+If clarification of the ground ring is needed, we add ``$;R$'' inside the brackets, for example $C_\bullet(\Delta;R)$. 
+
+
+\subsection{Links and order complexes}
 \label{subsec:topological-tools}
 
-\new{For a finite poset $(P,<)$, its \defn{order complex} $\Delta(P)$ is the simplicial complex on the vertex set $P$ whose $r$-faces are the chains $x_0<x_1<\cdots<x_r$ of $P$. No choice of total order on $P$ is needed to write the basis symbols $\langle x_0<\cdots<x_r\rangle$, since the elements of each face are already ordered by $<$. In particular $\Delta(\emptyset)=\{\emptyset\}$ is the trivial complex and not the void complex, so $\widetilde H_{-1}(\Delta(\emptyset))=R$; on the other hand $\Delta(P)$ is never void.}
-
-A simplicial complex $K$ is a \defn{cone with vertex $p$} if $p\in V(K)$ and $\sigma\cup\{p\}\in K$ for every $\sigma\in K$. A cone has zero reduced homology over $R$.\new{ See, e.g., \cite[Lemma~8.2]{Mun84}.}  \comment{may be add a reference}\comment{Claude: I could not check the lemma number in Munkres from here; please verify (or replace by a bare \cite{Mun84}).}
+A simplicial complex $K$ is a \defn{cone with vertex $p$} if $p\in V(K)$ and $\sigma\cup\{p\}\in K$ for every $\sigma\in K$. A cone has zero reduced homology over $R$; see, for example, \cite[Theorem~8.2]{Mun84}.
 % ******** For non-algebraic topologists:
 %To see this, order its vertices with $p$ first and define
 %\[h_{-1}:R\longrightarrow C_0(K),\qquad 1\longmapsto\langle p\rangle,\]
@@ -537,18 +411,26 @@ A simplicial complex $K$ is a \defn{cone with vertex $p$} if $p\in V(K)$ and $\s
 %These maps satisfy $\partial_0h_{-1}=\id_R$ and $\partial_{k+1}h_k+h_{k-1}\partial_k=\id_{C_k(K)}$ for $k\geq0$, so they contract the augmented complex $\widetilde C_\bullet(K)$. In particular, the order complex of a non-empty poset with a least or greatest element is a cone.
 
 \begin{dfn}\label{def:link,face poset,sd}
-Let $K$ be a finite simplicial complex on a vertex set $V$.  For a face $F\in K$, define its \defn{link} of $F$ in $K$ by
+\begin{enumerate}
+    \item Let $K$ be a finite simplicial complex on a vertex set $V$.  For a face $F\in K$, define its \defn{link} of $F$ in $K$ by
 \[
 \operatorname{lk}_K F:=\{G\subseteq V\setminus F:F\cup G\in K\}.
 \]
-Define the \defn{face poset} and the \defn{non-empty-face poset} of $K$ as
+
+    \item 
+For a finite poset $(P,<)$, its \defn{order complex} $\Delta(P)$ is the simplicial complex on the vertex set $P$ whose $r$-faces are the chains $x_0<x_1<\cdots<x_r$ of $P$; we will use this choice of ordering for the associated chain complex $\widetilde{C}_\bullet(\Delta(P))$.  Note that $\Delta(P)$ is never a void complex.
+
+\item Define the \defn{face poset} and the \defn{non-empty-face poset} of $K$ as
 \[
 \mathcal F(K):=\{\text{faces of }K\}, \quad \mathcal{F}^\times(K):=\mathcal{F}(K)\setminus\{\emptyset\},
 \]
-respectively, ordered by inclusion.  The \defn{barycentric subdivision} $\operatorname{sd}K$ of $K$ is the order complex of the non-empty-face poset of $K$.
+respectively, ordered by inclusion.
+
+\item The \defn{barycentric subdivision} $\operatorname{sd}K$ of a finite simplicial complex $K$ is the order complex of the non-empty-face poset of $K$.
+\end{enumerate}
 \end{dfn}
 
-For a finite simplicial complex $K$, write $|K|$ for its geometric realization.  We identify simplicial homology with the singular homology of the realization.  Barycentric subdivision preserves the geometric realization, and hence preserves reduced homology over $R$.
+For a \bhx{non-void} finite simplicial complex $K$, write $|K|$ for its geometric realization.  We identify simplicial homology with the singular homology of the realization.  Barycentric subdivision preserves the geometric realization, and hence preserves reduced homology over $R$.
 
 For a finite set $E$ with $|E|\geq2$, the power set $2^E$ is regarded as a simplicail complex on $E$ is the $(|E|-1)$-simplex with boundary $\partial(2^E)=2^E\setminus\{E\}$, so
 \begin{equation}
@@ -586,26 +468,25 @@ where the first isomorphism uses the fact that barycentric subdivision preserves
 We also recall an order homotopy theorem for maps between order complexes.
 
 Let $f:Q\to Q'$ be an order-preserving map between two finite posets $Q,Q'$.  Define, for all $k\ge 0$, a map $f_{\#,k}:C_k(\Delta(Q))\to C_k(\Delta(Q'))$ given by
-\[
+\begin{equation}\label{eq:order-presv-map-induced-chain-map}
 \langle x_0<\cdots<x_k\rangle \mapsto
 \begin{cases}
 \langle f(x_0)<\cdots<f(x_k)\rangle, & f(x_0),\ldots,f(x_k)\text{ are pairwise distinct},\\
 0,&\text{otherwise}.
 \end{cases}
-\]
-We also set $f_{\#,-1}=\id_R$. Then $f_\#$ is a chain map on the chain complexes and their augmentations.
+\end{equation}
+We also set $f_{\#,-1}=\id_R$. Then $f_\#$ is the \defn{induced chain map} on the chain complexes and their augmentations.
 
 \begin{lem}\label{lem:order homotopy}
-Let $f,g:Q\to Q'$ be order-preserving maps between finite posets, and suppose that $f(q)\leq g(q)$ for every $q\in Q$. The induced chain maps $f_\#,g_\#$ are chain homotopic.
+Let $f,g:Q\to Q'$ be order-preserving maps between finite posets.
+If $f(q)\leq g(q)$ for every $q\in Q$, then there is a chain homotopy $h$ between $f_\#,g_\#$, i.e. $\partial h+h\partial=g_\#-f_\#$, given by $h_{-1}:=0$ and
+\[
+h_k\langle x_0<\cdots<x_k\rangle:=\sum_{j=0}^k(-1)^j\langle f(x_0)\leq\cdots\leq f(x_j)\leq g(x_j)\leq\cdots\leq g(x_k)\rangle\quad \text{ for }k\geq0,
+\]
+where every summand with a repeated entry is regarded as zero.
 \end{lem}
 \begin{proof}
-This is the chain complex version of \cite[Theorem 10.11]{Bjo95}; see also \cite[Theorem 13.3]{Mun84}.  \comment{Removed direct proof; maybe include proof if Proposition 3.x requires some details of it?}
-\comment{Claude: yes, Proposition~\ref{prop:lower-deformation-retract} needs the explicit formula, but not the verification. I suggest keeping only the formula, as below.}
-\new{Explicitly, a chain homotopy $h$ with $\partial h+h\partial=g_\#-f_\#$ is given by $h_{-1}:=0$ and, for $k\geq0$,
-\[
-h_k\langle x_0<\cdots<x_k\rangle:=\sum_{j=0}^k(-1)^j\langle f(x_0)\leq\cdots\leq f(x_j)\leq g(x_j)\leq\cdots\leq g(x_k)\rangle,
-\]
-where every summand with a repeated entry is read as zero.}
+This is the chain complex version of \cite[Theorem 10.11]{Bjo95}; see also \cite[Theorem 13.3]{Mun84}.  
 % ***** For non-algebraic topologists: *****
 %We can verify it directly as follows. For $k\geq0$, define a map $h_k:C_k(\Delta(Q))\longrightarrow C_{k+1}(\Delta(Q'))$ by
 %\[
@@ -630,7 +511,7 @@ $\Delta\bigl(2^P\setminus\{\emptyset,P\}\bigr)$. Then the boundary map
 $\partial_{|P|-2}:C_{|P|-2}(K)\longrightarrow C_{|P|-3}(K)$ has an $R$-linear left inverse. 
 \end{lem}
 \begin{proof}
-Put $d:=|P|-2\ge 1$. If $K=\emptyset$ there is nothing to prove, so assume $K\ne\emptyset$.
+Put $d:=|P|-2\ge 1$. \bhx{If $|K|=\emptyset$ there is nothing to prove, so assume $|K|\neq\emptyset$.} \old{If $K=\emptyset$ there is nothing to prove, so assume $K\ne\emptyset$.} \xnew{(Perhaps we should also take care of the case $K=\{\emptyset\}$?)}
 Since $P$ is finite, each $C_q(K)=C_q(K;\mathbb Z)\otimes_{\mathbb Z}R$ is a finitely generated free $R$-module. 
 Let
 \[
@@ -672,9 +553,8 @@ x\vee(y\wedge z)
 \]
 for all $x,y,z\in L$. A finite lattice has a least element $0$ and a greatest element $1$.
 
-For a finite poset $P$, we denote by $\max(P)$ the set of its maximal elements. An \defn{order ideal} of $P$ is a subset $X\subseteq P$ such that if $y\in X$ and $x\leq y$ then $x\in X$. We denote by $\mathcal J(P)$ the set of order ideals of $P$, ordered by inclusion. It is a finite distributive lattice with $X\wedge Y=X\cap Y$ and $X\vee Y=X\cup Y$.
-
-Conversely, Birkhoff's fundamental theorem of finite distributive lattices states that every finite distributive lattice is isomorphic to $\mathcal J(P)$ for some finite poset $P$; see, for example, \cite{Gra03}.
+For a finite poset $P$, we denote by $\max(P)$ the set of its maximal elements. An \defn{order ideal} of $P$ is a subset $X\subseteq P$ such that if $y\in X$ and $x\leq y$ then $x\in X$. We denote by $\mathcal J(P)$ the set of order ideals of $P$, ordered by inclusion. 
+$\mathcal J(P)$ is a finite distributive lattice with $X\wedge Y=X\cap Y$ and $X\vee Y=X\cup Y$; conversely, Birkhoff's fundamental theorem of finite distributive lattices states that every finite distributive lattice is isomorphic to $\mathcal J(P)$ for some finite poset $P$; see, for example, \cite{Gra03}.
 
 The \defn{Hasse graph} of a finite poset $Q$ is the undirected graph whose vertex set is $Q$, in which two elements are adjacent if one covers the other, i.e. an edge is given by $\{x,y\}$ with $x<y$ and there is no $z\in Q$ satisfying $x<z<y$. We write $d_Q(x,y)$, or simply $d(x,y)$, for the corresponding graph distance. Moreover, for subsets $X,Y\subseteq Q$, their \defn{symmetric difference} is $X\SDiff Y:=(X\setminus Y)\sqcup(Y\setminus X)$.
 
@@ -686,15 +566,8 @@ Let $X,Y,Z$ be subsets of a finite set. Then the following hold.
 
 \item\label{itm:symdiff-cancellation} $(X\SDiff Y)\SDiff(X\SDiff Z)=Y\SDiff Z$, $X\SDiff(X\SDiff Y)=Y.$
 
-\item\label{itm:symdiff-intersection} Let $\nabla^{Y,Z}_X:=(X\cap Y)\cup (X\cap Z)\cup (Y\cap Z)$.\footnote{The position of $X,Y,Z$ around $\nabla$ does not matter, but will be useful later.}  
-Then $(X\SDiff Y)\cap (X\SDiff Z) = \bigl(X\setminus(Y\cup Z)\bigr)\sqcup\bigl((Y\cap Z)\setminus X\bigr) = X\SDiff \nabla^{Y,Z}_X$.
-%\[
-%\begin{aligned}
-% (X\SDiff Y)\cap(X\SDiff Z)
-% &=\bigl(X\setminus(Y\cup Z)\bigr)\sqcup\bigl((Y\cap Z)\setminus X\bigr)\\
-%&=X\SDiff\bigl((X\cap Y)\cup(X\cap Z)\cup(Y\cap Z)\bigr).
-%\end{aligned}
-%\]
+\item\label{itm:symdiff-intersection} Let $m(X,Y,Z):=(X\cap Y)\cup (X\cap Z)\cup (Y\cap Z)$.
+Then $$(X\SDiff Y)\cap (X\SDiff Z) = \bigl(X\setminus(Y\cup Z)\bigr)\sqcup\bigl((Y\cap Z)\setminus X\bigr) = X\SDiff\, m(X,Y,Z).$$
 
 \item\label{itm:symdiff-difference} $ (X\SDiff Y)\setminus(X\SDiff Z) =\bigl(X\cap(Z\setminus Y)\bigr) \sqcup\bigl((Y\setminus Z)\setminus X\bigr).$
 
@@ -846,7 +719,7 @@ For $Z\in\mathcal J(P)$, let $\D_X^{>\underline{Z}}$ be the upset of $\D_X$ cont
 \[
 \Delta_X:=\Delta(\D_X), \qquad \text{and} \qquad \Delta^{>\underline{Z}}:=\Delta_X^{>\underline{Z}}:=\Delta(\D_X^{>\underline{Z}})
 \]
-the associated order complexes.  Note that the vertices of $\Delta^{>\underline{Z}}$ are the elements $\underline{T}>\underline{Z}$, and its $r$-dimensional faces are the strict chains $\underline{T_0}<\underline{T_1}<\cdots<\underline{T_r}$, and it is a subcomplex of $\Delta_X$.
+the associated order complexes.  Note that the vertices of $\Delta^{>\underline{Z}}$ are the elements $\underline{T}>\underline{Z}$, and its $r$-dimensional faces are the strict chains $\underline{T_0}<\underline{T_1}<\cdots<\underline{T_r}$ (with $\underline{Z}<\underline{T_0}$), and it is a subcomplex of $\Delta_X$.
 
 \begin{eg}\label{subsec:eg1}
 Let $P=\{1<2\}\sqcup\{3\}$.  For more compact display, we use, for instance, $[ijk]$ to denote $\{i,j,k\}\subset P$, and write $\underline{xy}$ when $\underline{Z}=\{x,y\}$. We consider the case when $X=\{1\}=[1]$.
@@ -882,8 +755,8 @@ The six strict upsets $\D_X^{>\underline{Z}}$ and their order complexes $\Delta_
  \ [\emptyset]& \underline{1}&\{\underline{13}\}& \{\underline{13}\} \\[1mm]
  \ [12]& \underline{2}&\{\underline{23}\}& \{\underline{23}\} \\[1mm]
  \ [13]& \underline{3}&\{\underline{13}, \underline{23}\}&  \{\underline{13}\}\sqcup\{\underline{23}\}\\[1mm]
- \ [3]& \underline{13}&{\emptyset}&{\old{\{\underline{\emptyset}\}}\new{\{\emptyset\}}}\\[1mm]
- \ [123]& \underline{23}&{\emptyset}&{\old{\{\underline{\emptyset}\}}\new{\{\emptyset\}}}
+ \ [3]& \underline{13}&{\emptyset}&\{\emptyset\}\\[1mm]
+ \ [123]& \underline{23}&{\emptyset}&\{\emptyset\}
 \end{array}
 \]
 
@@ -917,7 +790,7 @@ For $k\geq0$, we write
  \underline{Z}_\ast=(\underline{Z}_0<\cdots<\underline{Z}_k)
  \in\Delta_{X,k}=\Delta(\mathcal D_X)_k
 \]
-for a strict chain, where $Z_i$ is the order ideal such that $Z_i \SDiff X = \underline{Z}_i$. For $0\leq i\leq k$, define
+for a strict chain, where $Z_i$ is the order ideal such that $\underline{Z}_i = Z_i \SDiff X$. For $0\leq i\leq k$, define
 \[
  \underline{Z}_\ast^{\widehat{i}}
  :=(\underline{Z}_0<\cdots<\widehat{\underline{Z}_i}<\cdots<\underline{Z}_k)
@@ -1158,7 +1031,16 @@ If $L\cong\mathcal J(P)$, then $P$ is isomorphic to the poset of join-irreducibl
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Exactness of the candidate complex}
-We prove exactness after right multiplication by each vertex idempotent $e_W$.  The first lemma records the multiplication criterion used in both steps of the argument.
+To show that the candidate complex $\widetilde{\mathcal{P}}_\bullet$ is exact, we do this locally, i.e. show the exactness of the complex 
+\begin{equation*}
+ \widetilde{\mathcal P}_\bullet e_W:\quad
+ \cdots\longrightarrow\mathcal P_1e_W
+ \longrightarrow\mathcal P_0e_W
+ \longrightarrow I_Xe_W\longrightarrow0.
+\end{equation*}
+of $R$-modules obtained by right-multiplying the idempotent $e_W$ everywhere.
+
+The first lemma records the multiplication criterion used in both steps of the argument.
 
 \begin{lem}\label{lem:multiplication-criterion}
 Let $U,V,W\in\mathcal J(P)$ with $\underline{U}\leq \underline{V}$.  Then $b_{VU}b_{UW}\neq0 \; \Leftrightarrow\; (\underline{V}\setminus \underline{U})\cap \underline{W}=\emptyset$.
@@ -1174,139 +1056,261 @@ Let $U,V,W\in\mathcal J(P)$ with $\underline{U}\leq \underline{V}$.  Then $b_{VU
 where the first equivalence is Lemma~\ref{lem:d(X,Y)}, the second follows from Lemma~\ref{lem:symmetric-difference-identities}\textup{(\ref{itm:symdiff-cancellation})}. The claim then follows from Lemma~\ref{lem:symmetric-difference-identities}\textup{(\ref{itm:symdiff-difference})} by taking $(X,Y,Z)=(W,V,U)$.
 \end{proof}
 
-Fix $W\in\mathcal J(P)$.  Right multiplication by $e_W$ gives the complex
-\begin{equation*}
- \widetilde{\mathcal P}_\bullet e_W:\quad
- \cdots\longrightarrow\mathcal P_1e_W
- \longrightarrow\mathcal P_0e_W
- \longrightarrow I_Xe_W\longrightarrow0.
-\end{equation*}
-We first replace it by a smaller homotopy equivalent subcomplex.
+When we first wrote down the candidate complex, we are looking forward that the minimal resolution can be obtained by extracting homologies of $\Delta(\D_X)$.  If we restrict to the local part $\widetilde{P}_\bullet e_W$, then it is natural to expect that only homologies of the subcomplex given by chains bounded above by $\underline{W}$ appear. From this, we expect that $\widetilde{P}_\bullet e_W$ should be homotopic to a similar $\mathcal{P}_\bullet$-construction associated to the the subposet 
+$\D_X^{\le \underline{W}} := \{\underline{Z}\in\D_X\mid \underline{Z}\le \underline{W}\}$, and such a homotopy could be obtain naturally from similar to Lemma \ref{lem:order homotopy}.
+\new{
+In view of utilising Lemma \ref{lem:order homotopy}, we consider
+\[
+r_W\colon\D_X\longrightarrow\D_X^{\leq\underline{W}},\qquad
+ \underline{Z}\longmapsto\underline{Z}\cap\underline{W}=X\SDiff\,m(X,W,Z)
+\]
+where the equality is Lemma~\ref{lem:symmetric-difference-identities}\textup{(\ref{itm:symdiff-intersection})}; since $m(X,W,Z)$ is an order ideal, $r_W$ is well defined. Clearly $r_W$ is order-preserving, $r_W(\underline{Z})\leq\underline{Z}$, and $r_W$ is the identity on $\D_X^{\leq\underline{W}}$.
+
+\begin{lem}\label{lem:evaluated-differential}
+Consider the $R$-linear maps
+\begin{align*}
+\theta_{-1}\colon &I_Xe_W\to C_{-1}(\Delta(\D_X))=R, & b_{WX}^* &\mapsto 1, \\
+\theta_k\colon& \mathcal P_ke_W\to C_k(\Delta(\D_X)), & (b_{Z_0W})^{(\underline{Z}_\ast)}&\mapsto\langle\underline{Z}_\ast\rangle \qquad (k\ge 0),
+\end{align*} 
+where $b_{WX}^*$ is the basis of $D(e_W\Sigma e_X)$ dual to $b_{WX}$.
+Define $\eta_k\colon C_k(\Delta(\D_X))\to C_{k-1}(\Delta(\D_X))$ by
+\[
+ \eta_0\langle\underline{Z}\rangle:=
+ \begin{cases}
+ 1, & \underline{W}\not\subseteq\underline{Z},\\
+ 0, & \text{otherwise},
+ \end{cases}
+ \qquad
+ \eta_k\langle\underline{Z}_0<\cdots<\underline{Z}_k\rangle:=
+ \begin{cases}
+ \langle\underline{Z}_1<\cdots<\underline{Z}_k\rangle, & r_W(\underline{Z}_0)\neq r_W(\underline{Z}_1),\\
+ 0, & \text{otherwise},
+ \end{cases}
+\]
+for $k\geq1$. Then $\theta\colon\widetilde{\mathcal P}_\bullet e_W\to\bigl(\widetilde C_\bullet(\Delta(\D_X)),\partial-\eta\bigr)$ is an isomorphism of complexes of $R$-modules.
+\end{lem}
+
+\begin{proof}
+Each $\theta_k$ is an isomorphism, since $(P_{Z_0}e_W)^{(\underline{Z}_\ast)}=R\,(b_{Z_0W})^{(\underline{Z}_\ast)}$ and $I_Xe_W=D(e_WAe_X)$ are free of rank one. 
+
+It remains to show $\theta_{k-1}d_k=(\partial_k-\eta_k)\theta_k$ for $k\geq0$.
+Let $k\geq1$. Writing out \eqref{eq:candidate-differential} explicitly yields
+\begin{equation}
+ d_k\bigl((b_{Z_0W})^{(\underline{Z}_\ast)}\bigr)
+ =\bigl(b_{Z_1Z_0}b_{Z_0W}\bigr)^{(\underline{Z}_\ast^{\widehat{0}})}
+ +\sum_{i=1}^k(-1)^i
+ (b_{Z_0W})^{(\underline{Z}_\ast^{\widehat{i}})}.
+ \label{eq:evaluated-differential}
+\end{equation}
+We compare this with $\partial_k\langle\underline{Z}_\ast\rangle=\sum_{i=0}^k(-1)^i\langle\underline{Z}_\ast^{\widehat{i}}\rangle$ term by term.
+
+For $i\geq1$, the chain $\underline{Z}_\ast^{\widehat{i}}$ starts with $\underline{Z}_0$, so $\theta_{k-1}$ maps $(b_{Z_0W})^{(\underline{Z}_\ast^{\widehat{i}})}$ to $\langle\underline{Z}_\ast^{\widehat{i}}\rangle$. These terms agree.
+
+For $i=0$, the chain $\underline{Z}_\ast^{\widehat{0}}$ starts with $\underline{Z}_1$, so $\theta_{k-1}$ maps $(b_{Z_1W})^{(\underline{Z}_\ast^{\widehat{0}})}$ to $\langle\underline{Z}_\ast^{\widehat{0}}\rangle$. 
+We have
+\[
+ b_{Z_1Z_0}b_{Z_0W}=b_{Z_1W}
+ \iff(\underline{Z}_1\setminus\underline{Z}_0)\cap\underline{W}=\emptyset
+ \iff r_W(\underline{Z}_0)=r_W(\underline{Z}_1),
+\]
+where the first equivalence is Lemma~\ref{lem:multiplication-criterion} with $(U,V)=(Z_0,Z_1)$, and the second holds as $\underline{Z}_0\subseteq\underline{Z}_1$. Hence $\theta_{k-1}$ sends the term $(b_{Z_1Z_0}b_{Z_0W})^{(\underline{Z}_\ast^{\widetilde{0}})}$ of \eqref{eq:evaluated-differential} to
+\begin{align*}
+\theta_{k-1}\big( (b_{Z_1Z_0}b_{Z_0W})^{(\underline{Z}_\ast^{\widetilde{0}})} \big) &= \begin{cases}
+ \langle\underline{Z}_\ast^{\widehat{0}}\rangle, & \text{if }r_W(\underline{Z}_0)=r_W(\underline{Z}_1),\\
+ 0, & \text{otherwise}
+ \end{cases}
+ \\
+ &=\quad
+ \langle\underline{Z}_\ast^{\widehat{0}}\rangle-\eta_k\langle\underline{Z}_\ast\rangle.
+\end{align*}
+This shows that $\theta_{k-1}d_k=(\partial_k-\eta_k)\theta_k$ holds for $k\ge 1$.
+
+For the case when $k=0$. Recall that $\phi_Z:P_Z\to I_X$ is the homomorphism that sends $e_Z$ to the element $b_{ZX}^*\in D(e_Z \Sigma e_X )\subset I_X$ dual to $b_{ZX}\in e_Z \Sigma e_X$.  Observe that
+\[
+ \phi_Z(b_{ZW})\neq0
+ \iff b_{ZW}b_{WX}=b_{ZX}
+ \iff d(X,Z)=d(X,W)+d(W,Z)
+ \iff \underline{W}\subseteq\underline{Z},
+\]
+where the last equivalence is Lemma~\ref{lem:d(X,Y)}.
+Thus, we obtain 
+\[
+\theta_{-1}d_0\bigl((b_{ZW})^{(\underline{Z})}\bigr) = \theta_{-1}\big(\phi_Z(b_{ZW})\big) = \begin{cases}
+    1, &\text{if }\underline{W}\subseteq\underline{Z},\\
+    0, &\text{otherwise}.
+\end{cases}
+\]
+This is exactly $(\partial_0-\eta_0)\langle\underline{Z}\rangle$ as required.
+\end{proof}}
+
 
 \begin{prop}\label{prop:lower-deformation-retract}
-\comment{Claude points out that this is Lemma \ref{lem:order homotopy} `with coefficient', which could shrink proof by a half if use the lemma. -- Let Claude rewrite the proof using this simplication, new proof in new-tag, current proof needs to be kept in old-tag.}
-\comment{Claude: done below. Note that the lemma is used with coefficients only through the explicit homotopy formula (added to its proof). I verified the weighted computation by hand: the only non-trivial points are the two places where the zeroth face enters, as described at the end of the new proof. Please double-check that paragraph.}
 For $k\geq0$, put
 \[
- \mathcal P_k^{\leq W}
+ \widetilde{\mathcal{P}}_k^{\leq \underline{W}} = \mathcal P_k^{\leq \underline{W}}
  :=\bigoplus_{\substack{
  \underline{Z}_\ast=(\underline{Z}_0<\cdots<\underline{Z}_k)\in\Delta_{X,k}\\
  \underline{Z}_k\leq \underline{W}}}
- (P_{Z_0}e_W)^{(\underline{Z}_\ast)}.
+ (P_{Z_0}e_W)^{(\underline{Z}_\ast)}, \quad \text{and}\quad  \widetilde{\mathcal{P}}_{-1}^{\leq \underline{W}}:= I_Xe_W
 \]
-Together with $I_Xe_W$ in degree $-1$, these $R$-modules form a subcomplex $\widetilde{\mathcal P}_\bullet^{\leq W}$ of $\widetilde{\mathcal P}_\bullet e_W$.  Its inclusion
-\[
- \iota_W\colon
- \widetilde{\mathcal P}_\bullet^{\leq W}
- \longrightarrow
- \widetilde{\mathcal P}_\bullet e_W
-\]
-is a homotopy equivalence.
+yields a subcomplex $\widetilde{\mathcal P}_\bullet^{\leq \underline{W}}$ of $\widetilde{\mathcal P}_\bullet e_W$.  Moreover, the inclusion map $\iota_W\colon
+ \widetilde{\mathcal P}_\bullet^{\leq \underline{W}}
+ \rightarrow
+ \widetilde{\mathcal P}_\bullet e_W$
+defines a homotopy equivalence.
 \end{prop}
-
 \begin{proof}
-\old{
-Since $P_{Z_0}e_W=R\, b_{Z_0W}$, the differential in \eqref{eq:candidate-differential} evaluates to
-\begin{equation}
- \begin{aligned}
- d_k\bigl((b_{Z_0W})^{(\underline{Z}_\ast)}\bigr)
- &=\bigl(b_{Z_1Z_0}b_{Z_0W}\bigr)^{(\underline{Z}_\ast^{\widehat{0}})}
- +\sum_{i=1}^k(-1)^i
- (b_{Z_0W})^{(\underline{Z}_\ast^{\widehat{i}})}.
- \end{aligned}
- \label{eq:evaluated-differential}
-\end{equation}
-Deleting a member of a chain whose largest member is at most $\underline{W}$ preserves this property, so the displayed $R$-modules form a subcomplex.
+\new{
+Consider the isomorphism $\theta\colon\widetilde{\mathcal P}_\bullet e_W\to\bigl(\widetilde C_\bullet(\Delta(\D_X)),\partial-\eta\bigr)$ from
+ Lemma~\ref{lem:evaluated-differential}. The direct summands of $\mathcal P_k^{\leq W} \subseteq \mathcal P_ke_W$ are indexed by the chains in $\D_X^{\leq\underline{W}}$, so $\theta_k$ restricts to an isomorphism between $\widetilde{\mathcal P}_k^{\leq \underline{W}}$ and $\widetilde C_k(\Delta(\D_X^{\leq\underline{W}})) \subset \widetilde C_k(\Delta(\D_X))$.  That is, we have a commutative diagram of modules
+ }
+ \begin{equation}
+ \label{eq:iota-W-transported}
+\begin{tikzcd}[column sep=large]
+  \widetilde{\mathcal P}_k^{\le \underline{W}} \ar[r, "\iota_W"] \ar[d, "\theta_k'", "\cong"'] & \widetilde{\mathcal{P}}_k e_W \ar[d, "\theta_k", "\cong"'] \\
+  \widetilde{C}_k(\Delta(\D_X^{\leq\underline{W}})) \ar[r, "\mathrm{inc}_k"] & \widetilde{C}_k(\Delta(\D_X)),
+\end{tikzcd}
+ \end{equation}
+ \new{
+ where $\theta_k'$ is the restriction of $\theta_k$ and $\mathrm{inc}_k$ is the canonical inclusion.
+ 
+We show below that (a) $\widetilde C_\bullet(\Delta(\D_X^{\leq\underline{W}}))$ is a subcomplex of $\bigl(\widetilde C_\bullet(\Delta(\D_X)),\partial-\eta\bigr)$, and (b) $\mathrm{inc}$ is a homotopy equivalence. By (a), $\widetilde{\mathcal P}_\bullet^{\leq W}=\theta^{-1}\bigl(\widetilde C_\bullet(\Delta(\D_X^{\leq\underline{W}}))\bigr)$ is a subcomplex of $\widetilde{\mathcal P}_\bullet e_W$ and $\theta|_{\widetilde{\mathcal P}_\bullet^{\leq W}}$ is an isomorphism of complexes. By (b) and \eqref{eq:iota-W-transported}, $\iota_W=\theta^{-1}\circ\mathrm{inc}\circ\theta|_{\widetilde{\mathcal P}_\bullet^{\leq W}}$ is a homotopy equivalence.
 
-For $\underline{Z}\in\D_X$, set $r_W(\underline{Z}):=\underline{Z}\cap \underline{W}$. This again lies in $\D_X$: indeed, recall from Lemma~\ref{lem:symmetric-difference-identities}\textup{(\ref{itm:symdiff-intersection})} that $\nabla^{Z,W}_X:=(X\cap Z)\cup(X\cap W)\cup(Z\cap W)$, which is also an order ideal, satisfies $\underline{Z}\cap\underline{W}=\underline{\nabla_X^{Z,W}}$.  Thus $r_W$ is an order-preserving map from $\D_X$ to $\D_{X}^{\leq W}:=\{\underline{Z}\in \mathcal{J}(P)\mid \underline{Z}\le \underline{W}\}$.
+\smallskip
+\noindent\textit{Proof of \textup{(a)}.}
+For $k\geq1$, $(\partial_k-\eta_k)\langle\underline{Z}_\ast\rangle$ is a linear combination of faces of $\underline{Z}_\ast$, and every face of a chain in $\D_X^{\leq\underline{W}}$ is again a chain in $\D_X^{\leq\underline{W}}$. In degree $0$, $\partial_0-\eta_0$ maps into $C_{-1}(\Delta(\D_X))=R$, which is also the degree $-1$ term of $\widetilde C_\bullet(\Delta(\D_X^{\leq\underline{W}}))$.
 
-Fix $\underline{Z}_\ast=(\underline{Z}_0<\cdots<\underline{Z}_k)$ and let $T_i:=\nabla_X^{Z_i,W}$, so that $\underline{T_i}=\underline{Z}_i\cap \underline{W}$.  Define $\rho_{W,-1}:=\id_{I_Xe_W}$ and, for $k\geq0$, define
+\smallskip
+\noindent\textit{Proof of \textup{(b)}.}
+Let $\rho:=(r_W)_\#\colon\widetilde C_\bullet(\Delta(\D_X))\to\widetilde C_\bullet(\Delta(\D_X^{\leq\underline{W}}))$. Since $r_W$ is the identity on $\D_X^{\leq\underline{W}}$, we have $\rho\circ\mathrm{inc}=\id$. Apply Lemma~\ref{lem:order homotopy} to $f:=r_W$, regarded as a map $\D_X\to\D_X$, and $g:=\id_{\D_X}$. Then $f\leq g$, $f_\#=\mathrm{inc}\circ\rho$ and $g_\#=\id$, and the lemma gives $h$ with $\partial h+h\partial=\id-\mathrm{inc}\circ\rho$, namely $h_{-1}:=0$ and
 \[
- \rho_{W,k}\bigl((b_{Z_0W})^{(\underline{Z}_\ast)}\bigr)
- :=
- \begin{cases}
- (b_{T_0W})^{(\underline{T_0}<\cdots<\underline{T_k})},
-     &\underline{T_0}<\cdots<\underline{T_k},\\
- 0,&\underline{T_i}=\underline{T_{i+1}}\text{ for some }i.
- \end{cases}
+ h_k\langle\underline{Z}_0<\cdots<\underline{Z}_k\rangle
+ =\sum_{j=0}^k(-1)^{j}
+ \langle r_W(\underline{Z}_0)\leq\cdots\leq r_W(\underline{Z}_{j})\leq\underline{Z}_{j}<\cdots<\underline{Z}_k\rangle,
 \]
-Then $\rho_W\iota_W=\id$ as graded maps.
-
-It remains to construct the homotopy.  Put $h_{W,-1}:=0$ and, for $k\geq0$, define
-\begin{equation*}
- \begin{aligned}
- h_{W,k}\bigl((b_{Z_0W})^{(\underline{Z}_\ast)}\bigr)
- :=\sum_{j=0}^k(-1)^j
- (b_{T_0W})^{(
- \underline{T_0}\leq\cdots\leq \underline{T_j}\leq
- \underline{Z}_j<\cdots<\underline{Z}_k)}.
- \end{aligned}
-\end{equation*}
-A summand is understood to be zero if two adjacent members of its indexing sequence are equal.  We now suppress the subscript $W$ from $\iota$, $\rho$, and $h$.
-
-For $k=0$, a direct calculation gives $d_1h_0 =\id_{\mathcal P_0e_W}-\iota_0\rho_0$. For $k\geq1$, put
+where summands with a repeated entry are zero. Therefore
 \[
- \tau_j
- :=(\underline{T_0}\leq\cdots\leq \underline{T_j}\leq
- \underline{Z}_j<\cdots<\underline{Z}_k).
+ (\partial-\eta)h+h(\partial-\eta)=(\partial h+h\partial)-(\eta h+h\eta)=\id-\mathrm{inc}\circ\rho-(\eta h+h\eta),
 \]
-Expanding the differential gives
-\[
- \begin{aligned}
- d_{k+1}h_k\bigl((b_{Z_0W})^{(\underline{Z}_\ast)}\bigr)
- &=(b_{Z_0T_0}b_{T_0W})^{(\underline{Z}_\ast)}\\
- &\quad+\sum_{j=1}^k(-1)^j
- (b_{T_1T_0}b_{T_0W})^{(\tau_j^{\widehat0})}\\
- &\quad+\sum_{j=0}^k\sum_{i=1}^{k+1}(-1)^{i+j}
- (b_{T_0W})^{(\tau_j^{\widehat i})}.
- \end{aligned}
-\]
-Because $(\underline{U}\setminus r_W(\underline{U}))\cap \underline{W}=\emptyset$, Lemma~\ref{lem:multiplication-criterion} gives $b_{Z_iT_i}b_{T_iW}=b_{Z_iW}$.  The first term is therefore the original basis element, the single sum is $-h_{k-1}\bigl( (b_{Z_1Z_0}b_{Z_0W})^{(\underline{Z}_\ast^{\widehat{0}})} \bigr)$, and the double sum is
-\[
- -\sum_{\ell=1}^k(-1)^\ell
- h_{k-1}\bigl((b_{Z_0W})^{(\underline{Z}_\ast^{\widehat{\ell}})}\bigr)
- -\iota_k\rho_k\bigl((b_{Z_0W})^{(\underline{Z}_\ast)}\bigr).
-\]
-Comparing this with the expansion of $h_{k-1}d_k$ yields
-\begin{equation*}
- d_{k+1}h_k+h_{k-1}d_k
- =\id_{\mathcal P_ke_W}-\iota_k\rho_k
- \qquad(k\geq0).
-\end{equation*}
-For $k\geq1$, applying $d_k$ to this identity and comparing with the identity in degree $k-1$ gives
-\[
- d_k(\id-\iota_k\rho_k)
- =(\id-\iota_{k-1}\rho_{k-1})d_k.
-\]
-Since $\iota_W$ is an injective chain map, it follows that $d_k\rho_k=\rho_{k-1}d_k$.  The same conclusion in degree zero follows by applying $d_0$ to the degree-zero homotopy identity.  Thus $\rho_W$ is a chain map and the displayed identity is the required homotopy.
-}
+and it remains to show that $\eta h+h\eta=0$.
 
-\new{Write $g(\underline Z_\ast):=(b_{Z_0W})^{(\underline Z_\ast)}$ for the standard basis of $\mathcal P_ke_W$ (one element for each $k$-chain $\underline Z_\ast$ of $\mathcal D_X$), and $r_W(\underline Z):=\underline Z\cap\underline W$. By Lemma~\ref{lem:symmetric-difference-identities}\textup{(\ref{itm:symdiff-intersection})}, $r_W(\underline Z)=\underline{\nabla^{Z,W}_X}$ lies in $\mathcal D_X$, so $r_W\colon\mathcal D_X\to\mathcal D_X^{\leq W}$ is an order-preserving map with $r_W(\underline Z)\leq\underline Z$ and $r_W|_{\mathcal D_X^{\leq W}}=\id$.
-
-\smallskip\noindent\emph{The differential.}
-By Lemma~\ref{lem:multiplication-criterion}, $b_{Z_1Z_0}b_{Z_0W}=b_{Z_1W}$ if $(\underline Z_1\setminus\underline Z_0)\cap\underline W=\emptyset$, which is equivalent to $r_W(\underline Z_0)=r_W(\underline Z_1)$, and $b_{Z_1Z_0}b_{Z_0W}=0$ otherwise. Hence \eqref{eq:evaluated-differential} reads
+Fix a chain $\underline{Z}_\ast=(\underline{Z}_0<\cdots<\underline{Z}_k)$ in $\D_X$. The first two entries of the $j$-th summand of $h_k\langle\underline{Z}_\ast\rangle$ are
 \[
-d_kg(\underline Z_\ast)=\kappa(\underline Z_0,\underline Z_1)\,g(\underline Z_\ast^{\widehat0})+\sum_{i=1}^k(-1)^ig(\underline Z_\ast^{\widehat i}),
-\qquad
-\kappa(\underline Z_0,\underline Z_1):=\begin{cases}1,&r_W(\underline Z_0)=r_W(\underline Z_1),\\0,&\text{otherwise,}\end{cases}
+ r_W(\underline{Z}_0)\leq\underline{Z}_0\quad(j=0),
+ \qquad
+ r_W(\underline{Z}_0)\leq r_W(\underline{Z}_1)\quad(j\geq1).
 \]
-and $d_0g(\underline Z)$ is the basis element of $I_Xe_W$ if $\underline W\subseteq\underline Z$ and $0$ otherwise (it is non-zero iff $b_{ZW}b_{WX}\neq0$, which by Lemma~\ref{lem:d(X,Y)} means $\underline Z\SDiff\underline W\subseteq\underline Z$). In other words, $\widetilde{\mathcal P}_\bullet e_W$ is the augmented simplicial chain complex of $\Delta_X$ in which the zeroth face is erased whenever it changes $r_W$. The weight satisfies $\kappa(a,c)=\kappa(a,b)\kappa(b,c)$ for $a\leq b\leq c$. Since deleting a member of a chain whose largest member is at most $\underline W$ preserves this property, $\widetilde{\mathcal P}_\bullet^{\leq W}$ is a subcomplex.
+For $j=0$, both entries have the same image $r_W(\underline{Z}_0)$ under $r_W$, so $\eta$ kills the summand; in particular $\eta h_0=0$. For $j\geq1$, both entries are fixed by $r_W$, so the summand is zero if $r_W(\underline{Z}_0)=r_W(\underline{Z}_1)$, and otherwise $\eta$ deletes $r_W(\underline{Z}_0)$. Hence, if $r_W(\underline{Z}_0)=r_W(\underline{Z}_1)$, then $\eta h\langle\underline{Z}_\ast\rangle=0=h\eta\langle\underline{Z}_\ast\rangle$. Otherwise
+\begin{align*}
+ \eta h\langle\underline{Z}_\ast\rangle
+ &=\sum_{j=1}^k(-1)^{j}
+ \langle r_W(\underline{Z}_1)\leq\cdots\leq r_W(\underline{Z}_{j})\leq\underline{Z}_{j}<\cdots<\underline{Z}_k\rangle\\
+ &=-h\langle\underline{Z}_1<\cdots<\underline{Z}_k\rangle
+ =-h\eta\langle\underline{Z}_\ast\rangle,
+\end{align*}
+where the second equality is the formula for $h_{k-1}$ with the index shifted by one, and the third is the definition of $\eta$.
 
-\smallskip\noindent\emph{The retraction.}
-For a chain put $T_i:=r_W(\underline Z_i)$, so $T_0\leq\cdots\leq T_k\leq\underline W$, and let $\rho_{-1}:=\id$ and $\rho_k\,g(\underline Z_\ast):=g(T_0<\cdots<T_k)$ if $T_0<\cdots<T_k$, and $0$ otherwise; this is the map $(r_W)_\#$ of Section~\ref{subsec:topological-tools} with coefficients, and $\rho\iota=\id$. It is a chain map. Indeed, $\kappa(T_i,T_{i+1})=0$ whenever $T_i\neq T_{i+1}$, because $r_W(T_i)=T_i$. If $T_0<\cdots<T_k$, then $\kappa(\underline Z_0,\underline Z_1)=0$ as well, and both $d\rho\,g(\underline Z_\ast)$ and $\rho\,d\,g(\underline Z_\ast)$ equal $\sum_{i\geq1}(-1)^ig(T_\ast^{\widehat i})$. If $T_s=T_{s+1}$ for some $s$, then $\rho\,g(\underline Z_\ast)=0$, and also $\rho\,d\,g(\underline Z_\ast)=0$: only the faces $i=s$ and $i=s+1$ of $\underline Z_\ast$ can have non-zero image, and they cancel (for $s=0$ the zeroth face has weight $\kappa=1$). In degree $0$, $d_0\rho=d_0$ because $r_W(\underline Z)\supseteq\underline W$ if and only if $\underline Z\supseteq\underline W$.
-
-\smallskip\noindent\emph{The homotopy.}
-Let $h_{-1}:=0$ and let $h_k$ be the map of Lemma~\ref{lem:order homotopy} for $f=r_W\leq g=\id$:
-\[
-h_k\,g(\underline Z_\ast):=\sum_{j=0}^k(-1)^j\,g(T_0\leq\cdots\leq T_j\leq\underline Z_j<\cdots<\underline Z_k),
-\]
-where summands with a repeated entry are read as zero. We claim that $d_{k+1}h_k+h_{k-1}d_k=\id-\iota_k\rho_k$ for $k\geq0$. Without the weights $\kappa$ this is Lemma~\ref{lem:order homotopy}, whose proof is a face-by-face computation with weakly increasing sequences modulo those with a repeated entry. It carries over verbatim to our complex, since the weights are multiplicative (so the simplicial identities persist) and they enter only in two places. First, in the zeroth face of the $j=0$ summand $(T_0\leq\underline Z_0<\cdots<\underline Z_k)$ of $h_kg(\underline Z_\ast)$: here $\kappa(T_0,\underline Z_0)=1$ because $r_W(T_0)=T_0=r_W(\underline Z_0)$, and this face is the term $g(\underline Z_\ast)$ in $\id$. Second, in the zeroth faces of the summands with $j\geq1$ of $d\,h\,g(\underline Z_\ast)$, which in the unweighted computation cancel against the terms of $h\,(\text{zeroth face of }g(\underline Z_\ast))$; in our complex both occur with the same weight, namely $\kappa(T_0,T_1)=\kappa(\underline Z_0,\underline Z_1)$ (both equal $1$ exactly when $T_0=T_1$), so the cancellation persists. Hence $\iota_W$ and $\rho_W$ are mutually inverse homotopy equivalences.}
+Thus $(\partial-\eta)h+h(\partial-\eta)=\id-\mathrm{inc}\circ\rho$. Then $(\partial-\eta)(\id-\mathrm{inc}\circ\rho)=(\partial-\eta)h(\partial-\eta)=(\id-\mathrm{inc}\circ\rho)(\partial-\eta)$, so $(\partial-\eta)\circ\mathrm{inc}\circ\rho=\mathrm{inc}\circ\rho\circ(\partial-\eta)$. Since $\mathrm{inc}$ is an injective chain map by (a), $\rho$ is a chain map. Hence $\rho\circ\mathrm{inc}=\id$ and $\mathrm{inc}\circ\rho$ is homotopic to $\id$, so $\mathrm{inc}$ is a homotopy equivalence. }
 \end{proof}
 
-The lower subcomplex admits a direct decomposition into augmented chain complexes of intervals.
+
+\old{
+\begin{proof}
+Since $P_{Z_0}e_W=R\,b_{Z_0W}$, the differential \eqref{eq:candidate-differential} evaluates to
+\begin{equation}
+ d_k\bigl((b_{Z_0W})^{(\underline{Z}_\ast)}\bigr)
+ =\bigl(b_{Z_1Z_0}b_{Z_0W}\bigr)^{(\underline{Z}_\ast^{\widehat{0}})}
+ +\sum_{i=1}^k(-1)^i
+ (b_{Z_0W})^{(\underline{Z}_\ast^{\widehat{i}})}.
+ \label{eq:evaluated-differential}
+\end{equation}
+Deleting a member of a chain whose largest member is at most $\underline{W}$ preserves this property, so the displayed modules form a subcomplex.
+
+For each chain $\underline{Z}_\ast$, the summand $(P_{Z_0}e_W)^{(\underline{Z}_\ast)}=R\,b_{Z_0W}^{(\underline{Z}_\ast)}$ is free of rank one, so we have an $R$-module isomorphism $\mathcal{P}_ke_W\cong C_k(\Delta(\D_X))$ given by $b_{Z_0W}^{(\underline{Z}_\ast)}\mapsto\langle\underline{Z}_\ast\rangle$. 
+Under this isomorphism we compare \eqref{eq:evaluated-differential} term by term with the face map $\partial_k$ of $C_\bullet(\Delta(\D_X))$, which is
+\[
+ \partial_k\langle\underline{Z}_\ast\rangle
+ =\langle\underline{Z}_\ast^{\widehat{0}}\rangle
+ +\sum_{i=1}^k(-1)^i\langle\underline{Z}_\ast^{\widehat{i}}\rangle.
+\]
+For $i\geq1$, the chain $\underline{Z}_\ast^{\widehat{i}}$ still starts with $\underline{Z}_0$, so $b_{Z_0W}^{(\underline{Z}_\ast^{\widehat{i}})}$ corresponds to $\langle\underline{Z}_\ast^{\widehat{i}}\rangle$, and these terms agree. The chain $\underline{Z}_\ast^{\widehat{0}}$ starts with $\underline{Z}_1$, so its basis element $b_{Z_1W}^{(\underline{Z}_\ast^{\widehat{0}})}$ corresponds to $\langle\underline{Z}_\ast^{\widehat{0}}\rangle$. The product $b_{Z_1Z_0}b_{Z_0W}$ is either $b_{Z_1W}$ or $0$, and by Lemma~\ref{lem:multiplication-criterion} with $(U,V)=(Z_0,Z_1)$ it is $b_{Z_1W}$ if and only if $(\underline{Z}_1\setminus\underline{Z}_0)\cap\underline{W}=\emptyset$. As $\underline{Z}_0\subseteq\underline{Z}_1$, we have
+\[
+ \underline{Z}_1\cap\underline{W}=(\underline{Z}_0\cap\underline{W})\sqcup\bigl((\underline{Z}_1\setminus\underline{Z}_0)\cap\underline{W}\bigr),
+\]
+so this condition says $\underline{Z}_0\cap\underline{W}=\underline{Z}_1\cap\underline{W}$. Hence the zeroth term of \eqref{eq:evaluated-differential} corresponds to
+\begin{equation}
+ \begin{cases}
+ \langle\underline{Z}_\ast^{\widehat{0}}\rangle, & \underline{Z}_0\cap\underline{W}=\underline{Z}_1\cap\underline{W},\\
+ 0, & \underline{Z}_0\cap\underline{W}\neq\underline{Z}_1\cap\underline{W}.
+ \end{cases}
+ \label{eq:zeroth-term}
+\end{equation}
+In other words, $d_k$ keeps the zeroth face of $\partial_k$ exactly when it does not change the intersection with $\underline{W}$. The faces that $d_k$ drops are recorded by
+\begin{equation}
+ \eta_k\langle\underline{Z}_0<\cdots<\underline{Z}_k\rangle:=
+ \begin{cases}
+ 0, & \underline{Z}_0\cap\underline{W}=\underline{Z}_1\cap\underline{W},\\
+ \langle\underline{Z}_1<\cdots<\underline{Z}_k\rangle, & \underline{Z}_0\cap\underline{W}\neq\underline{Z}_1\cap\underline{W}.
+ \end{cases}
+ \label{eq:removed-faces}
+\end{equation}
+Since $\langle\underline{Z}_1<\cdots<\underline{Z}_k\rangle=\langle\underline{Z}_\ast^{\widehat{0}}\rangle$, comparing \eqref{eq:zeroth-term} and \eqref{eq:removed-faces} case by case shows that the zeroth term of $d_k\langle\underline{Z}_\ast\rangle$ equals $\langle\underline{Z}_\ast^{\widehat{0}}\rangle-\eta_k\langle\underline{Z}_\ast\rangle$ in both cases. Together with the terms for $i\geq1$, this gives
+\[
+ d_k=\partial_k-\eta_k\qquad(k\geq1).
+\]
+
+To obtain the homotopy equivalence, we consider
+%\smallskip
+%\noindent\textit{Retraction and homotopy.}
+the map \[
+r_W: \D_X \longrightarrow \D_X^{\le\underline{W}}, \qquad \underline{Z}\mapsto \underline{Z}\cap\underline{W}, 
+\]
+where the equality follows from Lemma~\ref{lem:symmetric-difference-identities}\textup{(\ref{itm:symdiff-intersection})}. 
+It is order-preserving by Lemma~\ref{lem:symmetric-difference-identities}\textup{(\ref{itm:symdiff-interval})} and we have $r_W|_{\D_X^{\leq\underline{W}}} = \id$. 
+
+Let $\iota:=\iota_W$ and let $\rho:=(r_W)_\#$ be the induced chain map (whose degree $-1$ term is $\id_{I_Xe_W}$).
+Then we have $\rho\iota=\id$.  In particular, since $\iota_W$ is an injective chain map, it follows that $d_k\rho_k=\rho_{k-1}d_k$, i.e. $\rho$ is also a chain map.
+
+Now, applying Lemma~\ref{lem:order homotopy} to $f=r_W$ and $g=\id$ we obtain chain homotopy $h$, i.e. $\partial h+h\partial=g_\# - f_\# = \id-\iota\rho$, where 
+\[
+h_{-1}:=0, \;\;\text{and}\;\;
+ h_k\langle\underline{Z}_0<\cdots<\underline{Z}_k\rangle
+ =\sum_{j=0}^k(-1)^j
+ \langle r_W(\underline{Z}_0)\leq\cdots\leq r_W(\underline{Z}_j)\leq \underline{Z}_j<\cdots<\underline{Z}_k\rangle
+\]
+with summands having repeated entries regarded as zero. 
+By \eqref{eq:removed-faces}, this gives
+\[
+ dh+hd=(\partial h+h\partial) - (\eta h+h\eta) = \id-\iota\rho-(\eta h+h\eta).
+\]
+%Note that $h\eta$ has no degree $0$ term as $h_{-1}=0$. 
+
+It remains to show that $\eta h+h\eta=0$.
+%\smallskip
+%\noindent\textit{The removed faces cancel.}
+Fix a chain $\underline{Z}_\ast=(\underline{Z}_0<\cdots<\underline{Z}_k)$, and note that $r_W(\underline{Z}_i)\cap\underline{W}=r_W(\underline{Z}_i)$. 
+To compute $\eta h\langle\underline{Z}_\ast\rangle$ we look at the first two entries in the chain of each summand of $h_k\langle\underline{Z}_\ast\rangle$. 
+For the summand at $j=0$, these starting entries are $r_W(\underline{Z}_0)\le \underline{Z}_0$.  Since $r_W(\underline{Z}_0)\cap \underline{W} = \underline{Z}_0\cap\underline{W}$,  $\eta$ kills this summand. 
+For the other summands at $j\geq1$, the starting entries are $r_W(\underline{Z}_0)\le r_W(\underline{Z}_1)$.  We have two subcases to consider.
+
+\underline{$r_W(\underline{Z}_0)=r_W(\underline{Z}_1)$}: This summand itself is already $0$; otherwise $\eta$ removes $r_W(\underline{Z}_0)$ from the chain. 
+Hence, if $r_W(\underline{Z}_0)=r_W(\underline{Z}_1)$, then $\eta h\langle\underline{Z}_\ast\rangle=0$, and also $h\eta\langle\underline{Z}_\ast\rangle=0$ because $\eta\langle\underline{Z}_\ast\rangle=0$. 
+
+\underline{$r_W(\underline{Z}_0)\neq r_W(\underline{Z}_1)$}: We have $\eta\langle\underline{Z}_\ast\rangle=\langle\underline{Z}_1<\cdots<\underline{Z}_k\rangle$ and
+\begin{align*}
+ \eta h\langle\underline{Z}_\ast\rangle
+ &=\sum_{j=1}^k(-1)^j
+ \langle r_W(\underline{Z}_1)\leq\cdots\leq r_W(\underline{Z}_j)\leq\underline{Z}_j<\cdots<\underline{Z}_k\rangle\\
+ &=-h_{k-1}\langle\underline{Z}_1<\cdots<\underline{Z}_k\rangle\\
+ &=-h\eta\langle\underline{Z}_\ast\rangle,
+\end{align*}
+as required.
+\end{proof}
+}
+
 
 \begin{prop}\label{prop:lower-subcomplex-exact}
-For every $W\in\mathcal J(P)$, the complex $\widetilde{\mathcal P}_\bullet^{\leq W}$ is exact.
+For every $W\in\mathcal J(P)$, the complex $\widetilde{\mathcal P}_\bullet^{\leq \underline{W}}$ is exact.
 \end{prop}
 
 \begin{proof}
@@ -1335,23 +1339,25 @@ Now let $(\underline{Y},\underline{W}]:=\{\underline{T}\in\D_X\mid \underline{Y}
  K_{Y,\bullet}
  \xrightarrow{\sim}
  \widetilde C_\bullet
- \bigl(\Delta((\underline{Y},\underline{W}])\bigr)[1],
+ \Bigl(\Delta\big((\underline{Y},\underline{W}]\big)\Bigr)[1],
 \]  
 where $[1]$ denotes the shift of the complex (so that $(\widetilde{C}_\bullet[1])_0 = \widetilde{C}_{-1}$).
 %It is straightforward to check that the signs agree with \eqref{eq:evaluated-differential}.  
 Since $\underline{W}$ is the maximum of $(\underline{Y},\underline{W}]$, its order complex is a cone and its augmented chain complex is exact.
 
-When $\underline{Y}=\underline{W}$, one has $Y=W$.  The complex $K_{W,\bullet}$ is concentrated in degree zero, and $d_0=\phi_We_W\colon K_{W,0}\longrightarrow I_Xe_W$ is a homomorphism between free $R$-modules of rank one sending the canonical basis element to the canonical dual basis element, hence an isomorphism.  Therefore
+When $\underline{Y}=\underline{W}$, one has $Y=W$.  The complex $K_{W,\bullet}$ is concentrated in degree zero, and $d_0: K_{W,0}\longrightarrow I_Xe_W$ is an isomorphism between free $R$-modules of rank $1$ sending $e_W\mapsto b_{W,X}^*$.  
+
+Combining the two cases, we obtain a direct sum decomposition
 \[
- \widetilde{\mathcal P}_\bullet^{\leq W}
- =\left(\bigoplus_{\underline{Y}<\underline{W}}K_{Y,\bullet}\right)
+ \widetilde{\mathcal P}_\bullet^{\leq \underline{W}}
+ =\Big(\bigoplus_{\underline{Y}<\underline{W}}K_{Y,\bullet}\Big)
  \oplus\left(K_{W,0}\xrightarrow{\sim}I_Xe_W\right)
 \]
-is a direct sum of exact complexes.
+of exact complexes, which shows the exacteness of $\widetilde{P}_\bullet^{\le W}$.
 \end{proof}
 
 \begin{proof}[Proof of Theorem~\ref{thm:exactness}]
-For every $W\in\mathcal J(P)$, Proposition~\ref{prop:lower-deformation-retract} identifies $\widetilde{\mathcal P}_\bullet e_W$, up to homotopy, with the exact complex $\widetilde{\mathcal P}_\bullet^{\leq W}$ from Proposition~\ref{prop:lower-subcomplex-exact}.  Hence every $\widetilde{\mathcal P}_\bullet e_W$ is exact, and so taking the direct sum over $W\in \mathcal{J}(P)$ yields an exact complex $\widetilde{\mathcal P}_\bullet =\bigoplus_{W\in\mathcal J(P)} \widetilde{\mathcal P}_\bullet e_W$.
+For every $W\in\mathcal J(P)$, Proposition~\ref{prop:lower-deformation-retract} identifies $\widetilde{\mathcal P}_\bullet e_W$, up to homotopy, with the exact complex $\widetilde{\mathcal P}_\bullet^{\leq \underline{W}}$ from Proposition~\ref{prop:lower-subcomplex-exact}.  Hence every $\widetilde{\mathcal P}_\bullet e_W$ is exact, and so taking the direct sum over $W\in \mathcal{J}(P)$ yields an exact complex $\widetilde{\mathcal P}_\bullet =\bigoplus_{W\in\mathcal J(P)} \widetilde{\mathcal P}_\bullet e_W$.
 \end{proof}
 
 \begin{eg}\label{subsec:eg3}
@@ -1362,7 +1368,7 @@ We continue with Examples~\ref{subsec:eg1} and~\ref{subsec:eg2}. Put $W=[13]$, s
  0\longrightarrow\mathcal P_2e_W\xrightarrow{d_2e_W}\mathcal P_1e_W\xrightarrow{d_1e_W}\mathcal P_0e_W\xrightarrow{d_0e_W}I_{[1]}e_W\longrightarrow0.
 \]
 
-Explicitly, $\mathcal P_ke_W$ is obtained from the displayed expression for $\mathcal P_k$ by replacing every labelled copy $P_Z^{(\underline{Z}_\ast)}$ by $P_Ze_W^{(\underline{Z}_\ast)}$.  The lower subcomplex consists of the labelled copies for which every member of $\underline{Z}_\ast$ is contained in $\underline{W}=\{3\}$.  It is
+Explicitly, $\mathcal P_ke_W$ is obtained from the displayed expression for $\mathcal P_k$ by replacing every labelled copy $P_Z^{(\underline{Z}_\ast)}$ by $P_Ze_W^{(\underline{Z}_\ast)}$.  The subcomplex $\mathcal{P}_\bullet^{\le\underline{W}}$ consists of the labelled copies for which every member of $\underline{Z}_\ast$ is contained in $\underline{W}=\{3\}$.  It is
 \[
  0\longrightarrow(P_{[1]}e_{[13]})^{(\emptyset<\{3\})}\xrightarrow{d_1}(P_{[1]}e_{[13]})^{(\emptyset)}\oplus(P_{[13]}e_{[13]})^{(\{3\})}\xrightarrow{d_0}I_{[1]}e_{[13]}\longrightarrow0.
 \]
@@ -1496,7 +1502,10 @@ The bound in Proposition~\ref{prop:n-2-inequalities} is optimal at least of $|P|
 \section{Morse reduction and the minimal projective resolution}
 \label{sec:minimal-morse}
 
-While we now know that ${\mathcal P}_\bullet$ is a projective resolution of $I_X$, it is far from being minimal.  To obtain a minimal resolution, we apply algebraic Morse theory \cite{CLZ26} to remove its invertible differential components. Throughout, we require the ground ring $R=\Bbbk$ to be a field.
+While we now know that ${\mathcal P}_\bullet$ is a projective resolution of $I_X$, it is far from being minimal.  To obtain a minimal resolution, we apply algebraic Morse theory \cite{CLZ26} to remove its invertible differential components. 
+This allows us to describe the term using homologies of $\Delta(\D_X^{>Z})$, which can be used to show (in subsection \ref{subsec:CM regularity}) a reformation of $\pdim I_X$ in terms of Castelnuovo--Mumford regularity of certain Stanley--Reisner ring.
+
+Throughout, we require the ground ring $R=\Bbbk$ to be a field.
 
 \subsection{Algebraic Morse theory}
 \label{subsec:algebraic-morse}
@@ -1583,9 +1592,11 @@ In particular, if $X_\bullet$ is a projective resolution of a module, then its M
 \subsection{Construction of the Morse matching}
 \label{subsec:construction-morse-matching}
 
-Let us first explain the idea of how to find a Morse matching. The differential formula~\eqref{eq:candidate-differential} separates the faces of a strict chain into two types: the zeroth face deletes its initial member, whereas the remaining faces preserve the initial member.  Under the identification~\eqref{eq:candidate-terms}, these two contributions give a decomposition $d=\delta+\partial$, where the non-zero components of $\partial$ are signed identity maps between copies of the same projective, while those of $\delta$ are induced by the left-multiplication map (more precise formulation will come after the next paragraph).
+Let us first explain the idea of how to find a Morse matching. The differential formula~\eqref{eq:candidate-differential} separates the faces of a strict chain into two types: the zeroth face deletes its initial member, whereas the remaining faces preserve the initial member.  Under the identification~\eqref{eq:candidate-terms}, these two contributions give a decomposition $d=\eta+\partial$, where the non-zero components of $\partial$ are signed identity maps between copies of the same projective, while those of $\eta$ are induced by the left-multiplication map (more precise formulation will come after the next paragraph); c.f. this separation is also used in the proof of Proposition \ref{prop:lower-deformation-retract}.
 
-The difficulty of finding a Morse matching is that the signed identity components of $\partial$ need not themselves form a partial matching, since several of them may share a source or target (see Example \ref{subsec:eg2}). The `solution' is use homological perturbation theory~\cite{GL89} does: decompose using a choice of kernel--image splitting for each chain complex $C_\bullet(\Delta^{>\underline{Z}})$. With respect to this new choice of decomposition, the matrix components of both $\partial$ and $\delta$ will change, but $\partial$ becomes a collection of isomorphisms with pairwise disjoint endpoints, whereas every matrix component arising from $\delta$ is still a radical map.  The former components will define the Morse matching, and the latter property will control its zigzag paths.
+We want to use Morse matching to eliminate the identity components in the differential, but several of them may share a source or target (see Example \ref{subsec:eg2}) which obstructs any simple choice of components to form a Morse matching. 
+The `solution' is to use homological perturbation theory~\cite{GL89}: decompose using a choice of kernel--image splitting for each chain complex $C_\bullet(\Delta^{>\underline{Z}})$. 
+With respect to this new choice of decomposition, $\partial$ will naturally define a collection of isomorphisms with pairwise disjoint endpoints, whereas $\eta$ only contributes radical maps.  This allows us to obtain a Morse matching that reduces $\mathcal{P}_\bullet$ to a minimal resolution.
 
 \medskip
 
@@ -1597,9 +1608,9 @@ We now construct the matching. All tensor products below are over $\Bbbk$. For $
 \]
 where $\partial^Z_k = -\partial_{k-1}$ is the negative of the boundary map on $\widetilde{C}_\bullet(\Delta^{>\underline{Z}})$. Thus $C_{Z,0}=\Bbbk 1_Z$, $C_{Z,k}=0$ for $k<0$, and $\partial^Z_0=0$.
 
-For $\underline{Z}<\underline{T}$ and $k\geq1$, define $\delta_{T,Z,k}:C_{Z,k}\to C_{T,k-1}$ on the standard basis by
+For $\underline{Z}<\underline{T}$ and $k\geq1$, define $\eta_{T,Z,k}:C_{Z,k}\to C_{T,k-1}$ on the standard basis by
 \[
- \delta_{T,Z,k}\langle \underline{Z}_1<\cdots<\underline{Z}_k\rangle
+ \eta_{T,Z,k}\langle \underline{Z}_1<\cdots<\underline{Z}_k\rangle
  =
  \begin{cases}
   1_T,&T=Z_1\text{ and }k=1,\\
@@ -1612,14 +1623,14 @@ Note that here we have $\underline{Z}<\underline{Z}_1<\cdots<\underline{Z}_k$; w
 Under \eqref{eq:candidate-terms},  we have
 \[
  \begin{aligned}
- d_k&=\partial_k+\delta_k:
+ d_k&=\partial_k+\eta_k:
        \mathcal P_k\longrightarrow\mathcal P_{k-1}, \quad \text{ for all $k\ge 1$,}\\
  \text{ with } \partial_k&:=\bigoplus_Z\id_{P_Z}\otimes\partial^Z_k,
  \qquad
- \delta_k:=\sum_{\underline{Z}<\underline{T}}\mu_{T,Z}\otimes\delta_{T,Z,k}.
+ \eta_k:=\sum_{\underline{Z}<\underline{T}}\mu_{T,Z}\otimes\eta_{T,Z,k}.
  \end{aligned}
 \]
-The $(T,Z)$-component of $\delta_k$ has source $P_Z\otimes C_{Z,k}$ and target $P_T\otimes C_{T,k-1}$. Recall that $\mu_{T,Z}:P_Z\to P_T$ is given by $p\mapsto b_{TZ}p$.
+The $(T,Z)$-component of $\eta_k$ has source $P_Z\otimes C_{Z,k}$ and target $P_T\otimes C_{T,k-1}$. Recall that $\mu_{T,Z}:P_Z\to P_T$ is given by $p\mapsto b_{TZ}p$.
 
 % \old{For $k\geq1$, let $\underline{Z}_\ast=(\underline{Z}<\underline{Z}_1<\cdots<\underline{Z}_k)$ be a chain in $\mathcal D_X$ and let $p\in P_Z$. Under the identification~\eqref{eq:candidate-terms}, the element $p^{(\underline{Z}_\ast)}$ corresponds to $p\otimes\langle\underline{Z}_1<\cdots<\underline{Z}_k\rangle\in P_Z\otimes C_{Z,k}$.}
 % \comment{not needed here, the formulation at this point does not use $P_Z^{(\underline{Z}_\ast)}$}
@@ -1627,7 +1638,7 @@ The $(T,Z)$-component of $\delta_k$ has source $P_Z\otimes C_{Z,k}$ and target $
 Since $\Bbbk$ is a field, choose, for every $Z$ and $k\geq0$, a decomposition
 \begin{equation}
  C_{Z,k}=B_{Z,k}\oplus H_{Z,k}\oplus L_{Z,k}\;
-\text{ for all $k\ge 1$, where } 
+\text{ for all $k\ge 0$, where } 
 \begin{cases}
     B_{Z,k}:=\Image\partial^Z_{k+1},\\
     B_{Z,k}\oplus H_{Z,k}=\Ker\partial^Z_k,\\
@@ -1648,7 +1659,7 @@ Use the resulting decomposition
        (P_Z\otimes H_{Z,k})\oplus
        (P_Z\otimes L_{Z,k})\bigr)
 \]
-to form the weighted quiver of the resolution part $\mathcal P_\bullet$, that is, the vertices of the weighted quiver at degree $k$ are given by $(Z,E)$ for $Z\in\mathcal{J}(P)$ and $E\in\{B,H,L\}$ such that the summand $P_Z\otimes E_{Z,k}$ is non-zero.  Note that the map $\partial_k$ sends $P_Z\otimes C_{Z,k}$ into $P_Z\otimes C_{Z,k-1}$, whereas $\delta_k$ sends it into $\bigoplus_{\underline{Z}<\underline{T}}P_T\otimes C_{T,k-1}$.
+to form the weighted quiver of the resolution part $\mathcal P_\bullet$, that is, the vertices of the weighted quiver at degree $k$ are given by $(Z,E)$ for $Z\in\mathcal{J}(P)$ and $E\in\{B,H,L\}$ such that the summand $P_Z\otimes E_{Z,k}$ is non-zero.  Note that the map $\partial_k$ sends $P_Z\otimes C_{Z,k}$ into $P_Z\otimes C_{Z,k-1}$, whereas $\eta_k$ sends it into $\bigoplus_{\underline{Z}<\underline{T}}P_T\otimes C_{T,k-1}$.
 
 
 \begin{thm}\label{thm:minimal-resolution}
@@ -1681,21 +1692,21 @@ where $\widetilde\beta_{Z,k}:= \dim_{\Bbbk}\widetilde H_{k-1}(\Delta^{>\underlin
 \end{thm}
 
 \begin{proof} 
-To see that $\mathcal M$ is a partial matching, notice first that both the source $P_Z\otimes L_{Z,k}$ and the target $P_Z\otimes B_{Z,k-1}$ of each displayed map have label $Z$. Since every nonzero component of $\delta_k$ changes the label from $Z$ to some $T$ with $\underline{Z}<\underline{T}$, the component of $\delta_k$ between these two summands is zero. Hence the component of $d_k=\partial_k+\delta_k$ from $P_Z\otimes L_{Z,k}$ to $P_Z\otimes B_{Z,k-1}$ is exactly $\id_{P_Z}\otimes\left.\partial^Z_k\right|_{L_{Z,k}}$. Their endpoints are pairwise disjoint and their weights are isomorphisms, so $\mathcal M$ is a partial matching.
+To see that $\mathcal M$ is a partial matching, notice first that both the source $P_Z\otimes L_{Z,k}$ and the target $P_Z\otimes B_{Z,k-1}$ of each displayed map have label $Z$. Since every nonzero component of $\eta_k$ changes the label from $Z$ to some $T$ with $\underline{Z}<\underline{T}$, the component of $\eta_k$ between these two summands is zero. Hence the component of $d_k=\partial_k+\eta_k$ from $P_Z\otimes L_{Z,k}$ to $P_Z\otimes B_{Z,k-1}$ is exactly $\id_{P_Z}\otimes\left.\partial^Z_k\right|_{L_{Z,k}}$. Their endpoints are pairwise disjoint and their weights are isomorphisms, so $\mathcal M$ is a partial matching.
 
 To show that $\mathcal M$ is a Morse matching, by Proposition~\ref{prop:morse-sufficient-condition}, it suffices to show that $\mathcal M$ has no infinite zigzag path.
-Indeed, since every nonzero component of $\partial$ belongs to $\mathcal M$, every unmatched arrow in $Q^{\mathcal M}$ is a component of $\delta$. Thus, for $k\geq1$, every unmatched arrow has the form
+Indeed, since every nonzero component of $\partial$ belongs to $\mathcal M$, every unmatched arrow in $Q^{\mathcal M}$ is a component of $\eta$. Thus, for $k\geq1$, every unmatched arrow has the form
 \[
  P_Z\otimes E_{Z,k}
- \xrightarrow{\mu_{T,Z}\otimes\delta'_{T,Z}}
+ \xrightarrow{\mu_{T,Z}\otimes\eta'_{T,Z}}
  P_T\otimes F_{T,k-1}
  \quad \text{ with }\underline{Z}<\underline{T},
 \]
-for appropriate $E,F\in\{B,H,L\}$ and the map $\delta'_{T,Z}$ is given by the composition
+for appropriate $E,F\in\{B,H,L\}$ and the map $\eta'_{T,Z}$ is given by the composition
 \begin{equation*}\label{eq:delta'}
- \delta'_{T,Z}:
+ \eta'_{T,Z}:
  E_{Z,k}\hookrightarrow C_{Z,k}
- \xrightarrow{\delta_{T,Z,k}}C_{T,k-1}
+ \xrightarrow{\eta_{T,Z,k}}C_{T,k-1}
  \twoheadrightarrow F_{T,k-1}.
 \end{equation*}
 On the other hand, every reversed matching goes from $P_Z\otimes B_{Z,k-1}$ to $P_Z\otimes L_{Z,k}$. Hence, along a zigzag path, reversed matchings preserve the label $\underline{Z}\in\mathcal D_X$, whereas unmatched arrows strictly increase it. 
@@ -1705,10 +1716,10 @@ Theorem~\ref{thm:algebraic-morse} yields a Morse complex $(\mathcal P_{\min,\bul
 Its terms are projective, and $\mathcal P_\bullet$ resolves $I_X$ by Theorem~\ref{thm:exactness}.  Hence $\mathcal P_{\min,\bullet}$ is a projective resolution of $I_X$.  To see that the individual terms are as described in \eqref{eq:minimal-terms}, recall from our choice of decomposition \eqref{eq:homology-splitting} and $\mathcal{M}$ that every nonzero summand $P_Z\otimes B_{Z,k}$ is matched with $P_Z\otimes L_{Z,k+1}$.
 Thus the critical summands in degree $k$ are precisely the nonzero $P_Z\otimes H_{Z,k}$. Together with $H_{Z,k}\cong\widetilde H_{k-1}(\Delta^{>\underline{Z}})$ yields the required description \eqref{eq:minimal-terms}. 
 
-It remains to prove minimality. Note that every unmatched arrow has weight $\mu_{T,Z}\otimes\delta'_{T,Z}:P_Z\otimes E_{Z,k}\to P_T\otimes F_{T,k-1}$, where $k\geq1$ and $\underline{Z}<\underline{T}$, with appropriate $E,F\in\{B,H,L\}$.
+It remains to prove minimality. Note that every unmatched arrow has weight $\mu_{T,Z}\otimes\eta'_{T,Z}:P_Z\otimes E_{Z,k}\to P_T\otimes F_{T,k-1}$, where $k\geq1$ and $\underline{Z}<\underline{T}$, with appropriate $E,F\in\{B,H,L\}$.
 Since $Z\neq T$, we have $b_{TZ}\in e_T\rad\Sigma_{\mathcal J(P)}$, which implies that the map $\mu_{T,Z}$ given by left-multiplying $b_{TZ}$ is radical.  Hence, we have
 \begin{equation}\label{eq:image muTZ otimes delta'}    
- \Image(\mu_{T,Z}\otimes\delta'_{T,Z})
+ \Image(\mu_{T,Z}\otimes\eta'_{T,Z})
  \subseteq (P_T\rad\Sigma_{\mathcal J(P)})\otimes F_{T,k-1}
  = \rad P_T\otimes F_{T,k-1}.
 \end{equation}
@@ -1777,29 +1788,12 @@ For the remaining sets with non-zero degree one terms, take
 \end{align*}
 All unlisted spaces in the decomposition \eqref{eq:homology-splitting} are zero.
 
-\new{The internal differential $\partial^{[1]}_2$ is the negative of the simplicial boundary, so on $L_{[1],2}=C_{[1],2}$ it sends each basis element $\langle\underline a<\underline c\rangle$ to $\langle\underline a\rangle-\langle\underline c\rangle$. In particular it maps the four generators of $L_{[1],2}$ displayed above, in the given order, onto the four generators of $B_{[1],1}$.}
-\old{The restriction of the internal differential to $L_{[1],2}$ is given by
-\begin{align*}
- \langle\underline{1}<\underline{13}\rangle
-   &\longmapsto
-   \langle\underline{1}\rangle-\langle\underline{13}\rangle,&
- \langle\underline{3}<\underline{13}\rangle
-   &\longmapsto
-   \langle\underline{3}\rangle-\langle\underline{13}\rangle,\\
- \langle\underline{3}<\underline{23}\rangle
-   &\longmapsto
-   \langle\underline{3}\rangle-\langle\underline{23}\rangle,&
- \langle\underline{2}<\underline{23}\rangle
-   &\longmapsto
-   \langle\underline{2}\rangle-\langle\underline{23}\rangle.
-\end{align*}}
-\comment{ask AI for simplification proposal, put in new-tag, but current exposition in old-tag.}
-\comment{Claude: the four displayed maps are just the four instances of one formula, and they are also what defines the list of $B_{[1],1}$ above. The next sentence (``Moreover, $\partial^Z_1$ sends\dots'') can stay.}
+The map $\partial^{Z=[1]}_2$ is the negative of the simplicial boundary, so on $L_{[1],2}=C_{[1],2}$ it sends each basis element $\langle\underline a<\underline c\rangle$ to $\langle\underline a\rangle-\langle\underline c\rangle$.  In particular it maps the four generators of $L_{[1],2}$ displayed above, in the given order, onto the four generators of $B_{[1],1}$.
 Moreover, $\partial^Z_1$ sends the displayed generator of each $L_{Z,1}$ to $-1\in B_{Z,0}$.  These eight isomorphisms have pairwise disjoint endpoints and are selected for the Morse matching.  In terms of the colors in Figure~\ref{fig:complex-picture}, the yellow part gives four matching components from degree two to degree one and one from degree one to degree zero, while the blue, green, and orange parts each give one matching component from degree one to degree zero. In particular, the two green arrows have the same target and both have weight $-1$. After change of basis, the green part therefore contributes one matching component from $P_{[13]}\otimes L_{[13],1}$ to $P_{[13]}\otimes B_{[13],0}$,  while the difference $\langle\underline{13}\rangle-\langle\underline{23}\rangle$ spans $H_{[13],1}$ and determines the critical summand $P_{[13]}\otimes H_{[13],1}$.
 
-The matrix components of $\delta$ also change.  For example, $ \delta_2\bigl( p\otimes\langle\underline{3}<\underline{23}\rangle \bigr) =b_{[13][1]}p\otimes\langle\underline{23}\rangle, $ and, in the chosen decomposition of $C_{[13],1}$, we get that $\langle\underline{23}\rangle =\langle\underline{13}\rangle -\bigl( \langle\underline{13}\rangle- \langle\underline{23}\rangle \bigr)$. It thus produces two matrix components, of weights $b_{[13][1]}$ and $-b_{[13][1]}$, respectively.  Similarly,
+The matrix components of $\delta$ also change.  For example, $ \eta_2\bigl( p\otimes\langle\underline{3}<\underline{23}\rangle \bigr) =b_{[13][1]}p\otimes\langle\underline{23}\rangle, $ and, in the chosen decomposition of $C_{[13],1}$, we get that $\langle\underline{23}\rangle =\langle\underline{13}\rangle -\bigl( \langle\underline{13}\rangle- \langle\underline{23}\rangle \bigr)$. It thus produces two matrix components, of weights $b_{[13][1]}$ and $-b_{[13][1]}$, respectively.  Similarly,
 \[
- \delta_1\bigl(
+ \eta_1\bigl(
  p\otimes(
  \langle\underline{3}\rangle-\langle\underline{13}\rangle)
  \bigr)
@@ -1924,15 +1918,15 @@ The two summands $P_{[3]}$ and $P_{[123]}$ without any highlight in Figure~\ref{
 Note that this example shows that the bound $|P|-2=1$ in Proposition~\ref{prop:n-2-inequalities} is attained.
 \end{eg}
 
-\subsection{Projective dimension and Castelnuovo--Mumford regularity}
+\subsection{Projective dimension and Castelnuovo--Mumford regularity}\label{subsec:CM regularity}
 The formula for $\pdim I_X$ looks very close to the following characterisation of Castelnuovo--Mumford regularity via reduced homology:
 \begin{align}
 \pdim I_X
 &=\max\{k\geq 0:\widetilde H_{k-1}(\Delta^{>\underline{Z}})\neq 0 \text{ for some }Z\in \mathcal{J}(P)\}, \\
-\operatorname{reg}\Bbbk[K]
-&=\max\{k\geq 0:\widetilde H_{k-1}(\operatorname{lk}_K F)\neq 0 \text{ for some }F\in K\}. \label{eq:reg=non-vanishing homology}
+\operatorname{reg}\Bbbk[\Delta]
+&=\max\{k\geq 0:\widetilde H_{k-1}(\operatorname{lk}_\Delta F)\neq 0 \text{ for some face }F\in \Delta\}. \label{eq:reg=non-vanishing homology}
 \end{align}
-Here $\Bbbk[K]$ is the Stanley--Reisner ring of a finite simplicial complex $K$, and $\operatorname{reg}$ denotes the Castelnuovo--Mumford regularity (see Definition \ref{def:SR ring} and Lemma \ref{lem:Hochshster easier}). This motivates us to seek a complex $K$ for which the two equations coincide -- it turns out that such a $K$ is given by the simplicial complex $\mathcal{S}_X$ `generated by $\mathcal{D}_X$', namely,\[
+Here $\Bbbk[\Delta]$ is the Stanley--Reisner ring of a finite simplicial complex $K$, and $\operatorname{reg}$ denotes the Castelnuovo--Mumford regularity (see Definition \ref{def:SR ring} and Lemma \ref{lem:Hochshster easier}). This motivates us to seek a complex $\Delta$ for which the two equations coincide -- it turns out that such a $\Delta$ is given by the simplicial complex $\mathcal{S}_X$ `generated by $\mathcal{D}_X$', namely,\[
 \mathcal S_X:=\{U\subseteq P \mid U\subseteq \underline{Y} \text{ for some }\underline{Y}\in\mathcal D_X\} = \bigcup_{\underline{Y}\in \max \D_X} 2^{\underline{Y}}.
 \]
 
@@ -1966,7 +1960,7 @@ is well-defined, preserves inclusion, and satisfies $F\subseteq c(F)$.
 \end{lem}
 
 \begin{proof}
-For $Y,Z\in\mathcal{J}(P)$, we have an order ideal $\nabla^{Y,Z}_X$ so that $\underline{\nabla^{Y,Z}_X} = \underline{Y}\cap \underline{Z}$ by Lemma~\ref{lem:symmetric-difference-identities}\textup{(\ref{itm:symdiff-intersection})}. Hence, closure under intersections of non-empty finite families follows by induction.
+For $Y,Z\in\mathcal{J}(P)$, we have an order ideal $m(X,Y,Z)$ so that $\underline{m(X,Y,Z)} = \underline{Y}\cap \underline{Z}$ by Lemma~\ref{lem:symmetric-difference-identities}\textup{(\ref{itm:symdiff-intersection})}. Hence, closure under intersections of non-empty finite families follows by induction.
 
 Every $F\in\mathcal S_X$ is contained in a facet, so the family defining $c(F)$ is non-empty. Closure under intersections gives $c(F)\in\mathcal D_X$, and every set in the intersection contains $F$. If $F\subseteq G$, the family of facets containing $G$ is contained in the family containing $F$. Therefore $c(F)\subseteq c(G)$.
 \end{proof}
@@ -2004,11 +1998,7 @@ which proves the claim.
 Now we need to look at the reduce homologies of links of faces $F\in \mathcal{S}_X\setminus \D_X$.
 
 \begin{lem}\label{lem:bad face has 0 homology link}
-If $F\in\mathcal S_X$ and $F\notin\mathcal D_X$, then $\operatorname{lk}_{\mathcal S_X}(F)$ is a cone. In particular,
-\[
-\widetilde H_i\bigl(\operatorname{lk}_{\mathcal S_X}(F)\bigr)=0
-\qquad\text{for every }i.
-\]
+If $F\in\mathcal S_X$ and $F\notin\mathcal D_X$, then $\operatorname{lk}_{\mathcal S_X}(F)$ is a cone. In particular, $\widetilde H_i\bigl(\operatorname{lk}_{\mathcal S_X}(F)\bigr)=0$ for every $i$.
 \end{lem}
 
 \begin{proof}
@@ -2020,42 +2010,68 @@ For $G\in\operatorname{lk}_{\mathcal S_X}(F)$, choose a facet $\underline{Y}$ co
 Let us review the necessary background we need about Stanley--Reisner ring before proving Theorem \ref{thm:pdim=reg}.
 
 \begin{dfn}\label{def:SR ring}
-Let $K$ be a finite simplicial complex and put $S_{\Bbbk}(K):=\Bbbk[x_v\mid v\in V(K)]$, with $\deg x_v=1$. Its \emph{Stanley--Reisner ideal} and \emph{Stanley--Reisner ring} are
+Let $\Delta$ be a finite simplicial complex and put $S(\Delta):=\Bbbk[x_v\mid v\in V(\Delta)]$, with $\deg x_v=1$. Its \emph{Stanley--Reisner ideal} and \emph{Stanley--Reisner ring} are
 \[
-I(K):=\left(\prod_{v\in F}x_v\ \middle|\ F\subseteq V(K),\ F\notin K\right),
-\qquad \Bbbk[K]:=S(K)/I(K).
+I(\Delta):=\left(\prod_{v\in F}x_v\ \middle|\ F\subseteq V(\Delta),\ F\notin \Delta\right), \quad \text{and}
+\quad \Bbbk[\Delta]:=S(\Delta)/I(\Delta) \text{ respectively}.
 \]
-Thus a product of distinct variables is non-zero in $\Bbbk[K]$ precisely when its support is a face of $K$.
+Thus a product of distinct variables is non-zero in $\Bbbk[\Delta]$ precisely when its support is a face of $\Delta$.
 
-Write the $i$-th term of the minimal graded free resolution of $\Bbbk[K]$ over $S_{\Bbbk}(K)$ as $\bigoplus_j S_{\Bbbk}(K)(-j)^{\oplus \beta_{i,j}}$, where $(-j)$ denotes the grading shift so that $1\in S_{\Bbbk}(K)(-j)$ is in degree $j$. The \emph{Castelnuovo--Mumford regularity} is
+Consider a minimal graded free resolution of $\Bbbk[\Delta]$ over $S(\Delta)$, and let $\beta_{i,j}$ be the multiplicity of $S(\Delta)(-j)$ in the $i$-term, where $(-j)$ denotes the grading shift so that $1\in S(\Delta)(-j)$ is in degree $j$. The \emph{Castelnuovo--Mumford regularity} is
 \[
-\operatorname{reg}\Bbbk[K]:=\max\{j-i\mid\beta_{i,j}\neq0\}.
+\operatorname{reg}\Bbbk[\Delta]:=\max\{j-i\mid\beta_{i,j}\neq0\}.
 \]
-For $K=\{\emptyset\}$, set $S_{\Bbbk}(K)=\Bbbk$, so $\operatorname{reg}\Bbbk[K]=0$.
+For the trivial complex $\Delta=\{\emptyset\}$, set $S(\Delta)=\Bbbk$, so $\operatorname{reg}\Bbbk[\Delta]=0$.
 \end{dfn}
 
 \begin{lem}\label{lem:Hochshster easier}{\rm\cite{HH11}}
-For every finite simplicial complex $K$,
+For every finite simplicial complex $\Delta$,
 \[
-\operatorname{reg}\Bbbk[K]
-=\max\{k\geq0\mid\widetilde H_{k-1}(\operatorname{lk}_K(F))\neq0
-\text{ for some }F\in K\}.
+\operatorname{reg}\Bbbk[\Delta]
+=\max\{k\geq0\mid\widetilde H_{k-1}(\operatorname{lk}_\Delta(F))\neq0
+\text{ for some }F\in \Delta\}.
 \]
 \end{lem}
 
 \begin{proof}
-This is a reformulation of Hochster's formula (see \cite{Hoc77}) and interpretation of Castelnuovo--Mumford regularity using local cohomology; we clarify the reason for completeness and refer unexplained terminologies and references to \cite[Section A.7]{HH11}.  Let $S:=S_{\Bbbk}(K)$ and $M:=S_{\Bbbk}(K)/I(K)$.
-Consider the local cohomology $H^i_{\mathfrak{m}}(M)$, which is a $\ZZ^{V(K)}$-graded module.
-Now we have equality
+This is a reformulation of Hochster's formula (see \cite{Hoc77}) and interpretation of Castelnuovo--Mumford regularity using local cohomology that seems to known to expert but not explicitly written in the literature under our setting ($\Bbbk$ is an arbitrary field); we clarify the reason for completeness and refer unexplained terminologies and references to \cite[Section A.7]{HH11}.  
+
+Let $S:=S(\Delta)$ and $M:=\Bbbk[\Delta]=S(\Delta)/I(\Delta)$.
+Consider the local cohomology $H^i_{\mathfrak{m}}(M)$, which is a $\ZZ^{V(\Delta)}$-graded module.  The Castelnuovo--Mumford regularity can be rephrased in terms of the totalised $\ZZ$-grading, that is,
 \begin{align*}
 \operatorname{reg}(M) 
-&=\max\{i+j\mid H^i_{\mathfrak m}(M)_j\neq 0, \ j\in \ZZ\}\\
-&=\max \{ i+\sum_v \alpha_v \mid H^i_{\mathfrak m}(M)_\alpha \neq 0, \ \alpha\in \ZZ^{V(K)}\}\\
-&=\max\{i-|F| \,:\, \widetilde H_{i-|F|-1}(\operatorname{lk}_K F)\neq0,\ F\in K\},
+&=\max\{i+j\mid H^i_{\mathfrak m}(M)_j\neq 0, \ j\in \ZZ\}
+=\max \{ i+\sum_v \alpha_v \mid H^i_{\mathfrak m}(M)_\alpha \neq 0, \ \alpha\in \ZZ^{V(\Delta)}\}.
 \end{align*}
-where the first equality is the local cohomology reformulation, the second follows by un-collapsing the total $\ZZ$-grading to the $\ZZ^{V(K)}$-grading, and the last equality follows from Hochster's formula \cite[Theorem A.7.3]{HH11} \comment{there is some reindexing and relabeling hiding.  Clarify: let AI handle this.}.
-\new{Let us make the last two steps explicit. Hochster's formula, in its local cohomology form, says that $H^i_{\mathfrak m}(\Bbbk[K])_\alpha=0$ unless $\alpha_v\leq0$ for all $v$ and $F:=\{v\mid\alpha_v<0\}$ is a face of $K$, and that in this case $\dim_{\Bbbk}H^i_{\mathfrak m}(\Bbbk[K])_\alpha=\dim_{\Bbbk}\widetilde H_{i-|F|-1}(\operatorname{lk}_KF;\Bbbk)$, which depends on $\alpha$ only through its support $F$. For such $\alpha$ we have $\sum_v\alpha_v=-\sum_{v\in F}|\alpha_v|\leq-|F|$, with equality exactly when $\alpha_v=-1$ for all $v\in F$. Hence, for fixed $i$ and $F\in K$, the largest value of $i+\sum_v\alpha_v$ over all $\alpha$ with support $F$ and $H^i_{\mathfrak m}(\Bbbk[K])_\alpha\neq0$ is $i-|F|$, and such an $\alpha$ exists if and only if $\widetilde H_{i-|F|-1}(\operatorname{lk}_KF)\neq0$. Taking the maximum over $i$ and $F$ gives the last line of the display.}
-Note that $\widetilde{H}_{i-|F|-1}(\operatorname{lk}_KF)\neq 0$ implies that $i-|F|-1\ge -1$, and so $i-|F|$ is always non-negative, and we get the stated formula.
+We claim that
+\[
+\max \{ i+\sum_v \alpha_v \mid H^i_{\mathfrak m}(M)_\alpha \neq 0, \ \alpha\in \ZZ^{V(\Delta)}\}
+=\max\{i-|F| \,:\, \widetilde H_{i-|F|-1}(\operatorname{lk}_\Delta F)\neq0,\ F\in \Delta\}.
+\]
+Indeed, the Hochster's formula \cite[Theorem A.7.3]{HH11} states that
+\begin{equation}\label{eq:hochster-local-cohomology}
+\dim_{\Bbbk}H^i_{\mathfrak m}(M)_\alpha=
+\begin{cases}
+\dim_{\Bbbk}\widetilde H_{i-|F_\alpha|-1}(\operatorname{lk}_\Delta(F_\alpha)), & \alpha\leq0\text{ and }F_\alpha\in \Delta,\\
+0, & \text{otherwise}.
+\end{cases}
+\end{equation}
+Here $\alpha =(\alpha_v)_{v\in V(\Delta)} \le 0$ means that $\alpha_v\le 0$ for all $v\in V(\Delta)$, and $F_\alpha:=\{v\in V(\Delta)\mid\alpha_v<0\}$ is the face supported at $\alpha$.  Hence
+\begin{align*}
+\max\bigl\{i+{\textstyle\sum_v}\alpha_v \bigm| H^i_{\mathfrak m}(M)_\alpha\neq0\bigr\}
+&=\max\bigl\{i+{\textstyle\sum_v}\alpha_v \bigm| \alpha\leq0,\ F_\alpha\in \Delta,\ \widetilde H_{i-|F_\alpha|-1}(\operatorname{lk}_\Delta (F_\alpha))\neq0\bigr\}\\
+&=\max\bigl\{i-|F| \bigm| F\in K,\ \widetilde H_{i-|F|-1}(\operatorname{lk}_\Delta(F))\neq0\bigr\},
+\end{align*}
+where the second equality follows from the observation that every $\alpha\leq0$ with $F_\alpha=F$ satisfies
+\[
+\sum_v\alpha_v=-\sum_{v\in F}|\alpha_v|\leq-|F|.
+\]
+
+Finally, $\widetilde{H}_{i-|F|-1}(\operatorname{lk}_\Delta (F))\neq 0$ implies that $i-|F|-1\ge -1$, and so we get that
+\[
+\max\bigl\{i-|F| \bigm| F\in \Delta,\ \widetilde H_{i-|F|-1}(\operatorname{lk}_\Delta (F))\neq0\bigr\} = \max \{ k\ge 0 \mid F\in \Delta\ \widetilde H_{k-1}(\operatorname{lk}_\Delta (F))\neq0 \}, 
+\]
+as required.
 \end{proof}
 
 
@@ -2090,22 +2106,22 @@ In the following subsections, we exhibit some possible of these multiplicities.
 
 \subsection{Multiplicity-free in degrees zero and one}
 \label{subsec:multi-free deg 0 1}
-In degrees zero and one, the topology of $\Delta^{>\underline{Z}}$ is sufficiently restricted to give the following multiplicity-free results.
+In degrees zero and one, the topology of $\Delta^{>\underline{Z}}$ is sufficiently restricted to give the following multiplicity-free results.  We recall that there is a difference between the void complex $\emptyset$ and the trivial complex $\{\emptyset\}$; see subsection \ref{subsec:simplicial-topology}.
 
 \begin{prop}\label{prop:low-degree-multiplicity}
 The projective modules $\mathcal P_{\min,0}$ and $\mathcal P_{\min,1}$ are multiplicity-free.
 \end{prop}
 
 \begin{proof}
-For $k=0$, the multiplicity of $P_Z$ is $\dim_{\Bbbk}\widetilde H_{-1}(\Delta^{>\underline{Z}})$, which is $1$ when \old{$\Delta^{>\underline{Z}}=\emptyset$}\new{$\Delta^{>\underline{Z}}=\{\emptyset\}$ is the trivial complex (i.e.\ $\D_X^{>\underline{Z}}=\emptyset$)} and is $0$ otherwise.
+For $k=0$, the multiplicity of $P_Z$ is $\dim_{\Bbbk}\widetilde H_{-1}(\Delta^{>\underline{Z}})$, which is $1$ when $\Delta^{>\underline{Z}}=\{\emptyset\}$ is the trivial complex (i.e.\ $\D_X^{>\underline{Z}}=\emptyset$) and is $0$ otherwise.
 
-Now consider $k=1$.  If $\Delta^{>\underline{Z}}$ is void, then $\mathcal{P}_{\min,1}=0$; otherwise, we have
+Now consider $k=1$. \bhx{Now consider $k=1$. If $\Delta^{>\underline{Z}}$ is trivial, then $\widetilde\beta_{Z,1}=0$; otherwise, we have} \old{If $\Delta^{>\underline{Z}}$ is void, then $\mathcal{P}_{\min,1}=0$; otherwise, we have} \xnew{(An empty strict upset gives the trivial complex $\{\emptyset\}$, not the void complex. This makes the multiplicity of $P_Z$ zero, but need not make the whole term $\mathcal P_{\min,1}$ zero.)}
 \begin{equation*}
  \widetilde\beta_{Z,1}
  =\dim_{\Bbbk}\widetilde H_0(\Delta^{>\underline{Z}})
  =\#\{\text{connected components of the $1$-skeleton of }\Delta^{>\underline{Z}}\}-1.
 \end{equation*}
-The $1$-skeleton of $\Delta^{>\underline{Z}}$ is a graph whose  elements are $\underline{Y}\in\D_X^{>\underline{Z}}$, and two vertices $\underline{Y},\underline{Y'}$ are adjacent precisely when they are comparable. It then suffices to show that the $1$-skeleton of $\Delta^{>\underline{Z}}$ has at most two connected components. Note that if $\D_X^{>\underline{Z}}=\emptyset$, then the $1$-skeleton of $\Delta^{>\underline{Z}}$ is \old{just the point $\emptyset$}\new{empty (the trivial complex $\{\emptyset\}$ has no vertex)} and $\widetilde H_0(\Delta^{>\underline{Z}})=0$.
+The $1$-skeleton of $\Delta^{>\underline{Z}}$ is a graph whose  elements are $\underline{Y}\in\D_X^{>\underline{Z}}$, and two vertices $\underline{Y},\underline{Y'}$ are adjacent precisely when they are comparable. It then suffices to show that the $1$-skeleton of $\Delta^{>\underline{Z}}$ has at most two connected components. Note that if $\D_X^{>\underline{Z}}=\emptyset$, then the $1$-skeleton of $\Delta^{>\underline{Z}}$ is empty and $\widetilde H_0(\Delta^{>\underline{Z}})=0$.
 
 Every vertex $\underline{Y}\in \D_X^{>\underline{Z}}$ falls into one of the three cases (a) $Y\subsetneq Z$, (b) $Z\subsetneq Y$, or (c) $Y$ and $Z$ are incomparable.  In case (a), if $Y,Y'\subsetneq Z$, then $Y\cap Y'$ is an order ideal. Lemma~\ref{lem:symmetric-difference-identities}\textup{(\ref{itm:symdiff-inclusion})} gives $Z\setminus Y,Z\setminus Y'\subseteq X$. Similarly applying Lemma~\ref{lem:symmetric-difference-identities}\textup{(\ref{itm:symdiff-inclusion})} to $Y,Y\cap Y'$ and to $Y',Y\cap Y'$ yields
 \[
@@ -2115,16 +2131,7 @@ Every vertex $\underline{Y}\in \D_X^{>\underline{Z}}$ falls into one of the thre
 \]
 Thus all vertices in case (a) lie in one connected component.
 
-\new{Case (b) is dual to case (a) by taking complement $Y\mapsto P\setminus Y$ and working inside $\mathcal{J}(P^{\mathrm{op}})$.}
-\old{For case (b), given $Z\subsetneq Y,Y'$, then $Y\cup Y'$ is an order ideal. By Lemma~\ref{lem:symmetric-difference-identities}\textup{(\ref{itm:symdiff-inclusion})}, both $Y\setminus Z$ and $Y'\setminus Z$ are disjoint from $X$. Applying the same item to $Y,Y\cup Y'$ and to $Y',Y\cup Y'$ yields
-\[
- \underline{Y}\subseteq \underline{Y\cup Y'},\qquad
- \underline{Y'}\subseteq \underline{Y\cup Y'},\qquad
- \underline{Z}\subsetneq \underline{Y\cup Y'}.
-\]
-Thus all vertices in case (b) lie in one connected component.}
-\comment{To Claude: is this phrasing OK or too simplified.}
-\comment{Claude: the claim is correct, but one sentence more would make it checkable. Complementation $Y\mapsto P\setminus Y$ is an order-reversing bijection $\mathcal J(P)\to\mathcal J(P^{\mathrm{op}})$ and $X\SDiff Z=(P\setminus X)\SDiff(P\setminus Z)$, so $\mathcal D_X$ (hence $\mathcal D_X^{>\underline Z}$ and $\Delta^{>\underline Z}$) is the same poset for $(P,X)$ and for $(P^{\mathrm{op}},P\setminus X)$, while the inclusions $Y\subsetneq Z$ and $Z\subsetneq Y$ are interchanged. Suggested wording: ``Case (b) follows from case (a) applied to $P^{\mathrm{op}}$ and $P\setminus X$: the complement map $Y\mapsto P\setminus Y$ identifies $\mathcal J(P)$ with $\mathcal J(P^{\mathrm{op}})$ reversing inclusions, preserves symmetric differences, and therefore leaves $\mathcal D_X$ unchanged but interchanges the cases (a) and (b).''}
+Case (b) follows from case (a) applied to $P^{\mathrm{op}}$ and $P\setminus X$: the complement map $Y\mapsto P\setminus Y$ identifies $\mathcal J(P)$ with $\mathcal J(P^{\mathrm{op}})$ reversing inclusions, preserves symmetric differences, and therefore leaves $\mathcal D_X$ unchanged but interchanges the cases (a) and (b).
 
 Finally, suppose that $Y$ and $Z$ are incomparable. Since $\underline{Z}\subsetneq\underline{Y}$, Lemma~\ref{lem:symmetric-difference-identities}\textup{(\ref{itm:symdiff-interval})} gives
 \[
@@ -2145,14 +2152,14 @@ Let $B=(X\sqcup Y,E)$ be a (finite) bipartite graph so we can regard $E\subseteq
  x<y
  \quad\Leftrightarrow\quad
  \{x,y\}\in E
- \qquad(x\in X,\ y\in Y),
+ \qquad \text{ for any } x\in X,\ y\in Y,
 \]
 with no other strict relations.  Conversely, the Hasse diagram of a height-two poset $(P=X\sqcup Y, \le)$, where $X$ is of height $0$ and $Y$ is of height $1$, is precisely the bipartite graph $B$ with $P_B=P$.
 
 A subset $\sigma\subseteq V(B)$ is \defn{independent} if no two vertices of $\sigma$ are joined by an edge of $B$.  The \defn{independence complex} $\Ind(B)$ is the simplicial complex on $V(B)$ whose faces are the independent subsets of $B$.
 
 \begin{prop}\label{prop:height-two-independence}
-For a bipartite graph $B=(X\sqcup Y,E)$, the poset $\mathcal F\bigl(\Ind(B)\bigr)$ is the same as $\D_X$ associated to the height-two poset $P_B$. In particular, we have $\sd\Ind(B)=\Delta(\D_X\setminus\{\emptyset\}) = \Delta^{>\underline{X}}$, and hence
+For a bipartite graph $B=(X\sqcup Y,E)$, the poset $\mathcal F\bigl(\Ind(B)\bigr)$ is the same as $\D_X$ associated to the height-two poset $P_B$. In particular, we have $\sd\Ind(B)=\Delta(\D_X\setminus\{\emptyset\}) = \Delta^{>\underline{X}}$, and hence over $\Sigma_{\mathcal{J}(P_B)}$, we have
 \[
  [\mathcal P_{\min,k}:P_X] = \beta_{X,k} = \dim_{\Bbbk}\widetilde H_{k-1}(\Delta^{>\underline{X}})
  \cong \dim_{\Bbbk}\widetilde H_{k-1}(\Ind(B))
@@ -2164,9 +2171,7 @@ For a bipartite graph $B=(X\sqcup Y,E)$, the poset $\mathcal F\bigl(\Ind(B)\bigr
 Fix $T\in \mathcal{J}(P_B)$.  We show that $\underline{T}$ is an independent set of $B$.  Indeed, note that $\underline{T}=(X\setminus T)\sqcup(T\cap Y)$, so if, on the contrary, $x\in X\setminus T$ and $y\in T\cap Y$ were adjacent in $B$, then $x<y$ in $P_B$.  But $T$ being an order ideal implies that $x\in T$, a contradiction.
 
 Conversely, let $U$ be an independent set of $B$, we claim that $T_U:=\bigl(X\setminus(U\cap X)\bigr)\cup(U\cap Y)\in \mathcal{J}(P_B)$.  Indeed, if $y\in U\cap Y$ and $x<y$ in $P_B$, then independence gives $x\notin U$, so $x\in T_U$. Since $T_U=X\SDiff U$, Lemma~\ref{lem:symmetric-difference-identities}\textup{(\ref{itm:symdiff-cancellation})} gives
-\[
- \underline{T_U}=X\SDiff(X\SDiff U)=U.
-\]
+$\underline{T_U}=X\SDiff(X\SDiff U)=U$.
 Hence we get that $\mathcal F(\Ind(B))$ are the same collection of subsets as $\D_X$.  Since both posets use inclusion order, they are the same poset.
 
 The last assertion follows from $\underline{X}=\emptyset$, which holds by Lemma~\ref{lem:symmetric-difference-identities}\textup{(\ref{itm:symdiff-associativity})}.
@@ -2175,12 +2180,7 @@ The last assertion follows from $\underline{X}=\emptyset$, which holds by Lemma~
 By Proposition~\ref{prop:height-two-independence}, a bipartite graph $B$ with $\Ind(B)$ that has reduced homology group of dimension at least $2$ gives a non-multiplicity-free term we desired.
 
 \begin{eg}
-Let $B$ be the bipartition graph $C_6\sqcup K_2$ (the disjoint union of a $6$-point cycle and a $2$-point complete graph) with parts
-\[
- X=\{1,2,3,4\},
- \qquad
- Y=\{5,6,7,8\},
-\]
+Let $B$ be the bipartition graph $C_6\sqcup K_2$ (the disjoint union of a $6$-point cycle and a $2$-point complete graph) with parts $X=\{1,2,3,4\}$ and $Y=\{5,6,7,8\}$
 so that $P_B$ is of the form:
 \begin{center}
 \begin{tikzpicture}[scale=0.8,
@@ -2246,8 +2246,7 @@ Contracting the two $2$-simplices yields a graph with two vertices joined by thr
 Note that an independent set of a disjoint union $G\sqcup H$ is the union of an independent set of $G$ and one of $H$, i.e. $\Ind(G\sqcup H)=\Ind(G)\ast \Ind(H)$, where $\ast$ denotes the simplicial join (faces are the union of those in the two components).  Since joining with $S^0$ is homotopic to taking the suspension $\Sigma(-)$, and suspension preserves wedge sums, we get a homotopy equivalence
 \begin{align*}
  |\Ind(B)|
- &=|\Ind(C_6)*\Ind(K_2)|\\
- &\simeq(S^1\vee S^1)*S^0
+ &=|\Ind(C_6)*\Ind(K_2)| \simeq(S^1\vee S^1)*S^0
  \simeq\Sigma(S^1\vee S^1)\simeq S^2\vee S^2.
 \end{align*}
 Hence, for $k\ge 0$, we have
@@ -2256,32 +2255,30 @@ Hence, for $k\ge 0$, we have
     \Bbbk^{\oplus 2}, & k=2, \\ 0, & \text{otherwise.}
 \end{cases}
 \]
-In particular, we have $[\mathcal{P}_{\min,k+1}:P_X]=2$, i.e. $\mathcal P_{\min,3}$ is not multiplicity-free.
+In particular, we have $[\mathcal{P}_{\min,3}:P_X]=2$, i.e. $\mathcal P_{\min,3}$ is not multiplicity-free.
 \end{eg}
 
 In general, we can wedge more spheres to get arbitrary multiplicity in reduced homology.
 
 \begin{eg}\label{eg:complexes-with-arbitrary-homology}
-%\comment{don't need $\widetilde{H}_{0}$ since multi-free there}
-\old{For $m\geq1$ and $k\ge 2$, take a finite triangulation of $K=\bigvee_{j=1}^{m}S^{k-1}$.  Then $\widetilde H_{k-1}(K)\cong\Bbbk^m$.}
-\new{For $m\geq1$ and $k\ge 2$, take a finite triangulation of $K=\bigvee_{j=1}^{m}S^{k-2}$ (for $k=2$ this is a set of $m+1$ points). Then $\widetilde H_{k-2}(K)\cong\Bbbk^m$ and $\widetilde H_j(K)=0$ for $j\neq k-2$.}
+For $m\geq1$ and $k\ge 2$, take a finite triangulation $\Delta$ of $\bigvee_{j=1}^{m}S^{k-2}$ (for $k=2$ this is a set of $m+1$ points). Then $\widetilde H_{k-2}(\Delta)\cong\Bbbk^{\oplus m}$ and $\widetilde H_j(\Delta)=0$ for $j\neq k-2$.
 \end{eg}
 
 The final ingredient we need is the following realization theorem.
 
-\begin{thm}\textnormal{(\cite[Proposition~6.2]{NR09})}
-\label{thm:nagel-reiner}
-For every finite simplicial complex $K$, there exists a finite bipartite graph $B_K$ such that $\Ind(B_K)\simeq\Sigma K$.
-\end{thm}
+\begin{prop}\textnormal{(\cite[Proposition~6.2]{NR09})}
+\label{prop:nagel-reiner}
+For every finite simplicial complex $\Delta$, there exists a finite bipartite graph $B_\Delta$ such that $\Ind(B_\Delta)\simeq\Sigma \Delta$.
+\end{prop}
 
 \begin{cor}\label{cor:arbitrary-higher-multiplicities}
 For every $k\geq2$ and every $m\geq1$, there exist a finite height-two poset $P$ and an order ideal $X\in\mathcal J(P)$ such that the multiplicity $[\mathcal{P}_{\min,k}:P_X]=m$ in the degree $k$ term of any minimal projective resolution $\mathcal{P}_{\min,\bullet}$ of the $\Sigma_{\mathcal{J}(P)}$-module $I_X$.
 \end{cor}
 
 \begin{proof}
-\old{Take $K=\bigvee_{j=1}^m S^{k-1}$, then we get that $\dim_{\Bbbk}\widetilde H_{k-1}(K)=m$ as seen in Example~\ref{eg:complexes-with-arbitrary-homology}.  Let $B_K=X \sqcup Y$ be the bipartite graph guaranteed by Theorem~\ref{thm:nagel-reiner} and take $P=P_{B_K}$, then the claim follows from Proposition~\ref{prop:height-two-independence}.}  \comment{TODO: $\Sigma K$ shifted homologies of $K$, so there is a mismatch of indices??  Find correct statement.}
-\new{Take $K=\bigvee_{j=1}^m S^{k-2}$ as in Example~\ref{eg:complexes-with-arbitrary-homology}, so that $\dim_{\Bbbk}\widetilde H_{k-2}(K)=m$. Let $B_K=X\sqcup Y$ be the bipartite graph given by Theorem~\ref{thm:nagel-reiner}, so that $\Ind(B_K)\simeq\Sigma K\simeq\bigvee_{j=1}^mS^{k-1}$, whence $\dim_{\Bbbk}\widetilde H_{k-1}(\Ind(B_K))=m$ (the suspension raises the degree of reduced homology by one). Take $P=P_{B_K}$. Then $[\mathcal P_{\min,k}:P_X]=\dim_{\Bbbk}\widetilde H_{k-1}(\Ind(B_K))=m$ by Proposition~\ref{prop:height-two-independence}.}
-\comment{Claude: you were right. By Proposition~\ref{prop:height-two-independence}, $[\mathcal P_{\min,k}:P_X]=\dim\widetilde H_{k-1}(\Ind B)$, and $\Ind(B_K)\simeq\Sigma K$ has $\widetilde H_{k-1}(\Sigma K)\cong\widetilde H_{k-2}(K)$. So degree $k$ needs $K=\bigvee S^{k-2}$, not $\bigvee S^{k-1}$. This agrees with your worked example ($S^2\vee S^2$ gives degree $3$). For $k=2$ the complex $K$ is a set of $m+1$ points, which is fine. The statement of the Corollary is correct as it stands.}
+As shown in Example~\ref{eg:complexes-with-arbitrary-homology}, we have $\dim_{\Bbbk}\widetilde H_{k-2}(\Delta)=m$ for any finite triangulation $\Delta$ of $\bigvee_{j=1}^m S^{k-2}$.  By Proposition~\ref{prop:nagel-reiner}, we have a bipartite graph $B_\Delta=X\sqcup Y$ so that $\Ind(B_\Delta)\simeq \Sigma \Delta$.  
+Hence we have $\dim_{\Bbbk}\widetilde H_{k-1}(\Ind(B_\Delta))=m$ as suspension raises the degree of reduced homology by one. 
+By Proposition~\ref{prop:height-two-independence}, over the distance algebra $\Sigma_{P_{\mathcal{J}(B_\Delta)}}$, we have $[\mathcal P_{\min,k}:P_X]=\dim_{\Bbbk}\widetilde H_{k-1}(\Ind(B_\Delta))=m$.
 \end{proof}
 
 \appendix
@@ -2289,14 +2286,10 @@ For every $k\geq2$ and every $m\geq1$, there exist a finite height-two poset $P$
 \section{A simplicial construction for thin modules}
 \label{app:thin-modules}
 
-The projective resolution in Section~\ref{sec:candidate-resolution} is an instance of the simplicial replacement (bar construction of \cite[Definition 4.2.1]{Rie14}) of a diagram of projective modules.  \old{This explains why it looks very much like an economoical reformulation of bar construction.  For some modules, this construction always gives a complex of projectives, although the complex need not be exact.}
-\new{This explains why it looks very much like an economical reformulation of the bar construction. For every thin module $M$ as below, the construction gives a complex of projective modules; this complex need not be exact, but it is exact at degree $0$ when $M$ is faithful (Proposition~\ref{prop:cpx from module}).}
+We show that the projective resolution in Section~\ref{sec:candidate-resolution} is an instance of the simplicial replacement (bar construction of \cite[Definition 4.2.1]{Rie14}) of a diagram of projective modules.
+This explains why it looks very much like a bar construction. 
 
-Let $A=\Bbbk Q/I$ be a basic finite-dimensional bound-quiver algebra, and let $M$ be a \defn{thin} right $A$-module, i.e. $\dim_{\Bbbk}Me_x\leq1$ for every \old{$i\in Q_0$}\new{$x\in Q_0$}.  Let $Q_M$ be the subquiver of $Q$ whose vertices are
-\[
-(Q_M)_0:=\{x\in Q_0\mid Me_x\neq0\}
-\]
-and whose arrows are those $a:x\to y$ for which right multiplication induces a non-zero map $Me_x\to Me_y$.  The key assumption we need is that non-zero vectors $m_x\in Me_x$ can be chosen so that
+Let $A=\Bbbk Q/I$ be a basic finite-dimensional bound-quiver algebra, and let $M$ be a \defn{thin} right $A$-module, i.e. $\dim_{\Bbbk}Me_x\leq1$ for every $x\in Q_0$.  Let $Q_M$ be the subquiver of $Q$ with vertex set $(Q_M)_0:=\{x\in Q_0\mid Me_x\neq0\}$ and whose arrows are those $a:x\to y$ for which right-multiplying $a$ induces a non-zero map $Me_x\to Me_y$.  The key assumption we need is that non-zero vectors $m_x\in Me_x$ can be chosen so that
 \begin{equation}
 m_x a=m_y
 \qquad
@@ -2323,7 +2316,7 @@ Define a functor
 \begin{equation*}
 F_M\colon\mathcal C_M\longrightarrow\proj A,
 \qquad
-\old{i\longmapsto P_i}\new{x\longmapsto P_x},
+x\longmapsto P_x,
 \qquad
 \mu_p\longmapsto\mu_p.
 \end{equation*}
@@ -2351,7 +2344,7 @@ In particular, $N_0(\mathcal C_M)$ is the object set of $\mathcal C_M$.  For $0\
 F_M(x_0)^{(x_\ast)} = \bigoplus_{x_\ast\in N_k(\mathcal C_M)}
 P_{x_0}^{(x_\ast)}.
 \end{equation*}
-Here \old{\(F_M(i_0)^{(x_\ast)}\)}\new{\(F_M(x_0)^{(x_\ast)}\)} denotes a labelled copy of \(F_M(x_0)=P_{x_0}\).  For $k>0$, define
+Here \(F_M(x_0)^{(x_\ast)} = P_{x_0}^{(x_\ast)}\) denotes a copy of \(F_M(x_0)=P_{x_0}\) indexed by $x_\ast$.  For $k>0$, define
 \[
 d_k\colon\mathcal P_k(M)\longrightarrow\mathcal P_{k-1}(M),
 \qquad u^{(x_\ast)}
@@ -2375,31 +2368,13 @@ which is exact at $\mathcal{P}_0(M)$ when $M$ is faithful.
 \end{prop}
 
 \begin{proof}
-Fix a string $x_\ast$ \new{of length $k$ of the form \eqref{eq:x ast string} and take} $0\leq r\leq k$, let $\varepsilon_r^{x_\ast}$ be the homomorphism \old{defines analogous to \eqref{eq:face map}.} \new{given by $d_k$ restricted to the indecomposable projective module $P_{x_0}$, that is,
-\begin{align}\label{eq:general face map}
-\varepsilon_r^{x_\ast}\colon
-P_{x_0}^{(x_\ast)}
-\longrightarrow
-\mathcal P_{k-1}, \quad \varepsilon_r^{x_\ast}
-\bigl(u^{(x_\ast)}\bigr)
-:=
-\begin{cases}
-\bigl(F_M(f_1)(u)\bigr)^{
- (x_\ast^{\widehat{0}})},
- & r=0,\\[1mm]
-u^{(x_\ast^{\widehat{r}})},
- & r>0.
-\end{cases}
-\end{align}
-}
-\comment{To Claude: check everything is OK, all indices are well-defined, no typo.}
-\comment{Claude: the blue block above has four small problems: (1) it is one sentence with two main clauses (``Fix a string \dots{} and take $0\le r\le k$, let $\varepsilon$ be \dots''); (2) $\varepsilon_r^{x_\ast}$ is not ``$d_k$ restricted to $P_{x_0}$'' -- that restriction is the alternating \emph{sum} of the $\varepsilon_r^{x_\ast}$; (3) $k\ge1$ is needed (no $\varepsilon_r$ for $k=0$); (4) ``indecomposable'' is not needed. A corrected version follows. The other indices are fine: in $\varepsilon_i^{x_\ast^{\widehat j}}\varepsilon_j^{x_\ast}=\varepsilon_{j-1}^{x_\ast^{\widehat i}}\varepsilon_i^{x_\ast}$ ($0\le i<j\le k$) one has $i\le k-1$ and $j-1\le k-1$, so all faces of $x_\ast^{\widehat i},x_\ast^{\widehat j}$ (of length $k-1$) exist; and the faithful case is correct (a path $p$ in $Q_M$ satisfies $m_xp=m_y\ne0$, so $\mu_p$ is a genuine morphism and $d_1(e_y^{(\mu_p)})=\iota_x(p)-\iota_y(e_y)$). Typos fixed in old/new tags: $i\in Q_0$, $F_M(i_0)$, $F_M(i)$, $x^{(f)}$ (should be $u^{(f)}$), ``the the''.}
-\new{Fix $k\geq1$ and a string $x_\ast$ as in \eqref{eq:x ast string}. For $0\leq r\leq k$, let $\varepsilon_r^{x_\ast}\colon P_{x_0}^{(x_\ast)}\to\mathcal P_{k-1}(M)$ be the $r$-th face map, that is,
-\[
+Fix $k\geq1$ and a string $x_\ast$ as in \eqref{eq:x ast string}. For $0\leq r\leq k$, let $\varepsilon_r^{x_\ast}\colon P_{x_0}^{(x_\ast)}\to\mathcal P_{k-1}(M)$ be the $r$-th face map, that is,
+\begin{equation}\label{eq:general face map}
 \varepsilon_r^{x_\ast}\bigl(u^{(x_\ast)}\bigr):=\begin{cases}\bigl(F_M(f_1)(u)\bigr)^{(x_\ast^{\widehat0})},&r=0,\\[1mm]u^{(x_\ast^{\widehat r})},&r>0,\end{cases}
 \qquad\text{so that}\qquad
 d_k\big|_{P_{x_0}^{(x_\ast)}}=\sum_{r=0}^k(-1)^r\varepsilon_r^{x_\ast}.
-\]}
+\end{equation}
+
 %The zeroth face is induced by $F_M(f_1)$, while every other face is the identity map between the corresponding labelled copies of $F_M(i_0)$.  
 Functoriality of $F_M$ gives the simplicial identities
 \begin{equation*}
@@ -2413,9 +2388,9 @@ Functoriality of $F_M$ gives the simplicial identities
 \end{equation*}
 The only identity involving two non-identity homomorphisms is the one obtained by deleting $x_0$ and $x_1$, and it follows from $F_M(f_2)F_M(f_1)=F_M(f_2f_1)$.  For $0\leq i<j\leq k$, the equal composites $\varepsilon_i^{x_\ast^{\widehat j}}\varepsilon_j^{x_\ast}$ and $\varepsilon_{j-1}^{x_\ast^{\widehat i}}\varepsilon_i^{x_\ast}$ occur in $d_{k-1}d_k$ with coefficients $(-1)^{i+j}$ and $(-1)^{i+j-1}$, respectively. Hence $d_{k-1}d_k=0$ for $k\geq2$.
 
-For a morphism $f:x_0\to x_1$ and $u\in P_{x_0}$, \old{the the}\new{the} equality $\pi_{x_1}\circ F_M(f)=\pi_{x_0}$ gives
+For a morphism $f:x_0\to x_1$ and $u\in P_{x_0}$, the equality $\pi_{x_1}\circ F_M(f)=\pi_{x_0}$ gives
 \[
-\old{d_0d_1\bigl(x^{(f)}\bigr)}\new{d_0d_1\bigl(u^{(f)}\bigr)}
+d_0d_1\bigl(u^{(f)}\bigr)
 =
 \pi_{x_1}F_M(f)(u)-\pi_{x_0}(u)=0.
 \]
@@ -2432,137 +2407,71 @@ is an isomorphism for every $y\in Q_0$. Therefore $\overline{d}_0$ is an isomorp
 
 \begin{eg}\label{eg:DX is C_IX}
 For $A=\Sigma_{\mathcal J(P)}$ and $M=I_X$, choose $m_Y\in I_Xe_Y$ to be the functional dual to $b_{YX}$.  Then $\mathcal C_{I_X}$ can be identified with the poset category $\D_X$: there is a non-identity morphism $Z\to T$ precisely when $\underline{Z}<\underline{T}$, and this morphism is represented by the left-multiplication map $\mu_{T,Z}:P_Z\to P_T$ given by $a\mapsto b_{TZ}a$. The set $N_k(\mathcal{C}_M)$ becomes the $k$-chains in $\Delta(\D_X)$.
-%Note that $I_X$ is thin and sincere, but not faithful.
+Note that, when $P\neq\emptyset$, $I_X$ is not faithful, so the faithful condition in Proposition \ref{prop:cpx from module} is only sufficient and not necessary.
 \end{eg}
 
-\begin{eg}
-For a simple module $S_i$, the category $\mathcal C_{S_i}$ has only the object $i$ and its identity morphism. Hence $\mathcal P_0(S_i)=P_i$ and $\mathcal P_k(S_i)=0$ for $k>0$, so the construction reduces to the projective cover $P_i\to S_i$.  It is a projective resolution only when $S_i$ is itself projective.  This gives a complex $\mathcal{P}_\bullet$ that is not a projective resolution.
+\begin{eg}\label{eg:non exact cpx from simple}
+For a simple module $S_i$, the category $\mathcal C_{S_i}$ has only the object $i$ and its identity morphism. Hence $\mathcal P_0(S_i)=P_i$ and $\mathcal P_k(S_i)=0$ for $k>0$, so the construction reduces to the projective cover $P_i\to S_i$.  It is a projective resolution only when $S_i$ is itself projective. When $S_i$ is not projective, the complex $\mathcal P_\bullet(S_i)$ is not a projective resolution.
 \end{eg}
 
 
-\new{We now identify $\mathcal P_\bullet(M)$ with a standard construction. Let $\mathcal C$ be a small category and $F\colon\mathcal C\to\operatorname{Mod}A$ a functor. The \defn{simplicial replacement} of $F$ is the simplicial right $A$-module $B_\bullet(F)$ whose degree-$k$ term is
+Now we relate $\mathcal P_\bullet(M)$ to the simplicial bar construction of \cite[Definition~4.2.1]{Rie14}.  For $k\geq0$, put
 \[
-B_k(F):=\bigoplus_{x_0\xrightarrow{f_1}x_1\xrightarrow{f_2}\cdots\xrightarrow{f_k}x_k}F(x_0),
+B_k:=\bigoplus_{x_0\xrightarrow{f_1}\cdots\xrightarrow{f_k}x_k}F_M(x_0)^{(x_\ast)}
+ \qquad(\text{identity morphisms allowed among the }f_r),
 \]
-the sum over all strings of $k$ composable morphisms of $\mathcal C$, \emph{identity morphisms allowed}. For $0\leq r\leq k$ the face map $\varepsilon_r\colon B_k(F)\to B_{k-1}(F)$ sends the summand $F(x_0)$ of a string $x_\ast$ to the summand of the string $x_\ast^{\widehat r}$ obtained by deleting $x_r$ (composing $f_r$ and $f_{r+1}$ if $0<r<k$, and dropping $f_k$ if $r=k$): it is $F(f_1)$ if $r=0$ and the identity of $F(x_0)$ if $r>0$. The degeneracy map $s_r\colon B_{k-1}(F)\to B_k(F)$, $0\leq r\leq k-1$, inserts $\id_{x_r}$ into the string. For $\mathcal C=\mathcal C_M$ and $F=F_M$ these are exactly the maps $\varepsilon_r^{x_\ast}$ above.
+where the sum is, similar to \eqref{eq:x ast string}, over all strings of $k$ (\emph{possibly identity}) composable maps. 
+This comes with face maps $\varepsilon_r\colon B_k\to B_{k-1}$ given by the same formula \eqref{eq:general face map}, and degeneracy maps $s_r\colon B_{k-1}\to B_k$ ($0\leq r\leq k-1$), which insert $\id_{x_r}$ into the string. 
+This makes $B_\bullet$ a \emph{simplicial} right $A$-module; the following table gives the detailed translation between our notations and those in \cite{Rie14}.
 
-This is the two-sided bar construction $B_\bullet(G,\mathcal C,F)$ of \cite[Definition~4.2.1]{Rie14} for the \defn{constant functor} $G\colon\mathcal C^{\mathrm{op}}\to\mathrm{Set}$, which has $G(x)=\{\ast\}$ (a one-point set) for every object $x$ and $G(f)=\id_{\{\ast\}}$ for every morphism $f$. For such $G$ the summand $G(x_k)\otimes F(x_0)$ is a single copy of $F(x_0)$, so nothing from the theory of simplicial modules is needed beyond the formulas above. The dictionary is:
 \begin{center}
 \begin{tabular}{p{0.28\textwidth}p{0.64\textwidth}}
 \hline
 Bar construction setting & Our setting\\
 \hline
 $\mathcal D$ & $\mathcal C_M$\\[3pt]
+$\mathcal M$ & $\operatorname{Mod}A$, the category of right $A$-modules\\[3pt]
 $F\colon\mathcal D\to\mathcal M$ & $F_M\colon\mathcal C_M\to\operatorname{proj}A\subseteq\operatorname{Mod}A$\\[3pt]
-$G\colon\mathcal D^{\mathrm{op}}\to\mathrm{Set}$ & the constant functor with value a point\\[3pt]
-$d_0\to\cdots\to d_k$ & a string $x_\ast=(x_0\xrightarrow{f_1}\cdots\xrightarrow{f_k}x_k)$, identities allowed\\[3pt]
-$G(d_k)\otimes F(d_0)$ & $F_M(x_0)$ (one copy)\\[3pt]
-$B_k(G,\mathcal D,F)$ & $\bigoplus_{x_\ast}F_M(x_0)$\\[3pt]
-face maps & $\varepsilon_r$\\[3pt]
-degeneracy maps & insertion of an identity morphism\\
-\hline
+$G\colon\mathcal D^{\mathrm{op}}\to\mathrm{Set}$ & the constant functor with value a one-point set $\ast$\\[3pt]
+$d_0\to\cdots\to d_k$ & a string $x_\ast$, identities allowed\\[3pt]
+$Gd_k\otimes Fd_0$ & $\ast\otimes F_M(x_0)\cong F_M(x_0)$\\[3pt]
+$B_k(G,\mathcal D,F)$ & $B_k$\\[3pt]
+face and degeneracy maps & $\varepsilon_r$ and $s_r$\\
+\hline\\[3pt]
 \end{tabular}
 \end{center}
-A simplicial module $B_\bullet$ has an associated chain complex with differential $\sum_{r}(-1)^r\varepsilon_r$, which squares to zero by the simplicial identities, and the degenerate summands (those indexed by strings containing an identity morphism) span a subcomplex; the quotient is the \defn{normalized} chain complex (see, e.g., \cite[\S8.3]{Wei94}). In our situation $Q_M$ is acyclic, so the composite of non-identity morphisms of $\mathcal C_M$ is never an identity; hence the non-degenerate strings are exactly the elements of $N_k(\mathcal C_M)$, the faces of a non-degenerate string are non-degenerate, and the normalized complex of $B_\bullet(F_M)$ is precisely $\mathcal P_\bullet(M)$. In particular $d_{k-1}d_k=0$ is the usual consequence of the simplicial identities (it is the argument of Proposition~\ref{prop:cpx from module}).}
-\comment{Claude: this replaces everything between the old table and ``\dots$\overline B_\bullet\cong\mathcal P_\bullet(M)$'' (about 80 lines, now red) by about 30. The two ideas are: (a) the weight $G$ in \cite[Def.~4.2.1]{Rie14} is the constant functor at a point, so one can take the target category to be $\operatorname{Mod}A$ itself instead of simplicial modules, and the constant simplicial module $c(-)$, the simplicial tensor and the terminal simplicial set all disappear; (b) the face-map discussion becomes the definition, and the degeneracy identities are replaced by a citation to the Moore/normalized complex. Please check against \cite[Def.~4.2.1]{Rie14} that a Set-valued weight and $\operatorname{Mod}A$ as target is covered there (I believe it is, as Bousfield--Kan simplicial replacement); if not, keep the old table and only adopt (b). I used \cite[\S8.3]{Wei94} for the normalized complex; the section number is from memory.}
-\old{Now we relate $\mathcal P_\bullet(M)$ to the two-sided simplicial bar construction used in \cite[Definition 4.2.1]{Rie14}; we note that this does not really give an alternative proof of Proposition \ref{prop:cpx from module} -- the proof we shown here is specialized case of the reason exactly the reason why the simplicial bar construction yields a complex.  We summarise the translation of setting as follows.
 
-\begin{center}
-\begin{tabular}{p{0.28\textwidth}p{0.64\textwidth}}
-\hline
-Bar construction setting & Our $\mathcal{C}_M$ setting\\
-\hline
-$\mathcal D$ & $\mathcal C_M$\\[4pt]
-$\mathcal M$ & $s(\operatorname{Mod}A)$, the category of simplicial right $A$-modules.\\[4pt]
-$F:\mathcal D\to\mathcal M$ & The composite $c\circ F_M$, where $F_M:\mathcal C_M\to\operatorname{proj}A$ and $c$ regards an ordinary module as a constant simplicial module.\\[4pt]
-$G:\mathcal D^{\mathrm{op}}\to\mathrm{sSet}$ & The constant functor $G=*$ with value in $\ast\in \mathrm{sSet}$.\\[4pt]
-$\vec d:[k]\to \mathcal D$ & A string $x_\ast=(x_0\xrightarrow{f_1}\cdots\xrightarrow{f_k}x_k)$, but allowing identity morphisms.\\[4pt]
-$Gd_k\otimes Fd_0$ & $*\otimes cF_M(x_0)\cong cF_M(x_0)$;\footnotemark\\[4pt]
-$B_k(G,\mathcal D,F)$ & The constant simplicial module associated to $\bigoplus_{x_\ast}F_M(x_0)$.\\[4pt]
-Face maps &  Homomorphisms $\varepsilon_r^{x_\ast}$, whose alternating sum gives $d_k$.\\[4pt]
-Degeneracy maps & The homomorphisms inserting identity morphisms into $x_\ast$.\\
-%[4pt]Normalized chain complex & $\mathcal P_\bullet(M)$, obtained by quotienting out the summands indexed by strings containing identity morphisms.\\
-\hline
-\end{tabular}
-\end{center}
- \footnotetext{The $\otimes$ on the left is the simplicial tensoring, not tensor product of modules.}}
-
-\medskip
-
-\comment{To Claude:  Following is written for non-specialists (potentially all reader of this paper is non-specialist), so table should be kept.  But if there is a way to just introduce what "constant functor" means, so that its definition immedately says that we do not need to explain any of the terminologies of simplicial module theory, then such a simplification will be nice.  Propose one if you can.
-
-Clarification of differential in simplicial bar complex and the various maps in our construction is desirable.  But if there is any way to simplify the current writing, propose one.
-}
-\old{Let us explain the translation of $\mathcal M$ and $F$ now.
-Recall that a simplicial right $A$-module is a functor $\Delta^{\mathrm{op}}\to\operatorname{Mod}A$, where $\Delta$ is the category of finite non-empty totally ordered sets $[n]=\{0<\ldots<n\}$ and order-preserving maps; roughly speaking, it is a sequence $\{M_k\}_{k\ge 0}$ of right $A$-modules (where \emph{degree $k$ term} $M_k$ is the functor evaluated at $[k]$) equipped with homomorphisms that delete or repeat positions, satisfying compatibility identities.  Every right $A$-module $N$ determines a \emph{constant simplicial module} $cN$, with $(cN)_k = N$ for all $k\ge 0$ where all structure maps are $\id_N$. We take
+Having a simplicial module means that taking the alternating sum of the face maps
 \[
-\mathcal M=s(\operatorname{Mod}A),\qquad F=c\circ F_M:\mathcal C_M\longrightarrow s(\operatorname{Mod}A),
+ d^B_k:=\sum_{r=0}^k(-1)^r\varepsilon_r\colon B_k\longrightarrow B_{k-1}
 \]
-where the inclusion $\operatorname{proj}A\hookrightarrow\operatorname{Mod}A$ is understood. Thus, we have $F(x)=cP_x$ for each $x\in \mathcal{C}_M=Q_M$.
-
-Next, we unfold the definition of the simplicial bar construction to see how (the modules underlying) $\mathcal{P}_\bullet$ shows up in it. Writing out the evaluation of a string $\vec d:[k]\to \D$ yields a sequence $d_0\xrightarrow{f_1} d_1 \xrightarrow{f_2} \cdots \xrightarrow{f_k} d_k$.  These $d_j$'s are our $x_j\in Q_M$, and so with the chosen $F,G$ we have a summand
+makes $B_\bullet$ a chain complex: $d^B_{k-1}d^B_k=0$ follows from the simplicial identities, by the same computation as in the proof of Proposition~\ref{prop:cpx from module}. 
+%This chain complex is the reason for considering $B_\bullet$: its homology computes the left derived functors of $\colim_{\mathcal C_M}F_M$; see the end of this section. 
+We now compare it with $\mathcal P_\bullet(M)$ using the decomposition above.
+Partitioning the direct summands of $B_k$ according to whether their labeling string contain an identity morphism gives
 \[
-Gd_k\otimes Fd_0 = \ast \otimes c(F_M(x_0)) \cong c F_M(x_0)
+ B_k=\mathcal P_k(M)\oplus D_k,
+ \qquad
+ D_k:=\bigoplus_{\substack{x_\ast\text{ with }f_r=\id\\ \text{for some }r}}F_M(x_0)^{(x_\ast)}.
 \]
-indexed by $\vec d$ of $B_k(G,\D,F)$. Note that $\ast$ here is the terminal object in the category $\mathrm{sSet}$ of simplicial sets, that is the singleton set at every degree with all structure map being identity; taking the simplicial tensor with $\ast$ is naturally isomorphic to applying the identity functor, which explains the last isomorphism.
+\begin{prop}\label{prop:bar-construction-decomposition}
+The decomposition $B_k=\mathcal P_k(M)\oplus D_k$ extends to one on the level of chain complexes $B_\bullet=\mathcal P_\bullet(M)\oplus D_\bullet$ with $D_\bullet$ acyclic.
+In particular, the inclusion $\mathcal P_\bullet(M)\hookrightarrow B_\bullet$ induces an isomorphism in homology.
+\end{prop}
 
-%Now the simplicial bar construction reads
-%\[
-%B_k(*,\mathcal C_M,cF_M)=\bigoplus_{x_\ast=(i_0\xrightarrow{f_1}\cdots\xrightarrow{f_k}i_k)} cF_M(i_0)
-%\cong c\left(\bigoplus_{x_\ast=(i_0\xrightarrow{f_1}\cdots\xrightarrow{f_k}i_k)}F_M(i_0)\right).
-%\]
-%This is quite close to our formulation, but the sum includes strings where some of the $f_j$'s are identity.  Since the far-right is a constant simplicial module, we can identity this with the ordinary right $A$-module inside $c(-)$.
+\begin{proof}
+The decomposition follows from the fact that face maps of $B_k$'s preserve (1) the property of having $f_r=\id$ for some $r$ in the labeling string, and also (2) the property of not having any identity morphism in the labeling.
+Thus the differential restricts to a differential on the two direct summands in the decomposition; in particular, the restriction on $\mathcal{P}_k(M)$ yields exactly the differential of $\mathcal{P}_\bullet(M)$.
 
-Next, we want to clarify the differential of the simplicial bar complex. For each fixed $k$, we have $k+1$ face maps $\partial_k^{(r)}:B_k(G,\D,F)\to B_{k-1}(G,\D,F)$ for $0\le r\le k$.   As we show in the table above, these are our $\varepsilon_r$ maps.  To see this, for $r=k$, its restriction to $Gd_k\otimes Fd_0$ is given by $G(f_k)\otimes\operatorname{id}_{F(d_0)}$, which translates to $ \epsilon_k^{(x_\ast)}:p^{(x_\ast)} \mapsto p^{(x_\ast^{\widehat k})} $ in our setting.  For $r=0$, the restriction to the same summand is
-\[
-\operatorname{id}_{G(d_k)}\otimes F(f_1):G(d_k)\otimes F(d_0)
-\longrightarrow
-G(d_k)\otimes F(d_1),
-\]which is
-$ \epsilon_0^{(x_\ast)}:p^{(x_\ast)}\mapsto (F_M(f_1)(p))^{(x_\ast^{\widehat 0})} $ in our setting. For $0<r<n$, $\partial^{(r)}$ composes $f_r$ and $f_{r+1}$, and leaves the element of $F(d_0)$ unchanged, which means that the same term-omitting map $\epsilon_r^{(x_\ast)}:p^{(x_\ast)} \mapsto p^{(x_\ast^{\widehat r})}$ in our setting. The differential of the (not-yet-normalized) simplicial bar complex $B_\bullet=B_\bullet(G,\D,F)$ is
-\[
-d_k^{\mathrm{un}}:B_k\longrightarrow B_{k-1},
-\qquad
-d_k^{\mathrm{un}} = \sum_{r=0}^{k}(-1)^r\partial_k^{(r)}.
-\]
-Note that $d_{k-1}^{\mathrm{un}}d_k^{\mathrm{un}}=0$ is just a consequence of $ \partial_{k-1}^{(r)}\partial_k^{(s)} = \partial_{k-1}^{(s-1)}\partial_k^{(r)}$ for any $0\le r<s\le k$; by the same argument we use in Proposition \ref{prop:cpx from module}.
+(1) We show that $d^B(D_k)\subseteq D_{k-1}$.  Indeed, suppose that $x_\ast$ be a string with $f_{r+1}=\id$. Then both $\varepsilon_r$ and $\varepsilon_{r+1}$ removes this identity and produce the same string and the same map, which appear in $d^B$ with opposite signs $(-1)^r$ and $(-1)^{r+1}$.  Hence, they cancel each other.  Every other face of $x_\ast$ still contains the identity morphism $f_{r+1}$, so $d^B(D_k)\subseteq D_{k-1}$.
 
-To normalise the bar complex, we need to consider, for each $0\le r\le k-1$, the degeneracy map
-\[
-s_{k-1}^{(r)}:B_{k-1}\longrightarrow B_k,
-\]
-which inserts the identity morphism $\id_{x_r}$ into the string at the object $x_r$.  They satisfy
-\begin{align}\label{eq:degeneracy identities}
-\partial_k^{(r)}s_{k-1}^{(q)}
-=
-\begin{cases}
-s_{k-2}^{(q-1)}\partial_{k-1}^{(r)},&r<q,\\
-\id_{B_{k-1}},&r=q\text{ or }r=q+1,\\
-s_{k-2}^{(q)}\partial_{k-1}^{(r-1)},&r>q+1.
-\end{cases}\end{align}
-Define
-\[
-C_k = \sum_{r=0}^{k-1}\operatorname{im}s_{k-1}^{(r)}
-\subseteq B_k,
-\text{ and } C_0=0.
-\]
-Then \eqref{eq:degeneracy identities} implies that $d_k^{\mathrm{un}}(C_k)\subseteq C_{k-1}$.  Consequently, we have a quotient complex $\overline{B}_\bullet$, called the \defn{normalized bar complex} given by
-\[
-\overline{B}_k:=B_k/C_k, \text{ with differential }d_k(b+C_k)=d_k^{\mathrm{un}}(b)+C_{k-1}.
-\]
+(2) Now we show that $d^B|_{\mathcal{P}_k(M)}$ is precisely the differential of $\mathcal{P}_k(M)$.  Indeed, suppose that $x_\ast$ contains no identity morphisms in its letters, then the ayclicity of $Q_M$ implies that none of the composition $f_rf_{r+1}$ can be identity.  Thus, $d^B(\mathcal{P}_k(M))\subseteq \mathcal{P}_{k-1}(M)$, and the claim follows by direct comparison of the differential.
 
-Since $\mathcal C_M$ has no non-identity isomorphisms, we have
-\[
-\overline{B}_k
-\cong \bigoplus_{\substack{
-x_0\xrightarrow{f_1}\cdots\xrightarrow{f_k}x_k\\
-f_r\neq\id\ \text{for all }r
-}} F_M(x_0) = \bigoplus_{f_* =(x_0 \to \cdots \to x_k ) \in N_k(\mathcal{C}_M)} F_M(x_0).
-\]
-Moreover, the differential is the alternating sum of the maps $\partial_k^{(r)}$ after deleting every term that contains an identity morphism, which implies that $\overline{B}_\bullet \cong \mathcal{P}_\bullet(M)$.
-}
+(3) Finally, since the the image of the degeneracy map $s_r$ is spanned by the strings with $f_{r+1}=\id$, \cite[\S8.3]{Wei94} says that $D_\bullet$ is a subcomplex $B_\bullet$ that is acyclic.
+\end{proof}
 
-As a consequence of the identification with bar construction, we get that
+
+The last part of Proposition \ref{prop:bar-construction-decomposition} says that we have
 \begin{equation*}
 H_0\bigl(\mathcal P_\bullet(M)\bigr)
 \cong\colim_{\mathcal C_M}F_M,
@@ -2575,7 +2484,7 @@ where $L_k$ denotes the $k$-th left-derived functor. In the general setting of $
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\new{\section{Proofs of Lemma~\ref{lem:lattice-canonical-duality} and Corollary~\ref{cor:relative-ordinary-injective-dimension}}
+\section{Proofs of Lemma~\ref{lem:lattice-canonical-duality} and Corollary~\ref{cor:relative-ordinary-injective-dimension}}
 \label{app:lattice-proofs}
 \begin{proof}[Proof of Lemma~\ref{lem:lattice-canonical-duality}]
 The functor $D$ is exact on $R$-split short exact sequences, and evaluation gives a natural isomorphism $M\xrightarrow{\sim}D^2(M)$ for every $M\in\lat(A)$. This proves the duality assertion.
@@ -2623,7 +2532,7 @@ Applying the same argument to $A^{\operatorname{op}}$ gives
 $\idim {}_A A\leq\idim_R R+\pdim_A D(A)$.  Thus, if both $\pdim_{A^{\operatorname{op}}}D(A)$ and $\pdim_{A}D(A)$ are finite, $A$ is Iwanaga--Gorenstein.
 
 Finally, when $R=\Bbbk$, we have $\idim_R R=0$, and relative injective dimension agrees with ordinary injective dimension.  Putting this into the inequalities and the claim follows immediately.
-\end{proof}}
+\end{proof}
 
 \bibliographystyle{alpha}
 \bibliography{reference.bib}
