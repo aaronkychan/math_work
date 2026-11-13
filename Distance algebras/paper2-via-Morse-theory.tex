@@ -146,7 +146,7 @@ For every finite poset $P$ and every $X\in\mathcal J(P)$, we construct a minimal
 \medskip
 \noindent
 \textbf{Use of AI.} After we calculated the projective cover of the first syzygy (see subsection \ref{subsec:multi-free deg 0 1}) and fed it to ChatGPT 5.6 Sol, it suggested the candidate resolution to us; first half of Appendix \ref{app:thin-modules} records our retrospect explanation of this suggestion in a more general setting, and the second half (material after Example \ref{eg:non exact cpx from simple}) is pointed out by ChatGPT after we fed it this viewpoint.
-The key reduction (Proposition \ref{prop:lower-subcomplex-exact}) step is also ChatGPT's suggestion.
+Lemma \ref{lem:twisted-retraction}, which is a key ingredient in the proof of the main result (and the major obstacle when we first attempt the problem), was first shown directly by ChatGPT; the (more intuitive) proof we present now is modified by ourselves following the advise of Claude Opus 5.5.
 After feeding ChatGPT again with the write up of Theorem \ref{thm:exactness} and 
 Theorem \ref{thm:minimal-resolution}, and exploring various phenomena, ChatGPT 5.6 Sol obtained subsection~\ref{subsec:higher-multiplicities}.
 A statement similar to Theorem \ref{thm:pdim=reg} was first speculated by ChatGPT 5.5 when we fed it the companion paper \cite{CX26}, without a sound argument; the correct form and proof of Theorem \ref{thm:pdim=reg} was obtained by ChatGPT 5.6 Sol after feeding it our Theorem \ref{thm:minimal-resolution}.
@@ -430,7 +430,7 @@ respectively, ordered by inclusion.
 \end{enumerate}
 \end{dfn}
 
-For a \bhx{non-void} finite simplicial complex $K$, write $|K|$ for its geometric realization.  We identify simplicial homology with the singular homology of the realization.  Barycentric subdivision preserves the geometric realization, and hence preserves reduced homology over $R$.
+For a non-void finite simplicial complex $K$, write $|K|$ for its geometric realization.  We identify simplicial homology with the singular homology of the realization.  Barycentric subdivision preserves the geometric realization, and hence preserves reduced homology over $R$.
 
 For a finite set $E$ with $|E|\geq2$, the power set $2^E$ is regarded as a simplicail complex on $E$ is the $(|E|-1)$-simplex with boundary $\partial(2^E)=2^E\setminus\{E\}$, so
 \begin{equation}
@@ -1056,9 +1056,14 @@ Let $U,V,W\in\mathcal J(P)$ with $\underline{U}\leq \underline{V}$.  Then $b_{VU
 where the first equivalence is Lemma~\ref{lem:d(X,Y)}, the second follows from Lemma~\ref{lem:symmetric-difference-identities}\textup{(\ref{itm:symdiff-cancellation})}. The claim then follows from Lemma~\ref{lem:symmetric-difference-identities}\textup{(\ref{itm:symdiff-difference})} by taking $(X,Y,Z)=(W,V,U)$.
 \end{proof}
 
-When we first wrote down the candidate complex, we are looking forward that the minimal resolution can be obtained by extracting homologies of $\Delta(\D_X)$.  If we restrict to the local part $\widetilde{P}_\bullet e_W$, then it is natural to expect that only homologies of the subcomplex given by chains bounded above by $\underline{W}$ appear. From this, we expect that $\widetilde{P}_\bullet e_W$ should be homotopic to a similar $\mathcal{P}_\bullet$-construction associated to the the subposet 
-$\D_X^{\le \underline{W}} := \{\underline{Z}\in\D_X\mid \underline{Z}\le \underline{W}\}$, and such a homotopy could be obtain naturally from similar to Lemma \ref{lem:order homotopy}.
+
 \new{
+When we first wrote down the candidate complex, we are looking forward that the minimal resolution can be obtained by extracting homologies of $\Delta(\D_X)$.  If we restrict to the local part $\widetilde{\mathcal P}_\bullet e_W$, then it is natural to expect that only homologies of the subcomplex given by chains bounded above by $\underline{W}$ appear. From this, we expect that $\widetilde{\mathcal P}_\bullet e_W$ should be homotopic to a similar $\mathcal{P}_\bullet$-construction associated to the the subposet 
+$\D_X^{\le \underline{W}} := \{\underline{Z}\in\D_X\mid \underline{Z}\le \underline{W}\}$, and such a homotopy could be obtain naturally from similar to Lemma \ref{lem:order homotopy}.
+
+Our strategy is as follows.  The first step (Lemma \ref{lem:evaluated-differential}) is to show that $\widetilde{\mathcal P}_\bullet e_W$ can be identified as the chain complex associated to $\Delta(\D_X)$ with a twist in the differential; this is the content of  below.  Then we show in Lemma \ref{lem:twisted-retraction} that this twisted chain complex is homotopy to the twisted chain complex associated to $\D_X^{\le \underline{W}}$.
+Finally, we lift this homotopy back to $\mathcal{\mathcal P}_\bullet$ side.
+
 In view of utilising Lemma \ref{lem:order homotopy}, we consider
 \[
 r_W\colon\D_X\longrightarrow\D_X^{\leq\underline{W}},\qquad
@@ -1143,46 +1148,29 @@ Thus, we obtain
 This is exactly $(\partial_0-\eta_0)\langle\underline{Z}\rangle$ as required.
 \end{proof}}
 
-
-\begin{prop}\label{prop:lower-deformation-retract}
-For $k\geq0$, put
-\[
- \widetilde{\mathcal{P}}_k^{\leq \underline{W}} = \mathcal P_k^{\leq \underline{W}}
- :=\bigoplus_{\substack{
- \underline{Z}_\ast=(\underline{Z}_0<\cdots<\underline{Z}_k)\in\Delta_{X,k}\\
- \underline{Z}_k\leq \underline{W}}}
- (P_{Z_0}e_W)^{(\underline{Z}_\ast)}, \quad \text{and}\quad  \widetilde{\mathcal{P}}_{-1}^{\leq \underline{W}}:= I_Xe_W
-\]
-yields a subcomplex $\widetilde{\mathcal P}_\bullet^{\leq \underline{W}}$ of $\widetilde{\mathcal P}_\bullet e_W$.  Moreover, the inclusion map $\iota_W\colon
- \widetilde{\mathcal P}_\bullet^{\leq \underline{W}}
- \rightarrow
- \widetilde{\mathcal P}_\bullet e_W$
-defines a homotopy equivalence.
-\end{prop}
-\begin{proof}
 \new{
-Consider the isomorphism $\theta\colon\widetilde{\mathcal P}_\bullet e_W\to\bigl(\widetilde C_\bullet(\Delta(\D_X)),\partial-\eta\bigr)$ from
- Lemma~\ref{lem:evaluated-differential}. The direct summands of $\mathcal P_k^{\leq W} \subseteq \mathcal P_ke_W$ are indexed by the chains in $\D_X^{\leq\underline{W}}$, so $\theta_k$ restricts to an isomorphism between $\widetilde{\mathcal P}_k^{\leq \underline{W}}$ and $\widetilde C_k(\Delta(\D_X^{\leq\underline{W}})) \subset \widetilde C_k(\Delta(\D_X))$.  That is, we have a commutative diagram of modules
- }
- \begin{equation}
- \label{eq:iota-W-transported}
-\begin{tikzcd}[column sep=large]
-  \widetilde{\mathcal P}_k^{\le \underline{W}} \ar[r, "\iota_W"] \ar[d, "\theta_k'", "\cong"'] & \widetilde{\mathcal{P}}_k e_W \ar[d, "\theta_k", "\cong"'] \\
-  \widetilde{C}_k(\Delta(\D_X^{\leq\underline{W}})) \ar[r, "\mathrm{inc}_k"] & \widetilde{C}_k(\Delta(\D_X)),
-\end{tikzcd}
- \end{equation}
- \new{
- where $\theta_k'$ is the restriction of $\theta_k$ and $\mathrm{inc}_k$ is the canonical inclusion.
- 
-We show below that (a) $\widetilde C_\bullet(\Delta(\D_X^{\leq\underline{W}}))$ is a subcomplex of $\bigl(\widetilde C_\bullet(\Delta(\D_X)),\partial-\eta\bigr)$, and (b) $\mathrm{inc}$ is a homotopy equivalence. By (a), $\widetilde{\mathcal P}_\bullet^{\leq W}=\theta^{-1}\bigl(\widetilde C_\bullet(\Delta(\D_X^{\leq\underline{W}}))\bigr)$ is a subcomplex of $\widetilde{\mathcal P}_\bullet e_W$ and $\theta|_{\widetilde{\mathcal P}_\bullet^{\leq W}}$ is an isomorphism of complexes. By (b) and \eqref{eq:iota-W-transported}, $\iota_W=\theta^{-1}\circ\mathrm{inc}\circ\theta|_{\widetilde{\mathcal P}_\bullet^{\leq W}}$ is a homotopy equivalence.
+\begin{lem}\label{lem:twisted-retraction}
+Consider the chain complex $C_\bullet:=(C_\bullet(\Delta(\D_X)), \delta:=\partial-\eta)$ of Lemma~\ref{lem:evaluated-differential}.
+\begin{enumerate}[(1)]
+\item $(C^{\leq\underline{W}}_\bullet:=\widetilde{C}_\bullet(\Delta(\D_X^{\leq\underline{W}})), \delta_\bullet)$ is a subcomplex of $C_\bullet$ whose differential is
+\[
+ \delta_k\langle\underline{Z}_\ast\rangle=(\partial_k-\eta_k)\langle\underline{Z}_\ast\rangle= 
+ \begin{cases}
+ \sum_{i=1}^k(-1)^i\langle\underline{Z}_\ast^{\widehat{i}}\rangle, & k\geq1,\\
+ 1, & k=0, \text{ and }\underline{Z}=\underline{W},\\
+ 0, & k=0, \text{ and }\underline{Z}\neq \underline{W}.
+ \end{cases}
+\]
+\item The inclusion $\mathrm{inc}\colon\widetilde C_\bullet(\Delta(\D_X^{\leq\underline{W}}))\to\widetilde C_\bullet(\Delta(\D_X))$ is a homotopy equivalence, with homotopy inverse given by the induced map $(r_W)_\#$.
+\end{enumerate}
+\end{lem}
 
-\smallskip
-\noindent\textit{Proof of \textup{(a)}.}
-For $k\geq1$, $(\partial_k-\eta_k)\langle\underline{Z}_\ast\rangle$ is a linear combination of faces of $\underline{Z}_\ast$, and every face of a chain in $\D_X^{\leq\underline{W}}$ is again a chain in $\D_X^{\leq\underline{W}}$. In degree $0$, $\partial_0-\eta_0$ maps into $C_{-1}(\Delta(\D_X))=R$, which is also the degree $-1$ term of $\widetilde C_\bullet(\Delta(\D_X^{\leq\underline{W}}))$.
+\begin{proof}
+(1)  First consdier teh case when $k\geq1$ and let $\underline{Z}_\ast=(\underline{Z}_0<\cdots<\underline{Z}_k)$ be a chain in $\D_X^{\leq\underline{W}}$. Since $r_W$ is the identity on $\D_X^{\leq\underline{W}}$, we have $r_W(\underline{Z}_0)=\underline{Z}_0\neq\underline{Z}_1=r_W(\underline{Z}_1)$, so $\eta_k\langle\underline{Z}_\ast\rangle=\langle\underline{Z}_\ast^{\widehat{0}}\rangle$. This gives the displayed formula for $k\geq1$. In particular, as $\underline{Z}_\ast^{\widehat{i}}$ is still bounded by $\underline{W}$, the range of $\delta_k$ is in $C_{k-1}(\Delta(\D_X^{\leq\underline{W}}))$. 
 
-\smallskip
-\noindent\textit{Proof of \textup{(b)}.}
-Let $\rho:=(r_W)_\#\colon\widetilde C_\bullet(\Delta(\D_X))\to\widetilde C_\bullet(\Delta(\D_X^{\leq\underline{W}}))$. Since $r_W$ is the identity on $\D_X^{\leq\underline{W}}$, we have $\rho\circ\mathrm{inc}=\id$. Apply Lemma~\ref{lem:order homotopy} to $f:=r_W$, regarded as a map $\D_X\to\D_X$, and $g:=\id_{\D_X}$. Then $f\leq g$, $f_\#=\mathrm{inc}\circ\rho$ and $g_\#=\id$, and the lemma gives $h$ with $\partial h+h\partial=\id-\mathrm{inc}\circ\rho$, namely $h_{-1}:=0$ and
+For $k=0$ and $\underline{Z}\in\D_X^{\leq\underline{W}}$, we have $\underline{W}\subseteq\underline{Z}$ if and only if $\underline{Z}=\underline{W}$, which gives the formula for $\partial_0-\eta_0$; it takes values in $C_{-1}(\Delta(\D_X^{\leq\underline{W}}))=R$ as claimed.
+
+(2) Since $r_W$ is the identity on $\D_X^{\leq\underline{W}}$, we have $r_\#\circ\mathrm{inc}=\id$. Apply Lemma~\ref{lem:order homotopy} to $f:=r_W$, regarded as a map $\D_X\to\D_X$, and $g:=\id_{\D_X}$. Then $f\leq g$, $f_\#=\mathrm{inc}\circ r_\#$ and $g_\#=\id$, and there exists $h$ with $\partial h+h\partial=\id-\mathrm{inc}\circ r_\#$, namely $h_{-1}:=0$ and
 \[
  h_k\langle\underline{Z}_0<\cdots<\underline{Z}_k\rangle
  =\sum_{j=0}^k(-1)^{j}
@@ -1190,7 +1178,7 @@ Let $\rho:=(r_W)_\#\colon\widetilde C_\bullet(\Delta(\D_X))\to\widetilde C_\bull
 \]
 where summands with a repeated entry are zero. Therefore
 \[
- (\partial-\eta)h+h(\partial-\eta)=(\partial h+h\partial)-(\eta h+h\eta)=\id-\mathrm{inc}\circ\rho-(\eta h+h\eta),
+ (\partial-\eta)h+h(\partial-\eta)=(\partial h+h\partial)-(\eta h+h\eta)=\id-\mathrm{inc}\circ r_\#-(\eta h+h\eta),
 \]
 and it remains to show that $\eta h+h\eta=0$.
 
@@ -1210,7 +1198,41 @@ For $j=0$, both entries have the same image $r_W(\underline{Z}_0)$ under $r_W$, 
 \end{align*}
 where the second equality is the formula for $h_{k-1}$ with the index shifted by one, and the third is the definition of $\eta$.
 
-Thus $(\partial-\eta)h+h(\partial-\eta)=\id-\mathrm{inc}\circ\rho$. Then $(\partial-\eta)(\id-\mathrm{inc}\circ\rho)=(\partial-\eta)h(\partial-\eta)=(\id-\mathrm{inc}\circ\rho)(\partial-\eta)$, so $(\partial-\eta)\circ\mathrm{inc}\circ\rho=\mathrm{inc}\circ\rho\circ(\partial-\eta)$. Since $\mathrm{inc}$ is an injective chain map by (a), $\rho$ is a chain map. Hence $\rho\circ\mathrm{inc}=\id$ and $\mathrm{inc}\circ\rho$ is homotopic to $\id$, so $\mathrm{inc}$ is a homotopy equivalence. }
+Thus $(\partial-\eta)h+h(\partial-\eta)=\id-\mathrm{inc}\circ r_\#$. Then $(\partial-\eta)(\id-\mathrm{inc}\circ r_\#)=(\partial-\eta)h(\partial-\eta)=(\id-\mathrm{inc}\circ r_\#)(\partial-\eta)$, so $(\partial-\eta)\circ\mathrm{inc}\circ r_\#=\mathrm{inc}\circ r_\#\circ(\partial-\eta)$. Since $\mathrm{inc}$ is an injective chain map by (1), $r_\#$ is a chain map. Hence $ r_\#\circ\mathrm{inc}=\id$ and $\mathrm{inc}\circ r_\#$ is homotopic to $\id$.
+\end{proof}
+}
+
+
+
+\begin{prop}\label{prop:lower-deformation-retract}
+For $k\geq0$, put
+\[
+ \widetilde{\mathcal{P}}_k^{\leq \underline{W}} = \mathcal P_k^{\leq \underline{W}}
+ :=\bigoplus_{\substack{
+ \underline{Z}_\ast=(\underline{Z}_0<\cdots<\underline{Z}_k)\in\Delta_{X,k}\\
+ \underline{Z}_k\leq \underline{W}}}
+ (P_{Z_0}e_W)^{(\underline{Z}_\ast)}, \quad \text{and}\quad  \widetilde{\mathcal{P}}_{-1}^{\leq \underline{W}}:= I_Xe_W
+\]
+yields a subcomplex $\widetilde{\mathcal P}_\bullet^{\leq \underline{W}}$ of $\widetilde{\mathcal P}_\bullet e_W$.  Moreover, the inclusion map $\iota_W\colon
+ \widetilde{\mathcal P}_\bullet^{\leq \underline{W}}
+ \rightarrow
+ \widetilde{\mathcal P}_\bullet e_W$
+defines a homotopy equivalence.
+\end{prop}
+\begin{proof}\comment{new cleaner proof (not "new"-blocked because tikzcd cannot be in color block)}
+By Lemma~\ref{lem:evaluated-differential}, $\theta\colon\widetilde{\mathcal P}_\bullet e_W\to\bigl(\widetilde C_\bullet(\Delta(\D_X)),\partial-\eta\bigr)$ is an isomorphism of complexes. The direct summands of $\mathcal P_k^{\leq W}\subseteq\mathcal P_ke_W$ are indexed by the chains in $\D_X^{\leq\underline{W}}$, so for every $k\geq-1$ we have a commutative diagram of $R$-modules
+\begin{equation}
+\label{eq:iota-W-transported}
+\begin{tikzcd}[column sep=large]
+ \widetilde{\mathcal P}_k^{\leq W} \ar[r, "(\iota_W)_k"] \ar[d, "\theta_k", "\cong"'] & \widetilde{\mathcal P}_k e_W \ar[d, "\theta_k", "\cong"'] \\
+ \widetilde C_k(\Delta(\D_X^{\leq\underline{W}})) \ar[r, "\mathrm{inc}_k"] & \widetilde C_k(\Delta(\D_X)),
+\end{tikzcd}
+\end{equation}
+where the horizontal maps are the inclusions and $\theta_k$ is the restriction of $\theta_k$. 
+
+By Lemma~\ref{lem:twisted-retraction}\textup{(1)}, the bottom row is the inclusion of a subcomplex. Since $\theta$ is an isomorphism of complexes, it follows that $\widetilde{\mathcal P}_\bullet^{\leq W}=\theta^{-1}\bigl(\widetilde C_\bullet(\Delta(\D_X^{\leq\underline{W}}))\bigr)$ is a subcomplex of $\widetilde{\mathcal P}_\bullet e_W$, and that the maps $\theta_k$ form an isomorphism of complexes. 
+
+By Lemma~\ref{lem:twisted-retraction}\textup{(2)}, the bottom row defines a homotopy equivalence, and so this lifts to one in the top row, which is what we claimed.
 \end{proof}
 
 
@@ -1308,6 +1330,7 @@ as required.
 \end{proof}
 }
 
+\comment{maybe possible to even skip $\widetilde{\mathcal P}^{\le \underline{W}}_\bullet$ and just work directly with the twisted $\widetilde{C}_\bullet$ complexes??}
 
 \begin{prop}\label{prop:lower-subcomplex-exact}
 For every $W\in\mathcal J(P)$, the complex $\widetilde{\mathcal P}_\bullet^{\leq \underline{W}}$ is exact.
